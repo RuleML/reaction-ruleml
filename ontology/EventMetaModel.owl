@@ -1,0 +1,717 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+    xml:base="http://reaction.ruleml.org/1.0/ontology/EventMetaModel.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://reaction.ruleml.org/1.0/ontology/EventMetaModel.owl"
+     versionIRI="http://reaction.ruleml.org/1.0/">
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>http://www.co-ode.org/ontologies/lists/2008/09/11/list.owl</Import>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal datatypeIRI="&xsd;string">This is version 4 of the Event Meta Model Ontology that describes a semantic meta model for Event Descriptions as Event Types in terms of their Event Class Definitions as a set of Event Properties (Event Attributes) and their Event Values.</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#AggregationAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Algorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CollectingAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ComputationAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Context"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PropertyList"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Property"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HistoryList"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OrderFunction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OrderedPropertyValuesList"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PossibleValues"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EventType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Event"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EventClass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EventValue"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MetaProperty"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PatternProperty"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#aggregates"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#collects"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#computes"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasProperty"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasHistory"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasOrderedList"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasRange"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasEvent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasEventValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isCollectedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isComputedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isHistoryOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isMemberOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isPartOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRangeOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isEventOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isEventValueIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isValueOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#orderedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#orders"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#currentValue"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#EventID"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#timeStamped"/>
+    </Declaration>
+    
+    <!-- predefined Event types which can be specialized by defining the event class --> 
+    <Declaration>
+        <Class IRI="#SimpleEvent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ComplexEvent"/>
+    </Declaration>
+    
+    <!-- Event Class Meta Model for defining Event Types -->
+    
+    <Declaration>
+        <NamedIndividual IRI="#EventValue1"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Context"/>
+        <Class IRI="#PropertyList"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#EventClass"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Event"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasProperty"/>
+                <Class IRI="#Property"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasProperty"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Property"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasEventValue"/>
+                        <Class IRI="#EventValue"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasEventValue"/>
+                <Class IRI="#EventValue"/>
+            </ObjectSomeValuesFrom>
+            <ObjectMinCardinality cardinality="1">
+                <ObjectProperty IRI="#hasProperty"/>
+                <Class IRI="#Property"/>
+            </ObjectMinCardinality>
+            <ObjectMinCardinality cardinality="1">
+                <ObjectProperty IRI="#hasEventValue"/>
+                <Class IRI="#EventValue"/>
+            </ObjectMinCardinality>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#EventClass"/>
+        <Class IRI="#EventType"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AggregationAlgorithm"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AggregationAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#aggregates"/>
+            <Class IRI="#Context"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AggregationAlgorithm"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CollectingAlgorithm"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CollectingAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#collects"/>
+            <Class IRI="#Property"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CollectingAlgorithm"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#computes"/>
+            <Class IRI="#Property"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#computes"/>
+            <Class IRI="#EventValue"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Context"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isAggregatedBy"/>
+            <Class IRI="#AggregationAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Context"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#currentValue"/>
+            <Datatype abbreviatedIRI="rdfs:Literal"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Context"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PropertyList"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasRange"/>
+            <Class IRI="#PossibleValues"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasValue"/>
+            <Class IRI="#EventValue"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isCollectedBy"/>
+            <Class IRI="#CollectingAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isMemberOf"/>
+            <Class IRI="#PropertyList"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="#isCollectedBy"/>
+            <Class IRI="#CollectingAlgorithm"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HistoryList"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderFunction"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderFunction"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#orders"/>
+            <Class IRI="#OrderFunction"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderFunction"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderedPropertyValuesList"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasOrderedList"/>
+            <Class IRI="#OrderedPropertyValuesList"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasOrderedList"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#OrderedPropertyValuesList"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#orderedBy"/>
+                    <Class IRI="#OrderFunction"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#orderedBy"/>
+            <Class IRI="#OrderFunction"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Event"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isEventOf"/>
+            <Class IRI="#EventType"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Event"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#isEventOf"/>
+            <Class IRI="#EventType"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Event"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#EventID"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventValue"/>
+        <ObjectIntersectionOf>
+            <ObjectMinCardinality cardinality="0">
+                <ObjectProperty IRI="#hasHistory"/>
+                <Class IRI="#HistoryList"/>
+            </ObjectMinCardinality>
+            <ObjectMaxCardinality cardinality="1">
+                <ObjectProperty IRI="#hasHistory"/>
+                <Class IRI="#HistoryList"/>
+            </ObjectMaxCardinality>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventValue"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasHistory"/>
+            <Class IRI="#HistoryList"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventValue"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventValue"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isPartOf"/>
+            <Class IRI="#PossibleValues"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventValue"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventValue"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#currentValue"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EventValue"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#timeStamped"/>
+            <Datatype abbreviatedIRI="xsd:dateTime"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#AggregationAlgorithm"/>
+        <Class IRI="#CollectingAlgorithm"/>
+        <Class IRI="#ComputationAlgorithm"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Algorithm"/>
+        <Class IRI="#Property"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Algorithm"/>
+        <Class IRI="#PossibleValues"/>
+        <Class IRI="#Event"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Algorithm"/>
+        <Class IRI="#EventValue"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Property"/>
+        <Class IRI="#PossibleValues"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Property"/>
+        <Class IRI="#Event"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Property"/>
+        <Class IRI="#EventValue"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Event"/>
+        <Class IRI="#EventValue"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#EventValue"/>
+        <NamedIndividual IRI="#EventValue1"/>
+    </ClassAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+        <ObjectProperty abbreviatedIRI=":topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#aggregates"/>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#collects"/>
+        <ObjectProperty IRI="#isCollectedBy"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#computes"/>
+        <ObjectProperty IRI="#isComputedBy"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasHistory"/>
+        <ObjectProperty IRI="#isHistoryOf"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isRangeOf"/>
+        <ObjectProperty IRI="#hasRange"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isEventOf"/>
+        <ObjectProperty IRI="#hasEvent"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasEventValue"/>
+        <ObjectProperty IRI="#isEventValueIn"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isValueOf"/>
+        <ObjectProperty IRI="#hasValue"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#orders"/>
+        <ObjectProperty IRI="#orderedBy"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isCollectedBy"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isComputedBy"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isEventOf"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#aggregates"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#collects"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#computes"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#hasEvent"/>
+    </InverseFunctionalObjectProperty>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasDescription"/>
+        <DataProperty abbreviatedIRI=":topDataProperty"/>
+    </SubDataPropertyOf>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#EventID"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#currentValue"/>
+        <Class IRI="#EventValue"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#EventID"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#timeStamped"/>
+        <Class IRI="#EventValue"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#currentValue"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDescription"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#EventID"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#timeStamped"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    
+    <!-- predefined event types in the top-level event ontology which can be specialized by defining their event class (i.e. the definition as a specialized event type) -->
+    <SubClassOf>
+        <Class IRI="#SimpleEvent"/>
+        <Class IRI="#Event"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComplexEvent"/>
+        <Class IRI="#Event"/>
+    </SubClassOf>
+    
+    <!-- Annotations -->
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#AggregationAlgorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A method to aggregate the values of multiple Property to 1 context value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#Algorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">An algorithm is a method which performs a certain function in one or more steps. It can represent a mathematical function or a description of a collection of steps to achieve a goal.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CollectingAlgorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A method to collect information about a Property value or a Event value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ComputationAlgorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Also known as Event computation engine or Event function, which calculates the Event value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#PossibleValues</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A set of the possible values that a Property can have. It can be a set of fixed values or a description of the value type e.g. natural numbers, binary, integers from 1 to 5.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#EventClass</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A Event Class is a semantic representation defining an Event Type for Event Objects which are instantiation of the Event Class. It consists of one or more Event Property (aka Event Attributes) along with the definition of their Event Values.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">relates a Event Property or EventValue to its computation algorithm
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Adrian Paschke</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">isComputedBy</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Reaction RuleML 1.0 Event Meta Model</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+

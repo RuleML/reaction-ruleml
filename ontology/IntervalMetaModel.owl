@@ -1,0 +1,762 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+    xml:base="http://reaction.ruleml.org/1.0/ontology/IntervalMetaModel.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://reaction.ruleml.org/1.0/ontology/IntervalMetaModel.owl"
+     versionIRI="http://reaction.ruleml.org/1.0/">
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>http://www.co-ode.org/ontologies/lists/2008/09/11/list.owl</Import>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal datatypeIRI="&xsd;string">This is version 1 of the Interval Meta Model Ontology that describes a semantic meta model for Interval Descriptions as Interval Types in terms of their Interval Class Definitions as a set of Interval Properties (Interval Attributes) and their Interval Values.</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#AggregationAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Algorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CollectingAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ComputationAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Context"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PropertyList"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Property"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HistoryList"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OrderFunction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OrderedPropertyValuesList"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PossibleValues"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IntervalType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Interval"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IntervalClass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IntervalValue"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MetaProperty"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PatternProperty"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#aggregates"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#collects"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#computes"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasProperty"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasHistory"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasOrderedList"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasRange"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasInterval"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasIntervalValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isCollectedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isComputedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isHistoryOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isMemberOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isPartOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRangeOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isIntervalOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isIntervalValueIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isValueOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#orderedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#orders"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#currentValue"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#IntervalID"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#IntervalStamped"/>
+    </Declaration>
+    
+    <!-- predefined Interval types which can be specialized by defining the Interval class --> 
+    <Declaration>
+        <Class IRI="#EmtpyInterval"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DegeneratedInterval"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DegeneratedInterval"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LeftClosedRightOpenInterval"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LeftOpenRightClosedInterval"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LeftOpenInterval"/>
+    </Declaration>    
+    <Declaration>
+        <Class IRI="#LeftClosedInterval"/>
+    </Declaration>    
+    <Declaration>
+        <Class IRI="#RightClosedInterval"/>
+    </Declaration>    
+    <Declaration>
+        <Class IRI="#RightOpenInterval"/>
+    </Declaration>        
+
+    <!-- Interval Class Meta Model for defining Interval Types -->
+    
+    <Declaration>
+        <NamedIndividual IRI="#IntervalValue1"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Context"/>
+        <Class IRI="#PropertyList"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#IntervalClass"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Interval"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasProperty"/>
+                <Class IRI="#Property"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasProperty"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="#Property"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="#hasIntervalValue"/>
+                        <Class IRI="#IntervalValue"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasIntervalValue"/>
+                <Class IRI="#IntervalValue"/>
+            </ObjectSomeValuesFrom>
+            <ObjectMinCardinality cardinality="1">
+                <ObjectProperty IRI="#hasProperty"/>
+                <Class IRI="#Property"/>
+            </ObjectMinCardinality>
+            <ObjectMinCardinality cardinality="1">
+                <ObjectProperty IRI="#hasIntervalValue"/>
+                <Class IRI="#IntervalValue"/>
+            </ObjectMinCardinality>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#IntervalClass"/>
+        <Class IRI="#IntervalType"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AggregationAlgorithm"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AggregationAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#aggregates"/>
+            <Class IRI="#Context"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AggregationAlgorithm"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CollectingAlgorithm"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CollectingAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#collects"/>
+            <Class IRI="#Property"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CollectingAlgorithm"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#computes"/>
+            <Class IRI="#Property"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#computes"/>
+            <Class IRI="#IntervalValue"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ComputationAlgorithm"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Context"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isAggregatedBy"/>
+            <Class IRI="#AggregationAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Context"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#currentValue"/>
+            <Datatype abbreviatedIRI="rdfs:Literal"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Context"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PropertyList"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasRange"/>
+            <Class IRI="#PossibleValues"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasValue"/>
+            <Class IRI="#IntervalValue"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isCollectedBy"/>
+            <Class IRI="#CollectingAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isMemberOf"/>
+            <Class IRI="#PropertyList"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="#isCollectedBy"/>
+            <Class IRI="#CollectingAlgorithm"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Property"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HistoryList"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderFunction"/>
+        <Class IRI="#Algorithm"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderFunction"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#orders"/>
+            <Class IRI="#OrderFunction"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderFunction"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#hasDescription"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OrderedPropertyValuesList"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <Class IRI="http://www.co-ode.org/ontologies/list.owl#OWLList"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasOrderedList"/>
+            <Class IRI="#OrderedPropertyValuesList"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasOrderedList"/>
+            <ObjectIntersectionOf>
+                <Class IRI="#OrderedPropertyValuesList"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#orderedBy"/>
+                    <Class IRI="#OrderFunction"/>
+                </ObjectSomeValuesFrom>
+            </ObjectIntersectionOf>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PossibleValues"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#orderedBy"/>
+            <Class IRI="#OrderFunction"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Interval"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isIntervalOf"/>
+            <Class IRI="#IntervalType"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Interval"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#isIntervalOf"/>
+            <Class IRI="#IntervalType"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Interval"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#IntervalID"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IntervalValue"/>
+        <ObjectIntersectionOf>
+            <ObjectMinCardinality cardinality="0">
+                <ObjectProperty IRI="#hasHistory"/>
+                <Class IRI="#HistoryList"/>
+            </ObjectMinCardinality>
+            <ObjectMaxCardinality cardinality="1">
+                <ObjectProperty IRI="#hasHistory"/>
+                <Class IRI="#HistoryList"/>
+            </ObjectMaxCardinality>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IntervalValue"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasHistory"/>
+            <Class IRI="#HistoryList"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IntervalValue"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IntervalValue"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#isPartOf"/>
+            <Class IRI="#PossibleValues"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IntervalValue"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#isComputedBy"/>
+            <Class IRI="#ComputationAlgorithm"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IntervalValue"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#currentValue"/>
+            <DataUnionOf>
+                <Datatype abbreviatedIRI="rdfs:Literal"/>
+                <Datatype abbreviatedIRI="xsd:anyURI"/>
+            </DataUnionOf>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IntervalValue"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#IntervalStamped"/>
+            <Datatype abbreviatedIRI="xsd:dateInterval"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#AggregationAlgorithm"/>
+        <Class IRI="#CollectingAlgorithm"/>
+        <Class IRI="#ComputationAlgorithm"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Algorithm"/>
+        <Class IRI="#Property"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Algorithm"/>
+        <Class IRI="#PossibleValues"/>
+        <Class IRI="#Interval"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Algorithm"/>
+        <Class IRI="#IntervalValue"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Property"/>
+        <Class IRI="#PossibleValues"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Property"/>
+        <Class IRI="#Interval"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Property"/>
+        <Class IRI="#IntervalValue"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Interval"/>
+        <Class IRI="#IntervalValue"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#IntervalValue"/>
+        <NamedIndividual IRI="#IntervalValue1"/>
+    </ClassAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+        <ObjectProperty abbreviatedIRI=":topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#aggregates"/>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#collects"/>
+        <ObjectProperty IRI="#isCollectedBy"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#computes"/>
+        <ObjectProperty IRI="#isComputedBy"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasHistory"/>
+        <ObjectProperty IRI="#isHistoryOf"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isRangeOf"/>
+        <ObjectProperty IRI="#hasRange"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isIntervalOf"/>
+        <ObjectProperty IRI="#hasInterval"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasIntervalValue"/>
+        <ObjectProperty IRI="#isIntervalValueIn"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isValueOf"/>
+        <ObjectProperty IRI="#hasValue"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#orders"/>
+        <ObjectProperty IRI="#orderedBy"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isAggregatedBy"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isCollectedBy"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isComputedBy"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isIntervalOf"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#aggregates"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#collects"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#computes"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#hasInterval"/>
+    </InverseFunctionalObjectProperty>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasDescription"/>
+        <DataProperty abbreviatedIRI=":topDataProperty"/>
+    </SubDataPropertyOf>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#IntervalID"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#currentValue"/>
+        <Class IRI="#IntervalValue"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#IntervalID"/>
+        <Class IRI="#Interval"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#IntervalStamped"/>
+        <Class IRI="#IntervalValue"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#currentValue"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDescription"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#IntervalID"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#IntervalStamped"/>
+        <Datatype abbreviatedIRI="xsd:dateInterval"/>
+    </DataPropertyRange>
+    
+    <!-- predefined Interval types in the top-level Interval ontology which can be specialized by defining their Interval class (i.e. the definition as a specialized Interval type) -->
+    <SubClassOf>
+        <Class IRI="#EmptyInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DegeneratedInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LeftClosedRightOpenInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LeftOpenRightClosedInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LeftOpenInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LeftClosedInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>   
+    <SubClassOf>
+        <Class IRI="#RightOpenInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RightClosedInterval"/>
+        <Class IRI="#Interval"/>
+    </SubClassOf>      
+   
+    <!-- Annotations -->
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#AggregationAlgorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A method to aggregate the values of multiple Property to 1 context value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#Algorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">An algorithm is a method which performs a certain function in one or more steps. It can represent a mathematical function or a description of a collection of steps to achieve a goal.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CollectingAlgorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A method to collect information about a Property value or a Interval value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ComputationAlgorithm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Also known as Interval computation engine or Interval function, which calculates the Interval value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#PossibleValues</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A set of the possible values that a Property can have. It can be a set of fixed values or a description of the value type e.g. natural numbers, binary, integers from 1 to 5.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#IntervalClass</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A Interval Class is a semantic representation defining an Interval Type for Interval Objects which are instantiation of the Interval Class. It consists of one or more Interval Property (aka Interval Attributes) along with the definition of their Interval Values.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">relates a Interval Property or IntervalValue to its computation algorithm
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Adrian Paschke</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">isComputedBy</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status"/>
+        <IRI>#isComputedBy</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Reaction RuleML 1.0 Interval Meta Model</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+

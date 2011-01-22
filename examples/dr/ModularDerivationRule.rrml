@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+
+<!-- Clocksin/Mellish sample rule 
+
+This example shows how the modular rule definitions can refer to each other using key - keyref attributes.
+The interface definition of rule "r1" references (keyref) the rule implementation of rule which is identified by its unique key "r1". 
+
+This can be quite importan in the context of distributed reactive knowledge bases which communicate via event queries, e.g. to support modularization and information hiding (e.g. only the interface is publicly published while the implementation is not public).
+
+-->
+
+
+  <!-- assert knowledge -->
+
+  <Assert>
+
+ 
+<!-- rule interface with two alternative interpretation semantics and a signature. The interface is referenced by the implementation identified by the corresponding key-keyref -->
+
+ <Rule key="r1">
+
+ 	<evaluation index="1">
+  		<!-- WFS semantic profile define in the metamodel -->
+ 		<Profile type="ruleml:WellFoundedSemantics"/>
+ 	</evaluation>
+
+ 	<evaluation index="2">
+ 	<!-- alternative ASS semantic profile define in the metamodel -->
+		<Profile type="ruleml:AnswerSetSemantics" direction="backward"/>
+	</evaluation>
+
+	<!-- the signature  defines the queryable head of the 		backward-reasoning rule -->
+
+ 	<signature>
+   		<Atom>
+			<Rel>likes</Rel>
+			<Var mode="+">John</Var> <!-- predefined constant -->
+			<Var mode="-"/>
+		</Atom>
+ 	</signature>
+ </Rule>
+
+<!-- implementation of rule 1 which is interpreted either by WFS or by ASS semantics according to it's interface definition. -->
+
+ <Rule keyref="r1" style="reasoning">
+	<if>
+		<Atom>
+     			<op><Rel>likes</Rel></op>
+     			<Var>X</Var>
+     			<Ind>wine</Ind>
+     		</Atom>
+	</if>
+    	<then>
+		<Atom>
+    			 <op><Rel>likes</Rel></op>
+	      	<Ind>John</Ind>
+     		 	<Var>X</Var>
+     		</Atom>
+	</then>
+ </Rule>
+
+
+ <!-- fact -->
+
+  <Atom>
+    <op><Rel>likes</Rel></op>
+    <Ind>Mary</Ind>
+    <Ind>wine</Ind>
+  </Atom>
+ 
+ </Assert>
+
+</RuleML>

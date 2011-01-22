@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dc="http://purl.org/dc/elements/1.1"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+
+
+<!-- Clocksin/Mellish sample rule 
+
+This example shows how signatures are define.
+
+The signature is part of the interface description. It defines the signature with optional input / output mode declarations. The signature declaration can act as public interface and
+can be published together with the intended evaluation semantics. 
+
+Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
+for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
+pattern machting, i.e. in the on part of a reaction rule it triggers the reaction rule if the template matches with required event instances, which are
+instantiations of the event type / class to which make up the required properties of the event template.
+        	
+In backward-reasoning derivation rules the signature interface description defines a query template for the head of the rule. 
+In forward-(reasoning) reaction rules the signature interface description  defines the event template for the event pattern matching which triggers the rules.  
+       	
+Multiple signatures are possible by repreating the <signature> element
+
+Signatures can be used to distinguishing public rule interfaces, which can be queried, from private knowledge such as private facts which is not visible
+to external agents which query the knowledge base by using the public interface. This allows implementing principles of information hiding and
+loosley-coupled interactions where the concrete implementations are hidden behind the public interface. 
+This can be e.g. quite useful in the context of distributed reactive knowledge bases which communicate via event queries a.
+-->
+
+  <!-- assert knowledge -->
+
+  <Assert key="#kb_module1">
+
+  <!-- signature definition -->
+  <!-- the signature is defined globaly on the level of the asserted module. 
+       Note: it could be also defined for a rulebase or localy within a rule --> 
+
+    <signature>
+   	 <Atom key="#rule1">
+   		
+    		<!-- general meta information about the signature -->
+    
+    		<!-- natural language description for humans -->
+    		<meta><Atom><Rel iri="dc:description"/><Data xsi:type="xs:string">public interface of the likes function</Data></Atom></meta>
+    		
+    		<!-- signature definition -->
+    		
+    		<Rel>likes</Rel> <!-- function relation -->
+    		<Var mode="+"/> <!-- mode=+ i.e. input argument -->
+    		<Var mode="-"/> <!-- mode=- i.e. output argument -->
+   
+   	 </Atom>
+    </signature>
+
+
+  <!-- rule instance implementation which references the globalby defined signature -->
+
+  <Rule keyref="#rule1">
+    <if>
+      <Atom>
+        <op><Rel>likes</Rel></op>
+        <Var>X</Var>
+        <Ind>wine</Ind>
+      </Atom>
+    </if>
+    <then>
+      <Atom>
+        <op><Rel>likes</Rel></op>
+        <Ind>John</Ind>
+        <Var>X</Var>
+      </Atom>
+    </then>
+  </Rule>
+
+
+
+    <!-- a similar rule example but with a localy defined signature  -->
+    
+    <Rule key="#rule2">
+      <signature>
+        <!-- signature definition --> 
+        <Atom>
+          <Rel>likes</Rel> <!-- function relation -->
+          <Ind>John</Ind> <!-- first argument is a constan, i.e. all queries refer to "John" -->
+          <Var mode="-"/> <!-- mode=- i.e. output argument -->
+        </Atom>
+      </signature>
+      <if>
+        <Atom>
+          <op><Rel>likes</Rel></op>
+          <Var>X</Var>
+          <Ind>beer</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op><Rel>likes</Rel></op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
+    
+    
+    <!-- a similar rule example, but now with a seperation of the rule interface and
+        the implementation of the rule. The reference from the instance to the interface is done using the key-keyref referencing
+        mechanism between distributed knowledge in a KB.
+    -->   
+
+    <!-- the rule interface 
+      
+         Note: the rule interface might contain also the other rules of a Reaction RuleML rule.
+         In particular, the <evaluation> role which defines the semantic profile(s) of the rule
+         is often part of the interface description.
+         
+         But also metadata <meta> specific to the interface description of the rule or qualification <qualification>, e.g. on the validitiy of the signature,
+         visibility of the signature (such as public, private etc.), could be defined as part of the interface description.
+         
+         The signature is part of the interface description. It defines the signature with optional input / output mode declarations. The signature declaration can act as public interface and
+	       can be published together with the intended evaluation semantics. 
+	
+        	Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
+        	for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
+        	pattern machting, i.e. in the on part of a reaction rule it triggers the reaction rule if the template matches with required event instances, which are
+        	instantiations of the event type / class to which make up the required properties of the event template.
+        	
+        	In backward-reasoning derivation rules the signature interface description defines a query template for the head of the rule. 
+        	In forward-(reasoning) reaction rules the signature interface description  defines the event template for the event pattern matching which triggers the rules.  
+        	
+        	Multiple signatures are possible by repreating the <signature> element
+    -->
+    <Rule key="#rule3">
+      <signature>
+        <!-- signature definition -->  
+        <Atom>
+          <Rel>likes</Rel> <!-- function relation -->
+          <Ind>John</Ind> <!-- first argument is a constan, i.e. all queries refer to "John" -->
+          <Var mode="-"/> <!-- mode=- i.e. output argument -->
+        </Atom>
+      </signature>
+    </Rule>
+
+    <!-- a concrete rule instance implementation of the seperated rule interface. The reference from the implementation to the interface
+         is done by a key keyref reference. 
+         The rule instance implemenation can be given a unique new key (#rule3impl) which distinguishes it from other rule instance implementations of the
+         rule interface #rule3. By this way multiple implementations (but with e.g. different rule body's) can instantiate the same interface. 
+     -->
+    <Rule keyref="#rule3" key="#rule3impl">
+      <if>
+        <Atom>
+          <op><Rel>likes</Rel></op>
+          <Var>X</Var>
+          <Ind>beer</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op><Rel>likes</Rel></op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
+
+  <!-- fact -->
+
+  <Atom>
+    <op><Rel>likes</Rel></op>
+    <Ind>Mary</Ind>
+    <Ind>wine</Ind>
+  </Atom>
+ 
+ </Assert>
+
+</RuleML>

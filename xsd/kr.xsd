@@ -1,58 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-		xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
-		targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
-		
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">	
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-          
-            Spatio-Temporal Derivation Rule (DR) dialect of Reaction RuleML 
 			
-			This layer defines the spatio-temporal Derivation Rule dialect of Reaction RuleML.
-			It adds necessary extensions to the RuleML Horn Logic layer with equality for
-			the spatio-temporal Derivation Rule dialect.
+			KR (Knowledge Representation) dialect of Reaction RuleML for temporal / event / action / situation reasoning logics
 			
-			File: dr.xsd
+			File: kr.xsd
 			Version: 1.0
 			Last Modification: 2011-03-22
 			
-			This schema declares the following Reaction RuleML elements and attributes:
-				  								  
-				  * rename Implies into Rule (if-then-else)
-				  * extends RuleML by adding meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends Assert, Retract by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification,  @safety and @size
-				  * extends Query by adding Negation, Naf, Neg Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
-				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends if and then by adding Time, Spatial, Interval
-				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
-				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification and Time, Spatial, Interval
-				  * extends slot by adding Time, Spatial, Interval
-				  * extends oid by adding Time, Spatial, Interval
-				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
-				  * extends Rel by adding @per	
-				  * extends And/Or by adding Negation, Neg, Naf, Rule
-				  * extends torso by  Negation, Neg, Naf 
-				  * extends @type to be of type termOrCurieOrIRI.datatype
-				  * add Negation, Neg, Naf 
-				  * add Time, Interval, Spatial
-				  * add Quantifier, Forall, Exists (quantification) 
-				  * add @key, @keyref (with key and keyref of type curieORAbsIRI)
-
-			 Rule is the core construct for all types of rules in Reaction RuleML.			 
-
+			This schema declares the following Reaction RuleML KR elements and attributes for reasoning:
+			
+			* extend Assert/Retract by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
+			* extend Rulebase by Time, Interval, Spatial,  adding Event, Situation, Holds, Initates, Terminstes, Happens
+			* extend Query by adding Time, Interval, Spatial,  Event, Situation, Holds, Initates, Terminates, Happens
+			* extend if by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
+			* extend then by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
+			* And/Or by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
+			* Negation and Neg by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Termiantes, Happens
+			* add Time, Interval, Spatial, Event, Situation, Holds, Initates, Termiantes, Happens
+			
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
 		<xs:appinfo>
-			<dc:title>DR Reaction RuleML Schema</dc:title>
+			<dc:title>KR Reaction RuleML Schema</dc:title>
 			<dc:version>1.0</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
 			<dc:subject>Reaction RuleML 1.0</dc:subject> 
-			<dc:description>spatio-temporal Derivation Rule dialect of Reaction RuleML</dc:description> 
+			<dc:description>Knowledge Representation (KR) dialect of Reaction RuleML</dc:description> 
 			<dc:date>2011-03-22T23:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
 			<dcterms:rights>LGPL-3.0</dcterms:rights> 
 			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
-		</xs:appinfo> 
+		</xs:appinfo>
 	</xs:annotation>
 
 	<!-- includes the datalog layer of deliberation ruleml -->
@@ -65,15 +46,15 @@
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
 	<xs:include schemaLocation="modules/iri_module.xsd"/>
-
+	
 	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
 	<xs:include schemaLocation="modules/expr_module.xsd"/>
 	<xs:include schemaLocation="modules/rest_module.xsd"/>
-
+	
 	<!-- includes the equalog layer with the 'equality' module -->
 	<xs:include schemaLocation="modules/equality_module.xsd"/>
-
-	<!-- include from the (spatio-temporal) derivation rule layer of reaction ruleml   -->
+	
+	<!-- include from the (spatio-temporal) derivation rule (DR) layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/attribute_module.xsd"/>
 	<xs:include schemaLocation="modules/rule_module.xsd"/>
 	<xs:include schemaLocation="modules/negation_module.xsd"/>
@@ -82,6 +63,11 @@
 	<xs:include schemaLocation="modules/time_module.xsd"/>
 	<xs:include schemaLocation="modules/spatial_module.xsd"/>	
 	<xs:include schemaLocation="modules/interval_module.xsd"/>
+	
+	<!-- include from the knowledge representation (KR) rule layer of reaction ruleml   -->
+	<xs:include schemaLocation="modules/situation_module.xsd" />
+	<xs:include schemaLocation="modules/situationreasoning_module.xsd" />
+	<xs:include schemaLocation="modules/event_module.xsd" />
 
 
 	<!--
@@ -130,8 +116,8 @@
 			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:group>
-
-
+	
+	
 	<!--
          
      An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
@@ -154,10 +140,9 @@
          
      An internal group for the implementation of a rule in the Reaction RuleML language
     
-    
      content model:
      
-     in DR Reaction RuleML: (if, then, else?)
+     in KR Reaction RuleML: (if, then, else?)
           
 	-->
 	
@@ -182,7 +167,7 @@
 			<xs:element ref="Negation"/>
 			<xs:element ref="Naf"/>
 			<xs:element ref="Neg"/>
-			<xs:element ref="Equal"/> 
+			<xs:element ref="Equal"/> 			
 		</xs:choice>
 	</xs:group>
 	
@@ -276,15 +261,19 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
+     In the KR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial, Interval, Event, Situation, Holds, Initiates, Terminates, Happens
     
-     content model: (Time | Spatial | Interval)
+     content model: (Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
           
 	-->
 	
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
 			<xs:group ref="extended-signature-function-sorts.content"/>
+			<xs:element ref="Holds" />	
+			<xs:element ref="Initiates" />
+			<xs:element ref="Terminates" />
+			<xs:element ref="Happens" />
 		</xs:choice>
 	</xs:group>
 	
@@ -293,9 +282,9 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the DR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
+     In the KR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial, Interval, Event and Situation
     
-     content model: (Time | Spatial | Interval)
+     content model: (Time | Spatial | Interval | Event | Situation)
           
 	-->
 	
@@ -303,19 +292,22 @@
 		<xs:choice>
 			<xs:element ref="Time"/>
 			<xs:element name="Spatial"/>
-			<xs:element name="Interval"/>	
+			<xs:element name="Interval"/>
+			<xs:element name="Event"/>
+			<xs:element name="Situation"/>			
 		</xs:choice>
 	</xs:group>
-
+	
 	<!--
     *** @style ***
     
      restriction: active | messaging | reasoning
-	 default value: reasoning (in DR Reaction RuleML)
+	 default value: reasoning (in KR Reaction RuleML)
 	 optional attribute
 -->
 	<xs:attributeGroup name="style.attrib">
 		<xs:attribute name="style" type="style.datatype" use="optional" default="reasoning"/>
 	</xs:attributeGroup>
+	
 
 </xs:schema>

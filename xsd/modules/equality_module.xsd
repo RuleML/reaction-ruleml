@@ -33,10 +33,17 @@
 		See http://www.ruleml.org/0.91/glossary/#gloss-Equal
 
 		content model:
+		in DR Reaction RuleML:
 		(
 		  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?
 			(left, right) |
-			(  (Ind | Data | Skolem | Var | Reify), (Ind | Data | Skolem | Var | Reify)  )
+			(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)  )
+		)
+		in KR Reaction RuleML:
+		(
+		  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?
+			(left, right) |
+			(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)  )
 		)
 	-->
   <xs:attributeGroup name="Equal.attlist">
@@ -90,9 +97,11 @@
 		*** left ***
 		The left-hand side of an equational formula.
 
-		See http://www.ruleml.org/0.91/glossary/#gloss-left
+		See http://www.ruleml.org/1.0/glossary/#gloss-left
 
-		content model: (Ind|Data|Var|Skolem|Reify)
+		content model: 
+		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
 	-->
   <xs:attributeGroup name="left.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -112,9 +121,11 @@
 		*** right***
 		The right-hand side of an equational formula.
 
-		See http://www.ruleml.org/0.91/glossary/#gloss-right
+		See http://www.ruleml.org/1.0/glossary/#gloss-right
 
-		content model: (Ind|Data|Var|Skolem|Reify)
+		content model: 
+		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
 	-->
   <xs:attributeGroup name="right.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

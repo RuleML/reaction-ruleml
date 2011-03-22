@@ -32,7 +32,9 @@
 		
 		See http://www.ruleml.org/1.0/glossary/#gloss-arg
 
-		content model: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		content model: 
+		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
 	-->
   <xs:attributeGroup name="arg.attlist">
     <xs:attributeGroup ref="index.attrib"/>

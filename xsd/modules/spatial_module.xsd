@@ -42,9 +42,14 @@
       or externally, where the optional @iri attribute points to an external data definition of the spatial
       The optional @type attribute defines the type of the spatial
 		
-	content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
+	content model: 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-				content(xs:any*)* ) ) -->
+				content(xs:any*)* ) ) 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+				content(xs:any*)* ) ) 
+	-->
 	<xs:attributeGroup name="Spatial.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>

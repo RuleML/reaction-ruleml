@@ -42,7 +42,10 @@
        An interval can be defined by Events, Times, Spatials, and other Intervals can be typed by the 
        interval ontology of Reaction RuleML (defining different types of intervals).
 		
-	content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? -->
+	content model: 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
+	-->
 	<xs:attributeGroup name="Interval.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>

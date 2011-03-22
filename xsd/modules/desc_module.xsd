@@ -80,7 +80,9 @@
   
   See http://www.ruleml.org/1.0/glossary/#gloss-oid
   
-  content model: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+  content model: 
+  in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+  in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
   -->
   <xs:element name="oid" type="oid.type"/>
   
@@ -110,9 +112,10 @@
     
 	Used for descriptive Metadata annotations in Reaction RuleML
 	
-     content model: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval )
+     content model: 
+     in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
+     in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
         
-     
      Multiple Metadata annotations are possible by repreating <meta>
 -->
   
@@ -204,7 +207,9 @@
      
 	guard constraints 
 	
-     content model: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
+     content model: 
+     in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
+     in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
           
 -->
   <xs:attributeGroup name="guard.attlist">
@@ -263,7 +268,9 @@
 	
 	Multiple signatures are possible by repreating the <signature> element
 	
-     content model: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
+     content model: 
+     in DR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
+     in KR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval | Event | Situation )
           
 -->
   <xs:attributeGroup name="signature.attlist">
@@ -294,9 +301,10 @@
 	
 	That would mean the qualification of the rule changes depending on the situation (the truth value of the fluent in KR RuleML)
 	
-     content model: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval) 
-     
-          
+     content model: 
+     in DR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval)
+     in KR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation)
+
 -->
   <xs:attributeGroup name="qualification.attlist">
     <xs:attributeGroup ref="index.attrib"/>

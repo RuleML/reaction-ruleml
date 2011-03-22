@@ -34,17 +34,22 @@
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-Atom
 	
-		content model (normally):
+		content model:
+		in DR Reaction RuleML:
 		(
 			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
 			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval)*, repo?) | repo), slot*, resl?
-			
-			
-			
+		)
+		
+		in KR Reaction RuleML:
+		(
+			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
+			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo?) | repo), slot*, resl?
 		)
 		
 		however, the above content model is non-deterministic,
 		so it is (equivalently) restructured as follows:
+		in DR Reaction RuleML:
 		(
 				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel), slot*,
 				( 
@@ -56,6 +61,19 @@
 					slot*)?, 
 				resl?
 			)	
+			
+		in KR Reaction RuleML
+		(
+				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel), slot*,
+				( 
+					( 
+						((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo?)
+						|
+						repo
+					),
+					slot*)?, 
+				resl?
+			)
 	
 		Note the 'positionalized' normal form where the oid and op roles
 		are at the beginning of the atom.

@@ -41,14 +41,24 @@
 		See http://www.ruleml.org/0.91/glossary/#gloss-Expr
 
 		content model:
-		( 
-		  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
+		DR Reaction RuleML:
+		( 		   
+		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
 		  (op|Fun), slot*, 
       (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*,
 		  repo?, slot*, resl?
 		)
 
+    KR Reaction RuleML:
+		( 		   
+		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
+		  (op|Fun), slot*, 
+      (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*,
+		  repo?, slot*, resl?
+		)
+
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
+		DR Reaction RuleML:
 		(
 		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
 			( 
@@ -60,7 +70,18 @@
 				slot*)? , 
 			resl?
 		)
-		
+		KR Reaction RuleML:
+				(
+		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
+			( 
+				( 
+					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo? )
+					|
+					repo
+				),
+				slot*)? , 
+			resl?
+		)
 		Note the 'positionalized' normal form where the op role is only
 		at the beginning of the Expr.
 	-->
@@ -199,11 +220,18 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		See http://www.ruleml.org/0.91/glossary/#gloss-Plex
 		
 		content model (within Atom, Plex, slot):
+		DR Reaction RuleML:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
 		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*, repo?, slot*, resl? )
-
+    
+    KR Reaction RuleML
+		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
+		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Interval)*, repo?, slot*, resl? )
+		
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
-		(
+		
+		DR Reaction RuleML:
+		(		
 		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
 		   slot*,
 		     (
@@ -214,9 +242,27 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
                      resl
 		     )
 		)
-
-		content model (within repo): ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval )*, repo? )
-		content model (within resl): (slot*, resl? )
+		
+		KR Reaction RuleML:
+		(		
+		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
+		   slot*,
+		     (
+		        ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo?, slot*, resl? )?
+		        |
+                     ( repo, slot*, resl? )
+                     |
+                     resl
+		     )
+		)
+		
+		content model (within repo): 
+		DR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval )*, repo? )
+		KR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo? )
+		
+		content model (within resl):
+		DR Reaction RuleML: (slot*, resl? )
+		KR Reaction RuleML: (slot*, resl? )
 	-->
   <xs:attributeGroup name="Plex.attlist">
     <xs:attributeGroup ref="node.attrib"/>

@@ -32,7 +32,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-slot
 
 		content model:
-		( (Ind|Data|Expr|Plex|Time|Spatial), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
+		DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
+		KR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Event|Situation), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation) )
 		
 		
 		this allows using time and spatial as slot names to define nominal units, e.g. time1(years->3 months->2)  

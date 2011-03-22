@@ -86,7 +86,9 @@
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-if
 
-		content model: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
+		content model: 
+		DR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
+		KR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 	-->
   <xs:attributeGroup name="if.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -120,7 +122,9 @@
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-then
 
-		content model: ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
+		content model: 
+		DR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
+		KR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 	-->
   <xs:attributeGroup name="then.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -187,7 +191,10 @@
 		
 		See http://www.ruleml.org/1.0/glossary/#gloss-Equivalent
 
-		content model: 			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval), (Atom | Equal | Negation | Neg | Time | Spatial | Interval) ) ) )
+		content model: 		
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval), (Atom | Equal | Negation | Neg | Time | Spatial | Interval) ) ) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens), 
+		                      (Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) ) ) )
 	-->
   <xs:attributeGroup name="Equivalent.attlist">
     <xs:attributeGroup ref="closure.attrib"/>
@@ -240,7 +247,9 @@
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-torso
 
-		content model: (Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
+		content model: 
+		DR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
+		KR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 	-->
   <xs:attributeGroup name="torso.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -265,7 +274,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Rulebase
 		
 		content model:
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
 	-->
   <xs:attributeGroup name="Rulebase.attlist">
     <xs:attributeGroup ref="mapClosure.attrib"/>
@@ -295,7 +305,9 @@
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-And
 		
-		content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		content model: 
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
 
 		Under Query, And may have attribute closure="existential"; elsewhere, it may
 		not have any attributes.
@@ -333,7 +345,9 @@
 		
 		See http://www.ruleml.org/1.0/glossary/#gloss-Or
 		
-		content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		content model: 
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* )
 
 		Under Query, Or may have attribute closure="existential"; elsewhere, it may not
 		have any attributes.
@@ -371,8 +385,13 @@
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-formula
 
-		content model (below And/Or): (Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-		content model (below Rulebase): (Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval)
+		content model (below And/Or): 
+		DR Reaction RuleML (Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
+		KR Reaction RuleML (Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
+		
+		content model (below Rulebase): 
+		DR Reaction RuleML (Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval)
+		KR Reaction RuleML (Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 		
 		Other (context-sensitive) versions of <formula> are in the
 		performative and quantifier modules.

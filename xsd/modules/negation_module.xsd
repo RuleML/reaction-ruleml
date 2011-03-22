@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+        Negation module part of Reaction RuleML.
+		This defines the negation elements for Reaction RuleML.
+		File: negation_module.xsd
+		Version: 1.0
+		Last Modification: 2011-03-22
+		
+		* Negation		generic polymorphig negation
+		* Naf           negation as failure (inflationary negation in production rules), weak negation
+		* Neg           classical negation, strong negation
+		* weak		
+		* strong
+		* formula				
+
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-22T23:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>
+	</xs:annotation>
+
+
+	<!--
+		*** Negation ***
+		A generic polymorphic negation, which can be specialized by using
+		the @type attribute to specify the type of negation and/or 
+ 		the @iri attribute to point to an external definition of the negation
+ 		@key, @keyref, @node
+
+		content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation ) )
+-->
+	<xs:attributeGroup name="Negation.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Negation.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice>
+				<xs:element name="formula" type="formula-negation.type"/>
+				<xs:group ref="formula-negation.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Negation.type">
+		<xs:group ref="Negation.content"/>
+		<xs:attributeGroup ref="Negation.attlist"/>
+	</xs:complexType>
+	<xs:element name="Negation" type="Negation.type"/>
+	<xs:attributeGroup name="formula-negation.attlist"/>
+	<xs:group name="formula-negation.content">
+		<xs:choice>
+			<xs:element name="Atom" type="Atom.type"/>
+			<xs:element ref="Equal"/>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Naf"/>
+			<xs:element ref="Neg"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="formula-negation.type">
+		<xs:group ref="formula-negation.content"/>
+		<xs:attributeGroup ref="formula-negation.attlist"/>
+	</xs:complexType>
+	<xs:element name="formula" type="formula-negation.type"/>
+	
+	<!--
+		*** Naf ***
+		A "by default" negation of a logical atom (i.e. "weak" negation or
+		negation-as-failure).
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-Naf
+		
+content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (weak | Atom | Equal | Negation | Neg ) )
+	-->
+	<xs:attributeGroup name="Naf.attlist">
+		<xs:attributeGroup ref="Negation.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Naf.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice>
+				<xs:element ref="weak"/>
+				<xs:group ref="weak.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Naf.type">
+		<xs:group ref="Naf.content"/>
+		<xs:attributeGroup ref="Naf.attlist"/>
+	</xs:complexType>
+	<xs:element name="Naf" type="Naf.type"/>
+	
+	<!--
+		*** weak ***
+		A role used for negation as failure.
+	
+		See http://www.ruleml.org/1.0/glossary/#gloss-weak
+		
+		content model: ( Atom | Equal | Negation | Neg  )
+	-->
+	<xs:attributeGroup name="weak.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="weak.content">
+		<xs:choice>
+			<xs:group ref="formula-negation.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="weak.type">
+		<xs:group ref="weak.content"/>
+		<xs:attributeGroup ref="weak.attlist"/>
+	</xs:complexType>
+	<xs:element name="weak" type="weak.type"/>
+
+	<!--
+		*** Neg ***
+		A classical negation of a logical atom (i.e. classical or "strong" negation).
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-Neg
+		
+content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (strong | Atom | Equal | Negation | Neg ) )
+	-->
+	<xs:attributeGroup name="Neg.attlist">
+		<xs:attributeGroup ref="Negation.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Neg.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice>
+				<xs:element ref="strong"/>
+				<xs:group ref="strong.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Neg.type">
+		<xs:group ref="Neg.content"/>
+		<xs:attributeGroup ref="Neg.attlist"/>
+	</xs:complexType>
+	<xs:element name="Neg" type="Neg.type"/>
+	
+	<!--
+		*** strong ***
+		A role used for classical negation.
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-strong
+		
+		content model: ( Atom | Equal | Negation | Neg )
+	-->
+	<xs:attributeGroup name="strong.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="strong.content">
+		<xs:choice>
+			<xs:group ref="formula-negation.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="strong.type">
+		<xs:group ref="strong.content"/>
+		<xs:attributeGroup ref="strong.attlist"/>
+	</xs:complexType>
+	<xs:element name="strong" type="strong.type"/>
+
+</xs:schema>

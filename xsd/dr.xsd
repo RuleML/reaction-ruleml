@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+            Temporal Derivation RuleML schema of Reaction RuleML 
+			
+			This layer defines the temporal Derivation RuleML part of Reaction RuleML.
+			It adds necessary extensions to the RuleML Horn Logic layer with equality for
+			the temporal Derivation RuleML language family.
+			
+			File: dr.xsd
+			Version: 1.0
+			Last Modification: 2011-03-22
+			
+			This schema declares the following Reaction RuleML elements and attributes:
+				  								  
+				  * rename Implies into Rule (if-then-else)
+				  * extends RuleML by adding meta, scope, guard, evaluation, signature, qualification, quantification 
+				  * extends Assert, Retract by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification,  @safety and @size
+				  * extends Query by adding Negation, Naf, Neg Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
+				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
+				  * extends if and then by adding Time, Spatial, Interval
+				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
+				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification and Time, Spatial, Interval
+				  * extends slot by adding Time, Spatial, Interval
+				  * extends oid by adding Time, Spatial, Interval
+				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
+				  * extends Rel by adding @per	
+				  * extends And/Or by adding Negation, Neg, Naf, Rule
+				  * extends torso by  Negation, Neg, Naf 
+				  * extends @type to be of type termOrCurieOrIRI.datatype
+				  * add Negation, Neg, Naf 
+				  * add Time, Interval, Spatial
+				  * add Quantifier, Forall, Exists (quantification) 
+				  * add @key, @keyref (with key and keyref of type curieORAbsIRI)
+
+			 Rule is the core construct for all types of rules in Reaction RuleML.			 
+
+		</xs:documentation>
+	</xs:annotation>
+
+	<!-- includes the datalog layer of deliberation ruleml -->
+	
+	<xs:include schemaLocation="modules/performative_module.xsd"/>
+	<xs:include schemaLocation="modules/desc_module.xsd"/> <!-- extended descriptors in Reaction RuleML -->
+	<xs:include schemaLocation="modules/quantifier_module.xsd"/>
+	<xs:include schemaLocation="modules/connective_module.xsd"/>
+	<xs:include schemaLocation="modules/atom_module.xsd"/>
+	<xs:include schemaLocation="modules/slot_module.xsd"/>
+	<xs:include schemaLocation="modules/term_module.xsd"/>
+	<xs:include schemaLocation="modules/iri_module.xsd"/>
+
+	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
+	<xs:include schemaLocation="modules/expr_module.xsd"/>
+	<xs:include schemaLocation="modules/rest_module.xsd"/>
+
+	<!-- includes the equalog layer with the 'equality' module -->
+	<xs:include schemaLocation="modules/equality_module.xsd"/>
+
+	<!-- include from the (temporal) derivation rule layer of reaction ruleml   -->
+	<xs:include schemaLocation="modules/attribute_module.xsd"/>
+	<xs:include schemaLocation="modules/rule_module.xsd"/>
+	<xs:include schemaLocation="modules/negation_module.xsd"/>
+	<xs:include schemaLocation="modules/extended_quantifier_module.xsd"/>
+	<xs:include schemaLocation="modules/profile_module.xsd"/>	
+	<xs:include schemaLocation="modules/time_module.xsd"/>
+	<xs:include schemaLocation="modules/spatial_module.xsd"/>	
+	<xs:include schemaLocation="modules/interval_module.xsd"/>
+
+
+	<!--
+     metadata group
+     
+	This internal group defines the descriptive metadata and the scope (for scoped reasoning on the metadata) + additional guard constraints on the scope
+	
+     content model: (meta*, scope*, guard )
+          
+	-->
+	<xs:group name="metadata.content">
+		<xs:sequence>
+			<xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="scope" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="guard" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
+	</xs:group>
+	
+	<!--
+     interface group
+     
+     This internal group defines the interface signature and the evaluation semantics
+     
+     content model: (evaluation*, signature* )
+          
+	-->
+	<xs:group name="interface.content">
+		<xs:sequence>
+			<xs:element ref="evaluation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="signature" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!--
+     instance group
+     
+     This internal group defines the instance including the qualification (qualifying metadata), the quantification and the object id
+     
+     content model: (qualification*, quantification*, oid? )
+          
+	-->
+	<xs:group name="instance.content">
+		<xs:sequence>
+			<xs:element ref="qualification" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="quantification" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+
+	<!--
+         
+     An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
+    
+    
+     content model: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?)
+          
+	-->
+	
+	<xs:group name="meta-roles.content">
+		<xs:sequence>
+			<xs:group ref="metadata.content"/>
+			<xs:group ref="interface.content"/>
+			<xs:group ref="instance.content"/>
+		</xs:sequence>
+	</xs:group>
+	
+	
+	<!--
+         
+     An internal group for the implementation of a rule in the Reaction RuleML language
+    
+    
+     content model:
+     
+     in DR Reaction RuleML: (if, then, else?)
+          
+	-->
+	
+	<xs:group name="rule-implementation.content">
+		<xs:choice>
+			<xs:group ref="DerivationRule.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the query connectives in the Reaction RuleML language
+    
+     content model: (And | Or | Negation | Naf | Neg | Equal)
+          
+	-->
+	
+	<xs:group name="query-connective.content">
+		<xs:choice>
+			<xs:element name="And" type="And-query.type"/>
+			<xs:element name="Or" type="Or-query.type"/>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Naf"/>
+			<xs:element ref="Neg"/>
+			<xs:element ref="Equal"/> 
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the inner connectives in the Reaction RuleML language
+    
+    
+     content model: (And | Or | Negation | Naf | Neg | Equal)
+          
+	-->
+	
+	<xs:group name="inner-connective.content">
+		<xs:choice>
+			<xs:element name="And" type="And-inner.type"/>
+			<xs:element name="Or" type="Or-inner.type"/>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Naf"/>
+			<xs:element ref="Neg"/>
+			<xs:element ref="Equal"/> 
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the outer connectives in the Reaction RuleML language
+    
+    
+     content model: (Negation | Neg | Equal )
+          
+	-->
+	
+	<xs:group name="outer-connective.content">
+		<xs:choice>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Neg"/>
+			<xs:element ref="Equal"/> 
+		</xs:choice>
+	</xs:group>
+	
+	
+	<!--
+         
+     An internal group for the query quantifiers in the Reaction RuleML language
+    
+     content model: (Exists | Quantifier)
+          
+	-->
+	
+	<xs:group name="query-quantifier.content">
+		<xs:choice>
+			<xs:element ref="Exists"/>
+			<xs:element ref="Quantifier"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the inner quantifiers in the Reaction RuleML language
+    
+    
+     content model: (Forall | Exists | Quantifier)
+          
+	-->
+	
+	<xs:group name="inner-quantifier.content">
+		<xs:choice>
+			<xs:element name="Forall" type="Forall-quantifier.type"/>
+			<xs:element name="Exists" type="Exists-quantifier.type"/>
+			<xs:element ref="Quantifier"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the outer quantifiers in the Reaction RuleML language
+    
+    
+     content model: ( Forall | Quantifier )
+          
+	-->
+	
+	<xs:group name="outer-quantifier.content">
+		<xs:choice>
+			<xs:element ref="Forall"/>
+			<xs:element ref="Quantifier"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
+    
+     In the DR language of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
+    
+     content model: (Time | Spatial | Interval)
+          
+	-->
+	
+	<xs:group name="extended-signature-predicate-sorts.content">
+		<xs:choice>
+			<xs:group ref="extended-signature-function-sorts.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	
+	<!--
+         
+     An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
+    
+     In the DR language of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
+    
+     content model: (Time | Spatial | Interval)
+          
+	-->
+	
+	<xs:group name="extended-signature-function-sorts.content">
+		<xs:choice>
+			<xs:element ref="Time"/>
+			<xs:element name="Spatial"/>
+			<xs:element name="Interval"/>	
+		</xs:choice>
+	</xs:group>
+
+	<!--
+    *** @style ***
+    
+     restriction: active | messaging | reasoning
+	 default value: reasoning (in DR Reaction RuleML)
+	 optional attribute
+-->
+	<xs:attributeGroup name="style.attrib">
+		<xs:attribute name="style" type="style.datatype" use="optional" default="reasoning"/>
+	</xs:attributeGroup>
+
+</xs:schema>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<xs:schema targetNamespace="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns="http://ruleml.org/spec" elementFormDefault="qualified">
+
+  <!-- note that elementFormDefault is qualified because of local declarations -->
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML rest variables. File:
+      rest_module.xsd Version: 1.0 Last Modification: 2011-07-05 This module declares the following
+      RuleML elements: * repo * resl See http://www.ruleml.org/modularization for details about this
+      modularization approach. </xs:documentation>
+    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    <xs:appinfo>
+      <dc:title>RuleML Schema</dc:title>
+      <dc:version>1.0</dc:version>
+      <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+      <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:description>custom-built main module for Reaction RuleML</dc:description> 
+      <dc:date>2011-07-05T23:11:17-0300</dc:date>
+      <dc:language>en</dc:language>
+      <dcterms:rights>LGPL-3.0</dcterms:rights> 
+      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+    </xs:appinfo> 
+  </xs:annotation>
+
+  <!--
+		*** repo ***
+		A positional rest variable.
+		
+		See http://www.ruleml.org/0.91/glossary/#gloss-repo
+
+		content model: (Var | Plex)
+	-->
+  <xs:attributeGroup name="repo.attlist">
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="repo.content">
+    <xs:choice>
+      <xs:element ref="Var"/>
+      <xs:element name="Plex" type="Plex-repo.type"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="repo.type">
+    <xs:group ref="repo.content"/>
+    <xs:attributeGroup ref="repo.attlist"/>
+  </xs:complexType>
+  <xs:element name="repo" type="repo.type"/>
+
+  <!--
+		*** resl ***
+		A slotted rest variable.
+		
+		See http://www.ruleml.org/0.91/glossary/#gloss-resl		
+
+		content model: (Var | Plex)
+	-->
+  <xs:attributeGroup name="resl.attlist">
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="resl.content">
+    <xs:choice>
+      <xs:element ref="Var"/>
+      <xs:element name="Plex" type="Plex-resl.type"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="resl.type">
+    <xs:group ref="resl.content"/>
+    <xs:attributeGroup ref="resl.attlist"/>
+  </xs:complexType>
+  <xs:element name="resl" type="resl.type"/>
+
+</xs:schema>

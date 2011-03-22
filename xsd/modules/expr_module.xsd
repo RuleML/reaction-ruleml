@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+
+<xs:schema targetNamespace="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns="http://ruleml.org/spec" elementFormDefault="qualified">
+
+  <!-- note that elementFormDefault is qualified because of local declarations -->
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML expressions. File:
+      expr_module.xsd Version: 1.0 Last Modification: 2011-10-05 [Tara Athan] This module declares
+      the following RuleML elements and attributes: * Expr * op * Fun * Plex * @per See
+      http://www.ruleml.org/modularization for details about this modularization approach. </xs:documentation>
+    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    <xs:appinfo>
+      <dc:title>RuleML Schema</dc:title>
+      <dc:version>1.0</dc:version>
+      <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+      <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:description>custom-built main module for Reaction RuleML</dc:description> 
+      <dc:date>2011-10-05T23:11:17-0300</dc:date>
+      <dc:language>en</dc:language>
+      <dcterms:rights>LGPL-3.0</dcterms:rights> 
+      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+    </xs:appinfo> 
+
+    <!-- necessary for schematron -->
+    <!-- 
+		<xs:appinfo>
+
+		<sch:ns prefix="r" iri="http://www.ruleml.org/0.91/xsd"/>
+		-->
+
+  </xs:annotation>
+
+  <!--
+		*** Expr ***
+		A logical function of the form "f(...)" where f is a function name.
+
+		See http://www.ruleml.org/0.91/glossary/#gloss-Expr
+
+		content model:
+		( 
+		  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
+		  (op|Fun), slot*, 
+      (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*,
+		  repo?, slot*, resl?
+		)
+
+		however, this is non-deterministic, so it is (equivalently) restructured as follows:
+		(
+		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
+			( 
+				( 
+					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo? )
+					|
+					repo
+				),
+				slot*)? , 
+			resl?
+		)
+		
+		Note the 'positionalized' normal form where the op role is only
+		at the beginning of the Expr.
+	-->
+  <xs:attributeGroup name="Expr.attlist">
+    <xs:attributeGroup ref="type.attrib"/>
+    <xs:attributeGroup ref="per.attrib"/>
+    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="Expr.content">
+    <xs:sequence>
+      <xs:group ref="meta-roles.content"/>
+      <xs:choice>
+        <xs:element name="op" type="op-Expr.type"/>
+        <xs:group ref="op-Expr.content"/>
+      </xs:choice>
+      <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:sequence minOccurs="0">
+        <xs:choice>
+          <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element ref="arg"/>
+              <xs:group ref="arg.content"/>
+            </xs:choice>
+            <xs:element ref="repo" minOccurs="0"/>
+          </xs:sequence>
+          <xs:element ref="repo"/>
+        </xs:choice>
+        <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:element ref="resl" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="Expr.type">
+
+    <!--
+		<xs:annotation>
+			<xs:appinfo>
+				<sch:pattern name="Uninterpreted functions">
+					<sch:rule context="r:Expr/r:Fun[@per='no']">
+						<sch:assert test=
+								"not(../r:Expr/r:Fun[@per='yes'] or
+									 ../r:arg/r:Expr/r:Fun[@per='yes'] or
+									 ../r:Expr/r:op/r:Fun[@per='yes'] or 
+									 ../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
+								Functions nested within an uninterpreted function must also be uninterpreted.
+						</sch:assert>
+					</sch:rule>
+					<sch:rule context="r:Expr/r:op/r:Fun[@per='no']">
+						<sch:assert test=
+								"not(../../r:Expr/r:Fun[@per='yes'] or
+									 ../../r:arg/r:Expr/r:Fun[@per='yes'] or
+									 ../../r:Expr/r:op/r:Fun[@per='yes'] or 
+									 ../../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
+								Functions nested within an uninterpreted function must also be uninterpreted.
+						</sch:assert>
+					</sch:rule>
+				</sch:pattern>
+			</xs:appinfo>
+		</xs:annotation>
+		-->
+
+    <xs:group ref="Expr.content"/>
+    <xs:attributeGroup ref="Expr.attlist"/>
+  </xs:complexType>
+  <xs:element name="Expr" type="Expr.type"/>
+
+  <!--
+		*** op ***
+		An operator expression including the function name of an expression.
+		
+		See http://www.ruleml.org/0.91/glossary/#gloss-op
+				
+		content model (within Expr): (Fun)
+		
+		Other (context-sensitive) versions of <op> are in the atom and holog modules.
+	-->
+  <!-- the (empty) attribute list is declared in the atom module -->
+  <xs:group name="op-Expr.content">
+    <xs:sequence>
+      <xs:element ref="Fun"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="op-Expr.type">
+    <xs:group ref="op-Expr.content"/>
+    <xs:attributeGroup ref="op.attlist"/>
+  </xs:complexType>
+  <!--
+		*** Fun ***
+		A user-defined function name.
+		
+		See http://www.ruleml.org/0.91/glossary/#gloss-Fun
+
+content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
+	-->
+  <xs:attributeGroup name="Fun.attlist">
+    <xs:attributeGroup ref="iri.attrib"/>
+    <xs:attributeGroup ref="per.attrib"/>
+    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+    <xs:attributeGroup ref="val.attrib"/>
+  </xs:attributeGroup>
+  <xs:group name="Fun.content">
+    <xs:sequence> </xs:sequence>
+  </xs:group>
+  <xs:complexType name="Fun.type" mixed="true">
+    <xs:group ref="Fun.content"/>
+    <xs:attributeGroup ref="Fun.attlist"/>
+  </xs:complexType>
+  <xs:element name="Fun" type="Fun.type"/>
+
+  <!--
+		*** @val ***
+		An attribute indicating whether a function is deterministic (exactly one)
+		or non-deterministic (set-valued).
+		
+		May be unified with @card/@minCard/@maxCard for slots in a future version.
+		
+		See http://www.ruleml.org/0.91/glossary/#gloss-@val
+	-->
+  <xs:attributeGroup name="val.attrib">
+    <xs:attribute name="val" use="optional" default="0..">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="0.."/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+
+  <!--
+		*** Plex ***
+		An unordered collection of arguments without a constructor.
+
+		See http://www.ruleml.org/0.91/glossary/#gloss-Plex
+		
+		content model (within Atom, Plex, slot):
+		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
+		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*, repo?, slot*, resl? )
+
+		however, this is non-deterministic, so it is (equivalently) restructured as follows:
+		(
+		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
+		   slot*,
+		     (
+		        ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?, slot*, resl? )?
+		        |
+                     ( repo, slot*, resl? )
+                     |
+                     resl
+		     )
+		)
+
+		content model (within repo): ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval )*, repo? )
+		content model (within resl): (slot*, resl? )
+	-->
+  <xs:attributeGroup name="Plex.attlist">
+    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="Plex.content">
+    <xs:sequence>
+      <xs:group ref="meta-roles.content"/>
+      <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:choice>
+        <xs:sequence minOccurs="0">
+          <xs:choice maxOccurs="unbounded">
+            <xs:element ref="arg"/>
+            <xs:group ref="arg.content"/>
+          </xs:choice>
+          <xs:element ref="repo" minOccurs="0"/>
+          <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="resl" minOccurs="0"/>
+        </xs:sequence>
+        <xs:sequence>
+          <xs:element ref="repo"/>
+          <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="resl" minOccurs="0"/>
+        </xs:sequence>
+        <xs:sequence>
+          <xs:element ref="resl"/>
+        </xs:sequence>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Plex-repo.content">
+    <xs:sequence>
+      <xs:group ref="meta-roles.content"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="arg"/>
+        <xs:group ref="arg.content"/>
+      </xs:choice>
+      <xs:element ref="repo" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Plex-resl.content">
+    <xs:sequence>
+      <xs:group ref="meta-roles.content"/>
+      <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="resl" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="Plex.type">
+    <xs:group ref="Plex.content"/>
+    <xs:attributeGroup ref="Plex.attlist"/>
+  </xs:complexType>
+  <xs:complexType name="Plex-repo.type">
+    <xs:group ref="Plex-repo.content"/>
+    <xs:attributeGroup ref="Plex.attlist"/>
+  </xs:complexType>
+  <xs:complexType name="Plex-resl.type">
+    <xs:group ref="Plex-resl.content"/>
+    <xs:attributeGroup ref="Plex.attlist"/>
+  </xs:complexType>
+  <xs:element name="Plex" type="Plex.type"/>
+
+  <!--
+		*** @per ***
+		An attribute indicating whether a function or expression is interpreted.
+		
+		See http://www.ruleml.org/0.91/glossary/#gloss-@per
+	-->
+  <xs:attributeGroup name="per.attrib">
+    <xs:attribute name="per" use="optional" default="copy">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="copy"/>
+          <xs:enumeration value="value"/>
+          <xs:enumeration value="open"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+
+</xs:schema>

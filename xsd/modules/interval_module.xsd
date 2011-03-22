@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+			Interval module part of Reaction RuleML. It defines the core 
+			Interval construct
+			
+			This is the XML Schema event module for Reaction RuleML.
+			File: interval_module.xsd
+			Version: 1.0
+			Last Modification: 2011-03-29
+
+			This schema declares the following Reaction RuleML elements and attributes:
+
+			  * Interval
+
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-29T23:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>
+	</xs:annotation>
+
+
+	<!--
+	*** Interval ***
+	Explicit generic Interval. The interval can be
+      defined internally by the any content model (xs:any Element) or externally, where 
+      the optional @type attribute defines the name/type of the event,
+      the optional @iri attribute points to an external definition of the event, and
+       An interval can be defined by Events, Times, Spatials, and other Intervals can be typed by the 
+       interval ontology of Reaction RuleML (defining different types of intervals).
+		
+	content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? -->
+	<xs:attributeGroup name="Interval.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Interval.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:choice minOccurs="0">
+				<xs:element name="arg" type="arg_interval.type" minOccurs="1" maxOccurs="2"/>
+				<xs:element name="content" type="interval_anycontent.type" minOccurs="1" maxOccurs="2"/>				
+				<xs:group ref="interval_primitives.content"/>				
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Interval.type">
+		<xs:group ref="Interval.content"/>
+		<xs:attributeGroup ref="Interval.attlist"/>
+	</xs:complexType>
+	<xs:element name="Interval" type="Interval.type"/>
+
+	<!--
+     *** arg ***
+     
+     Definition of the the arg role for Intervals
+     
+     content model:  Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex 
+          
+-->
+	<xs:attributeGroup name="arg_interval.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="arg_interval.content">
+		<xs:choice>
+			<xs:group ref="arg.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="arg_interval.type">
+		<xs:group ref="arg_interval.content"/>
+		<xs:attributeGroup ref="arg_interval.attlist"/>
+	</xs:complexType>
+
+	<!--
+     *** content ***
+     
+     content model:  xs:any*
+-->
+	<xs:attributeGroup name="interval_anycontent.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="interval_anycontent.content">
+		<xs:choice>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="interval_anycontent.type">
+		<xs:group ref="interval_anycontent.content"/>
+		<xs:attributeGroup ref="interval_anycontent.attlist"/>
+	</xs:complexType>
+
+	<!-- Interval primitives
+		content model: [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?] -->
+	<xs:group name="interval_primitives.content">
+		<xs:choice>								
+			<xs:sequence>
+				<xs:group ref="arg.content"/>
+				<xs:group ref="arg.content" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>	
+
+		</xs:choice>
+	</xs:group>
+
+</xs:schema>

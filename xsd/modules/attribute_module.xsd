@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+            
+            Mode / Transactional / Use attribute module.
+			This is the XML Schema attributes module for Reaction RuleML.
+			File: attribute_module.xsd
+			Version: 1.0
+			Last Modification: 2011-03-30
+			
+			This module declares the following Reaction RuleML elements and attributes:
+                  
+                  * @mode (mode declaration)
+                  * @safety (transactional)
+                  * @per (usage)
+                  * @all (yes|no)
+                  * @style (execution style)	
+                  * @key and @keyref for modularization of knowledge bases
+             
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-30T23:11:17-0300</dc:date> 
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>			
+	</xs:annotation>
+	
+	<xs:include schemaLocation="currie_module.xsd" />   
+	
+	<!--
+           *** @mode ***
+           A attribute for optionally specifing the intended input-output constellations of the predicate terms with the
+           following semantics:
+        
+           "+" The term is intended to be input
+           "-" The term is intended to be output
+           "?" The term is undefined (input or output)
+		   
+		   default="?"
+		   optional attribute
+-->
+	<xs:attributeGroup name="mode.attrib">
+		<xs:attribute name="mode" use="optional" default="?">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="+"/>
+					<xs:enumeration value="-"/>
+					<xs:enumeration value="?"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!--
+	  *** @safety ***
+
+	     restriction: interrupting, non-interrupting or transactional
+		 default: non-interrupting
+		 optional attribute
+	-->
+	<xs:attributeGroup name="safety.attrib">
+		<xs:attribute name="safety" use="optional" default="non-interrupting">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="non-interrupting"/>
+					<xs:enumeration value="interrupting"/>
+					<xs:enumeration value="transactional"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!--
+		*** @per ***
+		An attribute indicating whether a function or expression is interpreted.
+		
+	-->
+	<xs:attributeGroup name="per-effect.attrib">
+		<xs:attribute name="per" use="optional" default="copy">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="copy"/>
+					<xs:enumeration value="value"/>
+					<xs:enumeration value="effect"/>
+					<xs:enumeration value="modal"/>
+					<xs:enumeration value="open"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>	
+	
+	<!--
+		*** @size ***
+		An attribute indicating the size / number		
+		-1 = unbound / all
+	-->
+	<xs:attributeGroup name="size.attrib">
+		<xs:attribute name="size" type="xs:int" use="optional" default="-1"/>
+	</xs:attributeGroup>
+	
+	<!--
+    *** @style ***
+    
+     restriction: active | messaging | reasoning
+	 default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
+	 optional attribute
+-->
+	
+	<xs:simpleType name="style.datatype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="active"/>
+			<xs:enumeration value="messaging"/>
+			<xs:enumeration value="reasoning"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!--
+    *** @key ***
+    
+    
+    
+	 optinal attribute
+-->
+	<xs:attributeGroup name="key.attrib">
+		<xs:attribute name="key" type="curieOrAbsIRI.datatype" use="optional"/>
+	</xs:attributeGroup>
+	
+	<!--
+    *** @keyref ***
+    
+    
+	 optinal attribute
+-->
+	<xs:attributeGroup name="keyref.attrib">
+		<xs:attribute name="keyref" type="curieOrAbsIRI.datatype" use="optional"/>
+	</xs:attributeGroup> 
+
+	
+</xs:schema>

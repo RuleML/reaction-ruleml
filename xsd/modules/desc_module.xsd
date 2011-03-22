@@ -1,0 +1,340 @@
+<?xml version="1.0"?>
+
+<xs:schema targetNamespace="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns="http://ruleml.org/spec" elementFormDefault="qualified">
+  
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml_module.xsd"/>  
+  <xs:annotation>
+    <xs:documentation xml:lang="en"> This is the XML Schema module for description-related RuleML
+      elements. File: desc_module.xsd Version: 1.0 Last Modification: 2012-05-17 [Adrian Paschke]
+      This module declares the following RuleML elements:   
+      
+      * @node
+      * meta            descriptive metadata 
+      * scope           scope  (e.g. for scoped reasoning)	
+      * guard			      guard (e.g. for guard constraints in scoped reasoning)
+      * evaluation      semantic profile 
+      * signature       interface signature, pattern definition,
+      * qualification   qualification, e.g. priorities, validity, strategy
+      * quantification  quantification
+      * oid
+      
+      See
+      http://www.ruleml.org/modularization for details about this modularization approach.
+    </xs:documentation>
+    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    <xs:appinfo>
+      <dc:title>RuleML Schema</dc:title>
+      <dc:version>1.0</dc:version>
+      <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+      <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:description>custom-built main module for Reaction RuleML</dc:description> 
+      <dc:date>2012-05-17T23:11:17-0300</dc:date>
+      <dc:language>en</dc:language>
+      <dcterms:rights>LGPL-3.0</dcterms:rights> 
+      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+    </xs:appinfo> 
+  </xs:annotation>
+
+  <!--
+    *** @node ***
+    An optional identification label for a Node, creating accessibility within
+    the knowledge representation.
+    This can help for representing prioritization between rules, for example. 
+    The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
+    such a label.
+    
+    See http://www.ruleml.org/1.0/glossary/#gloss-@node
+    
+    content model: xs:anyURI
+  -->
+  <xs:attributeGroup name="node.attrib">
+    <xs:attribute name="node" type="xs:anyURI" use="optional"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="oid.attlist"/>
+  <xs:group name="oid.content">
+    <xs:choice>
+      <xs:element ref="Ind"/>
+      <xs:element ref="Data"/>
+      <xs:element ref="Var"/>
+      <xs:element ref="Skolem"/>
+      <xs:element ref="Reify"/>
+      <xs:element ref="Expr"/>
+      <xs:element name="Plex" type="Plex.type"/> 
+      <xs:group ref="extended-signature-function-sorts.content"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:complexType name="oid.type">
+    <xs:group ref="oid.content"/>
+    <xs:attributeGroup ref="oid.attlist"/>
+  </xs:complexType>
+  <!--
+  *** oid ***
+  An optional object identifier for an atomic formula, expression or the unifed terms
+  of the SWSL branch, as needed for PSOA semantics.
+  Note that oids are not required to be unique within a rulebase.
+  
+  See http://www.ruleml.org/1.0/glossary/#gloss-oid
+  
+  content model: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+  -->
+  <xs:element name="oid" type="oid.type"/>
+  
+  <!-- 
+ 	
+	@key @keyref @xml:id @xml:base
+ 
+  @key and @keyref attributes for modularization of the knowledge base
+
+  -->
+
+  <xs:attributeGroup name="xml.attlist">
+    <xs:attributeGroup ref="key.attrib"/>
+    <xs:attributeGroup ref="keyref.attrib"/>
+    <xs:attribute ref="xml:base" use="optional"/>
+    <xs:attribute ref="xml:id" use="optional"/>
+  </xs:attributeGroup>
+  
+
+
+  <!-- 
+     *** meta ***     
+     
+    An optional container for meta-knowledge about a Node.
+    
+    See http://www.ruleml.org/1.0/glossary/#gloss-meta
+    
+	Used for descriptive Metadata annotations in Reaction RuleML
+	
+     content model: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval )
+        
+     
+     Multiple Metadata annotations are possible by repreating <meta>
+-->
+  
+  <xs:attributeGroup name="meta.attlist">
+    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="meta.content">
+    <xs:choice>
+      <xs:group ref="formula-assert.content"/>			
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="meta.type">
+    <xs:group ref="meta.content"/>
+    <xs:attributeGroup ref="meta.attlist"/>
+  </xs:complexType>
+  <xs:element name="meta" type="meta.type"/>
+  
+  
+  <!--
+     *** scope ***
+     
+     Note: scope of the rule, e.g. defining a constructive view on the rules and facts
+     using the metadata annotations and the qualifications annotations. 
+     The scoped rule/literal goal only applies in this scope (scoped reasoning/processing)
+     
+     For an implementation of scoped reasoning as a mechanism to dynamicaly create a scope (a constructive view)
+     on the knowledge base and to do scoped reasoning on this scope see the Prova rule engine (http://prova.ws).
+     
+     Example:
+     @src(kb1) @author("Adrian Paschke") @validity([2011-03-20, 2011-04-20]) @label(fact1) fact1(constant1).
+     @src(kb2) @author("Alex Kozlenkov") @validity([2011-01-20, 2011-03-20]) @label(fact2) fact2(constant2).
+     
+     @src(rb1) @label(rule1) rule1(Y) :- @validity(VTime) @authors("Adrian Paschke") fact1(Y) [between(SysTime,VTime)] 
+     
+     In this example all knowledge is annotated with predefined (@src, ...) and user-defined metadata annotations (@author, @validity, ...). 
+     User-defined metadata annotations can be arbitrary name/value pairs described as predicates. The literal "fact1" in the body
+     of "rule1" is a scoped literal defining a scope over knowledge in the knowledge base with the scope constraints
+     @validity and @author. If such knowledge is found in the KB the meta data value (an Interval) for @validity
+     is bound to the variable "VTime" and used in the guard constraint [...] on the literal. The guard is stating that 
+     the actual system time should be  within the validity interval. The second scope constraint is directly compared 
+     to the constant value "Adrian Paschke".
+     The sub-goal literal "fact1" in the rule condition is then applied only on the selected scope 
+     (a constructive view on the overall knowledge base which is selected by the metadata scope of the literal) and not on the 
+     overal knowledge. It is possible to define scopes for modules (e.g. sets of knowledge such as a rule-base/rule-set or 
+     an knowledge updates (assert, retracts) by using the meta data identifier such as @src or @label. Such identifiers can
+     be also used for transactional logics.
+     
+     In Reaction RuleML general metadata annotations (descriptive metadata) are defined under the <meta> tag role and
+     qualifying metadata which qualify the rule (such as validity in the above example) are defined under the <qualification> tag.
+     The @key attribute which defines a unique identifier for knowledge in the knowledge base is used for a 
+     modular nested structuring of the knowledge base. The @key of e.g. <Assert key=""> or <Rulebase key=""> acts as module identifier 
+     (which in Prova is denoted by the predefined @src metadata).
+     
+	 Scopes in Reaction RuleML can be defined within the <scope> role tag on descriptive metadata <meta> and qualifying metadata <qualification> as well as
+	 on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
+	 by referencing it with the @keyref attribute.
+	 
+	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the inner knowledge. For instance, a scope
+	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. Inner scopes
+	 overwrite the outer scope. For instance a scope defined on <Assert> becomes overwritten by an inner scope defined on a <Rule> which is within the
+	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the outer scope.
+	 
+	 Note: the old approach which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0
+     
+     Note: multiple scopes can be defined by repeating the <scope> role element
+     Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
+     
+     content model: ( (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval)? )
+          
+-->
+  <xs:attributeGroup name="scope.attlist">
+    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="scope.content">
+    <xs:choice>
+      <xs:group ref="formula-query.content" minOccurs="0"/>	
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="scope.type">
+    <xs:group ref="scope.content"/>
+    <xs:attributeGroup ref="scope.attlist"/>
+  </xs:complexType>
+  <xs:element name="scope" type="scope.type"/>
+  
+  <!--
+     *** guard ***     
+     
+	guard constraints 
+	
+     content model: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
+          
+-->
+  <xs:attributeGroup name="guard.attlist">
+    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="guard.content">
+    <xs:choice>
+      <xs:group ref="if.content"/>		
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="guard.type">
+    <xs:group ref="guard.content"/>
+    <xs:attributeGroup ref="guard.attlist"/>
+  </xs:complexType>
+  <xs:element name="guard" type="guard.type"/>
+  
+  <!--
+     *** evaluation ***
+     
+     The intended evaluation semantics of the rule, 
+     e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
+     
+     Note: multiple Profiles can be defined by repreating the <evaluation> role element
+     The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
+     
+     content model: (Profile )     -->
+  <xs:attributeGroup name="evaluation.attlist">
+    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="evaluation.content">
+    <xs:sequence>
+      <xs:element ref="Profile"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="evaluation.type">
+    <xs:group ref="evaluation.content"/>
+    <xs:attributeGroup ref="evaluation.attlist"/>
+  </xs:complexType>
+  <xs:element name="evaluation" type="evaluation.type"/>
+  
+  <!--
+     *** signature ***
+     
+     The signature defines the signature with optional input / output mode declarations. The signature declaration can act as public interface and
+	can be published together with the intended evaluation semantics. 
+	
+	Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
+	for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
+	pattern machting, i.e. in the on part of a reaction rule it triggers the reaction rule if the template matches with required event instances, which are
+	instantiations of the event type / class to which make up the required properties of the event template.
+	
+	In backward-reasoning derivation rules the signature interface description defines a query template for the head of the rule. 
+	In forward-(reasoning) reaction rules the signature interface description  defines the event template for the event pattern matching which triggers the rules.  
+	
+	Multiple signatures are possible by repreating the <signature> element
+	
+     content model: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
+          
+-->
+  <xs:attributeGroup name="signature.attlist">
+    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="signature.content">
+    <xs:choice>
+      <xs:group ref="formula-query.content"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="signature.type">
+    <xs:group ref="signature.content"/>
+    <xs:attributeGroup ref="signature.attlist"/>
+  </xs:complexType>
+  <xs:element name="signature" type="signature.type"/>
+  
+  <!--
+     *** qualification ***
+     
+    Definition of the rule's qualification (qualifying metadata), e.g. validity time of the rule, priorities, etc.
+     
+    Note: the qualification can be also defined as a situation  <Situation> 
+	A situation could be also modelled as a changeable situation called fluent (in the KR dialect of Reaction RuleML),
+	which changes its truth value depending on the context (context can be time, events/actions which 
+	initiate/terminate the changeable situation, or a history of occured events/actions which leads to an occured situation
+	as context for the truth changes of the fluent.
+	
+	That would mean the qualification of the rule changes depending on the situation (the truth value of the fluent in KR RuleML)
+	
+     content model: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval) 
+     
+          
+-->
+  <xs:attributeGroup name="qualification.attlist">
+    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="qualification.content">
+    <xs:choice>
+      <xs:group ref="formula-assert.content"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="qualification.type">
+    <xs:group ref="qualification.content"/>
+    <xs:attributeGroup ref="qualification.attlist"/>
+  </xs:complexType>
+  <xs:element name="qualification" type="qualification.type"/>
+  
+  <!--
+     *** quantification ***
+     
+     Definition of the rules' quantifier. 
+     
+     content model: (Forall | Exists | Quantifier)
+          
+-->
+  <xs:attributeGroup name="quantification.attlist">
+    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="quantification.content">
+    <xs:choice>
+      <xs:group ref="inner-quantifier.content"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="quantification.type">
+    <xs:group ref="quantification.content"/>
+    <xs:attributeGroup ref="quantification.attlist"/>
+  </xs:complexType>
+  <xs:element name="quantification" type="quantification.type"/>
+  
+
+</xs:schema>

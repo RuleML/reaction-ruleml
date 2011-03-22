@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+<xs:schema targetNamespace="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns="http://ruleml.org/spec">
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en"> This is the XML Schema module for equality in RuleML. File:
+      equality_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module
+      declares the following RuleML elements and attributes: * Equal * left * right * @oriented *
+      @val See http://www.ruleml.org/modularization for details about this modularization approach. </xs:documentation>
+
+    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    <xs:appinfo>
+      <dc:title>RuleML Schema</dc:title>
+      <dc:version>1.0</dc:version>
+      <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+      <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:description>custom-built main module for Reaction RuleML</dc:description> 
+      <dc:date>2012-02-21T23:11:17-0300</dc:date>
+      <dc:language>en</dc:language>
+      <dcterms:rights>LGPL-3.0</dcterms:rights> 
+      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+    </xs:appinfo> 
+
+  </xs:annotation>
+
+  <!--
+		*** Equal ***
+		An equational formula consisting of two expressions.
+
+		See http://www.ruleml.org/0.91/glossary/#gloss-Equal
+
+		content model:
+		(
+		  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?
+			(left, right) |
+			(  (Ind | Data | Skolem | Var | Reify), (Ind | Data | Skolem | Var | Reify)  )
+		)
+	-->
+  <xs:attributeGroup name="Equal.attlist">
+    <xs:attributeGroup ref="oriented.attrib"/>
+    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="Equal.content">
+    <xs:sequence>
+      <xs:group ref="meta-roles.content"/>
+      <xs:element ref="degree" minOccurs="0"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element ref="left"/>
+          <xs:element ref="right"/>
+        </xs:sequence>
+        <!-- note that (right, left) is disallowed -->
+        <xs:sequence>
+          <xs:group ref="left.content"/>
+          <xs:group ref="right.content"/>
+        </xs:sequence>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="Equal.type">
+
+    <!-- 
+			<xs:annotation>
+			<xs:appinfo>
+				<sch:pattern name="Defining equality">
+					<sch:rule context=
+						"r:Implies/r:then/r:Equal/r:left/r:Expr/r:Fun |
+						 r:Implies/r:Equal[2]/r:left/r:Expr/r:Fun |
+						 r:Implies/r:then/r:Equal/r:Expr[1]/r:Fun |
+						 r:Implies/r:Equal[2]/r:Expr[1]/r:Fun">
+						<sch:assert test="@per='yes'">
+							A defining equality must have an interpreted left-hand side.
+						</sch:assert>
+					</sch:rule>
+				</sch:pattern>
+			</xs:appinfo>
+		</xs:annotation>
+		-->
+
+    <xs:group ref="Equal.content"/>
+    <xs:attributeGroup ref="Equal.attlist"/>
+  </xs:complexType>
+  <xs:element name="Equal" type="Equal.type"/>
+
+  <!--
+		*** left ***
+		The left-hand side of an equational formula.
+
+		See http://www.ruleml.org/0.91/glossary/#gloss-left
+
+		content model: (Ind|Data|Var|Skolem|Reify)
+	-->
+  <xs:attributeGroup name="left.attlist">
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="left.content">
+    <xs:choice>
+      <xs:group ref="arg.content"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="left.type">
+    <xs:group ref="left.content"/>
+    <xs:attributeGroup ref="left.attlist"/>
+  </xs:complexType>
+  <xs:element name="left" type="left.type"/>
+
+  <!--
+		*** right***
+		The right-hand side of an equational formula.
+
+		See http://www.ruleml.org/0.91/glossary/#gloss-right
+
+		content model: (Ind|Data|Var|Skolem|Reify)
+	-->
+  <xs:attributeGroup name="right.attlist">
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="right.content">
+    <xs:choice>
+      <xs:group ref="arg.content"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="right.type">
+    <xs:group ref="right.content"/>
+    <xs:attributeGroup ref="right.attlist"/>
+  </xs:complexType>
+  <xs:element name="right" type="right.type"/>
+
+  <!--
+		*** @oriented ***
+		An attribute indicating whether an equation is oriented (directed)
+		or unoriented (symmetric).
+		
+		See http://www.ruleml.org/0.91/glossary/#gloss-@oriented
+	-->
+  <xs:attributeGroup name="oriented.attrib">
+    <xs:attribute name="oriented" use="optional" default="no">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="yes"/>
+          <xs:enumeration value="no"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+
+
+
+</xs:schema>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+          Rules module part of Reaction RuleML. It defines the core 
+          Rule construct used as basis for all types of rules in Reaction RuleML
+          
+          This is the XML Schema rule module for Reaction RuleML.
+          File: rule_module.xsd
+          Version: 1.0
+          Last Modification: 2011-03-29
+          
+          This schema declares the following Reaction RuleML elements and attributes:
+          
+          * Rule
+          * on
+          * if
+          * then
+          * do
+          * after 			 			  
+          * else
+          * elseDo
+          * elseAfter			  					  
+          
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-29T23:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo> 
+	</xs:annotation>
+	
+	<!--
+      *** Rule ***
+      The Rule element that provides the basic syntax for rules
+      in Reaction RuleML.
+
+      content model: 
+ 	 
+ 	 In (temporal) DR Reaction RuleML:
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (if, then, else?)? ) )	
+	
+      Rule has the following attributes:
+      @key @keyref @type @style @closure @direction @material @node 
+      
+-->
+	<xs:attributeGroup name="Rule.attlist">
+		<xs:attributeGroup ref="style.attrib"/>
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="Implies.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Rule.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:group ref="rule-implementation.content" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Rule.type">
+		<xs:group ref="Rule.content"/>
+		<xs:attributeGroup ref="Rule.attlist"/>
+	</xs:complexType>
+	<xs:element name="Rule" type="Rule.type"/>
+
+
+	<!--
+     *** on ***
+     
+     content model: (  )
+          
+-->
+	<xs:attributeGroup name="on.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="on.content">
+		<xs:choice>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="on.type">
+		<xs:group ref="on.content"/>
+		<xs:attributeGroup ref="on.attlist"/>
+	</xs:complexType>
+	<xs:element name="on" type="on.type"/>
+	
+	<!--
+     *** if ***
+     *** after ***
+     
+     content model:   (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+         
+	-->
+	<xs:element name="after" type="if.type"/>
+
+	<!--
+	 *** then ***	
+     *** else ***
+     
+     content model: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
+     
+	-->
+	<xs:element name="else" type="then.type"/>
+	
+	<!--
+     *** do ***
+     *** elseDo ***
+     
+     content model:  (  )
+-->
+	<xs:attributeGroup name="do.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="do.content">
+		<xs:choice>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="do.type">
+		<xs:group ref="do.content"/>
+		<xs:attributeGroup ref="do.attlist"/>
+	</xs:complexType>
+	<xs:element name="do" type="do.type"/>
+	<xs:element name="elseDo" type="do.type"/>
+	
+	<!--
+  *** Derivation Rule content model ***
+  	(if, then, else?)	
+-->
+	<xs:group name="DerivationRule.content">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element ref="else" minOccurs="0"/>
+				<xs:element ref="then"/>
+				<xs:element ref="if"/>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:element ref="if"/>
+				<xs:element ref="then"/>
+				<xs:element ref="else" minOccurs="0"/>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:group ref="if.content"/>
+				<xs:group ref="then.content"/>
+				<xs:group ref="then.content" minOccurs="0"/>
+			</xs:sequence>
+		</xs:choice>
+	</xs:group>
+	
+
+	<!--
+   *** Production Rule content model ***
+   will be extended in the production rules layer
+-->
+	<xs:group name="ProductionRule.content">
+		<xs:sequence/>
+	</xs:group>
+
+	<!--
+   *** Reaction Rule content model ***
+   (on, (if?, then?, do, after?,else?, elseDo?)? )
+-->
+	<xs:group name="ReactionRule.content">
+		<xs:sequence>
+			<xs:element ref="on"/>
+			<xs:sequence minOccurs="0">
+				<xs:element ref="if" minOccurs="0"/>
+				<xs:element ref="then" minOccurs="0"/>
+				<xs:element ref="do"/>
+				<xs:element ref="after" minOccurs="0"/>
+				<xs:element ref="else" minOccurs="0"/>
+				<xs:element ref="elseDo" minOccurs="0"/>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+
+	<!--
+   *** Messaging Rule content model ***
+   (do)
+-->
+	<xs:group name="MessagingRule.content">
+		<xs:sequence>
+			<xs:element ref="do"/>
+		</xs:sequence>
+	</xs:group>
+
+</xs:schema>

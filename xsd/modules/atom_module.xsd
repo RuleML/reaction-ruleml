@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+
+<xs:schema targetNamespace="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns="http://ruleml.org/spec" elementFormDefault="qualified">
+
+  <!-- note that elementFormDefault is qualified because of local declarations -->
+  
+  <xs:annotation>
+    <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML atoms. File:
+      atom_module.xsd Version: 1.0 Last Modification: 2012-02-21 This module declares
+      the following RuleML elements and attributes: * Atom * op * Rel * degree See
+      http://www.ruleml.org/modularization for details about this modularization approach.
+    </xs:documentation>
+    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    <xs:appinfo>
+      <dc:title>RuleML Schema</dc:title>
+      <dc:version>1.0</dc:version>
+      <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+      <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+       <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:description>custom-built main module for Reaction RuleML</dc:description> 
+      <dc:date>2012-07-05T23:11:17-0300</dc:date>
+      <dc:language>en</dc:language>
+      <dcterms:rights>LGPL-3.0</dcterms:rights> 
+      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+    </xs:appinfo>  
+  </xs:annotation>
+
+  <!--
+        *** Atom ***
+		A logical atom, i.e. an expression formed from a predicate
+		applied to a collection of its (logical) arguments.
+
+		See http://www.ruleml.org/1.0/glossary/#gloss-Atom
+	
+		content model (normally):
+		(
+			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
+			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval)*, repo?) | repo), slot*, resl?
+			
+			
+			
+		)
+		
+		however, the above content model is non-deterministic,
+		so it is (equivalently) restructured as follows:
+		(
+				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel), slot*,
+				( 
+					( 
+						((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?)
+						|
+						repo
+					),
+					slot*)?, 
+				resl?
+			)	
+	
+		Note the 'positionalized' normal form where the oid and op roles
+		are at the beginning of the atom.
+	-->
+  <xs:attributeGroup name="Atom.attlist">
+    <xs:attributeGroup ref="closure.attrib"/>
+    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <!--
+		These .extend groups, pointed to by Atom.content, are necessary
+		for redefinition to be binary in bindatalog and to add rest
+		variables in hornlog.
+	-->
+  <xs:group name="Atom-repo.extend">
+    <xs:choice>
+      <xs:group ref="Atom-arg.extend"/>
+        <xs:element ref="repo"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="Atom-arg.extend">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="arg"/>
+        <xs:group ref="arg.content"/>
+      </xs:choice>
+      <xs:element ref="repo" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Atom-slots.extend1">
+    <xs:sequence>
+      <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Atom-slots.extend2">
+    <xs:sequence>
+      <xs:element ref="resl" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Atom.content">
+    <xs:sequence>
+      <xs:group ref="meta-roles.content"/>
+      <xs:element ref="degree" minOccurs="0"/>
+      <xs:choice>
+        <xs:element name="op" type="op-atom.type"/>
+        <xs:group ref="op-atom.content"/>
+      </xs:choice>
+      <xs:group ref="Atom-slots.extend1"/>
+      <xs:sequence minOccurs="0">
+        <xs:group ref="Atom-repo.extend"/>
+        <xs:group ref="Atom-slots.extend1"/>
+      </xs:sequence>
+      <xs:group ref="Atom-slots.extend2"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="Atom.type">
+    <xs:group ref="Atom.content"/>
+    <xs:attributeGroup ref="Atom.attlist"/>
+  </xs:complexType>
+  <xs:element name="Atom" type="Atom.type"/>
+
+  <!--
+		*** op ***
+		An operator expression including the relation of an atom.
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-op
+
+		content model (within Atom): (Rel)
+		
+		Other (context-sensitive) versions of <op> are in the expr and holog modules.
+	-->
+  <xs:attributeGroup name="op.attlist">
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+
+  <xs:group name="op-atom.content">
+    <xs:sequence>
+      <xs:element ref="Rel"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="op-atom.type">
+    <xs:group ref="op-atom.content"/>
+    <xs:attributeGroup ref="op.attlist"/>
+  </xs:complexType>
+  <xs:element name="op" type="op-atom.type"/>
+
+  <!--
+		*** Rel ***
+		A relation, i.e. a logical predicate, of an atom.
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-Rel
+		
+		content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
+	-->
+  <xs:attributeGroup name="Rel.attlist">
+    <xs:attributeGroup ref="iri.attrib"/>
+    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+    <xs:attributeGroup ref="per-effect.attrib"/>
+  </xs:attributeGroup>
+  <xs:group name="Rel.content">
+    <xs:sequence> </xs:sequence>
+  </xs:group>
+  <xs:complexType name="Rel.type" mixed="true">
+    <xs:group ref="Rel.content"/>
+    <xs:attributeGroup ref="Rel.attlist"/>
+  </xs:complexType>
+  <xs:element name="Rel" type="Rel.type"/>
+
+  <!-- 
+		*** degree ***
+
+		An optional uncertainty value (between 0.0 and 1.0)
+		that may be assigned to facts and rules.
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-degree
+
+		content model: (Data)
+	-->
+  <xs:attributeGroup name="degree.attlist">
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  <xs:group name="degree.content">
+    <xs:sequence>
+      <xs:element ref="Data"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="degree.type">
+    <xs:group ref="degree.content"/>
+    <xs:attributeGroup ref="degree.attlist"/>
+  </xs:complexType>
+  <xs:element name="degree" type="degree.type"/>
+
+</xs:schema>

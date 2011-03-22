@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<xs:schema targetNamespace="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns="http://ruleml.org/spec">
+
+	<xs:annotation>
+		<xs:documentation xml:lang="en"> This is the XML Schema module for IRI references in RuleML.
+			File: iri_module.xsd Version: 1.0 Last Modification: 2010-07-16 This module declares the
+			following RuleML attribute: * @iri See http://www.ruleml.org/modularization for details
+			about this modularization approach. </xs:documentation>
+			<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+			<xs:appinfo>
+				<dc:title>RuleML Schema</dc:title>
+				<dc:version>1.0</dc:version>
+				<dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+				<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+				<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+				<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+				<dc:date>2010-07-16T23:11:17-0300</dc:date>
+				<dc:language>en</dc:language>
+				<dcterms:rights>LGPL-3.0</dcterms:rights> 
+				<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			</xs:appinfo>  
+	</xs:annotation>
+
+	<!--
+		*** @iri ***
+		An attribute for referring to a IRI.
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-@iri
+	-->
+	<xs:attributeGroup name="iri.attrib">
+		<xs:attribute name="iri" type="xs:anyURI" use="optional"/>
+	</xs:attributeGroup>
+
+</xs:schema>

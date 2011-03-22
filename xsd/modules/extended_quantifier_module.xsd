@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+            
+        Quantifier module part of Reaction RuleML redefining the Forall, Exists and introduce the Quantifier element.
+		This is the XML Schema Quantifier element for Reaction RuleML.
+		File: quantifier_module.xsd
+		Version: 1.0
+		Last Modification: 2011-03-22
+			
+		* Quantifier    generic quantifier
+		* Forall		predefined inner quantifier (used in quantification metatag)
+		* Exist			predefined inner quantifier (used in qualification metatag)
+			
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-22T23:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>  
+	</xs:annotation>
+
+
+	<!--
+	*** Quantifier ***
+	Explicit generic quantifier, where the quantifier name can be defined by the 
+      @type attribute and the @iri attribute can point to an external definition
+      of the quantifier.
+		
+	content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+-->
+	<xs:attributeGroup name="Quantifier.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Quantifier.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="declare"/>
+				<xs:element ref="Var"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element name="formula" type="formula-forall.type"/>
+				<xs:group ref="formula-forall.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Quantifier.type">
+		<xs:group ref="Quantifier.content"/>
+		<xs:attributeGroup ref="Quantifier.attlist"/>
+	</xs:complexType>
+	<xs:element name="Quantifier" type="Quantifier.type"/>
+	<!--
+	make the quantifier constraint restrictions ("such that") optional
+	
+	(  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+-->
+	<xs:group name="Exists-quantifier.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="declare"/>
+				<xs:group ref="declare.content"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element name="formula" type="formula-forall.type"/>
+				<xs:group ref="formula-forall.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Exists-quantifier.type">
+		<xs:group ref="Exists-quantifier.content"/>
+		<xs:attributeGroup ref="Exists.attlist"/>
+	</xs:complexType>
+	<!--
+	make the quantifier constraint restrictions ("such that") optional
+	
+	( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+
+
+-->
+	<xs:group name="Forall-quantifier.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element ref="declare"/>
+				<xs:group ref="declare.content"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element name="formula" type="formula-forall.type"/>
+				<xs:group ref="formula-forall.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Forall-quantifier.type">
+		<xs:group ref="Forall-quantifier.content"/>
+		<xs:attributeGroup ref="Exists.attlist"/>
+	</xs:complexType>
+
+	
+
+	
+</xs:schema>

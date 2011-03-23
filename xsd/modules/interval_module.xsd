@@ -57,8 +57,8 @@
 			<xs:group ref="meta-roles.content"/>	
 			<xs:choice minOccurs="0">
 				<xs:element name="arg" type="arg_interval.type" minOccurs="1" maxOccurs="2"/>
-				<xs:element name="content" type="interval_anycontent.type" minOccurs="1" maxOccurs="2"/>				
-				<xs:group ref="interval_primitives.content"/>				
+				<xs:group ref="interval_primitives.content"/>			
+				<xs:element name="content" type="interval_anycontent.type" minOccurs="1" maxOccurs="2"/>												
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -73,7 +73,9 @@
      
      Definition of the the arg role for Intervals
      
-     content model:  Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex 
+     content model:  
+     in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
+     in KR Reaction RuleML: Time | Spatial | Interval |  Event | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
           
 -->
 	<xs:attributeGroup name="arg_interval.attlist">
@@ -82,7 +84,7 @@
 	</xs:attributeGroup>
 	<xs:group name="arg_interval.content">
 		<xs:choice>
-			<xs:group ref="arg.content"/>
+			<xs:group ref="interval_primitives.content"/>
 		</xs:choice>
 	</xs:group>
 	<xs:complexType name="arg_interval.type">
@@ -108,16 +110,6 @@
 		<xs:attributeGroup ref="interval_anycontent.attlist"/>
 	</xs:complexType>
 
-	<!-- Interval primitives
-		content model: [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?] -->
-	<xs:group name="interval_primitives.content">
-		<xs:choice>								
-			<xs:sequence>
-				<xs:group ref="arg.content"/>
-				<xs:group ref="arg.content" minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>	
 
-		</xs:choice>
-	</xs:group>
 
 </xs:schema>

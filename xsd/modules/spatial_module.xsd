@@ -67,8 +67,8 @@
 						<xs:choice>
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
-									<xs:element ref="arg"/>
-									<xs:group ref="arg.content"/>
+									<xs:element name="arg" type="arg_spatial.type"/>									
+									<xs:group ref="spatial_primitives.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
@@ -87,7 +87,33 @@
 		<xs:attributeGroup ref="Spatial.attlist"/>
 	</xs:complexType>
 	<xs:element name="Spatial" type="Spatial.type"/>
-	
+
+	<!--
+     *** arg ***
+     
+     Definition of the the arg role for Spatial
+     
+     content model:  
+     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
+     
+          
+-->
+	<xs:attributeGroup name="arg_spatial.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="arg_spatial.content">
+		<xs:choice>
+			<xs:group ref="spatial_primitives.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="arg_spatial.type">
+		<xs:group ref="arg_spatial.content"/>
+		<xs:attributeGroup ref="arg_spatial.attlist"/>
+	</xs:complexType>
+
+
 	<!--
      *** content ***
      

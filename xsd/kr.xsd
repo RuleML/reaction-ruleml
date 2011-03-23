@@ -297,6 +297,69 @@
 			<xs:element name="Situation"/>			
 		</xs:choice>
 	</xs:group>
+
+
+	<!-- An internal group for the time primitives for interpretation as time
+		content model: 
+		in KR RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval  | Event | Situation)
+	-->
+	<xs:group name="time_primitives.content">
+		<xs:choice>
+			<xs:group ref="arg.content"/>
+		</xs:choice>
+	</xs:group>
+
+	<!-- An internal group for the spatial primitives for interpretation as spatial
+		content model: 
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+	-->
+	<xs:group name="spatial_primitives.content">
+		<xs:choice>
+			<xs:group ref="arg.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Interval primitives
+		content model: 
+		in ([Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?] | [Situation, Situation?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval | Event | Situation), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval | Event | Situation)?]) -->
+	<xs:group name="interval_primitives.content">
+		<xs:choice>							
+			<xs:sequence>
+				<xs:group ref="arg.content"/>
+				<xs:group ref="arg.content" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>	
+			
+		</xs:choice>
+	</xs:group>
+	
+	<!-- An internal group for the situation primitives for interpretation as situation
+		content model: 
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+	-->
+	<xs:group name="situation_primitives.content">
+		<xs:choice>
+			<xs:group ref="arg.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- An internal group for the event primitives for interpretation as event
+		content model: 
+		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+	-->
+	<xs:group name="event_primitives.content">
+		<xs:choice>			
+			<xs:group ref="arg.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- An internal group for the action primitives for interpretation as action
+		content model: 
+		in DR Reaction RuleML: ()
+	-->
+	<xs:group name="action_primitives.content">
+		<xs:choice>
+		</xs:choice>
+	</xs:group>
 	
 	<!--
     *** @style ***

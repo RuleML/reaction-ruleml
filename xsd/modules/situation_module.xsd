@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+			Situation module part of Reaction RuleML. It defines the core 
+			situation constructs
+			
+			This is the XML Schema situation module for Reaction RuleML.
+			File: situation_module.xsd
+			Version: 1.0
+			Last Modification: 2011-03-29
+
+			This schema declares the following Reaction RuleML elements and attributes:
+
+			  * Situation
+
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>Reaction RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-22T29:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>		
+	</xs:annotation>
+
+
+	<!--
+	*** Situation ***
+	Explicit generic Situation. The situation can be defined internally 
+	   	* with positional arguments <arg>, e.g., <arg><Ind>s1</Ind></arg>
+      	* with unpositional slots <slot>, e.g., <slot><Ind>name</Ind><Ind>s1</Ind></slot><slot><Ind>occursAt</Ind><Time>....</Time></slot>
+      	* as interpretation of the knowledge as situation with <formula>, e.g., <formula><Atom>...</Atom></formula>
+      	* by the any content model (<content>xs:any Element</content>), which acts as an extension point
+      or externally, where the optional @iri attribute points to an external definition of the situation.
+      The optional @type attribute defines the type of the situation.
+      
+      The situation instance (aka situation occurence is defined by its <arg>uments, <slot>s, as a situation interpretation <formula>, 
+      or arbitrary <content>. A situation pattern, as used, e.g., in a query or condition of a rule, is defined in the <signature> 
+      as situation template, e.g. <Situation><signature>...</signature></Situation>.
+      
+      Note: It is possible to interpret intervals, time (in the reaction layers also events and actions) as situations,
+            e.g., <Situation><Time>...</Time></Situation>. 
+		
+	content model: 
+	in KR Reaction RuleML: 
+			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (
+		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
+			content(xs:any) )? 
+	-->
+	<xs:attributeGroup name="Situation.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Situation.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0">
+				<xs:sequence>
+					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="resl" minOccurs="0"/>
+					<xs:sequence minOccurs="0">
+						<xs:choice>
+							<xs:sequence>
+								<xs:choice maxOccurs="unbounded">
+									<xs:element name="arg" type="arg_situation.type"/>
+									<xs:group ref="situation_primitives.content"/>
+								</xs:choice>
+								<xs:element ref="repo" minOccurs="0"/>
+							</xs:sequence>
+							<xs:element ref="repo"/>
+						</xs:choice>
+						<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="resl" minOccurs="0"/>
+					</xs:sequence>
+				</xs:sequence>    				
+				<xs:element name="content" type="situation_anycontent.type"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Situation.type">
+		<xs:group ref="Situation.content"/>
+		<xs:attributeGroup ref="Situation.attlist"/>
+	</xs:complexType>
+	<xs:element name="Situation" type="Situation.type"/>
+
+	<!--
+     *** arg ***
+     
+     Definition of the the arg role for Situation
+     
+     content model:  
+     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
+     
+          
+-->
+	<xs:attributeGroup name="arg_situation.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="arg_situation.content">
+		<xs:choice>
+			<xs:group ref="situation_primitives.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="arg_situation.type">
+		<xs:group ref="arg_situation.content"/>
+		<xs:attributeGroup ref="arg_situation.attlist"/>
+	</xs:complexType>
+
+	<!--
+     *** content ***
+     
+     content model:  xs:any*
+-->
+	<xs:attributeGroup name="situation_anycontent.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="situation_anycontent.content">
+		<xs:choice>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="situation_anycontent.type">
+		<xs:group ref="situation_anycontent.content"/>
+		<xs:attributeGroup ref="situation_anycontent.attlist"/>
+	</xs:complexType>
+
+</xs:schema>

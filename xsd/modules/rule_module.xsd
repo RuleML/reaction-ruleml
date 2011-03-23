@@ -77,7 +77,9 @@
 	<!--
      *** on ***
      
-     content model: (  )
+     content model: 
+     DR Reaction RuleMl: (  )
+     KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
           
 -->
 	<xs:attributeGroup name="on.attlist">
@@ -85,6 +87,7 @@
 	</xs:attributeGroup>
 	<xs:group name="on.content">
 		<xs:choice>
+			<xs:group ref="event_primitives.content"/>
 		</xs:choice>
 	</xs:group>
 	<xs:complexType name="on.type">
@@ -97,7 +100,9 @@
      *** if ***
      *** after ***
      
-     content model:   (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+     content model:   
+     DR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+     KR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
          
 	-->
 	<xs:element name="after" type="if.type"/>
@@ -106,7 +111,9 @@
 	 *** then ***	
      *** else ***
      
-     content model: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
+     content model: 
+     DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
+     KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation )
      
 	-->
 	<xs:element name="else" type="then.type"/>
@@ -115,13 +122,17 @@
      *** do ***
      *** elseDo ***
      
-     content model:  (  )
+     content model:  
+     DR Reaction RuleML: (  )
+     KR Reaction RuleML: (  )
 -->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="do.content">
 		<xs:choice>
+			<xs:group ref="action_primitives.content"/>
+			
 		</xs:choice>
 	</xs:group>
 	<xs:complexType name="do.type">

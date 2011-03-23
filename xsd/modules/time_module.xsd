@@ -69,8 +69,8 @@
 						<xs:choice>
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
-									<xs:element ref="arg"/>
-									<xs:group ref="arg.content"/>
+									<xs:element name="arg" type="arg_time.type"/>
+									<xs:group ref="time_primitives.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
@@ -89,6 +89,33 @@
 		<xs:attributeGroup ref="Time.attlist"/>
 	</xs:complexType>
 	<xs:element name="Time" type="Time.type"/>
+
+
+	<!--
+     *** arg ***
+     
+     Definition of the the arg role for Time
+     
+     content model:  
+     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
+     
+          
+-->
+	<xs:attributeGroup name="arg_time.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="arg_time.content">
+		<xs:choice>
+			<xs:group ref="time_primitives.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="arg_time.type">
+		<xs:group ref="arg_time.content"/>
+		<xs:attributeGroup ref="arg_time.attlist"/>
+	</xs:complexType>
+	
 
 	<!--
      *** content ***

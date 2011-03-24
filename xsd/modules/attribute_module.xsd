@@ -35,7 +35,7 @@
 		</xs:appinfo>			
 	</xs:annotation>
 	
-	<xs:include schemaLocation="currie_module.xsd" />   
+	<xs:include schemaLocation="curie_module.xsd" />   
 	
 	<!--
            *** @mode ***

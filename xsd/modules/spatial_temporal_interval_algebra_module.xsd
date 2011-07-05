@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+            spatial-temporal-interval algebra module part of Reaction RuleML
+			This is the XML Schema of the algebra module for Reaction RuleML
+			File: spatial_temporal_interval_algebra_module.xsd
+			Version: 1.0
+			Last Modification: 2011-03-22
+			
+			This schema declares the following Reaction RuleML elements and attributes:
+                  
+                  Operator (generic operator)
+                  
+                  Spatial, Temporal, Interval Function Constructs 
+                  
+                  * After
+                  * Before
+				  * Every
+                  * Any
+                  * Timer
+                  
+                  
+                  (Allen's) Interval Relations
+                  
+                  * During
+                  * Overlaps
+                  * Starts
+                  * Precedes
+                  * Succeeds
+                  * Meets
+                  * Equals
+                  * Finishes
+ 			
+			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
+			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
+			[http://www.w3.org/TR/xhtml-modularization/].
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>Reaction RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-22T29:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>		
+	</xs:annotation>		
+	
+	
+	<!--(After | Before | Any | Every | Timer | Operator)-->
+	
+	<xs:group name="spatial_temporal_algebra_group.content">
+		<xs:choice>
+			<xs:element ref="After"/>
+			<xs:element ref="Before"/>
+			<xs:element ref="Every"/>
+			<xs:element ref="Any"/>			
+			<xs:element ref="Timer"/>
+			<xs:element name="Operator" type="Any.type"/> 
+		</xs:choice>
+	</xs:group>	
+
+	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator) -->
+	<xs:group name="interval_algebra_group.content">
+		<xs:choice>
+			<xs:element ref="During"/>
+			<xs:element ref="Overlaps"/>
+			<xs:element ref="Starts"/>
+			<xs:element ref="Precedes"/>
+			<xs:element ref="Succeeds"/>
+			<xs:element ref="Meets"/>
+			<xs:element name="Equals" type="IntervalAlgebraOperator.type"/>
+			<xs:element ref="Finishes"/>
+			<xs:element name="Operator" type="IntervalAlgebraOperator.type"/>
+		</xs:choice>
+	</xs:group>
+	
+
+	<!--
+      *** After / Before***
+
+      X after Y  / X before Y
+      
+      Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
+
+      content model: 
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] ))
+    -->
+	<xs:attributeGroup name="After.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="After.content">
+		<xs:sequence>
+			<xs:group ref="Interval.content"/>	
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="After.type">
+		<xs:group ref="After.content"/>
+		<xs:attributeGroup ref="After.attlist"/>
+	</xs:complexType>
+	<xs:element name="After" type="After.type"/>
+	<xs:element name="Before" type="After.type"/>
+
+	<!--
+      *** Every ***
+      
+      Every X 
+      
+      Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
+      
+      content model:
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) ))
+    -->
+	<xs:attributeGroup name="Every.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Every.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:choice  minOccurs="0">
+				<xs:element name="arg" type="arg_interval.type"/>
+				<xs:group ref="interval_primitives.content"/>			
+				<xs:element name="content" type="interval_anycontent.type"/>												
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Every.type">
+		<xs:group ref="Every.content"/>
+		<xs:attributeGroup ref="Every.attlist"/>
+	</xs:complexType>
+	<xs:element name="Every" type="Every.type"/>
+
+	<!--
+      *** Any ***
+      
+      Any X1,..Xn
+            
+      e.g. "at any Saturday and Sunday"     
+           
+      content model: 
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg*] | content(xs:any)* | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)* ))
+    -->
+	<xs:attributeGroup name="Any.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Any.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:choice minOccurs="0">
+				<xs:element name="arg" type="arg_interval.type" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:group ref="interval_primitives.content" minOccurs="1" maxOccurs="unbounded"/>			
+				<xs:element name="content" type="interval_anycontent.type" minOccurs="1" maxOccurs="unbounded"/>												
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Any.type">
+		<xs:group ref="Any.content"/>
+		<xs:attributeGroup ref="Any.attlist"/>
+	</xs:complexType>
+	<xs:element name="Any" type="Any.type"/>
+
+
+	<!--
+      *** (Recurring) Timer ***
+      
+      After X Every Y
+      
+      Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
+      
+      content model: 
+         
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
+       
+    -->
+	<xs:attributeGroup name="Timer.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Timer.content">
+		<xs:sequence>
+			<xs:group ref="Interval.content"/>	
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Timer.type">
+		<xs:group ref="Timer.content"/>
+		<xs:attributeGroup ref="Timer.attlist"/>
+	</xs:complexType>
+	<xs:element name="Timer" type="Timer.type"/>
+
+	<!--
+      *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes) ***
+      
+      operator(Interval, Interval)
+      
+      content model: 
+      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval]) 
+	-->
+	<xs:attributeGroup name="IntervalAlgebraOperator.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="IntervalAlgebraOperator.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice>
+				<xs:element name="arg" type="arg_interval.type" minOccurs="2" maxOccurs="2"/>
+				<xs:element ref="Interval" minOccurs="2" maxOccurs="2"/>			
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="IntervalAlgebraOperator.type">
+		<xs:group ref="IntervalAlgebraOperator.content"/>
+		<xs:attributeGroup ref="IntervalAlgebraOperator.attlist"/>
+	</xs:complexType>
+	<xs:element name="During" type="IntervalAlgebraOperator.type"/>
+	<xs:element name="Overlaps" type="IntervalAlgebraOperator.type"/>
+	<xs:element name="Starts" type="IntervalAlgebraOperator.type"/>
+	<xs:element name="Precedes" type="IntervalAlgebraOperator.type"/>
+	<xs:element name="Succeeds" type="IntervalAlgebraOperator.type"/>
+	<xs:element name="Meets" type="IntervalAlgebraOperator.type"/>
+	<!--<xs:element name="Equals" type="IntervalAlgebraOperator.type"/>-->
+	<xs:element name="Finishes" type="IntervalAlgebraOperator.type"/>
+	
+
+</xs:schema>
+
+

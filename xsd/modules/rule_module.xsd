@@ -144,8 +144,8 @@
 	
 	<!--
   *** Derivation Rule content model ***
-  	(if, then, else?)	
--->
+  	((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
+	-->
 	<xs:group name="DerivationRule.content">
 		<xs:choice>
 			<xs:sequence>
@@ -169,10 +169,27 @@
 
 	<!--
    *** Production Rule content model ***
-   will be extended in the production rules layer
+   ((elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?))
 -->
 	<xs:group name="ProductionRule.content">
-		<xs:sequence/>
+		<xs:choice>
+			<xs:sequence>
+				<xs:element ref="else" minOccurs="0"/>
+				<xs:element ref="do"/>
+				<xs:element ref="if"/>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:element ref="if"/>
+				<xs:element ref="do"/>
+				<xs:element ref="elseDo" minOccurs="0"/>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:group ref="if.content"/>
+				<xs:group ref="do.content"/>
+				<xs:group ref="do.content" minOccurs="0"/>
+			</xs:sequence>
+		</xs:choice>
+		
 	</xs:group>
 
 	<!--

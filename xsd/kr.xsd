@@ -142,7 +142,7 @@
     
      content model:
      
-     in KR Reaction RuleML: (if, then, else?)
+     in KR Reaction RuleML: ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
           
 	-->
 	
@@ -282,7 +282,7 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the KR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial, Interval, Event and Situation
+     In the KR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial, Interval, Event, and Situation
     
      content model: (Time | Spatial | Interval | Event | Situation)
           
@@ -291,10 +291,10 @@
 	<xs:group name="extended-signature-function-sorts.content">
 		<xs:choice>
 			<xs:element ref="Time"/>
-			<xs:element name="Spatial"/>
-			<xs:element name="Interval"/>
-			<xs:element name="Event"/>
-			<xs:element name="Situation"/>			
+			<xs:element ref="Spatial"/>
+			<xs:element ref="Interval"/>
+			<xs:element ref="Event"/>			
+			<xs:element ref="Situation"/>			
 		</xs:choice>
 	</xs:group>
 
@@ -355,9 +355,11 @@
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		in DR Reaction RuleML: ()
+		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
+			<xs:group ref="arg.content"/>
 		</xs:choice>
 	</xs:group>
 	

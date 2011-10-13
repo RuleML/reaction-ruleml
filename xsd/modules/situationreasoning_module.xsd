@@ -93,9 +93,9 @@
 	<!--     *** Happens ***
 		
 		Different types of happens / happenings can be defined by pointing to an external vocabulary with @type, e.g. a vocabulary for a calculi
-		which distinguishes between events which acutally happen and other event relations to time  (e.g. planned, occured etc.).
+		which distinguishes between events which acutally happen and other event relations to time or situations  (e.g. possibly, planned, etc.).
 		
-		In Situation Calculus happens can be used to define a sequence of action events (the history) as situation.
+		In Situation Calculus happens can be used to define action effects. 
 		
  		Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
 		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic

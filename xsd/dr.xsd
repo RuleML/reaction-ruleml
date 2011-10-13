@@ -157,7 +157,9 @@
     
      content model:
      
-     in DR Reaction RuleML: (if, then, else?)
+     in DR Reaction RuleML: 
+     
+     ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
           
 	-->
 	
@@ -302,8 +304,8 @@
 	<xs:group name="extended-signature-function-sorts.content">
 		<xs:choice>
 			<xs:element ref="Time"/>
-			<xs:element name="Spatial"/>
-			<xs:element name="Interval"/>	
+			<xs:element ref="Spatial"/>
+			<xs:element ref="Interval"/>	
 		</xs:choice>
 	</xs:group>
 

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/kr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
+ 
+<!-- Example: manage server load in task scheduling using an Event Calculus formalization -->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+  
+  <!-- domain dependend initates and terminates axioms  -->
+  <Rulebase>    
+
+  <!-- initially status(Server,unloaded)  -->
+  <Initiates> <!-- initialy axiom with empty start event -->
+      <on><Event/></on> <!-- empty event -->
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>status</Fun>
+            <Var>Server</Var>
+            <Ind>unloaded</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+  </Initiates>
+    
+
+  <!-- unloading(Server) initiates status(Server,unloaded) at time T -->
+  <Initiates> <!-- initiates axiom -->
+    <!-- on event -->
+    <on>
+      <Event>
+          <Expr> 
+            <Fun>unloading</Fun>
+            <Var>Server</Var>
+          </Expr>
+      </Event>
+    </on>
+    <!-- initiate fluent situation -->
+    <fluent>
+      <Situation type="ruleml:Fluent">
+        <Expr>
+          <Fun>status</Fun>
+          <Var>Server</Var>
+          <Ind>unloaded</Ind>
+        </Expr>  
+      </Situation>
+    </fluent>
+    <!-- at time -->
+    <at>  
+      <Time>
+        <Var>T</Var>
+      </Time>
+    </at>  
+  </Initiates>
+
+  <!-- loading(Server) terminates status(Server,unloaded) at time T -->
+  <Terminates> <!-- terminates axiom -->
+    <!-- on event -->
+      <Event>
+          <Expr>
+            <Fun>loading</Fun>
+            <Var>Server</Var>
+          </Expr>
+      </Event>
+    
+    <!-- terminate fluent situation -->
+      <Situation type="ruleml:Fluent">
+        <Expr>
+          <Fun>status</Fun>
+          <Var>Server</Var>
+          <Ind>unloaded</Ind>
+        </Expr>  
+      </Situation>
+    
+    <!-- at time -->
+      <Time>
+        <Var>T</Var>
+      </Time>
+      
+  </Terminates>
+
+  <!-- if status(Server,unloaded) holds at Time then scheduling(Task, Server) initates schedule(Server,Task,executing) at Time  -->
+  <Rule>
+    <if>
+      <Holds>
+          <Situation type="ruleml:Fluent">
+            <Expr>
+              <Fun>status</Fun>
+              <Var>Server</Var>
+              <Ind>unloaded</Ind>
+            </Expr>  
+          </Situation>
+          <Time>
+            <Var>Time</Var>
+          </Time>
+      </Holds>
+    </if>
+    <then>
+      <Initiates> 
+          <Event>
+            <Expr> 
+              <Fun>scheduling</Fun>
+              <Var>Task</Var>
+              <Var>Server</Var>
+            </Expr>
+          </Event>
+          <Situation type="ruleml:Fluent">
+            <Expr>
+              <Fun>schedule</Fun>
+              <Var>Server</Var>
+              <Var>Task</Var>
+              <Ind>executing</Ind>
+            </Expr>  
+          </Situation>
+          <Time>
+            <Var>Time</Var>
+          </Time>
+      </Initiates>
+    </then>
+  </Rule>
+
+    <!-- ending(Taks,Server) terminates schedule(Server,Task, executing) at time T -->
+    <Terminates> <!-- terminates axiom -->
+      <!-- on event -->
+      <Event>
+        <arg>                  
+          <Expr>
+            <op><Fun>ending</Fun></op> 
+            <arg><Var>Task</Var></arg> 
+            <arg><Var>Server</Var></arg>
+          </Expr>
+        </arg>  
+      </Event>
+      
+      <!-- terminate fluent situation -->
+      <Situation type="ruleml:Fluent">
+        <Expr>
+          <Fun>schedule</Fun>
+          <Var>Server</Var>
+          <Var>Task</Var>
+          <Ind>executing</Ind>
+        </Expr>  
+      </Situation>
+      
+      <!-- at time -->
+      <Time>
+        <Var>T</Var>
+      </Time>
+      
+    </Terminates>
+
+  </Rulebase>  
+    
+  <!-- event rulebase -->
+  <Rulebase>
+
+    <!-- scheduling task1 on server1 at time 2 -->
+    <Happens>
+        <Event> <!-- event instance (event individual) -->
+          <Expr>
+            <Fun>scheduling</Fun> <!-- scheduling -->
+            <Ind>task1</Ind> <!-- task1 -->
+            <Ind>server1</Ind> <!-- server1 -->
+          </Expr>
+        </Event>
+        <Time>
+          <Ind>2</Ind> <!-- time 2 -->
+        </Time>
+    </Happens>
+
+  <!-- if scheduling(Task,Server) happens at Time then loading(Server) happens at Time,
+       i.e., event loading(Server) is a derived event from event scheduling(Task,Server) -->
+  <Rule>
+    <if>
+      <Happens>
+          <Event> 
+            <Expr>
+              <Fun>scheduling</Fun> 
+              <Var>Task</Var> 
+              <Var>Service</Var> 
+            </Expr>
+          </Event>
+          <Time>
+            <Var>Time</Var> 
+          </Time>
+      </Happens>        
+    </if>
+    <then>
+      <Happens>
+        <on>
+          <Event> 
+            <Expr>
+              <Fun>loading</Fun> <!-- loading -->
+              <Var>Server</Var> 
+            </Expr>
+          </Event>
+        </on>
+        <at>
+          <Time>
+            <Var>Time</Var> 
+          </Time>
+        </at>
+      </Happens>      
+    </then>
+  </Rule>  
+
+  <!-- ending task1 on server1 at time 5 -->
+  <Happens>
+      <Event> <!-- event instance (event individual) -->
+        <Expr>
+          <Fun>ending</Fun> <!-- ending -->
+          <Ind>task1</Ind> <!-- task task1 -->
+          <Ind>server1</Ind> <!-- server server1 -->
+        </Expr>
+      </Event>
+      <Time>
+        <Ind>5</Ind> <!-- time 5 -->
+      </Time>
+  </Happens>
+
+    <!-- if ending(Task,Server) happens at Time then unloading(Server) happens at Time -->
+    <Rule>
+      <if>
+        <And>
+          <Happens>
+            <on>
+              <Event>
+                <arg>                  
+                  <Expr>
+                    <op><Fun>ending</Fun></op> 
+                    <arg><Var>Task</Var></arg> 
+                    <arg><Var>Server</Var></arg>
+                  </Expr>
+                </arg>  
+              </Event>
+            </on>
+            <at>  
+              <Time>
+                <arg>
+                  <Var>Time</Var> 
+                </arg>  
+              </Time>
+            </at>  
+          </Happens>
+        </And>
+      </if>
+      <then>
+        <Happens>
+          <on>
+            <Event> 
+              <Expr>
+                <Fun>unloading</Fun> <!-- unloading -->
+                <Var>Server</Var> 
+              </Expr>
+            </Event>
+          </on>
+          <at>
+            <Time>
+              <Var>Time</Var> 
+            </Time>
+          </at>
+        </Happens>      
+      </then>
+    </Rule>  
+
+  </Rulebase>
+
+  </Assert>
+
+  <!-- queries -->
+  
+  <Query>
+    
+    <Holds>
+      <fluent>
+        <Situation type="ruleml:Fluent">
+             <Expr>
+              <Fun>status</Fun>
+              <Ind>server1</Ind>
+              <Ind>unloaded</Ind>
+            </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>1</Ind>
+        </Time>
+      </at>
+    </Holds>    
+    
+    <Holds>
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>schedule</Fun>
+            <Var>server1</Var>
+            <Var>task1</Var>
+            <Ind>executing</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>1</Ind>
+        </Time>
+      </at>
+    </Holds>    
+    
+    <Holds>
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>status</Fun>
+            <Ind>s1</Ind>
+            <Ind>unloaded</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>2</Ind>
+        </Time>
+      </at>
+    </Holds>    
+
+    <Holds>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>schedule</Fun>
+            <Var>server1</Var>
+            <Var>task1</Var>
+            <Ind>executing</Ind>
+          </Expr>  
+        </Situation>
+        <Time>
+          <Ind>2</Ind>
+        </Time>      
+    </Holds>    
+    
+    <Holds>
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>status</Fun>
+            <Ind>s1</Ind>
+            <Ind>unloaded</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>3</Ind>
+        </Time>
+      </at>
+    </Holds>    
+
+    <Holds>
+      <Situation type="ruleml:Fluent">
+        <Expr>
+          <Fun>schedule</Fun>
+          <Var>server1</Var>
+          <Var>task1</Var>
+          <Ind>executing</Ind>
+        </Expr>  
+      </Situation>
+      <Time>
+        <Ind>3</Ind>
+      </Time>      
+    </Holds>    
+
+    <Holds>
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>status</Fun>
+            <Ind>s1</Ind>
+            <Ind>unloaded</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>4</Ind>
+        </Time>
+      </at>
+    </Holds>    
+
+    <Holds>
+      <Situation type="ruleml:Fluent">
+        <Expr>
+          <Fun>schedule</Fun>
+          <Var>server1</Var>
+          <Var>task1</Var>
+          <Ind>executing</Ind>
+        </Expr>  
+      </Situation>
+      <Time>
+        <Ind>4</Ind>
+      </Time>      
+    </Holds>    
+    
+    <Holds>
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>status</Fun>
+            <Ind>s1</Ind>
+            <Ind>unloaded</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>5</Ind>
+        </Time>
+      </at>
+    </Holds>    
+
+    <Holds>
+      <Situation type="ruleml:Fluent">
+        <Expr>
+          <Fun>schedule</Fun>
+          <Var>server1</Var>
+          <Var>task1</Var>
+          <Ind>executing</Ind>
+        </Expr>  
+      </Situation>
+      <Time>
+        <Ind>5</Ind>
+      </Time>      
+    </Holds>    
+
+    <Holds>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>status</Fun>
+            <Ind>s1</Ind>
+            <Ind>unloaded</Ind>
+          </Expr>  
+        </Situation>
+        <Time>
+          <Ind>6</Ind>
+        </Time>
+    </Holds>    
+    
+    <Holds>
+      <Situation type="ruleml:Fluent">
+        <Expr>
+          <Fun>schedule</Fun>
+          <Var>server1</Var>
+          <Var>task1</Var>
+          <Ind>executing</Ind>
+        </Expr>  
+      </Situation>
+      <Time>
+        <Ind>6</Ind>
+      </Time>      
+    </Holds>    
+
+  </Query>
+</RuleML>

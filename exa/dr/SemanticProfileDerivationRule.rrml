@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
-<RuleML
-  xmlns="http://ruleml.org/spec"
+<RuleML xmlns="http://ruleml.org/spec"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
 
 <!-- Clocksin/Mellish sample rule 
@@ -22,29 +22,76 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
   <!-- assert knowledge -->
 
   <Assert>
+    <Rulebase>
+
+    <!-- define intended semantic profile for the rule -->
+    
+    <evaluation index="1">
+      
+      <!-- the primary intended semantics is well founded semantics -->
+      
+      <Profile type="ruleml:WellFoundedSemantics" direction="backward"/>
+      
+    </evaluation>
+    
+    <!-- and (alternatively) semantic profile is answer set semantics -->
+    
+    <evaluation index="2">
+      
+      <Profile type="ruleml:AnswerSetSemantics" direction="backward"/>
+      
+    </evaluation>
+
+    <!-- third alternative semantic profile with a simple SLDNF axiomatization of negation as failure -->
+    
+    <evaluation index="3">
+      
+      <Profile key="ruleml:SLDNF" direction="backward">
+        <formula>
+          <Rulebase>
+            
+            <!-- Axiomatization of negation as failure in Prolog
+              not(Goal) :- derive(Goal), !, fail.
+              not(Goal).            
+              -->
+            
+            <Rule>
+              <if>
+                <And>
+                  <Atom>
+                    <Rel iri="ruleml:derive"/>
+                    <Var>Goal</Var>
+                  </Atom>
+                  <Atom>
+                    <Rel iri="ruleml:cut"/>
+                  </Atom>
+                  <Atom>
+                    <Rel iri="ruleml:fail"/>
+                  </Atom>
+                </And>
+              </if>
+              <then>
+                <Atom>
+                  <Rel iri="ruleml:Naf"/>
+                  <Var>Goal</Var>
+                </Atom>
+              </then>
+            </Rule>
+            
+            <Atom>
+              <Rel iri="ruleml:Naf"/>
+              <Var>Goal</Var>
+            </Atom>
+            
+          </Rulebase>           
+        </formula>
+        
+      </Profile>
+  </evaluation>  
 
   <!-- rule -->
 
   <Rule>
-
-    <!-- define intended semantic profile for the rule -->
-
-    <evaluation index="1">
-
-      <!-- the primary intended semantics is well founded semantics -->
-
-      <Profile type="ruleml:WellFoundedSemantics" direction="backward"/>
-      
-    </evaluation>
-
-	 <!-- and (alternatively) semantic profile is answer set semantics -->
-
-    <evaluation index="2">
-      
-      <Profile type="ruleml:AnswerSetSemantics" direction="backward"/>
-
-    </evaluation>
-
     <if>
       <Atom>
         <op><Rel>likes</Rel></op>
@@ -61,6 +108,25 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
     </then>
   </Rule>
 
+  <Rule>  
+    <if>
+      <Naf> <!-- negation as failure -->
+        <Atom>
+          <op><Rel>likes</Rel></op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </Naf>  
+    </if>
+    <then>
+      <Atom>
+        <op><Rel>dislikes</Rel></op>
+        <Ind>John</Ind>
+        <Var>X</Var>
+      </Atom>
+    </then>
+  </Rule>
+
   <!-- fact -->
 
   <Atom>
@@ -69,18 +135,19 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
     <Ind>wine</Ind>
   </Atom>
  
+  </Rulebase>
  </Assert>
 
 <!-- query knowledge base -->
  
  <Query>
 
-    <!-- define intended semantic profile for the query -->    
+    <!-- intended semantic profile for the query -->    
 
     <evaluation>
 
       <!-- the intended semantics for this query is well founded semantics, i.e. it can be "safely" applied to the rule using the first
-            semantic profile of the rule -->
+            semantic interpretation profile  -->
 
       <Profile type="ruleml:WellFoundedSemantics" direction="backward"/>
 
@@ -92,5 +159,16 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
      <Var>whom</Var>
    </Atom>
  </Query>
-  
+
+  <!-- The intenteded semantics for this query is referencing the locally axiomatized SLDNF profile of the rulebase  -->
+  <Query>
+    <evaluation>
+      <Profile keyref="ruleml:SLDNF"/>      
+    </evaluation>
+    <Atom>
+      <Rel>dislikes</Rel>
+      <Ind>John</Ind>
+      <Var>Katy</Var>
+    </Atom>
+  </Query>
 </RuleML>

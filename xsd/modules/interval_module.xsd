@@ -8,7 +8,7 @@
 			Interval module part of Reaction RuleML. It defines the core 
 			Interval construct
 			
-			This is the XML Schema event module for Reaction RuleML.
+			This is the XML Schema interval module for Reaction RuleML.
 			File: interval_module.xsd
 			Version: 1.0
 			Last Modification: 2011-03-29
@@ -37,14 +37,14 @@
 	*** Interval ***
 	Explicit generic Interval. The interval can be
       defined internally by the any content model (xs:any Element) or externally, where 
-      the optional @type attribute defines the name/type of the event,
-      the optional @iri attribute points to an external definition of the event, and
-       An interval can be defined by Events, Times, Spatials, and other Intervals can be typed by the 
+      the optional @type attribute defines the name/type of the interval,
+      the optional @iri attribute points to an external definition of the interval, and
+       An interval can be defined by Events, Actions,  Times, Spatials, and other Intervals can be typed by the 
        interval ontology of Reaction RuleML (defining different types of intervals).
 		
 	content model: 
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Action, Action?] | [Event, Event?] | [Situation, Situation?] | [Var, Var?])?
 	-->
 	<xs:attributeGroup name="Interval.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -75,7 +75,7 @@
      
      content model:  
      in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
-     in KR Reaction RuleML: Time | Spatial | Interval |  Event | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
+     in KR Reaction RuleML: Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
           
 -->
 	<xs:attributeGroup name="arg_interval.attlist">

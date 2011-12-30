@@ -5,22 +5,29 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
 
-<!-- Example: manage server load in task scheduling using a Situation Calculus formalization -->
+<!-- Example: manage server load in task scheduling using a Situation Calculus formalization 
+  
+    Classical Situation Calculus with purely non-reified fluents and action (SCpnr)
+  
+  -->
 
   <!-- assert knowledge -->
 
   <Assert>
   
+  <evaluation>
+    <Profile type="ruleml:PurelyNonReifiedClassicalSituationCalculus"/>
+  </evaluation>
+  
   <!-- Action Precondition Axioms -->
   
   <Rulebase>    
 
-    <!--   poss(move(X,Y),S) :- clear(X,S), clear(Y,S), not X = Y.  -->
+    <!--   poss(move(X,Y,S)) :- clear(X,S), clear(Y,S), not X = Y.  -->
     <Rule>
       <if>
-        <And>
-          
-            <Situation type="ruleml:Fluent">
+        <And>         
+          <Situation type="ruleml:Fluent">
               <Expr>
                 <Fun>clear</Fun>
                 <Var>X</Var>
@@ -28,7 +35,7 @@
                   <Var>S</Var>
                 </Situation>
               </Expr>  
-            </Situation>
+          </Situation>
           
           <Situation type="ruleml:Fluent">
             <Expr>
@@ -50,26 +57,23 @@
         </And>
       </if>
       <then>
-        <Happens type="ruleml:PossibleOccurence">
-          <on>
-            <Event>
-              <Expr> 
-                <Fun>move</Fun>
-                <Var>X</Var>
-                <Var>Y</Var>
-              </Expr>
-            </Event>
-          </on> 
-          <at>
-            <Situation type="ruleml:History">
+        
+        <Atom>
+          <Rel>poss</Rel>
+          <Situation type="ruleml:History">
+            <Expr> 
+              <Fun>move</Fun>
+              <Var>X</Var>
+              <Var>Y</Var>
               <Var>S</Var>
-            </Situation>
-          </at>  
-        </Happens>
-      </then>
+            </Expr>
+          </Situation>
+        </Atom>
+       </then>
+      
     </Rule>
 
-    <!--     poss(putOnTable(X),S) :- clear(X,S), not ontable(X,S).-->  
+    <!--     poss(putOnTable(X,S)) :- clear(X,S), not onTable(X,S).-->  
     <Rule>
       <if>
         <And>
@@ -87,7 +91,7 @@
           <Negation>
             <Situation type="ruleml:Fluent">
               <Expr>
-                <Fun>ontable</Fun>
+                <Fun>onTable</Fun>
                 <Var>X</Var>
                 <Situation type="ruleml:History">
                   <Var>S</Var>
@@ -99,21 +103,16 @@
         </And>
       </if>
       <then>
-        <Happens type="ruleml:PossibleOccurence">
-          <on>
-            <Event>
-              <Expr> 
-                <Fun>putOnTable</Fun>
-                <Var>X</Var>
-              </Expr>
-            </Event>
-          </on> 
-          <at>
-            <Situation type="ruleml:History">
+        <Atom>
+          <Rel>poss</Rel>
+          <Situation type="ruleml:History">
+            <Expr> 
+              <Fun>putOnTable</Fun>
+              <Var>X</Var>
               <Var>S</Var>
-            </Situation>
-          </at>  
-        </Happens>
+            </Expr>
+          </Situation>
+        </Atom>
       </then>
     </Rule>
 
@@ -123,33 +122,37 @@
   <Rulebase>
 
   
-  <!-- clear(X,do(A,S)) :- (A = move(Y,Z) ;
-                              A = putOnTable(Y)),
+  <!-- clear(X,A) :- (A = move(Y,Z,S) ;
+                              A = putOnTable(Y,S)),
                               on(Y,X,S) ;
-                              clear(X,S), not A = move(Y,X). -->
+                              clear(X,S), not A = move(Y,X,S). --> 
+
+    
   <Rule>
     <if>
       <Or>
         <And>
           <Or>
             <Equal>
-              <Event><Var>A</Var></Event>
-              <Event> 
+              <Var>A</Var>
+              <Situation type="ruleml:History">
                 <Expr>
                   <Fun>move</Fun> 
                   <Var>X</Var> 
                   <Var>Z</Var> 
-                </Expr>
-              </Event>            
+                  <Var>S</Var>
+                </Expr>    
+              </Situation>  
             </Equal>
             <Equal>
-              <Event><Var>A</Var></Event>
-              <Event> 
+              <Var>A</Var>
+              <Situation type="ruleml:History">
                 <Expr>
                   <Fun>putOnTable</Fun> 
-                  <Var>Y</Var> 
-                </Expr>
-              </Event>            
+                  <Var>Y</Var>
+                  <Var>S</Var>
+                </Expr>  
+              </Situation>
             </Equal>
           </Or>
           <Situation type="ruleml:Fluent">
@@ -173,14 +176,15 @@
           </Situation>
           <Negation>
             <Equal>
-              <Event><Var>A</Var></Event>
-              <Event> 
+              <Var>A</Var>
+              <Situation type="ruleml:History">
                 <Expr>
                   <Fun>move</Fun> 
                   <Var>Y</Var> 
                   <Var>X</Var> 
-                </Expr>
-              </Event>            
+                  <Var>S</Var>
+                </Expr>    
+              </Situation>  
             </Equal>
           </Negation>
         </And>
@@ -191,34 +195,29 @@
         <Expr>
               <Fun>clear</Fun> 
               <Var>X</Var>
-              <Situation type="ruleml:History">
-                <Expr>
-                  <Fun>do</Fun>
-                  <Event><Var>A</Var></Event>
-                  <Situation type="ruleml:History"><Var>S</Var></Situation>
-                </Expr>
-              </Situation>
+              <Var>A</Var>
         </Expr>
       </Situation>      
     </then>
   </Rule>  
     
-    <!-- on(X,Y,do(A,S)) :- A = move(X,Y) ;
-                            on(X,Y,S), not A = putOnTable(X),
-                            not A = move(X,Z). -->
+    <!-- on(X,Y,A) :- A = move(X,Y,S) ;
+                            on(X,Y,S), not A = putOnTable(X,S),
+                            not A = move(X,Z,S). -->
 
    <Rule>
      <if>
        <Or>
          <Equal>
-           <Event><Var>A</Var></Event>
-           <Event> 
+           <Var>A</Var>
+           <Situation> 
              <Expr>
                <Fun>move</Fun> 
                <Var>X</Var> 
-               <Var>Y</Var> 
+               <Var>Y</Var>
+               <Var>S</Var>
              </Expr>
-           </Event>            
+           </Situation>            
          </Equal>
          <And>
            <Situation type="ruleml:Fluent">
@@ -231,25 +230,27 @@
            </Situation>
            <Negation>
              <Equal>
-               <Event><Var>A</Var></Event>
-               <Event> 
+               <Situation><Var>A</Var></Situation>
+               <Situation> 
                  <Expr>
                    <Fun>putOnTable</Fun> 
-                   <Var>X</Var> 
+                   <Var>X</Var>
+                   <Var>S</Var>
                  </Expr>
-               </Event>            
+               </Situation>            
              </Equal>
            </Negation>
            <Negation>
              <Equal>
-               <Event><Var>A</Var></Event>
-               <Event> 
+               <Var>A</Var>
+               <Situation> 
                  <Expr>
                    <Fun>move</Fun> 
                    <Var>Y</Var> 
                    <Var>X</Var> 
+                   <Var>S</Var>
                  </Expr>
-               </Event>            
+               </Situation>            
              </Equal>
            </Negation>
          </And>
@@ -262,49 +263,45 @@
            <Var>X</Var>
            <Var>Y</Var>
            <Situation type="ruleml:History">
-             <Expr>
-               <Fun>do</Fun>
-               <Event><Var>A</Var></Event>
-               <Situation type="ruleml:History"><Var>S</Var></Situation>
-             </Expr>
-           </Situation>
+             <Var>A</Var>
+           </Situation>           
          </Expr>
        </Situation>      
      </then>
    </Rule> 
     
-    <!-- ontable(X,do(A,S)) :- A = putOnTable(X) ;
-                               ontable(X,S), not A = move(X,Y). -->
+    <!-- ontable(X,A) :- A = putOnTable(X,S) ;
+                               onTable(X,S), not A = move(X,Y,S). -->
     <Rule>
       <if>
         <Or>
           <Equal>
-            <Event><Var>A</Var></Event>
-            <Event> 
+            <Var type="ruleml:Situation">A</Var>
               <Expr>
                 <Fun>putOnTable</Fun> 
-                <Var>X</Var> 
-              </Expr>
-            </Event>            
+                <Var>X</Var>
+                <Var type="ruleml:History">S</Var>
+              </Expr>                       
           </Equal>
           <And>
             <Situation type="ruleml:Fluent">
               <Expr>
-                <Fun>ontanle</Fun>
+                <Fun>onTable</Fun>
                 <Var>X</Var>
-                <Situation type="ruleml:History"><Var>S</Var></Situation>
+                <Situation><Var type="ruleml:History">S</Var></Situation>
               </Expr>
             </Situation>
             <Negation>
               <Equal>
-                <Event><Var>A</Var></Event>
-                <Event> 
+                <Var type="ruleml:History">A</Var>
+                <Situation> 
                   <Expr>
                     <Fun>move</Fun> 
                     <Var>X</Var> 
-                    <Var>Y</Var> 
+                    <Var>Y</Var>
+                    <Var>S</Var>
                   </Expr>
-                </Event>            
+                </Situation>            
               </Equal>
             </Negation>
           </And>
@@ -313,16 +310,10 @@
       <then>
         <Situation type="ruleml:Fluent">
           <Expr>
-            <Fun>ontable</Fun> 
+            <Fun>onTable</Fun> 
             <Var>X</Var>
-            <Situation type="ruleml:History">
-              <Expr>
-                <Fun>do</Fun>
-                <Event><Var>A</Var></Event>
-                <Situation type="ruleml:History"><Var>S</Var></Situation>
-              </Expr>
-            </Situation>
-          </Expr>
+            <Var type="ruleml:Situation">A</Var>
+         </Expr>
         </Situation>      
       </then>
     </Rule>

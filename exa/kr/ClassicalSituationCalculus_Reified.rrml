@@ -3,20 +3,30 @@
 <RuleML xmlns="http://ruleml.org/spec"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
-  
+
 <!-- Example: manage server load in task scheduling using a Situation Calculus formalization 
   
-    Classical Situation Calculus wiith reified fluents and actions (CSr)
+    Classical Situation Calculus with reified fluents and actions (CSr)
   
   -->
+
+  <!-- Includes the external semantic profile for situation calculus which has been axiomatized in Reaction RuleML.
+       The included axiomatized profiles are asserted and can be referenced directly using keyref.
+       In contrast to the external reference by the @type attribute, the @keyref makes a local reference to the included axioms of the referenced profile.
+       
+       Note: it is also possible to reference external semantic profiles which are formalized in other non RuleML languages such as e.g. Common Logic. 
+  -->
+  
+  <xi:include href="../../profiles/SituationCalculusProfile.rrml" xpointer="xpointer(/RuleML/*)"/>
 
   <!-- assert knowledge -->
 
   <Assert>
   
   <evaluation>
-    <Profile type="ruleml:ReifiedClassicalSituationCalculus" direction="backward"/>
+    <Profile keyref="ruleml:ReifiedClassicalSituationCalculus" type="ruleml:ReifiedClassicalSituationCalculus" direction="backward"/>
   </evaluation>
   
   <!-- Action Precondition Axioms -->
@@ -63,7 +73,7 @@
         </And>
       </if>
       <then>
-        <Happens iri="ruleml:possible">
+        <Happens iri="ruleml:Possible">
           <on>
             <Action>
               <Expr> 
@@ -117,7 +127,7 @@
         </And>
       </if>
       <then>
-        <Happens iri="ruleml:possible">
+        <Happens iri="ruleml:Possible">
           <on>
             <Action>
               <Expr> 

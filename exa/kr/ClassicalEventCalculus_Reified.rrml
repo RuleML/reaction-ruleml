@@ -10,6 +10,10 @@
   <!-- assert knowledge -->
 
   <Assert>
+    
+    <evaluation>
+      <Profile type="ruleml:ReifiedClassicalEventCalculus"/>
+    </evaluation>
   
   <!-- domain dependend initates and terminates axioms  -->
   <Rulebase>    

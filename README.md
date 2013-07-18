@@ -1,4 +1,3 @@
-reaction-test
+reaction-ruleml
 =============
 
-sdfjkl

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+  
+
+  <Assert>
+ <!-- 
+	oddelement function :
+
+	oddels([]) :& [].
+	oddels([X]) :& [[X]].
+	oddels([X,Y|Z]) :- R .= oddels(Z) & [[X]|R].
+  --> 
+ 
+ <!-- 
+  oddels([]) = []
+ --> 
+
+  <Equal oriented="yes">
+    <Expr>
+      <Fun per="value">oddels</Fun> 
+        <Plex></Plex> 
+    </Expr>
+    <Plex></Plex> 
+  </Equal>
+
+ <!-- 
+   oddels([X]) = [[X]]
+  --> 
+  <Equal oriented="yes">
+    <Expr>
+      <Fun per="value">oddels</Fun>
+        <Plex>
+          <Var>X</Var>
+        </Plex>
+    </Expr>
+    <Plex>
+      <Plex>
+        <Var>X</Var>
+      </Plex>
+    </Plex>
+  </Equal>
+
+    
+  <!-- 
+	 oddels([X,Y|Z])=[[X]|R] if R = oddels(Z)
+  --> 
+
+<Implies>
+  <then>
+    <Equal oriented="yes">
+      <Expr>
+        <Fun per="value">oddels</Fun>
+          <Plex>  
+            <Var>X</Var> 
+            <Var>Y</Var>
+            <repo>
+              <Var>Z</Var>
+            </repo>
+          </Plex>
+      </Expr>
+      <Plex>  
+        <Plex>
+          <Var>X</Var> 
+        </Plex>
+        <repo>
+          <Var>R</Var>
+        </repo>
+      </Plex>
+    </Equal>
+  </then>
+
+  <if>
+    <Equal oriented="no">
+      <Var>R</Var>
+      <Expr>
+        <Fun per="value">oddels</Fun> 
+          <Var>Z</Var> 
+      </Expr>
+    </Equal>
+  </if>
+</Implies>
+</Assert>
+</RuleML>

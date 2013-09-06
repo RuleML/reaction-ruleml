@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+  
+
+  <!-- a flattened factorial definition -->
+
+<Assert mapClosure="universal">
+
+    <Equal>
+      <Expr>
+        <op>
+          <Fun per="value">fac</Fun>
+        </op>
+        <Data xsi:type="xs:nonNegativeInteger">0</Data>
+      </Expr>
+      <Data xsi:type="xs:positiveInteger">1</Data>
+    </Equal>
+
+
+<Implies>
+  <then>
+    <Equal>
+      <Expr>
+        <op>
+          <Fun per="value">fac</Fun>
+        </op>
+        <Var>n</Var>
+      </Expr>
+      <Var>r</Var>
+    </Equal>
+  </then>
+  <if>
+    <And>
+      <Atom>
+        <op>
+          <Rel>greater</Rel>
+        </op>
+        <Var>n</Var>
+        <Data xsi:type="xs:nonNegativeInteger">0</Data>
+      </Atom>
+      <Equal>
+        <Var>m</Var>
+        <Expr>
+          <op>
+            <Fun per="value">-</Fun>
+          </op>
+          <Var>n</Var>
+          <Data xsi:type="xs:positiveInteger">1</Data>
+        </Expr>
+      </Equal>
+      <Equal>
+        <Var>f</Var>
+        <Expr>
+          <op>
+            <Fun per="value">fac</Fun>
+          </op>
+          <Var>m</Var>
+        </Expr>
+      </Equal>
+      <Equal>
+        <Var>r</Var>
+        <Expr>
+          <op>
+            <Fun per="value">*</Fun>
+          </op>
+          <Var>n</Var>
+          <Var>f</Var>
+        </Expr>
+      </Equal>
+    </And>
+  </if>
+</Implies>
+
+
+</Assert>
+
+</RuleML>

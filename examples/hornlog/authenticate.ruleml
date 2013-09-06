@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+  
+
+<!-- Tim Berners-Lee's authentication rule (without URI inspection):
+Any person who was some time in the last 2 months an employee of
+an organization which was some time in the last 2 months a W3C member
+may register -->
+
+<Assert mapClosure="universal">
+
+<Implies>
+  <then>
+    <Atom>
+      <op>
+        <Rel>may register</Rel>
+      </op>
+      <Var>any</Var>
+    </Atom>
+  </then>
+  <if>
+    <And>
+      <Atom>
+        <op>
+          <Rel>person</Rel>
+        </op>
+        <Var>any</Var>
+      </Atom>
+      <Atom>
+        <op>
+          <Rel>organization</Rel>
+        </op>
+        <Var>org</Var>
+      </Atom>
+      <Atom>
+        <op>
+          <Rel>employee in</Rel>
+        </op>
+        <Var>any</Var>
+        <Var>org</Var>
+        <Expr>
+          <op>
+            <Fun>last</Fun>
+          </op>
+          <Expr>
+            <op>
+              <Fun>month</Fun>
+            </op>
+            <Data xsi:type="xs:positiveInteger">2</Data>
+          </Expr>
+        </Expr>
+      </Atom>
+      <Atom>
+        <op>
+          <Rel>member in</Rel>
+        </op>
+        <Var>org</Var>
+        <Ind iri="http://www.w3.org/">W3C</Ind>
+        <Expr>
+          <op>
+            <Fun>last</Fun>
+          </op>
+          <Expr>
+            <op>
+              <Fun>month</Fun>
+            </op>
+            <Data xsi:type="xs:positiveInteger">2</Data>
+          </Expr>
+        </Expr>
+      </Atom>
+    </And>
+  </if>
+</Implies>
+
+</Assert>
+
+</RuleML>

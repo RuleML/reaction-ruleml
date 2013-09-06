@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+
+<!-- Clocksin/Mellish sample rule 
+
+This example shows how the distributed rule bases can be included using XInclude.
+
+This Reaction RuleML XML document instance defines the interface part of the distributed knowledge which is included by the implementation part of the distributed knowledge base defined in the DistributedDerivationRuleImplementation XML document instance. 
+
+For the reference from the interface to the implementation of the rules it uses key-keyref attributes. See ModularDerivationRule 
+
+This can be quite importan in the context of distributed reactive knowledge bases which communicate via event queries, e.g. to support modularization and information hiding (e.g. only the interface is publicly published while the implementation is not public).
+
+-->
+
+
+  <!-- assert knowledge -->
+
+<Assert>
+ 
+<!-- rule interface with two alternative interpretation semantics and a signature. The interface is referenced by the implementation using the key -->
+
+ <Rule key="r1">
+
+ 	<evaluation index="1">
+  		<!-- WFS semantic profile define in the metamodel -->
+ 		<Profile type="ruleml:Well-Founded-Semantics"/>
+ 	</evaluation>
+
+ 	<evaluation index="2">
+ 	<!-- alternative ASS semantic profile define in the metamodel -->
+		<Profile type="ruleml:Answer-Set-Semantics" direction="backward"/>
+	</evaluation>
+
+	<!-- the signature  defines the queryable head of the 		backward-reasoning rule -->
+
+ 	<signature>
+   		<Atom>
+			<Rel>likes</Rel>
+			<Var mode="+">John</Var> <!-- predefined constant -->
+			<Var mode="-"/>
+		</Atom>
+ 	</signature>
+ </Rule>
+
+
+ </Assert>
+
+</RuleML>

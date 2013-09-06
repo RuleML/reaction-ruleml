@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+  
+
+<Assert mapClosure="universal">
+
+
+<!--Unoriented with interpreted functions on lhs and rhs
+     morningstar() = eveningstar()
+    Can rewrite morningstar() to eveningstar() 
+    Can rewrite eveningstar() to morningstar()
+-->
+
+<Equal oriented="no">
+  <Expr>
+    <Fun per="value">morningstar</Fun>
+  </Expr>
+  <Expr>
+    <Fun per="value">eveningstar</Fun>
+  </Expr>
+</Equal>
+
+
+<!--Oriented with interpreted functions on lhs and rhs:
+    morningstar() -> venus()
+    eveningstar() -> venus()
+    Can rewrite morningstar() to venus()
+    Can rewrite eveningstar() to venus()
+-->
+
+<Equal oriented="yes">
+  <Expr>
+    <Fun per="value">morningstar</Fun>
+  </Expr>
+  <Expr>
+    <Fun per="value">venus</Fun>
+  </Expr>
+</Equal>
+<Equal oriented="yes">
+  <Expr>
+    <Fun per="value">eveningstar</Fun>
+  </Expr>
+  <Expr>
+    <Fun per="value">venus</Fun>
+  </Expr>
+</Equal>
+
+
+<!--Unoriented with interpreted function on lhs and uninterpreted function on rhs:
+NOT ALLOWED: Uninterpreted function on rhs prevents any right-to-left rewriting.
+Oriented with interpreted function on lhs and uninterpreted function on rhs:
+morningstar() -> venus[]
+eveningstar() -> venus[]
+Can rewrite morningstar() to venus[]
+Can rewrite eveningstar() to venus[]
+-->
+
+<Equal oriented="yes">
+  <Expr>
+    <Fun per="value">morningstar</Fun>
+  </Expr>
+  <Expr>
+    <Fun per="copy">venus</Fun>
+  </Expr>
+</Equal>
+<Equal oriented="yes">
+  <Expr>
+    <Fun per="value">eveningstar</Fun>
+  </Expr>
+  <Expr>
+    <Fun per="copy">venus</Fun>
+  </Expr>
+</Equal>
+
+</Assert>
+
+</RuleML>

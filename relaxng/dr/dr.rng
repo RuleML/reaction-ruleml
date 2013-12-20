@@ -330,7 +330,7 @@
         <rng:ref name="formula-query.content"/>
         <rng:ref name="formula.attlist"/>
     </rng:define>
-    <rng:include href="modules/xml_module.rng" ns="http://www.w3.org/XML/1998/namespace"/>
+    <!--<rng:include href="modules/xml_module.rng" ns="http://www.w3.org/XML/1998/namespace"/>-->
     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
          This is the XML Schema module for description-related
             RuleML       elements. File: desc_module.xsd Version: 1.0 Last Modification: 2012-05-17
@@ -375,7 +375,7 @@
 </rng:attribute>
 </rng:optional>
     </rng:define>
-    <rng:define name="oid.attlist"/>
+    <rng:define name="oid.attlist"><rng:empty/></rng:define>
     <rng:define name="oid.content">
         <rng:choice>
             <rng:ref name="Ind"/>
@@ -1716,7 +1716,7 @@
         <rng:ref name="per-effect.attrib"/>
     </rng:define>
     <rng:define name="Rel.content">
-         
+         <rng:data type="token"></rng:data>
     </rng:define>
     <rng:define name="Rel.type">
         <rng:ref name="Rel.content"/>
@@ -1932,7 +1932,7 @@
         <rng:ref name="xml.attlist"/>
     </rng:define>
     <rng:define name="Ind.content">
-        
+        <rng:data type="token"></rng:data>
     </rng:define>
     <rng:define name="Ind.type">
         <rng:ref name="Ind.content"/>
@@ -1987,7 +1987,7 @@
         <rng:ref name="mode.attrib"/>
     </rng:define>
     <rng:define name="Var.content">
-        
+        <rng:data type="token"/>
     </rng:define>
     <rng:define name="Var.type">
         <rng:ref name="Var.content"/>
@@ -2016,7 +2016,7 @@
         <rng:ref name="xml.attlist"/>
     </rng:define>
     <rng:define name="Skolem.content">
-        
+        <rng:data type="token"/>
     </rng:define>
     <rng:define name="Skolem.type">
         <rng:ref name="Skolem.content"/>
@@ -2333,7 +2333,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
         <rng:ref name="val.attrib"/>
     </rng:define>
     <rng:define name="Fun.content">
-         
+         <rng:data type="token"></rng:data>
     </rng:define>
     <rng:define name="Fun.type">
         <rng:ref name="Fun.content"/>
@@ -3320,7 +3320,9 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 <rng:ref name="Negation.type"/>
 </rng:element>
 </rng:define>
-    <rng:define name="formula-negation.attlist"/>
+    <rng:define name="formula-negation.attlist">
+      <rng:empty/>
+    </rng:define>
     <rng:define name="formula-negation.content">
         <rng:choice>
             <rng:element name="Atom">
@@ -4360,21 +4362,21 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		in DR Reaction RuleML: ()
 	-->
     <rng:define name="situation_primitives.content">
-        <rng:choice> </rng:choice>
+        <rng:choice> <rng:notAllowed/></rng:choice>
     </rng:define>
     <!-- An internal group for the event primitives for interpretation as event
 		content model: 
 		in DR Reaction RuleML: ()
 	-->
     <rng:define name="event_primitives.content">
-        <rng:choice> </rng:choice>
+        <rng:choice><rng:notAllowed/> </rng:choice>
     </rng:define>
     <!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		in DR Reaction RuleML: ()
 	-->
     <rng:define name="action_primitives.content">
-        <rng:choice> </rng:choice>
+        <rng:choice><rng:notAllowed/> </rng:choice>
     </rng:define>
     <!--
     *** @style ***

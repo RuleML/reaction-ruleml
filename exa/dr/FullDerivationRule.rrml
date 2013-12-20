@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
-<RuleML xmlns="http://ruleml.org/spec"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:dc="http://purl.org/dc/elements/1.1"
-	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+<?xml-model href="../../xsd/dr.xsd"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1">
 
-<!-- Clocksin/Mellish sample rule 
+  <!-- Clocksin/Mellish sample rule 
 
 This is the extended version of the simple derivation rule example (SimpleDerivationRule.rrml).
 It explicitly shows all metadata information
@@ -19,33 +17,47 @@ It explicitly shows all metadata information
        material implication (mapMaterial) applies to all derivation rules in the asserted KB  
   -->
 
-	<Assert key="#kb1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">  
+  <Assert key="#kb1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">
 
-	<!-- general metadata of the asserted knowledge -->
+    <!-- general metadata of the asserted knowledge -->
 
-	<meta> <!-- metainformation about the asserted knowledge -->
-		<Atom>
-			<op><Rel iri="dc:creator"/></op> <!-- Dublin Core creator -->
-			<arg index="1"><Data xsi:type="xs:string">Adrian Paschke</Data></arg> <!-- value -->
-		</Atom>
-	</meta>
-  	<meta>
-  		<!-- note: an alternative formulation of this time meta data would be by using the <Time> construct of Reaction RuleML
+    <meta>
+      <!-- metainformation about the asserted knowledge -->
+      <Atom>
+        <op>
+          <Rel iri="dc:creator"/>
+        </op>
+        <!-- Dublin Core creator -->
+        <arg index="1">
+          <Data xsi:type="xs:string">Adrian Paschke</Data>
+        </arg>
+        <!-- value -->
+      </Atom>
+    </meta>
+    <meta>
+      <!-- note: an alternative formulation of this time meta data would be by using the <Time> construct of Reaction RuleML
   		
   		<Time>
   			<arg index="1"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg> 
   		</Time>
   		-->
-  		
-		<Atom>
-			<op><Rel iri="dc:date"/></op> <!-- Dublin Core date -->
-			<arg index="1"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg> <!-- value -->
-		</Atom>
-	</meta>
 
-	<oid> <!-- object identifier of the asserted knowledge module -->
-		
-		<!-- note: In Reaction RuleML 1.0 a new attribute @key has been introduced - see ModularDerivationRule.rrml for an example
+      <Atom>
+        <op>
+          <Rel iri="dc:date"/>
+        </op>
+        <!-- Dublin Core date -->
+        <arg index="1">
+          <Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data>
+        </arg>
+        <!-- value -->
+      </Atom>
+    </meta>
+
+    <oid>
+      <!-- object identifier of the asserted knowledge module -->
+
+      <!-- note: In Reaction RuleML 1.0 a new attribute @key has been introduced - see ModularDerivationRule.rrml for an example
 			 The @key attribute defines a unique key identifying the knowledge in modular and distributed knowledge bases.
 			 This replaces the old approach of Reaction RuleML which used the <oid> for referencing - see examples in Reaction RuleML 0.2 and 0.3
 
@@ -65,54 +77,77 @@ It explicitly shows all metadata information
 			
 			For backwards compatibility and also object transformations Reaction RuleML 1.0 keeps the <oid> tag in addition to the @key attribute
 			 
-		-->	 
-		<Ind>kb1</Ind>	
-	</oid>
+		-->
+      <Ind>kb1</Ind>
+    </oid>
 
-	<!-- rule base 1 with one rule -->
+    <!-- rule base 1 with one rule -->
 
-	<formula>
-		<Rulebase key="#rulebase1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">
+    <formula>
+      <Rulebase key="#rulebase1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">
 
-			<!-- general metadata of the asserted rule base -->
+        <!-- general metadata of the asserted rule base -->
 
-			<meta> <!-- metainformation about the rule base -->
-				<Atom> 
-					<op><Rel iri="dc:creator"/></op> <!-- Dublin Core creator -->
-					<arg index="1"><Data xsi:type="xs:string">Adrian Paschke</Data></arg> <!-- value -->
-				</Atom>
-			</meta>
-			<meta>
-				<!-- note: <Time> could be used here as alternative to the more general <Atom> -->
-				<Atom>
-					<op><Rel iri="dc:date"/></op> <!-- Dublin Core date -->
-					<arg index="1"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg> <!-- value -->
-				</Atom>
-			</meta>
-			<!-- see note about oid at the <Assert> oid -->
-			<oid> <!-- object identifier of the asserted knowledge module -->
-				<Ind>rulebase1</Ind>	
-			</oid>
-		
-	 		<!-- rule 1  -->
+        <meta>
+          <!-- metainformation about the rule base -->
+          <Atom>
+            <op>
+              <Rel iri="dc:creator"/>
+            </op>
+            <!-- Dublin Core creator -->
+            <arg index="1">
+              <Data xsi:type="xs:string">Adrian Paschke</Data>
+            </arg>
+            <!-- value -->
+          </Atom>
+        </meta>
+        <meta>
+          <!-- note: <Time> could be used here as alternative to the more general <Atom> -->
+          <Atom>
+            <op>
+              <Rel iri="dc:date"/>
+            </op>
+            <!-- Dublin Core date -->
+            <arg index="1">
+              <Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data>
+            </arg>
+            <!-- value -->
+          </Atom>
+        </meta>
+        <!-- see note about oid at the <Assert> oid -->
+        <oid>
+          <!-- object identifier of the asserted knowledge module -->
+          <Ind>rulebase1</Ind>
+        </oid>
 
-			<formula>
+        <!-- rule 1  -->
 
-				<!-- the rule is a backward reasoning material implication rule with universal variable closure -->
+        <formula>
 
-				<Rule key="#rule1" style="reasoning" closure="universal" direction="backward" material="yes">
+          <!-- the rule is a backward reasoning material implication rule with universal variable closure -->
 
-					<!-- general metadata of the rule -->
+          <Rule key="#rule1" style="reasoning" closure="universal" direction="backward"
+            material="yes">
 
-					<meta> <!-- metainformation about the asserted rule base -->
-						<Atom>
-							<op><Rel iri="dc:creator"/></op> <!-- Dublin Core creator -->
-							<arg index="1"><Data xsi:type="xs:string">Adrian Paschke</Data></arg> <!-- value -->
-						</Atom>
-					</meta>
-					<qualification> <!-- qualification of the rule -->
-						
-						<!-- 
+            <!-- general metadata of the rule -->
+
+            <meta>
+              <!-- metainformation about the asserted rule base -->
+              <Atom>
+                <op>
+                  <Rel iri="dc:creator"/>
+                </op>
+                <!-- Dublin Core creator -->
+                <arg index="1">
+                  <Data xsi:type="xs:string">Adrian Paschke</Data>
+                </arg>
+                <!-- value -->
+              </Atom>
+            </meta>
+            <qualification>
+              <!-- qualification of the rule -->
+
+              <!-- 
 							Note: this could be also represented as a situation <Situation> 
 							A situation could be also modelled as a changeable situation called fluent (see KR dialect of Reaction RuleML),
 							which changes its truth value depending on the context 
@@ -121,160 +156,239 @@ It explicitly shows all metadata information
 							 the fluent.
 							 That would mean the validity of the rule changes depending on the situation (the truth value of the fluent)
 						-->
-						
-						<Atom> <!-- the rule is valid for one year from 2011 to 2012 -->
-							<op><Rel>valid</Rel></op>
-								<Interval>
-									<arg index="1"><Time type="ruleml:TimeInstant"><arg index="1"><Data xsi:type="xs:dateTime">2011-03-20T12:00:00-01:00</Data></arg></Time></arg>
-									<arg index="2"><Time type="ruleml:TimeInstant"><arg index="1"><Data xsi:type="xs:dateTime">2012-03-20T12:00:00-01:00</Data></arg></Time></arg>
-								</Interval>
-						</Atom>
-					</qualification>
-					<quantification> <!-- explicit quantification -->
 
-						<!-- for all ?x such that ?x is not John -->
+              <Atom>
+                <!-- the rule is valid for one year from 2011 to 2012 -->
+                <op>
+                  <Rel>valid</Rel>
+                </op>
+                <Interval>
+                  <arg index="1">
+                    <Time type="ruleml:TimeInstant">
+                      <arg index="1">
+                        <Data xsi:type="xs:dateTime">2011-03-20T12:00:00-01:00</Data>
+                      </arg>
+                    </Time>
+                  </arg>
+                  <arg index="2">
+                    <Time type="ruleml:TimeInstant">
+                      <arg index="1">
+                        <Data xsi:type="xs:dateTime">2012-03-20T12:00:00-01:00</Data>
+                      </arg>
+                    </Time>
+                  </arg>
+                </Interval>
+              </Atom>
+            </qualification>
+            <quantification>
+              <!-- explicit quantification -->
 
-						<Forall> <!-- forall quantifier -->
-							<declare>
-								<Var mode="?">x</Var> <!-- variable mode is '?' -->
-							</declare>
-							<formula>
-								<!-- negation is strong classical negation -->
-								<Negation type="ruleml:ClassicalNegation">
-									<formula>
-										<Equal oriented="no"> <!-- unoriented equality -->
-											<left>
-												<Var>x</Var>
-											</left>
-											<right>
-												<Ind>John</Ind>
-											</right>
-										</Equal>
-									</formula>
-								</Negation>
-							</formula>
-						</Forall>
-					</quantification>
-					
-					<!-- see note about oid at the <Assert> oid -->
-					<oid> <!-- object identifier of the rule -->
-						<Ind>rule1</Ind>
-					</oid>
-				
+              <!-- for all ?x such that ?x is not John -->
 
-    					<if> <!-- rule body -->
-      					<Atom>
-							<op><Rel>likes</Rel></op>
-        						<arg index="1"><Var>X</Var></arg>
-        						<arg index="2"><Ind>wine</Ind></arg>
-					      </Atom>
-    					</if>
-    					<then> <!-- rule head -->
-      					<Atom>
-        						<op><Rel>likes</Rel></op>
-						      <arg index="1"><Ind>John</Ind></arg>
-						      <arg index="2"><Var>X</Var></arg>
-					      </Atom>
-					</then>
-			  	</Rule>
-			</formula>
-		</Rulebase>
-	</formula>
+              <Forall>
+                <!-- forall quantifier -->
+                <declare>
+                  <Var mode="?">x</Var>
+                  <!-- variable mode is '?' -->
+                </declare>
+                <formula>
+                  <!-- negation is strong classical negation -->
+                  <Negation type="ruleml:ClassicalNegation">
+                    <formula>
+                      <Equal oriented="no">
+                        <!-- unoriented equality -->
+                        <left>
+                          <Var>x</Var>
+                        </left>
+                        <right>
+                          <Ind>John</Ind>
+                        </right>
+                      </Equal>
+                    </formula>
+                  </Negation>
+                </formula>
+              </Forall>
+            </quantification>
 
-	<!-- rule base 2 with one fact -->
-
-	<formula>
-		<Rulebase>
-
-			<!-- general metadata of the asserted rule base -->
-
-			<meta> <!-- metainformation -->
-				<Atom>
-					<op><Rel iri="dc:creator"/></op> <!-- Dublin Core creator -->
-					<arg index="1"><Data xsi:type="xs:string">Adrian Paschke</Data></arg> <!-- value -->
-				</Atom>
-			</meta>
-			<meta>
-				<Time type="ruleml:TimeInstant"> 	
-					<arg index="1"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg> <!-- value -->
-				</Time>
-			</meta>
-			<!-- note: see note at the <Assert> oid -->
-			<oid> <!-- object identifier of the asserted knowledge module -->
-				<Ind>rulebase2</Ind>	
-			</oid>
+            <!-- see note about oid at the <Assert> oid -->
+            <oid>
+              <!-- object identifier of the rule -->
+              <Ind>rule1</Ind>
+            </oid>
 
 
-			<!-- fact 1 -->
-			<formula>
-				<Atom key="#fact1">
-					<meta> <!-- metainformation -->
-						<Atom>
-							<op><Rel iri="dc:creator"/></op> <!-- Dublin Core creator -->
-							<arg index="1"><Data xsi:type="xs:string">Mary</Data></arg> <!-- value -->
-						</Atom>
-					</meta>
-					<qualification> <!-- qualification of the fact -->
-						<!-- note: see note of <qualification> of the validity of #rule1 -->
-						<Atom> <!-- the fact is valid for one year from 2011 to 2012-->
-							<op><Rel>valid</Rel></op>
-							<arg index="1"><Data xsi:type="xs:dateTime">2011-03-20T12:00:00-01:00</Data></arg>
-							<arg index="2"><Data xsi:type="xs:dateTime">2012-03-20T12:00:00-01:00</Data></arg>
-						</Atom>
-					</qualification>
-					<!-- note: see note about oid at <Assert> oid -->
-					<oid>
-						<Ind>fact1</Ind>
-					</oid>
-					<op><Rel>likes</Rel></op>
-					<Ind>Mary</Ind>
-					<Ind>wine</Ind>
-  				</Atom>
-			</formula>
+            <if>
+              <!-- rule body -->
+              <Atom>
+                <op>
+                  <Rel>likes</Rel>
+                </op>
+                <arg index="1">
+                  <Var>X</Var>
+                </arg>
+                <arg index="2">
+                  <Ind>wine</Ind>
+                </arg>
+              </Atom>
+            </if>
+            <then>
+              <!-- rule head -->
+              <Atom>
+                <op>
+                  <Rel>likes</Rel>
+                </op>
+                <arg index="1">
+                  <Ind>John</Ind>
+                </arg>
+                <arg index="2">
+                  <Var>X</Var>
+                </arg>
+              </Atom>
+            </then>
+          </Rule>
+        </formula>
+      </Rulebase>
+    </formula>
 
-		</Rulebase>
-	</formula>
- 
- </Assert>
+    <!-- rule base 2 with one fact -->
 
- <!-- query knowledge base -->
- 
- <!-- query with existential variable closure -->
- <Query key="#query1" closure="existential">
-	<quantification> <!-- explicit quantification -->
-		<Exists> <!-- exist quantifier -->
-			<declare>
-				<Var mode="-">whom</Var> <!-- variable mode is output '-' -->
-			</declare>
-		</Exists>
-	</quantification>
- 	<!-- note: see note about oid at the <Assert> oid -->
-	<oid><Ind>query1</Ind></oid>
-	<formula>
-		<Atom>
-     			<op><Rel>likes</Rel></op>
-			<arg index="1"><Ind>John</Ind></arg>
-			<arg index="2"><Var>whom</Var></arg>
-   		</Atom>
-	</formula>
- </Query>
- 
- <!-- retract from knowledge base -->
+    <formula>
+      <Rulebase>
 
- <Retract>
-	<formula>
-		<!-- note: here we could also directly retract the fact by using its key identifier
+        <!-- general metadata of the asserted rule base -->
+
+        <meta>
+          <!-- metainformation -->
+          <Atom>
+            <op>
+              <Rel iri="dc:creator"/>
+            </op>
+            <!-- Dublin Core creator -->
+            <arg index="1">
+              <Data xsi:type="xs:string">Adrian Paschke</Data>
+            </arg>
+            <!-- value -->
+          </Atom>
+        </meta>
+        <meta>
+          <Time type="ruleml:TimeInstant">
+            <arg index="1">
+              <Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data>
+            </arg>
+            <!-- value -->
+          </Time>
+        </meta>
+        <!-- note: see note at the <Assert> oid -->
+        <oid>
+          <!-- object identifier of the asserted knowledge module -->
+          <Ind>rulebase2</Ind>
+        </oid>
+
+
+        <!-- fact 1 -->
+        <formula>
+          <Atom key="#fact1">
+            <meta>
+              <!-- metainformation -->
+              <Atom>
+                <op>
+                  <Rel iri="dc:creator"/>
+                </op>
+                <!-- Dublin Core creator -->
+                <arg index="1">
+                  <Data xsi:type="xs:string">Mary</Data>
+                </arg>
+                <!-- value -->
+              </Atom>
+            </meta>
+            <qualification>
+              <!-- qualification of the fact -->
+              <!-- note: see note of <qualification> of the validity of #rule1 -->
+              <Atom>
+                <!-- the fact is valid for one year from 2011 to 2012-->
+                <op>
+                  <Rel>valid</Rel>
+                </op>
+                <arg index="1">
+                  <Data xsi:type="xs:dateTime">2011-03-20T12:00:00-01:00</Data>
+                </arg>
+                <arg index="2">
+                  <Data xsi:type="xs:dateTime">2012-03-20T12:00:00-01:00</Data>
+                </arg>
+              </Atom>
+            </qualification>
+            <!-- note: see note about oid at <Assert> oid -->
+            <oid>
+              <Ind>fact1</Ind>
+            </oid>
+            <op>
+              <Rel>likes</Rel>
+            </op>
+            <Ind>Mary</Ind>
+            <Ind>wine</Ind>
+          </Atom>
+        </formula>
+
+      </Rulebase>
+    </formula>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <!-- query with existential variable closure -->
+  <Query key="#query1" closure="existential">
+    <quantification>
+      <!-- explicit quantification -->
+      <Exists>
+        <!-- exist quantifier -->
+        <declare>
+          <Var mode="-">whom</Var>
+          <!-- variable mode is output '-' -->
+        </declare>
+      </Exists>
+    </quantification>
+    <!-- note: see note about oid at the <Assert> oid -->
+    <oid>
+      <Ind>query1</Ind>
+    </oid>
+    <formula>
+      <Atom>
+        <op>
+          <Rel>likes</Rel>
+        </op>
+        <arg index="1">
+          <Ind>John</Ind>
+        </arg>
+        <arg index="2">
+          <Var>whom</Var>
+        </arg>
+      </Atom>
+    </formula>
+  </Query>
+
+  <!-- retract from knowledge base -->
+
+  <Retract>
+    <formula>
+      <!-- note: here we could also directly retract the fact by using its key identifier
 			 <Atom key="fact1"/>
 			 
 			 By using keys we can also retract complete module such as a rule base, asserted knowledge identifier by the assert key
 			 This is the basis for a modular knowledge base and transactional logics - see transactional logic actions of Reaction RuleML
-		--> 
-		<Atom>
-     			<op><Rel>likes</Rel></op>
-	   		<arg index="1"><Ind>Mary</Ind></arg>
-     			<arg index="2"><Ind>wine</Ind></arg>
-   		</Atom>
-	</formula>
- </Retract>
- 
+		-->
+      <Atom>
+        <op>
+          <Rel>likes</Rel>
+        </op>
+        <arg index="1">
+          <Ind>Mary</Ind>
+        </arg>
+        <arg index="2">
+          <Ind>wine</Ind>
+        </arg>
+      </Atom>
+    </formula>
+  </Retract>
+
 </RuleML>

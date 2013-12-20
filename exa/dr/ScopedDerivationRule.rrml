@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
-<RuleML xmlns="http://ruleml.org/spec"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
-
-<!-- Clocksin/Mellish sample rule 
+<?xml-model href="../../xsd/dr.xsd"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <!-- Clocksin/Mellish sample rule 
 
 This example shows how scopes can be defined for derivation rules. See also GuardedDerivationRule.rrml for the use of guards in combination wit scopes.
 
@@ -64,79 +61,89 @@ Scopes can be used for modularization and life-cycle management of the knowledge
 
   <Assert>
 
-  <!-- rule -->
+    <!-- rule -->
 
-  <Rule>
-    <if>
-      <Atom>
-	
-	  <!-- the conditional atomic literal applies in the scope, where dc:creator="Adrian Paschke" -->
+    <Rule>
+      <if>
+        <Atom>
 
-        <!-- scope constraint definition -->
-     	  <scope>
-       		<Atom>
-       			<Rel iri="dc:creator"/>
-       			<Data xsi:type="xs:string">Adrian Paschke</Data>
-       		</Atom>
-     	  </scope>
-        
-        <!-- scoped literal -->
-        <op><Rel>likes</Rel></op>
-        <Var>X</Var>
-        <Ind>wine</Ind>
-      </Atom>
-    </if>
-    <then>
-      <Atom>
-        <op><Rel>likes</Rel></op>
-        <Ind>John</Ind>
-        <Var>X</Var>
-      </Atom>
-    </then>
-  </Rule>
+          <!-- the conditional atomic literal applies in the scope, where dc:creator="Adrian Paschke" -->
 
-  <!-- fact -->
+          <!-- scope constraint definition -->
+          <scope>
+            <Atom>
+              <Rel iri="dc:creator"/>
+              <Data xsi:type="xs:string">Adrian Paschke</Data>
+            </Atom>
+          </scope>
 
-  <Atom>
-    <meta> <!-- metadata -->
-		<Atom>
-			<Rel iri="dc:creator"/>
-			<Data xsi:type="xs:string">Adrian Paschke</Data>
-		</Atom>
-    </meta>
-    <op><Rel>likes</Rel></op>
-    <Ind>Mary</Ind>
-    <Ind>wine</Ind>
-  </Atom>
+          <!-- scoped literal -->
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
 
-  <Atom>
-    <meta> <!-- metadata -->
-		<Atom>
-			<Rel iri="dc:creator"/>
-			<Data xsi:type="xs:string">Unknown</Data>
-		</Atom>
-    </meta>
-    <op><Rel>likes</Rel></op>
-    <Ind>Jane</Ind>
-    <Ind>wine</Ind>
-  </Atom>
- 
- </Assert>
+    <!-- fact -->
 
-<!-- query knowledge base -->
- 
-<!-- since we have defined a scoped literal for the if condition of the rule, 
+    <Atom>
+      <meta>
+        <!-- metadata -->
+        <Atom>
+          <Rel iri="dc:creator"/>
+          <Data xsi:type="xs:string">Adrian Paschke</Data>
+        </Atom>
+      </meta>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+    <Atom>
+      <meta>
+        <!-- metadata -->
+        <Atom>
+          <Rel iri="dc:creator"/>
+          <Data xsi:type="xs:string">Unknown</Data>
+        </Atom>
+      </meta>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Jane</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <!-- since we have defined a scoped literal for the if condition of the rule, 
      the scoped condition goal only applies to the fact created by "Adrian Paschke",
      but not to the fact with dc:creator="Unknown".
      That is we only get one result ?whom = Mary.
  -->
 
- <Query>
-   <Atom>
-     <Rel>likes</Rel>
-     <Ind>John</Ind>
-     <Var>whom</Var>
-   </Atom>
- </Query>
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
 
 </RuleML>

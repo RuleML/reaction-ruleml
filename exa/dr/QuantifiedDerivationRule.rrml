@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
-<RuleML xmlns="http://ruleml.org/spec"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
-
-<!-- Clocksin/Mellish sample rule 
+<?xml-model href="../../xsd/dr.xsd"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- Clocksin/Mellish sample rule 
 
 This example shows how derivation rules and queries are explicitly quantified.
 
@@ -23,76 +21,89 @@ It also defines the shorter quantifier element
 
   <Assert>
 
-  <!-- rule -->
+    <!-- rule -->
 
-  <Rule>
+    <Rule>
 
-	<quantification> <!-- explicit quantification -->
+      <quantification>
+        <!-- explicit quantification -->
 
-		<!-- "forall" quantifier; 
+        <!-- "forall" quantifier; 
 		     Note: Reaction RuleML 1.0 also supports the "shortcut" 
                  element "Forall" as it is used in RuleML 1.0, see FullDerivationRule example -->
 
-		<Quantifier type="ruleml:Forall"> 
+        <Quantifier type="ruleml:Forall">
 
-			<!-- for all ?x -->
-			<Var>x</Var>
+          <!-- for all ?x -->
+          <Var>x</Var>
 
-			<!-- such that ?x is not John -->
-			<Neg><Equal><Var>x</Var><Ind>John</Ind></Equal></Neg>
+          <!-- such that ?x is not John -->
+          <Neg>
+            <Equal>
+              <Var>x</Var>
+              <Ind>John</Ind>
+            </Equal>
+          </Neg>
 
-		</Quantifier>
-	</quantification>
+        </Quantifier>
+      </quantification>
 
 
-    <if>
-      <Atom>
-        <op><Rel>likes</Rel></op>
-        <Var>X</Var>
-        <Ind>wine</Ind>
-      </Atom>
-    </if>
-    <then>
-      <Atom>
-        <op><Rel>likes</Rel></op>
-        <Ind>John</Ind>
-        <Var>X</Var>
-      </Atom>
-    </then>
-  </Rule>
+      <if>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
 
-  <!-- fact -->
+    <!-- fact -->
 
-  <Atom>
-    <op><Rel>likes</Rel></op>
-    <Ind>Mary</Ind>
-    <Ind>wine</Ind>
-  </Atom>
- 
- </Assert>
+    <Atom>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
 
-<!-- query knowledge base -->
- 
- <Query>
+  </Assert>
 
-	<quantification> <!-- explicit quantification -->
+  <!-- query knowledge base -->
 
-		<!-- "Exists" quantifier; 
+  <Query>
+
+    <quantification>
+      <!-- explicit quantification -->
+
+      <!-- "Exists" quantifier; 
 		     Note: Reaction RuleML 1.0 also supports the "shortcut" 
                  element "Exists", see FullDerivationRule example -->
 
-		<Quantifier type="ruleml:Exists"> 
-			<Var>x</Var>
-		</Quantifier>
+      <Quantifier type="ruleml:Exists">
+        <Var>x</Var>
+      </Quantifier>
 
-	</quantification>
+    </quantification>
 
 
-   <Atom>
-     <Rel>likes</Rel>
-     <Ind>John</Ind>
-     <Var>whom</Var>
-   </Atom>
- </Query>
- 
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
+
 </RuleML>

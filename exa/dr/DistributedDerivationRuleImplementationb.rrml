@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="../../xsd/dr.xsd"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
 <?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -17,9 +17,9 @@ For the reference from the interface to the implementation of the rules it uses 
 
   <!-- Include the distributed interface definition of the rule, so that both form one valid XML instance which ensures unique and valid key and keyref references. -->
 
-  <xi:include href="DistributedDerivationRuleInterfaceb.rrml" xpointer="xpointer(/RuleML/*)">
-    <xi:fallback/>
-  </xi:include>
+  <xi:include href="DistributedDerivationRuleInterfaceb.rrml"/>
+
+
   <!-- assert knowledge -->
 
   <Assert>

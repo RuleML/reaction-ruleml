@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
-<RuleML xmlns="http://ruleml.org/spec"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:dc="http://purl.org/dc/elements/1.1"
-  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+<?xml-model href="../../xsd/dr.xsd"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1">
 
-
-<!-- Clocksin/Mellish sample rule 
+  <!-- Clocksin/Mellish sample rule 
 
 This example shows how signatures are define.
 
@@ -34,81 +31,100 @@ This can be e.g. quite useful in the context of distributed reactive knowledge b
 
   <Assert key="#kb_module1">
 
-  <!-- signature definition -->
-  <!-- the signature is defined globaly on the level of the asserted module. 
-       Note: it could be also defined for a rulebase or localy within a rule --> 
+    <!-- signature definition -->
+    <!-- the signature is defined globaly on the level of the asserted module. 
+       Note: it could be also defined for a rulebase or localy within a rule -->
 
     <signature>
-   	 <Atom key="#rule1">
-   		
-    		<!-- general meta information about the signature -->
-    
-    		<!-- natural language description for humans -->
-    		<meta><Atom><Rel iri="dc:description"/><Data xsi:type="xs:string">public interface of the likes function</Data></Atom></meta>
-    		
-    		<!-- signature definition -->
-    		
-    		<Rel>likes</Rel> <!-- function relation -->
-    		<Var mode="+"/> <!-- mode=+ i.e. input argument -->
-    		<Var mode="-"/> <!-- mode=- i.e. output argument -->
-   
-   	 </Atom>
+      <Atom key="#rule1">
+
+        <!-- general meta information about the signature -->
+
+        <!-- natural language description for humans -->
+        <meta>
+          <Atom>
+            <Rel iri="dc:description"/>
+            <Data xsi:type="xs:string">public interface of the likes function</Data>
+          </Atom>
+        </meta>
+
+        <!-- signature definition -->
+
+        <Rel>likes</Rel>
+        <!-- function relation -->
+        <Var mode="+"/>
+        <!-- mode=+ i.e. input argument -->
+        <Var mode="-"/>
+        <!-- mode=- i.e. output argument -->
+
+      </Atom>
     </signature>
 
 
-  <!-- rule instance implementation which references the globalby defined signature -->
+    <!-- rule instance implementation which references the globalby defined signature -->
 
-  <Rule keyref="#rule1">
-    <if>
-      <Atom>
-        <op><Rel>likes</Rel></op>
-        <Var>X</Var>
-        <Ind>wine</Ind>
-      </Atom>
-    </if>
-    <then>
-      <Atom>
-        <op><Rel>likes</Rel></op>
-        <Ind>John</Ind>
-        <Var>X</Var>
-      </Atom>
-    </then>
-  </Rule>
+    <Rule keyref="#rule1">
+      <if>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
 
 
 
     <!-- a similar rule example but with a localy defined signature  -->
-    
+
     <Rule key="#rule2">
       <signature>
-        <!-- signature definition --> 
+        <!-- signature definition -->
         <Atom>
-          <Rel>likes</Rel> <!-- function relation -->
-          <Ind>John</Ind> <!-- first argument is a constan, i.e. all queries refer to "John" -->
-          <Var mode="-"/> <!-- mode=- i.e. output argument -->
+          <Rel>likes</Rel>
+          <!-- function relation -->
+          <Ind>John</Ind>
+          <!-- first argument is a constan, i.e. all queries refer to "John" -->
+          <Var mode="-"/>
+          <!-- mode=- i.e. output argument -->
         </Atom>
       </signature>
       <if>
         <Atom>
-          <op><Rel>likes</Rel></op>
+          <op>
+            <Rel>likes</Rel>
+          </op>
           <Var>X</Var>
           <Ind>beer</Ind>
         </Atom>
       </if>
       <then>
         <Atom>
-          <op><Rel>likes</Rel></op>
+          <op>
+            <Rel>likes</Rel>
+          </op>
           <Ind>John</Ind>
           <Var>X</Var>
         </Atom>
       </then>
     </Rule>
-    
-    
+
+
     <!-- a similar rule example, but now with a seperation of the rule interface and
         the implementation of the rule. The reference from the instance to the interface is done using the key-keyref referencing
         mechanism between distributed knowledge in a KB.
-    -->   
+    -->
 
     <!-- the rule interface 
       
@@ -134,11 +150,14 @@ This can be e.g. quite useful in the context of distributed reactive knowledge b
     -->
     <Rule key="#rule3">
       <signature>
-        <!-- signature definition -->  
+        <!-- signature definition -->
         <Atom>
-          <Rel>likes</Rel> <!-- function relation -->
-          <Ind>John</Ind> <!-- first argument is a constan, i.e. all queries refer to "John" -->
-          <Var mode="-"/> <!-- mode=- i.e. output argument -->
+          <Rel>likes</Rel>
+          <!-- function relation -->
+          <Ind>John</Ind>
+          <!-- first argument is a constan, i.e. all queries refer to "John" -->
+          <Var mode="-"/>
+          <!-- mode=- i.e. output argument -->
         </Atom>
       </signature>
     </Rule>
@@ -151,28 +170,34 @@ This can be e.g. quite useful in the context of distributed reactive knowledge b
     <Rule keyref="#rule3" key="#rule3impl">
       <if>
         <Atom>
-          <op><Rel>likes</Rel></op>
+          <op>
+            <Rel>likes</Rel>
+          </op>
           <Var>X</Var>
           <Ind>beer</Ind>
         </Atom>
       </if>
       <then>
         <Atom>
-          <op><Rel>likes</Rel></op>
+          <op>
+            <Rel>likes</Rel>
+          </op>
           <Ind>John</Ind>
           <Var>X</Var>
         </Atom>
       </then>
     </Rule>
 
-  <!-- fact -->
+    <!-- fact -->
 
-  <Atom>
-    <op><Rel>likes</Rel></op>
-    <Ind>Mary</Ind>
-    <Ind>wine</Ind>
-  </Atom>
- 
- </Assert>
+    <Atom>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+  </Assert>
 
 </RuleML>

@@ -1,4 +1,3 @@
-default namespace = "http://ruleml.org/spec"
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace a0 = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace a1 = "http://relaxng.org/ns/compatibility/annotations/1.0"
@@ -15,9 +14,131 @@ namespace a9 = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace dc = "http://purl.org/dc/elements/1.1/"
 namespace dcterms = "http://purl.org/dc/terms/"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
-namespace ruleml = "http://ruleml.org/spec"
+default namespace ruleml = "http://ruleml.org/spec"
 
-
+# 
+# ORDER MODE - UNORDERED GROUPS ENABLED
+#
+include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# STRIPE-SKIPPING MODE ENABLED
+#
+include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# ATTRIBUTES WITH DEFAULT VALUES ARE INITIALIZED
+#
+include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# ATTRIBUTES WITH DEFAULT VALUES ARE ABSENT OR OPTIONAL
+#
+include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# ATTRIBUTES WITH DEFAULT VALUES REQUIRED
+#
+include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# EQUATIONS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/equal_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# ORIENTED EQUALITY ATTRIBUTE IS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/oriented_attrib_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# NON-DEFAULT VALUES OF ORIENTED EQUALITY ATTRIBUTE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/oriented_non-default_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# DEFAULT VALUE OF ORIENTED EQUALITY ATTRIBUTE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# EXPLICIT TYPING OF TERMS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# EXPLICIT DATATYPING ENABLED
+#
+include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# DATA TERMS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/dataterm_any_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# DATA ELEMENTS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# SKOLEM CONSTANTS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/skolem_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# REIFICATION TERMS INCLUDED, EXPLICIT CONTENT
+#
+include "http://ruleml.org/1.0/relaxng/modules/reify_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# INDIVIDUAL TERMS (INTERPRETED NAMES) ARE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/individual_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# VARIABLES (INTERPRETABLE NAMES) ARE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/variable_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# XML BASE ATTRIBUTE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/xml_base_expansion_module.rnc" {
+  start |= notAllowed
+}
+# 
+# XML ID ATTRIBUTE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/xml_id_expansion_module.rnc" {
+  start |= notAllowed
+}
 a:documentation [
   "\x{a}" ~
   "                                Spatio-Temporal Derivation Rule (DR)\x{a}" ~
@@ -139,7 +260,7 @@ a:documentation [
 # 
 #  Note: key and keyref object identifier are defined to be unique under the RuleML document root
 #
-RuleML.attlist = node.attrib, xml.attlist
+RuleML.attlist = commonNode.attlist
 RuleML.content = meta-roles.content, (act | Assert | Retract | Query)*
 RuleML.type = RuleML.content, RuleML.attlist
 start |= RuleML
@@ -157,9 +278,8 @@ RuleML =
 # content model  (Assert|Retract|Query)
 #
 act.content = Assert | Retract | Query
-act.attlist = index.attrib, xml.attlist
+act.attlist = index.attrib, commonInit.attlist?
 act.type = act.content, act.attlist
-start |= act
 act = element act { act.type }
 #	    *** Assert ***
 #	    A KQML-like performative acting as a wrapper specifying that its content is
@@ -174,8 +294,7 @@ Assert.attlist =
   mapDirection.attrib,
   mapClosure.attrib,
   mapMaterial.attrib,
-  node.attrib,
-  xml.attlist,
+  commonNode.attlist,
   safety.attrib,
   size.attrib
 Assert.content =
@@ -194,12 +313,7 @@ Assert = element Assert { Assert.type }
 #	    content model:
 #	    DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval  )*)
 # KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
-Retract.attlist =
-  mapDirection.attrib,
-  mapClosure.attrib,
-  mapMaterial.attrib,
-  node.attrib,
-  xml.attlist
+Retract.attlist = mapDirection.attrib, mapClosure.attrib, mapMaterial.attrib, commonNode.attlist
 Retract.content =
   meta-roles.content,
   (element formula { formula-assert.type }
@@ -216,7 +330,7 @@ Retract = element Retract { Retract.type }
 # content model:
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
-Query.attlist = closure.attrib, node.attrib, xml.attlist
+Query.attlist = closure.attrib, commonNode.attlist
 Query.content =
   meta-roles.content,
   (element formula { formula-query.type }
@@ -320,7 +434,6 @@ a:documentation [
 # See http://www.ruleml.org/1.0/glossary/#gloss-@node
 # 
 # content model: xs:anyURI
-node.attrib = attribute node { xsd:anyURI }?
 oid.attlist = empty
 oid.content =
   Ind
@@ -342,18 +455,14 @@ oid.type = oid.content, oid.attlist
 # content model: 
 # in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-start |= oid
 oid = element oid { oid.type }
 # 
 #       @key @keyref @xml:id @xml:base
 # 
 # @key and @keyref attributes for modularization of the knowledge base
 #
-xml.attlist =
-  key.attrib?,
-  keyref.attrib?,
-  attribute xml:base { text }?,
-  attribute xml:id { text }?
+commonNode.attlist &= key.attrib?
+commonNode.attlist &= keyref.attrib?
 #  *** meta ***     
 # 
 # An optional container for meta-knowledge about a Node.
@@ -367,10 +476,9 @@ xml.attlist =
 #  in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
 # 
 #  Multiple Metadata annotations are possible by repreating <meta>
-meta.attlist = index.attrib, xml.attlist
+meta.attlist = index.attrib, commonInit.attlist?
 meta.content = formula-assert.content
 meta.type = meta.content, meta.attlist
-start |= meta
 meta = element meta { meta.type }
 # *** scope ***
 # 
@@ -421,11 +529,11 @@ meta = element meta { meta.type }
 # Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
 # 
 # content model: ( (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval)? )
-#
-scope.attlist = index.attrib, xml.attlist
+# 
+# FIXME: design pattern deviation - key/keyref on an edge element
+scope.attlist = index.attrib, commonNode.attlist?
 scope.content = formula-query.content?
 scope.type = scope.content, scope.attlist
-start |= scope
 scope = element scope { scope.type }
 # *** guard ***     
 # 
@@ -435,10 +543,9 @@ scope = element scope { scope.type }
 # in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
 # in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
 #
-guard.attlist = index.attrib, xml.attlist
+guard.attlist = index.attrib, commonInit.attlist?
 guard.content = if.content
 guard.type = guard.content, guard.attlist
-start |= guard
 guard = element guard { guard.type }
 # *** evaluation ***
 # 
@@ -449,10 +556,9 @@ guard = element guard { guard.type }
 # The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
 # 
 # content model: (Profile )
-evaluation.attlist = index.attrib, xml.attlist
+evaluation.attlist = index.attrib, commonInit.attlist?
 evaluation.content = Profile
 evaluation.type = evaluation.content, evaluation.attlist
-start |= evaluation
 evaluation = element evaluation { evaluation.type }
 # *** signature ***
 # 
@@ -473,10 +579,9 @@ evaluation = element evaluation { evaluation.type }
 # in DR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
 # in KR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval | Event | Situation )
 #
-signature.attlist = index.attrib, xml.attlist
+signature.attlist = index.attrib, commonInit.attlist?
 signature.content = formula-query.content
 signature.type = signature.content, signature.attlist
-start |= signature
 signature = element signature { signature.type }
 #  *** qualification ***
 # 
@@ -494,10 +599,9 @@ signature = element signature { signature.type }
 #  in DR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval)
 #  in KR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation)
 #
-qualification.attlist = index.attrib, xml.attlist
+qualification.attlist = index.attrib, commonInit.attlist?
 qualification.content = formula-assert.content
 qualification.type = qualification.content, qualification.attlist
-start |= qualification
 qualification = element qualification { qualification.type }
 # *** quantification ***
 # 
@@ -505,10 +609,9 @@ qualification = element qualification { qualification.type }
 # 
 # content model: (Forall | Exists | Quantifier)
 #
-quantification.attlist = index.attrib, xml.attlist
+quantification.attlist = index.attrib, commonInit.attlist?
 quantification.content = inner-quantifier.content
 quantification.type = quantification.content, quantification.attlist
-start |= quantification
 quantification = element quantification { quantification.type }
 # extended descriptors in Reaction RuleML
 
@@ -564,14 +667,13 @@ a:documentation [
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
 #
-Forall.attlist = node.attrib, xml.attlist
+Forall.attlist = commonNode.attlist
 Forall.content =
   meta-roles.content,
   (declare | declare.content)+,
   (element formula { formula-forall.type }
    | formula-forall.content)
 Forall.type = Forall.content, Forall.attlist
-start |= Forall
 Forall = element Forall { Forall.type }
 # *** Exists ***
 # Explicit existential quantifier.
@@ -581,14 +683,13 @@ Forall = element Forall { Forall.type }
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
-Exists.attlist = node.attrib, xml.attlist
+Exists.attlist = commonNode.attlist
 Exists.content =
   meta-roles.content,
   (declare | declare.content)+,
   (element formula { formula-exists.type }
    | formula-exists.content)
 Exists.type = Exists.content, Exists.attlist
-start |= Exists
 Exists = element Exists { Exists.type }
 # *** declare ***
 # A role used for variables declared within a quantifier.
@@ -596,10 +697,8 @@ Exists = element Exists { Exists.type }
 # See http://www.ruleml.org/1.0/glossary/#gloss-declare
 # 
 # content model: ( Var )
-declare.attlist = xml.attlist
 declare.content = Var
 declare.type = declare.content, declare.attlist
-start |= declare
 declare = element declare { declare.type }
 # *** formula ***
 # The formula role of a quantifier (<Forall> or <Exists>).
@@ -693,17 +792,11 @@ a:documentation [
 # 
 # content model:
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
-Implies.attlist =
-  closure.attrib,
-  direction.attrib,
-  material.attrib,
-  node.attrib,
-  xml.attlist
+Implies.attlist = closure.attrib, direction.attrib, material.attrib, commonNode.attlist
 Implies.content =
   meta-roles.content,
-  ((if & then) | (if.content , then.content))
+  ((if & then) | (if.content, then.content))
 Implies.type = Implies.content, Implies.attlist
-start |= Implies
 Implies = element Implies { Implies.type }
 # *** if ***
 # The if of an implication rule containing the premise(s),
@@ -714,7 +807,7 @@ Implies = element Implies { Implies.type }
 # content model: 
 # DR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
 # KR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-if.attlist = xml.attlist
+if.attlist = commonInit.attlist?
 if.content =
   element Atom { Atom.type }
   | inner-connective.content
@@ -722,7 +815,6 @@ if.content =
 if-entails.content = Rulebase
 if.type = if.content, if.attlist
 if-entails.type = if-entails.content, if.attlist
-start |= if
 if = element if { if.type }
 # *** then ***
 # The then of an implication rule containing the conclusion,
@@ -733,7 +825,7 @@ if = element if { if.type }
 # content model: 
 # DR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
 # KR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-then.attlist = xml.attlist
+then.attlist = commonInit.attlist?
 then.content =
   element Atom { Atom.type }
   | outer-connective.content
@@ -741,7 +833,6 @@ then.content =
 then-entails.content = Rulebase
 then.type = then.content, then.attlist
 then-entails.type = then-entails.content, then.attlist
-start |= then
 then = element then { then.type }
 # *** Entails ***
 # Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
@@ -751,7 +842,7 @@ then = element then { then.type }
 # 
 # content model:
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
-Entails.attlist = node.attrib, xml.attlist
+Entails.attlist = commonNode.attlist
 Entails.content =
   meta-roles.content,
   (element if { if-entails.type }
@@ -759,7 +850,6 @@ Entails.content =
   (element then { then-entails.type }
    | then-entails.content)
 Entails.type = Entails.content, Entails.attlist
-start |= Entails
 Entails = element Entails { Entails.type }
 # *** Equivalent ***
 # An equivalence expression, which is "syntactic sugar" for a pair
@@ -771,9 +861,8 @@ Entails = element Entails { Entails.type }
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval), (Atom | Equal | Negation | Neg | Time | Spatial | Interval) ) ) )
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens), 
 #		      (Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) ) ) )
-Equivalent.attlist = closure.attrib, node.attrib, xml.attlist
-Equivalent.content =
-  meta-roles.content, (torso | torso | torso.content | torso.content)
+Equivalent.attlist = closure.attrib, commonNode.attlist
+Equivalent.content = meta-roles.content, (torso | torso | torso.content | torso.content)
 Equivalent.type =
   # <xs:annotation>
   #	<xs:appinfo>
@@ -793,7 +882,6 @@ Equivalent.type =
   # </xs:annotation>
   Equivalent.content,
   Equivalent.attlist
-start |= Equivalent
 Equivalent = element Equivalent { Equivalent.type }
 # *** torso ***
 # A symmetric role used in an equivalence expression combining
@@ -804,13 +892,11 @@ Equivalent = element Equivalent { Equivalent.type }
 # content model: 
 # DR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
 # KR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-torso.attlist = xml.attlist
 torso.content =
   element Atom { Atom.type }
   | outer-connective.content
   | extended-signature-predicate-sorts.content
 torso.type = torso.content, torso.attlist
-start |= torso
 torso = element torso { torso.type }
 # *** Rulebase ***
 # A collection of rules that can be ordered or unordered, without or with duplicates.
@@ -820,18 +906,12 @@ torso = element torso { torso.type }
 # content model:
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
-Rulebase.attlist =
-  mapClosure.attrib,
-  mapDirection.attrib,
-  mapMaterial.attrib,
-  node.attrib,
-  xml.attlist
+Rulebase.attlist = mapClosure.attrib, mapDirection.attrib, mapMaterial.attrib, commonNode.attlist
 Rulebase.content =
   meta-roles.content,
   (element formula { formula-rulebase.type }
    | formula-rulebase.content)*
 Rulebase.type = Rulebase.content, Rulebase.attlist
-start |= Rulebase
 Rulebase = element Rulebase { Rulebase.type }
 # *** And ***
 # A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
@@ -844,15 +924,14 @@ Rulebase = element Rulebase { Rulebase.type }
 # 
 # Under Query, And may have attribute closure="existential"; elsewhere, it may
 # not have any attributes.
-And-inner.attlist = node.attrib
-And-query.attlist = closure.attrib, node.attrib, xml.attlist
+And-inner.attlist = commonNode.attlist
+And-query.attlist = closure.attrib, commonNode.attlist
 And.content =
   meta-roles.content,
   (element formula { formula-and-or.type }
    | formula-and-or.content)*
 And-query.type = And.content, And-query.attlist
 And-inner.type = And.content, And-inner.attlist
-start |= And
 And = element And { And-inner.type }
 # *** Or ***
 # A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
@@ -865,15 +944,14 @@ And = element And { And-inner.type }
 # 
 # Under Query, Or may have attribute closure="existential"; elsewhere, it may not
 # have any attributes.
-Or-query.attlist = closure.attrib, node.attrib, xml.attlist
-Or-inner.attlist = node.attrib
+Or-query.attlist = closure.attrib, commonNode.attlist
+Or-inner.attlist = commonNode.attlist
 Or.content =
   meta-roles.content,
   (element formula { formula-and-or.type }
    | formula-and-or.content)*
 Or-query.type = Or.content, Or-query.attlist
 Or-inner.type = Or.content, Or-inner.attlist
-start |= Or
 Or = element Or { Or-inner.type }
 # *** formula ***
 # The formula role of a conjunctive/disjunctive expression or a rulebase.
@@ -890,7 +968,7 @@ Or = element Or { Or-inner.type }
 # 
 # Other (context-sensitive) versions of <formula> are in the
 # performative and quantifier modules.
-formula.attlist = xml.attlist
+formula.attlist = commonInit.attlist?
 formula-and-or.content =
   element Atom { Atom.type }
   | inner-connective.content
@@ -918,14 +996,12 @@ formula-rulebase.type = formula-rulebase.content, formula.attlist
 # falling within its scope (i.e. child elements).
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@mapMaterial
-mapMaterial.attrib =
-  [ a0:defaultValue = "yes" ] attribute mapMaterial { "no" | "yes" }?
+mapMaterial.attrib = [ a0:defaultValue = "yes" ] attribute mapMaterial { "no" | "yes" }?
 # *** @material ***
 # An attribute indicating the kind of an implication rule.
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@material
-material.attrib =
-  [ a1:defaultValue = "yes" ] attribute material { "no" | "yes" }?
+material.attrib = [ a1:defaultValue = "yes" ] attribute material { "no" | "yes" }?
 # *** @mapDirection ***
 # An attribute indicating the intended direction of implication rule inferencing
 # of elements falling within its scope (i.e. child elements).
@@ -946,8 +1022,7 @@ direction.attrib =
 # its scope (i.e. child elements) are quantified.
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@mapClosure
-mapClosure.attrib =
-  attribute mapClosure { "universal" | "existential" }?
+mapClosure.attrib = attribute mapClosure { "universal" | "existential" }?
 # *** @closure ***
 # An attribute indicating how the contained free variables are quantified.
 # 
@@ -1045,7 +1120,7 @@ a:documentation [
 # 
 #	Note the 'positionalized' normal form where the oid and op roles
 #	are at the beginning of the atom.
-Atom.attlist = closure.attrib, node.attrib, xml.attlist
+Atom.attlist = closure.attrib, commonNode.attlist
 # These .extend groups, pointed to by Atom.content, are necessary
 # for redefinition to be binary in bindatalog and to add rest
 # variables in hornlog.
@@ -1063,7 +1138,6 @@ Atom.content =
   Atom-slots.extend1,
   Atom-slots.extend2
 Atom.type = Atom.content, Atom.attlist
-start |= Atom
 Atom = element Atom { Atom.type }
 # *** op ***
 # An operator expression including the relation of an atom.
@@ -1073,10 +1147,9 @@ Atom = element Atom { Atom.type }
 # content model (within Atom): (Rel)
 # 
 # Other (context-sensitive) versions of <op> are in the expr and holog modules.
-op.attlist = xml.attlist
+op.attlist = commonInit.attlist?
 op-atom.content = Rel
 op-atom.type = op-atom.content, op.attlist
-start |= op
 op = element op { op-atom.type }
 # *** Rel ***
 # A relation, i.e. a logical predicate, of an atom.
@@ -1084,10 +1157,9 @@ op = element op { op-atom.type }
 # See http://www.ruleml.org/1.0/glossary/#gloss-Rel
 # 
 # content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-Rel.attlist = iri.attrib, node.attrib, xml.attlist, per-effect.attrib
+Rel.attlist = iri.attrib, commonNode.attlist, per-effect.attrib
 Rel.content = xsd:token
 Rel.type = Rel.content, Rel.attlist
-start |= Rel
 Rel = element Rel { Rel.type }
 # *** degree ***
 # 
@@ -1097,10 +1169,8 @@ Rel = element Rel { Rel.type }
 # See http://www.ruleml.org/1.0/glossary/#gloss-degree
 # 
 # content model: (Data)
-degree.attlist = xml.attlist
 degree.content = Data
 degree.type = degree.content, degree.attlist
-start |= degree
 degree = element degree { degree.type }
 a:documentation [
   "\x{a}" ~
@@ -1155,12 +1225,10 @@ a:documentation [
 # 
 # this allows using time and spatial as slot names to define nominal units, e.g. time1(years->3 months->2)  
 #	location1(x -> 10 y -> 10)
-slot.attlist = card.attrib, weight.attrib, xml.attlist
-slot-name.extend =
-  Ind | Data | Expr | Plex | extended-signature-function-sorts.content
+slot.attlist = card.attrib, weight.attrib, commonInit.attlist?
+slot-name.extend = Ind | Data | Expr | Plex | extended-signature-function-sorts.content
 slot.content = slot-name.extend, arg.content
 slot.type = slot.content, slot.attlist
-start |= slot
 slot = element slot { slot.type }
 # *** @card ***
 # An attribute optionally specifying a slot's cardinality.
@@ -1226,18 +1294,10 @@ a:documentation [
 # content model: 
 # in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-arg.attlist = index.attrib, xml.attlist
+arg.attlist = index.attrib, commonInit.attlist?
 arg.content =
-  Ind
-  | Data
-  | Var
-  | Skolem
-  | Reify
-  | Expr
-  | Plex
-  | extended-signature-function-sorts.content
+  Ind | Data | Var | Skolem | Reify | Expr | Plex | extended-signature-function-sorts.content
 arg.type = arg.content, arg.attlist
-start |= arg
 arg = element arg { arg.type }
 # *** Ind ***
 # An individual constant, as in predicate logic, which can also be considered to
@@ -1247,11 +1307,7 @@ arg = element arg { arg.type }
 # 
 # content model: text
 #
-Ind.attlist = type.attrib, iri.attrib, node.attrib, xml.attlist
-Ind.content = xsd:token
-Ind.type = Ind.content, Ind.attlist
-start |= Ind
-Ind = element Ind { Ind.type }
+Ind = Individual-node.choice
 # *** Data ***
 # A fixed argument like RDF literals, allowing XML data.  It may be
 # optionally associated with an XML Schema built-in datatype
@@ -1261,8 +1317,7 @@ Ind = element Ind { Ind.type }
 # See http://www.ruleml.org/1.0/glossary/#gloss-Data
 # 
 # content model: xs:anytype [optionally datatyped]
-start |= Data
-Data = element Data { xsd:string }
+Data = DataTerm.choice
 #	*** Var ***
 #	A logical variable, as in logic programming.
 # 
@@ -1276,11 +1331,8 @@ Data = element Data { xsd:string }
 # - output variable which must be free (unbound)
 # ? can be both input / bound or output / free
 #
-Var.attlist = type.attrib, node.attrib, xml.attlist, mode.attrib
-Var.content = xsd:token
-Var.type = Var.content, Var.attlist
-start |= Var
-Var = element Var { Var.type }
+Var = Variable-node.choice
+reVar.attlist &= mode.attrib
 # *** Skolem ***
 # A Skolem individual constant, like RDF's blank nodes.
 # 
@@ -1288,11 +1340,7 @@ Var = element Var { Var.type }
 # 
 # content model: text
 #
-Skolem.attlist = type.attrib, node.attrib, xml.attlist
-Skolem.content = xsd:token
-Skolem.type = Skolem.content, Skolem.attlist
-start |= Skolem
-Skolem = element Skolem { Skolem.type }
+Skolem = Skolem-node.choice
 # *** Reify ***
 # Supports reification (a kind of instantiation or quasi-quotation)
 # as needed by SWSL. It allows any RuleML tag available within the
@@ -1302,17 +1350,7 @@ Skolem = element Skolem { Skolem.type }
 # See http://www.ruleml.org/1.0/glossary/#gloss-Reify		
 # 
 # content model: (any valid RuleML formula)
-Reify.attlist = node.attrib, xml.attlist
-Reify.content =
-  # <xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/>
-  
-  # <Reify> only allows valid RuleML
-  
-  # <xs:any minOccurs="0" maxOccurs="unbounded" processContents="strict" namespace="##targetNamespace"/>
-  element * { text }?
-Reify.type = Reify.content, Reify.attlist
-start |= Reify
-Reify = element Reify { Reify.type }
+Reify = Reify-node.choice
 # *** @type ***
 # An attribute for optionally specifying a term's (user-defined) type.
 # 
@@ -1479,7 +1517,7 @@ a:documentation [
 #	    )
 #	    Note the 'positionalized' normal form where the op role is only
 #	    at the beginning of the Expr.
-Expr.attlist = type.attrib, per.attrib, node.attrib, xml.attlist
+Expr.attlist = type.attrib, per.attrib, commonNode.attlist
 Expr.content =
   meta-roles.content,
   (element op { op-Expr.type }
@@ -1515,7 +1553,6 @@ Expr.type =
   # </xs:annotation>
   Expr.content,
   Expr.attlist
-start |= Expr
 Expr = element Expr { Expr.type }
 # *** op ***
 # An operator expression including the function name of an expression.
@@ -1535,11 +1572,9 @@ op-Expr.type = op-Expr.content, op.attlist
 #		See http://www.ruleml.org/0.91/glossary/#gloss-Fun
 # 
 # content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-Fun.attlist =
-  iri.attrib, per.attrib, node.attrib, xml.attlist, val.attrib
+Fun.attlist = iri.attrib, per.attrib, commonNode.attlist, val.attrib
 Fun.content = xsd:token
 Fun.type = Fun.content, Fun.attlist
-start |= Fun
 Fun = element Fun { Fun.type }
 # *** @val ***
 # An attribute indicating whether a function is deterministic (exactly one)
@@ -1598,7 +1633,7 @@ val.attrib = [ a4:defaultValue = "0.." ] attribute val { "1" | "0.." }?
 #	    content model (within resl):
 #	    DR Reaction RuleML: (slot*, resl? )
 #	    KR Reaction RuleML: (slot*, resl? )
-Plex.attlist = node.attrib, xml.attlist
+Plex.attlist = commonNode.attlist
 Plex.content =
   meta-roles.content,
   element slot { slot.type }*,
@@ -1618,15 +1653,12 @@ Plex-resl.content =
 Plex.type = Plex.content, Plex.attlist
 Plex-repo.type = Plex-repo.content, Plex.attlist
 Plex-resl.type = Plex-resl.content, Plex.attlist
-start |= Plex
 Plex = element Plex { Plex.type }
 # *** @per ***
 # An attribute indicating whether a function or expression is interpreted.
 # 
 # See http://www.ruleml.org/0.91/glossary/#gloss-@per
-per.attrib =
-  [ a5:defaultValue = "copy" ]
-  attribute per { "copy" | "value" | "open" }?
+per.attrib = [ a5:defaultValue = "copy" ] attribute per { "copy" | "value" | "open" }?
 # note that elementFormDefault is qualified because of local declarations
 
 a:documentation [
@@ -1677,12 +1709,10 @@ a:documentation [
 # See http://www.ruleml.org/0.91/glossary/#gloss-repo
 # 
 # content model: (Var | Plex)
-repo.attlist = xml.attlist
 repo.content =
   Var
   | element Plex { Plex-repo.type }
 repo.type = repo.content, repo.attlist
-start |= repo
 repo = element repo { repo.type }
 # *** resl ***
 # A slotted rest variable.
@@ -1690,12 +1720,10 @@ repo = element repo { repo.type }
 # See http://www.ruleml.org/0.91/glossary/#gloss-resl		
 # 
 # content model: (Var | Plex)
-resl.attlist = xml.attlist
 resl.content =
   Var
   | element Plex { Plex-resl.type }
 resl.type = resl.content, resl.attlist
-start |= resl
 resl = element resl { resl.type }
 # includes the equalog layer with the 'equality' module
 
@@ -1759,35 +1787,8 @@ a:documentation [
 #	(left, right) |
 #	(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)  )
 # )
-Equal.attlist = oriented.attrib, node.attrib, xml.attlist
-Equal.content =
-  meta-roles.content,
-  degree?,
-  (left
-   | right
-   | # note that (right, left) is disallowed
-     left.content
-   | right.content)
-Equal.type =
-  #	<xs:annotation>
-  #	<xs:appinfo>
-  #		<sch:pattern name="Defining equality">
-  #			<sch:rule context=
-  #				"r:Implies/r:then/r:Equal/r:left/r:Expr/r:Fun |
-  #				 r:Implies/r:Equal[2]/r:left/r:Expr/r:Fun |
-  #				 r:Implies/r:then/r:Equal/r:Expr[1]/r:Fun |
-  #				 r:Implies/r:Equal[2]/r:Expr[1]/r:Fun">
-  #				<sch:assert test="@per='yes'">
-  #					A defining equality must have an interpreted left-hand side.
-  #				</sch:assert>
-  #			</sch:rule>
-  #		</sch:pattern>
-  #	</xs:appinfo>
-  # </xs:annotation>
-  Equal.content,
-  Equal.attlist
-start |= Equal
-Equal = element Equal { Equal.type }
+Equal = Equal-node.choice
+Equal.header &= meta-roles.content
 # *** left ***
 # The left-hand side of an equational formula.
 # 
@@ -1796,11 +1797,7 @@ Equal = element Equal { Equal.type }
 # content model: 
 # in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-left.attlist = xml.attlist
-left.content = arg.content
-left.type = left.content, left.attlist
-start |= left
-left = element left { left.type }
+leftTerm.choice |= Time | Spatial | Interval
 # *** right***
 # The right-hand side of an equational formula.
 # 
@@ -1809,18 +1806,7 @@ left = element left { left.type }
 # content model: 
 # in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-right.attlist = xml.attlist
-right.content = arg.content
-right.type = right.content, right.attlist
-start |= right
-right = element right { right.type }
-# *** @oriented ***
-# An attribute indicating whether an equation is oriented (directed)
-# or unoriented (symmetric).
-# 
-# See http://www.ruleml.org/0.91/glossary/#gloss-@oriented
-oriented.attrib =
-  [ a6:defaultValue = "no" ] attribute oriented { "yes" | "no" }?
+rightTerm.choice |= Time | Spatial | Interval
 # include from the (spatio-temporal) derivation rule layer of reaction ruleml
 
 a:documentation [
@@ -1930,8 +1916,7 @@ absIRI.datatype = xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
 curie.datatype =
   xsd:string {
     minLength = "1"
-    pattern =
-      "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+    pattern = "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
   }
 term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 # *** @mode ***
@@ -1944,8 +1929,7 @@ term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 # 
 #	default="?"
 #	optional attribute
-mode.attrib =
-  [ a7:defaultValue = "?" ] attribute mode { "+" | "-" | "?" }?
+mode.attrib = [ a7:defaultValue = "?" ] attribute mode { "+" | "-" | "?" }?
 # *** @safety ***
 # 
 #    restriction: interrupting, non-interrupting or transactional
@@ -1953,15 +1937,12 @@ mode.attrib =
 #        optional attribute
 safety.attrib =
   [ a8:defaultValue = "non-interrupting" ]
-  attribute safety {
-    "non-interrupting" | "interrupting" | "transactional"
-  }?
+  attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
 # *** @per ***
 # An attribute indicating whether a function or expression is interpreted.
 #
 per-effect.attrib =
-  [ a9:defaultValue = "copy" ]
-  attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
+  [ a9:defaultValue = "copy" ] attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
 # *** @size ***
 # An attribute indicating the size / number		
 # -1 = unbound / all
@@ -2042,7 +2023,6 @@ a:documentation [
 Rule.attlist = style.attrib, type.attrib, Implies.attlist
 Rule.content = meta-roles.content, rule-implementation.content?
 Rule.type = Rule.content, Rule.attlist
-start |= Rule
 Rule = element Rule { Rule.type }
 # *** on ***
 # 
@@ -2050,10 +2030,9 @@ Rule = element Rule { Rule.type }
 # DR Reaction RuleMl: (  )
 # KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
 #
-on.attlist = xml.attlist
+on.attlist = commonInit.attlist?
 on.content = event_primitives.content
 on.type = on.content, on.attlist
-start |= on
 on = element on { on.type }
 # *** if ***
 # *** after ***
@@ -2062,7 +2041,6 @@ on = element on { on.type }
 # DR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
 # KR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
 #
-start |= after
 after = element after { if.type }
 #     *** then ***	
 # *** else ***
@@ -2071,7 +2049,6 @@ after = element after { if.type }
 # DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
 # KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation )
 #
-start |= else
 else = element else { then.type }
 # *** do ***
 # *** elseDo ***
@@ -2079,21 +2056,17 @@ else = element else { then.type }
 # content model:  
 # DR Reaction RuleML: (  )
 # KR Reaction RuleML: (  )
-do.attlist = xml.attlist
+do.attlist = commonInit.attlist?
 do.content = action_primitives.content
 do.type = do.content, do.attlist
-start |= do
 do = element do { do.type }
-start |= elseDo
 elseDo = element elseDo { do.type }
 # *** Derivation Rule content model ***
 #       ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
-DerivationRule.content =
-  (if & then & else?) | (if.content, then.content, then.content?)
+DerivationRule.content = (if & then & else?) | (if.content, then.content, then.content?)
 # *** Production Rule content model ***
 # ((elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?))
-ProductionRule.content =
-   (if & do & elseDo?)	| (if.content, do.content, do.content?)
+ProductionRule.content = (if & do & elseDo?) | (if.content, do.content, do.content?)
 # *** Reaction Rule content model ***
 # (on, (if?, then?, do, after?,else?, elseDo?)? )
 ReactionRule.content = on, (if?, then?, do, after?, else?, elseDo?)?
@@ -2149,13 +2122,12 @@ a:documentation [
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-Negation.attlist = type.attrib, iri.attrib, node.attrib, xml.attlist
+Negation.attlist = type.attrib, iri.attrib, commonNode.attlist
 Negation.content =
   meta-roles.content,
   (element formula { formula-negation.type }
    | formula-negation.content)
 Negation.type = Negation.content, Negation.attlist
-start |= Negation
 Negation = element Negation { Negation.type }
 formula-negation.attlist = empty
 formula-negation.content =
@@ -2165,9 +2137,7 @@ formula-negation.content =
   | Naf
   | Neg
   | extended-signature-predicate-sorts.content
-formula-negation.type =
-  formula-negation.content, formula-negation.attlist
-start |= formula
+formula-negation.type = formula-negation.content, formula-negation.attlist
 formula = element formula { formula-negation.type }
 # *** Naf ***
 # A "by default" negation of a logical atom (i.e. "weak" negation or
@@ -2181,7 +2151,6 @@ formula = element formula { formula-negation.type }
 Naf.attlist = Negation.attlist
 Naf.content = meta-roles.content, (weak | weak.content)
 Naf.type = Naf.content, Naf.attlist
-start |= Naf
 Naf = element Naf { Naf.type }
 # *** weak ***
 # A role used for negation as failure.
@@ -2191,10 +2160,8 @@ Naf = element Naf { Naf.type }
 # content model:
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-weak.attlist = xml.attlist
 weak.content = formula-negation.content
 weak.type = weak.content, weak.attlist
-start |= weak
 weak = element weak { weak.type }
 # *** Neg ***
 # A classical negation of a logical atom (i.e. classical or "strong" negation).
@@ -2207,7 +2174,6 @@ weak = element weak { weak.type }
 Neg.attlist = Negation.attlist
 Neg.content = meta-roles.content, (strong | strong.content)
 Neg.type = Neg.content, Neg.attlist
-start |= Neg
 Neg = element Neg { Neg.type }
 # *** strong ***
 # A role used for classical negation.
@@ -2217,10 +2183,8 @@ Neg = element Neg { Neg.type }
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-strong.attlist = xml.attlist
 strong.content = formula-negation.content
 strong.type = strong.content, strong.attlist
-start |= strong
 strong = element strong { strong.type }
 a:documentation [
   "\x{a}" ~
@@ -2268,14 +2232,13 @@ a:documentation [
 # of the quantifier.
 # 
 #   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
-Quantifier.attlist = type.attrib, iri.attrib, node.attrib, xml.attlist
+Quantifier.attlist = type.attrib, iri.attrib, commonNode.attlist
 Quantifier.content =
   meta-roles.content,
   (declare | Var)+,
   (element formula { formula-forall.type }
    | formula-forall.content)?
 Quantifier.type = Quantifier.content, Quantifier.attlist
-start |= Quantifier
 Quantifier = element Quantifier { Quantifier.type }
 # make the quantifier constraint restrictions ("such that") optional
 # 
@@ -2349,26 +2312,18 @@ a:documentation [
 # 
 #   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, content(xs:any*)* )
 Profile.attlist =
-  type.attrib,
-  iri.attrib,
-  direction.attrib,
-  node.attrib,
-  safety.attrib,
-  size.attrib,
-  xml.attlist
+  type.attrib, iri.attrib, direction.attrib, commonNode.attlist, safety.attrib, size.attrib
 Profile.content =
   meta-roles.content,
   element content { profile_anycontent.type }*
 Profile.type = Profile.content, Profile.attlist
-start |= Profile
 Profile = element Profile { Profile.type }
 # *** content ***
 # 
 # content model:  xs:any*
-profile_anycontent.attlist = xml.attlist
+profile_anycontent.attlist = commonInit.attlist?
 profile_anycontent.content = element * { text }*
-profile_anycontent.type =
-  profile_anycontent.content, profile_anycontent.attlist
+profile_anycontent.type = profile_anycontent.content, profile_anycontent.attlist
 a:documentation [
   "\x{a}" ~
   "                       Time module part of Reaction RuleML. It\x{a}" ~
@@ -2434,7 +2389,7 @@ a:documentation [
 #	KR Reaction RuleML:  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 #				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 #				content(xs:any*)* ) ) 
-Time.attlist = type.attrib, iri.attrib, node.attrib, xml.attlist
+Time.attlist = type.attrib, iri.attrib, commonNode.attlist
 Time.content =
   meta-roles.content,
   (element slot { slot.type }*
@@ -2447,7 +2402,6 @@ Time.content =
    | resl?
    | element content { time_anycontent.type }*)
 Time.type = Time.content, Time.attlist
-start |= Time
 Time = element Time { Time.type }
 # *** arg ***
 # 
@@ -2458,13 +2412,13 @@ Time = element Time { Time.type }
 # in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
 # 
 #
-arg_time.attlist = index.attrib, xml.attlist
+arg_time.attlist = index.attrib, commonInit.attlist?
 arg_time.content = time_primitives.content
 arg_time.type = arg_time.content, arg_time.attlist
 # *** content ***
 # 
 # content model:  xs:any*
-time_anycontent.attlist = xml.attlist
+time_anycontent.attlist = commonInit.attlist?
 time_anycontent.content = element * { text }*
 time_anycontent.type = time_anycontent.content, time_anycontent.attlist
 a:documentation [
@@ -2521,7 +2475,7 @@ a:documentation [
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 #		  ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 #			  content(xs:any*)* ) ) 
-Spatial.attlist = type.attrib, iri.attrib, node.attrib, xml.attlist
+Spatial.attlist = type.attrib, iri.attrib, commonNode.attlist
 Spatial.content =
   meta-roles.content,
   (element slot { slot.type }*
@@ -2534,7 +2488,6 @@ Spatial.content =
    | resl?
    | element content { spatial_anycontent.type }*)
 Spatial.type = Spatial.content, Spatial.attlist
-start |= Spatial
 Spatial = element Spatial { Spatial.type }
 # *** arg ***
 # 
@@ -2545,16 +2498,15 @@ Spatial = element Spatial { Spatial.type }
 # in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
 # 
 #
-arg_spatial.attlist = index.attrib, xml.attlist
+arg_spatial.attlist = index.attrib, commonInit.attlist?
 arg_spatial.content = spatial_primitives.content
 arg_spatial.type = arg_spatial.content, arg_spatial.attlist
 # *** content ***
 # 
 # content model:  xs:any*
-spatial_anycontent.attlist = xml.attlist
+spatial_anycontent.attlist = commonInit.attlist?
 spatial_anycontent.content = element * { text }*
-spatial_anycontent.type =
-  spatial_anycontent.content, spatial_anycontent.attlist
+spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
 a:documentation [
   "\x{a}" ~
   "                       Interval module part of Reaction RuleML. It\x{a}" ~
@@ -2605,14 +2557,13 @@ a:documentation [
 #   content model: 
 #   DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
-Interval.attlist = type.attrib, iri.attrib, node.attrib, xml.attlist
+Interval.attlist = type.attrib, iri.attrib, commonNode.attlist
 Interval.content =
   meta-roles.content,
-  (element arg { arg_interval.type }
-   | interval_primitives.content
-   | element content { interval_anycontent.type })?
+  ((arg_interval, arg_interval?)
+   | (content_interval, content_interval?)
+   | interval_primitives.content)?
 Interval.type = Interval.content, Interval.attlist
-start |= Interval
 Interval = element Interval { Interval.type }
 # *** arg ***
 # 
@@ -2622,16 +2573,17 @@ Interval = element Interval { Interval.type }
 # in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
 # in KR Reaction RuleML: Time | Spatial | Interval |  Event | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
 #
-arg_interval.attlist = index.attrib, xml.attlist
+arg_interval.attlist = index.attrib, commonInit.attlist?
 arg_interval.content = interval_primitives.content
 arg_interval.type = arg_interval.content, arg_interval.attlist
+arg_interval = element arg { arg_interval.type }
 # *** content ***
 # 
 # content model:  xs:any*
-interval_anycontent.attlist = xml.attlist
+interval_anycontent.attlist = commonInit.attlist?
 interval_anycontent.content = element * { text }*
-interval_anycontent.type =
-  interval_anycontent.content, interval_anycontent.attlist
+interval_anycontent.type = interval_anycontent.content, interval_anycontent.attlist
+content_interval = element content { interval_anycontent.type }
 # metadata group
 # 
 #    This internal group defines the descriptive metadata and the scope (for scoped reasoning on the metadata) + additional guard constraints on the scope
@@ -2659,8 +2611,7 @@ instance.content = qualification*, quantification*, oid?
 # 
 # content model: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?)
 #
-meta-roles.content =
-  metadata.content, interface.content, instance.content
+meta-roles.content = metadata.content, interface.content, instance.content
 # 
 # An internal group for the implementation of a rule in the Reaction RuleML language
 # 
@@ -2734,8 +2685,7 @@ outer-quantifier.content = Forall | Quantifier
 # 
 # content model: (Time | Spatial | Interval)
 #
-extended-signature-predicate-sorts.content =
-  extended-signature-function-sorts.content
+extended-signature-predicate-sorts.content = extended-signature-function-sorts.content
 # 
 # An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
 # 
@@ -2755,7 +2705,12 @@ spatial_primitives.content = arg.content
 # Interval primitives
 # content model: 
 # in ([Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?])
-interval_primitives.content = arg.content | arg.content?
+interval_primitives.content =
+  (Time, Time?)
+  | (Spatial, Spatial?)
+  | (Interval, Interval?)
+  | ((Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval),
+     (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?)
 # An internal group for the situation primitives for interpretation as situation
 # content model: 
 # in DR Reaction RuleML: ()
@@ -2773,5 +2728,4 @@ action_primitives.content = notAllowed
 #  restriction: active | messaging | reasoning
 #      default value: reasoning (in DR Reaction RuleML)
 #      optional attribute
-style.attrib =
-  [ a11:defaultValue = "reasoning" ] attribute style { style.datatype }?
+style.attrib = [ a11:defaultValue = "reasoning" ] attribute style { style.datatype }?

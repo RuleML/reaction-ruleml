@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
-<RuleML
-  xmlns="http://ruleml.org/spec"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
-
-<!-- Clocksin/Mellish sample rule 
+<?xml-model href="../../xsd/dr.xsd"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- Clocksin/Mellish sample rule 
 
 This example shows how the intended evaluation / semantic profiles can be defined.
 
@@ -23,59 +20,65 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
 
   <Assert>
 
-  <!-- rule -->
+    <!-- rule -->
 
-  <Rule>
+    <Rule>
 
-    <!-- define intended semantic profile for the rule -->
+      <!-- define intended semantic profile for the rule -->
 
-    <evaluation index="1">
+      <evaluation index="1">
 
-      <!-- the primary intended semantics is well founded semantics -->
+        <!-- the primary intended semantics is well founded semantics -->
 
-      <Profile type="ruleml:WellFoundedSemantics" direction="backward"/>
-      
-    </evaluation>
+        <Profile type="ruleml:WellFoundedSemantics" direction="backward"/>
 
-	 <!-- and (alternatively) semantic profile is answer set semantics -->
+      </evaluation>
 
-    <evaluation index="2">
-      
-      <Profile type="ruleml:AnswerSetSemantics" direction="backward"/>
+      <!-- and (alternatively) semantic profile is answer set semantics -->
 
-    </evaluation>
+      <evaluation index="2">
 
-    <if>
-      <Atom>
-        <op><Rel>likes</Rel></op>
-        <Var>X</Var>
-        <Ind>wine</Ind>
-      </Atom>
-    </if>
-    <then>
-      <Atom>
-        <op><Rel>likes</Rel></op>
-        <Ind>John</Ind>
-        <Var>X</Var>
-      </Atom>
-    </then>
-  </Rule>
+        <Profile type="ruleml:AnswerSetSemantics" direction="backward"/>
 
-  <!-- fact -->
+      </evaluation>
 
-  <Atom>
-    <op><Rel>likes</Rel></op>
-    <Ind>Mary</Ind>
-    <Ind>wine</Ind>
-  </Atom>
- 
- </Assert>
+      <if>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
 
-<!-- query knowledge base -->
- 
- <Query>
+    <!-- fact -->
 
-    <!-- define intended semantic profile for the query -->    
+    <Atom>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <Query>
+
+    <!-- define intended semantic profile for the query -->
 
     <evaluation>
 
@@ -86,11 +89,11 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
 
     </evaluation>
 
-   <Atom>
-     <Rel>likes</Rel>
-     <Ind>John</Ind>
-     <Var>whom</Var>
-   </Atom>
- </Query>
-  
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
+
 </RuleML>

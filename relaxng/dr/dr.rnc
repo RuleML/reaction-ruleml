@@ -15,6 +15,8 @@ namespace a9 = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace dc = "http://purl.org/dc/elements/1.1/"
 namespace dcterms = "http://purl.org/dc/terms/"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
+namespace ruleml = "http://ruleml.org/spec"
+
 
 a:documentation [
   "\x{a}" ~
@@ -348,10 +350,10 @@ oid = element oid { oid.type }
 # @key and @keyref attributes for modularization of the knowledge base
 #
 xml.attlist =
-  key.attrib,
-  keyref.attrib,
-  attribute xml:base { text },
-  attribute xml:id { text }
+  key.attrib?,
+  keyref.attrib?,
+  attribute xml:base { text }?,
+  attribute xml:id { text }?
 #  *** meta ***     
 # 
 # An optional container for meta-knowledge about a Node.
@@ -699,7 +701,7 @@ Implies.attlist =
   xml.attlist
 Implies.content =
   meta-roles.content,
-  (then | if | if | then | if.content | then.content)
+  ((if & then) | (if.content , then.content))
 Implies.type = Implies.content, Implies.attlist
 start |= Implies
 Implies = element Implies { Implies.type }
@@ -2087,30 +2089,14 @@ elseDo = element elseDo { do.type }
 # *** Derivation Rule content model ***
 #       ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
 DerivationRule.content =
-  else?
-  | then
-  | if
-  | if
-  | then
-  | else?
-  | if.content
-  | then.content
-  | then.content?
+  (if & then & else?) | (if.content, then.content, then.content?)
 # *** Production Rule content model ***
 # ((elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?))
 ProductionRule.content =
-  else?
-  | do
-  | if
-  | if
-  | do
-  | elseDo?
-  | if.content
-  | do.content
-  | do.content?
+   (if & do & elseDo?)	| (if.content, do.content, do.content?)
 # *** Reaction Rule content model ***
 # (on, (if?, then?, do, after?,else?, elseDo?)? )
-ReactionRule.content = on, if?, then?, do, after?, else?, elseDo?
+ReactionRule.content = on, (if?, then?, do, after?, else?, elseDo?)?
 # *** Messaging Rule content model ***
 # (do)
 MessagingRule.content = do

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="../../xsd/dr.xsd"?>
-<?xml-model href="../../relaxng/dr_converted.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 

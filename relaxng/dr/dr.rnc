@@ -467,7 +467,7 @@ oid.content =
   | Skolem
   | Reify
   | Expr
-  | element Plex { Plex.type }
+  | Plex
   | extended-signature-function-sorts.content
 oid.type = oid.content, oid.attlist
 # *** oid ***
@@ -1015,9 +1015,9 @@ formula-and-or.content =
 # Rulebases.
 formula-rulebase.content =
   Atom
-  | element Implies { Implies.type }
+  | Implies
   | Rule
-  | element Equivalent { Equivalent.type }
+  | Equivalent
   | outer-quantifier.content
   | outer-connective.content
   | extended-signature-predicate-sorts.content
@@ -1770,7 +1770,7 @@ a:documentation [
   "\x{a}" ~
   "         This is the XML Schema module for equality in RuleML. File:\x{a}" ~
   "            equality_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module\x{a}" ~
-  "            declares the following RuleML elements and attributes: * Equal * left * right *\x{a}" ~
+  "            declares the following RuleML s and attributes: * Equal * left * right *\x{a}" ~
   "            @oriented *       @val See http://www.ruleml.org/modularization for details about this\x{a}" ~
   "            modularization approach. \x{a}" ~
   "        \x{a}" ~
@@ -1853,7 +1853,7 @@ a:documentation [
   "                                  Mode / Transactional / Use\x{a}" ~
   "            attribute module.    This is the XML Schema attributes module for Reaction RuleML.\x{a}" ~
   "            File: attribute_module.xsd    Version: 1.0    Last Modification: 2011-03-30        This\x{a}" ~
-  "            module declares the following Reaction RuleML elements and attributes:\x{a}" ~
+  "            module declares the following Reaction RuleML s and attributes:\x{a}" ~
   "            * @mode (mode declaration)                   * @safety (transactional)\x{a}" ~
   "            * @per (usage)                   * @all (yes|no)                   * @style (execution\x{a}" ~
   "            style)                    * @key and @keyref for modularization of knowledge bases                 \x{a}" ~
@@ -2010,7 +2010,7 @@ a:documentation [
   "            Reaction RuleML                      This is the XML Schema rule module for Reaction\x{a}" ~
   "            RuleML.           File: rule_module.xsd           Version: 1.0           Last\x{a}" ~
   "            Modification: 2011-03-29                      This schema declares the following\x{a}" ~
-  "            Reaction RuleML elements and attributes:                      * Rule           * on\x{a}" ~
+  "            Reaction RuleML s and attributes:                      * Rule           * on\x{a}" ~
   "            * if           * then           * do           * after                     * else\x{a}" ~
   "            * elseDo           * elseAfter                          \x{a}" ~
   "        \x{a}" ~
@@ -2046,7 +2046,7 @@ a:documentation [
   "    "
 ]
 # *** Rule ***
-# The Rule element that provides the basic syntax for rules
+# The Rule  that provides the basic syntax for rules
 # in Reaction RuleML.
 # 
 # content model: 
@@ -2178,7 +2178,7 @@ formula-negation.content =
   | Neg
   | extended-signature-predicate-sorts.content
 formula-negation.type = formula-negation.content, formula-negation.attlist
-formula = element formula { formula-negation.type }
+#formula = element formula { formula-negation.type }
 # *** Naf ***
 # A "by default" negation of a logical atom (i.e. "weak" negation or
 # negation-as-failure).
@@ -2435,13 +2435,13 @@ a:documentation [
 Time.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Time.content =
   meta-roles.content,
-  (element slot { slot.type }*
+  (slot*
    | resl?
    | ((element arg { arg_time.type }
        | time_primitives.content)+
       | repo?
       | repo)
-   | element slot { slot.type }*
+   | slot*
    | resl?
    | element content { time_anycontent.type }*)
 Time.type = Time.content, Time.attlist
@@ -2522,13 +2522,13 @@ a:documentation [
 Spatial.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Spatial.content =
   meta-roles.content,
-  (element slot { slot.type }*
+  (slot*
    | resl?
    | ((element arg { arg_spatial.type }
        | spatial_primitives.content)+
       | repo?
       | repo)
-   | element slot { slot.type }*
+   | slot*
    | resl?
    | element content { spatial_anycontent.type }*)
 Spatial.type = Spatial.content, Spatial.attlist

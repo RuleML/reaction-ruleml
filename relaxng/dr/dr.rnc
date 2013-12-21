@@ -75,6 +75,8 @@ include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module
 #
 include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" {
   start |= notAllowed
+  # Note: In Reaction RuleML the type is changed to Term or Curie or IRI
+  type.value = termOrCurieOrIRI.datatype
 }
 # 
 # EXPLICIT DATATYPING ENABLED
@@ -128,6 +130,12 @@ include "http://ruleml.org/1.0/relaxng/modules/variable_expansion_module.rnc" {
   start |= notAllowed
 }
 # 
+# UNIVERSAL RESOURCE IDENTIFIERS (URIs) INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/iri_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
 # XML BASE ATTRIBUTE INCLUDED
 #
 include "http://ruleml.org/1.0/relaxng/modules/xml_base_expansion_module.rnc" {
@@ -139,6 +147,13 @@ include "http://ruleml.org/1.0/relaxng/modules/xml_base_expansion_module.rnc" {
 include "http://ruleml.org/1.0/relaxng/modules/xml_id_expansion_module.rnc" {
   start |= notAllowed
 }
+# 
+# xsi:schemaLocation ALLOWED IN RuleML
+#
+include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+
 a:documentation [
   "\x{a}" ~
   "                                Spatio-Temporal Derivation Rule (DR)\x{a}" ~
@@ -1355,8 +1370,6 @@ Reify = Reify-node.choice
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@type
 # 
-# Note: In Reaction RuleML the type is changed to Term or Curie or IRI
-type.attrib = attribute type { termOrCurieOrIRI.datatype }?
 # *** @index ***
 # A required attribute for specifying the position of a positional
 # argument within an atom.
@@ -1516,7 +1529,7 @@ a:documentation [
 #	    )
 #	    Note the 'positionalized' normal form where the op role is only
 #	    at the beginning of the Expr.
-Expr.attlist = type.attrib, per.attrib, commonNode.attlist
+Expr.attlist = Type.attlist, commonNode.attlist, per.attrib
 Expr.content =
   meta-roles.content,
   (element op { op-Expr.type }
@@ -1553,6 +1566,7 @@ Expr.type =
   Expr.content,
   Expr.attlist
 Expr = element Expr { Expr.type }
+Expression-node.choice |= Expr
 # *** op ***
 # An operator expression including the function name of an expression.
 # 
@@ -1653,6 +1667,7 @@ Plex.type = Plex.content, Plex.attlist
 Plex-repo.type = Plex-repo.content, Plex.attlist
 Plex-resl.type = Plex-resl.content, Plex.attlist
 Plex = element Plex { Plex.type }
+Plex_Any-node.choice |= Plex
 # *** @per ***
 # An attribute indicating whether a function or expression is interpreted.
 # 
@@ -2019,7 +2034,7 @@ a:documentation [
 # Rule has the following attributes:
 # @key @keyref @type @style @closure @direction @material @node 
 #
-Rule.attlist = style.attrib, type.attrib, Implies.attlist
+Rule.attlist = style.attrib, closure.attrib, direction.attrib, material.attrib, Type.attlist, commonNode.attlist
 Rule.content = meta-roles.content, rule-implementation.content?
 Rule.type = Rule.content, Rule.attlist
 Rule = element Rule { Rule.type }
@@ -2121,7 +2136,7 @@ a:documentation [
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-Negation.attlist = type.attrib, iri.attrib, commonNode.attlist
+Negation.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Negation.content =
   meta-roles.content,
   (element formula { formula-negation.type }
@@ -2231,7 +2246,7 @@ a:documentation [
 # of the quantifier.
 # 
 #   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
-Quantifier.attlist = type.attrib, iri.attrib, commonNode.attlist
+Quantifier.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Quantifier.content =
   meta-roles.content,
   (declare | Var)+,
@@ -2311,7 +2326,7 @@ a:documentation [
 # 
 #   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, content(xs:any*)* )
 Profile.attlist =
-  type.attrib, iri.attrib, direction.attrib, commonNode.attlist, safety.attrib, size.attrib
+  iri.attrib, direction.attrib, Type.attlist, commonNode.attlist, safety.attrib, size.attrib
 Profile.content =
   meta-roles.content,
   element content { profile_anycontent.type }*
@@ -2388,7 +2403,7 @@ a:documentation [
 #	KR Reaction RuleML:  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 #				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 #				content(xs:any*)* ) ) 
-Time.attlist = type.attrib, iri.attrib, commonNode.attlist
+Time.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Time.content =
   meta-roles.content,
   (element slot { slot.type }*
@@ -2474,7 +2489,7 @@ a:documentation [
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 #		  ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 #			  content(xs:any*)* ) ) 
-Spatial.attlist = type.attrib, iri.attrib, commonNode.attlist
+Spatial.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Spatial.content =
   meta-roles.content,
   (element slot { slot.type }*
@@ -2556,7 +2571,7 @@ a:documentation [
 #   content model: 
 #   DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
-Interval.attlist = type.attrib, iri.attrib, commonNode.attlist
+Interval.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Interval.content =
   meta-roles.content,
   ((arg_interval, arg_interval?)

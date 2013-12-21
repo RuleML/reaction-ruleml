@@ -461,8 +461,8 @@ oid = element oid { oid.type }
 # 
 # @key and @keyref attributes for modularization of the knowledge base
 #
-commonNode.attlist &= key.attrib?
-commonNode.attlist &= keyref.attrib?
+commonInit.attlist &= key.attrib?
+commonInit.attlist &= keyref.attrib?
 #  *** meta ***     
 # 
 # An optional container for meta-knowledge about a Node.
@@ -530,8 +530,7 @@ meta = element meta { meta.type }
 # 
 # content model: ( (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval)? )
 # 
-# FIXME: design pattern deviation - key/keyref on an edge element
-scope.attlist = index.attrib, commonNode.attlist?
+scope.attlist = index.attrib, commonInit.attlist?
 scope.content = formula-query.content?
 scope.type = scope.content, scope.attlist
 scope = element scope { scope.type }

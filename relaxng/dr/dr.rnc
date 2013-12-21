@@ -17,6 +17,13 @@ namespace rng = "http://relaxng.org/ns/structure/1.0"
 default namespace ruleml = "http://ruleml.org/spec"
 
 # 
+# NODE IDENTIFIERS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+
+# 
 # ORDER MODE - UNORDERED GROUPS ENABLED
 #
 include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" {
@@ -279,6 +286,7 @@ RuleML.attlist = commonNode.attlist
 RuleML.content = meta-roles.content, (act | Assert | Retract | Query)*
 RuleML.type = RuleML.content, RuleML.attlist
 start |= RuleML
+Node.choice |= RuleML
 RuleML =
   element RuleML {
     RuleML.type
@@ -318,6 +326,7 @@ Assert.content =
    | formula-assert.content)*
 Assert.type = Assert.content, Assert.attlist
 start |= Assert
+Node.choice |= Assert
 Assert = element Assert { Assert.type }
 #	    *** Retract ***
 #	    A performative similar to KQML's 'untell' that acts as a wrapper specifying that its
@@ -352,6 +361,7 @@ Query.content =
    | formula-query.content)*
 Query.type = Query.content, Query.attlist
 start |= Query
+Node.choice |= Query
 Query = element Query { Query.type }
 # *** formula ***
 # The formula role of a performative (<Assert>, <Retract> or <Query>).
@@ -688,6 +698,7 @@ Forall.content =
   (element formula { formula-forall.type }
    | formula-forall.content)
 Forall.type = Forall.content, Forall.attlist
+Node.choice |= Forall
 Forall = element Forall { Forall.type }
 # *** Exists ***
 # Explicit existential quantifier.
@@ -704,6 +715,7 @@ Exists.content =
   (element formula { formula-exists.type }
    | formula-exists.content)
 Exists.type = Exists.content, Exists.attlist
+Node.choice |= Exists
 Exists = element Exists { Exists.type }
 # *** declare ***
 # A role used for variables declared within a quantifier.
@@ -811,6 +823,7 @@ Implies.content =
   meta-roles.content,
   ((if & then) | (if.content, then.content))
 Implies.type = Implies.content, Implies.attlist
+Node.choice |= Implies
 Implies = element Implies { Implies.type }
 # *** if ***
 # The if of an implication rule containing the premise(s),
@@ -864,6 +877,7 @@ Entails.content =
   (element then { then-entails.type }
    | then-entails.content)
 Entails.type = Entails.content, Entails.attlist
+Node.choice |= Entails
 Entails = element Entails { Entails.type }
 # *** Equivalent ***
 # An equivalence expression, which is "syntactic sugar" for a pair
@@ -876,7 +890,7 @@ Entails = element Entails { Entails.type }
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens), 
 #		      (Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) ) ) )
 Equivalent.attlist = closure.attrib, commonNode.attlist
-Equivalent.content = meta-roles.content, (torso | torso | torso.content | torso.content)
+Equivalent.content = meta-roles.content, (torso | torso.content) , (torso | torso.content)
 Equivalent.type =
   # <xs:annotation>
   #	<xs:appinfo>
@@ -896,6 +910,7 @@ Equivalent.type =
   # </xs:annotation>
   Equivalent.content,
   Equivalent.attlist
+Node.choice |= Equivalent  
 Equivalent = element Equivalent { Equivalent.type }
 # *** torso ***
 # A symmetric role used in an equivalence expression combining
@@ -926,6 +941,7 @@ Rulebase.content =
   (element formula { formula-rulebase.type }
    | formula-rulebase.content)*
 Rulebase.type = Rulebase.content, Rulebase.attlist
+Node.choice |= Rulebase
 Rulebase = element Rulebase { Rulebase.type }
 # *** And ***
 # A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
@@ -946,6 +962,7 @@ And.content =
    | formula-and-or.content)*
 And-query.type = And.content, And-query.attlist
 And-inner.type = And.content, And-inner.attlist
+Node.choice |= And
 And = element And { And-inner.type }
 # *** Or ***
 # A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
@@ -966,6 +983,7 @@ Or.content =
    | formula-and-or.content)*
 Or-query.type = Or.content, Or-query.attlist
 Or-inner.type = Or.content, Or-inner.attlist
+Node.choice |= Or
 Or = element Or { Or-inner.type }
 # *** formula ***
 # The formula role of a conjunctive/disjunctive expression or a rulebase.
@@ -1152,6 +1170,7 @@ Atom.content =
   Atom-slots.extend1,
   Atom-slots.extend2
 Atom.type = Atom.content, Atom.attlist
+Node.choice |= Atom
 Atom = element Atom { Atom.type }
 # *** op ***
 # An operator expression including the relation of an atom.
@@ -1174,6 +1193,7 @@ op = element op { op-atom.type }
 Rel.attlist = iri.attrib, commonNode.attlist, per-effect.attrib
 Rel.content = xsd:token
 Rel.type = Rel.content, Rel.attlist
+Node.choice |= Rel
 Rel = element Rel { Rel.type }
 # *** degree ***
 # 
@@ -1565,6 +1585,7 @@ Expr.type =
   # </xs:annotation>
   Expr.content,
   Expr.attlist
+Node.choice |= Expr  
 Expr = element Expr { Expr.type }
 Expression-node.choice |= Expr
 # *** op ***
@@ -1588,6 +1609,7 @@ op-Expr.type = op-Expr.content, op.attlist
 Fun.attlist = iri.attrib, per.attrib, commonNode.attlist, val.attrib
 Fun.content = xsd:token
 Fun.type = Fun.content, Fun.attlist
+Node.choice |= Fun
 Fun = element Fun { Fun.type }
 # *** @val ***
 # An attribute indicating whether a function is deterministic (exactly one)
@@ -1666,6 +1688,7 @@ Plex-resl.content =
 Plex.type = Plex.content, Plex.attlist
 Plex-repo.type = Plex-repo.content, Plex.attlist
 Plex-resl.type = Plex-resl.content, Plex.attlist
+Node.choice |= Plex
 Plex = element Plex { Plex.type }
 Plex_Any-node.choice |= Plex
 # *** @per ***
@@ -2142,6 +2165,7 @@ Negation.content =
   (element formula { formula-negation.type }
    | formula-negation.content)
 Negation.type = Negation.content, Negation.attlist
+Node.choice |= Negation
 Negation = element Negation { Negation.type }
 formula-negation.attlist = empty
 formula-negation.content =
@@ -2165,7 +2189,8 @@ formula = element formula { formula-negation.type }
 Naf.attlist = Negation.attlist
 Naf.content = meta-roles.content, (weak | weak.content)
 Naf.type = Naf.content, Naf.attlist
-Naf = element Naf { Naf.type }
+Node.choice |= Naf
+Naf =  element Naf { Naf.type }
 # *** weak ***
 # A role used for negation as failure.
 # 
@@ -2176,7 +2201,7 @@ Naf = element Naf { Naf.type }
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
 weak.content = formula-negation.content
 weak.type = weak.content, weak.attlist
-weak = element weak { weak.type }
+weak =  element weak { weak.type }
 # *** Neg ***
 # A classical negation of a logical atom (i.e. classical or "strong" negation).
 # 
@@ -2188,6 +2213,7 @@ weak = element weak { weak.type }
 Neg.attlist = Negation.attlist
 Neg.content = meta-roles.content, (strong | strong.content)
 Neg.type = Neg.content, Neg.attlist
+Node.choice |= Neg
 Neg = element Neg { Neg.type }
 # *** strong ***
 # A role used for classical negation.
@@ -2331,6 +2357,7 @@ Profile.content =
   meta-roles.content,
   element content { profile_anycontent.type }*
 Profile.type = Profile.content, Profile.attlist
+Node.choice |= Profile
 Profile = element Profile { Profile.type }
 # *** content ***
 # 
@@ -2416,6 +2443,7 @@ Time.content =
    | resl?
    | element content { time_anycontent.type }*)
 Time.type = Time.content, Time.attlist
+Node.choice |= Time
 Time = element Time { Time.type }
 # *** arg ***
 # 
@@ -2502,6 +2530,7 @@ Spatial.content =
    | resl?
    | element content { spatial_anycontent.type }*)
 Spatial.type = Spatial.content, Spatial.attlist
+Node.choice |= Spatial
 Spatial = element Spatial { Spatial.type }
 # *** arg ***
 # 
@@ -2578,6 +2607,7 @@ Interval.content =
    | (content_interval, content_interval?)
    | interval_primitives.content)?
 Interval.type = Interval.content, Interval.attlist
+Node.choice |= Interval
 Interval = element Interval { Interval.type }
 # *** arg ***
 # 

@@ -383,7 +383,7 @@ Query = element Query { Query.type }
 # the (empty) attribute list is declared in the connective module
 formula-assert.content =
   Rulebase
-  | element Atom { Atom.type }
+  | Atom
   | Implies
   | Rule
   | Equivalent
@@ -393,7 +393,7 @@ formula-assert.content =
   | extended-signature-predicate-sorts.content
 formula-query.content =
   Rulebase
-  | element Atom { Atom.type }
+  | Atom
   | Entails
   | query-connective.content
   | query-quantifier.content
@@ -744,7 +744,7 @@ declare = element declare { declare.type }
 
 # the (empty) attribute list is declared in the connective module
 formula-forall.content =
-  element Atom { Atom.type }
+  Atom
   | Implies
   | Rule
   | Equivalent
@@ -753,7 +753,7 @@ formula-forall.content =
   | extended-signature-predicate-sorts.content
 formula-forall.type = formula-forall.content, formula.attlist
 formula-exists.content =
-  element Atom { Atom.type }
+  Atom
   | query-quantifier.content
   | query-connective.content
   | extended-signature-predicate-sorts.content
@@ -836,7 +836,7 @@ Implies = element Implies { Implies.type }
 # KR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 if.attlist = commonInit.attlist?
 if.content =
-  element Atom { Atom.type }
+  Atom
   | inner-connective.content
   | extended-signature-predicate-sorts.content
 if-entails.content = Rulebase
@@ -854,7 +854,7 @@ if = element if { if.type }
 # KR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 then.attlist = commonInit.attlist?
 then.content =
-  element Atom { Atom.type }
+  Atom
   | outer-connective.content
   | extended-signature-predicate-sorts.content
 then-entails.content = Rulebase
@@ -922,7 +922,7 @@ Equivalent = element Equivalent { Equivalent.type }
 # DR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
 # KR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 torso.content =
-  element Atom { Atom.type }
+  Atom
   | outer-connective.content
   | extended-signature-predicate-sorts.content
 torso.type = torso.content, torso.attlist
@@ -1002,7 +1002,7 @@ Or = element Or { Or-inner.type }
 # performative and quantifier modules.
 formula.attlist = commonInit.attlist?
 formula-and-or.content =
-  element Atom { Atom.type }
+  Atom
   | inner-connective.content
   | extended-signature-predicate-sorts.content
 # In 1.0, Naf is not allowed in the consequent (second child) of Entails
@@ -1014,7 +1014,7 @@ formula-and-or.content =
 # not skippable). Schematron could be used here to disallow Naf from other
 # Rulebases.
 formula-rulebase.content =
-  element Atom { Atom.type }
+  Atom
   | element Implies { Implies.type }
   | Rule
   | element Equivalent { Equivalent.type }
@@ -1153,22 +1153,18 @@ a:documentation [
 #	Note the 'positionalized' normal form where the oid and op roles
 #	are at the beginning of the atom.
 Atom.attlist = closure.attrib, commonNode.attlist
-# These .extend groups, pointed to by Atom.content, are necessary
-# for redefinition to be binary in bindatalog and to add rest
-# variables in hornlog.
-Atom-repo.extend = Atom-arg.extend | repo
-Atom-arg.extend = (arg | arg.content)+, repo?
-Atom-slots.extend1 = element slot { slot.type }*
-Atom-slots.extend2 = resl?
 Atom.content =
-  meta-roles.content,
-  degree?,
-  (element op { op-atom.type }
-   | op-atom.content),
-  Atom-slots.extend1,
-  Atom-repo.extend,
-  Atom-slots.extend1,
-  Atom-slots.extend2
+	(
+			meta-roles.content, oid?, degree?,  (op | Rel), slot*,
+			( 
+				( 
+					((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?)
+					|
+					repo
+				),
+				slot*)?, 
+			resl?
+		)	
 Atom.type = Atom.content, Atom.attlist
 Node.choice |= Atom
 Atom = element Atom { Atom.type }
@@ -1551,13 +1547,17 @@ a:documentation [
 #	    at the beginning of the Expr.
 Expr.attlist = Type.attlist, commonNode.attlist, per.attrib
 Expr.content =
-  meta-roles.content,
-  (element op { op-Expr.type }
-   | op-Expr.content),
-  element slot { slot.type }*,
-  ((arg | arg.content)+ | repo? | repo),
-  element slot { slot.type }*,
-  resl?
+	    (
+	    meta-roles.content, oid?, (op-Expr | Fun), slot*,
+		    ( 
+			    ( 
+				    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo? )
+				    |
+				    repo
+			    ),
+			    slot*)? , 
+		    resl?
+	    )
 Expr.type =
   # <xs:annotation>
   #	<xs:appinfo>
@@ -1606,6 +1606,7 @@ op-Expr.type = op-Expr.content, op.attlist
 #		See http://www.ruleml.org/0.91/glossary/#gloss-Fun
 # 
 # content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
+op-Expr = element op { op-Expr.type }
 Fun.attlist = iri.attrib, per.attrib, commonNode.attlist, val.attrib
 Fun.content = xsd:token
 Fun.type = Fun.content, Fun.attlist
@@ -1670,20 +1671,21 @@ val.attrib = [ a4:defaultValue = "0.." ] attribute val { "1" | "0.." }?
 #	    KR Reaction RuleML: (slot*, resl? )
 Plex.attlist = commonNode.attlist
 Plex.content =
-  meta-roles.content,
-  element slot { slot.type }*,
-  ((arg | arg.content)+
-   | repo?
-   | element slot { slot.type }*
-   | resl?
-   | repo
-   | element slot { slot.type }*
-   | resl?
-   | resl)
+	    (		
+	       meta-roles.content,
+	       slot*,
+		 (
+		    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?, slot*, resl? )?
+		    |
+		 ( repo, slot*, resl? )
+		 |
+		 resl
+		 )
+	    )
 Plex-repo.content = meta-roles.content, (arg | arg.content)*, repo?
 Plex-resl.content =
   meta-roles.content,
-  element slot { slot.type }*,
+  slot*,
   resl?
 Plex.type = Plex.content, Plex.attlist
 Plex-repo.type = Plex-repo.content, Plex.attlist
@@ -2169,7 +2171,7 @@ Node.choice |= Negation
 Negation = element Negation { Negation.type }
 formula-negation.attlist = empty
 formula-negation.content =
-  element Atom { Atom.type }
+  Atom
   | Equal
   | Negation
   | Naf

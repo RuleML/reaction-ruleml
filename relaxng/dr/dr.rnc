@@ -161,6 +161,24 @@ include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_modu
   start |= notAllowed
 }
 
+# MATERIAL IMPLICATION ATTRIBUTE IS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/material_attrib_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# NON-DEFAULT VALUES OF MATERIAL IMPLICATION INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/material_non-default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# DEFAULT VALUES OF MATERIAL IMPLICATION INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/material_default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+
 a:documentation [
   "\x{a}" ~
   "                                Spatio-Temporal Derivation Rule (DR)\x{a}" ~
@@ -1028,12 +1046,12 @@ formula-rulebase.type = formula-rulebase.content, formula.attlist
 # falling within its scope (i.e. child elements).
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@mapMaterial
-mapMaterial.attrib = [ a0:defaultValue = "yes" ] attribute mapMaterial { "no" | "yes" }?
+mapMaterial.attrib = mapMaterial-att.choice?
 # *** @material ***
 # An attribute indicating the kind of an implication rule.
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@material
-material.attrib = [ a1:defaultValue = "yes" ] attribute material { "no" | "yes" }?
+material.attrib = material-att.choice?
 # *** @mapDirection ***
 # An attribute indicating the intended direction of implication rule inferencing
 # of elements falling within its scope (i.e. child elements).
@@ -1946,12 +1964,6 @@ per-effect.attrib =
 # An attribute indicating the size / number		
 # -1 = unbound / all
 size.attrib = [ a10:defaultValue = "-1" ] attribute size { xsd:int }?
-# *** @style ***
-# 
-#  restriction: active | messaging | reasoning
-#      default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
-#      optional attribute
-style.datatype = "active" | "messaging" | "reasoning"
 # *** @key ***
 # 
 # 
@@ -2019,9 +2031,15 @@ a:documentation [
 # Rule has the following attributes:
 # @key @keyref @type @style @closure @direction @material @node 
 #
-Rule.attlist = style.attrib, closure.attrib, direction.attrib, material.attrib, Type.attlist, commonNode.attlist
+Rule-datt.choice |=
+  direction-att-inf.choice
+  & material-att-inf.choice
+  & style.attrib
+reRule.attlist &= closure.attrib?
+reRule.attlist &= Type.attlist?
+reRule.attlist &= commonNode.attlist?
 Rule.content = meta-roles.content, rule-implementation.content?
-Rule.type = Rule.content, Rule.attlist
+Rule.type = Rule.content, (Rule-datt.choice & reRule.attlist)
 Rule = element Rule { Rule.type }
 # *** on ***
 # 
@@ -2725,13 +2743,32 @@ situation_primitives.content = notAllowed
 # content model: 
 # in DR Reaction RuleML: ()
 event_primitives.content = notAllowed
+
 # An internal group for the action primitives for interpretation as action
 # content model: 
 # in DR Reaction RuleML: ()
 action_primitives.content = notAllowed
+
+# *** @style ***
+# 
+#  restriction: active | messaging | reasoning
+#      default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
+#      optional attribute
+# in style_default module
+style.datatype |= "reasoning"
+# in style_non-default module
+style.datatype |= "active" | "messaging"
 # *** @style ***
 # 
 #  restriction: active | messaging | reasoning
 #      default value: reasoning (in DR Reaction RuleML)
 #      optional attribute
-style.attrib = [ a11:defaultValue = "reasoning" ] attribute style { style.datatype }?
+style.attrib = style-att-inf.choice
+# in default_inf_reactive module
+style-att-inf.choice |= notAllowed
+# in default_absent_reactive module
+style-att-inf.choice |= empty
+# in default_present_reactive module
+style-att-inf.choice |= style-att.choice
+# in style_attrib module
+style-att.choice |= attribute style { style.datatype }

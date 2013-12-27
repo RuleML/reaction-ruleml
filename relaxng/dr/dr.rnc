@@ -160,6 +160,24 @@ include "http://ruleml.org/1.0/relaxng/modules/xml_id_expansion_module.rnc" {
 include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+# 
+# INFERENCE DIRECTION ATTRIBUTE IS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/direction_attrib_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# NON-DEFAULT VALUES OF INFERENCE DIRECTION INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/direction_non-default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# DEFAULT VALUES OF INFERENCE DIRECTION INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/direction_default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 
 # MATERIAL IMPLICATION ATTRIBUTE IS INCLUDED
 #
@@ -1417,7 +1435,7 @@ index.attrib = attribute index { xsd:positiveInteger }?
 # An attribute for referring to a IRI.
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@iri
-iri.attrib = iri-att.choice
+iri.attrib = iri-att.choice?
 # includes the hornlog layer with the 'expr' and 'rest' modules
 
 # note that elementFormDefault is qualified because of local declarations

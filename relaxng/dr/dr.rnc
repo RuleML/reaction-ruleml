@@ -1064,27 +1064,27 @@ formula-rulebase.type = formula-rulebase.content, formula.attlist
 # falling within its scope (i.e. child elements).
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@mapMaterial
-mapMaterial.attrib = mapMaterial-att.choice?
+mapMaterial.attrib = mapMaterial-att-inf.choice
 # *** @material ***
 # An attribute indicating the kind of an implication rule.
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@material
-material.attrib = material-att.choice?
+material.attrib = material-att-inf.choice
 # *** @mapDirection ***
 # An attribute indicating the intended direction of implication rule inferencing
 # of elements falling within its scope (i.e. child elements).
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@mapDirection
-mapDirection.attrib =
-  [ a2:defaultValue = "bidirectional" ]
-  attribute mapDirection { "forward" | "backward" | "bidirectional" }?
+mapDirection.attrib = mapDirection-att-inf.choice
+#  [ a2:defaultValue = "bidirectional" ]
+#  attribute mapDirection { "forward" | "backward" | "bidirectional" }?
 # *** @direction ***
 # An attribute indicating the intended direction of an implication rule's inferencing.
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@direction
-direction.attrib =
-  [ a3:defaultValue = "bidirectional" ]
-  attribute direction { "forward" | "backward" | "bidirectional" }?
+direction.attrib = direction-att-inf.choice
+#  [ a3:defaultValue = "bidirectional" ]
+#  attribute direction { "forward" | "backward" | "bidirectional" }?
 # *** @mapClosure ***
 # An attribute indicating how the free variables falling within
 # its scope (i.e. child elements) are quantified.

@@ -22,65 +22,64 @@ default namespace ruleml = "http://ruleml.org/spec"
 include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-
 # 
 # ORDER MODE - UNORDERED GROUPS ENABLED
 #
-include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # STRIPE-SKIPPING MODE ENABLED
 #
-include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # ATTRIBUTES WITH DEFAULT VALUES ARE INITIALIZED
 #
-include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # ATTRIBUTES WITH DEFAULT VALUES ARE ABSENT OR OPTIONAL
 #
-include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # ATTRIBUTES WITH DEFAULT VALUES REQUIRED
 #
-include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # EQUATIONS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/equal_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/equal_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # ORIENTED EQUALITY ATTRIBUTE IS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/oriented_attrib_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/oriented_attrib_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # NON-DEFAULT VALUES OF ORIENTED EQUALITY ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/oriented_non-default_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/oriented_non-default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DEFAULT VALUE OF ORIENTED EQUALITY ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # EXPLICIT TYPING OF TERMS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
   # Note: In Reaction RuleML the type is changed to Term or Curie or IRI
   type.value = termOrCurieOrIRI.datatype
@@ -88,52 +87,52 @@ include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" {
 # 
 # EXPLICIT DATATYPING ENABLED
 #
-include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DATA TERMS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/dataterm_any_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/dataterm_any_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DATA ELEMENTS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # SKOLEM CONSTANTS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/skolem_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/skolem_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # REIFICATION TERMS INCLUDED, EXPLICIT CONTENT
 #
-include "http://ruleml.org/1.0/relaxng/modules/reify_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/reify_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # INDIVIDUAL TERMS (INTERPRETED NAMES) ARE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/individual_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/individual_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # VARIABLES (INTERPRETABLE NAMES) ARE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/variable_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/variable_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -145,13 +144,13 @@ include "http://ruleml.org/1.0/relaxng/modules/iri_expansion_module.rnc" inherit
 # 
 # XML BASE ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/xml_base_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/xml_base_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # XML ID ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/xml_id_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/xml_id_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -178,7 +177,6 @@ include "http://ruleml.org/1.0/relaxng/modules/direction_non-default_expansion_m
 include "http://ruleml.org/1.0/relaxng/modules/direction_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-
 # MATERIAL IMPLICATION ATTRIBUTE IS INCLUDED
 #
 include "http://ruleml.org/1.0/relaxng/modules/material_attrib_expansion_module.rnc" inherit = ruleml {
@@ -196,116 +194,10 @@ include "http://ruleml.org/1.0/relaxng/modules/material_non-default_expansion_mo
 include "http://ruleml.org/1.0/relaxng/modules/material_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-
-a:documentation [
-  "\x{a}" ~
-  "                                Spatio-Temporal Derivation Rule (DR)\x{a}" ~
-  "            dialect of Reaction RuleML         This layer defines the spatio-temporal Derivation\x{a}" ~
-  "            Rule dialect of Reaction RuleML.    It adds necessary extensions to the RuleML Horn\x{a}" ~
-  "            Logic layer with equality for    the spatio-temporal Derivation Rule dialect.\x{a}" ~
-  "            File: dr.xsd    Version: 1.0    Last Modification: 2011-03-22        This schema\x{a}" ~
-  "            declares the following Reaction RuleML elements and attributes:                        *\x{a}" ~
-  "            rename Implies into Rule (if-then-else)       * extends RuleML by adding meta, scope,\x{a}" ~
-  "            guard, evaluation, signature, qualification, quantification        * extends Assert,\x{a}" ~
-  "            Retract by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard,\x{a}" ~
-  "            evaluation, signature, qualification, quantification,  @safety and @size       * extends\x{a}" ~
-  "            Query by adding Negation, Naf, Neg Time, Spatial, Interval, meta, scope, guard,\x{a}" ~
-  "            evaluation, signature, qualification, quantification                   * extends\x{a}" ~
-  "            Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard,\x{a}" ~
-  "            evaluation, signature, qualification, quantification        * extends if and then by\x{a}" ~
-  "            adding Time, Spatial, Interval       * extends Atom by adding meta, scope, guard,\x{a}" ~
-  "            evaluation, signature, qualification, quantification, Time, Spatial, Interval        *\x{a}" ~
-  "            extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification,\x{a}" ~
-  "            quantification and Time, Spatial, Interval       * extends slot by adding Time, Spatial,\x{a}" ~
-  "            Interval       * extends oid by adding Time, Spatial, Interval       * extends Var by\x{a}" ~
-  "            adding @mode (input / output mode declaration)                         * extends Rel by\x{a}" ~
-  "            adding @per        * extends And/Or by adding Negation, Neg, Naf, Rule       * extends\x{a}" ~
-  "            torso by  Negation, Neg, Naf        * extends @type to be of type\x{a}" ~
-  "            termOrCurieOrIRI.datatype       * add Negation, Neg, Naf        * add Time, Interval,\x{a}" ~
-  "            Spatial       * add Quantifier, Forall, Exists (quantification)        * add @key,\x{a}" ~
-  "            @keyref (with key and keyref of type curieORAbsIRI)      Rule is the core construct for\x{a}" ~
-  "            all types of rules in Reaction RuleML.        \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "DR Reaction RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [
-    "spatio-temporal Derivation Rule dialect of Reaction\x{a}" ~
-    "                RuleML"
-  ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-22T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # includes the datalog layer of deliberation ruleml
 
 # note that elementFormDefault is qualified because of local declarations
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML performatives.\x{a}" ~
-  "            File:       performative_module.xsd Version: 1.0 Last Modification: 2011-09-26 This\x{a}" ~
-  "            module declares the       following RuleML elements: * RuleML * Assert * Retract * Query\x{a}" ~
-  "            * act * formula See       http://www.ruleml.org/modularization for details about this\x{a}" ~
-  "            modularization approach.     \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-09-26T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 #	*** RuleML ***
 #	The n-ary top-level of a RuleML document.
 # 
@@ -438,53 +330,6 @@ formula-assert.type = formula-assert.content, formula.attlist
 formula-query.type = formula-query.content, formula.attlist
 # <rng:include href="modules/xml_module.rng" ns="http://www.w3.org/XML/1998/namespace"/>
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for description-related\x{a}" ~
-  "            RuleML       elements. File: desc_module.xsd Version: 1.0 Last Modification: 2012-05-17\x{a}" ~
-  "            [Adrian Paschke]       This module declares the following RuleML elements:\x{a}" ~
-  "            * @node       * meta            descriptive metadata        * scope           scope\x{a}" ~
-  "            (e.g. for scoped reasoning)        * guard         guard (e.g. for guard constraints in\x{a}" ~
-  "            scoped reasoning)       * evaluation      semantic profile        * signature\x{a}" ~
-  "            interface signature, pattern definition,       * qualification   qualification, e.g.\x{a}" ~
-  "            priorities, validity, strategy       * quantification  quantification       * oid\x{a}" ~
-  "            See       http://www.ruleml.org/modularization for details about this modularization\x{a}" ~
-  "            approach.     \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2012-05-17T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** @node ***
 # An optional identification label for a Node, creating accessibility within
 # the knowledge representation.
@@ -497,14 +342,7 @@ a:documentation [
 # content model: xs:anyURI
 oid.attlist = empty
 oid.content =
-  Ind
-  | Data
-  | Var
-  | Skolem
-  | Reify
-  | Expr
-  | Plex
-  | extended-signature-function-sorts.content
+  Ind | Data | Var | Skolem | Reify | Expr | Plex | extended-signature-function-sorts.content
 oid.type = oid.content, oid.attlist
 # *** oid ***
 # An optional object identifier for an atomic formula, expression or the unifed terms
@@ -590,7 +428,7 @@ meta = element meta { meta.type }
 # Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
 # 
 # content model: ( (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval)? )
-# 
+#
 scope.attlist = index.attrib, commonInit.attlist?
 scope.content = formula-query.content?
 scope.type = scope.content, scope.attlist
@@ -677,47 +515,6 @@ quantification = element quantification { quantification.type }
 
 # note that elementFormDefault is qualified because of local declarations
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML quantifiers. File:\x{a}" ~
-  "            quantifier_module.xsd Version: 1.0 Last Modification: 2011-07-16 This module declares\x{a}" ~
-  "            the       following RuleML elements: * Forall * Exists * declare * formula See\x{a}" ~
-  "            http://www.ruleml.org/modularization for details about this modularization approach.     \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-07-16T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** Forall ***
 # Explicit universal quantifier.
 # 
@@ -796,50 +593,6 @@ formula-exists.content =
 formula-exists.type = formula-exists.content, formula.attlist
 # note that elementFormDefault is qualified because of local declarations
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML connectives. File:\x{a}" ~
-  "            connective_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This\x{a}" ~
-  "            module       declares the following RuleML elements and attributes: * Implies * if *\x{a}" ~
-  "            then * Entails *       Equivalent * torso * Rulebase * And * Or * formula * @mapMaterial\x{a}" ~
-  "            * @material * @mapDirection       * @direction * @mapClosure * @closure See\x{a}" ~
-  "            http://www.ruleml.org/modularization for details       about this modularization\x{a}" ~
-  "            approach. \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2012-07-05T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # necessary for schematron
 
 # <xs:appinfo>
@@ -871,10 +624,7 @@ Implies = element Implies { Implies.type }
 # DR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
 # KR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 if.attlist = commonInit.attlist?
-if.content =
-  Atom
-  | inner-connective.content
-  | extended-signature-predicate-sorts.content
+if.content = Atom | inner-connective.content | extended-signature-predicate-sorts.content
 if-entails.content = Rulebase
 if.type = if.content, if.attlist
 if-entails.type = if-entails.content, if.attlist
@@ -889,10 +639,7 @@ if = element if { if.type }
 # DR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
 # KR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 then.attlist = commonInit.attlist?
-then.content =
-  Atom
-  | outer-connective.content
-  | extended-signature-predicate-sorts.content
+then.content = Atom | outer-connective.content | extended-signature-predicate-sorts.content
 then-entails.content = Rulebase
 then.type = then.content, then.attlist
 then-entails.type = then-entails.content, then.attlist
@@ -926,7 +673,7 @@ Entails = element Entails { Entails.type }
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens), 
 #		      (Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) ) ) )
 Equivalent.attlist = closure.attrib, commonNode.attlist
-Equivalent.content = meta-roles.content, (torso | torso.content) , (torso | torso.content)
+Equivalent.content = meta-roles.content, (torso | torso.content), (torso | torso.content)
 Equivalent.type =
   # <xs:annotation>
   #	<xs:appinfo>
@@ -946,7 +693,7 @@ Equivalent.type =
   # </xs:annotation>
   Equivalent.content,
   Equivalent.attlist
-Node.choice |= Equivalent  
+Node.choice |= Equivalent
 Equivalent = element Equivalent { Equivalent.type }
 # *** torso ***
 # A symmetric role used in an equivalence expression combining
@@ -957,10 +704,7 @@ Equivalent = element Equivalent { Equivalent.type }
 # content model: 
 # DR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
 # KR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-torso.content =
-  Atom
-  | outer-connective.content
-  | extended-signature-predicate-sorts.content
+torso.content = Atom | outer-connective.content | extended-signature-predicate-sorts.content
 torso.type = torso.content, torso.attlist
 torso = element torso { torso.type }
 # *** Rulebase ***
@@ -1038,9 +782,7 @@ Or = element Or { Or-inner.type }
 # performative and quantifier modules.
 formula.attlist = commonInit.attlist?
 formula-and-or.content =
-  Atom
-  | inner-connective.content
-  | extended-signature-predicate-sorts.content
+  Atom | inner-connective.content | extended-signature-predicate-sorts.content
 # In 1.0, Naf is not allowed in the consequent (second child) of Entails
 # because Integrity uses of Entails call for classical Neg
 # and Rulebase should not contain Naf in any other context (except Query).
@@ -1098,47 +840,6 @@ mapClosure.attrib = attribute mapClosure { "universal" | "existential" }?
 closure.attrib = attribute closure { "universal" | "existential" }?
 # note that elementFormDefault is qualified because of local declarations
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML atoms. File:\x{a}" ~
-  "            atom_module.xsd Version: 1.0 Last Modification: 2012-02-21 This module declares\x{a}" ~
-  "            the following RuleML elements and attributes: * Atom * op * Rel * degree See\x{a}" ~
-  "            http://www.ruleml.org/modularization for details about this modularization approach.     \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2012-07-05T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** Atom ***
 #	A logical atom, i.e. an expression formed from a predicate
 #	applied to a collection of its (logical) arguments.
@@ -1190,17 +891,15 @@ a:documentation [
 #	are at the beginning of the atom.
 Atom.attlist = closure.attrib, commonNode.attlist
 Atom.content =
-	(
-			meta-roles.content, oid?, degree?,  (op | Rel), slot*,
-			( 
-				( 
-					((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?)
-					|
-					repo
-				),
-				slot*)?, 
-			resl?
-		)	
+  meta-roles.content,
+  oid?,
+  degree?,
+  (op | Rel),
+  slot*,
+  ((((arg | Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)+, repo?)
+    | repo),
+   slot*)?,
+  resl?
 Atom.type = Atom.content, Atom.attlist
 Node.choice |= Atom
 Atom = element Atom { Atom.type }
@@ -1238,47 +937,6 @@ Rel = element Rel { Rel.type }
 degree.content = Data
 degree.type = degree.content, degree.attlist
 degree = element degree { degree.type }
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML slots. File:\x{a}" ~
-  "            slot_module.xsd Version: 1.0 Last Modification: 2011-07-16 This module declares the\x{a}" ~
-  "            following       RuleML element and attributes: * slot * @card * @weight See\x{a}" ~
-  "            http://www.ruleml.org/modularization for details about this modularization approach.     \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-07-16T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** slot ***
 # A user-defined slot consisting of a name (first position) and a filler (second position).
 # 
@@ -1309,49 +967,6 @@ weight.attrib =
   attribute weight {
     xsd:decimal { minInclusive = "0" maxInclusive = "1" }
   }?
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML terms. File:\x{a}" ~
-  "            term_module.xsd Version: 1.0 Last Modification: 2012-04-03 This module declares the\x{a}" ~
-  "            following       RuleML elements and attributes: * arg * Ind * Data * Var * Skolem *\x{a}" ~
-  "            Reify * @type * @index as       well as including a number of complex types for use in\x{a}" ~
-  "            expicitly-typed data Nodes. See       http://www.ruleml.org/modularization for details\x{a}" ~
-  "            about this modularization approach.     \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2012-04-03T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** arg ***
 # A role used for the positional arguments of a logical atom.
 # 
@@ -1430,7 +1045,6 @@ Reify = Reify-node.choice
 # 
 # See http://www.ruleml.org/1.0/glossary/#gloss-@index
 index.attrib = attribute index { xsd:positiveInteger }?
-
 # *** @iri ***
 # An attribute for referring to a IRI.
 # 
@@ -1440,58 +1054,6 @@ iri.attrib = iri-att.choice?
 
 # note that elementFormDefault is qualified because of local declarations
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML expressions. File:\x{a}" ~
-  "            expr_module.xsd Version: 1.0 Last Modification: 2011-10-05 [Tara Athan] This module\x{a}" ~
-  "            declares       the following RuleML elements and attributes: * Expr * op * Fun * Plex *\x{a}" ~
-  "            @per See       http://www.ruleml.org/modularization for details about this\x{a}" ~
-  "            modularization approach. \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-10-05T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "        "
-  # necessary for schematron
-  
-  "\x{a}" ~
-  "        "
-  # <xs:appinfo>
-  # 
-  # <sch:ns prefix="r" iri="http://www.ruleml.org/0.91/xsd"/>
-  
-  "\x{a}" ~
-  "    "
-]
 #	    *** Expr ***
 #	    A logical function of the form "f(...)" where f is a function name.
 # 
@@ -1543,17 +1105,14 @@ a:documentation [
 #	    at the beginning of the Expr.
 Expr.attlist = Type.attlist, commonNode.attlist, per.attrib
 Expr.content =
-	    (
-	    meta-roles.content, oid?, (op-Expr | Fun), slot*,
-		    ( 
-			    ( 
-				    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo? )
-				    |
-				    repo
-			    ),
-			    slot*)? , 
-		    resl?
-	    )
+  meta-roles.content,
+  oid?,
+  (op-Expr | Fun),
+  slot*,
+  ((((arg | Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)+, repo?)
+    | repo),
+   slot*)?,
+  resl?
 Expr.type =
   # <xs:annotation>
   #	<xs:appinfo>
@@ -1581,7 +1140,7 @@ Expr.type =
   # </xs:annotation>
   Expr.content,
   Expr.attlist
-Node.choice |= Expr  
+Node.choice |= Expr
 Expr = element Expr { Expr.type }
 Expression-node.choice |= Expr
 # *** op ***
@@ -1615,7 +1174,9 @@ Fun = element Fun { Fun.type }
 # May be unified with @card/@minCard/@maxCard for slots in a future version.
 # 
 # See http://www.ruleml.org/0.91/glossary/#gloss-@val
-val.attrib = [ a4:defaultValue = "0.." ] attribute val { "1" | "0.." }?
+#
+#val.attrib = [ a4:defaultValue = "0.." ] attribute val { "1" | "0.." }?
+val.attrib = attribute val { "1" | "0.." }?
 #	    *** Plex ***
 #	    An unordered collection of arguments without a constructor.
 # 
@@ -1667,22 +1228,16 @@ val.attrib = [ a4:defaultValue = "0.." ] attribute val { "1" | "0.." }?
 #	    KR Reaction RuleML: (slot*, resl? )
 Plex.attlist = commonNode.attlist
 Plex.content =
-	    (		
-	       meta-roles.content,
-	       slot*,
-		 (
-		    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?, slot*, resl? )?
-		    |
-		 ( repo, slot*, resl? )
-		 |
-		 resl
-		 )
-	    )
-Plex-repo.content = meta-roles.content, (arg | arg.content)*, repo?
-Plex-resl.content =
   meta-roles.content,
   slot*,
-  resl?
+  (((arg | Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)+,
+    repo?,
+    slot*,
+    resl?)?
+   | (repo, slot*, resl?)
+   | resl)
+Plex-repo.content = meta-roles.content, (arg | arg.content)*, repo?
+Plex-resl.content = meta-roles.content, slot*, resl?
 Plex.type = Plex.content, Plex.attlist
 Plex-repo.type = Plex-repo.content, Plex.attlist
 Plex-resl.type = Plex-resl.content, Plex.attlist
@@ -1693,51 +1248,10 @@ Plex_Any-node.choice |= Plex
 # An attribute indicating whether a function or expression is interpreted.
 # 
 # See http://www.ruleml.org/0.91/glossary/#gloss-@per
-per.attrib = [ a5:defaultValue = "copy" ] attribute per { "copy" | "value" | "open" }?
+#per.attrib = [ a5:defaultValue = "copy" ] attribute per { "copy" | "value" | "open" }?
+per.attrib = attribute per { "copy" | "value" | "open" }?
 # note that elementFormDefault is qualified because of local declarations
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for RuleML rest variables.\x{a}" ~
-  "            File:       rest_module.xsd Version: 1.0 Last Modification: 2011-07-05 This module\x{a}" ~
-  "            declares the following       RuleML elements: * repo * resl See\x{a}" ~
-  "            http://www.ruleml.org/modularization for details about this       modularization\x{a}" ~
-  "            approach. \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-07-05T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** repo ***
 # A positional rest variable.
 # 
@@ -1762,48 +1276,6 @@ resl.type = resl.content, resl.attlist
 resl = element resl { resl.type }
 # includes the equalog layer with the 'equality' module
 
-a:documentation [
-  "\x{a}" ~
-  "         This is the XML Schema module for equality in RuleML. File:\x{a}" ~
-  "            equality_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module\x{a}" ~
-  "            declares the following RuleML s and attributes: * Equal * left * right *\x{a}" ~
-  "            @oriented *       @val See http://www.ruleml.org/modularization for details about this\x{a}" ~
-  "            modularization approach. \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2012-02-21T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** Equal ***
 # An equational formula consisting of two expressions.
 # 
@@ -1823,7 +1295,6 @@ a:documentation [
 #	(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)  )
 # )
 Equal = Equal-node.choice
-Equal.header &= meta-roles.content
 # *** left ***
 # The left-hand side of an equational formula.
 # 
@@ -1832,7 +1303,6 @@ Equal.header &= meta-roles.content
 # content model: 
 # in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-leftTerm.choice |= Time | Spatial | Interval
 # *** right***
 # The right-hand side of an equational formula.
 # 
@@ -1841,112 +1311,32 @@ leftTerm.choice |= Time | Spatial | Interval
 # content model: 
 # in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-rightTerm.choice |= Time | Spatial | Interval
 # include from the (spatio-temporal) derivation rule layer of reaction ruleml
 
-a:documentation [
-  "\x{a}" ~
-  "                                  Mode / Transactional / Use\x{a}" ~
-  "            attribute module.    This is the XML Schema attributes module for Reaction RuleML.\x{a}" ~
-  "            File: attribute_module.xsd    Version: 1.0    Last Modification: 2011-03-30        This\x{a}" ~
-  "            module declares the following Reaction RuleML s and attributes:\x{a}" ~
-  "            * @mode (mode declaration)                   * @safety (transactional)\x{a}" ~
-  "            * @per (usage)                   * @all (yes|no)                   * @style (execution\x{a}" ~
-  "            style)                    * @key and @keyref for modularization of knowledge bases                 \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-30T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
-a:documentation [
-  "\x{a}" ~
-  "                      This is the XML Schema currie module for\x{a}" ~
-  "            Reaction RuleML.       File: currie_module.xsd       Version: 1.0       Last\x{a}" ~
-  "            Modification: 2011-03-30              This module declares the datatypes supporting\x{a}" ~
-  "            CURRIEs             \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-30T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
+# in time module
+AnyTerm.choice |= Time
+# in spatial module
+AnyTerm.choice |= Spatial
+# in interval module
+AnyTerm.choice |= Interval
+# in event module
+#AnyTerm.choice |= Event
+# in situation module
+#AnyTerm.choice |= Situation
 
-## 
-##             
-##         
+##
 curieOrIRI.datatype = curie.datatype | xsd:anyURI
 
-## 
-##             
 ##         
 curieOrAbsIRI.datatype = curie.datatype | absIRI.datatype
 
-## 
-##             
 ##         
 termOrCurieOrIRI.datatype = term.datatype | curie.datatype | xsd:anyURI
 
-## 
-##             
 ##         
 termOrCurieOrAbsIRI = term.datatype | curie.datatype | absIRI.datatype
 absIRI.datatype = xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
 
-## 
-##             
 ##         
 curie.datatype =
   xsd:string {
@@ -1964,24 +1354,25 @@ term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 # 
 #	default="?"
 #	optional attribute
-mode.attrib = [ a7:defaultValue = "?" ] attribute mode { "+" | "-" | "?" }?
+#mode.attrib = [ a7:defaultValue = "?" ] attribute mode { "+" | "-" | "?" }?
+mode.attrib = attribute mode { "+" | "-" | "?" }?
 # *** @safety ***
 # 
 #    restriction: interrupting, non-interrupting or transactional
 #        default: non-interrupting
 #        optional attribute
-safety.attrib =
-  [ a8:defaultValue = "non-interrupting" ]
-  attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
+#safety.attrib =  [ a8:defaultValue = "non-interrupting" ]  attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
+safety.attrib =  attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
 # *** @per ***
 # An attribute indicating whether a function or expression is interpreted.
 #
-per-effect.attrib =
-  [ a9:defaultValue = "copy" ] attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
+#per-effect.attrib =  [ a9:defaultValue = "copy" ] attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
+per-effect.attrib =  attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
 # *** @size ***
 # An attribute indicating the size / number		
 # -1 = unbound / all
-size.attrib = [ a10:defaultValue = "-1" ] attribute size { xsd:int }?
+#size.attrib = [ a10:defaultValue = "-1" ] attribute size { xsd:int }?
+size.attrib = attribute size { xsd:int }?
 # *** @key ***
 # 
 # 
@@ -1993,48 +1384,6 @@ key.attrib = attribute key { curieOrAbsIRI.datatype }?
 # 
 #      optinal attribute
 keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
-a:documentation [
-  "\x{a}" ~
-  "                              Rules module part of Reaction RuleML.\x{a}" ~
-  "            It defines the core            Rule construct used as basis for all types of rules in\x{a}" ~
-  "            Reaction RuleML                      This is the XML Schema rule module for Reaction\x{a}" ~
-  "            RuleML.           File: rule_module.xsd           Version: 1.0           Last\x{a}" ~
-  "            Modification: 2011-03-29                      This schema declares the following\x{a}" ~
-  "            Reaction RuleML s and attributes:                      * Rule           * on\x{a}" ~
-  "            * if           * then           * do           * after                     * else\x{a}" ~
-  "            * elseDo           * elseAfter                          \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "Reaction RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-29T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** Rule ***
 # The Rule  that provides the basic syntax for rules
 # in Reaction RuleML.
@@ -2049,10 +1398,7 @@ a:documentation [
 # Rule has the following attributes:
 # @key @keyref @type @style @closure @direction @material @node 
 #
-Rule-datt.choice |=
-  direction-att-inf.choice
-  & material-att-inf.choice
-  & style.attrib
+Rule-datt.choice |= direction-att-inf.choice & material-att-inf.choice & style.attrib
 reRule.attlist &= closure.attrib?
 reRule.attlist &= Type.attlist?
 reRule.attlist &= commonNode.attlist?
@@ -2108,46 +1454,6 @@ ReactionRule.content = on, (if?, then?, do, after?, else?, elseDo?)?
 # *** Messaging Rule content model ***
 # (do)
 MessagingRule.content = do
-a:documentation [
-  "\x{a}" ~
-  "                 Negation module part of Reaction RuleML.   This\x{a}" ~
-  "            defines the negation elements for Reaction RuleML.   File: negation_module.xsd\x{a}" ~
-  "            Version: 1.0   Last Modification: 2011-03-22      * Negation  generic polymorphig\x{a}" ~
-  "            negation   * Naf           negation as failure (inflationary negation in production\x{a}" ~
-  "            rules), weak negation   * Neg           classical negation, strong negation   * weak\x{a}" ~
-  "            * strong   * formula        \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "Reaction RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-22T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # *** Negation ***
 # A generic polymorphic negation, which can be specialized by using
 # the @type attribute to specify the type of negation and/or 
@@ -2167,14 +1473,9 @@ Node.choice |= Negation
 Negation = element Negation { Negation.type }
 formula-negation.attlist = empty
 formula-negation.content =
-  Atom
-  | Equal
-  | Negation
-  | Naf
-  | Neg
-  | extended-signature-predicate-sorts.content
+  Atom | Equal | Negation | Naf | Neg | extended-signature-predicate-sorts.content
 formula-negation.type = formula-negation.content, formula-negation.attlist
-#formula = element formula { formula-negation.type }
+# formula = element formula { formula-negation.type }
 # *** Naf ***
 # A "by default" negation of a logical atom (i.e. "weak" negation or
 # negation-as-failure).
@@ -2188,7 +1489,7 @@ Naf.attlist = Negation.attlist
 Naf.content = meta-roles.content, (weak | weak.content)
 Naf.type = Naf.content, Naf.attlist
 Node.choice |= Naf
-Naf =  element Naf { Naf.type }
+Naf = element Naf { Naf.type }
 # *** weak ***
 # A role used for negation as failure.
 # 
@@ -2199,7 +1500,7 @@ Naf =  element Naf { Naf.type }
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
 weak.content = formula-negation.content
 weak.type = weak.content, weak.attlist
-weak =  element weak { weak.type }
+weak = element weak { weak.type }
 # *** Neg ***
 # A classical negation of a logical atom (i.e. classical or "strong" negation).
 # 
@@ -2224,46 +1525,6 @@ Neg = element Neg { Neg.type }
 strong.content = formula-negation.content
 strong.type = strong.content, strong.attlist
 strong = element strong { strong.type }
-a:documentation [
-  "\x{a}" ~
-  "                                         Quantifier module part of\x{a}" ~
-  "            Reaction RuleML redefining the Forall, Exists and introduce the Quantifier element.\x{a}" ~
-  "            This is the XML Schema Quantifier element for Reaction RuleML.   File:\x{a}" ~
-  "            quantifier_module.xsd   Version: 1.0   Last Modification: 2011-03-22       * Quantifier\x{a}" ~
-  "            generic quantifier   * Forall  predefined inner quantifier (used in quantification\x{a}" ~
-  "            metatag)   * Exist   predefined inner quantifier (used in qualification metatag)       \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-22T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 #   *** Quantifier ***
 #   Explicit generic quantifier, where the quantifier name can be defined by the 
 # @type attribute and the @iri attribute can point to an external definition
@@ -2298,46 +1559,6 @@ Forall-quantifier.content =
   (element formula { formula-forall.type }
    | formula-forall.content)?
 Forall-quantifier.type = Forall-quantifier.content, Exists.attlist
-a:documentation [
-  "\x{a}" ~
-  "                 Profile module part of Reaction RuleML.   This is\x{a}" ~
-  "            the XML Schema Profile element for Reaction RuleML for describing semantic profiles.\x{a}" ~
-  "            Semantic Profiles are used to define the interpretation evaluation semantics (under the\x{a}" ~
-  "            evaluation metatag)    either by referecing external existing profiles or by defining\x{a}" ~
-  "            them internally.   File: profile_module.xsd   Version: 1.0   Last Modification:\x{a}" ~
-  "            2011-03-22      * Profile         generic semantic profile       \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-22T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 # 
 #   *** Profile ***
 #   Explicit generic semantic profile defining the semantics of the rule. The semantic profile can be
@@ -2363,45 +1584,6 @@ Profile = element Profile { Profile.type }
 profile_anycontent.attlist = commonInit.attlist?
 profile_anycontent.content = element * { text }*
 profile_anycontent.type = profile_anycontent.content, profile_anycontent.attlist
-a:documentation [
-  "\x{a}" ~
-  "                       Time module part of Reaction RuleML. It\x{a}" ~
-  "            defines the core     time constructs        This is the XML Schema time module for\x{a}" ~
-  "            Reaction RuleML.    File: time_module.xsd    Version: 1.0    Last Modification:\x{a}" ~
-  "            2011-03-29     This schema declares the following Reaction RuleML elements and\x{a}" ~
-  "            attributes:       * Time    \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-29T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 #	*** Time ***
 #	Explicit generic Time construct. The time can be represented internally 
 #       * with positional arguments <arg>, e.g., <arg>
@@ -2461,45 +1643,6 @@ arg_time.type = arg_time.content, arg_time.attlist
 time_anycontent.attlist = commonInit.attlist?
 time_anycontent.content = element * { text }*
 time_anycontent.type = time_anycontent.content, time_anycontent.attlist
-a:documentation [
-  "\x{a}" ~
-  "                Spatial module part of Reaction RuleML. It defines\x{a}" ~
-  "            the core     spatial constructs        This is the XML Schema spatial module for\x{a}" ~
-  "            Reaction RuleML.    File: spatial_module.xsd    Version: 1.0    Last Modification:\x{a}" ~
-  "            2011-03-29        This schema declares the following Reaction RuleML elements and\x{a}" ~
-  "            attributes:        * Spatial       \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-29T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 #   *** Spatial ***
 #   Explicit generic Spatial construct. The spatial can be represented internally 
 # * with positional arguments <arg>
@@ -2548,45 +1691,6 @@ arg_spatial.type = arg_spatial.content, arg_spatial.attlist
 spatial_anycontent.attlist = commonInit.attlist?
 spatial_anycontent.content = element * { text }*
 spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
-a:documentation [
-  "\x{a}" ~
-  "                       Interval module part of Reaction RuleML. It\x{a}" ~
-  "            defines the core     Interval construct        This is the XML Schema event module for\x{a}" ~
-  "            Reaction RuleML.    File: interval_module.xsd    Version: 1.0    Last Modification:\x{a}" ~
-  "            2011-03-29     This schema declares the following Reaction RuleML elements and\x{a}" ~
-  "            attributes:       * Interval    \x{a}" ~
-  "        \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.0" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2011-03-29T23:11:17-0300" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "LGPL-3.0" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://wiki.ruleml.org/index.php/Relax_NG" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
 #   *** Interval ***
 #   Explicit generic Interval. The interval can be
 # defined internally by the any content model (xs:any Element) or externally, where 
@@ -2761,12 +1865,10 @@ situation_primitives.content = notAllowed
 # content model: 
 # in DR Reaction RuleML: ()
 event_primitives.content = notAllowed
-
 # An internal group for the action primitives for interpretation as action
 # content model: 
 # in DR Reaction RuleML: ()
 action_primitives.content = notAllowed
-
 # *** @style ***
 # 
 #  restriction: active | messaging | reasoning
@@ -2790,3 +1892,35 @@ style-att-inf.choice |= empty
 style-att-inf.choice |= style-att.choice
 # in style_attrib module
 style-att.choice |= attribute style { style.datatype }
+
+# Managing the ordered and unordered forms of the extended Node header pattern in DR
+# 1. to deal with the different distribution of oid, define a new pattern for element oid that
+# is added to Node.header if the oid_all module is included. 
+# This is a temporary fix until the oid distribution is harmonized in the next release.
+# 2. to deal with the different definition of the meta element, define a new patterm for
+# element meta that is added to Node.header if the meta_indexed module is included.
+# This is a temporary fix until the meta distribution is harmonized in the next release.
+# Node_unordered.header
+# content model: meta* & scope* & guard* & evaluation* & signature* & qualification* & quantification* & oid?
+# In the modules for the corresponding features
+Node_unordered.header &= meta*
+Node_unordered.header &= scope*
+Node_unordered.header &= guard*
+Node_unordered.header &= evaluation*
+Node_unordered.header &= signature*
+Node_unordered.header &= qualification*
+Node_unordered.header &= quantification*
+# special case
+Node_unordered.header &= oid?
+# In the unordered_header_dr module
+# Node.header &= Node_unordered.header?
+# 
+# In the ordered_header_dr module
+# Node_ordered.header
+# content model: meta* , scope* , guard* , evaluation* , signature* , qualification* , quantification* , oid?
+Node_ordered-header.choice |=
+  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
+# unordered_group_dr
+# Node.header &= Node_unordered.header? 
+# ordered_group_dr - redefine ordered_group
+ Node.header &= Node_ordered-header.choice? 

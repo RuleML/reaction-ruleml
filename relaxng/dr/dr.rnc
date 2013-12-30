@@ -304,6 +304,15 @@ include "http://ruleml.org/1.0/relaxng/modules/per_non-default_expansion_module.
 include "http://ruleml.org/1.0/relaxng/modules/per_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+# 
+# IN-PLACE ANNOTATIONS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+  meta.edge.def =  element meta { index.attrib & 
+    formula_AssertRetract.attlist? & formula_AssertRetract.content }
+  Node.header &= empty
+}
 
 # includes the datalog layer of deliberation ruleml
 
@@ -429,7 +438,7 @@ formula-assert.content =
   | Entails
   | outer-quantifier.content
   | outer-connective.content
-  | extended-signature-predicate-sorts.content
+  | extended-signature-predicate-sorts.content  
 formula-query.content =
   Rulebase
   | Atom
@@ -439,7 +448,9 @@ formula-query.content =
   | extended-signature-predicate-sorts.content
 formula-assert.type = formula-assert.content, formula.attlist
 formula-query.type = formula-query.content, formula.attlist
-# <rng:include href="modules/xml_module.rng" ns="http://www.w3.org/XML/1998/namespace"/>
+#
+formula_AssertRetract.content |= formula-assert.content
+ # <rng:include href="modules/xml_module.rng" ns="http://www.w3.org/XML/1998/namespace"/>
 
 # *** oid ***
 # An optional object identifier for an atomic formula, expression or the unifed terms
@@ -463,22 +474,7 @@ oid = element oid { oid.type }
 commonInit.attlist &= key.attrib?
 commonInit.attlist &= keyref.attrib?
 #  *** meta ***     
-# 
-# An optional container for meta-knowledge about a Node.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-meta
-# 
-#     Used for descriptive Metadata annotations in Reaction RuleML
-# 
-#  content model: 
-#  in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
-#  in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
-# 
-#  Multiple Metadata annotations are possible by repreating <meta>
-meta.attlist = index.attrib, commonInit.attlist?
-meta.content = formula-assert.content
-meta.type = meta.content, meta.attlist
-meta = element meta { meta.type }
+meta = metaKnowledge-edge.choice
 # *** scope ***
 # 
 # Note: scope of the rule, e.g. defining a constructive view on the rules and facts
@@ -930,7 +926,6 @@ degree.type = degree.content, degree.attlist
 degree = element degree { degree.type }
 # *** slot ***
 slot = slot-edge.choice
-# *** @card ***
 # *** arg ***
 arg = positionalArgument-edge.choice
 # *** Data ***

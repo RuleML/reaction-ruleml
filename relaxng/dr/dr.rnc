@@ -194,6 +194,117 @@ include "http://ruleml.org/1.0/relaxng/modules/material_non-default_expansion_mo
 include "http://ruleml.org/1.0/relaxng/modules/material_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+# 
+# ATOMIC FORMULAS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# POLYADIC TERM (ONE OR MORE TERMS) SEQUENCES INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/termseq_poly_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# IMPLICIT CLOSURE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/closure_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# SLOTS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/slot_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# SLOT CARDINALITY INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/card_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# SLOT WEIGHTS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/weight_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+
+# 
+# SLOTTED REST VARIABLES INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/resl_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# POSITIONAL REST VARIABLES INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/repo_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# DEGREE OF UNCERTAINTY INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# EXPRESSIONS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+
+# 
+# GENERALIZED LISTS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/plex_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# SET-VALUED EXPRESSION ATTRIBUTE IS ABSENT OR OPTIONAL
+#
+include "http://ruleml.org/1.0/relaxng/modules/val_absence_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# SET-VALUED EXPRESSION ATTRIBUTE IS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/val_attrib_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# NON-DEFAULT VALUES OF THE SET-VALUED ATTRIBUTE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/val_non-default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# DEFAULT VALUE OF THE SET-VALUED ATTRIBUTE INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/val_default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# INTERPRETED EXPRESSION ATTRIBUTE IS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/per_attrib_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# NON-DEFAULT VALUES OF EXPRESSION INTERPRETATION INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/per_non-default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# DEFAULT VALUE OF EXPRESSION INTERPRETATION INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/per_default_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+
 # includes the datalog layer of deliberation ruleml
 
 # note that elementFormDefault is qualified because of local declarations
@@ -330,20 +441,6 @@ formula-assert.type = formula-assert.content, formula.attlist
 formula-query.type = formula-query.content, formula.attlist
 # <rng:include href="modules/xml_module.rng" ns="http://www.w3.org/XML/1998/namespace"/>
 
-# *** @node ***
-# An optional identification label for a Node, creating accessibility within
-# the knowledge representation.
-# This can help for representing prioritization between rules, for example. 
-# The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
-# such a label.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@node
-# 
-# content model: xs:anyURI
-oid.attlist = empty
-oid.content =
-  Ind | Data | Var | Skolem | Reify | Expr | Plex | extended-signature-function-sorts.content
-oid.type = oid.content, oid.attlist
 # *** oid ***
 # An optional object identifier for an atomic formula, expression or the unifed terms
 # of the SWSL branch, as needed for PSOA semantics.
@@ -354,6 +451,9 @@ oid.type = oid.content, oid.attlist
 # content model: 
 # in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+oid.attlist = empty
+oid.content = AnyTerm.choice
+oid.type = oid.content, oid.attlist
 oid = element oid { oid.type }
 # 
 #       @key @keyref @xml:id @xml:base
@@ -802,130 +902,21 @@ formula-rulebase.content =
 formula-and-or.type = formula-and-or.content, formula.attlist
 formula-rulebase.type = formula-rulebase.content, formula.attlist
 # *** @mapMaterial ***
-# An attribute indicating the kind of all implication rules 
-# falling within its scope (i.e. child elements).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@mapMaterial
 mapMaterial.attrib = mapMaterial-att-inf.choice
 # *** @material ***
-# An attribute indicating the kind of an implication rule.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@material
 material.attrib = material-att-inf.choice
 # *** @mapDirection ***
-# An attribute indicating the intended direction of implication rule inferencing
-# of elements falling within its scope (i.e. child elements).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@mapDirection
 mapDirection.attrib = mapDirection-att-inf.choice
-#  [ a2:defaultValue = "bidirectional" ]
-#  attribute mapDirection { "forward" | "backward" | "bidirectional" }?
 # *** @direction ***
-# An attribute indicating the intended direction of an implication rule's inferencing.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@direction
 direction.attrib = direction-att-inf.choice
-#  [ a3:defaultValue = "bidirectional" ]
-#  attribute direction { "forward" | "backward" | "bidirectional" }?
 # *** @mapClosure ***
-# An attribute indicating how the free variables falling within
-# its scope (i.e. child elements) are quantified.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@mapClosure
-mapClosure.attrib = attribute mapClosure { "universal" | "existential" }?
+mapClosure.attrib = mapClosure-att.choice?
 # *** @closure ***
-# An attribute indicating how the contained free variables are quantified.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@closure		
-closure.attrib = attribute closure { "universal" | "existential" }?
-# note that elementFormDefault is qualified because of local declarations
-
+closure.attrib = closure-att.choice?
 # *** Atom ***
-#	A logical atom, i.e. an expression formed from a predicate
-#	applied to a collection of its (logical) arguments.
-# 
-#	See http://www.ruleml.org/1.0/glossary/#gloss-Atom
-# 
-#	content model:
-#	in DR Reaction RuleML:
-#	(
-#		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
-#		((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval)*, repo?) | repo), slot*, resl?
-#	)
-# 
-#	in KR Reaction RuleML:
-#	(
-#		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
-#		((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo?) | repo), slot*, resl?
-#	)
-# 
-#	however, the above content model is non-deterministic,
-#	so it is (equivalently) restructured as follows:
-#	in DR Reaction RuleML:
-#	(
-#			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel), slot*,
-#			( 
-#				( 
-#					((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?)
-#					|
-#					repo
-#				),
-#				slot*)?, 
-#			resl?
-#		)	
-# 
-#	in KR Reaction RuleML
-#	(
-#			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel), slot*,
-#			( 
-#				( 
-#					((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo?)
-#					|
-#					repo
-#				),
-#				slot*)?, 
-#			resl?
-#		)
-# 
-#	Note the 'positionalized' normal form where the oid and op roles
-#	are at the beginning of the atom.
-Atom.attlist = closure.attrib, commonNode.attlist
-Atom.content =
-  meta-roles.content,
-  oid?,
-  degree?,
-  (op | Rel),
-  slot*,
-  ((((arg | Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)+, repo?)
-    | repo),
-   slot*)?,
-  resl?
-Atom.type = Atom.content, Atom.attlist
-Node.choice |= Atom
-Atom = element Atom { Atom.type }
-# *** op ***
-# An operator expression including the relation of an atom.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-op
-# 
-# content model (within Atom): (Rel)
-# 
-# Other (context-sensitive) versions of <op> are in the expr and holog modules.
-op.attlist = commonInit.attlist?
-op-atom.content = Rel
-op-atom.type = op-atom.content, op.attlist
-op = element op { op-atom.type }
+Atom = Atom-node.choice
 # *** Rel ***
-# A relation, i.e. a logical predicate, of an atom.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Rel
-# 
-# content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-Rel.attlist = iri.attrib, commonNode.attlist, per-effect.attrib
-Rel.content = xsd:token
-Rel.type = Rel.content, Rel.attlist
-Node.choice |= Rel
-Rel = element Rel { Rel.type }
+reRel.attlist &= per-effect.attrib?
 # *** degree ***
 # 
 # An optional uncertainty value (between 0.0 and 1.0)
@@ -938,74 +929,13 @@ degree.content = Data
 degree.type = degree.content, degree.attlist
 degree = element degree { degree.type }
 # *** slot ***
-# A user-defined slot consisting of a name (first position) and a filler (second position).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-slot
-# 
-# content model:
-# DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
-# KR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Event|Situation), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation) )
-# 
-# 
-# this allows using time and spatial as slot names to define nominal units, e.g. time1(years->3 months->2)  
-#	location1(x -> 10 y -> 10)
-slot.attlist = card.attrib, weight.attrib, commonInit.attlist?
-slot-name.extend = Ind | Data | Expr | Plex | extended-signature-function-sorts.content
-slot.content = slot-name.extend, arg.content
-slot.type = slot.content, slot.attlist
-slot = element slot { slot.type }
+slot = slot-edge.choice
 # *** @card ***
-# An attribute optionally specifying a slot's cardinality.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@card		
-card.attrib = attribute card { xsd:nonNegativeInteger }?
-# *** @weight ***
-# An attribute optionally specifying a slot's relative weight.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@weight		
-weight.attrib =
-  attribute weight {
-    xsd:decimal { minInclusive = "0" maxInclusive = "1" }
-  }?
 # *** arg ***
-# A role used for the positional arguments of a logical atom.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-arg
-# 
-# content model: 
-# in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-# in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-arg.attlist = index.attrib, commonInit.attlist?
-arg.content =
-  Ind | Data | Var | Skolem | Reify | Expr | Plex | extended-signature-function-sorts.content
-arg.type = arg.content, arg.attlist
-arg = element arg { arg.type }
-# *** Ind ***
-# An individual constant, as in predicate logic, which can also be considered to
-# be a fixed argument like RDF resources.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Ind
-# 
-# content model: text
-#
-Ind = Individual-node.choice
+arg = positionalArgument-edge.choice
 # *** Data ***
-# A fixed argument like RDF literals, allowing XML data.  It may be
-# optionally associated with an XML Schema built-in datatype
-# (see http://www.w3.org/TR/xmlschema-2/#built-in-datatypes)
-# using the built-in xsi:type attribute.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Data
-# 
-# content model: xs:anytype [optionally datatyped]
 Data = DataTerm.choice
 #	*** Var ***
-#	A logical variable, as in logic programming.
-# 
-#	See http://www.ruleml.org/1.0/glossary/#gloss-Var
-# 
-#	content model: text
-# 
 #	@mode = + | - | ?; default is ?
 # 
 #   + input variable which must be bound
@@ -1014,315 +944,22 @@ Data = DataTerm.choice
 #
 Var = Variable-node.choice
 reVar.attlist &= mode.attrib
-# *** Skolem ***
-# A Skolem individual constant, like RDF's blank nodes.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Skolem
-# 
-# content model: text
-#
-Skolem = Skolem-node.choice
-# *** Reify ***
-# Supports reification (a kind of instantiation or quasi-quotation)
-# as needed by SWSL. It allows any RuleML tag available within the
-# current sublanguage as content, treating it as a term for performing
-# reasoning on.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Reify		
-# 
-# content model: (any valid RuleML formula)
-Reify = Reify-node.choice
-# *** @type ***
-# An attribute for optionally specifying a term's (user-defined) type.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@type
-# 
 # *** @index ***
-# A required attribute for specifying the position of a positional
-# argument within an atom.
-# 
-# Note: in Reaction RuleML @index is optional
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@index
-index.attrib = attribute index { xsd:positiveInteger }?
+index.attrib = index-attrib.choice?
 # *** @iri ***
-# An attribute for referring to a IRI.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-@iri
 iri.attrib = iri-att.choice?
-# includes the hornlog layer with the 'expr' and 'rest' modules
-
-# note that elementFormDefault is qualified because of local declarations
-
-#	    *** Expr ***
-#	    A logical function of the form "f(...)" where f is a function name.
-# 
-#	    See http://www.ruleml.org/0.91/glossary/#gloss-Expr
-# 
-#	    content model:
-#	    DR Reaction RuleML:
-#	    ( 		   
-#	       meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-#	      (op|Fun), slot*, 
-#   (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*,
-#	      repo?, slot*, resl?
-#	    )
-# 
-# KR Reaction RuleML:
-#	    ( 		   
-#	       meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-#	      (op|Fun), slot*, 
-#   (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*,
-#	      repo?, slot*, resl?
-#	    )
-# 
-#	    however, this is non-deterministic, so it is (equivalently) restructured as follows:
-#	    DR Reaction RuleML:
-#	    (
-#	    meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
-#		    ( 
-#			    ( 
-#				    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo? )
-#				    |
-#				    repo
-#			    ),
-#			    slot*)? , 
-#		    resl?
-#	    )
-#	    KR Reaction RuleML:
-#			    (
-#	    meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
-#		    ( 
-#			    ( 
-#				    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo? )
-#				    |
-#				    repo
-#			    ),
-#			    slot*)? , 
-#		    resl?
-#	    )
-#	    Note the 'positionalized' normal form where the op role is only
-#	    at the beginning of the Expr.
-Expr.attlist = Type.attlist, commonNode.attlist, per.attrib
-Expr.content =
-  meta-roles.content,
-  oid?,
-  (op-Expr | Fun),
-  slot*,
-  ((((arg | Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)+, repo?)
-    | repo),
-   slot*)?,
-  resl?
-Expr.type =
-  # <xs:annotation>
-  #	<xs:appinfo>
-  #		<sch:pattern name="Uninterpreted functions">
-  #			<sch:rule context="r:Expr/r:Fun[@per='no']">
-  #				<sch:assert test=
-  #						"not(../r:Expr/r:Fun[@per='yes'] or
-  #							 ../r:arg/r:Expr/r:Fun[@per='yes'] or
-  #							 ../r:Expr/r:op/r:Fun[@per='yes'] or 
-  #							 ../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
-  #						Functions nested within an uninterpreted function must also be uninterpreted.
-  #				</sch:assert>
-  #			</sch:rule>
-  #			<sch:rule context="r:Expr/r:op/r:Fun[@per='no']">
-  #				<sch:assert test=
-  #						"not(../../r:Expr/r:Fun[@per='yes'] or
-  #							 ../../r:arg/r:Expr/r:Fun[@per='yes'] or
-  #							 ../../r:Expr/r:op/r:Fun[@per='yes'] or 
-  #							 ../../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
-  #						Functions nested within an uninterpreted function must also be uninterpreted.
-  #				</sch:assert>
-  #			</sch:rule>
-  #		</sch:pattern>
-  #	</xs:appinfo>
-  # </xs:annotation>
-  Expr.content,
-  Expr.attlist
-Node.choice |= Expr
-Expr = element Expr { Expr.type }
-Expression-node.choice |= Expr
-# *** op ***
-# An operator expression including the function name of an expression.
-# 
-# See http://www.ruleml.org/0.91/glossary/#gloss-op
-# 
-# content model (within Expr): (Fun)
-# 
-# Other (context-sensitive) versions of <op> are in the atom and holog modules.
-
-# the (empty) attribute list is declared in the atom module
-op-Expr.content = Fun
-op-Expr.type = op-Expr.content, op.attlist
-#		*** Fun ***
-#		A user-defined function name.
-# 
-#		See http://www.ruleml.org/0.91/glossary/#gloss-Fun
-# 
-# content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-op-Expr = element op { op-Expr.type }
-Fun.attlist = iri.attrib, per.attrib, commonNode.attlist, val.attrib
-Fun.content = xsd:token
-Fun.type = Fun.content, Fun.attlist
-Node.choice |= Fun
-Fun = element Fun { Fun.type }
-# *** @val ***
-# An attribute indicating whether a function is deterministic (exactly one)
-# or non-deterministic (set-valued).
-# 
-# May be unified with @card/@minCard/@maxCard for slots in a future version.
-# 
-# See http://www.ruleml.org/0.91/glossary/#gloss-@val
-#
-#val.attrib = [ a4:defaultValue = "0.." ] attribute val { "1" | "0.." }?
-val.attrib = attribute val { "1" | "0.." }?
-#	    *** Plex ***
-#	    An unordered collection of arguments without a constructor.
-# 
-#	    See http://www.ruleml.org/0.91/glossary/#gloss-Plex
-# 
-#	    content model (within Atom, Plex, slot):
-#	    DR Reaction RuleML:
-#	    ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-#	      slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*, repo?, slot*, resl? )
-# 
-# KR Reaction RuleML
-#	    ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-#	      slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Interval)*, repo?, slot*, resl? )
-# 
-#	    however, this is non-deterministic, so it is (equivalently) restructured as follows:
-# 
-#	    DR Reaction RuleML:
-#	    (		
-#	       meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-#	       slot*,
-#		 (
-#		    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?, slot*, resl? )?
-#		    |
-#		 ( repo, slot*, resl? )
-#		 |
-#		 resl
-#		 )
-#	    )
-# 
-#	    KR Reaction RuleML:
-#	    (		
-#	       meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-#	       slot*,
-#		 (
-#		    ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo?, slot*, resl? )?
-#		    |
-#		 ( repo, slot*, resl? )
-#		 |
-#		 resl
-#		 )
-#	    )
-# 
-#	    content model (within repo): 
-#	    DR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval )*, repo? )
-#	    KR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo? )
-# 
-#	    content model (within resl):
-#	    DR Reaction RuleML: (slot*, resl? )
-#	    KR Reaction RuleML: (slot*, resl? )
-Plex.attlist = commonNode.attlist
-Plex.content =
-  meta-roles.content,
-  slot*,
-  (((arg | Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)+,
-    repo?,
-    slot*,
-    resl?)?
-   | (repo, slot*, resl?)
-   | resl)
-Plex-repo.content = meta-roles.content, (arg | arg.content)*, repo?
-Plex-resl.content = meta-roles.content, slot*, resl?
-Plex.type = Plex.content, Plex.attlist
-Plex-repo.type = Plex-repo.content, Plex.attlist
-Plex-resl.type = Plex-resl.content, Plex.attlist
-Node.choice |= Plex
-Plex = element Plex { Plex.type }
-Plex_Any-node.choice |= Plex
-# *** @per ***
-# An attribute indicating whether a function or expression is interpreted.
-# 
-# See http://www.ruleml.org/0.91/glossary/#gloss-@per
-#per.attrib = [ a5:defaultValue = "copy" ] attribute per { "copy" | "value" | "open" }?
-per.attrib = attribute per { "copy" | "value" | "open" }?
-# note that elementFormDefault is qualified because of local declarations
-
 # *** repo ***
-# A positional rest variable.
-# 
-# See http://www.ruleml.org/0.91/glossary/#gloss-repo
-# 
-# content model: (Var | Plex)
-repo.content =
-  Var
-  | element Plex { Plex-repo.type }
-repo.type = repo.content, repo.attlist
-repo = element repo { repo.type }
+repo = restOfPositionalArguments-edge.choice
 # *** resl ***
-# A slotted rest variable.
-# 
-# See http://www.ruleml.org/0.91/glossary/#gloss-resl		
-# 
-# content model: (Var | Plex)
-resl.content =
-  Var
-  | element Plex { Plex-resl.type }
-resl.type = resl.content, resl.attlist
-resl = element resl { resl.type }
-# includes the equalog layer with the 'equality' module
-
+resl = restOfSlots-edge.choice
 # *** Equal ***
-# An equational formula consisting of two expressions.
-# 
-# See http://www.ruleml.org/0.91/glossary/#gloss-Equal
-# 
-# content model:
-# in DR Reaction RuleML:
-# (
-#   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?
-#	(left, right) |
-#	(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)  )
-# )
-# in KR Reaction RuleML:
-# (
-#   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?
-#	(left, right) |
-#	(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)  )
-# )
 Equal = Equal-node.choice
-# *** left ***
-# The left-hand side of an equational formula.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-left
-# 
-# content model: 
-# in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-# in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-# *** right***
-# The right-hand side of an equational formula.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-right
-# 
-# content model: 
-# in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-# in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-# include from the (spatio-temporal) derivation rule layer of reaction ruleml
-
 # in time module
-AnyTerm.choice |= Time
+SimpleKeyTerm.choice |= Time
 # in spatial module
-AnyTerm.choice |= Spatial
+SimpleKeyTerm.choice |= Spatial
 # in interval module
-AnyTerm.choice |= Interval
-# in event module
-#AnyTerm.choice |= Event
-# in situation module
-#AnyTerm.choice |= Situation
+SimpleKeyTerm.choice |= Interval
 
 ##
 curieOrIRI.datatype = curie.datatype | xsd:anyURI
@@ -1736,28 +1373,29 @@ content_interval = element content { interval_anycontent.type }
 # 
 # content model: (meta*, scope*, guard )
 #
-metadata.content = meta*, scope*, guard*
+#metadata.content = meta*, scope*, guard*
 # interface group
 # 
 # This internal group defines the interface signature and the evaluation semantics
 # 
 # content model: (evaluation*, signature* )
 #
-interface.content = evaluation*, signature*
+#interface.content = evaluation*, signature*
 # instance group
 # 
 # This internal group defines the instance including the qualification (qualifying metadata), the quantification and the object id
 # 
 # content model: (qualification*, quantification*, oid? )
 #
-instance.content = qualification*, quantification*, oid?
+#instance.content = qualification*, quantification*, oid?
 # 
 # An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
 # 
 # 
 # content model: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?)
 #
-meta-roles.content = metadata.content, interface.content, instance.content
+#meta-roles.content = metadata.content, interface.content, instance.content
+meta-roles.content = Node.header
 # 
 # An internal group for the implementation of a rule in the Reaction RuleML language
 # 
@@ -1855,8 +1493,8 @@ interval_primitives.content =
   (Time, Time?)
   | (Spatial, Spatial?)
   | (Interval, Interval?)
-  | ((Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval),
-     (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?)
+  | ((AnyTerm.choice),
+     (AnyTerm.choice)?)
 # An internal group for the situation primitives for interpretation as situation
 # content model: 
 # in DR Reaction RuleML: ()
@@ -1903,23 +1541,31 @@ style-att.choice |= attribute style { style.datatype }
 # Node_unordered.header
 # content model: meta* & scope* & guard* & evaluation* & signature* & qualification* & quantification* & oid?
 # In the modules for the corresponding features
-Node_unordered.header &= meta*
-Node_unordered.header &= scope*
-Node_unordered.header &= guard*
-Node_unordered.header &= evaluation*
-Node_unordered.header &= signature*
-Node_unordered.header &= qualification*
-Node_unordered.header &= quantification*
+#metadata.content, interface.content, instance.content
+metadata_unordered.header &= meta*
+metadata_unordered.header &= scope*
+metadata_unordered.header &= guard*
+interface_unordered.header &= evaluation*
+interface_unordered.header &= signature*
+instance_unordered.header &= qualification*
+instance_unordered.header &= quantification*
 # special case
-Node_unordered.header &= oid?
+instance_unordered.header &= oid?
+#
+Node_unordered.header &= metadata_unordered.header?
+Node_unordered.header &= interface_unordered.header?
+Node_unordered.header &= instance_unordered.header?
 # In the unordered_header_dr module
 # Node.header &= Node_unordered.header?
 # 
 # In the ordered_header_dr module
 # Node_ordered.header
 # content model: meta* , scope* , guard* , evaluation* , signature* , qualification* , quantification* , oid?
+metadata_ordered-header.choice |= meta*, scope*, guard*
+interface_ordered-header.choice |= evaluation*, signature*
+instance_ordered-header.choice |= qualification*, quantification*, oid?
 Node_ordered-header.choice |=
-  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
+  metadata_ordered-header.choice, interface_ordered-header.choice, instance_ordered-header.choice
 # unordered_group_dr
 # Node.header &= Node_unordered.header? 
 # ordered_group_dr - redefine ordered_group

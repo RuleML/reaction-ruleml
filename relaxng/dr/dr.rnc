@@ -913,17 +913,6 @@ closure.attrib = closure-att.choice?
 Atom = Atom-node.choice
 # *** Rel ***
 reRel.attlist &= per-effect.attrib?
-# *** degree ***
-# 
-# An optional uncertainty value (between 0.0 and 1.0)
-# that may be assigned to facts and rules.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-degree
-# 
-# content model: (Data)
-degree.content = Data
-degree.type = degree.content, degree.attlist
-degree = element degree { degree.type }
 # *** slot ***
 slot = slot-edge.choice
 # *** arg ***
@@ -951,10 +940,14 @@ resl = restOfSlots-edge.choice
 Equal = Equal-node.choice
 # in time module
 SimpleKeyTerm.choice |= Time
+SimpleFormula-node.choice |= Time
 # in spatial module
 SimpleKeyTerm.choice |= Spatial
+SimpleFormula-node.choice |= Spatial
 # in interval module
 SimpleKeyTerm.choice |= Interval
+SimpleFormula-node.choice |= Interval
+
 
 ##
 curieOrIRI.datatype = curie.datatype | xsd:anyURI
@@ -1245,14 +1238,14 @@ profile_anycontent.type = profile_anycontent.content, profile_anycontent.attlist
 Time.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Time.content =
   meta-roles.content,
-  (slot*
-   | resl?
-   | ((element arg { arg_time.type }
+  ((slot*,
+   resl?,
+   (( ((element arg { arg_time.type }
        | time_primitives.content)+
-      | repo?
-      | repo)
-   | slot*
-   | resl?
+      , repo?)
+      | repo),
+    slot*,
+   resl?)?)
    | element content { time_anycontent.type }*)
 Time.type = Time.content, Time.attlist
 Node.choice |= Time
@@ -1293,14 +1286,14 @@ time_anycontent.type = time_anycontent.content, time_anycontent.attlist
 Spatial.attlist = iri.attrib, Type.attlist, commonNode.attlist
 Spatial.content =
   meta-roles.content,
-  (slot*
-   | resl?
-   | ((element arg { arg_spatial.type }
+  ((slot*
+   , resl?,
+   (( ((element arg { arg_spatial.type }
        | spatial_primitives.content)+
-      | repo?
+      , repo? )
       | repo)
-   | slot*
-   | resl?
+   , slot*,
+   resl?)?)
    | element content { spatial_anycontent.type }*)
 Spatial.type = Spatial.content, Spatial.attlist
 Node.choice |= Spatial

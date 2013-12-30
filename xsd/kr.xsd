@@ -13,14 +13,14 @@
 			
 			This schema declares the following Reaction RuleML KR elements and attributes for reasoning:
 			
-			* extend Assert/Retract by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
-			* extend Rulebase by Time, Interval, Spatial,  adding Event, Situation, Holds, Initates, Terminstes, Happens
-			* extend Query by adding Time, Interval, Spatial,  Event, Situation, Holds, Initates, Terminates, Happens
-			* extend if by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
-			* extend then by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
-			* And/Or by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Terminates, Happens
-			* Negation and Neg by adding Time, Interval, Spatial, Event, Situation, Holds, Initates, Termiantes, Happens
-			* add Time, Interval, Spatial, Event, Situation, Holds, Initates, Termiantes, Happens
+			* extend Assert/Retract by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
+			* extend Rulebase by Time, Interval, Spatial,  adding Event, Action, Situation, Holds, Initates, Terminstes, Happens
+			* extend Query by adding Time, Interval, Spatial,  Event, Action, Situation, Holds, Initates, Terminates, Happens
+			* extend if by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
+			* extend then by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
+			* And/Or by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
+			* Negation and Neg by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Termiantes, Happens
+			* add Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Termiantes, Happens
 			
 		</xs:documentation>
 		<xs:appinfo>
@@ -68,7 +68,7 @@
 	<xs:include schemaLocation="modules/situation_module.xsd" />
 	<xs:include schemaLocation="modules/situationreasoning_module.xsd" />
 	<xs:include schemaLocation="modules/event_module.xsd" />
-
+	<xs:include schemaLocation="modules/action_module.xsd" />
 
 	<!--
      metadata group
@@ -261,9 +261,9 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the KR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial, Interval, Event, Situation, Holds, Initiates, Terminates, Happens
+     In the KR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial, Interval, Event, Action, Situation, Holds, Initiates, Terminates, Happens
     
-     content model: (Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
+     content model: (Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
           
 	-->
 	
@@ -282,9 +282,9 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the KR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial, Interval, Event, and Situation
+     In the KR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial, Interval, Event, Action, and Situation
     
-     content model: (Time | Spatial | Interval | Event | Situation)
+     content model: (Time | Spatial | Interval | Event | Action | Situation)
           
 	-->
 	
@@ -294,6 +294,7 @@
 			<xs:element ref="Spatial"/>
 			<xs:element ref="Interval"/>
 			<xs:element ref="Event"/>			
+			<xs:element ref="Action"/>			
 			<xs:element ref="Situation"/>			
 		</xs:choice>
 	</xs:group>
@@ -301,7 +302,7 @@
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
-		in KR RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval  | Event | Situation)
+		in KR RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval  | Event | Action | Situation)
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>
@@ -311,7 +312,7 @@
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
-		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 	-->
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>
@@ -321,20 +322,16 @@
 	
 	<!-- Interval primitives
 		content model: 
-		in ([Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?] | [Situation, Situation?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval | Event | Situation), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval | Event | Situation)?]) -->
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) -->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>							
-			<xs:sequence>
-				<xs:group ref="arg.content"/>
-				<xs:group ref="arg.content" minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>	
-			
+			<xs:group ref="arg.content"/>			
 		</xs:choice>
 	</xs:group>
 	
 	<!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
-		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 	-->
 	<xs:group name="situation_primitives.content">
 		<xs:choice>
@@ -344,7 +341,7 @@
 	
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
-		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>			
@@ -355,7 +352,7 @@
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		in DR Reaction RuleML: ()
-		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>

@@ -331,14 +331,10 @@
 
 	<!-- Interval primitives
 		content model: 
-		in ([Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?]) -->
+		in DR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) -->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>
-			<xs:sequence>
-				<xs:group ref="arg.content"/>
-				<xs:group ref="arg.content" minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>	
-			
+			<xs:group ref="arg.content"/>				
 		</xs:choice>
 	</xs:group>
 

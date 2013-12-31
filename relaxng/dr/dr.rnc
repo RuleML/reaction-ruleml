@@ -46,12 +46,18 @@ include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc"
 include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+include "http://ruleml.org/1.0/relaxng/modules/default_absent_folog_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 # 
 # ATTRIBUTES WITH DEFAULT VALUES REQUIRED
 #
 include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+#include "http://ruleml.org/1.0/relaxng/modules/default_present_folog_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
 # 
 # EQUATIONS INCLUDED
 #
@@ -309,14 +315,46 @@ include "http://ruleml.org/1.0/relaxng/modules/per_default_expansion_module.rnc"
 #
 include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
-  meta.edge.def =  element meta { index.attrib & 
+  meta.edge.def =  element meta { index-attrib.choice? & 
     formula_AssertRetract.attlist? & formula_AssertRetract.content }
   Node.header &= empty
 }
-
-# includes the datalog layer of deliberation ruleml
-
-# note that elementFormDefault is qualified because of local declarations
+# 
+# STRONG NEGATION INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# WEAK NEGATIONS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# EQUIVALENCES INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/equivalent_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# CONJUNCTIONS AND DISJUNCTIONS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# IMPLICATIONS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/implication_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# QUANTIFICATION OVER VARIABLES INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 
 #	*** RuleML ***
 #	The n-ary top-level of a RuleML document.
@@ -331,7 +369,7 @@ include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" inheri
 #  Note: key and keyref object identifier are defined to be unique under the RuleML document root
 #
 RuleML.attlist = commonNode.attlist
-RuleML.content = meta-roles.content, (act | Assert | Retract | Query)*
+RuleML.content = Node.header, (act | Assert | Retract | Query)*
 RuleML.type = RuleML.content, RuleML.attlist
 start |= RuleML
 Node.choice |= RuleML
@@ -349,7 +387,7 @@ RuleML =
 # content model  (Assert|Retract|Query)
 #
 act.content = Assert | Retract | Query
-act.attlist = index.attrib, commonInit.attlist?
+act.attlist = index-attrib.choice?, commonInit.attlist?
 act.type = act.content, act.attlist
 act = element act { act.type }
 #	    *** Assert ***
@@ -369,7 +407,7 @@ Assert.attlist =
   safety.attrib,
   size.attrib
 Assert.content =
-  meta-roles.content,
+  Node.header,
   (element formula { formula-assert.type }
    | formula-assert.content)*
 Assert.type = Assert.content, Assert.attlist
@@ -387,7 +425,7 @@ Assert = element Assert { Assert.type }
 # KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
 Retract.attlist = mapDirection.attrib, mapClosure.attrib, mapMaterial.attrib, commonNode.attlist
 Retract.content =
-  meta-roles.content,
+  Node.header,
   (element formula { formula-assert.type }
    | formula-assert.content)*
 Retract.type = Retract.content, Retract.attlist
@@ -404,7 +442,7 @@ Retract = element Retract { Retract.type }
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
 Query.attlist = closure.attrib, commonNode.attlist
 Query.content =
-  meta-roles.content,
+  Node.header,
   (element formula { formula-query.type }
    | formula-query.content)*
 Query.type = Query.content, Query.attlist
@@ -462,7 +500,6 @@ formula_AssertRetract.content |= formula-assert.content
 # content model: 
 # in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 # in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-oid.attlist = empty
 oid.content = AnyTerm.choice
 oid.type = oid.content, oid.attlist
 oid = element oid { oid.type }
@@ -525,7 +562,7 @@ meta = metaKnowledge-edge.choice
 # 
 # content model: ( (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval)? )
 #
-scope.attlist = index.attrib, commonInit.attlist?
+scope.attlist = index-attrib.choice?, commonInit.attlist?
 scope.content = formula-query.content?
 scope.type = scope.content, scope.attlist
 scope = element scope { scope.type }
@@ -537,8 +574,8 @@ scope = element scope { scope.type }
 # in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
 # in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
 #
-guard.attlist = index.attrib, commonInit.attlist?
-guard.content = if.content
+guard.attlist = index-attrib.choice?, commonInit.attlist?
+guard.content = PremiseFormula.choice
 guard.type = guard.content, guard.attlist
 guard = element guard { guard.type }
 # *** evaluation ***
@@ -550,7 +587,7 @@ guard = element guard { guard.type }
 # The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
 # 
 # content model: (Profile )
-evaluation.attlist = index.attrib, commonInit.attlist?
+evaluation.attlist = index-attrib.choice?, commonInit.attlist?
 evaluation.content = Profile
 evaluation.type = evaluation.content, evaluation.attlist
 evaluation = element evaluation { evaluation.type }
@@ -573,7 +610,7 @@ evaluation = element evaluation { evaluation.type }
 # in DR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
 # in KR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval | Event | Situation )
 #
-signature.attlist = index.attrib, commonInit.attlist?
+signature.attlist = index-attrib.choice?, commonInit.attlist?
 signature.content = formula-query.content
 signature.type = signature.content, signature.attlist
 signature = element signature { signature.type }
@@ -593,7 +630,7 @@ signature = element signature { signature.type }
 #  in DR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval)
 #  in KR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation)
 #
-qualification.attlist = index.attrib, commonInit.attlist?
+qualification.attlist = index-attrib.choice?, commonInit.attlist?
 qualification.content = formula-assert.content
 qualification.type = qualification.content, qualification.attlist
 qualification = element qualification { qualification.type }
@@ -603,7 +640,7 @@ qualification = element qualification { qualification.type }
 # 
 # content model: (Forall | Exists | Quantifier)
 #
-quantification.attlist = index.attrib, commonInit.attlist?
+quantification.attlist = index-attrib.choice?, commonInit.attlist?
 quantification.content = inner-quantifier.content
 quantification.type = quantification.content, quantification.attlist
 quantification = element quantification { quantification.type }
@@ -612,49 +649,13 @@ quantification = element quantification { quantification.type }
 # note that elementFormDefault is qualified because of local declarations
 
 # *** Forall ***
-# Explicit universal quantifier.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Forall
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
-# KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
-#
-Forall.attlist = commonNode.attlist
-Forall.content =
-  meta-roles.content,
-  (declare | declare.content)+,
-  (element formula { formula-forall.type }
-   | formula-forall.content)
-Forall.type = Forall.content, Forall.attlist
-Node.choice |= Forall
-Forall = element Forall { Forall.type }
+Forall = Forall-node.choice
+Forall-node.choice |= Quantifier
 # *** Exists ***
-# Explicit existential quantifier.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Exists
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
-# KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
-Exists.attlist = commonNode.attlist
-Exists.content =
-  meta-roles.content,
-  (declare | declare.content)+,
-  (element formula { formula-exists.type }
-   | formula-exists.content)
-Exists.type = Exists.content, Exists.attlist
-Node.choice |= Exists
-Exists = element Exists { Exists.type }
+Exists = Exists-node.choice
+Exists-node.choice |= Quantifier
 # *** declare ***
-# A role used for variables declared within a quantifier.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-declare
-# 
-# content model: ( Var )
-declare.content = Var
-declare.type = declare.content, declare.attlist
-declare = element declare { declare.type }
+declare = declare-edge.choice
 # *** formula ***
 # The formula role of a quantifier (<Forall> or <Exists>).
 # 
@@ -687,29 +688,9 @@ formula-exists.content =
   | query-connective.content
   | extended-signature-predicate-sorts.content
 formula-exists.type = formula-exists.content, formula.attlist
-# note that elementFormDefault is qualified because of local declarations
-
-# necessary for schematron
-
-# <xs:appinfo>
-# 
-#	<ns prefix="r" uri="http://ruleml.org/spec"/>
-# </xs:appinfo> 
 
 # *** Implies ***
-# An implication rule.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Implies
-# 
-# content model:
-# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
-Implies.attlist = closure.attrib, direction.attrib, material.attrib, commonNode.attlist
-Implies.content =
-  meta-roles.content,
-  ((if & then) | (if.content, then.content))
-Implies.type = Implies.content, Implies.attlist
-Node.choice |= Implies
-Implies = element Implies { Implies.type }
+Implies = Implies-node.choice
 # *** if ***
 # The if of an implication rule containing the premise(s),
 # also known as the "antecedent" or "if" part of the rule.
@@ -719,12 +700,11 @@ Implies = element Implies { Implies.type }
 # content model: 
 # DR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
 # KR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-if.attlist = commonInit.attlist?
-if.content = Atom | inner-connective.content | extended-signature-predicate-sorts.content
+if.attlist = body_Implies.attlist?
 if-entails.content = Rulebase
-if.type = if.content, if.attlist
+if.content = body_Implies.content
 if-entails.type = if-entails.content, if.attlist
-if = element if { if.type }
+if = body_Implies.name.choice
 # *** then ***
 # The then of an implication rule containing the conclusion,
 # also known as the "consequent" or "then" part of the rule.
@@ -734,12 +714,12 @@ if = element if { if.type }
 # content model: 
 # DR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
 # KR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-then.attlist = commonInit.attlist?
-then.content = Atom | outer-connective.content | extended-signature-predicate-sorts.content
+then.attlist = head_Implies.attlist?
 then-entails.content = Rulebase
-then.type = then.content, then.attlist
 then-entails.type = then-entails.content, then.attlist
-then = element then { then.type }
+then.content = head_Implies.content
+then.type = head_Implies.attlist? & head_Implies.content
+then = head_Implies.name.choice
 # *** Entails ***
 # Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
 # Kowalski/Bowen's object/meta-level-amalgamated logic).
@@ -750,7 +730,7 @@ then = element then { then.type }
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
 Entails.attlist = commonNode.attlist
 Entails.content =
-  meta-roles.content,
+  Node.header,
   (element if { if-entails.type }
    | if-entails.content),
   (element then { then-entails.type }
@@ -758,51 +738,10 @@ Entails.content =
 Entails.type = Entails.content, Entails.attlist
 Node.choice |= Entails
 Entails = element Entails { Entails.type }
+
 # *** Equivalent ***
-# An equivalence expression, which is "syntactic sugar" for a pair
-# of conjoined converse implication rules.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Equivalent
-# 
-# content model: 		
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval), (Atom | Equal | Negation | Neg | Time | Spatial | Interval) ) ) )
-# KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens), 
-#		      (Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) ) ) )
-Equivalent.attlist = closure.attrib, commonNode.attlist
-Equivalent.content = meta-roles.content, (torso | torso.content), (torso | torso.content)
-Equivalent.type =
-  # <xs:annotation>
-  #	<xs:appinfo>
-  #		<pattern name="Equivalent">
-  #			<rule context="r:Equivalent[count( descendant::r:Equal/r:Expr | descendant::r:Equal/r:left/r:Expr )=2]">
-  #				<assert test=
-  #					"( descendant::r:Equal[1]/descendant::r:Fun[@per = 'copy']
-  #					   and descendant::r:Equal[2]/descendant::r:Fun[@per = 'copy'] )
-  #					 or
-  #					 ( descendant::r:Equal[1]/descendant::r:Fun[@per = 'open']
-  #					   and descendant::r:Equal[2]/descendant::r:Fun[@per = 'open'] )">
-  #				  Equalities within an equivalence expression must either both be interpreted or both uninterpreted.
-  #				</assert>
-  #			</rule>
-  #		</pattern>
-  #	</xs:appinfo>
-  # </xs:annotation>
-  Equivalent.content,
-  Equivalent.attlist
-Node.choice |= Equivalent
-Equivalent = element Equivalent { Equivalent.type }
-# *** torso ***
-# A symmetric role used in an equivalence expression combining
-# the asymmetric <then> and <if>.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-torso
-# 
-# content model: 
-# DR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
-# KR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-torso.content = Atom | outer-connective.content | extended-signature-predicate-sorts.content
-torso.type = torso.content, torso.attlist
-torso = element torso { torso.type }
+Equivalent = Equivalent-node.choice
+
 # *** Rulebase ***
 # A collection of rules that can be ordered or unordered, without or with duplicates.
 # 
@@ -813,54 +752,17 @@ torso = element torso { torso.type }
 # KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
 Rulebase.attlist = mapClosure.attrib, mapDirection.attrib, mapMaterial.attrib, commonNode.attlist
 Rulebase.content =
-  meta-roles.content,
+  Node.header,
   (element formula { formula-rulebase.type }
    | formula-rulebase.content)*
 Rulebase.type = Rulebase.content, Rulebase.attlist
 Node.choice |= Rulebase
 Rulebase = element Rulebase { Rulebase.type }
+
 # *** And ***
-# A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-And
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-# KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
-# 
-# Under Query, And may have attribute closure="existential"; elsewhere, it may
-# not have any attributes.
-And-inner.attlist = commonNode.attlist
-And-query.attlist = closure.attrib, commonNode.attlist
-And.content =
-  meta-roles.content,
-  (element formula { formula-and-or.type }
-   | formula-and-or.content)*
-And-query.type = And.content, And-query.attlist
-And-inner.type = And.content, And-inner.attlist
-Node.choice |= And
-And = element And { And-inner.type }
+And = And-node.choice
 # *** Or ***
-# A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Or
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-# KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* )
-# 
-# Under Query, Or may have attribute closure="existential"; elsewhere, it may not
-# have any attributes.
-Or-query.attlist = closure.attrib, commonNode.attlist
-Or-inner.attlist = commonNode.attlist
-Or.content =
-  meta-roles.content,
-  (element formula { formula-and-or.type }
-   | formula-and-or.content)*
-Or-query.type = Or.content, Or-query.attlist
-Or-inner.type = Or.content, Or-inner.attlist
-Node.choice |= Or
-Or = element Or { Or-inner.type }
+Or = Or-node.choice
 # *** formula ***
 # The formula role of a conjunctive/disjunctive expression or a rulebase.
 # 
@@ -877,8 +779,6 @@ Or = element Or { Or-inner.type }
 # Other (context-sensitive) versions of <formula> are in the
 # performative and quantifier modules.
 formula.attlist = commonInit.attlist?
-formula-and-or.content =
-  Atom | inner-connective.content | extended-signature-predicate-sorts.content
 # In 1.0, Naf is not allowed in the consequent (second child) of Entails
 # because Integrity uses of Entails call for classical Neg
 # and Rulebase should not contain Naf in any other context (except Query).
@@ -895,7 +795,6 @@ formula-rulebase.content =
   | outer-quantifier.content
   | outer-connective.content
   | extended-signature-predicate-sorts.content
-formula-and-or.type = formula-and-or.content, formula.attlist
 formula-rulebase.type = formula-rulebase.content, formula.attlist
 # *** @mapMaterial ***
 mapMaterial.attrib = mapMaterial-att-inf.choice
@@ -928,10 +827,6 @@ Data = DataTerm.choice
 #
 Var = Variable-node.choice
 reVar.attlist &= mode.attrib
-# *** @index ***
-index.attrib = index-attrib.choice?
-# *** @iri ***
-iri.attrib = iri-att.choice?
 # *** repo ***
 repo = restOfPositionalArguments-edge.choice
 # *** resl ***
@@ -1027,28 +922,9 @@ Rule-datt.choice |= direction-att-inf.choice & material-att-inf.choice & style.a
 reRule.attlist &= closure.attrib?
 reRule.attlist &= Type.attlist?
 reRule.attlist &= commonNode.attlist?
-Rule.content = meta-roles.content, rule-implementation.content?
+Rule.content = Node.header, rule-implementation.content?
 Rule.type = Rule.content, (Rule-datt.choice & reRule.attlist)
 Rule = element Rule { Rule.type }
-# *** on ***
-# 
-# content model: 
-# DR Reaction RuleMl: (  )
-# KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-#
-on.attlist = commonInit.attlist?
-on.content = event_primitives.content
-on.type = on.content, on.attlist
-on = element on { on.type }
-# *** if ***
-# *** after ***
-# 
-# content model:   
-# DR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-# KR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
-#
-after = element after { if.type }
-#     *** then ***	
 # *** else ***
 # 
 # content model: 
@@ -1056,29 +932,9 @@ after = element after { if.type }
 # KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation )
 #
 else = element else { then.type }
-# *** do ***
-# *** elseDo ***
-# 
-# content model:  
-# DR Reaction RuleML: (  )
-# KR Reaction RuleML: (  )
-do.attlist = commonInit.attlist?
-do.content = action_primitives.content
-do.type = do.content, do.attlist
-do = element do { do.type }
-elseDo = element elseDo { do.type }
 # *** Derivation Rule content model ***
 #       ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
 DerivationRule.content = (if & then & else?) | (if.content, then.content, then.content?)
-# *** Production Rule content model ***
-# ((elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?))
-ProductionRule.content = (if & do & elseDo?) | (if.content, do.content, do.content?)
-# *** Reaction Rule content model ***
-# (on, (if?, then?, do, after?,else?, elseDo?)? )
-ReactionRule.content = on, (if?, then?, do, after?, else?, elseDo?)?
-# *** Messaging Rule content model ***
-# (do)
-MessagingRule.content = do
 # *** Negation ***
 # A generic polymorphic negation, which can be specialized by using
 # the @type attribute to specify the type of negation and/or 
@@ -1088,77 +944,35 @@ MessagingRule.content = do
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-Negation.attlist = iri.attrib, Type.attlist, commonNode.attlist
+Negation.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Negation.content =
-  meta-roles.content,
+  Node.header,
   (element formula { formula-negation.type }
    | formula-negation.content)
 Negation.type = Negation.content, Negation.attlist
-Node.choice |= Negation
 Negation = element Negation { Negation.type }
-formula-negation.attlist = empty
-formula-negation.content =
-  Atom | Equal | Negation | Naf | Neg | extended-signature-predicate-sorts.content
+Node.choice |= Negation
+Negation-node.choice |= Negation
+#
+formula-negation.attlist &= commonInit.attlist?
+formula-negation.content |= NegFormula.choice
 formula-negation.type = formula-negation.content, formula-negation.attlist
-# formula = element formula { formula-negation.type }
 # *** Naf ***
-# A "by default" negation of a logical atom (i.e. "weak" negation or
-# negation-as-failure).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Naf
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
-# KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-Naf.attlist = Negation.attlist
-Naf.content = meta-roles.content, (weak | weak.content)
-Naf.type = Naf.content, Naf.attlist
-Node.choice |= Naf
-Naf = element Naf { Naf.type }
-# *** weak ***
-# A role used for negation as failure.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-weak
-# 
-# content model:
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
-# KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-weak.content = formula-negation.content
-weak.type = weak.content, weak.attlist
-weak = element weak { weak.type }
+Naf = NegationAsFailure-node.choice
+reNaf.attlist &= iri-att.choice?
 # *** Neg ***
-# A classical negation of a logical atom (i.e. classical or "strong" negation).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Neg
-# 
-# content model:
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
-# KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-Neg.attlist = Negation.attlist
-Neg.content = meta-roles.content, (strong | strong.content)
-Neg.type = Neg.content, Neg.attlist
-Node.choice |= Neg
-Neg = element Neg { Neg.type }
-# *** strong ***
-# A role used for classical negation.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-strong
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
-# KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
-strong.content = formula-negation.content
-strong.type = strong.content, strong.attlist
-strong = element strong { strong.type }
+Neg = Neg.Node.def
+reNeg.attlist &= iri-att.choice?
+
 #   *** Quantifier ***
 #   Explicit generic quantifier, where the quantifier name can be defined by the 
 # @type attribute and the @iri attribute can point to an external definition
 # of the quantifier.
 # 
 #   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
-Quantifier.attlist = iri.attrib, Type.attlist, commonNode.attlist
+Quantifier.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Quantifier.content =
-  meta-roles.content,
+  Node.header,
   (declare | Var)+,
   (element formula { formula-forall.type }
    | formula-forall.content)?
@@ -1167,23 +981,27 @@ Quantifier = element Quantifier { Quantifier.type }
 # make the quantifier constraint restrictions ("such that") optional
 # 
 # (  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
-Exists-quantifier.content =
-  meta-roles.content,
-  (declare | declare.content)+,
-  (element formula { formula-forall.type }
-   | formula-forall.content)?
-Exists-quantifier.type = Exists-quantifier.content, Exists.attlist
+#Exists-quantifier.content =
+#  Node.header,
+#  (declare | declare.content)+,
+#  (element formula { formula-forall.type }
+#   | formula-forall.content)?
+#Exists-quantifier.type = Exists-quantifier.content, Exists.attlist
+Exists-quantifier.main |= boundVariables.choice, formula_Exists-edge.choice?
+Exists-quantifier.type = (Exists-datt.choice & reExists.attlist), Exists.header, Exists-quantifier.main
+
 # make the quantifier constraint restrictions ("such that") optional
 # 
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
 # 
 #
-Forall-quantifier.content =
-  meta-roles.content,
-  (declare | declare.content)+,
-  (element formula { formula-forall.type }
-   | formula-forall.content)?
-Forall-quantifier.type = Forall-quantifier.content, Exists.attlist
+#Forall-quantifier.content =
+#  Node.header,
+#  (declare | declare.content)+,
+#  (element formula { formula-forall.type }
+#   | formula-forall.content)?
+Forall-quantifier.main |= boundVariables.choice, formula_Forall-edge.choice?
+Forall-quantifier.type = (Forall-datt.choice & reForall.attlist), Forall.header, Forall-quantifier.main
 # 
 #   *** Profile ***
 #   Explicit generic semantic profile defining the semantics of the rule. The semantic profile can be
@@ -1196,9 +1014,9 @@ Forall-quantifier.type = Forall-quantifier.content, Exists.attlist
 # 
 #   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, content(xs:any*)* )
 Profile.attlist =
-  iri.attrib, direction.attrib, Type.attlist, commonNode.attlist, safety.attrib, size.attrib
+  iri-att.choice?, direction.attrib, Type.attlist, commonNode.attlist, safety.attrib, size.attrib
 Profile.content =
-  meta-roles.content,
+  Node.header,
   element content { profile_anycontent.type }*
 Profile.type = Profile.content, Profile.attlist
 Node.choice |= Profile
@@ -1235,9 +1053,9 @@ profile_anycontent.type = profile_anycontent.content, profile_anycontent.attlist
 #	KR Reaction RuleML:  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 #				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 #				content(xs:any*)* ) ) 
-Time.attlist = iri.attrib, Type.attlist, commonNode.attlist
+Time.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Time.content =
-  meta-roles.content,
+  Node.header,
   ((slot*,
    resl?,
    (( ((element arg { arg_time.type }
@@ -1259,7 +1077,7 @@ Time = element Time { Time.type }
 # in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
 # 
 #
-arg_time.attlist = index.attrib, commonInit.attlist?
+arg_time.attlist = index-attrib.choice?, commonInit.attlist?
 arg_time.content = time_primitives.content
 arg_time.type = arg_time.content, arg_time.attlist
 # *** content ***
@@ -1283,9 +1101,9 @@ time_anycontent.type = time_anycontent.content, time_anycontent.attlist
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 #		  ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 #			  content(xs:any*)* ) ) 
-Spatial.attlist = iri.attrib, Type.attlist, commonNode.attlist
+Spatial.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Spatial.content =
-  meta-roles.content,
+  Node.header,
   ((slot*
    , resl?,
    (( ((element arg { arg_spatial.type }
@@ -1307,7 +1125,7 @@ Spatial = element Spatial { Spatial.type }
 # in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
 # 
 #
-arg_spatial.attlist = index.attrib, commonInit.attlist?
+arg_spatial.attlist = index-attrib.choice?, commonInit.attlist?
 arg_spatial.content = spatial_primitives.content
 arg_spatial.type = arg_spatial.content, arg_spatial.attlist
 # *** content ***
@@ -1327,63 +1145,14 @@ spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
 #   content model: 
 #   DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
-Interval.attlist = iri.attrib, Type.attlist, commonNode.attlist
+Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Interval.content =
-  meta-roles.content,
-  ((arg_interval, arg_interval?)
-   | (content_interval, content_interval?)
-   | interval_primitives.content)?
+  Node.header,
+   (arg | arg.content), (arg | arg.content)?
 Interval.type = Interval.content, Interval.attlist
 Node.choice |= Interval
 Interval = element Interval { Interval.type }
-# *** arg ***
-# 
-# Definition of the the arg role for Intervals
-# 
-# content model:  
-# in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
-# in KR Reaction RuleML: Time | Spatial | Interval |  Event | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
 #
-arg_interval.attlist = index.attrib, commonInit.attlist?
-arg_interval.content = interval_primitives.content
-arg_interval.type = arg_interval.content, arg_interval.attlist
-arg_interval = element arg { arg_interval.type }
-# *** content ***
-# 
-# content model:  xs:any*
-interval_anycontent.attlist = commonInit.attlist?
-interval_anycontent.content = element * { text }*
-interval_anycontent.type = interval_anycontent.content, interval_anycontent.attlist
-content_interval = element content { interval_anycontent.type }
-# metadata group
-# 
-#    This internal group defines the descriptive metadata and the scope (for scoped reasoning on the metadata) + additional guard constraints on the scope
-# 
-# content model: (meta*, scope*, guard )
-#
-#metadata.content = meta*, scope*, guard*
-# interface group
-# 
-# This internal group defines the interface signature and the evaluation semantics
-# 
-# content model: (evaluation*, signature* )
-#
-#interface.content = evaluation*, signature*
-# instance group
-# 
-# This internal group defines the instance including the qualification (qualifying metadata), the quantification and the object id
-# 
-# content model: (qualification*, quantification*, oid? )
-#
-#instance.content = qualification*, quantification*, oid?
-# 
-# An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
-# 
-# 
-# content model: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?)
-#
-#meta-roles.content = metadata.content, interface.content, instance.content
-meta-roles.content = Node.header
 # 
 # An internal group for the implementation of a rule in the Reaction RuleML language
 # 
@@ -1401,8 +1170,8 @@ rule-implementation.content = DerivationRule.content
 # content model: (And | Or | Negation | Naf | Neg | Equal)
 #
 query-connective.content =
-  element And { And-query.type }
-  | element Or { Or-query.type }
+  And-Query-node.choice
+  | Or-Query-node.choice
   | Negation
   | Naf
   | Neg
@@ -1414,8 +1183,8 @@ query-connective.content =
 # content model: (And | Or | Negation | Naf | Neg | Equal)
 #
 inner-connective.content =
-  element And { And-inner.type }
-  | element Or { Or-inner.type }
+  And-node.choice
+  | Or-node.choice
   | Negation
   | Naf
   | Neg
@@ -1432,7 +1201,7 @@ outer-connective.content = Negation | Neg | Equal
 # 
 # content model: (Exists | Quantifier)
 #
-query-quantifier.content = Exists | Quantifier
+query-quantifier.content = Exists
 # 
 # An internal group for the inner quantifiers in the Reaction RuleML language
 # 
@@ -1449,7 +1218,7 @@ inner-quantifier.content =
 # 
 # content model: ( Forall | Quantifier )
 #
-outer-quantifier.content = Forall | Quantifier
+outer-quantifier.content = Forall
 # 
 # An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
 # 
@@ -1474,27 +1243,18 @@ time_primitives.content = arg.content
 # content model: 
 # in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 spatial_primitives.content = arg.content
-# Interval primitives
-# content model: 
-# in ([Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?])
-interval_primitives.content =
-  (Time, Time?)
-  | (Spatial, Spatial?)
-  | (Interval, Interval?)
-  | ((AnyTerm.choice),
-     (AnyTerm.choice)?)
 # An internal group for the situation primitives for interpretation as situation
 # content model: 
 # in DR Reaction RuleML: ()
-situation_primitives.content = notAllowed
+#situation_primitives.content = notAllowed
 # An internal group for the event primitives for interpretation as event
 # content model: 
 # in DR Reaction RuleML: ()
-event_primitives.content = notAllowed
+#event_primitives.content = notAllowed
 # An internal group for the action primitives for interpretation as action
 # content model: 
 # in DR Reaction RuleML: ()
-action_primitives.content = notAllowed
+#action_primitives.content = notAllowed
 # *** @style ***
 # 
 #  restriction: active | messaging | reasoning

@@ -4,10 +4,10 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
-
+  
 <!-- Example: manage server load in task scheduling using a Situation Calculus formalization 
   
-    Classical Situation Calculus wiith reified fluents and actions (SCr)
+    Classical Situation Calculus wiith reified fluents and actions (CSr)
   
   -->
 
@@ -64,7 +64,7 @@
       </if>
       <then>
         <Happens iri="ruleml:possible">
-          <do>
+          <on>
             <Action>
               <Expr> 
                 <Fun>move</Fun>
@@ -72,7 +72,7 @@
                 <Var>Y</Var>
               </Expr>
             </Action>
-          </do> 
+          </on> 
           <at>
             <Situation type="ruleml:History">
               <Var>S</Var>
@@ -224,11 +224,12 @@
         </fluent>
         <at>
           <Situation type="ruleml:History">
-            <Expr>
-              <Fun iri="ruleml:do"/>
-              <Action><Var>A</Var></Action>
-              <Situation type="ruleml:History"><Var>S</Var></Situation>
-            </Expr>
+            <arg>
+              <Do>
+                <do><Action><Var>A</Var></Action></do>
+                <at><Situation type="ruleml:History"><Var>S</Var></Situation></at>
+              </Do>
+            </arg>
           </Situation>
         </at>
       </Holds>
@@ -301,12 +302,11 @@
            </Situation>
          </fluent>  
          <at>
-           <Situation type="ruleml:History">
-             <Expr>
-               <Fun iri="ruleml:do"/>
+           <Situation>
+             <Do>
                <Action><Var>A</Var></Action>
-               <Situation type="ruleml:History"><Var>S</Var></Situation>
-             </Expr>
+               <Situation><Var>S</Var></Situation>
+             </Do>
            </Situation>
          </at>  
        </Holds>  
@@ -361,11 +361,10 @@
             </Expr>
           </Situation>
           <Situation type="ruleml:History">
-            <Expr>
-              <Fun iri="ruleml:do"/>
-              <Action><Var>A</Var></Action>
-              <Situation type="ruleml:History"><Var>S</Var></Situation>
-            </Expr>
+            <Do>
+              <do><Action><Var>A</Var></Action></do>
+              <at><Situation type="ruleml:History"><Var>S</Var></Situation></at>
+            </Do>
           </Situation>
         </Holds>  
       </then>

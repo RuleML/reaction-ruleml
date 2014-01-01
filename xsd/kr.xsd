@@ -331,11 +331,12 @@
 	
 	<!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
-		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Do)
 	-->
 	<xs:group name="situation_primitives.content">
 		<xs:choice>
 			<xs:group ref="arg.content"/>
+			<xs:element ref="Do"/>
 		</xs:choice>
 	</xs:group>
 	

@@ -90,6 +90,44 @@
 	</xs:complexType>
 	<xs:element name="at" type="at.type"/>
 
+
+	<!--     *** Do ***
+		
+	  The function do maps (reified) actions into situations; do: A x S -> S
+			
+      content model: 
+      in KR Reaction RuleML: 
+      		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  
+      		(do | Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation), 
+      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
+	-->
+	<xs:attributeGroup name="Do.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Do.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:sequence>
+				<xs:choice>	
+					<xs:element ref="do"/>
+					<xs:group ref="do.content"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">					
+					<xs:element ref="at"/>				
+					<xs:group ref="at.content"/>
+				</xs:choice>	
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Do.type">
+		<xs:group ref="Do.content"/>
+		<xs:attributeGroup ref="Do.attlist"/>
+	</xs:complexType>
+	<xs:element name="Do" type="Do.type"/>
+
 	<!--     *** Happens ***
 		
 		Different happens / happenings can be defined by pointing to an external vocabulary with @iri, e.g. a vocabulary for a calculi

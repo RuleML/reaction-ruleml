@@ -17,8 +17,9 @@ For the reference from the interface to the implementation of the rules it uses 
 -->
 
   <!-- Include the distributed interface definition of the rule, so that both form one valid XML instance which ensures unique and valid key and keyref references. -->
-
-  <xi:include href="DistributedDerivationRuleInterfaceb.rrml"/>
+  <xi:include href="DistributedDerivationRuleInterface.rrml" xpointer="xpointer(/RuleML/*)">
+    <xi:fallback/>
+  </xi:include>
 
 
   <!-- assert knowledge -->

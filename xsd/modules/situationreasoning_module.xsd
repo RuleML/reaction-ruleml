@@ -52,7 +52,7 @@
 		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
  
       content model: 
-      in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation )
+      in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
 	-->
 	<xs:attributeGroup name="fluent.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -74,7 +74,7 @@
 	  Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
 	
       content model: 
-      in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+      in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 	-->
 	<xs:attributeGroup name="at.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -90,10 +90,48 @@
 	</xs:complexType>
 	<xs:element name="at" type="at.type"/>
 
+
+	<!--     *** Do ***
+		
+	  The function do maps (reified) actions into situations; do: A x S -> S
+			
+      content model: 
+      in KR Reaction RuleML: 
+      		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  
+      		(do | Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation), 
+      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
+	-->
+	<xs:attributeGroup name="Do.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Do.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:sequence>
+				<xs:choice>	
+					<xs:element ref="do"/>
+					<xs:group ref="do.content"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">					
+					<xs:element ref="at"/>				
+					<xs:group ref="at.content"/>
+				</xs:choice>	
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Do.type">
+		<xs:group ref="Do.content"/>
+		<xs:attributeGroup ref="Do.attlist"/>
+	</xs:complexType>
+	<xs:element name="Do" type="Do.type"/>
+
 	<!--     *** Happens ***
 		
-		Different types of happens / happenings can be defined by pointing to an external vocabulary with @type, e.g. a vocabulary for a calculi
-		which distinguishes between events which acutally happen and other event relations to time or situations  (e.g. possibly, planned, etc.).
+		Different happens / happenings can be defined by pointing to an external vocabulary with @iri, e.g. a vocabulary for a calculi
+		which distinguishes between events which acutally happen and other event relations to time or situations  (e.g. poss, planned, etc.)
 		
 		In Situation Calculus happens can be used to define action effects. 
 		
@@ -103,8 +141,8 @@
       content model: 
       in KR Reaction RuleML: 
       		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-      		(on | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation), 
-      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)? )
+      		(on | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), 
+      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
 	-->
 	<xs:attributeGroup name="Happens.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -219,7 +257,7 @@
       *** Holds ***
       
       In Event Calculus, Feature and Fluent Calculus reified fluents hold at a time. 
-      In Situation Calculus a Fluent Situation (a statement whose truth value may change) holds at a particular Situation 
+      In reified Situation Calculus a Fluent Situation (a statement whose truth value may change) holds at a particular Situation 
       
   		Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
 		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic

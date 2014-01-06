@@ -102,7 +102,7 @@
      
      content model:   
      DR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-     KR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
+     KR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
          
 	-->
 	<xs:element name="after" type="if.type"/>
@@ -113,7 +113,7 @@
      
      content model: 
      DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
-     KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation )
+     KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation )
      
 	-->
 	<xs:element name="else" type="then.type"/>
@@ -124,7 +124,7 @@
      
      content model:  
      DR Reaction RuleML: (  )
-     KR Reaction RuleML: (  )
+     KR Reaction RuleML: ( Action  )
 -->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>

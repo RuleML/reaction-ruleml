@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/kr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
+
+<!-- Example: manage server load in task scheduling using a Situation Calculus formalization 
+  
+    Classical Situation Calculus with reified fluents and actions (CSr)
+  
+  -->
+
+  <!-- Includes the external semantic profile for situation calculus which has been axiomatized in Reaction RuleML.
+       The included axiomatized profiles are asserted and can be referenced directly using keyref.
+       In contrast to the external reference by the @type attribute, the @keyref makes a local reference to the included axioms of the referenced profile.
+       
+       Note: it is also possible to reference external semantic profiles which are formalized in other non RuleML languages such as e.g. Common Logic. 
+  -->
+  
+  <xi:include href="../../profiles/SituationCalculusProfile.rrml" xpointer="xpointer(/RuleML/*)"/>
+
+  <!-- assert knowledge -->
+
+  <Assert>
+  
+  <evaluation>
+    <Profile keyref="ruleml:ReifiedClassicalSituationCalculus" type="ruleml:ReifiedClassicalSituationCalculus" direction="backward"/>
+  </evaluation>
+  
+  <!-- Action Precondition Axioms -->
+  
+  <Rulebase>    
+
+    <!--   holds(poss(move(X,Y),S)) :- holds(clear(X),S), holds(clear(Y),S), not X = Y.  -->
+    <Rule>
+      <if>
+        <And>
+          <Holds>
+            <fluent>
+              <Situation>
+                <Expr>
+                  <Fun>clear</Fun>
+                  <Var>X</Var>    
+                </Expr> 
+              </Situation>
+            </fluent>
+            <at>
+              <Situation>
+                    <Var>S</Var>
+              </Situation>
+            </at>    
+          </Holds>
+          <Holds>
+            <Situation type="ruleml:Fluent">
+              <Expr>
+                <Fun>clear</Fun>
+                <Var>Y</Var>
+              </Expr>  
+            </Situation>
+            <Situation type="ruleml:History">
+              <Var>S</Var>
+            </Situation>
+          </Holds>
+          <Negation>
+            <Equal>
+              <Var>X</Var>
+              <Var>Y</Var>
+            </Equal>
+          </Negation>
+  
+        </And>
+      </if>
+      <then>
+        <Happens iri="ruleml:Possible">
+          <on>
+            <Action>
+              <Expr> 
+                <Fun>move</Fun>
+                <Var>X</Var>
+                <Var>Y</Var>
+              </Expr>
+            </Action>
+          </on> 
+          <at>
+            <Situation type="ruleml:History">
+              <Var>S</Var>
+            </Situation>
+          </at>  
+        </Happens>
+      </then>
+    </Rule>
+
+    <!--     poss(putOnTable(X),S) :- holds(clear(X),S), not holds(ontable(X),S).-->  
+    <Rule>
+      <if>
+        <And>
+          <Holds>
+            <Situation type="ruleml:Fluent">
+              <Expr>
+                <Fun>clear</Fun>
+                <Var>X</Var>
+              </Expr>  
+            </Situation>  
+            <Situation type="ruleml:History">
+               <Var>S</Var>
+            </Situation>
+          </Holds>
+          <Negation>
+            <Holds>
+              <fluent>
+                <Situation type="ruleml:Fluent">
+                  <Expr>
+                    <Fun>ontable</Fun>
+                    <Var>X</Var>
+                  </Expr>  
+                </Situation>
+              </fluent>
+              <at>
+                <Situation type="ruleml:History">
+                   <Var>S</Var>
+                </Situation>
+              </at>  
+            </Holds>  
+          </Negation>
+        </And>
+      </if>
+      <then>
+        <Happens iri="ruleml:Possible">
+          <on>
+            <Action>
+              <Expr> 
+                <Fun>putOnTable</Fun>
+                <Var>X</Var>
+              </Expr>
+            </Action>
+          </on> 
+          <at>
+            <Situation type="ruleml:History">
+              <Var>S</Var>
+            </Situation>
+          </at>  
+        </Happens>
+      </then>
+    </Rule>
+
+  </Rulebase>  
+    
+  <!-- Successor State Axioms -->
+  <Rulebase>
+
+  
+  <!-- holds(clear(X),do(A,S)) :- (A = move(Y,Z) ;
+                              A = putOnTable(Y)),
+                              holds(on(Y,X),S) ;
+                              holds(clear(X),S), not A = move(Y,X). -->
+  <Rule>
+    <if>
+      <Or>
+        <And>
+          <Or>
+            <Equal>
+              <Action><Var>A</Var></Action>
+              <Action> 
+                <Expr>
+                  <Fun>move</Fun> 
+                  <Var>X</Var> 
+                  <Var>Z</Var> 
+                </Expr>
+              </Action>            
+            </Equal>
+            <Equal>
+              <Action><Var>A</Var></Action>
+              <Action> 
+                <Expr>
+                  <Fun>putOnTable</Fun> 
+                  <Var>Y</Var> 
+                </Expr>
+              </Action>            
+            </Equal>
+          </Or>
+          <Holds>
+            <fluent>  
+              <Situation type="ruleml:Fluent">
+                <Expr>
+                  <Fun>on</Fun>
+                  <Var>Y</Var>
+                  <Var>X</Var>
+                </Expr>
+              </Situation>
+            </fluent>  
+            <at>
+              <Situation type="ruleml:History"><Var>S</Var></Situation>
+            </at>
+          </Holds>  
+        </And>
+        <And>
+          <Holds>
+            <Situation type="ruleml:Fluent">
+              <Expr>
+                <Fun>clear</Fun>
+                <Var>X</Var>
+              </Expr>  
+            </Situation>    
+            <Situation type="ruleml:History">
+              <Var>S</Var>
+            </Situation>
+          </Holds>  
+          <Negation>
+            <Equal>
+              <Action><Var>A</Var></Action>
+              <Action> 
+                <Expr>
+                  <Fun>move</Fun> 
+                  <Var>Y</Var> 
+                  <Var>X</Var> 
+                </Expr>
+              </Action>            
+            </Equal>
+          </Negation>
+        </And>
+      </Or>        
+    </if>
+    <then>
+      <Holds>
+        <fluent>
+          <Situation type="ruleml:Fluent">
+            <Expr>
+                  <Fun>clear</Fun> 
+                  <Var>X</Var>
+             </Expr>
+          </Situation>
+        </fluent>
+        <at>
+          <Situation type="ruleml:History">
+            <arg>
+              <Do>
+                <do><Action><Var>A</Var></Action></do>
+                <at><Situation type="ruleml:History"><Var>S</Var></Situation></at>
+              </Do>
+            </arg>
+          </Situation>
+        </at>
+      </Holds>
+    </then>
+  </Rule>  
+    
+    <!-- holds(on(X,Y),do(A,S)) :- A = move(X,Y) ;
+                            holds(on(X,Y),S), not A = putOnTable(X),
+                            not A = move(X,Z). -->
+
+   <Rule>
+     <if>
+       <Or>
+         <Equal>
+           <Action><Var>A</Var></Action>
+           <Action> 
+             <Expr>
+               <Fun>move</Fun> 
+               <Var>X</Var> 
+               <Var>Y</Var> 
+             </Expr>
+           </Action>            
+         </Equal>
+         <And>
+           <Holds>
+             <Situation type="ruleml:Fluent">
+               <Expr>
+                 <Fun>on</Fun>
+                 <Var>Y</Var>
+                 <Var>X</Var>
+               </Expr>
+             </Situation>
+             <Situation type="ruleml:History"><Var>S</Var></Situation>
+           </Holds>  
+           <Negation>
+             <Equal>
+               <Action><Var>A</Var></Action>
+               <Action> 
+                 <Expr>
+                   <Fun>putOnTable</Fun> 
+                   <Var>X</Var> 
+                 </Expr>
+               </Action>            
+             </Equal>
+           </Negation>
+           <Negation>
+             <Equal>
+               <Action><Var>A</Var></Action>
+               <Action> 
+                 <Expr>
+                   <Fun>move</Fun> 
+                   <Var>Y</Var> 
+                   <Var>X</Var> 
+                 </Expr>
+               </Action>            
+             </Equal>
+           </Negation>
+         </And>
+       </Or>
+     </if>
+     <then>
+       <Holds>
+         <fluent>
+           <Situation type="ruleml:Fluent">
+             <Expr>
+               <Fun>on</Fun> 
+               <Var>X</Var>
+               <Var>Y</Var>
+             </Expr>
+           </Situation>
+         </fluent>  
+         <at>
+           <Situation>
+             <Do>
+               <Action><Var>A</Var></Action>
+               <Situation><Var>S</Var></Situation>
+             </Do>
+           </Situation>
+         </at>  
+       </Holds>  
+     </then>
+   </Rule> 
+    
+    <!-- holds(ontable(X),do(A,S)) :- A = putOnTable(X) ;
+                               holds(onTable(X),S), not A = move(X,Y). -->
+    <Rule>
+      <if>
+        <Or>
+          <Equal>
+            <Action><Var>A</Var></Action>
+            <Action> 
+              <Expr>
+                <Fun>putOnTable</Fun> 
+                <Var>X</Var> 
+              </Expr>
+            </Action>            
+          </Equal>
+          <And>
+            <Holds>
+              <Situation type="ruleml:Fluent">
+                <Expr>
+                  <Fun>ontanle</Fun>
+                  <Var>X</Var>
+                </Expr>
+              </Situation>
+              <Situation type="ruleml:History"><Var>S</Var></Situation>
+            </Holds>  
+            <Negation>
+              <Equal>
+                <Action><Var>A</Var></Action>
+                <Action> 
+                  <Expr>
+                    <Fun>move</Fun> 
+                    <Var>X</Var> 
+                    <Var>Y</Var> 
+                  </Expr>
+                </Action>            
+              </Equal>
+            </Negation>
+          </And>
+        </Or>
+      </if>
+      <then>
+        <Holds>
+          <Situation type="ruleml:Fluent">
+            <Expr>
+              <Fun>ontable</Fun> 
+              <Var>X</Var>
+            </Expr>
+          </Situation>
+          <Situation type="ruleml:History">
+            <Do>
+              <do><Action><Var>A</Var></Action></do>
+              <at><Situation type="ruleml:History"><Var>S</Var></Situation></at>
+            </Do>
+          </Situation>
+        </Holds>  
+      </then>
+    </Rule>
+  </Rulebase>
+
+  </Assert>
+
+</RuleML>

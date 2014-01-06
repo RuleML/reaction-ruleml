@@ -361,6 +361,18 @@ include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.r
 include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+# 
+# RULEBASES INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/rulebase_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# ENTAILMENTS (PROVES) INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/metalevel_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 
 #	*** RuleML ***
 #	The n-ary top-level of a RuleML document.
@@ -749,21 +761,8 @@ Entails = element Entails { Entails.type }
 Equivalent = Equivalent-node.choice
 
 # *** Rulebase ***
-# A collection of rules that can be ordered or unordered, without or with duplicates.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Rulebase
-# 
-# content model:
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
-# KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
-Rulebase.attlist = mapClosure.attrib, mapDirection.attrib, mapMaterial.attrib, commonNode.attlist
-Rulebase.content =
-  Node.header,
-  (element formula { formula-rulebase.type }
-   | formula-rulebase.content)*
-Rulebase.type = Rulebase.content, Rulebase.attlist
-Node.choice |= Rulebase
-Rulebase = element Rulebase { Rulebase.type }
+Rulebase = Rulebase-node.choice
+RulebaseFormula.choice |= Rule
 
 # *** And ***
 And = And-node.choice

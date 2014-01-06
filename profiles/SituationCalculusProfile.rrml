@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="file://C:/Users/paschke/Documents/Eigene Arbeiten/Reaction RuleML/XSD Schema/Reaction RuleML 1.0/kr.xsd"?>
+
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xsi:schemaLocation="">
+
+  <!-- assert knowledge -->
+
+  <Assert>
+    
+  <evaluation>
+    
+    <!-- Semantic Profile for the reified Situation Calculus with reified fluents, actions and situations (SCr).
+    
+    The formalization of the axioms originates from Pinto's reified situation calculus which extends the basic axioms of Reiter's classcial situation calculus.
+  
+    -->
+    
+    <Profile key="ruleml:ReifiedClassicalSituationCalculus">
+      
+      <meta>
+        <Atom>
+          <op><Rel iri="dc:creator"/></op> <!-- Dublin Core creator -->
+          <arg><Data xsi:type="xs:string">Adrian Paschke</Data></arg> <!-- value -->
+        </Atom>
+      </meta>
+      <meta>
+        <Atom>
+          <op><Rel iri="dc:date"/></op> <!-- Dublin Core date -->
+          <Time><Data xsi:type="xs:dateTime">2013-07-21T10:00:00-04:00</Data></Time>
+        </Atom>
+      </meta>
+      
+      <Rulebase key="ruleml:BasicReifiedSituationCalculusAxioms">
+              
+        <!-- Forall(A1, A2, S1, S2) (do(A1,S1) = do(A2,S2)) => (A1 = A2) -->
+        <Rule key="ruleml:SituationCalculusBasicAxiom1">
+                <quantification>
+                  <Forall>
+                    <declare><Var>A1</Var></declare>
+                    <declare><Var>A2</Var></declare>
+                    <declare><Var>S1</Var></declare>
+                    <declare><Var>S2</Var></declare>
+                  </Forall>
+                </quantification>
+                <if>
+                  <Equal>
+                    <Situation>
+                      <Do>
+                        <Action><Var>A1</Var></Action>
+                        <Situation><Var>S1</Var></Situation>
+                      </Do>
+                    </Situation>
+                    <Situation>
+                      <Do>
+                        <Action><Var>A2</Var></Action>
+                        <Situation><Var>S2</Var></Situation>
+                      </Do>
+                    </Situation>                    
+                  </Equal>
+                </if>
+                <then>
+                  <Equal>
+                    <Action><Var>A1</Var></Action>
+                    <Action><Var>A2</Var></Action>
+                  </Equal>
+                </then>
+         </Rule>
+
+        <!-- not S < s0 -->
+        <Neg key="ruleml:SituationCalculusBasicAxiom2">
+          <Atom>
+            <Rel>less</Rel>
+            <Var>S</Var>
+            <Ind>s0</Ind>
+          </Atom>          
+        </Neg>
+
+         <!-- Forall(S1, S2, A) (S1 < do(A,S2)) = (S1 <= S2)  
+         
+         Note: Pinto's notion of < is weaker than Reiter's which additionally requires that every action must be possible in the situations in which they happen.
+         
+         Reiter's axiom: Forall(S1, S2, A) (S1 < do(A,S2)) = (poss(A,S2) and (S1 <= S2)) 
+         
+         -->
+        <Equivalent key="ruleml:SituationCalculusBasicAxiom3">
+                <quantification>
+                  <Forall>
+                    <Var>S1</Var>
+                    <Var>S2</Var>
+                    <Var>A</Var>                    
+                  </Forall>
+                </quantification>
+                <Atom>
+                  <Rel>less</Rel>
+                  <Situation><Var>S1</Var></Situation>
+                  <Situation>
+                    <Do>
+                      <Action><Var>A</Var></Action>
+                      <Situation><Var>S2</Var></Situation>
+                    </Do>
+                  </Situation>
+                </Atom>
+                <Atom>
+                  <Rel>lessequal</Rel>
+                  <Situation><Var>S1</Var></Situation>
+                  <Situation><Var>S2</Var></Situation>
+                </Atom>
+              </Equivalent>
+        
+          <!-- additional axioms defining the relation lessequal = (less or equal)
+             Forall(S1, S2) (S1 <= S2) = (S1 < S2) or (S1 = S2)  -->
+          <Rule>
+            <signature> 
+              <Atom key="sc:lessequal">
+                <Rel node="sc:lessequal">lessequal</Rel>
+                <Situation><Var>S1</Var></Situation>
+                <Situation><Var>S2</Var></Situation>
+              </Atom>
+            </signature>
+            <quantification><Forall><Var>S1</Var><Var>S2</Var></Forall></quantification>
+            <if>
+              <Or>
+                <Equal>
+                  <Situation><Var>S1</Var></Situation>
+                  <Situation><Var>S2</Var></Situation>
+                </Equal>
+                <Atom>
+                  <Rel>less</Rel>
+                  <Situation><Var>S1</Var></Situation>
+                  <Situation><Var>S2</Var></Situation>
+                </Atom>                
+              </Or>
+            </if>
+            <then>
+              <Atom>
+                <Rel>lessequal</Rel>
+                <Situation><Var>S1</Var></Situation>
+                <Situation><Var>S2</Var></Situation>
+              </Atom>
+            </then>
+          </Rule>     
+        
+           <Rule>
+             <signature> 
+               <Atom key="sc:less">
+                 <Rel node="sc:less">less</Rel>
+                 <Situation><Var>S1</Var></Situation>
+                 <Situation><Var>S2</Var></Situation>
+               </Atom>
+             </signature>
+             <quantification><Forall><Var>S1</Var><Var>S2</Var></Forall></quantification>
+             <if>
+               <Atom>
+                 <Rel>lessequal</Rel>
+                 <Situation><Var>S1</Var></Situation>
+                 <Situation><Var>S2</Var></Situation>
+               </Atom>
+             </if>
+             <then>
+               <Atom>
+                 <Rel>less</Rel>
+                 <Situation><Var>S1</Var></Situation>
+                 <Situation><Var>S2</Var></Situation>
+               </Atom>
+             </then>
+           </Rule>     
+        
+          <Rule>
+            <signature> 
+              <Atom key="sc:equal">
+                <Rel node="sc:equal">equal</Rel>
+                <Situation><Var>S1</Var></Situation>
+                <Situation><Var>S2</Var></Situation>
+              </Atom>
+            </signature>
+            <quantification><Forall><Var>S1</Var><Var>S2</Var></Forall></quantification>
+            <if>
+              <Atom>
+                <Rel>lessequal</Rel>
+                <Situation><Var>S1</Var></Situation>
+                <Situation><Var>S2</Var></Situation>
+              </Atom>
+            </if>
+            <then>
+              <Equal>
+                <Situation><Var>S1</Var></Situation>
+                <Situation><Var>S2</Var></Situation>
+              </Equal>
+            </then>
+          </Rule>     
+
+        <!-- Forall(S1, S2) (S1 < S2) => not (S2 < S1) -->
+        <Rule key="ruleml:SituationCalculusBasicAxiom4">
+                <quantification>
+                  <Forall>
+                    <Var>S1</Var>
+                    <Var>S2</Var>
+                  </Forall>
+                </quantification>
+                <if>
+                  <Atom>
+                    <Rel>less</Rel>
+                    <Situation><Var>S1</Var></Situation>
+                    <Situation><Var>S2</Var></Situation>
+                  </Atom>
+                </if>
+                <then>
+                  <Neg>
+                    <Atom>
+                      <Rel>less</Rel>
+                      <Situation><Var>S2</Var></Situation>
+                      <Situation><Var>S1</Var></Situation>
+                    </Atom>
+                  </Neg>
+                </then>
+        </Rule>
+        
+        <!-- Induction axiom to prove fluents true in all situations. 
+          
+              This axiom defines the universe of situations as the smallest set that includes s0,
+             such that if S is the set of Situations and a is an element of the set of Actions then do(A,S) is also in the set of situations.
+              
+          Forall (S, F) [holds(F,s0) and (Forall(A) (holds(F,S) => holds(F,do(A,S)))] => holds(F,S)
+        
+        -->
+        <Rule key="ruleml:SituationCalculusBasicAxiom5">
+          <quantification>
+            <Forall>
+              <Var>F</Var>
+              <Var>S</Var>
+              <Rule>
+                <quantification>
+                  <Forall>
+                    <Var>A</Var>
+                  </Forall>
+                </quantification>
+                <if>
+                  <Holds>
+                    <fluent><Situation type="ruleml:Fluent">
+                      <Var>F</Var>                      
+                    </Situation></fluent>
+                    <at><Situation><Var>S</Var></Situation></at>
+                  </Holds>
+                </if>
+                <then>
+                  <Holds>
+                    <fluent><Situation type="ruleml:Fluent"><Var>F</Var></Situation></fluent>
+                    <at><Situation><Do>
+                      <Action><Var>A</Var></Action>
+                      <Situation><Var>S</Var></Situation>
+                    </Do></Situation></at>
+                  </Holds>
+                </then>
+              </Rule>              
+            </Forall>
+          </quantification>
+          <if>
+            <Holds>
+              <fluent><Situation type="ruleml:Fluent"><Var>F</Var></Situation></fluent>
+              <at><Situation><Ind>s0</Ind></Situation></at>
+            </Holds>
+          </if>
+          <then>
+            <Holds>
+              <fluent><Situation type="ruleml:Fluent"><Var>F</Var></Situation></fluent>
+              <at><Situation><Var>S</Var></Situation></at>
+            </Holds>
+          </then>
+        </Rule>
+              
+
+      </Rulebase>
+    </Profile>
+  </evaluation>
+  
+  </Assert>
+
+</RuleML>

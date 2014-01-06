@@ -39,8 +39,10 @@
       the optional @direction attribute indicates the intended direction of the inference / execution
       the optional @safety attribute indicates if the execution / inference is transactional, interrupting, non-interrupting
       the optional @size attribute acts as a generic size boundary / counter in the operational semantic profiles    
-		
-	content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, content(xs:any*)* )-->
+
+	DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | content(xs:any*)  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
+	-->
 	<xs:attributeGroup name="Profile.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
@@ -53,7 +55,11 @@
 	<xs:group name="Profile.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
-			<xs:element name="content" type="profile_anycontent.type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="formula" type="formula-assert.type"/>
+				<xs:group ref="formula-assert.content"/>
+				<xs:element name="content" type="profile_anycontent.type"/>
+			</xs:choice>
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="Profile.type">
@@ -65,7 +71,7 @@
 	<!--
      *** content ***
      
-     content model:  xs:any*
+     content model:  (xs:any*)
 -->
 	<xs:attributeGroup name="profile_anycontent.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>

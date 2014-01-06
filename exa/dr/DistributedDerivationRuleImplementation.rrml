@@ -17,43 +17,43 @@ This Reaction RuleML XML document instance defines the implementation part of th
 For the reference from the interface to the implementation of the rules it uses key-keyref attributes. See ModularDerivationRule
 
 -->
-  
-  <!-- Include the distributed interface definition of the rule, so that both form one valid XML instance which ensures unique and valid key and keyref references. -->
-  
-  <xi:include href="./DistributedDerivationRuleInterface.rrml" xpointer="xpointer(/RuleML/*)"/>
-  
-  <!-- assert knowledge -->
-  
-  <Assert>
-    
-    <!-- implementation of rule 1 which is interpreted either by WFS or by ASS semantics according to it's interface definition. -->
-    
-    <Rule keyref="r1" style="reasoning">
-      <if>
-        <Atom>
-          <op><Rel>likes</Rel></op>
-          <Var>X</Var>
-          <Ind>wine</Ind>
-        </Atom>
-      </if>
-      <then>
-        <Atom>
-          <op><Rel>likes</Rel></op>
-          <Ind>John</Ind>
-          <Var>X</Var>
-        </Atom>
-      </then>
-    </Rule>
-    
-    
-    <!-- fact -->
-    
-    <Atom>
-      <op><Rel>likes</Rel></op>
-      <Ind>Mary</Ind>
-      <Ind>wine</Ind>
-    </Atom>
-    
-  </Assert>
-  
+
+<!-- Include the distributed interface definition of the rule, so that both form one valid XML instance which ensures unique and valid key and keyref references. -->
+
+	<xi:include href="./DistributedDerivationRuleInterface.rrml" xpointer="xpointer(/RuleML/*)"/>
+
+<!-- assert knowledge -->
+
+<Assert>
+
+<!-- implementation of rule 1 which is interpreted either by WFS or by ASS semantics according to it's interface definition. -->
+
+ <Rule keyref="r1" style="reasoning">
+	<if>
+		<Atom>
+     			<op><Rel>likes</Rel></op>
+     			<Var>X</Var>
+     			<Ind>wine</Ind>
+     		</Atom>
+	</if>
+    	<then>
+		<Atom>
+    			 <op><Rel>likes</Rel></op>
+	      	<Ind>John</Ind>
+     		 	<Var>X</Var>
+     		</Atom>
+	</then>
+ </Rule>
+
+
+ <!-- fact -->
+
+  <Atom>
+    <op><Rel>likes</Rel></op>
+    <Ind>Mary</Ind>
+    <Ind>wine</Ind>
+  </Atom>
+ 
+ </Assert>
+
 </RuleML>

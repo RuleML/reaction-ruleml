@@ -355,6 +355,12 @@ include "http://ruleml.org/1.0/relaxng/modules/implication_expansion_module.rnc"
 include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+# 
+# ROOT NODE AND PERFORMATIVES INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 
 #	*** RuleML ***
 #	The n-ary top-level of a RuleML document.
@@ -1017,7 +1023,8 @@ Profile.attlist =
   iri-att.choice?, direction.attrib, Type.attlist, commonNode.attlist, safety.attrib, size.attrib
 Profile.content =
   Node.header,
-  element content { profile_anycontent.type }*
+  (formula_AssertRetract-edge.choice
+  | element content { profile_anycontent.type })*
 Profile.type = Profile.content, Profile.attlist
 Node.choice |= Profile
 Profile = element Profile { Profile.type }

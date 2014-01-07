@@ -710,52 +710,15 @@ formula-exists.type = formula-exists.content, formula.attlist
 # *** Implies ***
 Implies = Implies-node.choice
 # *** if ***
-# The if of an implication rule containing the premise(s),
-# also known as the "antecedent" or "if" part of the rule.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-if
-# 
-# content model: 
-# DR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
-# KR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-if.attlist = body_Implies.attlist?
-if-entails.content = Rulebase
 if.content = body_Implies.content
-if-entails.type = if-entails.content, if.attlist
 if = body_Implies.name.choice
 # *** then ***
-# The then of an implication rule containing the conclusion,
-# also known as the "consequent" or "then" part of the rule.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-then
-# 
-# content model: 
-# DR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
-# KR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
 then.attlist = head_Implies.attlist?
-then-entails.content = Rulebase
-then-entails.type = then-entails.content, then.attlist
 then.content = head_Implies.content
 then.type = head_Implies.attlist? & head_Implies.content
 then = head_Implies.name.choice
 # *** Entails ***
-# Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
-# Kowalski/Bowen's object/meta-level-amalgamated logic).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Entails
-# 
-# content model:
-# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
-Entails.attlist = commonNode.attlist
-Entails.content =
-  Node.header,
-  (element if { if-entails.type }
-   | if-entails.content),
-  (element then { then-entails.type }
-   | then-entails.content)
-Entails.type = Entails.content, Entails.attlist
-Node.choice |= Entails
-Entails = element Entails { Entails.type }
+Entails = Entails-node.choice
 
 # *** Equivalent ***
 Equivalent = Equivalent-node.choice

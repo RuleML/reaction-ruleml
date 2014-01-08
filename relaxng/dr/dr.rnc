@@ -375,149 +375,21 @@ include "http://ruleml.org/1.0/relaxng/modules/metalevel_expansion_module.rnc" i
 }
 
 #	*** RuleML ***
-#	The n-ary top-level of a RuleML document.
-# 
-#	See http://www.ruleml.org/1.0/glossary/#gloss-RuleML
-# 
-#  the DR schema redefines the RuleML element
-#  and adds meta, evaluation, signature, qualification, quantification, and scope so that the content model is:
-# 
-# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert | Retract | Query)* )
-# 
-#  Note: key and keyref object identifier are defined to be unique under the RuleML document root
-#
-RuleML.attlist = commonNode.attlist
-RuleML.content = Node.header, (act | Assert | Retract | Query)*
-RuleML.type = RuleML.content, RuleML.attlist
 start |= RuleML
-Node.choice |= RuleML
-RuleML =
-  element RuleML {
-    RuleML.type
-    # key object identifiers and key object references defined on the top level
-    
-  }
-# *** act ***
-# The act role of the root element (<RuleML>).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-act
-# 
-# content model  (Assert|Retract|Query)
-#
-act.content = Assert | Retract | Query
-act.attlist = index-attrib.choice?, commonInit.attlist?
-act.type = act.content, act.attlist
-act = element act { act.type }
-#	    *** Assert ***
-#	    A KQML-like performative acting as a wrapper specifying that its content is
-#	    asserted, making an 'implicit <Rulebase>' assumption.
-# 
-#	    See http://www.ruleml.org/1.0/glossary/#gloss-Assert 
-# 
-#	    content model:
-#	    DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval  )*)
-# KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)	
-Assert.attlist =
-  mapDirection.attrib,
-  mapClosure.attrib,
-  mapMaterial.attrib,
-  commonNode.attlist,
-  safety.attrib,
-  size.attrib
-Assert.content =
-  Node.header,
-  (element formula { formula-assert.type }
-   | formula-assert.content)*
-Assert.type = Assert.content, Assert.attlist
+RuleML = RuleML.def
 start |= Assert
-Node.choice |= Assert
-Assert = element Assert { Assert.type }
+Assert = Assert-node.choice
 #	    *** Retract ***
-#	    A performative similar to KQML's 'untell' that acts as a wrapper specifying that its
-#	    content is to be deleted, making an 'implicit <Rulebase>' assumption.
-# 
-#	    See http://www.ruleml.org/1.0/glossary/#gloss-Retract
-# 
-#	    content model:
-#	    DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval  )*)
-# KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
-Retract.attlist = mapDirection.attrib, mapClosure.attrib, mapMaterial.attrib, commonNode.attlist
-Retract.content =
-  Node.header,
-  (element formula { formula-assert.type }
-   | formula-assert.content)*
-Retract.type = Retract.content, Retract.attlist
 start |= Retract
-Retract = element Retract { Retract.type }
+Retract = Retract-node.choice
+AssertRetractFormula.choice |= Rule
 # *** Query ***
-# A KQML-like performative acting as a wrapper specifying that its content is
-# queried, making an 'implicit <Rulebase>' assumption.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-Query 
-# 
-# content model:
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
-# KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
-Query.attlist = closure.attrib, commonNode.attlist
-Query.content =
-  Node.header,
-  (element formula { formula-query.type }
-   | formula-query.content)*
-Query.type = Query.content, Query.attlist
 start |= Query
-Node.choice |= Query
-Query = element Query { Query.type }
-# *** formula ***
-# The formula role of a performative (<Assert>, <Retract> or <Query>).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-formula
-# 
-# content model (below Assert): 
-# DR Reaction RuleML (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval )
-# KR Reaction RuleML (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  | Event | Situation | Holds | Initiates | Terminates | Happens )
-# 
-# content model (below Query): 
-# DR Reaction RuleML (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
-# KR Reaction RuleML (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
-# 
-# 
-# Other (context-sensitive) versions of <formula> are in the
-# connective and quantifier modules.
-
-# the (empty) attribute list is declared in the connective module
-formula-assert.content =
-  Rulebase
-  | Atom
-  | Implies
-  | Rule
-  | Equivalent
-  | Entails
-  | outer-quantifier.content
-  | outer-connective.content
-  | extended-signature-predicate-sorts.content  
-formula-query.content =
-  Rulebase
-  | Atom
-  | Entails
-  | query-connective.content
-  | query-quantifier.content
-  | extended-signature-predicate-sorts.content
-formula-assert.type = formula-assert.content, formula.attlist
-formula-query.type = formula-query.content, formula.attlist
-#
-formula_AssertRetract.content |= formula-assert.content
- # <rng:include href="modules/xml_module.rng" ns="http://www.w3.org/XML/1998/namespace"/>
+Query = Query-node.choice
+formula-assert.content = formula_AssertRetract.content
+formula-query.content = formula_Query.content
 
 # *** oid ***
-# An optional object identifier for an atomic formula, expression or the unifed terms
-# of the SWSL branch, as needed for PSOA semantics.
-# Note that oids are not required to be unique within a rulebase.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-oid
-# 
-# content model: 
-# in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-# in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
 oid.content = AnyTerm.choice
 oid.type = oid.content, oid.attlist
 oid = element oid { oid.type }
@@ -674,38 +546,10 @@ Exists = Exists-node.choice
 Exists-node.choice |= Quantifier
 # *** declare ***
 declare = declare-edge.choice
-# *** formula ***
-# The formula role of a quantifier (<Forall> or <Exists>).
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-formula
-# 
-# content model (below Forall): 
-# DR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
-# KR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-# 
-# content model (below Exists): 
-# DR Reaction RuleML ( Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval )
-# KR Reaction RuleML ( Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
-# 
-# Other (context-sensitive) versions of <formula> are in the
-# connective and performative modules.
-
-# the (empty) attribute list is declared in the connective module
-formula-forall.content =
-  Atom
-  | Implies
-  | Rule
-  | Equivalent
-  | outer-quantifier.content
-  | outer-connective.content
-  | extended-signature-predicate-sorts.content
+# needed for Quantifier and quantification
+formula.attlist = commonInit.attlist?
+formula-forall.content = formula_Forall.content
 formula-forall.type = formula-forall.content, formula.attlist
-formula-exists.content =
-  Atom
-  | query-quantifier.content
-  | query-connective.content
-  | extended-signature-predicate-sorts.content
-formula-exists.type = formula-exists.content, formula.attlist
 
 # *** Implies ***
 Implies = Implies-node.choice
@@ -731,39 +575,6 @@ RulebaseFormula.choice |= Rule
 And = And-node.choice
 # *** Or ***
 Or = Or-node.choice
-# *** formula ***
-# The formula role of a conjunctive/disjunctive expression or a rulebase.
-# 
-# See http://www.ruleml.org/1.0/glossary/#gloss-formula
-# 
-# content model (below And/Or): 
-# DR Reaction RuleML (Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-# KR Reaction RuleML (Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-# 
-# content model (below Rulebase): 
-# DR Reaction RuleML (Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval)
-# KR Reaction RuleML (Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
-# 
-# Other (context-sensitive) versions of <formula> are in the
-# performative and quantifier modules.
-formula.attlist = commonInit.attlist?
-# In 1.0, Naf is not allowed in the consequent (second child) of Entails
-# because Integrity uses of Entails call for classical Neg
-# and Rulebase should not contain Naf in any other context (except Query).
-# Alternatives would have been to use And in the consequent of Entails
-# or to only allow Naf children within Rulebases that are used for Integrity
-# and querying, but this would require making the role tags explicit (i.e.
-# not skippable). Schematron could be used here to disallow Naf from other
-# Rulebases.
-formula-rulebase.content =
-  Atom
-  | Implies
-  | Rule
-  | Equivalent
-  | outer-quantifier.content
-  | outer-connective.content
-  | extended-signature-predicate-sorts.content
-formula-rulebase.type = formula-rulebase.content, formula.attlist
 # *** @mapMaterial ***
 mapMaterial.attrib = mapMaterial-att-inf.choice
 # *** @material ***
@@ -865,12 +676,12 @@ size.attrib = attribute size { xsd:int }?
 # 
 # 
 # 
-#      optinal attribute
+#      optional attribute
 key.attrib = attribute key { curieOrAbsIRI.datatype }?
 # *** @keyref ***
 # 
 # 
-#      optinal attribute
+#      optional attribute
 keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
 # *** Rule ***
 # The Rule  that provides the basic syntax for rules
@@ -1138,39 +949,39 @@ rule-implementation.content = DerivationRule.content
 # 
 # content model: (And | Or | Negation | Naf | Neg | Equal)
 #
-query-connective.content =
-  And-Query-node.choice
-  | Or-Query-node.choice
-  | Negation
-  | Naf
-  | Neg
-  | Equal
+#query-connective.content =
+#  And-Query-node.choice
+#  | Or-Query-node.choice
+#  | Negation
+#  | Naf
+#  | Neg
+#  | Equal
 # 
 # An internal group for the inner connectives in the Reaction RuleML language
 # 
 # 
 # content model: (And | Or | Negation | Naf | Neg | Equal)
 #
-inner-connective.content =
-  And-node.choice
-  | Or-node.choice
-  | Negation
-  | Naf
-  | Neg
-  | Equal
+#inner-connective.content =
+#  And-node.choice
+#  | Or-node.choice
+#  | Negation
+#  | Naf
+#  | Neg
+#  | Equal
 # 
 # An internal group for the outer connectives in the Reaction RuleML language
 # 
 # 
 # content model: (Negation | Neg | Equal )
 #
-outer-connective.content = Negation | Neg | Equal
+#outer-connective.content = Negation | Neg | Equal
 # 
 # An internal group for the query quantifiers in the Reaction RuleML language
 # 
 # content model: (Exists | Quantifier)
 #
-query-quantifier.content = Exists
+#query-quantifier.content = Exists
 # 
 # An internal group for the inner quantifiers in the Reaction RuleML language
 # 
@@ -1187,7 +998,7 @@ inner-quantifier.content =
 # 
 # content model: ( Forall | Quantifier )
 #
-outer-quantifier.content = Forall
+#outer-quantifier.content = Forall
 # 
 # An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
 # 
@@ -1195,7 +1006,7 @@ outer-quantifier.content = Forall
 # 
 # content model: (Time | Spatial | Interval)
 #
-extended-signature-predicate-sorts.content = extended-signature-function-sorts.content
+#extended-signature-predicate-sorts.content = extended-signature-function-sorts.content
 # 
 # An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
 # 
@@ -1203,7 +1014,7 @@ extended-signature-predicate-sorts.content = extended-signature-function-sorts.c
 # 
 # content model: (Time | Spatial | Interval)
 #
-extended-signature-function-sorts.content = Time | Spatial | Interval
+#extended-signature-function-sorts.content = Time | Spatial | Interval
 # An internal group for the time primitives for interpretation as time
 # content model: 
 # in DR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
-
-<!-- Clocksin/Mellish sample rule 
-
+  
+  <!-- Clocksin/Mellish sample rule
+    
 This example shows how the intended evaluation / semantic profiles can be defined.
 
-Since there are many existing semantics for derivation and reaction rules  
+Since there are many existing semantics for derivation and reaction rules
 the generic Profile approach is extensible and allows pointing to externally defined semantic profiles as well as
 internal definitions of the evaluation profile's policies, e.g. with respect to selection and consumption
 of knowledge such as events in complex event processing rules.
 
-Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical entailment profiles 
+Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical entailment profiles
 
 -->
-
+  
   <!-- assert knowledge -->
-
+  
   <Assert>
     <Rulebase>
-
     <!-- define intended semantic profile for the rule -->
     
     <evaluation index="1">
@@ -95,7 +95,7 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
     <if>
       <Atom>
         <op><Rel>likes</Rel></op>
-        <Var>X</Var>
+        <Ind>Mary</Ind>
         <Ind>wine</Ind>
       </Atom>
     </if>
@@ -145,12 +145,12 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
     <!-- intended semantic profile for the query -->    
 
     <evaluation>
-
+      
       <!-- the intended semantics for this query is well founded semantics, i.e. it can be "safely" applied to the rule using the first
             semantic interpretation profile  -->
 
       <Profile type="ruleml:WellFoundedSemantics" direction="backward"/>
-
+      
     </evaluation>
 
    <Atom>

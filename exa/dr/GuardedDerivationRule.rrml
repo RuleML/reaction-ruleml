@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
-<RuleML xmlns="http://ruleml.org/spec"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:dc="http://purl.org/dc/elements/1.1"
-    xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">  
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
 
-<!-- Clocksin/Mellish sample rule 
+  <!-- Clocksin/Mellish sample rule 
 
 This example shows how scopes and guards can be defined for derivation rules. See also ScopedDerivationRule.rrml for an explanation
 of scopes.
@@ -39,71 +38,79 @@ on the knowledge base on the basis of the metadata of the knowledge.
 
   <!-- assert knowledge -->
 
-  <Assert key="#module1"> <!-- the key acts unique module identifier -->
+  <Assert key="#module1">
+    <!-- the key acts unique module identifier -->
 
-  <Rulebase key="#innermodule1"> <!-- a nested inner module; if no key is specified the inner module takes the key identifier of the outer module -->
+    <Rulebase key="#innermodule1">
+      <!-- a nested inner module; if no key is specified the inner module takes the key identifier of the outer module -->
 
-  <!-- rule -->
+      <!-- rule -->
 
-  <Rule> <!-- this rule takes the module identifier from the rulebase "innermodule1" -->    
-    <if>
-      <Atom>
-	
-    	  <!-- the conditional atomic literal applies in the scope defined by three scope constraints and only if it is not violating the guard constraints.
+      <Rule>
+        <!-- this rule takes the module identifier from the rulebase "innermodule1" -->
+        <if>
+          <Atom>
+
+            <!-- the conditional atomic literal applies in the scope defined by three scope constraints and only if it is not violating the guard constraints.
     	       The first constraint applies to a module identifier defined by a key attribute. (note: this replaces the old <oid> approach)
     	       The second constraint applies to descriptive metadata defined by <meta>.
     	       The third constraint applies to qualifying metadata defined by <qualification>.
 
     	       The found values of the metadata in the scope constraints are bound to the variables "Author" and "ValidityInterval".
     	  -->
-    
-        <!-- the first scope selects a module by its identifier "#trustedKnowledgeModule" which is a rulebase containing the 
-             names of trusted authors.  -->
-        <scope keyref="#trustedKnowledgeModule"/>
-    
-        <!-- the second scope selects knowledge with a descriptive meta data "dc:creator" and bind the found metadata values to the variable -->
-    	  <scope>
-      		<Atom>
-      			<Rel iri="dc:creator"/>
-      			<Var>Author</Var>
-      		</Atom>
-    	  </scope>
-        
-        <!-- the third scope applies to the qualifiying metadata with name "valid". The found values (in this case an interval) 
-             are bound to the variable "ValidityInterval" -->
-        
-        <scope>
-          <Atom>
-            <op><Rel>valid</Rel></op>
-            <Var type="ruleml:TimeInterval">ValidityInterval</Var> <!-- typed variable of type TimeInterval -->
-          </Atom>
-        </scope>
 
-        <!-- the first guard acts as constraint on the conditional atomic literal - where the current time 
+            <!-- the first scope selects a module by its identifier "#trustedKnowledgeModule" which is a rulebase containing the 
+             names of trusted authors.  -->
+            <scope keyref="#trustedKnowledgeModule"/>
+
+            <!-- the second scope selects knowledge with a descriptive meta data "dc:creator" and bind the found metadata values to the variable -->
+            <scope>
+              <Atom>
+                <Rel iri="dc:creator"/>
+                <Var>Author</Var>
+              </Atom>
+            </scope>
+
+            <!-- the third scope applies to the qualifiying metadata with name "valid". The found values (in this case an interval) 
+             are bound to the variable "ValidityInterval" -->
+
+            <scope>
+              <Atom>
+                <op>
+                  <Rel>valid</Rel>
+                </op>
+                <Var type="ruleml:TimeInterval">ValidityInterval</Var>
+                <!-- typed variable of type TimeInterval -->
+              </Atom>
+            </scope>
+
+            <!-- the first guard acts as constraint on the conditional atomic literal - where the current time 
              must be in the validity time of the knowledge which has been selected by the scopes
     	       It uses the bound variable "ValidityInterval" from the scope -->
-        <guard>
-          <Atom>
-            <Rel>between</Rel>
-            <!-- note: this is a simplified example with a static predefined time value which actually is inbetween the
+            <guard>
+              <Atom>
+                <Rel>between</Rel>
+                <!-- note: this is a simplified example with a static predefined time value which actually is inbetween the
                  time interval . It could be also a built-in asking e.g. for the 
               current Systemtime or any other time function / computation including timer (as in CEP Reaction RuleML )
               or continuous fluents (as in KR Reaction RuleML). -->
-            <Time type="ruleml:TimeInstant"><Data xsi:type="xs:date">2011-06-11</Data></Time>
-            <Var>ValidityInterval</Var>
-          </Atom>
-        </guard>
+                <Time type="ruleml:TimeInstant">
+                  <Data xsi:type="xs:date">2011-06-11</Data>
+                </Time>
+                <Var>ValidityInterval</Var>
+              </Atom>
+            </guard>
 
-    	  <!-- the second guard acts as constraint  - where "trusted(?Author)" 
+            <!-- the second guard acts as constraint  - where "trusted(?Author)" 
     	       It uses the bound variable from the scope -->
-    	  <guard>
-      		<Atom>
-      			<Rel>trusted</Rel>
-      			<Var>Author</Var>
-      		</Atom>
-    	  </guard>
+            <guard>
+              <Atom>
+                <Rel>trusted</Rel>
+                <Var>Author</Var>
+              </Atom>
+            </guard>
 
-        <!-- the scoped goal literal only applies to knowledge selected by the scopes which does not violate the guard constraints. 
+            <!-- the scoped goal literal only applies to knowledge selected by the scopes which does not violate the guard constraints. 
             In this example it selects only those knowledge from the knowledge base which has been written 
             by the trusted author "Adrian Paschke". 
             
@@ -116,58 +123,69 @@ on the knowledge base on the basis of the metadata of the knowledge.
             Windowing techniques and selection and consumption policies can be applied on such dynamic knowledge and event instance sequences
             by using scoped reasoning. 
          -->
-        <op><Rel>likes</Rel></op>
-        <Var>X</Var>
+            <op>
+              <Rel>likes</Rel>
+            </op>
+            <Var>X</Var>
+            <Ind>wine</Ind>
+          </Atom>
+        </if>
+        <then>
+          <Atom>
+            <op>
+              <Rel>likes</Rel>
+            </op>
+            <Ind>John</Ind>
+            <Var>X</Var>
+          </Atom>
+        </then>
+      </Rule>
+
+      <!-- fact -->
+
+      <Atom>
+        <meta>
+          <!-- metadata -->
+          <Atom>
+            <Rel iri="dc:creator"/>
+            <Data xsi:type="xs:string">Adrian Paschke</Data>
+          </Atom>
+        </meta>
+
+        <op>
+          <Rel>likes</Rel>
+        </op>
+        <Ind>Mary</Ind>
         <Ind>wine</Ind>
       </Atom>
-    </if>
-    <then>
+
       <Atom>
-        <op><Rel>likes</Rel></op>
-        <Ind>John</Ind>
-        <Var>X</Var>
+        <meta>
+          <!-- metadata -->
+          <Atom>
+            <Rel iri="dc:creator"/>
+            <Data xsi:type="xs:string">Unknown</Data>
+          </Atom>
+        </meta>
+
+        <op>
+          <Rel>likes</Rel>
+        </op>
+        <Ind>Jane</Ind>
+        <Ind>wine</Ind>
       </Atom>
-    </then>
-  </Rule>
 
-  <!-- fact -->
+    </Rulebase>
 
-  <Atom>
-    <meta> <!-- metadata -->
-  		<Atom>
-  			<Rel iri="dc:creator"/>
-  			<Data xsi:type="xs:string">Adrian Paschke</Data>
-  		</Atom>
-    </meta>
-    
-    <op><Rel>likes</Rel></op>
-    <Ind>Mary</Ind>
-    <Ind>wine</Ind>
-  </Atom>
-
-  <Atom>
-    <meta> <!-- metadata -->
-  		<Atom>
-  			<Rel iri="dc:creator"/>
-  			<Data xsi:type="xs:string">Unknown</Data>
-  		</Atom>
-    </meta>
-    
-    <op><Rel>likes</Rel></op>
-    <Ind>Jane</Ind>
-    <Ind>wine</Ind>
-  </Atom>
-
-  </Rulebase>
-
-  <Rulebase key="#trustedKnowledgeModule">
-  <!-- rulebase defining trusted authors. The guards defined in the rule above applies to these facts
+    <Rulebase key="#trustedKnowledgeModule">
+      <!-- rulebase defining trusted authors. The guards defined in the rule above applies to these facts
        The complete rulebase has a qualification saying that it is only valid in the year 2011.
   -->
 
-    <qualification> <!-- qualification of the rule -->
-      
-      <!-- 
+      <qualification>
+        <!-- qualification of the rule -->
+
+        <!-- 
 							Note: this "validity" could be also represented as a situation <Situation> 
 							A situation could be also modelled as a changeable situation called fluent (see KR dialect of Reaction RuleML),
 							which changes its truth value depending on the context 
@@ -176,29 +194,38 @@ on the knowledge base on the basis of the metadata of the knowledge.
 							 the fluent.
 							 That would mean the validity of the rule changes depending on the situation (the truth value of the fluent)
 						-->
-      
-      <Atom> <!-- the rule is valid for one year from 2011 to 2012 -->
-        <op><Rel>valid</Rel></op>
-        <Interval>
-          <Time type="ruleml:TimeInterval"><Data xsi:type="xs:dateTime">2011-03-20T12:00:00-01:00</Data></Time>
-          <Time type="ruleml:TimeInterval"><Data xsi:type="xs:dateTime">2012-03-20T12:00:00-01:00</Data></Time>
-        </Interval>
+
+        <Atom>
+          <!-- the rule is valid for one year from 2011 to 2012 -->
+          <op>
+            <Rel>valid</Rel>
+          </op>
+          <Interval>
+            <Time type="ruleml:TimeInterval">
+              <Data xsi:type="xs:dateTime">2011-03-20T12:00:00-01:00</Data>
+            </Time>
+            <Time type="ruleml:TimeInterval">
+              <Data xsi:type="xs:dateTime">2012-03-20T12:00:00-01:00</Data>
+            </Time>
+          </Interval>
+        </Atom>
+      </qualification>
+
+      <!-- fact -->
+      <Atom>
+        <op>
+          <Rel>trusted</Rel>
+        </op>
+        <Ind>Adrian Paschke</Ind>
       </Atom>
-    </qualification>
 
-    <!-- fact -->
-     <Atom>
-       <op><Rel>trusted</Rel></op>
-       <Ind>Adrian Paschke</Ind>
-     </Atom>
+    </Rulebase>
 
-  </Rulebase> 
+  </Assert>
 
- </Assert>
+  <!-- query knowledge base -->
 
-<!-- query knowledge base -->
- 
-<!-- since we have defined a scope for the if condition of the rule, 
+  <!-- since we have defined a scope for the if condition of the rule, 
      the scoped condition goal applies to all knowledge with the meta relation dc:creator (from).
      The values are bound to the variable ?Author (select) and the guard tests if the ?Author is trusted (where).
      
@@ -206,14 +233,14 @@ on the knowledge base on the basis of the metadata of the knowledge.
      we only get one result ?whom = "Mary".
  -->
 
- <Query>
-   <Atom>
-     <Rel>likes</Rel>
-     <Ind>John</Ind>
-     <Var>whom</Var>
-   </Atom>
- </Query>
-  
-  
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
+
+
 
 </RuleML>

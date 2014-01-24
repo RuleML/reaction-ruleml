@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>
+<?xml-model href="../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:xi="http://www.w3.org/2001/XInclude"
-	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
-
-
-<!-- Clocksin/Mellish sample rule 
-
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+  
+  
+  <!-- Clocksin/Mellish sample rule
+    
 This example shows how the distributed rule bases can be included using XInclude.
 
-This Reaction RuleML XML document instance defines the implementation part of the distributed knowledge which includes the interface part of the distributed knowledge base defined in the DistributedDerivationRuleInterface XML document instance. 
+This Reaction RuleML XML document instance defines the implementation part of the distributed knowledge which includes the interface part of the distributed knowledge base defined in the DistributedDerivationRuleInterface XML document instance.
 
 For the reference from the interface to the implementation of the rules it uses key-keyref attributes. See ModularDerivationRule
 

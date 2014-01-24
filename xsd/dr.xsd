@@ -83,6 +83,8 @@
 	<xs:include schemaLocation="modules/spatial_module.xsd"/>	
 	<xs:include schemaLocation="modules/interval_module.xsd"/>
 
+	<!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
+	<xs:include schemaLocation="modules/spatial_temporal_algebra_module.xsd"/>
 
 	<!--
      metadata group
@@ -311,11 +313,12 @@
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
-		in DR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | ())
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
+			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 

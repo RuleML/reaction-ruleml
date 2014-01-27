@@ -1,0 +1,1312 @@
+default namespace = "http://ruleml.org/spec"
+
+# Modifications, after creation from /flatten/dr.rng using oXygen schema conversion
+# 1. change start defintion
+start =
+  RuleML
+  | Assert
+  | Retract
+  | Query
+And =
+  element And { And-inner.type }
+RuleML =
+  element RuleML {
+      xml.attlist,
+      node.attrib,
+      meta-roles.content,
+      (act | Assert | Retract | Query)*
+    }
+torso =
+  element torso { xml.attlist, torso.content }
+per.attrib =
+  attribute per {
+    xsd:NMTOKEN "open" | xsd:NMTOKEN "value" | xsd:NMTOKEN "copy"
+  }?
+op =
+  notAllowed
+  | element op { op-atom.type }
+act =
+  notAllowed
+  | element act {
+      xml.attlist, index.attrib, (Assert | Retract | Query)
+    }
+Data =
+  notAllowed
+  | element Data {
+      mixed {
+        (attribute * { text }
+         | element0)*
+      }
+    }
+arg =
+  notAllowed
+  | element arg { xml.attlist, index.attrib, arg.content }
+if =
+  notAllowed
+  | element if { if.type }
+Entails =
+  notAllowed
+  | element Entails {
+      xml.attlist,
+      node.attrib,
+      meta-roles.content,
+      (element if { if.attlist, if-entails.content }
+       | if-entails.content),
+      (element then { then.attlist, then-entails.content }
+       | then-entails.content)
+    }
+after =
+  notAllowed
+  | element after { if.type }
+Rulebase =
+  notAllowed
+  | element Rulebase {
+      xml.attlist,
+      node.attrib,
+      mapMaterial.attrib,
+      mapDirection.attrib,
+      mapClosure.attrib,
+      meta-roles.content,
+      (element formula { formula.attlist, formula-rulebase.content }
+       | formula-rulebase.content)*
+    }
+formula-query.content =
+  Rulebase
+  | (notAllowed
+     | element Atom { Atom.type })
+  | Entails
+  | query-connective.content
+  | query-quantifier.content
+  | extended-signature-predicate-sorts.content
+formula.attlist = xml.attlist
+anyLax =
+  element * - (Ind
+               | Rel
+               | Rule
+               | Equivalent
+               | Reify
+               | formula
+               | Var
+               | act
+               | RuleML
+               | weak
+               | Skolem
+               | degree
+               | evaluation
+               | meta
+               | Query
+               | Interval
+               | scope
+               | torso
+               | Quantifier
+               | slot
+               | do
+               | left
+               | Equal
+               | Rulebase
+               | guard
+               | oid
+               | if
+               | Atom
+               | Time
+               | Retract
+               | declare
+               | Profile
+               | Spatial
+               | quantification
+               | op
+               | resl
+               | else
+               | And
+               | Entails
+               | Negation
+               | Or
+               | then
+               | Exists
+               | strong
+               | Forall
+               | Plex
+               | Fun
+               | Naf
+               | Assert
+               | elseDo
+               | Implies
+               | signature
+               | Expr
+               | right
+               | on
+               | Neg
+               | repo
+               | qualification
+               | arg
+               | Data
+               | after) {
+    mixed {
+      (attribute * { text }
+       | anyLax)*
+    }
+  }
+  | elseDo
+  | Implies
+  | Assert
+  | Naf
+  | after
+  | Data
+  | arg
+  | qualification
+  | repo
+  | Neg
+  | on
+  | Expr
+  | right
+  | signature
+  | else
+  | resl
+  | op
+  | Spatial
+  | quantification
+  | Profile
+  | declare
+  | Plex
+  | Fun
+  | Forall
+  | strong
+  | Exists
+  | then
+  | Or
+  | Negation
+  | Entails
+  | And
+  | torso
+  | Interval
+  | scope
+  | Query
+  | meta
+  | evaluation
+  | Retract
+  | Time
+  | Atom
+  | guard
+  | oid
+  | if
+  | Rulebase
+  | Equal
+  | do
+  | left
+  | slot
+  | Quantifier
+  | Reify
+  | Equivalent
+  | Rule
+  | Ind
+  | Rel
+  | degree
+  | Skolem
+  | weak
+  | RuleML
+  | Var
+  | act
+  | formula
+op.attlist = xml.attlist
+repo =
+  notAllowed
+  | element repo {
+      xml.attlist,
+      (Var
+       | element Plex {
+           Plex.attlist, meta-roles.content, (arg | arg.content)*, repo?
+         })
+    }
+Profile =
+  notAllowed
+  | element Profile {
+      xml.attlist,
+      size.attrib,
+      safety.attrib,
+      node.attrib,
+      direction.attrib,
+      iri.attrib,
+      type.attrib,
+      meta-roles.content,
+      element content { xml.attlist, anyLax* }*
+    }
+formula-negation.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | Equal
+  | Negation
+  | Naf
+  | Neg
+  | extended-signature-predicate-sorts.content
+anyLax2 =
+  element * - (Ind
+               | Rel
+               | Rule
+               | Equivalent
+               | Reify
+               | formula
+               | Var
+               | act
+               | RuleML
+               | weak
+               | Skolem
+               | degree
+               | evaluation
+               | meta
+               | Query
+               | Interval
+               | scope
+               | torso
+               | Quantifier
+               | slot
+               | do
+               | left
+               | Equal
+               | Rulebase
+               | guard
+               | oid
+               | if
+               | Atom
+               | Time
+               | Retract
+               | declare
+               | Profile
+               | Spatial
+               | quantification
+               | op
+               | resl
+               | else
+               | And
+               | Entails
+               | Negation
+               | Or
+               | then
+               | Exists
+               | strong
+               | Forall
+               | Plex
+               | Fun
+               | Naf
+               | Assert
+               | elseDo
+               | Implies
+               | signature
+               | Expr
+               | right
+               | on
+               | Neg
+               | repo
+               | qualification
+               | arg
+               | Data
+               | after) {
+    mixed {
+      (attribute * { text }
+       | anyLax2)*
+    }
+  }
+  | elseDo
+  | Implies
+  | Assert
+  | Naf
+  | after
+  | Data
+  | arg
+  | qualification
+  | repo
+  | Neg
+  | on
+  | Expr
+  | right
+  | signature
+  | else
+  | resl
+  | op
+  | Spatial
+  | quantification
+  | Profile
+  | declare
+  | Plex
+  | Fun
+  | Forall
+  | strong
+  | Exists
+  | then
+  | Or
+  | Negation
+  | Entails
+  | And
+  | torso
+  | Interval
+  | scope
+  | Query
+  | meta
+  | evaluation
+  | Retract
+  | Time
+  | Atom
+  | guard
+  | oid
+  | if
+  | Rulebase
+  | Equal
+  | do
+  | left
+  | slot
+  | Quantifier
+  | Reify
+  | Equivalent
+  | Rule
+  | Ind
+  | Rel
+  | degree
+  | Skolem
+  | weak
+  | RuleML
+  | Var
+  | act
+  | formula
+else =
+  notAllowed
+  | element else { then.type }
+do.type = (xml.attlist, notAllowed), empty
+slot.type =
+  ((xml.attlist,
+    attribute weight {
+      xsd:decimal { minInclusive = "0" maxInclusive = "1" }
+    }?,
+    attribute card { xsd:nonNegativeInteger }?),
+   ((Ind
+     | Data
+     | Expr
+     | Plex
+     | extended-signature-function-sorts.content),
+    arg.content)),
+  empty
+Or =
+  notAllowed
+  | element Or { Or-inner.type }
+formula-forall.type = (formula.attlist, formula-forall.content), empty
+then.type = (then.attlist, then.content), empty
+formula-assert.type = (formula.attlist, formula-assert.content), empty
+Rule =
+  notAllowed
+  | element Rule {
+      Implies.attlist,
+      type.attrib,
+      attribute style {
+        xsd:string "reasoning"
+        | xsd:string "active"
+        | xsd:string "messaging"
+      }?,
+      meta-roles.content,
+      ((else?, then, if)
+       | (if, then, else?)
+       | (if.content, then.content, then.content?))?
+    }
+Atom.type =
+  ((xml.attlist, node.attrib, closure.attrib),
+   (meta-roles.content,
+    degree?,
+    ((notAllowed
+      | element op { op-atom.type })
+     | op-atom.content),
+    Atom-slots.extend1,
+    ((((arg | arg.content)+, repo?)
+      | repo),
+     Atom-slots.extend1)?,
+    resl?)),
+  empty
+signature =
+  notAllowed
+  | element signature {
+      xml.attlist, index.attrib, formula-query.content
+    }
+if-entails.content = Rulebase
+Or-inner.type = (node.attrib, Or.content), empty
+formula-and-or.type = (formula.attlist, formula-and-or.content), empty
+Negation.attlist = xml.attlist, node.attrib, iri.attrib, type.attrib
+Neg =
+  notAllowed
+  | element Neg {
+      Negation.attlist, meta-roles.content, (strong | strong.content)
+    }
+interval_primitives.content = arg.content, arg.content?
+Or.content =
+  meta-roles.content,
+  ((notAllowed
+    | element formula { formula-and-or.type })
+   | formula-and-or.content)*
+right =
+  notAllowed
+  | element right { xml.attlist, right.content }
+elseDo =
+  notAllowed
+  | element elseDo { do.type }
+inner-connective.content =
+  (notAllowed
+   | element And { And-inner.type })
+  | (notAllowed
+     | element Or { Or-inner.type })
+  | Negation
+  | Naf
+  | Neg
+  | Equal
+meta-roles.content =
+  (meta*, scope*, guard*),
+  (evaluation*, signature*),
+  (qualification*, quantification*, oid?)
+Expr =
+  notAllowed
+  | element Expr {
+      xml.attlist,
+      node.attrib,
+      per.attrib,
+      type.attrib,
+      meta-roles.content,
+      (element op { op.attlist, op-Expr.content }
+       | op-Expr.content),
+      element slot { slot.type }*,
+      ((((arg | arg.content)+, repo?)
+        | repo),
+       element slot { slot.type }*)?,
+      resl?
+    }
+strong.content = formula-negation.content
+left =
+  notAllowed
+  | element left { xml.attlist, left.content }
+Quantifier =
+  notAllowed
+  | element Quantifier {
+      xml.attlist,
+      node.attrib,
+      iri.attrib,
+      type.attrib,
+      meta-roles.content,
+      (declare | Var)+,
+      (element formula { formula-forall.type }
+       | formula-forall.content)?
+    }
+And.content =
+  meta-roles.content,
+  ((notAllowed
+    | element formula { formula-and-or.type })
+   | formula-and-or.content)*
+formula =
+  notAllowed
+  | element formula { formula-negation.type }
+then.attlist = xml.attlist
+query-quantifier.content = Exists | Quantifier
+do =
+  notAllowed
+  | element do { do.type }
+op-Expr.content = Fun
+formula-and-or.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | inner-connective.content
+  | extended-signature-predicate-sorts.content
+evaluation =
+  notAllowed
+  | element evaluation { xml.attlist, index.attrib, Profile }
+formula-assert.content =
+  Rulebase
+  | (notAllowed
+     | element Atom { Atom.type })
+  | Implies
+  | Rule
+  | Equivalent
+  | Entails
+  | outer-quantifier.content
+  | outer-connective.content
+  | extended-signature-predicate-sorts.content
+size.attrib = attribute size { xsd:int }?
+element0 =
+  element * {
+    mixed {
+      (attribute * { text }
+       | element0)*
+    }
+  }
+Negation =
+  notAllowed
+  | element Negation {
+      Negation.attlist,
+      meta-roles.content,
+      (element formula { formula-negation.type }
+       | formula-negation.content)
+    }
+Exists.attlist = xml.attlist, node.attrib
+iri.attrib = attribute iri { xsd:anyURI }?
+Skolem =
+  notAllowed
+  | element Skolem {
+      mixed { xml.attlist, node.attrib, type.attrib }
+    }
+mapMaterial.attrib =
+  attribute mapMaterial { xsd:NMTOKEN "yes" | xsd:NMTOKEN "no" }?
+if.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | inner-connective.content
+  | extended-signature-predicate-sorts.content
+slot =
+  notAllowed
+  | element slot { slot.type }
+formula-negation.type = (empty, formula-negation.content), empty
+torso.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | outer-connective.content
+  | extended-signature-predicate-sorts.content
+strong =
+  notAllowed
+  | element strong { xml.attlist, strong.content }
+mapDirection.attrib =
+  attribute mapDirection {
+    xsd:NMTOKEN "backward"
+    | xsd:NMTOKEN "forward"
+    | xsd:NMTOKEN "bidirectional"
+  }?
+weak =
+  notAllowed
+  | element weak { xml.attlist, weak.content }
+xml.attlist =
+  attribute xml:id { xsd:NCName }?,
+  attribute xml:base { xsd:anyURI }?,
+  attribute keyref {
+    xsd:string {
+      minLength = "1"
+      pattern =
+        "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+    }
+    | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+  }?,
+  attribute key {
+    xsd:string {
+      minLength = "1"
+      pattern =
+        "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+    }
+    | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+  }?
+Retract =
+  notAllowed
+  | element Retract {
+      xml.attlist,
+      node.attrib,
+      mapMaterial.attrib,
+      mapClosure.attrib,
+      mapDirection.attrib,
+      meta-roles.content,
+      (element formula { formula-assert.type }
+       | formula-assert.content)*
+    }
+anyLax3 =
+  element * - (Ind
+               | Rel
+               | Rule
+               | Equivalent
+               | Reify
+               | formula
+               | Var
+               | act
+               | RuleML
+               | weak
+               | Skolem
+               | degree
+               | evaluation
+               | meta
+               | Query
+               | Interval
+               | scope
+               | torso
+               | Quantifier
+               | slot
+               | do
+               | left
+               | Equal
+               | Rulebase
+               | guard
+               | oid
+               | if
+               | Atom
+               | Time
+               | Retract
+               | declare
+               | Profile
+               | Spatial
+               | quantification
+               | op
+               | resl
+               | else
+               | And
+               | Entails
+               | Negation
+               | Or
+               | then
+               | Exists
+               | strong
+               | Forall
+               | Plex
+               | Fun
+               | Naf
+               | Assert
+               | elseDo
+               | Implies
+               | signature
+               | Expr
+               | right
+               | on
+               | Neg
+               | repo
+               | qualification
+               | arg
+               | Data
+               | after) {
+    mixed {
+      (attribute * { text }
+       | anyLax3)*
+    }
+  }
+  | elseDo
+  | Implies
+  | Assert
+  | Naf
+  | after
+  | Data
+  | arg
+  | qualification
+  | repo
+  | Neg
+  | on
+  | Expr
+  | right
+  | signature
+  | else
+  | resl
+  | op
+  | Spatial
+  | quantification
+  | Profile
+  | declare
+  | Plex
+  | Fun
+  | Forall
+  | strong
+  | Exists
+  | then
+  | Or
+  | Negation
+  | Entails
+  | And
+  | torso
+  | Interval
+  | scope
+  | Query
+  | meta
+  | evaluation
+  | Retract
+  | Time
+  | Atom
+  | guard
+  | oid
+  | if
+  | Rulebase
+  | Equal
+  | do
+  | left
+  | slot
+  | Quantifier
+  | Reify
+  | Equivalent
+  | Rule
+  | Ind
+  | Rel
+  | degree
+  | Skolem
+  | weak
+  | RuleML
+  | Var
+  | act
+  | formula
+Reify =
+  notAllowed
+  | element Reify {
+      xml.attlist,
+      node.attrib,
+      (elseDo
+       | Implies
+       | Assert
+       | Naf
+       | after
+       | Data
+       | arg
+       | qualification
+       | repo
+       | Neg
+       | on
+       | Expr
+       | right
+       | signature
+       | else
+       | resl
+       | op
+       | Spatial
+       | quantification
+       | Profile
+       | declare
+       | Plex
+       | Fun
+       | Forall
+       | strong
+       | Exists
+       | then
+       | Or
+       | Negation
+       | Entails
+       | And
+       | torso
+       | Interval
+       | scope
+       | Query
+       | meta
+       | evaluation
+       | Retract
+       | Time
+       | Atom
+       | guard
+       | oid
+       | if
+       | Rulebase
+       | Equal
+       | do
+       | left
+       | slot
+       | Quantifier
+       | Reify
+       | Equivalent
+       | Rule
+       | Ind
+       | Rel
+       | degree
+       | Skolem
+       | weak
+       | RuleML
+       | Var
+       | act
+       | formula)?
+    }
+right.content = arg.content
+Atom =
+  notAllowed
+  | element Atom { Atom.type }
+op-atom.type = (op.attlist, op-atom.content), empty
+Rel =
+  notAllowed
+  | element Rel {
+      mixed {
+        attribute per {
+          xsd:NMTOKEN "open"
+          | xsd:NMTOKEN "effect"
+          | xsd:NMTOKEN "value"
+          | xsd:NMTOKEN "modal"
+          | xsd:NMTOKEN "copy"
+        }?,
+        xml.attlist,
+        node.attrib,
+        iri.attrib
+      }
+    }
+Implies.attlist =
+  xml.attlist,
+  node.attrib,
+  attribute material { xsd:NMTOKEN "yes" | xsd:NMTOKEN "no" }?,
+  direction.attrib,
+  closure.attrib
+op-atom.content = Rel
+scope =
+  notAllowed
+  | element scope { xml.attlist, index.attrib, formula-query.content? }
+outer-connective.content = Negation | Neg | Equal
+outer-quantifier.content = Forall | Quantifier
+mapClosure.attrib =
+  attribute mapClosure {
+    xsd:NMTOKEN "universal" | xsd:NMTOKEN "existential"
+  }?
+declare =
+  notAllowed
+  | element declare { xml.attlist, declare.content }
+Fun =
+  notAllowed
+  | element Fun {
+      mixed {
+        attribute val { xsd:NMTOKEN "1" | xsd:NMTOKEN "0.." }?,
+        xml.attlist,
+        node.attrib,
+        per.attrib,
+        iri.attrib
+      }
+    }
+then.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | outer-connective.content
+  | extended-signature-predicate-sorts.content
+oid =
+  notAllowed
+  | element oid {
+      Ind
+      | Data
+      | Var
+      | Skolem
+      | Reify
+      | Expr
+      | element Plex { Plex.type }
+      | extended-signature-function-sorts.content
+    }
+then-entails.content = Rulebase
+direction.attrib =
+  attribute direction {
+    xsd:NMTOKEN "backward"
+    | xsd:NMTOKEN "forward"
+    | xsd:NMTOKEN "bidirectional"
+  }?
+formula-rulebase.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | (notAllowed
+     | element Implies { Implies.type })
+  | Rule
+  | (notAllowed
+     | element Equivalent { Equivalent.type })
+  | outer-quantifier.content
+  | outer-connective.content
+  | extended-signature-predicate-sorts.content
+safety.attrib =
+  attribute safety {
+    xsd:string "transactional"
+    | xsd:string "non-interrupting"
+    | xsd:string "interrupting"
+  }?
+Interval =
+  notAllowed
+  | element Interval {
+      xml.attlist,
+      node.attrib,
+      iri.attrib,
+      type.attrib,
+      meta-roles.content,
+      ((anonymous0, anonymous0?)
+       | interval_primitives.content
+       | (anonymous1, anonymous1?))?
+    }
+Assert =
+  notAllowed
+  | element Assert {
+      size.attrib,
+      safety.attrib,
+      xml.attlist,
+      node.attrib,
+      mapMaterial.attrib,
+      mapClosure.attrib,
+      mapDirection.attrib,
+      meta-roles.content,
+      (element formula { formula-assert.type }
+       | formula-assert.content)*
+    }
+formula-forall.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | Implies
+  | Rule
+  | Equivalent
+  | outer-quantifier.content
+  | outer-connective.content
+  | extended-signature-predicate-sorts.content
+Exists =
+  notAllowed
+  | element Exists {
+      Exists.attlist,
+      meta-roles.content,
+      (declare | declare.content)+,
+      (element formula { formula.attlist, formula-exists.content }
+       | formula-exists.content)
+    }
+quantification =
+  notAllowed
+  | element quantification {
+      xml.attlist,
+      index.attrib,
+      (element Forall {
+         Exists.attlist,
+         meta-roles.content,
+         (declare | declare.content)+,
+         (element formula { formula-forall.type }
+          | formula-forall.content)?
+       }
+       | element Exists {
+           Exists.attlist,
+           meta-roles.content,
+           (declare | declare.content)+,
+           (element formula { formula-forall.type }
+            | formula-forall.content)?
+         }
+       | Quantifier)
+    }
+anonymous0 =
+  notAllowed
+  | element arg {
+      xml.attlist, index.attrib, interval_primitives.content
+    }
+weak.content = formula-negation.content
+on =
+  notAllowed
+  | element on { notAllowed }
+Equal =
+  notAllowed
+  | element Equal {
+      xml.attlist,
+      node.attrib,
+      attribute oriented { xsd:NMTOKEN "yes" | xsd:NMTOKEN "no" }?,
+      meta-roles.content,
+      degree?,
+      ((left, right) | (left.content, right.content))
+    }
+Time =
+  notAllowed
+  | element Time {
+      xml.attlist,
+      node.attrib,
+      iri.attrib,
+      type.attrib,
+      meta-roles.content,
+      ((element slot { slot.type }*,
+        resl?,
+        ((((element arg {
+              xml.attlist, index.attrib, time_primitives.content
+            }
+            | time_primitives.content)+,
+           repo?)
+          | repo),
+         element slot { slot.type }*,
+         resl?)?)
+       | element content { xml.attlist, anyLax3* }+)
+    }
+then =
+  notAllowed
+  | element then { then.type }
+Forall =
+  notAllowed
+  | element Forall {
+      xml.attlist,
+      node.attrib,
+      meta-roles.content,
+      (declare | declare.content)+,
+      (element formula { formula-forall.type }
+       | formula-forall.content)
+    }
+Equivalent =
+  notAllowed
+  | element Equivalent { Equivalent.type }
+arg.content =
+  Ind
+  | Data
+  | Var
+  | Skolem
+  | Reify
+  | Expr
+  | Plex
+  | extended-signature-function-sorts.content
+formula-exists.content =
+  (notAllowed
+   | element Atom { Atom.type })
+  | query-quantifier.content
+  | query-connective.content
+  | extended-signature-predicate-sorts.content
+degree =
+  notAllowed
+  | element degree { xml.attlist, Data }
+time_primitives.content = arg.content
+Equivalent.type =
+  ((xml.attlist, node.attrib, closure.attrib),
+   (meta-roles.content,
+    ((torso, torso) | (torso.content, torso.content)))),
+  empty
+Implies.type =
+  (Implies.attlist,
+   (meta-roles.content,
+    ((then, if) | (if, then) | (if.content, then.content)))),
+  empty
+extended-signature-predicate-sorts.content =
+  extended-signature-function-sorts.content
+And-inner.type = (node.attrib, And.content), empty
+declare.content = Var
+Naf =
+  notAllowed
+  | element Naf {
+      Negation.attlist, meta-roles.content, (weak | weak.content)
+    }
+index.attrib = attribute index { xsd:positiveInteger }?
+meta =
+  notAllowed
+  | element meta { xml.attlist, index.attrib, formula-assert.content }
+qualification =
+  notAllowed
+  | element qualification {
+      xml.attlist, index.attrib, formula-assert.content
+    }
+guard =
+  notAllowed
+  | element guard { xml.attlist, index.attrib, if.content }
+left.content = arg.content
+anyLax4 =
+  element * - (Ind
+               | Rel
+               | Rule
+               | Equivalent
+               | Reify
+               | formula
+               | Var
+               | act
+               | RuleML
+               | weak
+               | Skolem
+               | degree
+               | evaluation
+               | meta
+               | Query
+               | Interval
+               | scope
+               | torso
+               | Quantifier
+               | slot
+               | do
+               | left
+               | Equal
+               | Rulebase
+               | guard
+               | oid
+               | if
+               | Atom
+               | Time
+               | Retract
+               | declare
+               | Profile
+               | Spatial
+               | quantification
+               | op
+               | resl
+               | else
+               | And
+               | Entails
+               | Negation
+               | Or
+               | then
+               | Exists
+               | strong
+               | Forall
+               | Plex
+               | Fun
+               | Naf
+               | Assert
+               | elseDo
+               | Implies
+               | signature
+               | Expr
+               | right
+               | on
+               | Neg
+               | repo
+               | qualification
+               | arg
+               | Data
+               | after) {
+    mixed {
+      (attribute * { text }
+       | anyLax4)*
+    }
+  }
+  | elseDo
+  | Implies
+  | Assert
+  | Naf
+  | after
+  | Data
+  | arg
+  | qualification
+  | repo
+  | Neg
+  | on
+  | Expr
+  | right
+  | signature
+  | else
+  | resl
+  | op
+  | Spatial
+  | quantification
+  | Profile
+  | declare
+  | Plex
+  | Fun
+  | Forall
+  | strong
+  | Exists
+  | then
+  | Or
+  | Negation
+  | Entails
+  | And
+  | torso
+  | Interval
+  | scope
+  | Query
+  | meta
+  | evaluation
+  | Retract
+  | Time
+  | Atom
+  | guard
+  | oid
+  | if
+  | Rulebase
+  | Equal
+  | do
+  | left
+  | slot
+  | Quantifier
+  | Reify
+  | Equivalent
+  | Rule
+  | Ind
+  | Rel
+  | degree
+  | Skolem
+  | weak
+  | RuleML
+  | Var
+  | act
+  | formula
+Implies =
+  notAllowed
+  | element Implies { Implies.type }
+node.attrib = attribute node { xsd:anyURI }?
+Query =
+  notAllowed
+  | element Query {
+      xml.attlist,
+      node.attrib,
+      closure.attrib,
+      meta-roles.content,
+      (element formula { formula.attlist, formula-query.content }
+       | formula-query.content)*
+    }
+type.attrib =
+  attribute type {
+    xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
+    | xsd:string {
+        minLength = "1"
+        pattern =
+          "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+      }
+    | xsd:anyURI
+  }?
+anonymous1 =
+  notAllowed
+  | element content { xml.attlist, anyLax2* }
+spatial_primitives.content = arg.content
+query-connective.content =
+  (notAllowed
+   | element And {
+       xml.attlist, node.attrib, closure.attrib, And.content
+     })
+  | (notAllowed
+     | element Or {
+         xml.attlist, node.attrib, closure.attrib, Or.content
+       })
+  | Negation
+  | Naf
+  | Neg
+  | Equal
+extended-signature-function-sorts.content = Time | Spatial | Interval
+if.attlist = xml.attlist
+Plex.type =
+  (Plex.attlist,
+   (meta-roles.content,
+    (notAllowed
+     | element slot { slot.type })*,
+    (((arg | arg.content)+,
+      repo?,
+      (notAllowed
+       | element slot { slot.type })*,
+      resl?)
+     | empty
+     | (repo,
+        (notAllowed
+         | element slot { slot.type })*,
+        resl?)
+     | resl))),
+  empty
+Var =
+  notAllowed
+  | element Var {
+      mixed {
+        attribute mode {
+          xsd:string "+" | xsd:string "?" | xsd:string "-"
+        }?,
+        xml.attlist,
+        node.attrib,
+        type.attrib
+      }
+    }
+Plex.attlist = xml.attlist, node.attrib
+Plex =
+  notAllowed
+  | element Plex { Plex.type }
+closure.attrib =
+  attribute closure {
+    xsd:NMTOKEN "universal" | xsd:NMTOKEN "existential"
+  }?
+if.type = (if.attlist, if.content), empty
+resl =
+  notAllowed
+  | element resl {
+      xml.attlist,
+      (Var
+       | element Plex {
+           Plex.attlist,
+           meta-roles.content,
+           element slot { slot.type }*,
+           resl?
+         })
+    }
+Atom-slots.extend1 =
+  (notAllowed
+   | element slot { slot.type })*
+Ind =
+  notAllowed
+  | element Ind {
+      mixed { xml.attlist, node.attrib, iri.attrib, type.attrib }
+    }
+Spatial =
+  notAllowed
+  | element Spatial {
+      xml.attlist,
+      node.attrib,
+      iri.attrib,
+      type.attrib,
+      meta-roles.content,
+      ((element slot { slot.type }*,
+        resl?,
+        ((((element arg {
+              xml.attlist, index.attrib, spatial_primitives.content
+            }
+            | spatial_primitives.content)+,
+           repo?)
+          | repo),
+         element slot { slot.type }*,
+         resl?)?)
+       | element content { xml.attlist, anyLax4* }+)
+    }

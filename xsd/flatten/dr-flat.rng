@@ -1,0 +1,2578 @@
+<?xml version="1.0"?>
+<grammar ns="http://ruleml.org/spec"
+    xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!-- Modifications, after creation using rngconv
+    1. changed name of any(...) to anyLax
+    2. change type of xml:id to NCName
+  -->
+    <start>
+        <choice>
+            <ref name="elseDo"/>
+            <ref name="Implies"/>
+            <ref name="Assert"/>
+            <ref name="Naf"/>
+            <ref name="after"/>
+            <ref name="Data"/>
+            <ref name="arg"/>
+            <ref name="qualification"/>
+            <ref name="repo"/>
+            <ref name="Neg"/>
+            <ref name="on"/>
+            <ref name="Expr"/>
+            <ref name="right"/>
+            <ref name="signature"/>
+            <ref name="else"/>
+            <ref name="resl"/>
+            <ref name="op"/>
+            <ref name="Spatial"/>
+            <ref name="quantification"/>
+            <ref name="Profile"/>
+            <ref name="declare"/>
+            <ref name="Plex"/>
+            <ref name="Fun"/>
+            <ref name="Forall"/>
+            <ref name="strong"/>
+            <ref name="Exists"/>
+            <ref name="then"/>
+            <ref name="Or"/>
+            <ref name="Negation"/>
+            <ref name="Entails"/>
+            <ref name="And"/>
+            <ref name="torso"/>
+            <ref name="Interval"/>
+            <ref name="scope"/>
+            <ref name="Query"/>
+            <ref name="meta"/>
+            <ref name="evaluation"/>
+            <ref name="Retract"/>
+            <ref name="Time"/>
+            <ref name="Atom"/>
+            <ref name="guard"/>
+            <ref name="oid"/>
+            <ref name="if"/>
+            <ref name="Rulebase"/>
+            <ref name="Equal"/>
+            <ref name="do"/>
+            <ref name="left"/>
+            <ref name="slot"/>
+            <ref name="Quantifier"/>
+            <ref name="Reify"/>
+            <ref name="Equivalent"/>
+            <ref name="Rule"/>
+            <ref name="Ind"/>
+            <ref name="Rel"/>
+            <ref name="degree"/>
+            <ref name="Skolem"/>
+            <ref name="weak"/>
+            <ref name="RuleML"/>
+            <ref name="Var"/>
+            <ref name="act"/>
+            <ref name="formula"/>
+        </choice>
+    </start>
+    <define name="And">
+        <choice>
+            <notAllowed/>
+            <element name="And">
+                <ref name="And-inner.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="RuleML">
+        <choice>
+            <notAllowed/>
+            <element name="RuleML">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="meta-roles.content"/>
+                <zeroOrMore>
+                    <choice>
+                        <ref name="act"/>
+                        <ref name="Assert"/>
+                        <ref name="Retract"/>
+                        <ref name="Query"/>
+                    </choice>
+                </zeroOrMore>
+            </element>
+        </choice>
+    </define>
+    <define name="torso">
+        <choice>
+            <notAllowed/>
+            <element name="torso">
+                <ref name="xml.attlist"/>
+                <ref name="torso.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="per.attrib">
+        <optional>
+            <attribute name="per">
+                <choice>
+                    <value type="NMTOKEN">open</value>
+                    <value type="NMTOKEN">value</value>
+                    <value type="NMTOKEN">copy</value>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="op">
+        <choice>
+            <notAllowed/>
+            <element name="op">
+                <ref name="op-atom.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="act">
+        <choice>
+            <notAllowed/>
+            <element name="act">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <choice>
+                    <ref name="Assert"/>
+                    <ref name="Retract"/>
+                    <ref name="Query"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="Data">
+        <choice>
+            <notAllowed/>
+            <element name="Data">
+                <mixed>
+                    <zeroOrMore>
+                        <choice>
+                            <attribute>
+                                <anyName/>
+                            </attribute>
+                            <ref name="element0"/>
+                        </choice>
+                    </zeroOrMore>
+                </mixed>
+            </element>
+        </choice>
+    </define>
+    <define name="arg">
+        <choice>
+            <notAllowed/>
+            <element name="arg">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <ref name="arg.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="if">
+        <choice>
+            <notAllowed/>
+            <element name="if">
+                <ref name="if.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="Entails">
+        <choice>
+            <notAllowed/>
+            <element name="Entails">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <element name="if">
+                        <ref name="if.attlist"/>
+                        <ref name="if-entails.content"/>
+                    </element>
+                    <ref name="if-entails.content"/>
+                </choice>
+                <choice>
+                    <element name="then">
+                        <ref name="then.attlist"/>
+                        <ref name="then-entails.content"/>
+                    </element>
+                    <ref name="then-entails.content"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="after">
+        <choice>
+            <notAllowed/>
+            <element name="after">
+                <ref name="if.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="Rulebase">
+        <choice>
+            <notAllowed/>
+            <element name="Rulebase">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="mapMaterial.attrib"/>
+                <ref name="mapDirection.attrib"/>
+                <ref name="mapClosure.attrib"/>
+                <ref name="meta-roles.content"/>
+                <zeroOrMore>
+                    <choice>
+                        <element name="formula">
+                            <ref name="formula.attlist"/>
+                            <ref name="formula-rulebase.content"/>
+                        </element>
+                        <ref name="formula-rulebase.content"/>
+                    </choice>
+                </zeroOrMore>
+            </element>
+        </choice>
+    </define>
+    <define name="formula-query.content">
+        <choice>
+            <ref name="Rulebase"/>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="Entails"/>
+            <ref name="query-connective.content"/>
+            <ref name="query-quantifier.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="formula.attlist">
+        <ref name="xml.attlist"/>
+    </define>
+    <define name="anyLax">
+        <choice>
+            <element>
+                <anyName>
+                    <except>
+                        <name>Ind</name>
+                        <name>Rel</name>
+                        <name>Rule</name>
+                        <name>Equivalent</name>
+                        <name>Reify</name>
+                        <name>formula</name>
+                        <name>Var</name>
+                        <name>act</name>
+                        <name>RuleML</name>
+                        <name>weak</name>
+                        <name>Skolem</name>
+                        <name>degree</name>
+                        <name>evaluation</name>
+                        <name>meta</name>
+                        <name>Query</name>
+                        <name>Interval</name>
+                        <name>scope</name>
+                        <name>torso</name>
+                        <name>Quantifier</name>
+                        <name>slot</name>
+                        <name>do</name>
+                        <name>left</name>
+                        <name>Equal</name>
+                        <name>Rulebase</name>
+                        <name>guard</name>
+                        <name>oid</name>
+                        <name>if</name>
+                        <name>Atom</name>
+                        <name>Time</name>
+                        <name>Retract</name>
+                        <name>declare</name>
+                        <name>Profile</name>
+                        <name>Spatial</name>
+                        <name>quantification</name>
+                        <name>op</name>
+                        <name>resl</name>
+                        <name>else</name>
+                        <name>And</name>
+                        <name>Entails</name>
+                        <name>Negation</name>
+                        <name>Or</name>
+                        <name>then</name>
+                        <name>Exists</name>
+                        <name>strong</name>
+                        <name>Forall</name>
+                        <name>Plex</name>
+                        <name>Fun</name>
+                        <name>Naf</name>
+                        <name>Assert</name>
+                        <name>elseDo</name>
+                        <name>Implies</name>
+                        <name>signature</name>
+                        <name>Expr</name>
+                        <name>right</name>
+                        <name>on</name>
+                        <name>Neg</name>
+                        <name>repo</name>
+                        <name>qualification</name>
+                        <name>arg</name>
+                        <name>Data</name>
+                        <name>after</name>
+                    </except>
+                </anyName>
+                <mixed>
+                    <zeroOrMore>
+                        <choice>
+                            <attribute>
+                                <anyName/>
+                            </attribute>
+                            <ref name="anyLax"/>
+                        </choice>
+                    </zeroOrMore>
+                </mixed>
+            </element>
+            <ref name="elseDo"/>
+            <ref name="Implies"/>
+            <ref name="Assert"/>
+            <ref name="Naf"/>
+            <ref name="after"/>
+            <ref name="Data"/>
+            <ref name="arg"/>
+            <ref name="qualification"/>
+            <ref name="repo"/>
+            <ref name="Neg"/>
+            <ref name="on"/>
+            <ref name="Expr"/>
+            <ref name="right"/>
+            <ref name="signature"/>
+            <ref name="else"/>
+            <ref name="resl"/>
+            <ref name="op"/>
+            <ref name="Spatial"/>
+            <ref name="quantification"/>
+            <ref name="Profile"/>
+            <ref name="declare"/>
+            <ref name="Plex"/>
+            <ref name="Fun"/>
+            <ref name="Forall"/>
+            <ref name="strong"/>
+            <ref name="Exists"/>
+            <ref name="then"/>
+            <ref name="Or"/>
+            <ref name="Negation"/>
+            <ref name="Entails"/>
+            <ref name="And"/>
+            <ref name="torso"/>
+            <ref name="Interval"/>
+            <ref name="scope"/>
+            <ref name="Query"/>
+            <ref name="meta"/>
+            <ref name="evaluation"/>
+            <ref name="Retract"/>
+            <ref name="Time"/>
+            <ref name="Atom"/>
+            <ref name="guard"/>
+            <ref name="oid"/>
+            <ref name="if"/>
+            <ref name="Rulebase"/>
+            <ref name="Equal"/>
+            <ref name="do"/>
+            <ref name="left"/>
+            <ref name="slot"/>
+            <ref name="Quantifier"/>
+            <ref name="Reify"/>
+            <ref name="Equivalent"/>
+            <ref name="Rule"/>
+            <ref name="Ind"/>
+            <ref name="Rel"/>
+            <ref name="degree"/>
+            <ref name="Skolem"/>
+            <ref name="weak"/>
+            <ref name="RuleML"/>
+            <ref name="Var"/>
+            <ref name="act"/>
+            <ref name="formula"/>
+        </choice>
+    </define>
+    <define name="op.attlist">
+        <ref name="xml.attlist"/>
+    </define>
+    <define name="repo">
+        <choice>
+            <notAllowed/>
+            <element name="repo">
+                <ref name="xml.attlist"/>
+                <choice>
+                    <ref name="Var"/>
+                    <element name="Plex">
+                        <ref name="Plex.attlist"/>
+                        <ref name="meta-roles.content"/>
+                        <zeroOrMore>
+                            <choice>
+                                <ref name="arg"/>
+                                <ref name="arg.content"/>
+                            </choice>
+                        </zeroOrMore>
+                        <optional>
+                            <ref name="repo"/>
+                        </optional>
+                    </element>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="Profile">
+        <choice>
+            <notAllowed/>
+            <element name="Profile">
+                <ref name="xml.attlist"/>
+                <ref name="size.attrib"/>
+                <ref name="safety.attrib"/>
+                <ref name="node.attrib"/>
+                <ref name="direction.attrib"/>
+                <ref name="iri.attrib"/>
+                <ref name="type.attrib"/>
+                <ref name="meta-roles.content"/>
+                <zeroOrMore>
+                    <element name="content">
+                        <ref name="xml.attlist"/>
+                        <zeroOrMore>
+                            <ref name="anyLax"/>
+                        </zeroOrMore>
+                    </element>
+                </zeroOrMore>
+            </element>
+        </choice>
+    </define>
+    <define name="formula-negation.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="Equal"/>
+            <ref name="Negation"/>
+            <ref name="Naf"/>
+            <ref name="Neg"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="anyLax2">
+        <choice>
+            <element>
+                <anyName>
+                    <except>
+                        <name>Ind</name>
+                        <name>Rel</name>
+                        <name>Rule</name>
+                        <name>Equivalent</name>
+                        <name>Reify</name>
+                        <name>formula</name>
+                        <name>Var</name>
+                        <name>act</name>
+                        <name>RuleML</name>
+                        <name>weak</name>
+                        <name>Skolem</name>
+                        <name>degree</name>
+                        <name>evaluation</name>
+                        <name>meta</name>
+                        <name>Query</name>
+                        <name>Interval</name>
+                        <name>scope</name>
+                        <name>torso</name>
+                        <name>Quantifier</name>
+                        <name>slot</name>
+                        <name>do</name>
+                        <name>left</name>
+                        <name>Equal</name>
+                        <name>Rulebase</name>
+                        <name>guard</name>
+                        <name>oid</name>
+                        <name>if</name>
+                        <name>Atom</name>
+                        <name>Time</name>
+                        <name>Retract</name>
+                        <name>declare</name>
+                        <name>Profile</name>
+                        <name>Spatial</name>
+                        <name>quantification</name>
+                        <name>op</name>
+                        <name>resl</name>
+                        <name>else</name>
+                        <name>And</name>
+                        <name>Entails</name>
+                        <name>Negation</name>
+                        <name>Or</name>
+                        <name>then</name>
+                        <name>Exists</name>
+                        <name>strong</name>
+                        <name>Forall</name>
+                        <name>Plex</name>
+                        <name>Fun</name>
+                        <name>Naf</name>
+                        <name>Assert</name>
+                        <name>elseDo</name>
+                        <name>Implies</name>
+                        <name>signature</name>
+                        <name>Expr</name>
+                        <name>right</name>
+                        <name>on</name>
+                        <name>Neg</name>
+                        <name>repo</name>
+                        <name>qualification</name>
+                        <name>arg</name>
+                        <name>Data</name>
+                        <name>after</name>
+                    </except>
+                </anyName>
+                <mixed>
+                    <zeroOrMore>
+                        <choice>
+                            <attribute>
+                                <anyName/>
+                            </attribute>
+                            <ref name="anyLax2"/>
+                        </choice>
+                    </zeroOrMore>
+                </mixed>
+            </element>
+            <ref name="elseDo"/>
+            <ref name="Implies"/>
+            <ref name="Assert"/>
+            <ref name="Naf"/>
+            <ref name="after"/>
+            <ref name="Data"/>
+            <ref name="arg"/>
+            <ref name="qualification"/>
+            <ref name="repo"/>
+            <ref name="Neg"/>
+            <ref name="on"/>
+            <ref name="Expr"/>
+            <ref name="right"/>
+            <ref name="signature"/>
+            <ref name="else"/>
+            <ref name="resl"/>
+            <ref name="op"/>
+            <ref name="Spatial"/>
+            <ref name="quantification"/>
+            <ref name="Profile"/>
+            <ref name="declare"/>
+            <ref name="Plex"/>
+            <ref name="Fun"/>
+            <ref name="Forall"/>
+            <ref name="strong"/>
+            <ref name="Exists"/>
+            <ref name="then"/>
+            <ref name="Or"/>
+            <ref name="Negation"/>
+            <ref name="Entails"/>
+            <ref name="And"/>
+            <ref name="torso"/>
+            <ref name="Interval"/>
+            <ref name="scope"/>
+            <ref name="Query"/>
+            <ref name="meta"/>
+            <ref name="evaluation"/>
+            <ref name="Retract"/>
+            <ref name="Time"/>
+            <ref name="Atom"/>
+            <ref name="guard"/>
+            <ref name="oid"/>
+            <ref name="if"/>
+            <ref name="Rulebase"/>
+            <ref name="Equal"/>
+            <ref name="do"/>
+            <ref name="left"/>
+            <ref name="slot"/>
+            <ref name="Quantifier"/>
+            <ref name="Reify"/>
+            <ref name="Equivalent"/>
+            <ref name="Rule"/>
+            <ref name="Ind"/>
+            <ref name="Rel"/>
+            <ref name="degree"/>
+            <ref name="Skolem"/>
+            <ref name="weak"/>
+            <ref name="RuleML"/>
+            <ref name="Var"/>
+            <ref name="act"/>
+            <ref name="formula"/>
+        </choice>
+    </define>
+    <define name="else">
+        <choice>
+            <notAllowed/>
+            <element name="else">
+                <ref name="then.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="do.type">
+        <group>
+            <ref name="xml.attlist"/>
+            <notAllowed/>
+        </group>
+        <empty/>
+    </define>
+    <define name="slot.type">
+        <group>
+            <group>
+                <ref name="xml.attlist"/>
+                <optional>
+                    <attribute name="weight">
+                        <data type="decimal">
+                            <param name="minInclusive">0</param>
+                            <param name="maxInclusive">1</param>
+                        </data>
+                    </attribute>
+                </optional>
+                <optional>
+                    <attribute name="card">
+                        <data type="nonNegativeInteger"/>
+                    </attribute>
+                </optional>
+            </group>
+            <group>
+                <choice>
+                    <ref name="Ind"/>
+                    <ref name="Data"/>
+                    <ref name="Expr"/>
+                    <ref name="Plex"/>
+                    <ref name="extended-signature-function-sorts.content"/>
+                </choice>
+                <ref name="arg.content"/>
+            </group>
+        </group>
+        <empty/>
+    </define>
+    <define name="Or">
+        <choice>
+            <notAllowed/>
+            <element name="Or">
+                <ref name="Or-inner.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="formula-forall.type">
+        <group>
+            <ref name="formula.attlist"/>
+            <ref name="formula-forall.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="then.type">
+        <group>
+            <ref name="then.attlist"/>
+            <ref name="then.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="formula-assert.type">
+        <group>
+            <ref name="formula.attlist"/>
+            <ref name="formula-assert.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="Rule">
+        <choice>
+            <notAllowed/>
+            <element name="Rule">
+                <ref name="Implies.attlist"/>
+                <ref name="type.attrib"/>
+                <optional>
+                    <attribute name="style">
+                        <choice>
+                            <value type="string">reasoning</value>
+                            <value type="string">active</value>
+                            <value type="string">messaging</value>
+                        </choice>
+                    </attribute>
+                </optional>
+                <ref name="meta-roles.content"/>
+                <optional>
+                    <choice>
+                        <group>
+                            <optional>
+                                <ref name="else"/>
+                            </optional>
+                            <ref name="then"/>
+                            <ref name="if"/>
+                        </group>
+                        <group>
+                            <ref name="if"/>
+                            <ref name="then"/>
+                            <optional>
+                                <ref name="else"/>
+                            </optional>
+                        </group>
+                        <group>
+                            <ref name="if.content"/>
+                            <ref name="then.content"/>
+                            <optional>
+                                <ref name="then.content"/>
+                            </optional>
+                        </group>
+                    </choice>
+                </optional>
+            </element>
+        </choice>
+    </define>
+    <define name="Atom.type">
+        <group>
+            <group>
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="closure.attrib"/>
+            </group>
+            <group>
+                <ref name="meta-roles.content"/>
+                <optional>
+                    <ref name="degree"/>
+                </optional>
+                <choice>
+                    <choice>
+                        <notAllowed/>
+                        <element name="op">
+                            <ref name="op-atom.type"/>
+                        </element>
+                    </choice>
+                    <ref name="op-atom.content"/>
+                </choice>
+                <ref name="Atom-slots.extend1"/>
+                <optional>
+                    <choice>
+                        <group>
+                            <oneOrMore>
+                                <choice>
+                                    <ref name="arg"/>
+                                    <ref name="arg.content"/>
+                                </choice>
+                            </oneOrMore>
+                            <optional>
+                                <ref name="repo"/>
+                            </optional>
+                        </group>
+                        <ref name="repo"/>
+                    </choice>
+                    <ref name="Atom-slots.extend1"/>
+                </optional>
+                <optional>
+                    <ref name="resl"/>
+                </optional>
+            </group>
+        </group>
+        <empty/>
+    </define>
+    <define name="signature">
+        <choice>
+            <notAllowed/>
+            <element name="signature">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <ref name="formula-query.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="if-entails.content">
+        <ref name="Rulebase"/>
+    </define>
+    <define name="Or-inner.type">
+        <group>
+            <ref name="node.attrib"/>
+            <ref name="Or.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="formula-and-or.type">
+        <group>
+            <ref name="formula.attlist"/>
+            <ref name="formula-and-or.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="Negation.attlist">
+        <ref name="xml.attlist"/>
+        <ref name="node.attrib"/>
+        <ref name="iri.attrib"/>
+        <ref name="type.attrib"/>
+    </define>
+    <define name="Neg">
+        <choice>
+            <notAllowed/>
+            <element name="Neg">
+                <ref name="Negation.attlist"/>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <ref name="strong"/>
+                    <ref name="strong.content"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="interval_primitives.content">
+        <ref name="arg.content"/>
+        <optional>
+            <ref name="arg.content"/>
+        </optional>
+    </define>
+    <define name="Or.content">
+        <ref name="meta-roles.content"/>
+        <zeroOrMore>
+            <choice>
+                <choice>
+                    <notAllowed/>
+                    <element name="formula">
+                        <ref name="formula-and-or.type"/>
+                    </element>
+                </choice>
+                <ref name="formula-and-or.content"/>
+            </choice>
+        </zeroOrMore>
+    </define>
+    <define name="right">
+        <choice>
+            <notAllowed/>
+            <element name="right">
+                <ref name="xml.attlist"/>
+                <ref name="right.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="elseDo">
+        <choice>
+            <notAllowed/>
+            <element name="elseDo">
+                <ref name="do.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="inner-connective.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="And">
+                    <ref name="And-inner.type"/>
+                </element>
+            </choice>
+            <choice>
+                <notAllowed/>
+                <element name="Or">
+                    <ref name="Or-inner.type"/>
+                </element>
+            </choice>
+            <ref name="Negation"/>
+            <ref name="Naf"/>
+            <ref name="Neg"/>
+            <ref name="Equal"/>
+        </choice>
+    </define>
+    <define name="meta-roles.content">
+        <group>
+            <zeroOrMore>
+                <ref name="meta"/>
+            </zeroOrMore>
+            <zeroOrMore>
+                <ref name="scope"/>
+            </zeroOrMore>
+            <zeroOrMore>
+                <ref name="guard"/>
+            </zeroOrMore>
+        </group>
+        <group>
+            <zeroOrMore>
+                <ref name="evaluation"/>
+            </zeroOrMore>
+            <zeroOrMore>
+                <ref name="signature"/>
+            </zeroOrMore>
+        </group>
+        <group>
+            <zeroOrMore>
+                <ref name="qualification"/>
+            </zeroOrMore>
+            <zeroOrMore>
+                <ref name="quantification"/>
+            </zeroOrMore>
+            <optional>
+                <ref name="oid"/>
+            </optional>
+        </group>
+    </define>
+    <define name="Expr">
+        <choice>
+            <notAllowed/>
+            <element name="Expr">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="per.attrib"/>
+                <ref name="type.attrib"/>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <element name="op">
+                        <ref name="op.attlist"/>
+                        <ref name="op-Expr.content"/>
+                    </element>
+                    <ref name="op-Expr.content"/>
+                </choice>
+                <zeroOrMore>
+                    <element name="slot">
+                        <ref name="slot.type"/>
+                    </element>
+                </zeroOrMore>
+                <optional>
+                    <choice>
+                        <group>
+                            <oneOrMore>
+                                <choice>
+                                    <ref name="arg"/>
+                                    <ref name="arg.content"/>
+                                </choice>
+                            </oneOrMore>
+                            <optional>
+                                <ref name="repo"/>
+                            </optional>
+                        </group>
+                        <ref name="repo"/>
+                    </choice>
+                    <zeroOrMore>
+                        <element name="slot">
+                            <ref name="slot.type"/>
+                        </element>
+                    </zeroOrMore>
+                </optional>
+                <optional>
+                    <ref name="resl"/>
+                </optional>
+            </element>
+        </choice>
+    </define>
+    <define name="strong.content">
+        <ref name="formula-negation.content"/>
+    </define>
+    <define name="left">
+        <choice>
+            <notAllowed/>
+            <element name="left">
+                <ref name="xml.attlist"/>
+                <ref name="left.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="Quantifier">
+        <choice>
+            <notAllowed/>
+            <element name="Quantifier">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="iri.attrib"/>
+                <ref name="type.attrib"/>
+                <ref name="meta-roles.content"/>
+                <oneOrMore>
+                    <choice>
+                        <ref name="declare"/>
+                        <ref name="Var"/>
+                    </choice>
+                </oneOrMore>
+                <optional>
+                    <choice>
+                        <element name="formula">
+                            <ref name="formula-forall.type"/>
+                        </element>
+                        <ref name="formula-forall.content"/>
+                    </choice>
+                </optional>
+            </element>
+        </choice>
+    </define>
+    <define name="And.content">
+        <ref name="meta-roles.content"/>
+        <zeroOrMore>
+            <choice>
+                <choice>
+                    <notAllowed/>
+                    <element name="formula">
+                        <ref name="formula-and-or.type"/>
+                    </element>
+                </choice>
+                <ref name="formula-and-or.content"/>
+            </choice>
+        </zeroOrMore>
+    </define>
+    <define name="formula">
+        <choice>
+            <notAllowed/>
+            <element name="formula">
+                <ref name="formula-negation.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="then.attlist">
+        <ref name="xml.attlist"/>
+    </define>
+    <define name="query-quantifier.content">
+        <choice>
+            <ref name="Exists"/>
+            <ref name="Quantifier"/>
+        </choice>
+    </define>
+    <define name="do">
+        <choice>
+            <notAllowed/>
+            <element name="do">
+                <ref name="do.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="op-Expr.content">
+        <ref name="Fun"/>
+    </define>
+    <define name="formula-and-or.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="inner-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="evaluation">
+        <choice>
+            <notAllowed/>
+            <element name="evaluation">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <ref name="Profile"/>
+            </element>
+        </choice>
+    </define>
+    <define name="formula-assert.content">
+        <choice>
+            <ref name="Rulebase"/>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="Implies"/>
+            <ref name="Rule"/>
+            <ref name="Equivalent"/>
+            <ref name="Entails"/>
+            <ref name="outer-quantifier.content"/>
+            <ref name="outer-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="size.attrib">
+        <optional>
+            <attribute name="size">
+                <data type="int"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="element0">
+        <element>
+            <anyName/>
+            <mixed>
+                <zeroOrMore>
+                    <choice>
+                        <attribute>
+                            <anyName/>
+                        </attribute>
+                        <ref name="element0"/>
+                    </choice>
+                </zeroOrMore>
+            </mixed>
+        </element>
+    </define>
+    <define name="Negation">
+        <choice>
+            <notAllowed/>
+            <element name="Negation">
+                <ref name="Negation.attlist"/>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <element name="formula">
+                        <ref name="formula-negation.type"/>
+                    </element>
+                    <ref name="formula-negation.content"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="Exists.attlist">
+        <ref name="xml.attlist"/>
+        <ref name="node.attrib"/>
+    </define>
+    <define name="iri.attrib">
+        <optional>
+            <attribute name="iri">
+                <data type="anyURI"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="Skolem">
+        <choice>
+            <notAllowed/>
+            <element name="Skolem">
+                <mixed>
+                    <ref name="xml.attlist"/>
+                    <ref name="node.attrib"/>
+                    <ref name="type.attrib"/>
+                </mixed>
+            </element>
+        </choice>
+    </define>
+    <define name="mapMaterial.attrib">
+        <optional>
+            <attribute name="mapMaterial">
+                <choice>
+                    <value type="NMTOKEN">yes</value>
+                    <value type="NMTOKEN">no</value>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="if.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="inner-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="slot">
+        <choice>
+            <notAllowed/>
+            <element name="slot">
+                <ref name="slot.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="formula-negation.type">
+        <group>
+            <empty/>
+            <ref name="formula-negation.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="torso.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="outer-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="strong">
+        <choice>
+            <notAllowed/>
+            <element name="strong">
+                <ref name="xml.attlist"/>
+                <ref name="strong.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="mapDirection.attrib">
+        <optional>
+            <attribute name="mapDirection">
+                <choice>
+                    <value type="NMTOKEN">backward</value>
+                    <value type="NMTOKEN">forward</value>
+                    <value type="NMTOKEN">bidirectional</value>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="weak">
+        <choice>
+            <notAllowed/>
+            <element name="weak">
+                <ref name="xml.attlist"/>
+                <ref name="weak.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="xml.attlist">
+        <optional>
+            <attribute>
+                <name ns="http://www.w3.org/XML/1998/namespace">id</name>
+                <data type="NCName"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute>
+                <name ns="http://www.w3.org/XML/1998/namespace">base</name>
+                <data type="anyURI"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="keyref">
+                <choice>
+                    <data type="string">
+                        <param name="minLength">1</param>
+                        <param name="pattern">(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)</param>
+                    </data>
+                    <data type="anyURI">
+                        <param name="pattern">[\i-[:]][\c-[:]]+:.+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="key">
+                <choice>
+                    <data type="string">
+                        <param name="minLength">1</param>
+                        <param name="pattern">(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)</param>
+                    </data>
+                    <data type="anyURI">
+                        <param name="pattern">[\i-[:]][\c-[:]]+:.+</param>
+                    </data>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="Retract">
+        <choice>
+            <notAllowed/>
+            <element name="Retract">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="mapMaterial.attrib"/>
+                <ref name="mapClosure.attrib"/>
+                <ref name="mapDirection.attrib"/>
+                <ref name="meta-roles.content"/>
+                <zeroOrMore>
+                    <choice>
+                        <element name="formula">
+                            <ref name="formula-assert.type"/>
+                        </element>
+                        <ref name="formula-assert.content"/>
+                    </choice>
+                </zeroOrMore>
+            </element>
+        </choice>
+    </define>
+    <define name="anyLax3">
+        <choice>
+            <element>
+                <anyName>
+                    <except>
+                        <name>Ind</name>
+                        <name>Rel</name>
+                        <name>Rule</name>
+                        <name>Equivalent</name>
+                        <name>Reify</name>
+                        <name>formula</name>
+                        <name>Var</name>
+                        <name>act</name>
+                        <name>RuleML</name>
+                        <name>weak</name>
+                        <name>Skolem</name>
+                        <name>degree</name>
+                        <name>evaluation</name>
+                        <name>meta</name>
+                        <name>Query</name>
+                        <name>Interval</name>
+                        <name>scope</name>
+                        <name>torso</name>
+                        <name>Quantifier</name>
+                        <name>slot</name>
+                        <name>do</name>
+                        <name>left</name>
+                        <name>Equal</name>
+                        <name>Rulebase</name>
+                        <name>guard</name>
+                        <name>oid</name>
+                        <name>if</name>
+                        <name>Atom</name>
+                        <name>Time</name>
+                        <name>Retract</name>
+                        <name>declare</name>
+                        <name>Profile</name>
+                        <name>Spatial</name>
+                        <name>quantification</name>
+                        <name>op</name>
+                        <name>resl</name>
+                        <name>else</name>
+                        <name>And</name>
+                        <name>Entails</name>
+                        <name>Negation</name>
+                        <name>Or</name>
+                        <name>then</name>
+                        <name>Exists</name>
+                        <name>strong</name>
+                        <name>Forall</name>
+                        <name>Plex</name>
+                        <name>Fun</name>
+                        <name>Naf</name>
+                        <name>Assert</name>
+                        <name>elseDo</name>
+                        <name>Implies</name>
+                        <name>signature</name>
+                        <name>Expr</name>
+                        <name>right</name>
+                        <name>on</name>
+                        <name>Neg</name>
+                        <name>repo</name>
+                        <name>qualification</name>
+                        <name>arg</name>
+                        <name>Data</name>
+                        <name>after</name>
+                    </except>
+                </anyName>
+                <mixed>
+                    <zeroOrMore>
+                        <choice>
+                            <attribute>
+                                <anyName/>
+                            </attribute>
+                            <ref name="anyLax3"/>
+                        </choice>
+                    </zeroOrMore>
+                </mixed>
+            </element>
+            <ref name="elseDo"/>
+            <ref name="Implies"/>
+            <ref name="Assert"/>
+            <ref name="Naf"/>
+            <ref name="after"/>
+            <ref name="Data"/>
+            <ref name="arg"/>
+            <ref name="qualification"/>
+            <ref name="repo"/>
+            <ref name="Neg"/>
+            <ref name="on"/>
+            <ref name="Expr"/>
+            <ref name="right"/>
+            <ref name="signature"/>
+            <ref name="else"/>
+            <ref name="resl"/>
+            <ref name="op"/>
+            <ref name="Spatial"/>
+            <ref name="quantification"/>
+            <ref name="Profile"/>
+            <ref name="declare"/>
+            <ref name="Plex"/>
+            <ref name="Fun"/>
+            <ref name="Forall"/>
+            <ref name="strong"/>
+            <ref name="Exists"/>
+            <ref name="then"/>
+            <ref name="Or"/>
+            <ref name="Negation"/>
+            <ref name="Entails"/>
+            <ref name="And"/>
+            <ref name="torso"/>
+            <ref name="Interval"/>
+            <ref name="scope"/>
+            <ref name="Query"/>
+            <ref name="meta"/>
+            <ref name="evaluation"/>
+            <ref name="Retract"/>
+            <ref name="Time"/>
+            <ref name="Atom"/>
+            <ref name="guard"/>
+            <ref name="oid"/>
+            <ref name="if"/>
+            <ref name="Rulebase"/>
+            <ref name="Equal"/>
+            <ref name="do"/>
+            <ref name="left"/>
+            <ref name="slot"/>
+            <ref name="Quantifier"/>
+            <ref name="Reify"/>
+            <ref name="Equivalent"/>
+            <ref name="Rule"/>
+            <ref name="Ind"/>
+            <ref name="Rel"/>
+            <ref name="degree"/>
+            <ref name="Skolem"/>
+            <ref name="weak"/>
+            <ref name="RuleML"/>
+            <ref name="Var"/>
+            <ref name="act"/>
+            <ref name="formula"/>
+        </choice>
+    </define>
+    <define name="Reify">
+        <choice>
+            <notAllowed/>
+            <element name="Reify">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <optional>
+                    <choice>
+                        <ref name="elseDo"/>
+                        <ref name="Implies"/>
+                        <ref name="Assert"/>
+                        <ref name="Naf"/>
+                        <ref name="after"/>
+                        <ref name="Data"/>
+                        <ref name="arg"/>
+                        <ref name="qualification"/>
+                        <ref name="repo"/>
+                        <ref name="Neg"/>
+                        <ref name="on"/>
+                        <ref name="Expr"/>
+                        <ref name="right"/>
+                        <ref name="signature"/>
+                        <ref name="else"/>
+                        <ref name="resl"/>
+                        <ref name="op"/>
+                        <ref name="Spatial"/>
+                        <ref name="quantification"/>
+                        <ref name="Profile"/>
+                        <ref name="declare"/>
+                        <ref name="Plex"/>
+                        <ref name="Fun"/>
+                        <ref name="Forall"/>
+                        <ref name="strong"/>
+                        <ref name="Exists"/>
+                        <ref name="then"/>
+                        <ref name="Or"/>
+                        <ref name="Negation"/>
+                        <ref name="Entails"/>
+                        <ref name="And"/>
+                        <ref name="torso"/>
+                        <ref name="Interval"/>
+                        <ref name="scope"/>
+                        <ref name="Query"/>
+                        <ref name="meta"/>
+                        <ref name="evaluation"/>
+                        <ref name="Retract"/>
+                        <ref name="Time"/>
+                        <ref name="Atom"/>
+                        <ref name="guard"/>
+                        <ref name="oid"/>
+                        <ref name="if"/>
+                        <ref name="Rulebase"/>
+                        <ref name="Equal"/>
+                        <ref name="do"/>
+                        <ref name="left"/>
+                        <ref name="slot"/>
+                        <ref name="Quantifier"/>
+                        <ref name="Reify"/>
+                        <ref name="Equivalent"/>
+                        <ref name="Rule"/>
+                        <ref name="Ind"/>
+                        <ref name="Rel"/>
+                        <ref name="degree"/>
+                        <ref name="Skolem"/>
+                        <ref name="weak"/>
+                        <ref name="RuleML"/>
+                        <ref name="Var"/>
+                        <ref name="act"/>
+                        <ref name="formula"/>
+                    </choice>
+                </optional>
+            </element>
+        </choice>
+    </define>
+    <define name="right.content">
+        <ref name="arg.content"/>
+    </define>
+    <define name="Atom">
+        <choice>
+            <notAllowed/>
+            <element name="Atom">
+                <ref name="Atom.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="op-atom.type">
+        <group>
+            <ref name="op.attlist"/>
+            <ref name="op-atom.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="Rel">
+        <choice>
+            <notAllowed/>
+            <element name="Rel">
+                <mixed>
+                    <optional>
+                        <attribute name="per">
+                            <choice>
+                                <value type="NMTOKEN">open</value>
+                                <value type="NMTOKEN">effect</value>
+                                <value type="NMTOKEN">value</value>
+                                <value type="NMTOKEN">modal</value>
+                                <value type="NMTOKEN">copy</value>
+                            </choice>
+                        </attribute>
+                    </optional>
+                    <ref name="xml.attlist"/>
+                    <ref name="node.attrib"/>
+                    <ref name="iri.attrib"/>
+                </mixed>
+            </element>
+        </choice>
+    </define>
+    <define name="Implies.attlist">
+        <ref name="xml.attlist"/>
+        <ref name="node.attrib"/>
+        <optional>
+            <attribute name="material">
+                <choice>
+                    <value type="NMTOKEN">yes</value>
+                    <value type="NMTOKEN">no</value>
+                </choice>
+            </attribute>
+        </optional>
+        <ref name="direction.attrib"/>
+        <ref name="closure.attrib"/>
+    </define>
+    <define name="op-atom.content">
+        <ref name="Rel"/>
+    </define>
+    <define name="scope">
+        <choice>
+            <notAllowed/>
+            <element name="scope">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <optional>
+                    <ref name="formula-query.content"/>
+                </optional>
+            </element>
+        </choice>
+    </define>
+    <define name="outer-connective.content">
+        <choice>
+            <ref name="Negation"/>
+            <ref name="Neg"/>
+            <ref name="Equal"/>
+        </choice>
+    </define>
+    <define name="outer-quantifier.content">
+        <choice>
+            <ref name="Forall"/>
+            <ref name="Quantifier"/>
+        </choice>
+    </define>
+    <define name="mapClosure.attrib">
+        <optional>
+            <attribute name="mapClosure">
+                <choice>
+                    <value type="NMTOKEN">universal</value>
+                    <value type="NMTOKEN">existential</value>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="declare">
+        <choice>
+            <notAllowed/>
+            <element name="declare">
+                <ref name="xml.attlist"/>
+                <ref name="declare.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="Fun">
+        <choice>
+            <notAllowed/>
+            <element name="Fun">
+                <mixed>
+                    <optional>
+                        <attribute name="val">
+                            <choice>
+                                <value type="NMTOKEN">1</value>
+                                <value type="NMTOKEN">0..</value>
+                            </choice>
+                        </attribute>
+                    </optional>
+                    <ref name="xml.attlist"/>
+                    <ref name="node.attrib"/>
+                    <ref name="per.attrib"/>
+                    <ref name="iri.attrib"/>
+                </mixed>
+            </element>
+        </choice>
+    </define>
+    <define name="then.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="outer-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="oid">
+        <choice>
+            <notAllowed/>
+            <element name="oid">
+                <choice>
+                    <ref name="Ind"/>
+                    <ref name="Data"/>
+                    <ref name="Var"/>
+                    <ref name="Skolem"/>
+                    <ref name="Reify"/>
+                    <ref name="Expr"/>
+                    <element name="Plex">
+                        <ref name="Plex.type"/>
+                    </element>
+                    <ref name="extended-signature-function-sorts.content"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="then-entails.content">
+        <ref name="Rulebase"/>
+    </define>
+    <define name="direction.attrib">
+        <optional>
+            <attribute name="direction">
+                <choice>
+                    <value type="NMTOKEN">backward</value>
+                    <value type="NMTOKEN">forward</value>
+                    <value type="NMTOKEN">bidirectional</value>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="formula-rulebase.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <choice>
+                <notAllowed/>
+                <element name="Implies">
+                    <ref name="Implies.type"/>
+                </element>
+            </choice>
+            <ref name="Rule"/>
+            <choice>
+                <notAllowed/>
+                <element name="Equivalent">
+                    <ref name="Equivalent.type"/>
+                </element>
+            </choice>
+            <ref name="outer-quantifier.content"/>
+            <ref name="outer-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="safety.attrib">
+        <optional>
+            <attribute name="safety">
+                <choice>
+                    <value type="string">transactional</value>
+                    <value type="string">non-interrupting</value>
+                    <value type="string">interrupting</value>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="Interval">
+        <choice>
+            <notAllowed/>
+            <element name="Interval">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="iri.attrib"/>
+                <ref name="type.attrib"/>
+                <ref name="meta-roles.content"/>
+                <optional>
+                    <choice>
+                        <group>
+                            <ref name="anonymous0"/>
+                            <optional>
+                                <ref name="anonymous0"/>
+                            </optional>
+                        </group>
+                        <ref name="interval_primitives.content"/>
+                        <group>
+                            <ref name="anonymous1"/>
+                            <optional>
+                                <ref name="anonymous1"/>
+                            </optional>
+                        </group>
+                    </choice>
+                </optional>
+            </element>
+        </choice>
+    </define>
+    <define name="Assert">
+        <choice>
+            <notAllowed/>
+            <element name="Assert">
+                <ref name="size.attrib"/>
+                <ref name="safety.attrib"/>
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="mapMaterial.attrib"/>
+                <ref name="mapClosure.attrib"/>
+                <ref name="mapDirection.attrib"/>
+                <ref name="meta-roles.content"/>
+                <zeroOrMore>
+                    <choice>
+                        <element name="formula">
+                            <ref name="formula-assert.type"/>
+                        </element>
+                        <ref name="formula-assert.content"/>
+                    </choice>
+                </zeroOrMore>
+            </element>
+        </choice>
+    </define>
+    <define name="formula-forall.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="Implies"/>
+            <ref name="Rule"/>
+            <ref name="Equivalent"/>
+            <ref name="outer-quantifier.content"/>
+            <ref name="outer-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="Exists">
+        <choice>
+            <notAllowed/>
+            <element name="Exists">
+                <ref name="Exists.attlist"/>
+                <ref name="meta-roles.content"/>
+                <oneOrMore>
+                    <choice>
+                        <ref name="declare"/>
+                        <ref name="declare.content"/>
+                    </choice>
+                </oneOrMore>
+                <choice>
+                    <element name="formula">
+                        <ref name="formula.attlist"/>
+                        <ref name="formula-exists.content"/>
+                    </element>
+                    <ref name="formula-exists.content"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="quantification">
+        <choice>
+            <notAllowed/>
+            <element name="quantification">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <choice>
+                    <element name="Forall">
+                        <ref name="Exists.attlist"/>
+                        <ref name="meta-roles.content"/>
+                        <oneOrMore>
+                            <choice>
+                                <ref name="declare"/>
+                                <ref name="declare.content"/>
+                            </choice>
+                        </oneOrMore>
+                        <optional>
+                            <choice>
+                                <element name="formula">
+                                    <ref name="formula-forall.type"/>
+                                </element>
+                                <ref name="formula-forall.content"/>
+                            </choice>
+                        </optional>
+                    </element>
+                    <element name="Exists">
+                        <ref name="Exists.attlist"/>
+                        <ref name="meta-roles.content"/>
+                        <oneOrMore>
+                            <choice>
+                                <ref name="declare"/>
+                                <ref name="declare.content"/>
+                            </choice>
+                        </oneOrMore>
+                        <optional>
+                            <choice>
+                                <element name="formula">
+                                    <ref name="formula-forall.type"/>
+                                </element>
+                                <ref name="formula-forall.content"/>
+                            </choice>
+                        </optional>
+                    </element>
+                    <ref name="Quantifier"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="anonymous0">
+        <choice>
+            <notAllowed/>
+            <element name="arg">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <ref name="interval_primitives.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="weak.content">
+        <ref name="formula-negation.content"/>
+    </define>
+    <define name="on">
+        <choice>
+            <notAllowed/>
+            <element name="on">
+                <notAllowed/>
+            </element>
+        </choice>
+    </define>
+    <define name="Equal">
+        <choice>
+            <notAllowed/>
+            <element name="Equal">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <optional>
+                    <attribute name="oriented">
+                        <choice>
+                            <value type="NMTOKEN">yes</value>
+                            <value type="NMTOKEN">no</value>
+                        </choice>
+                    </attribute>
+                </optional>
+                <ref name="meta-roles.content"/>
+                <optional>
+                    <ref name="degree"/>
+                </optional>
+                <choice>
+                    <group>
+                        <ref name="left"/>
+                        <ref name="right"/>
+                    </group>
+                    <group>
+                        <ref name="left.content"/>
+                        <ref name="right.content"/>
+                    </group>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="Time">
+        <choice>
+            <notAllowed/>
+            <element name="Time">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="iri.attrib"/>
+                <ref name="type.attrib"/>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <group>
+                        <zeroOrMore>
+                            <element name="slot">
+                                <ref name="slot.type"/>
+                            </element>
+                        </zeroOrMore>
+                        <optional>
+                            <ref name="resl"/>
+                        </optional>
+                        <optional>
+                            <choice>
+                                <group>
+                                    <oneOrMore>
+                                    <choice>
+                                    <element name="arg">
+                                    <ref name="xml.attlist"/>
+                                    <ref name="index.attrib"/>
+                                    <ref name="time_primitives.content"/>
+                                    </element>
+                                    <ref name="time_primitives.content"/>
+                                    </choice>
+                                    </oneOrMore>
+                                    <optional>
+                                    <ref name="repo"/>
+                                    </optional>
+                                </group>
+                                <ref name="repo"/>
+                            </choice>
+                            <zeroOrMore>
+                                <element name="slot">
+                                    <ref name="slot.type"/>
+                                </element>
+                            </zeroOrMore>
+                            <optional>
+                                <ref name="resl"/>
+                            </optional>
+                        </optional>
+                    </group>
+                    <oneOrMore>
+                        <element name="content">
+                            <ref name="xml.attlist"/>
+                            <zeroOrMore>
+                                <ref name="anyLax3"/>
+                            </zeroOrMore>
+                        </element>
+                    </oneOrMore>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="then">
+        <choice>
+            <notAllowed/>
+            <element name="then">
+                <ref name="then.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="Forall">
+        <choice>
+            <notAllowed/>
+            <element name="Forall">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="meta-roles.content"/>
+                <oneOrMore>
+                    <choice>
+                        <ref name="declare"/>
+                        <ref name="declare.content"/>
+                    </choice>
+                </oneOrMore>
+                <choice>
+                    <element name="formula">
+                        <ref name="formula-forall.type"/>
+                    </element>
+                    <ref name="formula-forall.content"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="Equivalent">
+        <choice>
+            <notAllowed/>
+            <element name="Equivalent">
+                <ref name="Equivalent.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="arg.content">
+        <choice>
+            <ref name="Ind"/>
+            <ref name="Data"/>
+            <ref name="Var"/>
+            <ref name="Skolem"/>
+            <ref name="Reify"/>
+            <ref name="Expr"/>
+            <ref name="Plex"/>
+            <ref name="extended-signature-function-sorts.content"/>
+        </choice>
+    </define>
+    <define name="formula-exists.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="Atom">
+                    <ref name="Atom.type"/>
+                </element>
+            </choice>
+            <ref name="query-quantifier.content"/>
+            <ref name="query-connective.content"/>
+            <ref name="extended-signature-predicate-sorts.content"/>
+        </choice>
+    </define>
+    <define name="degree">
+        <choice>
+            <notAllowed/>
+            <element name="degree">
+                <ref name="xml.attlist"/>
+                <ref name="Data"/>
+            </element>
+        </choice>
+    </define>
+    <define name="time_primitives.content">
+        <ref name="arg.content"/>
+    </define>
+    <define name="Equivalent.type">
+        <group>
+            <group>
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="closure.attrib"/>
+            </group>
+            <group>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <group>
+                        <ref name="torso"/>
+                        <ref name="torso"/>
+                    </group>
+                    <group>
+                        <ref name="torso.content"/>
+                        <ref name="torso.content"/>
+                    </group>
+                </choice>
+            </group>
+        </group>
+        <empty/>
+    </define>
+    <define name="Implies.type">
+        <group>
+            <ref name="Implies.attlist"/>
+            <group>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <group>
+                        <ref name="then"/>
+                        <ref name="if"/>
+                    </group>
+                    <group>
+                        <ref name="if"/>
+                        <ref name="then"/>
+                    </group>
+                    <group>
+                        <ref name="if.content"/>
+                        <ref name="then.content"/>
+                    </group>
+                </choice>
+            </group>
+        </group>
+        <empty/>
+    </define>
+    <define name="extended-signature-predicate-sorts.content">
+        <ref name="extended-signature-function-sorts.content"/>
+    </define>
+    <define name="And-inner.type">
+        <group>
+            <ref name="node.attrib"/>
+            <ref name="And.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="declare.content">
+        <ref name="Var"/>
+    </define>
+    <define name="Naf">
+        <choice>
+            <notAllowed/>
+            <element name="Naf">
+                <ref name="Negation.attlist"/>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <ref name="weak"/>
+                    <ref name="weak.content"/>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="index.attrib">
+        <optional>
+            <attribute name="index">
+                <data type="positiveInteger"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="meta">
+        <choice>
+            <notAllowed/>
+            <element name="meta">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <ref name="formula-assert.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="qualification">
+        <choice>
+            <notAllowed/>
+            <element name="qualification">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <ref name="formula-assert.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="guard">
+        <choice>
+            <notAllowed/>
+            <element name="guard">
+                <ref name="xml.attlist"/>
+                <ref name="index.attrib"/>
+                <ref name="if.content"/>
+            </element>
+        </choice>
+    </define>
+    <define name="left.content">
+        <ref name="arg.content"/>
+    </define>
+    <define name="anyLax4">
+        <choice>
+            <element>
+                <anyName>
+                    <except>
+                        <name>Ind</name>
+                        <name>Rel</name>
+                        <name>Rule</name>
+                        <name>Equivalent</name>
+                        <name>Reify</name>
+                        <name>formula</name>
+                        <name>Var</name>
+                        <name>act</name>
+                        <name>RuleML</name>
+                        <name>weak</name>
+                        <name>Skolem</name>
+                        <name>degree</name>
+                        <name>evaluation</name>
+                        <name>meta</name>
+                        <name>Query</name>
+                        <name>Interval</name>
+                        <name>scope</name>
+                        <name>torso</name>
+                        <name>Quantifier</name>
+                        <name>slot</name>
+                        <name>do</name>
+                        <name>left</name>
+                        <name>Equal</name>
+                        <name>Rulebase</name>
+                        <name>guard</name>
+                        <name>oid</name>
+                        <name>if</name>
+                        <name>Atom</name>
+                        <name>Time</name>
+                        <name>Retract</name>
+                        <name>declare</name>
+                        <name>Profile</name>
+                        <name>Spatial</name>
+                        <name>quantification</name>
+                        <name>op</name>
+                        <name>resl</name>
+                        <name>else</name>
+                        <name>And</name>
+                        <name>Entails</name>
+                        <name>Negation</name>
+                        <name>Or</name>
+                        <name>then</name>
+                        <name>Exists</name>
+                        <name>strong</name>
+                        <name>Forall</name>
+                        <name>Plex</name>
+                        <name>Fun</name>
+                        <name>Naf</name>
+                        <name>Assert</name>
+                        <name>elseDo</name>
+                        <name>Implies</name>
+                        <name>signature</name>
+                        <name>Expr</name>
+                        <name>right</name>
+                        <name>on</name>
+                        <name>Neg</name>
+                        <name>repo</name>
+                        <name>qualification</name>
+                        <name>arg</name>
+                        <name>Data</name>
+                        <name>after</name>
+                    </except>
+                </anyName>
+                <mixed>
+                    <zeroOrMore>
+                        <choice>
+                            <attribute>
+                                <anyName/>
+                            </attribute>
+                            <ref name="anyLax4"/>
+                        </choice>
+                    </zeroOrMore>
+                </mixed>
+            </element>
+            <ref name="elseDo"/>
+            <ref name="Implies"/>
+            <ref name="Assert"/>
+            <ref name="Naf"/>
+            <ref name="after"/>
+            <ref name="Data"/>
+            <ref name="arg"/>
+            <ref name="qualification"/>
+            <ref name="repo"/>
+            <ref name="Neg"/>
+            <ref name="on"/>
+            <ref name="Expr"/>
+            <ref name="right"/>
+            <ref name="signature"/>
+            <ref name="else"/>
+            <ref name="resl"/>
+            <ref name="op"/>
+            <ref name="Spatial"/>
+            <ref name="quantification"/>
+            <ref name="Profile"/>
+            <ref name="declare"/>
+            <ref name="Plex"/>
+            <ref name="Fun"/>
+            <ref name="Forall"/>
+            <ref name="strong"/>
+            <ref name="Exists"/>
+            <ref name="then"/>
+            <ref name="Or"/>
+            <ref name="Negation"/>
+            <ref name="Entails"/>
+            <ref name="And"/>
+            <ref name="torso"/>
+            <ref name="Interval"/>
+            <ref name="scope"/>
+            <ref name="Query"/>
+            <ref name="meta"/>
+            <ref name="evaluation"/>
+            <ref name="Retract"/>
+            <ref name="Time"/>
+            <ref name="Atom"/>
+            <ref name="guard"/>
+            <ref name="oid"/>
+            <ref name="if"/>
+            <ref name="Rulebase"/>
+            <ref name="Equal"/>
+            <ref name="do"/>
+            <ref name="left"/>
+            <ref name="slot"/>
+            <ref name="Quantifier"/>
+            <ref name="Reify"/>
+            <ref name="Equivalent"/>
+            <ref name="Rule"/>
+            <ref name="Ind"/>
+            <ref name="Rel"/>
+            <ref name="degree"/>
+            <ref name="Skolem"/>
+            <ref name="weak"/>
+            <ref name="RuleML"/>
+            <ref name="Var"/>
+            <ref name="act"/>
+            <ref name="formula"/>
+        </choice>
+    </define>
+    <define name="Implies">
+        <choice>
+            <notAllowed/>
+            <element name="Implies">
+                <ref name="Implies.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="node.attrib">
+        <optional>
+            <attribute name="node">
+                <data type="anyURI"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="Query">
+        <choice>
+            <notAllowed/>
+            <element name="Query">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="closure.attrib"/>
+                <ref name="meta-roles.content"/>
+                <zeroOrMore>
+                    <choice>
+                        <element name="formula">
+                            <ref name="formula.attlist"/>
+                            <ref name="formula-query.content"/>
+                        </element>
+                        <ref name="formula-query.content"/>
+                    </choice>
+                </zeroOrMore>
+            </element>
+        </choice>
+    </define>
+    <define name="type.attrib">
+        <optional>
+            <attribute name="type">
+                <choice>
+                    <data type="Name">
+                        <param name="pattern">[\i-[:]][/\c-[:]]*</param>
+                    </data>
+                    <data type="string">
+                        <param name="minLength">1</param>
+                        <param name="pattern">(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)</param>
+                    </data>
+                    <data type="anyURI"/>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="anonymous1">
+        <choice>
+            <notAllowed/>
+            <element name="content">
+                <ref name="xml.attlist"/>
+                <zeroOrMore>
+                    <ref name="anyLax2"/>
+                </zeroOrMore>
+            </element>
+        </choice>
+    </define>
+    <define name="spatial_primitives.content">
+        <ref name="arg.content"/>
+    </define>
+    <define name="query-connective.content">
+        <choice>
+            <choice>
+                <notAllowed/>
+                <element name="And">
+                    <ref name="xml.attlist"/>
+                    <ref name="node.attrib"/>
+                    <ref name="closure.attrib"/>
+                    <ref name="And.content"/>
+                </element>
+            </choice>
+            <choice>
+                <notAllowed/>
+                <element name="Or">
+                    <ref name="xml.attlist"/>
+                    <ref name="node.attrib"/>
+                    <ref name="closure.attrib"/>
+                    <ref name="Or.content"/>
+                </element>
+            </choice>
+            <ref name="Negation"/>
+            <ref name="Naf"/>
+            <ref name="Neg"/>
+            <ref name="Equal"/>
+        </choice>
+    </define>
+    <define name="extended-signature-function-sorts.content">
+        <choice>
+            <ref name="Time"/>
+            <ref name="Spatial"/>
+            <ref name="Interval"/>
+        </choice>
+    </define>
+    <define name="if.attlist">
+        <ref name="xml.attlist"/>
+    </define>
+    <define name="Plex.type">
+        <group>
+            <ref name="Plex.attlist"/>
+            <group>
+                <ref name="meta-roles.content"/>
+                <zeroOrMore>
+                    <choice>
+                        <notAllowed/>
+                        <element name="slot">
+                            <ref name="slot.type"/>
+                        </element>
+                    </choice>
+                </zeroOrMore>
+                <choice>
+                    <group>
+                        <oneOrMore>
+                            <choice>
+                                <ref name="arg"/>
+                                <ref name="arg.content"/>
+                            </choice>
+                        </oneOrMore>
+                        <optional>
+                            <ref name="repo"/>
+                        </optional>
+                        <zeroOrMore>
+                            <choice>
+                                <notAllowed/>
+                                <element name="slot">
+                                    <ref name="slot.type"/>
+                                </element>
+                            </choice>
+                        </zeroOrMore>
+                        <optional>
+                            <ref name="resl"/>
+                        </optional>
+                    </group>
+                    <empty/>
+                    <group>
+                        <ref name="repo"/>
+                        <zeroOrMore>
+                            <choice>
+                                <notAllowed/>
+                                <element name="slot">
+                                    <ref name="slot.type"/>
+                                </element>
+                            </choice>
+                        </zeroOrMore>
+                        <optional>
+                            <ref name="resl"/>
+                        </optional>
+                    </group>
+                    <ref name="resl"/>
+                </choice>
+            </group>
+        </group>
+        <empty/>
+    </define>
+    <define name="Var">
+        <choice>
+            <notAllowed/>
+            <element name="Var">
+                <mixed>
+                    <optional>
+                        <attribute name="mode">
+                            <choice>
+                                <value type="string">+</value>
+                                <value type="string">?</value>
+                                <value type="string">-</value>
+                            </choice>
+                        </attribute>
+                    </optional>
+                    <ref name="xml.attlist"/>
+                    <ref name="node.attrib"/>
+                    <ref name="type.attrib"/>
+                </mixed>
+            </element>
+        </choice>
+    </define>
+    <define name="Plex.attlist">
+        <ref name="xml.attlist"/>
+        <ref name="node.attrib"/>
+    </define>
+    <define name="Plex">
+        <choice>
+            <notAllowed/>
+            <element name="Plex">
+                <ref name="Plex.type"/>
+            </element>
+        </choice>
+    </define>
+    <define name="closure.attrib">
+        <optional>
+            <attribute name="closure">
+                <choice>
+                    <value type="NMTOKEN">universal</value>
+                    <value type="NMTOKEN">existential</value>
+                </choice>
+            </attribute>
+        </optional>
+    </define>
+    <define name="if.type">
+        <group>
+            <ref name="if.attlist"/>
+            <ref name="if.content"/>
+        </group>
+        <empty/>
+    </define>
+    <define name="resl">
+        <choice>
+            <notAllowed/>
+            <element name="resl">
+                <ref name="xml.attlist"/>
+                <choice>
+                    <ref name="Var"/>
+                    <element name="Plex">
+                        <ref name="Plex.attlist"/>
+                        <ref name="meta-roles.content"/>
+                        <zeroOrMore>
+                            <element name="slot">
+                                <ref name="slot.type"/>
+                            </element>
+                        </zeroOrMore>
+                        <optional>
+                            <ref name="resl"/>
+                        </optional>
+                    </element>
+                </choice>
+            </element>
+        </choice>
+    </define>
+    <define name="Atom-slots.extend1">
+        <zeroOrMore>
+            <choice>
+                <notAllowed/>
+                <element name="slot">
+                    <ref name="slot.type"/>
+                </element>
+            </choice>
+        </zeroOrMore>
+    </define>
+    <define name="Ind">
+        <choice>
+            <notAllowed/>
+            <element name="Ind">
+                <mixed>
+                    <ref name="xml.attlist"/>
+                    <ref name="node.attrib"/>
+                    <ref name="iri.attrib"/>
+                    <ref name="type.attrib"/>
+                </mixed>
+            </element>
+        </choice>
+    </define>
+    <define name="Spatial">
+        <choice>
+            <notAllowed/>
+            <element name="Spatial">
+                <ref name="xml.attlist"/>
+                <ref name="node.attrib"/>
+                <ref name="iri.attrib"/>
+                <ref name="type.attrib"/>
+                <ref name="meta-roles.content"/>
+                <choice>
+                    <group>
+                        <zeroOrMore>
+                            <element name="slot">
+                                <ref name="slot.type"/>
+                            </element>
+                        </zeroOrMore>
+                        <optional>
+                            <ref name="resl"/>
+                        </optional>
+                        <optional>
+                            <choice>
+                                <group>
+                                    <oneOrMore>
+                                    <choice>
+                                    <element name="arg">
+                                    <ref name="xml.attlist"/>
+                                    <ref name="index.attrib"/>
+                                    <ref name="spatial_primitives.content"/>
+                                    </element>
+                                    <ref name="spatial_primitives.content"/>
+                                    </choice>
+                                    </oneOrMore>
+                                    <optional>
+                                    <ref name="repo"/>
+                                    </optional>
+                                </group>
+                                <ref name="repo"/>
+                            </choice>
+                            <zeroOrMore>
+                                <element name="slot">
+                                    <ref name="slot.type"/>
+                                </element>
+                            </zeroOrMore>
+                            <optional>
+                                <ref name="resl"/>
+                            </optional>
+                        </optional>
+                    </group>
+                    <oneOrMore>
+                        <element name="content">
+                            <ref name="xml.attlist"/>
+                            <zeroOrMore>
+                                <ref name="anyLax4"/>
+                            </zeroOrMore>
+                        </element>
+                    </oneOrMore>
+                </choice>
+            </element>
+        </choice>
+    </define>
+</grammar>

@@ -928,9 +928,13 @@ spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Interval.content =
   Node.header,
-  (element arg { arg_interval.type }
-   | interval_primitives.content
-   | element content { interval_anycontent.type })?
+  (arg | arg.content | interval_anycontent), 
+  (arg | arg.content | interval_anycontent)? 
+
+interval_anycontent = element content {interval_anycontent.type}
+interval_anycontent.type = interval_anycontent.attlist, interval_anycontent.content
+interval_anycontent.attlist = commonInit.attlist
+interval_anycontent.content = text & anyElement.def*
 Interval.type = Interval.content, Interval.attlist
 Node.choice |= Interval
 Interval = element Interval { Interval.type }
@@ -993,9 +997,7 @@ Before = element Before { After.type }
 Every.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Every.content =
   Node.header,
-  (element arg { arg_interval.type }
-   | interval_primitives.content
-   | element content { interval_anycontent.type })?
+     (arg | arg.content | interval_anycontent)?
 Every.type = Every.content, Every.attlist
 start |= Every
 Every = element Every { Every.type }

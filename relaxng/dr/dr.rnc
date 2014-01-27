@@ -23,11 +23,21 @@ include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.r
   start |= notAllowed
 }
 # 
+# ORDER MODE - UNORDERED GROUPS DISABLED
+#
+include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+  Atom.header &= (Node.header? , degree-edge.choice?)?
+  Expr.header &= Node.header?
+}
+# 
 # ORDER MODE - UNORDERED GROUPS ENABLED
 #
-include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#  Atom.header &= (Node.header? & degree-edge.choice?)?
+#  Expr.header &= Node.header?
+#}
 # 
 # STRIPE-SKIPPING MODE ENABLED
 #
@@ -373,6 +383,12 @@ include "http://ruleml.org/1.0/relaxng/modules/rulebase_expansion_module.rnc" in
 include "http://ruleml.org/1.0/relaxng/modules/metalevel_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+# 
+# OBJECT IDENTIFIERS INCLUDED
+#
+include "http://ruleml.org/1.0/relaxng/modules/oid_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 
 #	*** RuleML ***
 start |= RuleML
@@ -390,9 +406,7 @@ formula-assert.content = formula_AssertRetract.content
 formula-query.content = formula_Query.content
 
 # *** oid ***
-oid.content = AnyTerm.choice
-oid.type = oid.content, oid.attlist
-oid = element oid { oid.type }
+oid = objectIdentifier-edge.choice
 # 
 #       @key @keyref @xml:id @xml:base
 # 

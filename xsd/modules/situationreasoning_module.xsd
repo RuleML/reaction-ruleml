@@ -5,7 +5,7 @@
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
           
-			KR state processing module part of Reaction RuleML.
+			KR situation reasoning module part of Reaction RuleML.
 
 			This is the XML Schema KR module for Reaction RuleML.
 			File: state_module.xsd

@@ -928,7 +928,7 @@ spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Interval.content =
   Node.header,
-   (arg | arg.content), (arg | arg.content)?
+   (((arg | arg.content), (arg | arg.content)?) | interval_algebra_group.content) 
 Interval.type = Interval.content, Interval.attlist
 Node.choice |= Interval
 Interval = element Interval { Interval.type }
@@ -1017,12 +1017,12 @@ inner-quantifier.content =
 #extended-signature-function-sorts.content = Time | Spatial | Interval
 # An internal group for the time primitives for interpretation as time
 # content model: 
-# in DR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-time_primitives.content = arg.content
+# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
+time_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
 # An internal group for the spatial primitives for interpretation as spatial
 # content model: 
-# in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-spatial_primitives.content = arg.content
+# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
+spatial_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
 # An internal group for the situation primitives for interpretation as situation
 # content model: 
 # in DR Reaction RuleML: ()

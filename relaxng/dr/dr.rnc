@@ -928,10 +928,142 @@ spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Interval.content =
   Node.header,
-   (((arg | arg.content), (arg | arg.content)?) | interval_algebra_group.content) 
+  (element arg { arg_interval.type }
+   | interval_primitives.content
+   | element content { interval_anycontent.type })?
 Interval.type = Interval.content, Interval.attlist
 Node.choice |= Interval
 Interval = element Interval { Interval.type }
+# *** arg ***
+# 
+# Definition of the the arg role for Intervals
+# 
+# content model:  
+# in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
+# in KR Reaction RuleML: Time | Spatial | Interval |  Event | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
+#
+arg_interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
+arg_interval.content = interval_primitives.content
+arg_interval.type = arg_interval.content, arg_interval.attlist
+
+# (After | Before | Any | Every | Timer | Operator)
+spatial_temporal_algebra_group.content =
+  After
+  | Before
+  | Every
+  | Any
+  | Timer
+  | element Operator { Any.type }
+# (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator)
+interval_algebra_group.content =
+  During
+  | Overlaps
+  | Starts
+  | Precedes
+  | Succeeds
+  | Meets
+  | element Equals { IntervalAlgebraOperator.type }
+  | Finishes
+  | element Operator { IntervalAlgebraOperator.type }
+# *** After / Before***
+# 
+# X after Y  / X before Y
+# 
+# Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
+# 
+# content model: 
+# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
+#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] ))
+After.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
+After.content = Interval.content
+After.type = After.content, After.attlist
+start |= After
+After = element After { After.type }
+start |= Before
+Before = element Before { After.type }
+# *** Every ***
+# 
+# Every X 
+# 
+# Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
+# 
+# content model:
+# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
+#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) ))
+Every.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
+Every.content =
+  Node.header,
+  (element arg { arg_interval.type }
+   | interval_primitives.content
+   | element content { interval_anycontent.type })?
+Every.type = Every.content, Every.attlist
+start |= Every
+Every = element Every { Every.type }
+# *** Any ***
+# 
+# Any X1,..Xn
+# 
+# e.g. "at any Saturday and Sunday"     
+# 
+# content model: 
+# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
+#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg*] | content(xs:any)* | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)* ))
+Any.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
+Any.content =
+  Node.header,
+  (element arg { arg_interval.type }+
+   | interval_primitives.content+
+   | element content { interval_anycontent.type }+)?
+Any.type = Any.content, Any.attlist
+start |= Any
+Any = element Any { Any.type }
+# *** (Recurring) Timer ***
+# 
+# After X Every Y
+# 
+# Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
+# 
+# content model: 
+# 
+# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
+#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
+#
+Timer.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
+Timer.content = Interval.content
+Timer.type = Timer.content, Timer.attlist
+start |= Timer
+Timer = element Timer { Timer.type }
+# *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes) ***
+# 
+# operator(Interval, Interval)
+# 
+# content model: 
+# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval]) 
+IntervalAlgebraOperator.attlist =
+  iri-att.choice?, Type.attlist, commonNode.attlist
+IntervalAlgebraOperator.content =
+  Node.header,
+  (element arg { arg_interval.type }
+   | element arg { arg_interval.type }
+   | Interval
+   | Interval)
+IntervalAlgebraOperator.type =
+  IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
+start |= During
+During = element During { IntervalAlgebraOperator.type }
+start |= Overlaps
+Overlaps = element Overlaps { IntervalAlgebraOperator.type }
+start |= Starts
+Starts = element Starts { IntervalAlgebraOperator.type }
+start |= Precedes
+Precedes = element Precedes { IntervalAlgebraOperator.type }
+start |= Succeeds
+Succeeds = element Succeeds { IntervalAlgebraOperator.type }
+start |= Meets
+Meets = element Meets { IntervalAlgebraOperator.type }
+# <xs:element name="Equals" type="IntervalAlgebraOperator.type"/>
+start |= Finishes
+Finishes = element Finishes { IntervalAlgebraOperator.type }  
 #
 # 
 # An internal group for the implementation of a rule in the Reaction RuleML language
@@ -1023,6 +1155,11 @@ time_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
 # content model: 
 # in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
 spatial_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
+# Interval primitives
+# content model: 
+# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))
+interval_primitives.content =
+  arg.content | interval_algebra_group.content
 # An internal group for the situation primitives for interpretation as situation
 # content model: 
 # in DR Reaction RuleML: ()

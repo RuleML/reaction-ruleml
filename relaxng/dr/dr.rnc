@@ -1,16 +1,3 @@
-namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a0 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a1 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a10 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a11 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a2 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a3 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a4 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a5 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a6 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a7 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a8 = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace a9 = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace dc = "http://purl.org/dc/elements/1.1/"
 namespace dcterms = "http://purl.org/dc/terms/"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
@@ -550,8 +537,6 @@ quantification.type = quantification.content, quantification.attlist
 quantification = element quantification { quantification.type }
 # extended descriptors in Reaction RuleML
 
-# note that elementFormDefault is qualified because of local declarations
-
 # *** Forall ***
 Forall = Forall-node.choice
 Forall-node.choice |= Quantifier
@@ -627,14 +612,15 @@ resl = restOfSlots-edge.choice
 # *** Equal ***
 Equal = Equal-node.choice
 # in time module
-SimpleKeyTerm.choice |= Time
-SimpleFormula-node.choice |= Time
+SimpleKeyTerm.choice |= Time_term
+SimpleFormula-node.choice |= Time_formula
+
 # in spatial module
-SimpleKeyTerm.choice |= Spatial
-SimpleFormula-node.choice |= Spatial
+SimpleKeyTerm.choice |= Spatial_term
+SimpleFormula-node.choice |= Spatial_formula
 # in interval module
-SimpleKeyTerm.choice |= Interval
-SimpleFormula-node.choice |= Interval
+SimpleKeyTerm.choice |= Interval_term
+SimpleFormula-node.choice |= Interval_formula
 
 
 ##
@@ -860,8 +846,10 @@ Time.content =
    resl?)?)
    | element content { time_anycontent.type }*)
 Time.type = Time.content, Time.attlist
-Node.choice |= Time
-Time = element Time { Time.type }
+Node.choice |= Time_formula
+Time_term = element Time {Time.type}
+Time_formula = element Time {Time.type}
+
 # *** arg ***
 # 
 # Definition of the the arg role for Time
@@ -908,8 +896,10 @@ Spatial.content =
    resl?)?)
    | element content { spatial_anycontent.type }*)
 Spatial.type = Spatial.content, Spatial.attlist
-Node.choice |= Spatial
-Spatial = element Spatial { Spatial.type }
+Node.choice |= Spatial_formula
+Spatial_term = element Spatial {Spatial.type}
+Spatial_formula = element Spatial {Spatial.type}
+
 # *** arg ***
 # 
 # Definition of the the arg role for Spatial
@@ -950,8 +940,10 @@ interval_anycontent.type = interval_anycontent.attlist, interval_anycontent.cont
 interval_anycontent.attlist = commonInit.attlist
 interval_anycontent.content = text & anyElement.def*
 Interval.type = Interval.content, Interval.attlist
-Node.choice |= Interval
-Interval = element Interval { Interval.type }
+Node.choice |= Interval_formula
+Interval_term = element Interval {Interval.type}
+Interval_formula = element Interval {Interval.type}
+
 # *** arg ***
 # 
 # Definition of the the arg role for Intervals

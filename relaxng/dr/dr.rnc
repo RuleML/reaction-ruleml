@@ -939,7 +939,11 @@ edge.choice |= spatial_anycontent
 #   DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Interval.content =
+Interval_term.content =
+  Node.header,
+  (arg | arg.content | interval_anycontent), 
+  (arg | arg.content | interval_anycontent)? 
+Interval_formula.content =
   Node.header,
   (arg | interval_primitives.content | interval_anycontent), 
   (arg | interval_primitives.content | interval_anycontent)? 
@@ -950,10 +954,11 @@ edge.choice |= interval_anycontent
 interval_anycontent.type = interval_anycontent.attlist, interval_anycontent.content
 interval_anycontent.attlist = commonInit.attlist
 interval_anycontent.content = text & anyElement.def*
-Interval.type = Interval.content, Interval.attlist
+Interval_term.type = Interval_term.content, Interval.attlist
+Interval_formula.type = Interval_formula.content, Interval.attlist
 Node.choice |= Interval_formula
-Interval_term = element Interval {Interval.type}
-Interval_formula = element Interval {Interval.type}
+Interval_term = element Interval {Interval_term.type}
+Interval_formula = element Interval {Interval_formula.type}
 
 # *** arg ***
 # 
@@ -1002,7 +1007,7 @@ IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type }
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
 #     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] ))
 After.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-After.content = Interval.content
+After.content = Interval_term.content
 After.type = After.content, After.attlist
 Node.choice |= After
 After = element After { After.type }
@@ -1054,7 +1059,7 @@ Any = element Any { Any.type }
 #     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
 #
 Timer.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Timer.content = Interval.content
+Timer.content = Interval_term.content
 Timer.type = Timer.content, Timer.attlist
 Node.choice |= Timer
 Timer = element Timer { Timer.type }

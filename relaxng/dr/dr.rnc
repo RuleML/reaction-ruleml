@@ -941,8 +941,8 @@ edge.choice |= spatial_anycontent
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Interval.content =
   Node.header,
-  (arg | arg.content | interval_anycontent), 
-  (arg | arg.content | interval_anycontent)? 
+  (arg | arg.content | interval_primitives.content | interval_anycontent), 
+  (arg | arg.content | interval_primitives.content | interval_anycontent)? 
 
 interval_anycontent = element content {interval_anycontent.type}
 edge.choice |= interval_anycontent
@@ -991,6 +991,7 @@ interval_algebra_group.content =
   | IntervalAlgebraOperator
 IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type }  
 IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type }  
+
 # *** After / Before***
 # 
 # X after Y  / X before Y
@@ -1083,7 +1084,6 @@ Node.choice |= Succeeds
 Succeeds = element Succeeds { IntervalAlgebraOperator.type }
 Node.choice |= Meets
 Meets = element Meets { IntervalAlgebraOperator.type }
-# <xs:element name="Equals" type="IntervalAlgebraOperator.type"/>
 Node.choice |= Finishes
 Finishes = element Finishes { IntervalAlgebraOperator.type }  
 #

@@ -4031,16 +4031,27 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
         
             <rng:ref name="meta-roles.content"/>
             <rng:optional>
-<rng:choice>
-                <rng:element name="arg">
-<rng:ref name="arg_interval.type"/>
-</rng:element>
-                <rng:ref name="interval_primitives.content"/>
-                <rng:element name="content">
-<rng:ref name="interval_anycontent.type"/>
-</rng:element>
-            </rng:choice>
-</rng:optional>
+                <rng:choice>
+                    <rng:element name="arg">
+                        <rng:ref name="arg_interval.type"/>
+                    </rng:element>
+                    <rng:ref name="interval_primitives.content"/>
+                    <rng:element name="content">
+                        <rng:ref name="interval_anycontent.type"/>
+                    </rng:element>
+                </rng:choice>
+                <rng:optional>
+                    <rng:choice>
+                        <rng:element name="arg">
+                            <rng:ref name="arg_interval.type"/>
+                        </rng:element>
+                        <rng:ref name="interval_primitives.content"/>
+                        <rng:element name="content">
+                            <rng:ref name="interval_anycontent.type"/>
+                        </rng:element>
+                    </rng:choice>
+                </rng:optional>    
+            </rng:optional>
         
     </rng:define>
     <rng:define name="Interval.type">
@@ -4100,6 +4111,338 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
         <rng:ref name="interval_anycontent.content"/>
         <rng:ref name="interval_anycontent.attlist"/>
     </rng:define>
+    
+        <!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
+    <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                                spatial-temporal-interval algebra
+            module part of Reaction RuleML    This is the XML Schema of the algebra module for
+            Reaction RuleML    File: spatial_temporal_interval_algebra_module.xsd    Version: 1.0
+            Last Modification: 2011-03-22        This schema declares the following Reaction RuleML
+            elements and attributes:                                      Operator (generic
+            operator)                                      Spatial, Temporal, Interval Function
+            Constructs                                       * After                   * Before
+            * Every                   * Any                   * Timer
+            (Allen's) Interval Relations                                      * During
+            * Overlaps                   * Starts                   * Precedes                   *
+            Succeeds                   * Meets                   * Equals                   *
+            Finishes         The approach is modelled after that used in "Modularization of XHTML in
+            XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be
+            integrated with    "Modularization of XHTML" (REC-xhtml-modularization-20010410)
+            [http://www.w3.org/TR/xhtml-modularization/].   
+        
+        
+            <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">Reaction RuleML Schema</dc:title>
+            <dc:version xmlns:dc="http://purl.org/dc/elements/1.1/">1.0</dc:version>
+            <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject xmlns:dc="http://purl.org/dc/elements/1.1/">RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description xmlns:dc="http://purl.org/dc/elements/1.1/">custom-built main module for Reaction RuleML</dc:description>
+            <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/">2011-03-22T29:11:17-0300</dc:date>
+            <dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">en</dc:language>
+            <dcterms:rights xmlns:dcterms="http://purl.org/dc/terms/">LGPL-3.0</dcterms:rights>
+            <dc:relation xmlns:dc="http://purl.org/dc/elements/1.1/">http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        
+    </a:documentation>
+    <!--(After | Before | Any | Every | Timer | Operator)-->
+    <rng:define name="spatial_temporal_algebra_group.content">
+        <rng:choice>
+            <rng:ref name="After"/>
+            <rng:ref name="Before"/>
+            <rng:ref name="Every"/>
+            <rng:ref name="Any"/>
+            <rng:ref name="Timer"/>
+            <rng:element name="Operator">
+<rng:ref name="Any.type"/>
+</rng:element>
+        </rng:choice>
+    </rng:define>
+    <!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator) -->
+    <rng:define name="interval_algebra_group.content">
+        <rng:choice>
+            <rng:ref name="During"/>
+            <rng:ref name="Overlaps"/>
+            <rng:ref name="Starts"/>
+            <rng:ref name="Precedes"/>
+            <rng:ref name="Succeeds"/>
+            <rng:ref name="Meets"/>
+            <rng:ref name="Equals"/>
+            <rng:ref name="Finishes"/>
+            <rng:element name="Operator">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+        </rng:choice>
+    </rng:define>
+    <!--
+      *** After / Before***
+
+      X after Y  / X before Y
+      
+      Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
+
+      content model: 
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] ))
+    -->
+    <rng:define name="After.attlist">
+        <rng:ref name="type.attrib"/>
+        <rng:ref name="iri.attrib"/>
+        <rng:ref name="node.attrib"/>
+        <rng:ref name="xml.attlist"/>
+    </rng:define>
+    <rng:define name="After.content">
+        
+            <rng:ref name="Interval.content"/>
+        
+    </rng:define>
+    <rng:define name="After.type">
+        <rng:ref name="After.content"/>
+        <rng:ref name="After.attlist"/>
+    </rng:define>
+    <rng:start combine="choice">
+<rng:ref name="After"/>
+</rng:start>
+<rng:define name="After">
+<rng:element name="After">
+<rng:ref name="After.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Before"/>
+</rng:start>
+<rng:define name="Before">
+<rng:element name="Before">
+<rng:ref name="After.type"/>
+</rng:element>
+</rng:define>
+    <!--
+      *** Every ***
+      
+      Every X 
+      
+      Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
+      
+      content model:
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) ))
+    -->
+    <rng:define name="Every.attlist">
+        <rng:ref name="type.attrib"/>
+        <rng:ref name="iri.attrib"/>
+        <rng:ref name="node.attrib"/>
+        <rng:ref name="xml.attlist"/>
+    </rng:define>
+    <rng:define name="Every.content">
+        
+            <rng:ref name="meta-roles.content"/>
+            <rng:optional>
+<rng:choice>
+                <rng:element name="arg">
+<rng:ref name="arg_interval.type"/>
+</rng:element>
+                <rng:ref name="interval_primitives.content"/>
+                <rng:element name="content">
+<rng:ref name="interval_anycontent.type"/>
+</rng:element>
+            </rng:choice>
+</rng:optional>
+        
+    </rng:define>
+    <rng:define name="Every.type">
+        <rng:ref name="Every.content"/>
+        <rng:ref name="Every.attlist"/>
+    </rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Every"/>
+</rng:start>
+<rng:define name="Every">
+<rng:element name="Every">
+<rng:ref name="Every.type"/>
+</rng:element>
+</rng:define>
+    <!--
+      *** Any ***
+      
+      Any X1,..Xn
+            
+      e.g. "at any Saturday and Sunday"     
+           
+      content model: 
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg*] | content(xs:any)* | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)* ))
+    -->
+    <rng:define name="Any.attlist">
+        <rng:ref name="type.attrib"/>
+        <rng:ref name="iri.attrib"/>
+        <rng:ref name="node.attrib"/>
+        <rng:ref name="xml.attlist"/>
+    </rng:define>
+    <rng:define name="Any.content">
+        
+            <rng:ref name="meta-roles.content"/>
+            <rng:optional>
+<rng:choice>
+                <rng:oneOrMore>
+<rng:element name="arg">
+<rng:ref name="arg_interval.type"/>
+</rng:element>
+</rng:oneOrMore>
+                <rng:oneOrMore>
+<rng:ref name="interval_primitives.content"/>
+</rng:oneOrMore>
+                <rng:oneOrMore>
+<rng:element name="content">
+<rng:ref name="interval_anycontent.type"/>
+</rng:element>
+</rng:oneOrMore>
+            </rng:choice>
+</rng:optional>
+        
+    </rng:define>
+    <rng:define name="Any.type">
+        <rng:ref name="Any.content"/>
+        <rng:ref name="Any.attlist"/>
+    </rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Any"/>
+</rng:start>
+<rng:define name="Any">
+<rng:element name="Any">
+<rng:ref name="Any.type"/>
+</rng:element>
+</rng:define>
+    <!--
+      *** (Recurring) Timer ***
+      
+      After X Every Y
+      
+      Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
+      
+      content model: 
+         
+      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
+       
+    -->
+    <rng:define name="Timer.attlist">
+        <rng:ref name="type.attrib"/>
+        <rng:ref name="iri.attrib"/>
+        <rng:ref name="node.attrib"/>
+        <rng:ref name="xml.attlist"/>
+    </rng:define>
+    <rng:define name="Timer.content">
+        
+            <rng:ref name="Interval.content"/>
+        
+    </rng:define>
+    <rng:define name="Timer.type">
+        <rng:ref name="Timer.content"/>
+        <rng:ref name="Timer.attlist"/>
+    </rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Timer"/>
+</rng:start>
+<rng:define name="Timer">
+<rng:element name="Timer">
+<rng:ref name="Timer.type"/>
+</rng:element>
+</rng:define>
+    <!--
+      *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes) ***
+      
+      operator(Interval, Interval)
+      
+      content model: 
+      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval]) 
+	-->
+    <rng:define name="IntervalAlgebraOperator.attlist">
+        <rng:ref name="type.attrib"/>
+        <rng:ref name="iri.attrib"/>
+        <rng:ref name="node.attrib"/>
+        <rng:ref name="xml.attlist"/>
+    </rng:define>
+    <rng:define name="IntervalAlgebraOperator.content">
+        
+            <rng:ref name="meta-roles.content"/>
+            <rng:choice>
+                <rng:element name="arg">
+<rng:ref name="arg_interval.type"/>
+</rng:element>
+<rng:element name="arg">
+<rng:ref name="arg_interval.type"/>
+</rng:element>
+                <rng:ref name="Interval"/>
+<rng:ref name="Interval"/>
+            </rng:choice>
+        
+    </rng:define>
+    <rng:define name="IntervalAlgebraOperator.type">
+        <rng:ref name="IntervalAlgebraOperator.content"/>
+        <rng:ref name="IntervalAlgebraOperator.attlist"/>
+    </rng:define>
+    <rng:start combine="choice">
+<rng:ref name="During"/>
+</rng:start>
+<rng:define name="During">
+<rng:element name="During">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Overlaps"/>
+</rng:start>
+<rng:define name="Overlaps">
+<rng:element name="Overlaps">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Starts"/>
+</rng:start>
+<rng:define name="Starts">
+<rng:element name="Starts">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Precedes"/>
+</rng:start>
+<rng:define name="Precedes">
+<rng:element name="Precedes">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Succeeds"/>
+</rng:start>
+<rng:define name="Succeeds">
+<rng:element name="Succeeds">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Meets"/>
+</rng:start>
+<rng:define name="Meets">
+<rng:element name="Meets">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Equals"/>
+</rng:start>
+<rng:define name="Equals">
+<rng:element name="Equals">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    <rng:start combine="choice">
+<rng:ref name="Finishes"/>
+</rng:start>
+<rng:define name="Finishes">
+<rng:element name="Finishes">
+<rng:ref name="IntervalAlgebraOperator.type"/>
+</rng:element>
+</rng:define>
+    
     <!--
      metadata group
      
@@ -4333,6 +4676,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
     <rng:define name="time_primitives.content">
         <rng:choice>
             <rng:ref name="arg.content"/>
+            <rng:ref name="spatial_temporal_algebra_group.content"/>
         </rng:choice>
     </rng:define>
     <!-- An internal group for the spatial primitives for interpretation as spatial
@@ -4342,19 +4686,16 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
     <rng:define name="spatial_primitives.content">
         <rng:choice>
             <rng:ref name="arg.content"/>
+            <rng:ref name="spatial_temporal_algebra_group.content"/>
         </rng:choice>
     </rng:define>
     <!-- Interval primitives
 		content model: 
-		in ([Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?]) -->
+		((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)) -->
     <rng:define name="interval_primitives.content">
-        <rng:choice>
-            
-                <rng:ref name="arg.content"/>
-                <rng:optional>
-<rng:ref name="arg.content"/>
-</rng:optional>
-            
+        <rng:choice>            
+            <rng:ref name="arg.content"/>
+            <rng:ref name="interval_algebra_group.content"/>            
         </rng:choice>
     </rng:define>
     <!-- An internal group for the situation primitives for interpretation as situation

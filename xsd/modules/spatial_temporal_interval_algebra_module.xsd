@@ -32,7 +32,7 @@
                   * Precedes
                   * Succeeds
                   * Meets
-                  * Equals
+                  * Equal
                   * Finishes
  			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
@@ -68,7 +68,7 @@
 		</xs:choice>
 	</xs:group>	
 
-	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator) -->
+	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operator) -->
 	<xs:group name="interval_algebra_group.content">
 		<xs:choice>
 			<xs:element ref="During"/>
@@ -77,7 +77,7 @@
 			<xs:element ref="Precedes"/>
 			<xs:element ref="Succeeds"/>
 			<xs:element ref="Meets"/>
-			<xs:element name="Equals" type="IntervalAlgebraOperator.type"/>
+			<xs:element name ="Equal"  type="IntervalAlgebraOperator.type"/>
 			<xs:element ref="Finishes"/>
 			<xs:element name="Operator" type="IntervalAlgebraOperator.type"/>
 		</xs:choice>
@@ -211,7 +211,7 @@
 	<xs:element name="Timer" type="Timer.type"/>
 
 	<!--
-      *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes) ***
+      *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes) ***
       
       operator(Interval, Interval)
       
@@ -243,7 +243,6 @@
 	<xs:element name="Precedes" type="IntervalAlgebraOperator.type"/>
 	<xs:element name="Succeeds" type="IntervalAlgebraOperator.type"/>
 	<xs:element name="Meets" type="IntervalAlgebraOperator.type"/>
-	<!--<xs:element name="Equals" type="IntervalAlgebraOperator.type"/>-->
 	<xs:element name="Finishes" type="IntervalAlgebraOperator.type"/>
 	
 

@@ -941,8 +941,8 @@ edge.choice |= spatial_anycontent
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Interval.content =
   Node.header,
-  (arg | arg.content | interval_primitives.content | interval_anycontent), 
-  (arg | arg.content | interval_primitives.content | interval_anycontent)? 
+  (arg | interval_primitives.content | interval_anycontent), 
+  (arg | interval_primitives.content | interval_anycontent)? 
 
 interval_anycontent = element content {interval_anycontent.type}
 edge.choice |= interval_anycontent
@@ -1179,7 +1179,7 @@ time_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
 spatial_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
 # Interval primitives
 # content model: 
-# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))
+# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equal | Finishes | Operator))
 interval_primitives.content =
   arg.content | interval_algebra_group.content
 # An internal group for the situation primitives for interpretation as situation

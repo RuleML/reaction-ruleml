@@ -87,9 +87,9 @@ include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.r
 #}
 # STRIPE-SKIPPING MODE ENABLED
 #
-#include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {
-#  start |= notAllowed
-#}
+include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 # 
 # EXPLICIT DATATYPING ENABLED
 #

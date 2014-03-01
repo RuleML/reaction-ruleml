@@ -1,0 +1,4197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://ruleml.org/spec" xmlns:spec="http://ruleml.org/spec">
+  <xs:element name="RuleML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="spec:act"/>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="spec:Assert"/>
+            <xs:element ref="spec:Retract"/>
+            <xs:element ref="spec:Query"/>
+          </xs:choice>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Assert">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="spec:formula"/>
+          <xs:element ref="spec:Atom"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Neg"/>
+          <xs:element ref="spec:Negation"/>
+          <xs:element ref="spec:Implies"/>
+          <xs:group ref="spec:Forall"/>
+          <xs:element ref="spec:Quantifier"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="mapClosure">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="universal"/>
+            <xs:enumeration value="existential"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Retract">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="spec:formula"/>
+          <xs:element ref="spec:Atom"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Neg"/>
+          <xs:element ref="spec:Negation"/>
+          <xs:element ref="spec:Implies"/>
+          <xs:group ref="spec:Forall"/>
+          <xs:element ref="spec:Quantifier"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="mapClosure">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="universal"/>
+            <xs:enumeration value="existential"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Query">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="spec:formula_2"/>
+          <xs:element ref="spec:Atom"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Neg"/>
+          <xs:element ref="spec:Negation"/>
+          <xs:group ref="spec:Exists"/>
+          <xs:element ref="spec:Quantifier"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="closure">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="universal"/>
+            <xs:enumeration value="existential"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Atom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:element ref="spec:op"/>
+          <xs:element ref="spec:Rel"/>
+        </xs:choice>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+        </xs:choice>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
+      </xs:sequence>
+      <xs:attribute name="closure">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="universal"/>
+            <xs:enumeration value="existential"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Rel">
+    <xs:complexType mixed="true">
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="per">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="copy"/>
+            <xs:enumeration value="value"/>
+            <xs:enumeration value="effect"/>
+            <xs:enumeration value="modal"/>
+            <xs:enumeration value="open"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Implies">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:sequence>
+            <xs:element ref="spec:if"/>
+            <xs:element ref="spec:then"/>
+          </xs:sequence>
+          <xs:sequence>
+            <xs:choice>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+            </xs:choice>
+            <xs:choice>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+            </xs:choice>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="closure">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="universal"/>
+            <xs:enumeration value="existential"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="Forall">
+    <xs:sequence>
+      <xs:element name="Forall">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element ref="spec:declare"/>
+              <xs:element ref="spec:Var"/>
+            </xs:choice>
+            <xs:choice>
+              <xs:group ref="spec:formula_3"/>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+              <xs:element ref="spec:Implies"/>
+              <xs:group ref="spec:Forall"/>
+              <xs:element ref="spec:Quantifier"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Exists">
+    <xs:sequence>
+      <xs:element name="Exists">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element ref="spec:declare"/>
+              <xs:element ref="spec:Var"/>
+            </xs:choice>
+            <xs:choice>
+              <xs:group ref="spec:formula_4"/>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+              <xs:group ref="spec:Exists"/>
+              <xs:element ref="spec:Quantifier"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="Neg">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:element ref="spec:Atom"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:strong"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Data">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:_1"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ind">
+    <xs:complexType mixed="true">
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Var">
+    <xs:complexType mixed="true">
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="mode">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="+"/>
+            <xs:enumeration value="-"/>
+            <xs:enumeration value="?"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Rule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice minOccurs="0">
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="spec:if"/>
+            <xs:element ref="spec:then"/>
+            <xs:element ref="spec:else"/>
+          </xs:choice>
+          <xs:sequence>
+            <xs:choice>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+            </xs:choice>
+            <xs:choice>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+            </xs:choice>
+            <xs:choice minOccurs="0">
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+            </xs:choice>
+          </xs:sequence>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="style">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="reasoning"/>
+            <xs:enumeration value="active"/>
+            <xs:enumeration value="messaging"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="closure">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="universal"/>
+            <xs:enumeration value="existential"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Negation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:formula_5"/>
+          <xs:element ref="spec:Atom"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Quantifier">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="spec:declare"/>
+          <xs:element ref="spec:Var"/>
+          <xs:element ref="spec:Var"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
+          <xs:group ref="spec:formula_6"/>
+          <xs:element ref="spec:Atom"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Neg"/>
+          <xs:element ref="spec:Negation"/>
+          <xs:element ref="spec:Implies"/>
+          <xs:group ref="spec:Forall"/>
+          <xs:element ref="spec:Quantifier"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Profile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="spec:formula"/>
+          <xs:element ref="spec:Atom"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Neg"/>
+          <xs:element ref="spec:Negation"/>
+          <xs:element ref="spec:Implies"/>
+          <xs:group ref="spec:Forall"/>
+          <xs:element ref="spec:Quantifier"/>
+          <xs:group ref="spec:content"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="safety">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="non-interrupting"/>
+            <xs:enumeration value="interrupting"/>
+            <xs:enumeration value="transactional"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="size" type="xs:int"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Time">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
+            <xs:sequence minOccurs="0">
+              <xs:choice maxOccurs="unbounded">
+                <xs:group ref="spec:arg_2"/>
+                <xs:element ref="spec:Ind"/>
+                <xs:element ref="spec:Data"/>
+                <xs:element ref="spec:Time"/>
+                <xs:element ref="spec:Spatial"/>
+                <xs:element ref="spec:Interval"/>
+                <xs:element ref="spec:Var"/>
+                <xs:element ref="spec:After"/>
+                <xs:element ref="spec:Before"/>
+                <xs:element ref="spec:Every"/>
+                <xs:element ref="spec:Any"/>
+                <xs:element ref="spec:Timer"/>
+                <xs:group ref="spec:Operator"/>
+              </xs:choice>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
+            </xs:sequence>
+          </xs:sequence>
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:content_2"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Spatial">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
+            <xs:sequence minOccurs="0">
+              <xs:choice maxOccurs="unbounded">
+                <xs:group ref="spec:arg_3"/>
+                <xs:element ref="spec:Ind"/>
+                <xs:element ref="spec:Data"/>
+                <xs:element ref="spec:Time"/>
+                <xs:element ref="spec:Spatial"/>
+                <xs:element ref="spec:Interval"/>
+                <xs:element ref="spec:Var"/>
+                <xs:element ref="spec:After"/>
+                <xs:element ref="spec:Before"/>
+                <xs:element ref="spec:Every"/>
+                <xs:element ref="spec:Any"/>
+                <xs:element ref="spec:Timer"/>
+                <xs:group ref="spec:Operator"/>
+              </xs:choice>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
+            </xs:sequence>
+          </xs:sequence>
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:content_3"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Interval">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="Operator">
+    <xs:sequence>
+      <xs:element name="Operator">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:choice minOccurs="0">
+              <xs:group maxOccurs="unbounded" ref="spec:arg_4"/>
+              <xs:choice maxOccurs="unbounded">
+                <xs:element ref="spec:Ind"/>
+                <xs:element ref="spec:Data"/>
+                <xs:element ref="spec:Time"/>
+                <xs:element ref="spec:Spatial"/>
+                <xs:element ref="spec:Interval"/>
+                <xs:element ref="spec:Var"/>
+                <xs:element ref="spec:During"/>
+                <xs:element ref="spec:Overlaps"/>
+                <xs:element ref="spec:Starts"/>
+                <xs:element ref="spec:Precedes"/>
+                <xs:element ref="spec:Succeeds"/>
+                <xs:element ref="spec:Meets"/>
+                <xs:element ref="spec:Equal"/>
+                <xs:element ref="spec:Finishes"/>
+                <xs:group ref="spec:Operator_2"/>
+              </xs:choice>
+              <xs:group maxOccurs="unbounded" ref="spec:content_4"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="iri" type="xs:anyURI"/>
+          <xs:attribute name="type">
+            <xs:simpleType>
+              <xs:union memberTypes="xs:anyURI">
+                <xs:simpleType>
+                  <xs:restriction base="xs:Name">
+                    <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="After">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Before">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Every">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice minOccurs="0">
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Any">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice minOccurs="0">
+          <xs:group maxOccurs="unbounded" ref="spec:arg_4"/>
+          <xs:choice maxOccurs="unbounded">
+            <xs:element ref="spec:Ind"/>
+            <xs:element ref="spec:Data"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Var"/>
+            <xs:element ref="spec:During"/>
+            <xs:element ref="spec:Overlaps"/>
+            <xs:element ref="spec:Starts"/>
+            <xs:element ref="spec:Precedes"/>
+            <xs:element ref="spec:Succeeds"/>
+            <xs:element ref="spec:Meets"/>
+            <xs:element ref="spec:Equal"/>
+            <xs:element ref="spec:Finishes"/>
+            <xs:group ref="spec:Operator_2"/>
+          </xs:choice>
+          <xs:group maxOccurs="unbounded" ref="spec:content_4"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Timer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:arg"/>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+          <xs:group ref="spec:content_4"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="During">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Overlaps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Starts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Precedes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Succeeds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Meets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Finishes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="formula">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Implies"/>
+            <xs:group ref="spec:Forall"/>
+            <xs:element ref="spec:Quantifier"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="formula_2">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:group ref="spec:Exists"/>
+            <xs:element ref="spec:Quantifier"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="op">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="spec:Rel"/>
+      </xs:sequence>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="then">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+      </xs:choice>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="if">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+      </xs:choice>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="declare">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="spec:Var"/>
+      </xs:sequence>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="formula_3">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Implies"/>
+            <xs:group ref="spec:Forall"/>
+            <xs:element ref="spec:Quantifier"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="formula_4">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:group ref="spec:Exists"/>
+            <xs:element ref="spec:Quantifier"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="strong">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+      </xs:choice>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="meta">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+        <xs:element ref="spec:Implies"/>
+        <xs:group ref="spec:Forall"/>
+        <xs:element ref="spec:Quantifier"/>
+      </xs:choice>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="slot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:element ref="spec:Ind"/>
+          <xs:element ref="spec:Data"/>
+          <xs:element ref="spec:Time"/>
+          <xs:element ref="spec:Spatial"/>
+          <xs:element ref="spec:Interval"/>
+          <xs:element ref="spec:Var"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="card" type="xs:nonNegativeInteger"/>
+      <xs:attribute name="weight">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.0"/>
+            <xs:maxInclusive value="1.0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="arg">
+    <xs:sequence>
+      <xs:element name="arg">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Ind"/>
+            <xs:element ref="spec:Data"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Var"/>
+          </xs:choice>
+          <xs:attribute name="index" use="required" type="xs:positiveInteger"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="scope">
+    <xs:complexType>
+      <xs:choice minOccurs="0">
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+        <xs:group ref="spec:Exists"/>
+        <xs:element ref="spec:Quantifier"/>
+      </xs:choice>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="guard">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+      </xs:choice>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="evaluation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="spec:Profile"/>
+      </xs:sequence>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="signature">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+        <xs:group ref="spec:Exists"/>
+        <xs:element ref="spec:Quantifier"/>
+      </xs:choice>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="qualification">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+        <xs:element ref="spec:Implies"/>
+        <xs:group ref="spec:Forall"/>
+        <xs:element ref="spec:Quantifier"/>
+      </xs:choice>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="quantification">
+    <xs:complexType>
+      <xs:choice>
+        <xs:group ref="spec:Forall_2"/>
+        <xs:group ref="spec:Exists_2"/>
+        <xs:element ref="spec:Quantifier"/>
+      </xs:choice>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="else">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+      </xs:choice>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="formula_5">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="content">
+    <xs:sequence>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:_2"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="arg_2">
+    <xs:sequence>
+      <xs:element name="arg">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Ind"/>
+            <xs:element ref="spec:Data"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Var"/>
+            <xs:element ref="spec:After"/>
+            <xs:element ref="spec:Before"/>
+            <xs:element ref="spec:Every"/>
+            <xs:element ref="spec:Any"/>
+            <xs:element ref="spec:Timer"/>
+            <xs:group ref="spec:Operator"/>
+          </xs:choice>
+          <xs:attribute name="index" type="xs:positiveInteger"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="content_2">
+    <xs:sequence>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:_2"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="arg_3">
+    <xs:sequence>
+      <xs:element name="arg">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Ind"/>
+            <xs:element ref="spec:Data"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Var"/>
+            <xs:element ref="spec:After"/>
+            <xs:element ref="spec:Before"/>
+            <xs:element ref="spec:Every"/>
+            <xs:element ref="spec:Any"/>
+            <xs:element ref="spec:Timer"/>
+            <xs:group ref="spec:Operator"/>
+          </xs:choice>
+          <xs:attribute name="index" type="xs:positiveInteger"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="content_3">
+    <xs:sequence>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:_2"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="content_4">
+    <xs:sequence>
+      <xs:element name="content">
+        <xs:complexType mixed="true">
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:_1"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="arg_4">
+    <xs:sequence>
+      <xs:element name="arg">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Ind"/>
+            <xs:element ref="spec:Data"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Var"/>
+            <xs:element ref="spec:During"/>
+            <xs:element ref="spec:Overlaps"/>
+            <xs:element ref="spec:Starts"/>
+            <xs:element ref="spec:Precedes"/>
+            <xs:element ref="spec:Succeeds"/>
+            <xs:element ref="spec:Meets"/>
+            <xs:element ref="spec:Equal"/>
+            <xs:element ref="spec:Finishes"/>
+            <xs:group ref="spec:Operator_2"/>
+          </xs:choice>
+          <xs:attribute name="index" use="required" type="xs:positiveInteger"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="act">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="spec:Assert"/>
+        <xs:element ref="spec:Retract"/>
+        <xs:element ref="spec:Query"/>
+      </xs:choice>
+      <xs:attribute name="index" use="required" type="xs:positiveInteger"/>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="_1">
+    <xs:sequence>
+      <xs:any processContents="lax"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="formula_6">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Implies"/>
+            <xs:group ref="spec:Forall"/>
+            <xs:element ref="spec:Quantifier"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="Equal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:group ref="spec:arg_4"/>
+          <xs:element ref="spec:Interval"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="iri" type="xs:anyURI"/>
+      <xs:attribute name="type">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:anyURI">
+            <xs:simpleType>
+              <xs:restriction base="xs:Name">
+                <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:group name="Operator_2">
+    <xs:sequence>
+      <xs:element name="Operator">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:choice>
+              <xs:group ref="spec:arg_4"/>
+              <xs:element ref="spec:Interval"/>
+            </xs:choice>
+            <xs:choice>
+              <xs:group ref="spec:arg_4"/>
+              <xs:element ref="spec:Interval"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="iri" type="xs:anyURI"/>
+          <xs:attribute name="type">
+            <xs:simpleType>
+              <xs:union memberTypes="xs:anyURI">
+                <xs:simpleType>
+                  <xs:restriction base="xs:Name">
+                    <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Forall_2">
+    <xs:sequence>
+      <xs:element name="Forall">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element ref="spec:declare"/>
+              <xs:element ref="spec:Var"/>
+            </xs:choice>
+            <xs:choice minOccurs="0">
+              <xs:group ref="spec:formula_3"/>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+              <xs:element ref="spec:Implies"/>
+              <xs:group ref="spec:Forall"/>
+              <xs:element ref="spec:Quantifier"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Exists_2">
+    <xs:sequence>
+      <xs:element name="Exists">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element ref="spec:declare"/>
+              <xs:element ref="spec:Var"/>
+            </xs:choice>
+            <xs:choice minOccurs="0">
+              <xs:group ref="spec:formula_4"/>
+              <xs:element ref="spec:Atom"/>
+              <xs:element ref="spec:Time"/>
+              <xs:element ref="spec:Spatial"/>
+              <xs:element ref="spec:Interval"/>
+              <xs:element ref="spec:Neg"/>
+              <xs:element ref="spec:Negation"/>
+              <xs:group ref="spec:Exists"/>
+              <xs:element ref="spec:Quantifier"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="_2">
+    <xs:sequence>
+      <xs:any processContents="lax"/>
+    </xs:sequence>
+  </xs:group>
+</xs:schema>

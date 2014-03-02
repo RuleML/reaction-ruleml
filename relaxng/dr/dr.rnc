@@ -941,12 +941,12 @@ edge.choice |= spatial_anycontent
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Interval_term.content =
   Node.header,
-  (arg | arg.content | interval_anycontent), 
-  (arg | arg.content | interval_anycontent)? 
+  (arg_interval | arg.content | interval_anycontent), 
+  (arg_interval | arg.content | interval_anycontent)? 
 Interval_formula.content =
   Node.header,
-  (arg | interval_primitives.content | interval_anycontent), 
-  (arg | interval_primitives.content | interval_anycontent)? 
+  (arg_interval | interval_primitives.content | interval_anycontent), 
+  (arg_interval | interval_primitives.content | interval_anycontent)? 
 
 interval_anycontent = element content {interval_anycontent.type}
 edge.choice |= interval_anycontent
@@ -968,7 +968,7 @@ Interval_formula = element Interval {Interval_formula.type}
 # in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
 # in KR Reaction RuleML: Time | Spatial | Interval |  Event | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
 #
-arg_interval.attlist = arg-datt.choice & rearg.attlist
+arg_interval.attlist = index-attrib.choice?, commonInit.attlist?
 arg_interval.content = interval_primitives.content
 arg_interval.type = arg_interval.content, arg_interval.attlist
 arg_interval = element arg {arg_interval.type}

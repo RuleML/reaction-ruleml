@@ -194,15 +194,15 @@
    					<formula><Interval>
 	   					<arg index="1"><Overlaps>
 	   						<arg index="1"><Interval><arg index="1"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t3</Ind></arg></Time></arg></Interval></arg>
-	   						<arg index="2"><Interval><arg index="1"><Time><arg><Ind>t2</Ind></arg></Time></arg><arg><Time><arg index="2"><Ind>t4</Ind></arg></Time></arg></Interval></arg>
+	   						<arg index="2"><Interval><arg index="1"><Time><arg><Ind>t2</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
 	   					</Overlaps></arg>
    					</Interval>	</formula>
    					
    					<!-- [t1,t2] starts [t1,t4] -->
    					<formula><Interval>
 	   					<arg index="1"><Starts>
-	   						<arg index="1"><Interval><arg index="1"><Time><Ind>t1</Ind></Time></arg><arg index="2"><Time><Ind>t2</Ind></Time></arg></Interval></arg>
-	   						<arg index="2"><Interval><arg index="2"><Time><Ind>t1</Ind></Time></arg><arg index="2"><Time><Ind>t4</Ind></Time></arg></Interval></arg>
+	   						<arg index="1"><Interval><arg index="1"><Time><Ind>t1</Ind></Time></arg><arg index="2"><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
+	   						<arg index="2"><Interval><arg index="2"><Time><Ind>t1</Ind></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
 	   					</Starts></arg>
    					</Interval></formula>
    					
@@ -276,7 +276,7 @@
 		</Time></formula>
 		<formula><Atom>
 			<op><Rel iri="dc:date"/></op> <!-- Dublin Core date -->		
-			<arg><Time><arg><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg></Time></arg> 			 
+			<arg index="1"><Time><arg><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg></Time></arg> 			 
 		</Atom></formula>
 		
 		<formula><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></formula>

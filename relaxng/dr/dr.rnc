@@ -738,7 +738,6 @@ edge.choice |= formula-negation
 Naf = NegationAsFailure-node.choice
 reNaf.attlist &= iri-att.choice?
 # *** Neg ***
-Neg = Neg.Node.def
 reNeg.attlist &= iri-att.choice?
 
 #   *** Quantifier ***
@@ -953,7 +952,7 @@ edge.choice |= interval_anycontent
 #
 interval_anycontent.type = interval_anycontent.attlist, interval_anycontent.content
 interval_anycontent.attlist = commonInit.attlist
-interval_anycontent.content = text & anyElement.def*
+interval_anycontent.content = text & anyElement.choice*
 Interval_term.type = Interval_term.content, Interval.attlist
 Interval_formula.type = Interval_formula.content, Interval.attlist
 Node.choice |= Interval_formula

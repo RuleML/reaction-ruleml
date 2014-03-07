@@ -1,0 +1,14 @@
+start = notAllowed
+# DR patterns referenced in RR-DR, but not intialized in the DR init module
+Implies-node.choice |= notAllowed
+formula_Exists-edge.choice |= notAllowed
+anyElement.choice |= notAllowed
+boundVariables.choice |= notAllowed
+formula_AssertRetract-edge.choice |= notAllowed
+Atom-node.choice |= notAllowed
+PremiseFormula.choice |= notAllowed
+iri-att.choice |= notAllowed
+NegFormula.choice |= notAllowed
+declare-edge.choice |= notAllowed
+formula_Forall-edge.choice |= notAllowed 
+slot-edge.choice |= notAllowed

@@ -378,7 +378,7 @@
 	 optional attribute
 -->
 	<xs:attributeGroup name="style.attrib">
-		<xs:attribute name="style" type="style.datatype" use="optional" default="reasoning"/>
+		<xs:attribute name="style" type="style.datatype" use="optional"/>
 	</xs:attributeGroup>
 
 </xs:schema>

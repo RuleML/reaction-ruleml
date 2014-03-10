@@ -647,24 +647,20 @@ term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 # 
 #	default="?"
 #	optional attribute
-#mode.attrib = [ a7:defaultValue = "?" ] attribute mode { "+" | "-" | "?" }?
 mode.attrib = attribute mode { "+" | "-" | "?" }?
 # *** @safety ***
 # 
 #    restriction: interrupting, non-interrupting or transactional
 #        default: non-interrupting
 #        optional attribute
-#safety.attrib =  [ a8:defaultValue = "non-interrupting" ]  attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
 safety.attrib =  attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
 # *** @per ***
 # An attribute indicating whether a function or expression is interpreted.
 #
-#per-effect.attrib =  [ a9:defaultValue = "copy" ] attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
 per-effect.attrib =  attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
 # *** @size ***
 # An attribute indicating the size / number		
 # -1 = unbound / all
-#size.attrib = [ a10:defaultValue = "-1" ] attribute size { xsd:int }?
 size.attrib = attribute size { xsd:int }?
 # *** @key ***
 # 
@@ -1198,15 +1194,13 @@ interval_primitives.content =
 # content model: 
 # in DR Reaction RuleML: ()
 #action_primitives.content = notAllowed
+
 # *** @style ***
 # 
 #  restriction: active | messaging | reasoning
 #      default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
 #      optional attribute
-# in style_default module
-style.datatype |= "reasoning"
-# in style_non-default module
-style.datatype |= "active" | "messaging"
+style.datatype |= "active" | "messaging" | "reasoning"
 # *** @style ***
 # 
 #  restriction: active | messaging | reasoning

@@ -1419,7 +1419,7 @@
 	-->
     <rng:define name="mapMaterial.attrib">
         <rng:optional>
-<rng:attribute name="mapMaterial" a0:defaultValue="yes" xmlns:a0="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="mapMaterial">
             
                 <rng:choice>
                     <rng:value>no</rng:value>
@@ -1437,7 +1437,7 @@
 	-->
     <rng:define name="material.attrib">
         <rng:optional>
-<rng:attribute name="material" a1:defaultValue="yes" xmlns:a1="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="material">
             
                 <rng:choice>
                     <rng:value>no</rng:value>
@@ -1456,7 +1456,7 @@
 	-->
     <rng:define name="mapDirection.attrib">
         <rng:optional>
-<rng:attribute name="mapDirection" a2:defaultValue="bidirectional" xmlns:a2="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="mapDirection">
             
                 <rng:choice>
                     <rng:value>forward</rng:value>
@@ -1475,7 +1475,7 @@
 	-->
     <rng:define name="direction.attrib">
         <rng:optional>
-<rng:attribute name="direction" a3:defaultValue="bidirectional" xmlns:a3="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="direction">
             
                 <rng:choice>
                     <rng:value>forward</rng:value>
@@ -2358,7 +2358,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
     <rng:define name="val.attrib">
         <rng:optional>
-<rng:attribute name="val" a4:defaultValue="0.." xmlns:a4="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="val">
             
                 <rng:choice>
                     <rng:value>1</rng:value>
@@ -2523,7 +2523,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
     <rng:define name="per.attrib">
         <rng:optional>
-<rng:attribute name="per" a5:defaultValue="copy" xmlns:a5="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="per">
             
                 <rng:choice>
                     <rng:value>copy</rng:value>
@@ -2780,7 +2780,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
     <rng:define name="oriented.attrib">
         <rng:optional>
-<rng:attribute name="oriented" a6:defaultValue="no" xmlns:a6="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="oriented">
             
                 <rng:choice>
                     <rng:value>yes</rng:value>
@@ -2901,7 +2901,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 -->
     <rng:define name="mode.attrib">
         <rng:optional>
-<rng:attribute name="mode" a7:defaultValue="?" xmlns:a7="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="mode">
             
                 <rng:choice>
                     <rng:value>+</rng:value>
@@ -2921,7 +2921,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
     <rng:define name="safety.attrib">
         <rng:optional>
-<rng:attribute name="safety" a8:defaultValue="non-interrupting" xmlns:a8="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="safety">
             
                 <rng:choice>
                     <rng:value>non-interrupting</rng:value>
@@ -2939,7 +2939,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
     <rng:define name="per-effect.attrib">
         <rng:optional>
-<rng:attribute name="per" a9:defaultValue="copy" xmlns:a9="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="per">
             
                 <rng:choice>
                     <rng:value>copy</rng:value>
@@ -2959,7 +2959,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
     <rng:define name="size.attrib">
         <rng:optional>
-<rng:attribute name="size" a10:defaultValue="-1" xmlns:a10="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="size">
 <rng:data type="int"/>
 </rng:attribute>
 </rng:optional>
@@ -4728,7 +4728,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 -->
     <rng:define name="style.attrib">
         <rng:optional>
-<rng:attribute name="style" a11:defaultValue="reasoning" xmlns:a11="http://relaxng.org/ns/compatibility/annotations/1.0">
+<rng:attribute name="style">
 <rng:ref name="style.datatype"/>
 </rng:attribute>
 </rng:optional>

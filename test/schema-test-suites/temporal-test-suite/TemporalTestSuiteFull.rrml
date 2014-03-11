@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>-->
-<?xml-model href="../../../dr.xsd"?>
-<?xml-model href="../../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="../../../xsd/dr.xsd"?>
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_normal.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,7 +10,7 @@
 	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
 
 <act index="1">
-	<Assert>
+	<Assert mapDirection="bidirectional" mapMaterial="yes">
 		
 
 	<!-- descriptive metadata with date -->
@@ -42,7 +42,7 @@
 
 	<!-- rule base  -->
 	<formula>
-		<Rulebase>
+		<Rulebase mapMaterial="yes" mapDirection="bidirectional">
 
 		<!-- different time definitions -->
 		
@@ -74,8 +74,8 @@
 
 		<!-- a user-defined functional time definition defining a time function "datetime" -->
 		<formula><Time>
-			<arg><Expr>
-				<op><Fun>datetime</Fun></op>
+			<arg><Expr per="copy">
+				<op><Fun per="copy">datetime</Fun></op>
 				<arg index="1"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg>
 			</Expr></arg>
 		</Time></formula>
@@ -156,7 +156,7 @@
 				
 	 	<!-- rule 1  -->
 
-		<formula><Rule>
+		<formula><Rule direction="bidirectional" material="yes">
 			<if> <!-- rule body using different times-->
    				<And>
    					

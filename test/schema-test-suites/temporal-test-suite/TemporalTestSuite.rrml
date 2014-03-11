@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>-->
-<?xml-model href="../../../dr.xsd"?>
-<?xml-model href="../../../relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="../../../xsd/dr.xsd"?>
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

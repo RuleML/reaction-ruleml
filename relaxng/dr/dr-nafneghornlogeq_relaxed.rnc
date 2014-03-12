@@ -89,6 +89,10 @@ include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module
 include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+#
+include "http://ruleml.org/1.0/relaxng/modules/asynchronous_stripe_skipping_entailment_expansion_module.rnc" inherit = ruleml {start |= notAllowed}
+#
+include "http://ruleml.org/1.0/relaxng/modules/asynchronous_stripe_skipping_implication_expansion_module.rnc" inherit = ruleml {start |= notAllowed}
 # 
 # EXPLICIT DATATYPING ENABLED
 #

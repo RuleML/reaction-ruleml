@@ -92,15 +92,15 @@ include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.
 # 
 # EXPLICIT DATATYPING ENABLED
 #
-include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
-include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
-include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
+#include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
+#include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
 # 
 # xsi:schemaLocation ALLOWED IN RuleML
 #

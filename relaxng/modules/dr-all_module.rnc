@@ -378,7 +378,7 @@ reNeg.attlist &= iri-att.choice?
 Quantifier.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Quantifier.content =
   Node.header,
-  (declare | Var)+,
+  declare+,
   (formula-forall
    | formula_Forall.content)?
 Quantifier.type = Quantifier.content, Quantifier.attlist
@@ -653,7 +653,7 @@ Before = element Before { After.type }
 Every.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Every.content =
   Node.header,
-     (arg | arg.content | interval_anycontent)?
+     (arg | interval_anycontent)?
 Every.type = Every.content, Every.attlist
 Node.choice |= Every
 Every = element Every { Every.type }

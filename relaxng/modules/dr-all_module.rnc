@@ -195,7 +195,6 @@ Equivalent = Equivalent-node.choice
 
 # *** Rulebase ***
 Rulebase = Rulebase-node.choice
-RulebaseFormula.choice |= Rule
 
 # *** And ***
 And = And-node.choice
@@ -328,6 +327,9 @@ Rule.content = Node.header, rule-implementation.content?
 Rule.type = Rule.content, (Rule-datt.choice & reRule.attlist)
 Rule = element Rule { Rule.type }
 Node.choice |= Rule
+AssertRetractFormula.choice |= Rule
+ForallFormula.choice |= Rule
+RulebaseFormula.choice |= Rule
 # *** else ***
 # 
 # content model: 

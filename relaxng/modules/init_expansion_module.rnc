@@ -10,5 +10,13 @@ PremiseFormula.choice |= notAllowed
 iri-att.choice |= notAllowed
 NegFormula.choice |= notAllowed
 declare-edge.choice |= notAllowed
-formula_Forall-edge.choice |= notAllowed 
+formula_Forall-edge.choice |= notAllowed
 slot-edge.choice |= notAllowed
+formula_Forall.content |= notAllowed
+# RR patterns
+formula-negation.content |= notAllowed
+if.content |= notAllowed
+then.content |= notAllowed
+time_primitives.content |= notAllowed
+spatial_primitives.content |= notAllowed
+interval_primitives.content |= notAllowed

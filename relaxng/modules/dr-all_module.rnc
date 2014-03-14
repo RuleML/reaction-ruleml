@@ -6,14 +6,15 @@ dc:version [ "1.0" ]
 dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
 dc:creator [ "Adrian Paschke" ]
 dc:subject [ "RuleML, Reaction, Deliberation" ]
-dc:description [ "The expansion module for reserved spatial and temporal predicates and relations." ]
+dc:description [
+  "The expansion module for reserved spatial and temporal predicates and relations."
+]
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
 formula-assert.content = formula_AssertRetract.content
 formula-query.content = formula_Query.content
-
 # *** oid ***
 oid = objectIdentifier-edge.choice
 # 
@@ -176,26 +177,18 @@ declare = declare-edge.choice
 # needed for Quantifier and quantification
 formula-forall.type = formula_Forall.content, formula_Forall.attlist
 formula-forall = element formula { formula-forall.type }
-
 # *** Implies ***
 Implies = Implies-node.choice
-# *** if ***
-if.content = body_Implies.content
-if = body_Implies.name.choice
 # *** then ***
 then.attlist = head_Implies.attlist?
 then.content = head_Implies.content
 then.type = head_Implies.attlist? & head_Implies.content
-then = head_Implies.name.choice
 # *** Entails ***
 Entails = Entails-node.choice
-
 # *** Equivalent ***
 Equivalent = Equivalent-node.choice
-
 # *** Rulebase ***
 Rulebase = Rulebase-node.choice
-
 # *** And ***
 And = And-node.choice
 # *** Or ***
@@ -240,14 +233,12 @@ Equal = Equal-node.choice
 # in time module
 SimpleKeyTerm.choice |= Time_term
 SimpleFormula-node.choice |= Time_formula
-
 # in spatial module
 SimpleKeyTerm.choice |= Spatial_term
 SimpleFormula-node.choice |= Spatial_formula
 # in interval module
 SimpleKeyTerm.choice |= Interval_term
 SimpleFormula-node.choice |= Interval_formula
-
 
 ##
 curieOrIRI.datatype = curie.datatype | xsd:anyURI
@@ -285,11 +276,11 @@ mode.attrib = attribute mode { "+" | "-" | "?" }?
 #    restriction: interrupting, non-interrupting or transactional
 #        default: non-interrupting
 #        optional attribute
-safety.attrib =  attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
+safety.attrib = attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
 # *** @per ***
 # An attribute indicating whether a function or expression is interpreted.
 #
-per-effect.attrib =  attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
+per-effect.attrib = attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
 # *** @size ***
 # An attribute indicating the size / number		
 # -1 = unbound / all
@@ -340,7 +331,7 @@ else = element else { then.type }
 edge.choice |= else
 # *** Derivation Rule content model ***
 #       ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
-DerivationRule.content = (if & then & else?) | (if.content, then.content, then.content?)
+DerivationRule.content |= Implies.main, else?
 # *** Negation ***
 # A generic polymorphic negation, which can be specialized by using
 # the @type attribute to specify the type of negation and/or 
@@ -351,10 +342,8 @@ DerivationRule.content = (if & then & else?) | (if.content, then.content, then.c
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
 # KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
 Negation.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Negation.content =
-  Node.header,
-  (formula-negation
-   | formula-negation.content)
+Negation.content = Node.header, formula-negation.choice
+formula-negation.choice |= formula-negation
 Negation.type = Negation.content, Negation.attlist
 Negation = element Negation { Negation.type }
 Node.choice |= Negation
@@ -370,47 +359,34 @@ Naf = NegationAsFailure-node.choice
 reNaf.attlist &= iri-att.choice?
 # *** Neg ***
 reNeg.attlist &= iri-att.choice?
-
-#   *** Quantifier ***
-#   Explicit generic quantifier, where the quantifier name can be defined by the 
+# *** Quantifier ***
+# Explicit generic quantifier, where the quantifier name can be defined by the
 # @type attribute and the @iri attribute can point to an external definition
 # of the quantifier.
 # 
-#   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+# content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
 Quantifier.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Quantifier.content =
-  Node.header,
-  declare+,
-  (formula-forall
-   | formula_Forall.content)?
+Quantifier.content = Quantifier.header, Quantifier.main
+Quantifier.header &= Node.header
+Quantifier.main |= boundVariables.choice, formula-quant.choice?
+formula-quant.choice |= formula-quant
+formula-quant = element formula { formula-forall.type }
 Quantifier.type = Quantifier.content, Quantifier.attlist
 Quantifier = element Quantifier { Quantifier.type }
-Node.choice |= Quantifier
 # make the quantifier constraint restrictions ("such that") optional
 # 
-# (  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
-#Exists-quantifier.content =
-#  Node.header,
-#  (declare | declare.content)+,
-#  (element formula { formula-forall.type }
-#   | formula-forall.content)?
-#Exists-quantifier.type = Exists-quantifier.content, Exists.attlist
-Exists-quantifier.main |= boundVariables.choice, formula_Exists-edge.choice?
-Exists-quantifier.type = (Exists-datt.choice & reExists.attlist), Exists.header, Exists-quantifier.main
-
+# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+Exists-quantifier.content = Exists.header, Exists-quantifier.main
+Exists-quantifier.main = boundVariables.choice, formula-quant.choice?
+Exists-quantifier.type = (Exists-datt.choice & reExists.attlist), Exists-quantifier.content
 # make the quantifier constraint restrictions ("such that") optional
 # 
-# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
 # 
 #
-#Forall-quantifier.content =
-#  Node.header,
-#  (declare | declare.content)+,
-#  (element formula { formula-forall.type }
-#   | formula-forall.content)?
-Forall-quantifier.main |= boundVariables.choice, formula_Forall-edge.choice?
-Forall-quantifier.type = (Forall-datt.choice & reForall.attlist), Forall.header, Forall-quantifier.main
-# 
+Forall-quantifier.content = Forall.header, Forall-quantifier.main
+Forall-quantifier.main = boundVariables.choice, formula-quant.choice?
+Forall-quantifier.type = (Forall-datt.choice & reForall.attlist), Forall-quantifier.content
 #   *** Profile ***
 #   Explicit generic semantic profile defining the semantics of the rule. The semantic profile can be
 # defined internally by the any content model (xs:any Element) or externally, where 
@@ -423,21 +399,13 @@ Forall-quantifier.type = (Forall-datt.choice & reForall.attlist), Forall.header,
 #   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, content(xs:any*)* )
 Profile.attlist =
   iri-att.choice?, direction.attrib, Type.attlist, commonNode.attlist, safety.attrib, size.attrib
-Profile.content =
-  Node.header,
-  (formula_AssertRetract-edge.choice
-  | profile_anycontent)*
+Profile.content = Node.header, formula_Profile-edge.choice*
+formula_Profile-edge.choice |= formula_AssertRetract-edge.choice
+# relaxed
+# formula_Profile-edge.choice |= profile_anycontent
 Profile.type = Profile.content, Profile.attlist
 Node.choice |= Profile
 Profile = element Profile { Profile.type }
-# *** content ***
-# 
-# content model:  xs:any*
-profile_anycontent.attlist = commonInit.attlist?
-profile_anycontent.content = element * { text }*
-profile_anycontent.type = profile_anycontent.content, profile_anycontent.attlist
-profile_anycontent = element content { profile_anycontent.type }
-edge.choice |= profile_anycontent
 #	*** Time ***
 #	Explicit generic Time construct. The time can be represented internally 
 #       * with positional arguments <arg>, e.g., <arg>
@@ -465,22 +433,15 @@ edge.choice |= profile_anycontent
 #				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 #				content(xs:any*)* ) ) 
 Time.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Time.content =
-  Node.header,
-  ((slot*,
-   resl?,
-   (( ((arg_time
-       | time_primitives.content)+
-      , repo?)
-      | repo),
-    slot*,
-   resl?)?)
-   | time_anycontent*)
+Time.content = Node.header, argumentsForTime.sequence
+argumentsForTime.sequence |= arg_time.choice*, repo?, slot*, resl?
+arg_time.choice |= arg_time
+# unordered
+# argumentsForTime.sequence |= arg_time.choice+ & repo? & slot* & resl?
 Time.type = Time.content, Time.attlist
 Node.choice |= Time_formula
-Time_term = element Time {Time.type}
-Time_formula = element Time {Time.type}
-
+Time_term = element Time { Time.type }
+Time_formula = element Time { Time.type }
 # *** arg ***
 # 
 # Definition of the the arg role for Time
@@ -493,16 +454,8 @@ Time_formula = element Time {Time.type}
 arg_time.attlist = index-attrib.choice?, commonInit.attlist?
 arg_time.content = time_primitives.content
 arg_time.type = arg_time.content, arg_time.attlist
-arg_time = element arg {arg_time.type}
+arg_time = element arg { arg_time.type }
 edge.choice |= arg_time
-# *** content ***
-# 
-# content model:  xs:any*
-time_anycontent.attlist = commonInit.attlist?
-time_anycontent.content = element * { text }*
-time_anycontent.type = time_anycontent.content, time_anycontent.attlist
-time_anycontent = element content { time_anycontent.type }
-edge.choice |= time_anycontent
 #   *** Spatial ***
 #   Explicit generic Spatial construct. The spatial can be represented internally 
 # * with positional arguments <arg>
@@ -519,22 +472,15 @@ edge.choice |= time_anycontent
 #		  ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 #			  content(xs:any*)* ) ) 
 Spatial.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Spatial.content =
-  Node.header,
-  ((slot*
-   , resl?,
-   (( ((arg_spatial
-       | spatial_primitives.content)+
-      , repo? )
-      | repo)
-   , slot*,
-   resl?)?)
-   | spatial_anycontent*)
-Spatial.type = Spatial.content, Spatial.attlist
+Spatial.content = Node.header, argumentsForSpatial.sequence
+argumentsForSpatial.sequence |= arg_spatial.choice*, repo?, slot*, resl?
+arg_spatial.choice |= arg_spatial
+# unordered
+# argumentsForSpatial.sequence |= arg_spatial.choice* & repo? & slot* & resl?Spatial.type = Spatial.content, Spatial.attlist
 Node.choice |= Spatial_formula
-Spatial_term = element Spatial {Spatial.type}
-Spatial_formula = element Spatial {Spatial.type}
-
+Spatial.type = Spatial.content, Spatial.attlist
+Spatial_term = element Spatial { Spatial.type }
+Spatial_formula = element Spatial { Spatial.type }
 # *** arg ***
 # 
 # Definition of the the arg role for Spatial
@@ -549,14 +495,7 @@ arg_spatial.content = spatial_primitives.content
 arg_spatial.type = arg_spatial.content, arg_spatial.attlist
 arg_spatial = element arg { arg_spatial.type }
 edge.choice |= arg_spatial
-# *** content ***
 # 
-# content model:  xs:any*
-spatial_anycontent.attlist = commonInit.attlist?
-spatial_anycontent.content = element * { text }*
-spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
-spatial_anycontent = element content { spatial_anycontent.type }
-edge.choice |= spatial_anycontent
 #   *** Interval ***
 #   Explicit generic Interval. The interval can be
 # defined internally by the any content model (xs:any Element) or externally, where 
@@ -569,27 +508,15 @@ edge.choice |= spatial_anycontent
 #   DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
 #   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Interval_term.content =
-  Node.header,
-  (arg_interval | arg.content | interval_anycontent), 
-  (arg_interval | arg.content | interval_anycontent)? 
-Interval_formula.content =
-  Node.header,
-  (arg_interval | interval_primitives.content | interval_anycontent), 
-  (arg_interval | interval_primitives.content | interval_anycontent)? 
-
-interval_anycontent = element content {interval_anycontent.type}
-edge.choice |= interval_anycontent
+arg_interval.choice |= arg_interval
+Interval_term.content = Node.header, arg_interval.choice, arg_interval.choice?
+Interval_formula.content = Node.header, arg_interval.choice, arg_interval.choice?
 #
-interval_anycontent.type = interval_anycontent.attlist, interval_anycontent.content
-interval_anycontent.attlist = commonInit.attlist
-interval_anycontent.content = text & anyElement.choice*
 Interval_term.type = Interval_term.content, Interval.attlist
 Interval_formula.type = Interval_formula.content, Interval.attlist
 Node.choice |= Interval_formula
-Interval_term = element Interval {Interval_term.type}
-Interval_formula = element Interval {Interval_formula.type}
-
+Interval_term = element Interval { Interval_term.type }
+Interval_formula = element Interval { Interval_formula.type }
 # *** arg ***
 # 
 # Definition of the the arg role for Intervals
@@ -601,18 +528,12 @@ Interval_formula = element Interval {Interval_formula.type}
 arg_interval.attlist = index-attrib.choice?, commonInit.attlist?
 arg_interval.content = interval_primitives.content
 arg_interval.type = arg_interval.content, arg_interval.attlist
-arg_interval = element arg {arg_interval.type}
+arg_interval = element arg { arg_interval.type }
 edge.choice |= arg_interval
 # (After | Before | Any | Every | Timer | Operator)
-spatial_temporal_algebra_group.content =
-  After
-  | Before
-  | Every
-  | Any
-  | Timer
-  | Operator_any
+spatial_temporal_algebra_group.content = After | Before | Every | Any | Timer | Operator_any
 Operator_any = element Operator { Any.type }
-Node.choice |= Operator_any 
+Node.choice |= Operator_any
 # (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator)
 interval_algebra_group.content =
   During
@@ -624,9 +545,8 @@ interval_algebra_group.content =
   | IntervalAlgebraEqual
   | Finishes
   | IntervalAlgebraOperator
-IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type }  
-IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type }  
-
+IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type }
+IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type }
 # *** After / Before***
 # 
 # X after Y  / X before Y
@@ -653,9 +573,7 @@ Before = element Before { After.type }
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
 #     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) ))
 Every.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Every.content =
-  Node.header,
-     (arg | interval_anycontent)?
+Every.content = Node.header, arg_interval.choice?
 Every.type = Every.content, Every.attlist
 Node.choice |= Every
 Every = element Every { Every.type }
@@ -669,11 +587,7 @@ Every = element Every { Every.type }
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
 #     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg*] | content(xs:any)* | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)* ))
 Any.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Any.content =
-  Node.header,
-  (arg_interval+
-   | interval_primitives.content+
-   | interval_anycontent+)?
+Any.content = Node.header, arg_interval.choice*
 Any.type = Any.content, Any.attlist
 Node.choice |= Any
 Any = element Any { Any.type }
@@ -699,14 +613,9 @@ Timer = element Timer { Timer.type }
 # 
 # content model: 
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval]) 
-IntervalAlgebraOperator.attlist =
-  iri-att.choice?, Type.attlist, commonNode.attlist
-IntervalAlgebraOperator.content =
-  Node.header,
-  (arg_interval | Interval_term), 
-  (arg_interval | Interval_term) 
-IntervalAlgebraOperator.type =
-  IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
+IntervalAlgebraOperator.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
+IntervalAlgebraOperator.content = Node.header, arg_interval.choice, arg_interval.choice
+IntervalAlgebraOperator.type = IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
 Node.choice |= During
 During = element During { IntervalAlgebraOperator.type }
 Node.choice |= Overlaps
@@ -720,8 +629,8 @@ Succeeds = element Succeeds { IntervalAlgebraOperator.type }
 Node.choice |= Meets
 Meets = element Meets { IntervalAlgebraOperator.type }
 Node.choice |= Finishes
-Finishes = element Finishes { IntervalAlgebraOperator.type }  
-#
+Finishes = element Finishes { IntervalAlgebraOperator.type }
+# 
 # 
 # An internal group for the implementation of a rule in the Reaction RuleML language
 # 
@@ -737,8 +646,8 @@ rule-implementation.content = DerivationRule.content
 # An internal group for the query connectives in the Reaction RuleML language
 # 
 # content model: (And | Or | Negation | Naf | Neg | Equal)
-#
-#query-connective.content =
+# 
+# query-connective.content =
 #  And-Query-node.choice
 #  | Or-Query-node.choice
 #  | Negation
@@ -750,8 +659,8 @@ rule-implementation.content = DerivationRule.content
 # 
 # 
 # content model: (And | Or | Negation | Naf | Neg | Equal)
-#
-#inner-connective.content =
+# 
+# inner-connective.content =
 #  And-node.choice
 #  | Or-node.choice
 #  | Negation
@@ -763,14 +672,14 @@ rule-implementation.content = DerivationRule.content
 # 
 # 
 # content model: (Negation | Neg | Equal )
-#
-#outer-connective.content = Negation | Neg | Equal
+# 
+# outer-connective.content = Negation | Neg | Equal
 # 
 # An internal group for the query quantifiers in the Reaction RuleML language
 # 
 # content model: (Exists | Quantifier)
-#
-#query-quantifier.content = Exists
+# 
+# query-quantifier.content = Exists
 # 
 # An internal group for the inner quantifiers in the Reaction RuleML language
 # 
@@ -786,49 +695,48 @@ inner-quantifier.content =
 # 
 # 
 # content model: ( Forall | Quantifier )
-#
-#outer-quantifier.content = Forall
+# 
+# outer-quantifier.content = Forall
 # 
 # An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
 # 
 # In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
 # 
 # content model: (Time | Spatial | Interval)
-#
-#extended-signature-predicate-sorts.content = extended-signature-function-sorts.content
+# 
+# extended-signature-predicate-sorts.content = extended-signature-function-sorts.content
 # 
 # An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
 # 
 # In the DR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
 # 
 # content model: (Time | Spatial | Interval)
-#
-#extended-signature-function-sorts.content = Time | Spatial | Interval
+# 
+# extended-signature-function-sorts.content = Time | Spatial | Interval
 # An internal group for the time primitives for interpretation as time
 # content model: 
 # in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
-time_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
+time_primitives.content = arg.content | spatial_temporal_algebra_group.content
 # An internal group for the spatial primitives for interpretation as spatial
 # content model: 
 # in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
-spatial_primitives.content = (arg.content | spatial_temporal_algebra_group.content)
+spatial_primitives.content = arg.content | spatial_temporal_algebra_group.content
 # Interval primitives
 # content model: 
 # in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equal | Finishes | Operator))
-interval_primitives.content =
-  arg.content | interval_algebra_group.content
+interval_primitives.content = arg.content | interval_algebra_group.content
 # An internal group for the situation primitives for interpretation as situation
 # content model: 
 # in DR Reaction RuleML: ()
-#situation_primitives.content = notAllowed
+# situation_primitives.content = notAllowed
 # An internal group for the event primitives for interpretation as event
 # content model: 
 # in DR Reaction RuleML: ()
-#event_primitives.content = notAllowed
+# event_primitives.content = notAllowed
 # An internal group for the action primitives for interpretation as action
 # content model: 
 # in DR Reaction RuleML: ()
-#action_primitives.content = notAllowed
+# action_primitives.content = notAllowed
 
 # *** @style ***
 # 
@@ -850,7 +758,6 @@ style-att-inf.choice |= empty
 style-att-inf.choice |= style-att.choice
 # in style_attrib module
 style-att.choice |= attribute style { style.datatype }
-
 # Managing the ordered and unordered forms of the extended Node header pattern in DR
 # 1. to deal with the different distribution of oid, define a new pattern for element oid that
 # is added to Node.header if the oid_all module is included. 
@@ -861,7 +768,7 @@ style-att.choice |= attribute style { style.datatype }
 # Node_unordered.header
 # content model: meta* & scope* & guard* & evaluation* & signature* & qualification* & quantification* & oid?
 # In the modules for the corresponding features
-#metadata.content, interface.content, instance.content
+# metadata.content, interface.content, instance.content
 metadata_unordered.header &= meta*
 metadata_unordered.header &= scope*
 metadata_unordered.header &= guard*
@@ -889,4 +796,4 @@ Node_ordered-header.choice |=
 # unordered_group_dr
 # Node.header &= Node_unordered.header? 
 # ordered_group_dr - redefine ordered_group
- Node.header &= Node_ordered-header.choice? 
+Node.header &= Node_ordered-header.choice?

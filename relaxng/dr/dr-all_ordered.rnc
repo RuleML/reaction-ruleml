@@ -105,5 +105,7 @@ include "http://ruleml.org/1.0/relaxng/modules/xml_lang_expansion_module.rnc" in
 include "http://ruleml.org/1.0/relaxng/modules/xml_space_expansion_module.rnc" inherit = ruleml {start |= notAllowed}
 include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml {start |= notAllowed}
 include "../modules/dr-all_module.rnc" inherit = ruleml {start |= notAllowed}
+include "../modules/any_content_expansion_module.rnc" inherit = ruleml {start |= notAllowed}
+include "../modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {start |= notAllowed}
 
     

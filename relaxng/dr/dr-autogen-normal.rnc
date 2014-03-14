@@ -104,9 +104,9 @@ include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.r
 # 
 # xsi:schemaLocation ALLOWED IN RuleML
 #
-#include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml {
-#  start |= notAllowed
-#}
+include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 # 
 # UNIVERSAL RESOURCE IDENTIFIERS (URIs) INCLUDED
 #

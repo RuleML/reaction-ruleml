@@ -426,6 +426,7 @@ formula-quant.choice |= formula-quant
 formula-quant = element formula { formula-forall.type }
 Quantifier.type = Quantifier.content, Quantifier.attlist
 Quantifier = element Quantifier { Quantifier.type }
+Node.choice |= Quantifier
 # make the quantifier constraint restrictions ("such that") optional
 # 
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )

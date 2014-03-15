@@ -172,15 +172,12 @@ Forall-node.choice |= Quantifier
 # *** Exists ***
 Exists = Exists-node.choice
 Exists-node.choice |= Quantifier
-# *** declare ***
-declare = declare-edge.choice
 # needed for Quantifier and quantification
 formula-forall.type = formula_Forall.content, formula_Forall.attlist
 formula-forall = element formula { formula-forall.type }
 # *** Implies ***
 Implies = Implies-node.choice
 # *** then ***
-then.attlist = head_Implies.attlist?
 then.content = head_Implies.content
 then.type = head_Implies.attlist? & head_Implies.content
 # *** Entails ***
@@ -191,8 +188,60 @@ Equivalent = Equivalent-node.choice
 Rulebase = Rulebase-node.choice
 # *** And ***
 And = And-node.choice
+And-Query.main |= formula_And-query-edge.choice*
+
+## an extension point for stripe skipping as well as alternate spellings and internationalization of the formula tag name in conjunctions.  
+formula_And-query-edge.choice |= formula_And-query.edge.def
+
+## The formula role of a conjunctive (<And>) expression, 
+## Within And ...
+formula_And-query.edge.def =
+  
+  ## <formula>: contains a single formula. See  
+  ## http://www.ruleml.org/1.0/glossary/#gloss-formula
+  element formula { formula_And.attlist? & formula_And-query.content }
+
+## Formulas within conjunctions consist of a single formula
+formula_And-query.content |= AndQueryFormula.choice
+
+## formulas allowed to participate in conjunctions. 
+AndQueryFormula.choice |=
+  SimpleFormula-node.choice
+  | And-Query-node.choice
+  | Or-Query-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-fo-node.choice
 # *** Or ***
 Or = Or-node.choice
+Or-Query.main |= formula_Or-query-edge.choice*
+
+## an extension point for stripe skipping as well as alternate spellings and internationalization of the formula tag name in conjunctions.  
+formula_Or-query-edge.choice |= formula_Or-query.edge.def
+
+## The formula role of a conjunctive (<Or>) expression, 
+## Within Or ...
+formula_Or-query.edge.def =
+  
+  ## <formula>: contains a single formula. See  
+  ## http://www.ruleml.org/1.0/glossary/#gloss-formula
+  element formula { formula_Or.attlist? & formula_Or-query.content }
+
+## Formulas within conjunctions consist of a single formula
+formula_Or-query.content |= OrQueryFormula.choice
+
+## formulas allowed to participate in conjunctions. 
+OrQueryFormula.choice |=
+  SimpleFormula-node.choice
+  | And-Query-node.choice
+  | Or-Query-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-fo-node.choice
 # *** @mapMaterial ***
 mapMaterial.attrib = mapMaterial-att-inf.choice
 # *** @material ***
@@ -296,6 +345,11 @@ key.attrib = attribute key { curieOrAbsIRI.datatype }?
 # 
 #      optional attribute
 keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
+#	    *** Assert ***
+reAssert.attlist &= commonNode.attlist?
+reAssert.attlist &= mapClosure-att.choice?
+reAssert.attlist &= safety.attrib?
+reAssert.attlist &= size.attrib?
 # *** Rule ***
 # The Rule  that provides the basic syntax for rules
 # in Reaction RuleML.
@@ -329,9 +383,6 @@ RulebaseFormula.choice |= Rule
 #
 else = element else { then.type }
 edge.choice |= else
-# *** Derivation Rule content model ***
-#       ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
-DerivationRule.content |= Implies.main, else?
 # *** Negation ***
 # A generic polymorphic negation, which can be specialized by using
 # the @type attribute to specify the type of negation and/or 
@@ -356,9 +407,11 @@ formula-negation = element formula { formula-negation.type }
 edge.choice |= formula-negation
 # *** Naf ***
 Naf = NegationAsFailure-node.choice
-reNaf.attlist &= iri-att.choice?
+reNaf.attlist &= iri-att.choice?, Type.attlist
+NafFormula.choice |= NegationAsFailure-node.choice
 # *** Neg ***
-reNeg.attlist &= iri-att.choice?
+reNeg.attlist &= iri-att.choice?, Type.attlist
+NegFormula.choice |= NegationAsFailure-node.choice
 # *** Quantifier ***
 # Explicit generic quantifier, where the quantifier name can be defined by the
 # @type attribute and the @iri attribute can point to an external definition
@@ -373,6 +426,7 @@ formula-quant.choice |= formula-quant
 formula-quant = element formula { formula-forall.type }
 Quantifier.type = Quantifier.content, Quantifier.attlist
 Quantifier = element Quantifier { Quantifier.type }
+Node.choice |= Quantifier
 # make the quantifier constraint restrictions ("such that") optional
 # 
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
@@ -436,8 +490,6 @@ Time.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Time.content = Node.header, argumentsForTime.sequence
 argumentsForTime.sequence |= arg_time.choice*, repo?, slot*, resl?
 arg_time.choice |= arg_time
-# unordered
-# argumentsForTime.sequence |= arg_time.choice+ & repo? & slot* & resl?
 Time.type = Time.content, Time.attlist
 Node.choice |= Time_formula
 Time_term = element Time { Time.type }
@@ -475,8 +527,6 @@ Spatial.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Spatial.content = Node.header, argumentsForSpatial.sequence
 argumentsForSpatial.sequence |= arg_spatial.choice*, repo?, slot*, resl?
 arg_spatial.choice |= arg_spatial
-# unordered
-# argumentsForSpatial.sequence |= arg_spatial.choice* & repo? & slot* & resl?Spatial.type = Spatial.content, Spatial.attlist
 Node.choice |= Spatial_formula
 Spatial.type = Spatial.content, Spatial.attlist
 Spatial_term = element Spatial { Spatial.type }
@@ -740,60 +790,9 @@ interval_primitives.content = arg.content | interval_algebra_group.content
 
 # *** @style ***
 # 
+#  optional attribute
 #  restriction: active | messaging | reasoning
-#      default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
-#      optional attribute
+#  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
 style.datatype |= "active" | "messaging" | "reasoning"
-# *** @style ***
-# 
-#  restriction: active | messaging | reasoning
-#      default value: reasoning (in DR Reaction RuleML)
-#      optional attribute
-style.attrib = style-att-inf.choice
-# in default_inf_reactive module
-style-att-inf.choice |= notAllowed
-# in default_absent_reactive module
-style-att-inf.choice |= empty
-# in default_present_reactive module
-style-att-inf.choice |= style-att.choice
-# in style_attrib module
+style.attrib = style-att.choice
 style-att.choice |= attribute style { style.datatype }
-# Managing the ordered and unordered forms of the extended Node header pattern in DR
-# 1. to deal with the different distribution of oid, define a new pattern for element oid that
-# is added to Node.header if the oid_all module is included. 
-# This is a temporary fix until the oid distribution is harmonized in the next release.
-# 2. to deal with the different definition of the meta element, define a new patterm for
-# element meta that is added to Node.header if the meta_indexed module is included.
-# This is a temporary fix until the meta distribution is harmonized in the next release.
-# Node_unordered.header
-# content model: meta* & scope* & guard* & evaluation* & signature* & qualification* & quantification* & oid?
-# In the modules for the corresponding features
-# metadata.content, interface.content, instance.content
-metadata_unordered.header &= meta*
-metadata_unordered.header &= scope*
-metadata_unordered.header &= guard*
-interface_unordered.header &= evaluation*
-interface_unordered.header &= signature*
-instance_unordered.header &= qualification*
-instance_unordered.header &= quantification*
-# special case
-instance_unordered.header &= oid?
-#
-Node_unordered.header &= metadata_unordered.header?
-Node_unordered.header &= interface_unordered.header?
-Node_unordered.header &= instance_unordered.header?
-# In the unordered_header_dr module
-# Node.header &= Node_unordered.header?
-# 
-# In the ordered_header_dr module
-# Node_ordered.header
-# content model: meta* , scope* , guard* , evaluation* , signature* , qualification* , quantification* , oid?
-metadata_ordered-header.choice |= meta*, scope*, guard*
-interface_ordered-header.choice |= evaluation*, signature*
-instance_ordered-header.choice |= qualification*, quantification*, oid?
-Node_ordered-header.choice |=
-  metadata_ordered-header.choice, interface_ordered-header.choice, instance_ordered-header.choice
-# unordered_group_dr
-# Node.header &= Node_unordered.header? 
-# ordered_group_dr - redefine ordered_group
-Node.header &= Node_ordered-header.choice?

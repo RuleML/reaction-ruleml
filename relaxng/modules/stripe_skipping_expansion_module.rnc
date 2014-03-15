@@ -6,21 +6,17 @@ dc:version [ "1.0" ]
 dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
 dc:creator [ "Adrian Paschke" ]
 dc:subject [ "RuleML, Reaction, stripe-skipping" ]
-dc:description [
-  "The expansion module for stripe-skipping."
-]
+dc:description [ "The expansion module for stripe-skipping." ]
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
-
 DerivationRule.content |= body_Implies.content, then.content, then.content
 formula-negation.choice |= formula-negation.content
 arg_time.choice |= time_primitives.content
 arg_spatial.choice |= spatial_primitives.content
 arg_interval.choice |= interval_primitives.content
 formula-quant.choice |= formula_Forall.content
-
-
-
-
+#
+formula_And-query-edge.choice |= formula_And-query.content
+formula_Or-query-edge.choice |= formula_Or-query.content

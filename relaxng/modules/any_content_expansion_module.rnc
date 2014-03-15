@@ -1,5 +1,6 @@
 namespace dc = "http://purl.org/dc/elements/1.1/"
 namespace dcterms = "http://purl.org/dc/terms/"
+namespace this = inherit
 
 dc:title [ "Foreign Namespace content in Reaction RuleML" ]
 dc:version [ "1.0" ]
@@ -17,27 +18,32 @@ edge.choice |= profile_anycontent
 
 # *** content ***
 # 
-formula_Profile-edge.choice |= formula_AssertRetract-edge.choice
+formula_Profile-edge.choice |= profile_anycontent
 profile_anycontent = element content { profile_anycontent.type }
 profile_anycontent.type = profile_anycontent.content, profile_anycontent.attlist
-profile_anycontent.content = text & anyElement.choice*
+profile_anycontent.content = anycontent.content
 profile_anycontent.attlist = commonInit.attlist?
 # 
 argumentsForTime.sequence |= time_anycontent*
 time_anycontent = element content { time_anycontent.type }
 time_anycontent.type = time_anycontent.content, time_anycontent.attlist
-time_anycontent.content = text & anyElement.choice*
+time_anycontent.content = anycontent.content
 time_anycontent.attlist = commonInit.attlist?
 #
 argumentsForSpatial.sequence |= spatial_anycontent*
 spatial_anycontent = element content { spatial_anycontent.type }
 spatial_anycontent.type = spatial_anycontent.content, spatial_anycontent.attlist
-spatial_anycontent.content = text & anyElement.choice*
+spatial_anycontent.content = anycontent.content
 spatial_anycontent.attlist = commonInit.attlist?
 #
 arg_interval.choice |=  interval_anycontent
 interval_anycontent = element content { interval_anycontent.type }
 interval_anycontent.type = interval_anycontent.attlist, interval_anycontent.content
-interval_anycontent.content = text & anyElement.choice*
+interval_anycontent.content = anycontent.content
 interval_anycontent.attlist = commonInit.attlist
 
+##
+anycontent.content = (text & foreign-element*) | Node.choice | edge.choice
+
+foreign-element = element * - (this:*) { anything }
+anything = ( element * { anything } | attribute * { text } | text )*

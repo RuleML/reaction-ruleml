@@ -1,5 +1,5 @@
 start = notAllowed
-# DR patterns referenced in RR-DR, but not intialized in the DR init module
+## DR patterns referenced in RR-DR, but not intialized in the DR init module
 Implies-node.choice |= notAllowed
 formula_Exists-edge.choice |= notAllowed
 anyElement.choice |= notAllowed
@@ -13,10 +13,31 @@ declare-edge.choice |= notAllowed
 formula_Forall-edge.choice |= notAllowed
 slot-edge.choice |= notAllowed
 formula_Forall.content |= notAllowed
-# RR patterns
-formula-negation.content |= notAllowed
+formula_And-query.content |= notAllowed
+formula_Or-query.content |= notAllowed
+slot |= notAllowed
 if.content |= notAllowed
 then.content |= notAllowed
+oid |= notAllowed
+repo |= notAllowed
+resl |= notAllowed
+slot-edge.choice |= notAllowed
+
+## RR patterns
+formula-negation.content |= notAllowed
 time_primitives.content |= notAllowed
 spatial_primitives.content |= notAllowed
 interval_primitives.content |= notAllowed
+arg_spatial.choice |= notAllowed
+signature |= notAllowed
+quantification |= notAllowed
+meta |= notAllowed
+guard |= notAllowed
+qualification |= notAllowed
+Spatial.attlist |= notAllowed
+Spatial.content |= notAllowed
+arg_time.choice |= notAllowed
+scope |= notAllowed
+evaluation |= notAllowed
+else |= notAllowed
+DerivationRule.content |= notAllowed

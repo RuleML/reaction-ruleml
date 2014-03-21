@@ -13,52 +13,50 @@ dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
-formula-assert.content = formula_AssertRetract.content
-formula-query.content = formula_Query.content
-
-commonInit.attlist &= key.attrib?
-commonInit.attlist &= keyref.attrib?
-
-
+formula-assert.content |= formula_AssertRetract.content
+formula-query.content |= formula_Query.content
+commonInit.attlist &= key-att.choice?
+commonInit.attlist &= keyref-att.choice?
 
 ## An internal group for the implementation of a rule in the Reaction RuleML language
-rule-implementation.content = DerivationRule.content
- 
+rule-implementation.content |= DerivationRule.content
+
 ## An internal group for the inner quantifiers in the Reaction RuleML language
-inner-quantifier.content =
-  element Forall { Forall-quantifier.type }
-  | element Exists { Exists-quantifier.type }
+inner-quantifier.content |=
+  element Forall { Forall-quantifier.type.def }
+  | element Exists { Exists-quantifier.type.def }
   | Quantifier
 
 ## An internal group for the time primitives for interpretation as time
-time_primitives.content = arg.content | spatial_temporal_algebra_group.content
+time_primitives.content |= arg.content | spatial_temporal_algebra_group.content
 
 ## An internal group for the spatial primitives for interpretation as spatial
-spatial_primitives.content = arg.content | spatial_temporal_algebra_group.content
+spatial_primitives.content |= arg.content | spatial_temporal_algebra_group.content
 
 ## Interval primitives
-interval_primitives.content = arg.content | interval_algebra_group.content
-
+interval_primitives.content |= arg.content | interval_algebra_group.content
 # extended descriptors in Reaction RuleML
 
 # *** Forall ***
+
 ## <Forall>: "forall declared variables [such that formula]". See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Forall
 Forall = Forall-node.choice
 Forall-node.choice |= Quantifier
 # *** Exists ***
+
 ## <Exists>: "exists declared variables [such that formula]". See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Forall
 Exists = Exists-node.choice
 Exists-node.choice |= Quantifier
 # needed for Quantifier and quantification
-formula-forall.type = formula_Forall.content, formula_Forall.attlist
-formula-forall = element formula { formula-forall.type }
+formula-forall.type.def = formula_Forall.content, formula_Forall.attlist
+formula-forall = element formula { formula-forall.type.def }
 # *** Implies ***
 Implies = Implies-node.choice
 # *** then ***
-then.content = head_Implies.content
-then.type = head_Implies.attlist? & head_Implies.content
+then.content |= head_Implies.content
+then.type.def = head_Implies.attlist? & head_Implies.content
 # *** Entails ***
 Entails = Entails-node.choice
 # *** Equivalent ***
@@ -136,7 +134,7 @@ closure.attrib = closure-att.choice?
 # *** Atom ***
 Atom = Atom-node.choice
 # *** Rel ***
-reRel.attlist &= per-effect.attrib?
+reRel.attlist &= per-effect-att.choice?
 # *** slot ***
 slot = slot-edge.choice
 # *** arg ***
@@ -145,7 +143,7 @@ arg = positionalArgument-edge.choice
 Data = DataTerm.choice
 #	*** Var with mode attribute ***
 Var = Variable-node.choice
-reVar.attlist &= mode.attrib
+reVar.attlist &= mode-att.choice?
 # *** repo ***
 repo = restOfPositionalArguments-edge.choice
 # *** resl ***
@@ -164,30 +162,29 @@ SimpleFormula-node.choice |= Interval_formula
 #	    *** Assert ***
 reAssert.attlist &= commonNode.attlist?
 reAssert.attlist &= mapClosure-att.choice?
-reAssert.attlist &= safety.attrib?
-reAssert.attlist &= size.attrib?
+reAssert.attlist &= safety-att.choice?
+reAssert.attlist &= size-att.choice?
 
 ## data type definition 
-curieOrIRI.datatype = curie.datatype | xsd:anyURI
+curieOrIRI.datatype |= curie.datatype | xsd:anyURI
 
 ## data type definition         
-curieOrAbsIRI.datatype = curie.datatype | absIRI.datatype
+curieOrAbsIRI.datatype |= curie.datatype | absIRI.datatype
 
 ## data type definition         
-termOrCurieOrIRI.datatype = term.datatype | curie.datatype | xsd:anyURI
+termOrCurieOrIRI.datatype |= term.datatype | curie.datatype | xsd:anyURI
 
 ## data type definition         
 termOrCurieOrAbsIRI = term.datatype | curie.datatype | absIRI.datatype
-absIRI.datatype = xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+absIRI.datatype |= xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
 
 ## data type definition         
-curie.datatype =
+curie.datatype |=
   xsd:string {
     minLength = "1"
     pattern = "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
   }
-term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
-
+term.datatype |= xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 # This module declares the following Reaction RuleML elements:
 #   * meta            descriptive metadata 
 #   * scope           scope  (e.g. for scoped reasoning)	
@@ -199,82 +196,91 @@ term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 #   * oid             object id     
 
 # *** oid ***
+
 ## <oid>: defines the object id. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-oid
 oid = objectIdentifier-edge.choice
-
 #  *** meta ***
+
 ## <meta>: defines a descriptive metadata annotation. See 
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-meta
 meta = metaKnowledge-edge.choice
 
+## the typical attribute list of edges in the header
+header.attlist &= index-attrib.choice?
+header.attlist &= commonInit.attlist?
 # *** scope ***
-## the attribute list of the scope edge
-scope.attlist = index-attrib.choice?, commonInit.attlist?
-scope.content = formula-query.content?
-scope.type = scope.content, scope.attlist
-scope = 
-    ## <scope>: allows defining a metadata-based scope on the knowledge base for scoped reasoning. See 
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-scope 
-    element scope { scope.type }
+
+##
+scope.attlist &= header.attlist?
+scope.content |= formula-query.content?
+scope.type.def = scope.content, scope.attlist
+scope =
+  
+  ## <scope>: allows defining a metadata-based scope on the knowledge base for scoped reasoning. See 
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-scope 
+  element scope { scope.type.def }
 edge.choice |= scope
-
-
 # *** guard ***     
+
 ## the attribute list of the guard edge
-guard.attlist = index-attrib.choice?, commonInit.attlist?
-guard.content = PremiseFormula.choice
-guard.type = guard.content, guard.attlist
+guard.attlist &= header.attlist?
+guard.content |= PremiseFormula.choice
+guard.type.def = guard.content, guard.attlist
 guard =
-    ## <guard>: a guard defines a simple pre-constraint which applies before the main reasoning. See 
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-guard 
-    element guard { guard.type }
+  
+  ## <guard>: a guard defines a simple pre-constraint which applies before the main reasoning. See 
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-guard 
+  element guard { guard.type.def }
 edge.choice |= guard
-
 # *** evaluation ***
+
 ## the attribute list of the evaluation edge
-evaluation.attlist = index-attrib.choice?, commonInit.attlist?
-evaluation.content = Profile
-evaluation.type = evaluation.content, evaluation.attlist
+evaluation.attlist &= header.attlist?
+evaluation.content |= Profile
+evaluation.type.def = evaluation.content, evaluation.attlist
 evaluation =
-    ## <evaluation>: defines the intended evaluation semantics as semantic <Profile>. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-evaluation
-    element evaluation { evaluation.type }
+  
+  ## <evaluation>: defines the intended evaluation semantics as semantic <Profile>. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-evaluation
+  element evaluation { evaluation.type.def }
 edge.choice |= evaluation
-
 # *** signature ***
+
 ## the attribute list of the signature edge
-signature.attlist = index-attrib.choice?, commonInit.attlist?
-signature.content = formula-query.content
-signature.type = signature.content, signature.attlist
-signature = 
-    ## <signature>: defines the signature which can be used as public interface or pattern definition. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-signature
-    element signature { signature.type }
+signature.attlist &= header.attlist?
+signature.content |= formula-query.content
+signature.type.def = signature.content, signature.attlist
+signature =
+  
+  ## <signature>: defines the signature which can be used as public interface or pattern definition. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-signature
+  element signature { signature.type.def }
 edge.choice |= signature
-
 #  *** qualification ***
+
 ## the attribute list of the qualification edge
-qualification.attlist = index-attrib.choice?, commonInit.attlist?
-qualification.content = formula-assert.content
-qualification.type = qualification.content, qualification.attlist
+qualification.attlist &= header.attlist?
+qualification.content |= formula-assert.content
+qualification.type.def = qualification.content, qualification.attlist
 qualification =
-    ## <qualification>: defines the qualification (qualifying metadata). See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-qualification
-    element qualification { qualification.type }
+  
+  ## <qualification>: defines the qualification (qualifying metadata). See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-qualification
+  element qualification { qualification.type.def }
 edge.choice |= qualification
-
 # *** quantification ***
-## the attribute list of the quantification
-quantification.attlist = index-attrib.choice?, commonInit.attlist?
-quantification.content = inner-quantifier.content
-quantification.type = quantification.content, quantification.attlist
-quantification =
-    ## <quantification>: defines the quantification (quantifier). See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-quantification
-    element quantification { quantification.type }
-edge.choice |= quantification
 
+## the attribute list of the quantification
+quantification.attlist &= header.attlist?
+quantification.content |= inner-quantifier.content
+quantification.type.def = quantification.content, quantification.attlist
+quantification =
+  
+  ## <quantification>: defines the quantification (quantifier). See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-quantification
+  element quantification { quantification.type.def }
+edge.choice |= quantification
 # This module declares the following Reaction RuleML attributes:
 #    * @mode (mode declaration)
 #    * @safety (transactional)
@@ -284,43 +290,65 @@ edge.choice |= quantification
 #    * @key and @keyref for modularization of knowledge bases
 
 # *** @mode ***
+
 ## @mode: input-output mode declaration of the arguments in predicates and functions. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@mode
-mode.attrib = attribute mode { "+" | "-" | "?" }?
-
+mode-att.choice |= mode.attrib.def
+mode.attrib.def = attribute mode { mode.datatype }
+mode.datatype |= "+" | "-" | "?"
 # *** @safety ***
+
 ## @safety: attribute defining the safety of the execution semantics for events, actions and primitives. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@safety    
-safety.attrib = attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
-
+safety-att.choice |= safety.attrib.def
+safety.attrib.def = attribute safety { safety.datatype }
+safety.datatype |= "non-interrupting" | "interrupting" | "transactional"
 # *** @per ***
+
+## the interpretation attribute may also have the "effect" value, indicating an effectful evaluation
+interpretation_non-default.value |= "effect"
+
 ## @per: an attribute indicating the execution/interpretation semantics of a function or expression. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@per
-per-effect.attrib = attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
+per-effect-att.choice |= per-effect.attrib.def
+per-effect.attrib.def = attribute per { per-effect.datatype }
 
+## the interpretation attribute on relations can take all values allowed for the
+## interpretation attribute on functions
+per-effect.datatype |= interpretation_non-default.value
+
+## the interpretation attribute on relations can also have a value "modal",
+## indicating interpretation as a modal operator
+per-effect.datatype |= "modal"
 # *** @size ***
+
 ## @size: an attribute acting as a counter for the number of occurences of events, actions and updates. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@size
-size.attrib = attribute size { xsd:int }?
-
+size-att.choice |= size.attrib.def
+size.attrib.def = attribute size { size.datatype }
+size.datatype |= xsd:int
 # *** @key ***
+
 ## @key: defines a unique key attribute which can be used for distributed referencing from a keyref attribute. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@key
-key.attrib = attribute key { curieOrAbsIRI.datatype }?
+key-att.choice |= key.attrib.def
+key.attrib.def = attribute key { key.datatype }
+key.datatype |= curieOrAbsIRI.datatype
 
 ## @keyref: defines a reference to a corresponding unique key. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@keyref
-keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
-
+keyref-att.choice |= keyref.attrib.def
+keyref.attrib.def = attribute keyref { keyref.datatype }
+keyref.datatype |= curieOrAbsIRI.datatype
 # *** @style ***
 #  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
-style.datatype |= "active" | "messaging" | "reasoning"
 style.attrib = style-att.choice
+
 ## @style: defines a reference to a corresponding unique key. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@style
-style-att.choice |= attribute style { style.datatype }
-
-
+style-att.choice |= style.attrib.def
+style.attrib.def = attribute style { style.datatype }
+style.datatype |= "active" | "messaging" | "reasoning"
 # This module declares the following Reaction RuleML elements:
 # * Rule
 # * if
@@ -328,179 +356,191 @@ style-att.choice |= attribute style { style.datatype }
 # * else
 
 # *** Rule ***
+
 ##
 Rule-datt.choice |= direction-att-inf.choice & material-att-inf.choice
-reRule.attlist &= style.attrib?
-reRule.attlist &= closure.attrib?
+reRule.attlist &= style-att.choice?
+reRule.attlist &= closure-att.choice?
 reRule.attlist &= Type.attlist?
 reRule.attlist &= commonNode.attlist?
-Rule.content = Node.header, rule-implementation.content?
-Rule.type = Rule.content, (Rule-datt.choice & reRule.attlist)
+Rule.content |= Node.header, rule-implementation.content?
+Rule.type.def = Rule.content, (Rule-datt.choice & reRule.attlist)
 Rule =
-    ## <Rule>: defines a rule in Reaction RuleML. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Rule
-    element Rule { Rule.type }
+  
+  ## <Rule>: defines a rule in Reaction RuleML. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Rule
+  element Rule { Rule.type.def }
 Node.choice |= Rule
 AssertRetractFormula.choice |= Rule
 ForallFormula.choice |= Rule
 RulebaseFormula.choice |= Rule
-
 # *** else ***
 else =
-    ## <else>: edge defining an alternative conclusion in a if-then-else rule. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-else
-    element else { then.type }
+  
+  ## <else>: edge defining an alternative conclusion in a if-then-else rule. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-else
+  element else { then.type.def }
 edge.choice |= else
 
+##
+generic-Node.attlist &= iri-att.choice?
+generic-Node.attlist &= Type.attlist?
+generic-Node.attlist &= commonNode.attlist?
 # This module declares the following Reaction RuleML elements:
 # * Negation		generic polymorphig negation
 # * Naf           negation as failure (inflationary negation in production rules), weak negation
 # * Neg           classical negation, strong negation
-		
+
 # *** Negation ***
+
 ## the Negation attribute list
-Negation.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Negation.content = Node.header, formula-negation.choice
+Negation.attlist &= generic-Node.attlist?
+Negation.content |= Node.header, formula-negation.choice
 formula-negation.choice |= formula-negation
-Negation.type = Negation.content, Negation.attlist
+Negation.type.def = Negation.content, Negation.attlist
 Negation =
-    ## <Negation>: a generic polymorphic negation, which is interpreted by the intended semantics (i.e. semantic profile). See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Negation
-    element Negation { Negation.type }
+  
+  ## <Negation>: a generic polymorphic negation, which is interpreted by the intended semantics (i.e. semantic profile). See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Negation
+  element Negation { Negation.type.def }
 Node.choice |= Negation
 Negation-node.choice |= Negation
 #
 formula-negation.attlist &= commonInit.attlist?
 formula-negation.content |= NegFormula.choice
-formula-negation.type = formula-negation.content, formula-negation.attlist
-formula-negation = element formula { formula-negation.type }
+formula-negation.type.def = formula-negation.content, formula-negation.attlist
+formula-negation = element formula { formula-negation.type.def }
 edge.choice |= formula-negation
-
 # *** Naf ***
 Naf = NegationAsFailure-node.choice
-reNaf.attlist &= iri-att.choice?, Type.attlist
+reNaf.attlist &= iri-att.choice?
+reNaf.attlist &= Type.attlist?
 NafFormula.choice |= NegationAsFailure-node.choice
 # *** Neg ***
-reNeg.attlist &= iri-att.choice?, Type.attlist
+reNeg.attlist &= iri-att.choice?
+reNeg.attlist &= Type.attlist?
 NegFormula.choice |= NegationAsFailure-node.choice
-
-
 # This module declares the following Reaction RuleML elements:
 # * Quantifier  generic quantifier
 # * Forall		predefined inner quantifier (used in quantification metatag)
 # * Exist		predefined inner quantifier (used in qualification metatag)
-    
+
 # *** Quantifier ***
+
 ## Quantifier attribute list with the @type and @iri
-Quantifier.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Quantifier.content = Quantifier.header, Quantifier.main
-Quantifier.header &= Node.header
+Quantifier.attlist &= generic-Node.attlist?
+Quantifier.content |= Quantifier.header, Quantifier.main
+Quantifier.header &= Node.header?
 Quantifier.main |= boundVariables.choice, formula-quant.choice?
 formula-quant.choice |= formula-quant
-formula-quant = element formula { formula-forall.type }
-Quantifier.type = Quantifier.content, Quantifier.attlist
+formula-quant = element formula { formula-forall.type.def }
+Quantifier.type.def = Quantifier.content, Quantifier.attlist
 Quantifier =
-    ## <Quantifier>: a generic quantifier - "quantify over declared variables such that ...".See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
-    element Quantifier { Quantifier.type }
+  
+  ## <Quantifier>: a generic quantifier - "quantify over declared variables such that ...".See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
+  element Quantifier { Quantifier.type.def }
 Node.choice |= Quantifier
 # make the quantifier constraint restrictions ("such that") optional
-Exists-quantifier.content = Exists.header, Exists-quantifier.main
-Exists-quantifier.main = boundVariables.choice, formula-quant.choice?
-Exists-quantifier.type = (Exists-datt.choice & reExists.attlist), Exists-quantifier.content
+Exists-quantifier.content |= Exists.header, Exists-quantifier.main
+Exists-quantifier.main |= boundVariables.choice, formula-quant.choice?
+Exists-quantifier.type.def = (Exists-datt.choice & reExists.attlist), Exists-quantifier.content
 # make the quantifier constraint restrictions ("such that") optional
-Forall-quantifier.content = Forall.header, Forall-quantifier.main
-Forall-quantifier.main = boundVariables.choice, formula-quant.choice?
-Forall-quantifier.type = (Forall-datt.choice & reForall.attlist), Forall-quantifier.content
-
+Forall-quantifier.content |= Forall.header, Forall-quantifier.main
+Forall-quantifier.main |= boundVariables.choice, formula-quant.choice?
+Forall-quantifier.type.def = (Forall-datt.choice & reForall.attlist), Forall-quantifier.content
 # This module declares the following Reaction RuleML elements:
 # * Profile         generic semantic profile
 
 #   *** Profile ***
+
 ## Profile attribute list with @type, @iri, @direction, @safety, @size
-Profile.attlist =
-  iri-att.choice?, direction.attrib, Type.attlist, commonNode.attlist, safety.attrib, size.attrib
-Profile.content = Node.header, formula_Profile-edge.choice*
+Profile.attlist &= iri-att.choice?
+Profile.attlist &= direction.attrib?
+Profile.attlist &= Type.attlist?
+Profile.attlist &= commonNode.attlist?
+Profile.attlist &= safety-att.choice?
+Profile.attlist &= size-att.choice?
+Profile.content |= Node.header, formula_Profile-edge.choice*
 formula_Profile-edge.choice |= formula_AssertRetract-edge.choice
 # relaxed
 # formula_Profile-edge.choice |= profile_anycontent
-Profile.type = Profile.content, Profile.attlist
+Profile.type.def = Profile.content, Profile.attlist
 Node.choice |= Profile
 Profile =
-    ## <Profile>: defines (or references) the intended semantics as a semantic profile. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
-    element Profile { Profile.type }
-
+  
+  ## <Profile>: defines (or references) the intended semantics as a semantic profile. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
+  element Profile { Profile.type.def }
 # This module declares the following Reaction RuleML elements:
 # * Time
-
-Time.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Time.content = Node.header, argumentsForTime.sequence
+Time.attlist &= generic-Node.attlist?
+Time.content |= Node.header, argumentsForTime.sequence
 argumentsForTime.sequence |= arg_time.choice*, repo?, slot*, resl?
 arg_time.choice |= arg_time
-Time.type = Time.content, Time.attlist
+Time.type.def = Time.content, Time.attlist
 Node.choice |= Time_formula
 Time_term =
-    ## <Time>: generic Time element. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Time
-    element Time { Time.type }
-Time_formula = element Time { Time.type }
-
+  
+  ## <Time>: generic Time element. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Time
+  element Time { Time.type.def }
+Time_formula = element Time { Time.type.def }
 # *** arg ***
-arg_time.attlist = index-attrib.choice?, commonInit.attlist?
-arg_time.content = time_primitives.content
-arg_time.type = arg_time.content, arg_time.attlist
-arg_time = element arg { arg_time.type }
+arg_time.attlist &= index-attrib.choice?
+arg_time.attlist &= commonInit.attlist?
+arg_time.content |= time_primitives.content
+arg_time.type.def = arg_time.content, arg_time.attlist
+arg_time = element arg { arg_time.type.def }
 edge.choice |= arg_time
-
 # This module declares the following Reaction RuleML elements:
 # * Spatial
 
 #   *** Spatial ***
-Spatial.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Spatial.content = Node.header, argumentsForSpatial.sequence
+Spatial.attlist &= generic-Node.attlist?
+Spatial.content |= Node.header, argumentsForSpatial.sequence
 argumentsForSpatial.sequence |= arg_spatial.choice*, repo?, slot*, resl?
 arg_spatial.choice |= arg_spatial
 Node.choice |= Spatial_formula
-Spatial.type = Spatial.content, Spatial.attlist
-Spatial_term = 
-    ## <Spatial>: generic Spatial element. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Spatial
-    element Spatial { Spatial.type }
-Spatial_formula = element Spatial { Spatial.type }
-
+Spatial.type.def = Spatial.content, Spatial.attlist
+Spatial_term =
+  
+  ## <Spatial>: generic Spatial element. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Spatial
+  element Spatial { Spatial.type.def }
+Spatial_formula = element Spatial { Spatial.type.def }
 # *** arg ***
-arg_spatial.attlist = index-attrib.choice?, commonInit.attlist?
-arg_spatial.content = spatial_primitives.content
-arg_spatial.type = arg_spatial.content, arg_spatial.attlist
-arg_spatial = element arg { arg_spatial.type }
+arg_spatial.attlist &= index-attrib.choice?
+arg_spatial.attlist &= commonInit.attlist?
+arg_spatial.content |= spatial_primitives.content
+arg_spatial.type.def = arg_spatial.content, arg_spatial.attlist
+arg_spatial = element arg { arg_spatial.type.def }
 edge.choice |= arg_spatial
-
 # This module declares the following Reaction RuleML elements:
 # * Interval
 
 #   *** Interval ***
-Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
+Interval.attlist &= generic-Node.attlist?
 arg_interval.choice |= arg_interval
-Interval_term.content = Node.header, arg_interval.choice, arg_interval.choice?
-Interval_formula.content = Node.header, arg_interval.choice, arg_interval.choice?
+Interval_term.content |= Node.header, arg_interval.choice, arg_interval.choice?
+Interval_formula.content |= Node.header, arg_interval.choice, arg_interval.choice?
 #
-Interval_term.type = Interval_term.content, Interval.attlist
-Interval_formula.type = Interval_formula.content, Interval.attlist
+Interval_term.type.def = Interval_term.content, Interval.attlist
+Interval_formula.type.def = Interval_formula.content, Interval.attlist
 Node.choice |= Interval_formula
 Interval_term =
-    ## <Time>: generic Interval element. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Interval
-    element Interval { Interval_term.type }
-Interval_formula = element Interval { Interval_formula.type }
-
+  
+  ## <Time>: generic Interval element. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Interval
+  element Interval { Interval_term.type.def }
+Interval_formula = element Interval { Interval_formula.type.def }
 # *** arg ***
-arg_interval.attlist = index-attrib.choice?, commonInit.attlist?
-arg_interval.content = interval_primitives.content
-arg_interval.type = arg_interval.content, arg_interval.attlist
-arg_interval = element arg { arg_interval.type }
+arg_interval.attlist &= index-attrib.choice?
+arg_interval.attlist &= commonInit.attlist?
+arg_interval.content |= interval_primitives.content
+arg_interval.type.def = arg_interval.content, arg_interval.attlist
+arg_interval = element arg { arg_interval.type.def }
 edge.choice |= arg_interval
-
 # This module declares the following Reaction RuleML elements:
 #                 * Operator (generic operator)
 #                  
@@ -525,15 +565,15 @@ edge.choice |= arg_interval
 #                  * Finishes
 
 # (After | Before | Any | Every | Timer | Operator)
-spatial_temporal_algebra_group.content = After | Before | Every | Any | Timer | Operator_any
+spatial_temporal_algebra_group.content |= After | Before | Every | Any | Timer | Operator_any
 Operator_any =
-    ## <Operator>: a generic Operator element which can be overloaded. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Operator    
-    element Operator { Any.type }
+  
+  ## <Operator>: a generic Operator element which can be overloaded. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Operator    
+  element Operator { Any.type.def }
 Node.choice |= Operator_any
-
 # (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator)
-interval_algebra_group.content =
+interval_algebra_group.content |=
   During
   | Overlaps
   | Starts
@@ -543,90 +583,97 @@ interval_algebra_group.content =
   | IntervalAlgebraEqual
   | Finishes
   | IntervalAlgebraOperator
-IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type }
-IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type }
-
+IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type.def }
+IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type.def }
+IntervalAlgebraOperator.attlist &= generic-Node.attlist?
 # *** After / Before***
-After.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-After.content = Interval_term.content
-After.type = After.content, After.attlist
+After.attlist &= IntervalAlgebraOperator.attlist?
+After.content |= Interval_term.content
+After.type.def = After.content, After.attlist
 Node.choice |= After
 After =
-    ## <After>: a temporal operator "t2 after t1". See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After  
-    element After { After.type }
+  
+  ## <After>: a temporal operator "t2 after t1". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After  
+  element After { After.type.def }
 Node.choice |= Before
 Before =
-    ## <Before>: a temporal operator "t1 before t2". See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After
-    element Before { After.type }
-    
+  
+  ## <Before>: a temporal operator "t1 before t2". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After
+  element Before { After.type.def }
 # *** Every ***
-Every.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Every.content = Node.header, arg_interval.choice?
-Every.type = Every.content, Every.attlist
+Every.attlist &= IntervalAlgebraOperator.attlist?
+Every.content |= Node.header, arg_interval.choice?
+Every.type.def = Every.content, Every.attlist
 Node.choice |= Every
-Every = 
-    ## <Every>: a temporal operator "every t". See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Every
-    element Every { Every.type }
-    
+Every =
+  
+  ## <Every>: a temporal operator "every t". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Every
+  element Every { Every.type.def }
 # *** Any ***
-Any.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Any.content = Node.header, arg_interval.choice*
-Any.type = Any.content, Any.attlist
+Any.attlist &= IntervalAlgebraOperator.attlist?
+Any.content |= Node.header, arg_interval.choice*
+Any.type.def = Any.content, Any.attlist
 Node.choice |= Any
 Any =
-    ## <Any>: a temporal operator "any t1, .., tn". See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Any
-    element Any { Any.type }
-    
+  
+  ## <Any>: a temporal operator "any t1, .., tn". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Any
+  element Any { Any.type.def }
 # *** (Recurring) Timer ***
-Timer.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-Timer.content = Interval_term.content
-Timer.type = Timer.content, Timer.attlist
+Timer.attlist &= IntervalAlgebraOperator.attlist?
+Timer.content |= Interval_term.content
+Timer.type.def = Timer.content, Timer.attlist
 Node.choice |= Timer
 Timer =
-    ## <Timer>: a temporal operator "After t Every tx". See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Timer
-    element Timer { Timer.type }
-    
+  
+  ## <Timer>: a temporal operator "After t Every tx". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Timer
+  element Timer { Timer.type.def }
 # *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes) ***
-IntervalAlgebraOperator.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
-IntervalAlgebraOperator.content = Node.header, arg_interval.choice, arg_interval.choice
-IntervalAlgebraOperator.type = IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
+IntervalAlgebraOperator.content |= Node.header, arg_interval.choice, arg_interval.choice
+IntervalAlgebraOperator.type.def = IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
 Node.choice |= During
 During =
-    ## <During>: an interval operator. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-During
-    element During { IntervalAlgebraOperator.type }
+  
+  ## <During>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-During
+  element During { IntervalAlgebraOperator.type.def }
 Node.choice |= Overlaps
 Overlaps =
-    ## <Overlaps>: an interval operator. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Overlaps
-    element Overlaps { IntervalAlgebraOperator.type }
+  
+  ## <Overlaps>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Overlaps
+  element Overlaps { IntervalAlgebraOperator.type.def }
 Node.choice |= Starts
 Starts =
-    ## <Starts>: an interval operator. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Starts
-    element Starts { IntervalAlgebraOperator.type }
+  
+  ## <Starts>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Starts
+  element Starts { IntervalAlgebraOperator.type.def }
 Node.choice |= Precedes
 Precedes =
-    ## <Precedes>: an interval operator. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Precedes
-    element Precedes { IntervalAlgebraOperator.type }
+  
+  ## <Precedes>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Precedes
+  element Precedes { IntervalAlgebraOperator.type.def }
 Node.choice |= Succeeds
 Succeeds =
-    ## <Succeeds>: an interval operator. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Succeeds
-    element Succeeds { IntervalAlgebraOperator.type }
+  
+  ## <Succeeds>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Succeeds
+  element Succeeds { IntervalAlgebraOperator.type.def }
 Node.choice |= Meets
 Meets =
-    ## <Meets>: an interval operator. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Meets
-    element Meets { IntervalAlgebraOperator.type }
+  
+  ## <Meets>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Meets
+  element Meets { IntervalAlgebraOperator.type.def }
 Node.choice |= Finishes
 Finishes =
-    ## <Finishes>: an interval operator. See
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Finishes
-    element Finishes { IntervalAlgebraOperator.type }
+  
+  ## <Finishes>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Finishes
+  element Finishes { IntervalAlgebraOperator.type.def }

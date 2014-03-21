@@ -15,161 +15,40 @@ dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
 formula-assert.content = formula_AssertRetract.content
 formula-query.content = formula_Query.content
-# *** oid ***
-oid = objectIdentifier-edge.choice
-# 
-#       @key @keyref @xml:id @xml:base
-# 
-# @key and @keyref attributes for modularization of the knowledge base
-#
+
 commonInit.attlist &= key.attrib?
 commonInit.attlist &= keyref.attrib?
-#  *** meta ***     
-meta = metaKnowledge-edge.choice
-# *** scope ***
-# 
-# Note: scope of the rule, e.g. defining a constructive view on the rules and facts
-# using the metadata annotations and the qualifications annotations. 
-# The scoped rule/literal goal only applies in this scope (scoped reasoning/processing)
-# 
-# For an implementation of scoped reasoning as a mechanism to dynamicaly create a scope (a constructive view)
-# on the knowledge base and to do scoped reasoning on this scope see the Prova rule engine (http://prova.ws).
-# 
-# Example:
-# @src(kb1) @author("Adrian Paschke") @validity([2011-03-20, 2011-04-20]) @label(fact1) fact1(constant1).
-# @src(kb2) @author("Alex Kozlenkov") @validity([2011-01-20, 2011-03-20]) @label(fact2) fact2(constant2).
-# 
-# @src(rb1) @label(rule1) rule1(Y) :- @validity(VTime) @authors("Adrian Paschke") fact1(Y) [between(SysTime,VTime)] 
-# 
-# In this example all knowledge is annotated with predefined (@src, ...) and user-defined metadata annotations (@author, @validity, ...). 
-# User-defined metadata annotations can be arbitrary name/value pairs described as predicates. The literal "fact1" in the body
-# of "rule1" is a scoped literal defining a scope over knowledge in the knowledge base with the scope constraints
-# @validity and @author. If such knowledge is found in the KB the meta data value (an Interval) for @validity
-# is bound to the variable "VTime" and used in the guard constraint [...] on the literal. The guard is stating that 
-# the actual system time should be  within the validity interval. The second scope constraint is directly compared 
-# to the constant value "Adrian Paschke".
-# The sub-goal literal "fact1" in the rule condition is then applied only on the selected scope 
-# (a constructive view on the overall knowledge base which is selected by the metadata scope of the literal) and not on the 
-# overal knowledge. It is possible to define scopes for modules (e.g. sets of knowledge such as a rule-base/rule-set or 
-# an knowledge updates (assert, retracts) by using the meta data identifier such as @src or @label. Such identifiers can
-# be also used for transactional logics.
-# 
-# In Reaction RuleML general metadata annotations (descriptive metadata) are defined under the <meta> tag role and
-# qualifying metadata which qualify the rule (such as validity in the above example) are defined under the <qualification> tag.
-# The @key attribute which defines a unique identifier for knowledge in the knowledge base is used for a 
-# modular nested structuring of the knowledge base. The @key of e.g. <Assert key=""> or <Rulebase key=""> acts as module identifier 
-# (which in Prova is denoted by the predefined @src metadata).
-# 
-#     Scopes in Reaction RuleML can be defined within the <scope> role tag on descriptive metadata <meta> and qualifying metadata <qualification> as well as
-#     on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
-#     by referencing it with the @keyref attribute.
-# 
-#     There is a nesting of scopes. Scopes defined on the more general level automatically apply to the inner knowledge. For instance, a scope
-#     defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. Inner scopes
-#     overwrite the outer scope. For instance a scope defined on <Assert> becomes overwritten by an inner scope defined on a <Rule> which is within the
-#     this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the outer scope.
-# 
-#     Note: the old approach which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0
-# 
-# Note: multiple scopes can be defined by repeating the <scope> role element
-# Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
-# 
-# content model: ( (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval)? )
-#
-scope.attlist = index-attrib.choice?, commonInit.attlist?
-scope.content = formula-query.content?
-scope.type = scope.content, scope.attlist
-scope = element scope { scope.type }
-edge.choice |= scope
-# *** guard ***     
-# 
-#    guard constraints 
-# 
-# content model: 
-# in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
-# in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
-#
-guard.attlist = index-attrib.choice?, commonInit.attlist?
-guard.content = PremiseFormula.choice
-guard.type = guard.content, guard.attlist
-guard = element guard { guard.type }
-edge.choice |= guard
-# *** evaluation ***
-# 
-# The intended evaluation semantics of the rule, 
-# e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
-# 
-# Note: multiple Profiles can be defined by repreating the <evaluation> role element
-# The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
-# 
-# content model: (Profile )
-evaluation.attlist = index-attrib.choice?, commonInit.attlist?
-evaluation.content = Profile
-evaluation.type = evaluation.content, evaluation.attlist
-evaluation = element evaluation { evaluation.type }
-edge.choice |= evaluation
-# *** signature ***
-# 
-# The signature defines the signature with optional input / output mode declarations. The signature declaration can act as public interface and
-#    can be published together with the intended evaluation semantics. 
-# 
-#    Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
-#    for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
-#    pattern machting, i.e. in the on part of a reaction rule it triggers the reaction rule if the template matches with required event instances, which are
-#    instantiations of the event type / class to which make up the required properties of the event template.
-# 
-#    In backward-reasoning derivation rules the signature interface description defines a query template for the head of the rule. 
-#    In forward-(reasoning) reaction rules the signature interface description  defines the event template for the event pattern matching which triggers the rules.  
-# 
-#    Multiple signatures are possible by repreating the <signature> element
-# 
-# content model: 
-# in DR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
-# in KR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval | Event | Situation )
-#
-signature.attlist = index-attrib.choice?, commonInit.attlist?
-signature.content = formula-query.content
-signature.type = signature.content, signature.attlist
-signature = element signature { signature.type }
-edge.choice |= signature
-#  *** qualification ***
-# 
-# Definition of the rule's qualification (qualifying metadata), e.g. validity time of the rule, priorities, etc.
-# 
-# Note: the qualification can be also defined as a situation  <Situation> 
-#     A situation could be also modelled as a changeable situation called fluent (in the KR dialect of Reaction RuleML),
-#     which changes its truth value depending on the context (context can be time, events/actions which 
-#     initiate/terminate the changeable situation, or a history of occured events/actions which leads to an occured situation
-#     as context for the truth changes of the fluent.
-# 
-#     That would mean the qualification of the rule changes depending on the situation (the truth value of the fluent in KR RuleML)
-# 
-#  content model: 
-#  in DR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval)
-#  in KR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation)
-#
-qualification.attlist = index-attrib.choice?, commonInit.attlist?
-qualification.content = formula-assert.content
-qualification.type = qualification.content, qualification.attlist
-qualification = element qualification { qualification.type }
-edge.choice |= qualification
-# *** quantification ***
-# 
-# Definition of the rules' quantifier. 
-# 
-# content model: (Forall | Exists | Quantifier)
-#
-quantification.attlist = index-attrib.choice?, commonInit.attlist?
-quantification.content = inner-quantifier.content
-quantification.type = quantification.content, quantification.attlist
-quantification = element quantification { quantification.type }
-edge.choice |= quantification
+
+
+
+## An internal group for the implementation of a rule in the Reaction RuleML language
+rule-implementation.content = DerivationRule.content
+ 
+## An internal group for the inner quantifiers in the Reaction RuleML language
+inner-quantifier.content =
+  element Forall { Forall-quantifier.type }
+  | element Exists { Exists-quantifier.type }
+  | Quantifier
+
+## An internal group for the time primitives for interpretation as time
+time_primitives.content = arg.content | spatial_temporal_algebra_group.content
+
+## An internal group for the spatial primitives for interpretation as spatial
+spatial_primitives.content = arg.content | spatial_temporal_algebra_group.content
+
+## Interval primitives
+interval_primitives.content = arg.content | interval_algebra_group.content
+
 # extended descriptors in Reaction RuleML
 
 # *** Forall ***
+## <Forall>: "forall declared variables [such that formula]". See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Forall
 Forall = Forall-node.choice
 Forall-node.choice |= Quantifier
 # *** Exists ***
+## <Exists>: "exists declared variables [such that formula]". See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Forall
 Exists = Exists-node.choice
 Exists-node.choice |= Quantifier
 # needed for Quantifier and quantification
@@ -264,13 +143,7 @@ slot = slot-edge.choice
 arg = positionalArgument-edge.choice
 # *** Data ***
 Data = DataTerm.choice
-#	*** Var ***
-#	@mode = + | - | ?; default is ?
-# 
-#   + input variable which must be bound
-# - output variable which must be free (unbound)
-# ? can be both input / bound or output / free
-#
+#	*** Var with mode attribute ***
 Var = Variable-node.choice
 reVar.attlist &= mode.attrib
 # *** repo ***
@@ -288,115 +161,212 @@ SimpleFormula-node.choice |= Spatial_formula
 # in interval module
 SimpleKeyTerm.choice |= Interval_term
 SimpleFormula-node.choice |= Interval_formula
+#	    *** Assert ***
+reAssert.attlist &= commonNode.attlist?
+reAssert.attlist &= mapClosure-att.choice?
+reAssert.attlist &= safety.attrib?
+reAssert.attlist &= size.attrib?
 
-##
+## data type definition 
 curieOrIRI.datatype = curie.datatype | xsd:anyURI
 
-##         
+## data type definition         
 curieOrAbsIRI.datatype = curie.datatype | absIRI.datatype
 
-##         
+## data type definition         
 termOrCurieOrIRI.datatype = term.datatype | curie.datatype | xsd:anyURI
 
-##         
+## data type definition         
 termOrCurieOrAbsIRI = term.datatype | curie.datatype | absIRI.datatype
 absIRI.datatype = xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
 
-##         
+## data type definition         
 curie.datatype =
   xsd:string {
     minLength = "1"
     pattern = "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
   }
 term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
+
+# This module declares the following Reaction RuleML elements:
+#   * meta            descriptive metadata 
+#   * scope           scope  (e.g. for scoped reasoning)	
+#   * guard			  guard (e.g. for guard constraints in scoped reasoning)
+#   * evaluation      semantic profile for evaluation 
+#   * signature       interface signature, pattern definition,
+#   * qualification   qualification, e.g. priorities, validity, strategy
+#   * quantification  quantification
+#   * oid             object id     
+
+# *** oid ***
+## <oid>: defines the object id. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-oid
+oid = objectIdentifier-edge.choice
+
+#  *** meta ***
+## <meta>: defines a descriptive metadata annotation. See 
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-meta
+meta = metaKnowledge-edge.choice
+
+# *** scope ***
+## the attribute list of the scope edge
+scope.attlist = index-attrib.choice?, commonInit.attlist?
+scope.content = formula-query.content?
+scope.type = scope.content, scope.attlist
+scope = 
+    ## <scope>: allows defining a metadata-based scope on the knowledge base for scoped reasoning. See 
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-scope 
+    element scope { scope.type }
+edge.choice |= scope
+
+
+# *** guard ***     
+## the attribute list of the guard edge
+guard.attlist = index-attrib.choice?, commonInit.attlist?
+guard.content = PremiseFormula.choice
+guard.type = guard.content, guard.attlist
+guard =
+    ## <guard>: a guard defines a simple pre-constraint which applies before the main reasoning. See 
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-guard 
+    element guard { guard.type }
+edge.choice |= guard
+
+# *** evaluation ***
+## the attribute list of the evaluation edge
+evaluation.attlist = index-attrib.choice?, commonInit.attlist?
+evaluation.content = Profile
+evaluation.type = evaluation.content, evaluation.attlist
+evaluation =
+    ## <evaluation>: defines the intended evaluation semantics as semantic <Profile>. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-evaluation
+    element evaluation { evaluation.type }
+edge.choice |= evaluation
+
+# *** signature ***
+## the attribute list of the signature edge
+signature.attlist = index-attrib.choice?, commonInit.attlist?
+signature.content = formula-query.content
+signature.type = signature.content, signature.attlist
+signature = 
+    ## <signature>: defines the signature which can be used as public interface or pattern definition. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-signature
+    element signature { signature.type }
+edge.choice |= signature
+
+#  *** qualification ***
+## the attribute list of the qualification edge
+qualification.attlist = index-attrib.choice?, commonInit.attlist?
+qualification.content = formula-assert.content
+qualification.type = qualification.content, qualification.attlist
+qualification =
+    ## <qualification>: defines the qualification (qualifying metadata). See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-qualification
+    element qualification { qualification.type }
+edge.choice |= qualification
+
+# *** quantification ***
+## the attribute list of the quantification
+quantification.attlist = index-attrib.choice?, commonInit.attlist?
+quantification.content = inner-quantifier.content
+quantification.type = quantification.content, quantification.attlist
+quantification =
+    ## <quantification>: defines the quantification (quantifier). See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-quantification
+    element quantification { quantification.type }
+edge.choice |= quantification
+
+# This module declares the following Reaction RuleML attributes:
+#    * @mode (mode declaration)
+#    * @safety (transactional)
+#    * @per (usage)
+#    * @all (yes|no)
+#    * @style (execution style)	
+#    * @key and @keyref for modularization of knowledge bases
+
 # *** @mode ***
-# A attribute for optionally specifing the intended input-output constellations of the predicate terms with the
-# following semantics:
-# 
-# "+" The term is intended to be input
-# "-" The term is intended to be output
-# "?" The term is undefined (input or output)
-# 
-#	default="?"
-#	optional attribute
+## @mode: input-output mode declaration of the arguments in predicates and functions. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@mode
 mode.attrib = attribute mode { "+" | "-" | "?" }?
+
 # *** @safety ***
-# 
-#    restriction: interrupting, non-interrupting or transactional
-#        default: non-interrupting
-#        optional attribute
+## @safety: attribute defining the safety of the execution semantics for events, actions and primitives. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@safety    
 safety.attrib = attribute safety { "non-interrupting" | "interrupting" | "transactional" }?
+
 # *** @per ***
-# An attribute indicating whether a function or expression is interpreted.
-#
+## @per: an attribute indicating the execution/interpretation semantics of a function or expression. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@per
 per-effect.attrib = attribute per { "copy" | "value" | "effect" | "modal" | "open" }?
+
 # *** @size ***
-# An attribute indicating the size / number		
-# -1 = unbound / all
+## @size: an attribute acting as a counter for the number of occurences of events, actions and updates. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@size
 size.attrib = attribute size { xsd:int }?
+
 # *** @key ***
-# 
-# 
-# 
-#      optional attribute
+## @key: defines a unique key attribute which can be used for distributed referencing from a keyref attribute. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@key
 key.attrib = attribute key { curieOrAbsIRI.datatype }?
-# *** @keyref ***
-# 
-# 
-#      optional attribute
+
+## @keyref: defines a reference to a corresponding unique key. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@keyref
 keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
-#	    *** Assert ***
-reAssert.attlist &= commonNode.attlist?
-reAssert.attlist &= mapClosure-att.choice?
-reAssert.attlist &= safety.attrib?
-reAssert.attlist &= size.attrib?
+
+# *** @style ***
+#  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
+style.datatype |= "active" | "messaging" | "reasoning"
+style.attrib = style-att.choice
+## @style: defines a reference to a corresponding unique key. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@style
+style-att.choice |= attribute style { style.datatype }
+
+
+# This module declares the following Reaction RuleML elements:
+# * Rule
+# * if
+# * then
+# * else
+
 # *** Rule ***
-# The Rule  that provides the basic syntax for rules
-# in Reaction RuleML.
-# 
-# content model: 
-# 
-#    In (temporal) DR Reaction RuleML:
-#    ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (if, then, else?)? ) )
-#    In KR Reaction RuleML:
-#    ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (if, then, else?)? ) )
-# 
-# Rule has the following attributes:
-# @key @keyref @type @style @closure @direction @material @node 
-#
-Rule-datt.choice |= direction-att-inf.choice & material-att-inf.choice & style.attrib
+##
+Rule-datt.choice |= direction-att-inf.choice & material-att-inf.choice
+reRule.attlist &= style.attrib?
 reRule.attlist &= closure.attrib?
 reRule.attlist &= Type.attlist?
 reRule.attlist &= commonNode.attlist?
 Rule.content = Node.header, rule-implementation.content?
 Rule.type = Rule.content, (Rule-datt.choice & reRule.attlist)
-Rule = element Rule { Rule.type }
+Rule =
+    ## <Rule>: defines a rule in Reaction RuleML. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Rule
+    element Rule { Rule.type }
 Node.choice |= Rule
 AssertRetractFormula.choice |= Rule
 ForallFormula.choice |= Rule
 RulebaseFormula.choice |= Rule
+
 # *** else ***
-# 
-# content model: 
-# DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
-# KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation )
-#
-else = element else { then.type }
+else =
+    ## <else>: edge defining an alternative conclusion in a if-then-else rule. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-else
+    element else { then.type }
 edge.choice |= else
+
+# This module declares the following Reaction RuleML elements:
+# * Negation		generic polymorphig negation
+# * Naf           negation as failure (inflationary negation in production rules), weak negation
+# * Neg           classical negation, strong negation
+		
 # *** Negation ***
-# A generic polymorphic negation, which can be specialized by using
-# the @type attribute to specify the type of negation and/or 
-# the @iri attribute to point to an external definition of the negation
-# @key, @keyref, @node
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
-# KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Naf | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+## the Negation attribute list
 Negation.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Negation.content = Node.header, formula-negation.choice
 formula-negation.choice |= formula-negation
 Negation.type = Negation.content, Negation.attlist
-Negation = element Negation { Negation.type }
+Negation =
+    ## <Negation>: a generic polymorphic negation, which is interpreted by the intended semantics (i.e. semantic profile). See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Negation
+    element Negation { Negation.type }
 Node.choice |= Negation
 Negation-node.choice |= Negation
 #
@@ -405,6 +375,7 @@ formula-negation.content |= NegFormula.choice
 formula-negation.type = formula-negation.content, formula-negation.attlist
 formula-negation = element formula { formula-negation.type }
 edge.choice |= formula-negation
+
 # *** Naf ***
 Naf = NegationAsFailure-node.choice
 reNaf.attlist &= iri-att.choice?, Type.attlist
@@ -412,12 +383,15 @@ NafFormula.choice |= NegationAsFailure-node.choice
 # *** Neg ***
 reNeg.attlist &= iri-att.choice?, Type.attlist
 NegFormula.choice |= NegationAsFailure-node.choice
+
+
+# This module declares the following Reaction RuleML elements:
+# * Quantifier  generic quantifier
+# * Forall		predefined inner quantifier (used in quantification metatag)
+# * Exist		predefined inner quantifier (used in qualification metatag)
+    
 # *** Quantifier ***
-# Explicit generic quantifier, where the quantifier name can be defined by the
-# @type attribute and the @iri attribute can point to an external definition
-# of the quantifier.
-# 
-# content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+## Quantifier attribute list with the @type and @iri
 Quantifier.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Quantifier.content = Quantifier.header, Quantifier.main
 Quantifier.header &= Node.header
@@ -425,32 +399,25 @@ Quantifier.main |= boundVariables.choice, formula-quant.choice?
 formula-quant.choice |= formula-quant
 formula-quant = element formula { formula-forall.type }
 Quantifier.type = Quantifier.content, Quantifier.attlist
-Quantifier = element Quantifier { Quantifier.type }
+Quantifier =
+    ## <Quantifier>: a generic quantifier - "quantify over declared variables such that ...".See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
+    element Quantifier { Quantifier.type }
 Node.choice |= Quantifier
 # make the quantifier constraint restrictions ("such that") optional
-# 
-# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
 Exists-quantifier.content = Exists.header, Exists-quantifier.main
 Exists-quantifier.main = boundVariables.choice, formula-quant.choice?
 Exists-quantifier.type = (Exists-datt.choice & reExists.attlist), Exists-quantifier.content
 # make the quantifier constraint restrictions ("such that") optional
-# 
-# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
-# 
-#
 Forall-quantifier.content = Forall.header, Forall-quantifier.main
 Forall-quantifier.main = boundVariables.choice, formula-quant.choice?
 Forall-quantifier.type = (Forall-datt.choice & reForall.attlist), Forall-quantifier.content
+
+# This module declares the following Reaction RuleML elements:
+# * Profile         generic semantic profile
+
 #   *** Profile ***
-#   Explicit generic semantic profile defining the semantics of the rule. The semantic profile can be
-# defined internally by the any content model (xs:any Element) or externally, where 
-# the optional @type attribute defines the name/type of the used sematics profile,
-# the optional @iri attribute points to an external definition of the semantics profile, and
-# the optional @direction attribute indicates the intended direction of the inference / execution
-# the optional @safety attribute indicates if the execution / inference is transactional, interrupting, non-interrupting
-# the optional @size attribute acts as a generic size boundary / counter in the operational semantic profiles    
-# 
-#   content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, content(xs:any*)* )
+## Profile attribute list with @type, @iri, @direction, @safety, @size
 Profile.attlist =
   iri-att.choice?, direction.attrib, Type.attlist, commonNode.attlist, safety.attrib, size.attrib
 Profile.content = Node.header, formula_Profile-edge.choice*
@@ -459,104 +426,60 @@ formula_Profile-edge.choice |= formula_AssertRetract-edge.choice
 # formula_Profile-edge.choice |= profile_anycontent
 Profile.type = Profile.content, Profile.attlist
 Node.choice |= Profile
-Profile = element Profile { Profile.type }
-#	*** Time ***
-#	Explicit generic Time construct. The time can be represented internally 
-#       * with positional arguments <arg>, e.g., <arg>
-# <Data xsi:type="xs:dateTime>2011-10-02T10:45:34-00:00</Data>
-# </arg>
-#       * with unpositional slots <slot>, e.g., <slot>
-# <Ind>year</Ind>
-# <Ind>2011</Ind>
-# </slot>
-# <slot>
-# <Ind>month</Ind>
-# <Ind>10</Ind>
-# </slot>
-#       * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for time
-#       or externally, where the optional @iri attribute points to an external data definition of the time
-#       The optional @type attribute defines the type of the time, e.g. ruleml:TimeInstant (linear continuous time model) 
-#       or ruleml:TimeInterval (discrete time interval model). The default time semantics is a discrete time model.
-#       Note: Time can be defined absolute or relative.
-# 
-#	content model: 
-#	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-#			((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
-#				content(xs:any*)* ) ) 
-#	KR Reaction RuleML:  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-#				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
-#				content(xs:any*)* ) ) 
+Profile =
+    ## <Profile>: defines (or references) the intended semantics as a semantic profile. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
+    element Profile { Profile.type }
+
+# This module declares the following Reaction RuleML elements:
+# * Time
+
 Time.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Time.content = Node.header, argumentsForTime.sequence
 argumentsForTime.sequence |= arg_time.choice*, repo?, slot*, resl?
 arg_time.choice |= arg_time
 Time.type = Time.content, Time.attlist
 Node.choice |= Time_formula
-Time_term = element Time { Time.type }
+Time_term =
+    ## <Time>: generic Time element. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Time
+    element Time { Time.type }
 Time_formula = element Time { Time.type }
+
 # *** arg ***
-# 
-# Definition of the the arg role for Time
-# 
-# content model:  
-# in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
-# in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
-# 
-#
 arg_time.attlist = index-attrib.choice?, commonInit.attlist?
 arg_time.content = time_primitives.content
 arg_time.type = arg_time.content, arg_time.attlist
 arg_time = element arg { arg_time.type }
 edge.choice |= arg_time
+
+# This module declares the following Reaction RuleML elements:
+# * Spatial
+
 #   *** Spatial ***
-#   Explicit generic Spatial construct. The spatial can be represented internally 
-# * with positional arguments <arg>
-# * with unpositional slots <slot>
-# * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed arbitrary XML syntaxes
-# or externally, where the optional @iri attribute points to an external data definition of the spatial
-# The optional @type attribute defines the type of the spatial
-# 
-#   content model: 
-#   DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-#		  ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-#			  content(xs:any*)* ) ) 
-#   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-#		  ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-#			  content(xs:any*)* ) ) 
 Spatial.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Spatial.content = Node.header, argumentsForSpatial.sequence
 argumentsForSpatial.sequence |= arg_spatial.choice*, repo?, slot*, resl?
 arg_spatial.choice |= arg_spatial
 Node.choice |= Spatial_formula
 Spatial.type = Spatial.content, Spatial.attlist
-Spatial_term = element Spatial { Spatial.type }
+Spatial_term = 
+    ## <Spatial>: generic Spatial element. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Spatial
+    element Spatial { Spatial.type }
 Spatial_formula = element Spatial { Spatial.type }
+
 # *** arg ***
-# 
-# Definition of the the arg role for Spatial
-# 
-# content model:  
-# in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
-# in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
-# 
-#
 arg_spatial.attlist = index-attrib.choice?, commonInit.attlist?
 arg_spatial.content = spatial_primitives.content
 arg_spatial.type = arg_spatial.content, arg_spatial.attlist
 arg_spatial = element arg { arg_spatial.type }
 edge.choice |= arg_spatial
-# 
+
+# This module declares the following Reaction RuleML elements:
+# * Interval
+
 #   *** Interval ***
-#   Explicit generic Interval. The interval can be
-# defined internally by the any content model (xs:any Element) or externally, where 
-# the optional @type attribute defines the name/type of the event,
-# the optional @iri attribute points to an external definition of the event, and
-#  An interval can be defined by Events, Times, Spatials, and other Intervals can be typed by the 
-#  interval ontology of Reaction RuleML (defining different types of intervals).
-# 
-#   content model: 
-#   DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Var, Var?])? 
-#   KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [Event, Event?], [Situation, Situation?] [Var, Var?])?
 Interval.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 arg_interval.choice |= arg_interval
 Interval_term.content = Node.header, arg_interval.choice, arg_interval.choice?
@@ -565,25 +488,50 @@ Interval_formula.content = Node.header, arg_interval.choice, arg_interval.choice
 Interval_term.type = Interval_term.content, Interval.attlist
 Interval_formula.type = Interval_formula.content, Interval.attlist
 Node.choice |= Interval_formula
-Interval_term = element Interval { Interval_term.type }
+Interval_term =
+    ## <Time>: generic Interval element. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Interval
+    element Interval { Interval_term.type }
 Interval_formula = element Interval { Interval_formula.type }
+
 # *** arg ***
-# 
-# Definition of the the arg role for Intervals
-# 
-# content model:  
-# in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
-# in KR Reaction RuleML: Time | Spatial | Interval |  Event | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
-#
 arg_interval.attlist = index-attrib.choice?, commonInit.attlist?
 arg_interval.content = interval_primitives.content
 arg_interval.type = arg_interval.content, arg_interval.attlist
 arg_interval = element arg { arg_interval.type }
 edge.choice |= arg_interval
+
+# This module declares the following Reaction RuleML elements:
+#                 * Operator (generic operator)
+#                  
+#                  Spatial, Temporal, Interval Function Constructs 
+#                  
+#                  * After
+#                  * Before
+#				  * Every
+#                  * Any
+#                  * Timer
+#                  
+#                  
+#                  (Allen's) Interval Relations
+#                  
+#                  * During
+#                  * Overlaps
+#                  * Starts
+#                  * Precedes
+#                  * Succeeds
+#                  * Meets
+#                  * Equal
+#                  * Finishes
+
 # (After | Before | Any | Every | Timer | Operator)
 spatial_temporal_algebra_group.content = After | Before | Every | Any | Timer | Operator_any
-Operator_any = element Operator { Any.type }
+Operator_any =
+    ## <Operator>: a generic Operator element which can be overloaded. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Operator    
+    element Operator { Any.type }
 Node.choice |= Operator_any
+
 # (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator)
 interval_algebra_group.content =
   During
@@ -597,202 +545,88 @@ interval_algebra_group.content =
   | IntervalAlgebraOperator
 IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type }
 IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type }
+
 # *** After / Before***
-# 
-# X after Y  / X before Y
-# 
-# Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
-#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] ))
 After.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 After.content = Interval_term.content
 After.type = After.content, After.attlist
 Node.choice |= After
-After = element After { After.type }
+After =
+    ## <After>: a temporal operator "t2 after t1". See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After  
+    element After { After.type }
 Node.choice |= Before
-Before = element Before { After.type }
+Before =
+    ## <Before>: a temporal operator "t1 before t2". See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After
+    element Before { After.type }
+    
 # *** Every ***
-# 
-# Every X 
-# 
-# Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
-# 
-# content model:
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
-#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) ))
 Every.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Every.content = Node.header, arg_interval.choice?
 Every.type = Every.content, Every.attlist
 Node.choice |= Every
-Every = element Every { Every.type }
+Every = 
+    ## <Every>: a temporal operator "every t". See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Every
+    element Every { Every.type }
+    
 # *** Any ***
-# 
-# Any X1,..Xn
-# 
-# e.g. "at any Saturday and Sunday"     
-# 
-# content model: 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
-#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg*] | content(xs:any)* | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)* ))
 Any.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Any.content = Node.header, arg_interval.choice*
 Any.type = Any.content, Any.attlist
 Node.choice |= Any
-Any = element Any { Any.type }
+Any =
+    ## <Any>: a temporal operator "any t1, .., tn". See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Any
+    element Any { Any.type }
+    
 # *** (Recurring) Timer ***
-# 
-# After X Every Y
-# 
-# Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
-# 
-# content model: 
-# 
-# DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
-#     KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
-#
 Timer.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 Timer.content = Interval_term.content
 Timer.type = Timer.content, Timer.attlist
 Node.choice |= Timer
-Timer = element Timer { Timer.type }
+Timer =
+    ## <Timer>: a temporal operator "After t Every tx". See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Timer
+    element Timer { Timer.type }
+    
 # *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes) ***
-# 
-# operator(Interval, Interval)
-# 
-# content model: 
-# ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval]) 
 IntervalAlgebraOperator.attlist = iri-att.choice?, Type.attlist, commonNode.attlist
 IntervalAlgebraOperator.content = Node.header, arg_interval.choice, arg_interval.choice
 IntervalAlgebraOperator.type = IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
 Node.choice |= During
-During = element During { IntervalAlgebraOperator.type }
+During =
+    ## <During>: an interval operator. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-During
+    element During { IntervalAlgebraOperator.type }
 Node.choice |= Overlaps
-Overlaps = element Overlaps { IntervalAlgebraOperator.type }
+Overlaps =
+    ## <Overlaps>: an interval operator. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Overlaps
+    element Overlaps { IntervalAlgebraOperator.type }
 Node.choice |= Starts
-Starts = element Starts { IntervalAlgebraOperator.type }
+Starts =
+    ## <Starts>: an interval operator. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Starts
+    element Starts { IntervalAlgebraOperator.type }
 Node.choice |= Precedes
-Precedes = element Precedes { IntervalAlgebraOperator.type }
+Precedes =
+    ## <Precedes>: an interval operator. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Precedes
+    element Precedes { IntervalAlgebraOperator.type }
 Node.choice |= Succeeds
-Succeeds = element Succeeds { IntervalAlgebraOperator.type }
+Succeeds =
+    ## <Succeeds>: an interval operator. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Succeeds
+    element Succeeds { IntervalAlgebraOperator.type }
 Node.choice |= Meets
-Meets = element Meets { IntervalAlgebraOperator.type }
+Meets =
+    ## <Meets>: an interval operator. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Meets
+    element Meets { IntervalAlgebraOperator.type }
 Node.choice |= Finishes
-Finishes = element Finishes { IntervalAlgebraOperator.type }
-# 
-# 
-# An internal group for the implementation of a rule in the Reaction RuleML language
-# 
-# 
-# content model:
-# 
-# in DR Reaction RuleML: 
-# 
-# ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
-#
-rule-implementation.content = DerivationRule.content
-# 
-# An internal group for the query connectives in the Reaction RuleML language
-# 
-# content model: (And | Or | Negation | Naf | Neg | Equal)
-# 
-# query-connective.content =
-#  And-Query-node.choice
-#  | Or-Query-node.choice
-#  | Negation
-#  | Naf
-#  | Neg
-#  | Equal
-# 
-# An internal group for the inner connectives in the Reaction RuleML language
-# 
-# 
-# content model: (And | Or | Negation | Naf | Neg | Equal)
-# 
-# inner-connective.content =
-#  And-node.choice
-#  | Or-node.choice
-#  | Negation
-#  | Naf
-#  | Neg
-#  | Equal
-# 
-# An internal group for the outer connectives in the Reaction RuleML language
-# 
-# 
-# content model: (Negation | Neg | Equal )
-# 
-# outer-connective.content = Negation | Neg | Equal
-# 
-# An internal group for the query quantifiers in the Reaction RuleML language
-# 
-# content model: (Exists | Quantifier)
-# 
-# query-quantifier.content = Exists
-# 
-# An internal group for the inner quantifiers in the Reaction RuleML language
-# 
-# 
-# content model: (Forall | Exists | Quantifier)
-#
-inner-quantifier.content =
-  element Forall { Forall-quantifier.type }
-  | element Exists { Exists-quantifier.type }
-  | Quantifier
-# 
-# An internal group for the outer quantifiers in the Reaction RuleML language
-# 
-# 
-# content model: ( Forall | Quantifier )
-# 
-# outer-quantifier.content = Forall
-# 
-# An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
-# 
-# In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
-# 
-# content model: (Time | Spatial | Interval)
-# 
-# extended-signature-predicate-sorts.content = extended-signature-function-sorts.content
-# 
-# An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
-# 
-# In the DR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
-# 
-# content model: (Time | Spatial | Interval)
-# 
-# extended-signature-function-sorts.content = Time | Spatial | Interval
-# An internal group for the time primitives for interpretation as time
-# content model: 
-# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
-time_primitives.content = arg.content | spatial_temporal_algebra_group.content
-# An internal group for the spatial primitives for interpretation as spatial
-# content model: 
-# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
-spatial_primitives.content = arg.content | spatial_temporal_algebra_group.content
-# Interval primitives
-# content model: 
-# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equal | Finishes | Operator))
-interval_primitives.content = arg.content | interval_algebra_group.content
-# An internal group for the situation primitives for interpretation as situation
-# content model: 
-# in DR Reaction RuleML: ()
-# situation_primitives.content = notAllowed
-# An internal group for the event primitives for interpretation as event
-# content model: 
-# in DR Reaction RuleML: ()
-# event_primitives.content = notAllowed
-# An internal group for the action primitives for interpretation as action
-# content model: 
-# in DR Reaction RuleML: ()
-# action_primitives.content = notAllowed
-
-# *** @style ***
-# 
-#  optional attribute
-#  restriction: active | messaging | reasoning
-#  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
-style.datatype |= "active" | "messaging" | "reasoning"
-style.attrib = style-att.choice
-style-att.choice |= attribute style { style.datatype }
+Finishes =
+    ## <Finishes>: an interval operator. See
+    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Finishes
+    element Finishes { IntervalAlgebraOperator.type }

@@ -315,7 +315,7 @@ per-effect.attrib.def = attribute per { per-effect.datatype }
 
 ## the interpretation attribute on relations can take all values allowed for the
 ## interpretation attribute on functions
-per-effect.datatype |= interpretation_non-default.value
+per-effect.datatype |= interpretation.value
 
 ## the interpretation attribute on relations can also have a value "modal",
 ## indicating interpretation as a modal operator

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+  
+
+<!-- a iri expander -->
+
+<Assert mapClosure="universal">
+
+  <Equal>
+    <Expr>
+      <op>
+        <Fun per="value">iriexp</Fun>
+      </op>
+      <Ind>daml</Ind>
+    </Expr>
+    <Ind iri="http://www.daml.org/"/>
+  </Equal>
+
+  <Equal>
+    <Expr>
+      <op>
+        <Fun per="value">iriexp</Fun>
+      </op>
+      <Ind>oil</Ind>
+    </Expr>
+    <Ind iri="http://www.ontoknowledge.org/oil/"/>
+  </Equal>
+
+  <Equal>
+    <Expr>
+      <op>
+        <Fun per="value">iriexp</Fun>
+      </op>
+      <Ind>w3c</Ind>
+    </Expr>
+    <Ind iri="http://www.w3.org/"/>
+  </Equal>
+
+
+</Assert>
+
+</RuleML>

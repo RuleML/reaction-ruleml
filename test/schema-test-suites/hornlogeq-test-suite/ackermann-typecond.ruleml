@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+  
+
+  <Assert>
+    <!--
+  For non-negative integers m and n,      
+	Ackermann function:
+
+	Ackermann(m,n) = n+1   if m=0
+	               = Ackermann(m-1,1)   if m>0 and n=0
+	               = Ackermann(m-1,Ackermann(m,n-1))   if m>0 and n>0	
+		See for example: http://en.wikipedia.org/wiki/Ackermann_function
+
+    -->
+
+    <!--
+		Ackermann(0,n) = n+1
+    -->
+    <Forall>
+      <Var
+        type="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >n</Var>
+      <Equal oriented="yes">
+        <Expr>
+          <Fun per="value">Ackermann</Fun>
+          <Data xsi:type="xs:nonNegativeInteger">0</Data>
+          <Var>n</Var>
+        </Expr>
+        <Expr>
+          <Fun per="value">add</Fun>
+          <Var>n</Var>
+          <Data xsi:type="xs:positiveInteger">1</Data>
+        </Expr>
+      </Equal>
+    </Forall>
+    <!--
+		Ackermann(m,0) = Ackermann(m-1,1)   if m>0
+	-->
+    <Forall>
+      <Var
+        type="http://www.w3.org/2001/XMLSchema#positiveInteger"
+        >m</Var>
+      <Equal oriented="yes">
+        <Expr>
+          <Fun per="value">Ackermann</Fun>
+          <Var>m</Var>
+          <Data xsi:type="xs:nonNegativeInteger">0</Data>
+        </Expr>
+        <Expr>
+          <Fun per="value">Ackermann</Fun>
+          <Expr>
+            <Fun per="value">subtract</Fun>
+            <Var>m</Var>
+            <Data xsi:type="xs:positiveInteger">1</Data>
+          </Expr>
+          <Data xsi:type="xs:positiveInteger">1</Data>
+        </Expr>
+      </Equal>
+    </Forall>
+
+    <!--
+		Ackermann(m,n) = Ackermann(m-1,Ackermann(m,n-1))   if m>0 and n>0	
+	-->
+    <Forall>
+      <Var
+        type="http://www.w3.org/2001/XMLSchema#positiveInteger"
+        >m</Var>
+      <Var
+        type="http://www.w3.org/2001/XMLSchema#positiveInteger"
+        >n</Var>
+      <Equal oriented="yes">
+        <Expr>
+          <Fun per="value">Ackermann</Fun>
+          <Var>m</Var>
+          <Var>n</Var>
+        </Expr>
+        <Expr>
+          <Fun per="value">Ackermann</Fun>
+          <Expr>
+            <Fun per="value">subtract</Fun>
+            <Var>m</Var>
+            <Data xsi:type="xs:positiveInteger">1</Data>
+          </Expr>
+          <Expr>
+            <Fun per="value">Ackermann</Fun>
+            <Var>m</Var>
+            <Expr>
+              <Fun per="value">subtract</Fun>
+              <Var>n</Var>
+              <Data xsi:type="xs:positiveInteger">1</Data>
+            </Expr>
+          </Expr>
+        </Expr>
+      </Equal>
+    </Forall>
+  </Assert>
+</RuleML>

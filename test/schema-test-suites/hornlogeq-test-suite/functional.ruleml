@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+	
+
+<!-- examples from http://www.ruleml.org/fun/ruleml-fun.pdf -->
+
+<Assert>
+
+	<!-- example 1 -->
+	<Atom>
+		<Rel/>
+		<Expr>
+			<Fun per="copy">first-born</Fun>
+			<Ind>John</Ind>
+			<Ind>Mary</Ind>
+		</Expr>
+	</Atom>
+	
+	<!-- example 2 -->
+	<Atom>
+		<Rel/>
+		<Expr>
+			<Fun per="value" val="0..">children</Fun>
+			<Ind>John</Ind>
+			<Ind>Mary</Ind>
+		</Expr>
+	</Atom>
+	
+	<!-- example 3 -->
+	<Atom>
+		<Rel/>
+		<Expr>
+			<Fun per="copy">age</Fun>
+			<Expr>
+				<Fun per="value">first-born</Fun>
+				<Ind>John</Ind>
+				<Ind>Mary</Ind>
+			</Expr>
+		</Expr>
+	</Atom>
+
+	
+	<!-- example 4 -->
+	<Atom>
+		<Rel/>
+		<Expr>
+			<Fun per="copy">age</Fun>
+			<Expr>
+				<Fun per="value" val="0..">children</Fun>
+				<Ind>John</Ind>
+				<Ind>Mary</Ind>
+			</Expr>
+		</Expr>
+	</Atom>
+	
+	<!-- example 5 -->
+	<Equal oriented="yes">
+		<left>
+			<Expr>
+				<Fun per="value">first-born</Fun>
+				<Ind>John</Ind>
+				<Ind>Mary</Ind>
+			</Expr>
+		</left>
+		<right>
+			<Ind>Jory</Ind>
+		</right>
+	</Equal>
+	
+	<!-- example 6 -->
+	<Equal oriented="yes">
+		<Expr>
+			<Fun per="value">first-born</Fun>
+			<Ind>John</Ind>
+			<Ind>Mary</Ind>
+		</Expr>
+		<Ind>Jory</Ind>
+	</Equal>
+
+	
+	<!-- example 7 -->
+	<Equal oriented="yes">
+		<Expr>
+			<Fun per="value">age</Fun>
+			<Expr>
+				<Fun per="copy">first-born</Fun>
+				<Ind>John</Ind>
+				<Ind>Mary</Ind>
+			</Expr>
+		</Expr>
+		<Expr>
+			<Fun per="value">subtract</Fun>
+			<Expr>
+				<Fun per="value">current-year</Fun>
+			</Expr>
+			<Data xsi:type="xs:positiveInteger">1993</Data>
+		</Expr>
+	</Equal>
+
+	
+	<!-- example 8 -->
+	<Rule>
+		<Equal oriented="no">
+			<Var>Byear</Var>
+			<Expr>
+				<Fun per="value">birth-year</Fun>
+				<Var>Person</Var>
+			</Expr>
+		</Equal>
+		<Equal oriented="yes">
+			<Expr>
+				<Fun per="value">age</Fun>
+				<Var>Person</Var>
+			</Expr>
+			<Expr>
+				<Fun per="value">subtract</Fun>
+				<Expr>
+					<Fun per="value">current-year</Fun>
+				</Expr>
+				<Var>Byear</Var>
+			</Expr>
+		</Equal>
+	</Rule>
+	
+	<!-- example 9 -->
+	<Rule>
+		<Atom>
+			<Rel>lessThanOrEqual</Rel>
+			<Expr>
+				<Fun per="value">age</Fun>
+				<Var>Person</Var>
+			</Expr>
+			<Data xsi:type="xs:positiveInteger">15</Data>
+		</Atom>
+		<Equal oriented="yes">
+			<Expr>
+				<Fun per="value">discount</Fun>
+				<Var>Person</Var>
+				<Var>Flight</Var>
+			</Expr>
+			<Data xsi:type="xs:positiveInteger">30</Data>
+		</Equal>
+	</Rule>
+
+	<!-- example 10 (higher order) -->
+	<!--
+	<Atom>
+		<Rel/>
+		<Expr>
+			<Fun>Compose</Fun>
+			<Fun per="value">age</Fun>
+			<Fun per="value">first-born</Fun>
+		</Expr>
+	</Atom>
+	-->
+	
+	<!-- example 11 (higher order) -->
+	<!--
+	<Atom>
+		<Rel/>
+		<Expr>
+			<Expr>
+				<Fun>Compose</Fun>
+				<Fun per="copy">age</Fun>
+				<Fun per="value">first-born</Fun>
+			</Expr>
+			<Ind>John</Ind>
+			<Ind>Mary</Ind>
+		</Expr>
+	</Atom>
+	-->
+	
+	<!-- example 12 (higher order) -->
+	<!--
+		<Atom>
+		<Lambda>
+			<Var>X</Var>
+			<Var>Y</Var>
+			<Expr>
+				<Fun per="copy">age</Fun>
+				<Expr>
+					<Fun per="value">first-born</Fun>
+					<Var>X</Var>
+					<Var>Y</Var>
+				</Expr>
+			</Expr>
+		</Lambda>
+	</Atom>
+	-->
+
+</Assert>
+	
+</RuleML>

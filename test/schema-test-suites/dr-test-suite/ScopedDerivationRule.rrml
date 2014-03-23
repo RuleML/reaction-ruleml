@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+  <!-- Clocksin/Mellish sample rule 
+
+This example shows how scopes can be defined for derivation rules. See also GuardedDerivationRule.rrml for the use of guards in combination wit scopes.
+
+Queries and conditional rule (sub-)goals (from the if body of the rule) then only apply in the defined scope. General scopes can be defined for complete rule sets or rulebases.
+
+Scopes can be defined on the descriptive metadata <meta> and the qualifying metadata <qualification> as well as the unique identifier key
+@key of knowledge bases (Assert), rule bases (RuleBase), rules (Rule) and facts (Atom). They act like constructive views on the knowledge base. 
+
+The scope of a rule is defining a constructive view on the rules and facts using the metadata annotations and the qualifications annotations. 
+The scoped rule/literal goal only applies in this scope (scoped reasoning/processing)
+     
+For an implementation of scoped reasoning as a mechanism to dynamicaly create a scope (a constructive view)
+on the knowledge base and to do scoped reasoning on this scope see the Prova rule engine (http://prova.ws).
+     
+     Example:
+     @src(kb1) @author("Adrian Paschke") @validity([2011-03-20, 2011-04-20]) @label(fact1) fact1(constant1).
+     @src(kb2) @author("Alex Kozlenkov") @validity([2011-01-20, 2011-03-20]) @label(fact2) fact2(constant2).
+     
+     @src(rb1) @label(rule1) rule1(Y) :- @validity(VTime) @authors("Adrian Paschke") fact1(Y) [between(SysTime,VTime)] 
+     
+In this example all knowledge is annotated with predefined (@src, ...) and user-defined metadata annotations (@author, @validity, ...). 
+User-defined metadata annotations can be arbitrary name/value pairs described as predicates. The literal "fact1" in the body
+of "rule1" is a scoped literal defining a scope over knowledge in the knowledge base with the scope constraints
+@validity and @author. If such knowledge is found in the KB the meta data value (an Interval) for @validity
+is bound to the variable "VTime" and used in the guard constraint [...] on the literal. The guard is stating that 
+the actual system time should be  within the validity interval. The second scope constraint is directly compared 
+to the constant value "Adrian Paschke". The sub-goal literal "fact1" in the rule condition is then applied only on the selected scope 
+(a constructive view on the overall knowledge base which is selected by the metadata scope of the literal) and not on the 
+overal knowledge. It is possible to define scopes for modules (e.g. sets of knowledge such as a rule-base/rule-set or 
+an knowledge updates (assert, retracts) by using the meta data identifier such as @src or @label. Such identifiers can
+be also used for transactional logics. See GuardedDerivationRule.rrml for an example with guards in Reaction RuleML.
+     
+In Reaction RuleML general metadata annotations (descriptive metadata) are defined under the <meta> tag role and
+qualifying metadata which qualify the rule (such as validity in the above example) are defined under the <qualification> tag.
+The @key attribute which defines a unique identifier for knowledge in the knowledge base is used for a 
+modular nested structuring of the knowledge base. The @key of e.g. <Assert key=""> or <Rulebase key=""> acts as module identifier 
+(which is denoted by the predefined @src metadata in Prova).
+     
+Scopes in Reaction RuleML can be defined under the <scope> role tag on descriptive metadata <meta> and qualifying metadata <qualification> as well as
+on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
+by referencing it with the @keyref attribute.
+
+There is a nesting of scopes. Scopes defined on the more general level automatically apply to the inner knowledge. For instance, a scope
+defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. Inner scopes
+overwrite the outer scope. For instance a scope defined on <Assert> becomes overwritten by an inner scope defined on a <Rule> which is within the
+this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the outer scope.
+
+Note: the old approach of Reaction RuleML which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0   
+Note: multiple scopes can be defined by repeating the <scope> role element
+
+Scopes can be used for modularization and life-cycle management of the knowledge base.
+-->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+
+    <!-- rule -->
+
+    <Rule>
+      <if>
+        <Atom>
+
+          <!-- the conditional atomic literal applies in the scope, where dc:creator="Adrian Paschke" -->
+
+          <!-- scope constraint definition -->
+          <scope>
+            <Atom>
+              <Rel iri="dc:creator"/>
+              <Data xsi:type="xs:string">Adrian Paschke</Data>
+            </Atom>
+          </scope>
+
+          <!-- scoped literal -->
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
+
+    <!-- fact -->
+
+    <Atom>
+      <meta>
+        <!-- metadata -->
+        <Atom>
+          <Rel iri="dc:creator"/>
+          <Data xsi:type="xs:string">Adrian Paschke</Data>
+        </Atom>
+      </meta>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+    <Atom>
+      <meta>
+        <!-- metadata -->
+        <Atom>
+          <Rel iri="dc:creator"/>
+          <Data xsi:type="xs:string">Unknown</Data>
+        </Atom>
+      </meta>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Jane</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <!-- since we have defined a scoped literal for the if condition of the rule, 
+     the scoped condition goal only applies to the fact created by "Adrian Paschke",
+     but not to the fact with dc:creator="Unknown".
+     That is we only get one result ?whom = Mary.
+ -->
+
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
+
+</RuleML>

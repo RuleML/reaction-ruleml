@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--<?xml-model href="http://reaction.ruleml.org/1.0/xsd/dr.xsd"?>-->
-<?xml-model href="../../../xsd/dr.xsd"?>
 <?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:dc="http://purl.org/dc/elements/1.1"
 	xmlns:owltime="http://www.w3.org/2006/time"
-	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+	xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
 
 
 	<Assert>

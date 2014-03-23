@@ -15,12 +15,8 @@ slot-edge.choice |= notAllowed
 formula_Forall.content |= notAllowed
 formula_And-query.content |= notAllowed
 formula_Or-query.content |= notAllowed
-slot |= notAllowed
 if.content |= notAllowed
 then.content |= notAllowed
-oid |= notAllowed
-repo |= notAllowed
-resl |= notAllowed
 slot-edge.choice |= notAllowed
 
 ## RR patterns
@@ -29,15 +25,21 @@ time_primitives.content |= notAllowed
 spatial_primitives.content |= notAllowed
 interval_primitives.content |= notAllowed
 arg_spatial.choice |= notAllowed
+Spatial.attlist &= empty
+Spatial.content |= notAllowed
+arg_time.choice |= notAllowed
+DerivationRule.content |= notAllowed
+
+## aliases
+slot |= notAllowed
+oid |= notAllowed
+repo |= notAllowed
+resl |= notAllowed
 signature |= notAllowed
 quantification |= notAllowed
 meta |= notAllowed
 guard |= notAllowed
 qualification |= notAllowed
-Spatial.attlist &= empty
-Spatial.content |= notAllowed
-arg_time.choice |= notAllowed
 scope |= notAllowed
 evaluation |= notAllowed
 else |= notAllowed
-DerivationRule.content |= notAllowed

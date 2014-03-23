@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+  
+  
+<!-- 'own' example as universal 'Assert' (changed from not-currently-supported 'Consider') -->
+
+<!-- Universally closed clauses of 'And' in 'Assert' wrapper (Appendix 1a after 'closure' propagation) -->
+
+  <Assert>
+
+    <Implies closure="universal">
+      <And>
+        <Atom>
+          <Rel>buy</Rel>
+          <Var>person</Var>
+          <Var>merchant</Var>
+          <Var>object</Var>
+        </Atom>
+        <Atom>
+          <Rel>keep</Rel>
+          <Var>person</Var>
+          <Var>object</Var>
+        </Atom>
+      </And>
+      <Atom>
+        <Rel>own</Rel>
+        <Var>person</Var>
+        <Var>object</Var>
+      </Atom>
+    </Implies>
+    
+    <Atom closure="universal">
+      <Rel>buy</Rel>
+      <Ind>Mary</Ind>
+      <Ind>John</Ind>
+      <Expr>
+        <Fun per="copy">book</Fun>
+        <Ind>Elliotte Rusty Harold</Ind>
+        <Ind>XML Bible</Ind>
+        <Data xsi:type="xs:positiveInteger">2001</Data>
+      </Expr>
+    </Atom>
+
+    <Atom closure="universal">
+      <Rel>keep</Rel>
+      <Ind>Mary</Ind>
+      <Var>object</Var>
+    </Atom>
+    
+  </Assert>
+    
+</RuleML>

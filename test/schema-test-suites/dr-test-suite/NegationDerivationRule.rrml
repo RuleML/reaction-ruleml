@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+  <!-- Clocksin/Mellish sample rule 
+
+This example illustrates the polymorphic negation approach of Reaction RuleML 1.0
+
+Since there are many different types of negation for derivation and production / reaction rules  
+the generic Negation approach is extensible and allows pointing to external definitions of negation types.
+
+Reaction RuleML 1.0 defines a set of typical negations, such as classical negation, negation-as-failure and inflationary negation 
+
+If no explicit definition of the type of negation is given, <Negation> behaves like a polymorphic negation which assumes the weakest
+negation in the given semantic profile, e.g. for normal logic programs it would assume negation as failure, for extented logic it would 
+assume classical negation, for classical production rules it would assume inflationary negation, etc.
+
+-->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+
+    <evaluation>
+
+      <!-- since we are using both classical negation and negation-as-failure in this example,
+           the intended semantics is extended well founded semantics  -->
+
+      <Profile type="ruleml:ExtendedWellFoundedSemantics"/>
+
+    </evaluation>
+
+
+    <!-- rule -->
+
+    <Rule>
+
+      <!-- if ?X does not like wine -->
+
+      <if>
+
+        <!-- we are using negation as failure in the condition, i.e. if the goal can be proofen positively from the closed knowledge base
+           the condition fails -->
+
+        <Negation type="ruleml:NegationAsFailure">
+          <!-- note: we could also use the shortcut notation <Naf> -->
+          <Atom>
+            <op>
+              <Rel>likes</Rel>
+            </op>
+            <Var mode="+">X</Var>
+            <!-- variable needs to be bound (mode="+") for the negation as finite failure proof -->
+            <Ind>wine</Ind>
+          </Atom>
+        </Negation>
+
+      </if>
+
+      <!-- then John does not like ?X -->
+
+      <then>
+
+        <!-- in the head we use strong classical negation , to explicitly state that John dislikes persons who do not like wine -->
+
+
+        <Negation type="ruleml:ClassicalNegation">
+          <!-- note: we could also use the shortcut notation <Neg> -->
+          <Atom>
+            <op>
+              <Rel>likes</Rel>
+            </op>
+            <Ind>John</Ind>
+            <Var>X</Var>
+          </Atom>
+        </Negation>
+
+      </then>
+    </Rule>
+
+    <!-- fact -->
+
+    <!-- we explicitly state that Mary dislikes wine. -->
+
+    <Negation type="ruleml:ClassicalNegation">
+      <!-- note: we could also use the shortcut notation <Neg> -->
+      <Atom>
+        <op>
+          <Rel>likes</Rel>
+        </op>
+        <Ind>Mary</Ind>
+        <Ind>wine</Ind>
+      </Atom>
+    </Negation>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <!-- Since in extended well founded semantics - as defined as intended semantics for the rule - negation as failure also applies to strongly
+     negated knowledge, the query would fail, since John dislikes Mary, since she does not like wine. -->
+
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Ind>Mary</Ind>
+    </Atom>
+  </Query>
+
+</RuleML>

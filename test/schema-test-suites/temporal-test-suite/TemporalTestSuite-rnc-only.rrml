@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1" xmlns:owltime="http://www.w3.org/2006/time">
+
+
+	<Assert>
+		
+
+	<!-- descriptive metadata with date -->
+  	<meta>
+  		<Atom>
+  			<Rel iri="dc:date"/> <!-- Dublin Core date -->		
+  			<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>  			 
+		</Atom>
+	</meta>
+
+
+	<!-- qualifying metadata defining validitiy interval-->
+	<qualification>
+		<Atom>
+			<Rel>valid</Rel> <!-- validity of asserted knowledge base -->
+			<Interval type="ruleml:TimeInterval"> <!-- validity interval -->
+				<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+				<Time type="ruleml:TimePoint">
+					<!-- after a period of  five years, two months, and 10 days -->
+					<After><Time type="ruleml:TimeInterval"><Data xsi:type="xs:duration">P5Y2M10D</Data></Time></After>
+				</Time>
+			</Interval>
+		</Atom>
+	</qualification>
+
+	<!-- rule base  -->
+	<Rulebase>
+
+		<!-- different time definitions -->
+		
+		<!-- a simple time "t1" definition -->
+		<Time><Ind>t1</Ind></Time>
+		
+		<!-- a discrete time point defining an XML schema datatype "dateTime" -->
+		<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+				
+		<!-- definition of a time instant (for a linear continous time model) with unpositional slot properties  --> 
+		<Time key="time1" type="ruleml:TimeInstant">
+			<slot><Ind>year</Ind><Ind>2011</Ind></slot>
+			<slot><Ind>month</Ind><Ind>03</Ind></slot>
+			<slot><Ind>day</Ind><Ind>21</Ind></slot>
+		</Time>		
+
+		<!-- time definition using the xs:any content model to define the time as OWL time instant --> 
+		<Time>	
+			<content> <!-- xs:any content -->
+				<owltime:inXSDDateTime>2003-01-09T12:39:09Z</owltime:inXSDDateTime>
+			</content>				
+		</Time>
+
+		<!-- time definition as RuleML atom -->
+		<Atom>
+			<Rel iri="dc:date"/> <!-- Dublin Core date -->		
+			<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>  			 
+		</Atom>
+
+		<!-- a user-defined functional time definition defining a time function "datetime" -->
+		<Time>
+			<Expr>
+				<Fun>datetime</Fun>
+				<Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data>
+			</Expr>
+		</Time>
+
+
+
+		<!-- functional time definition using the temporal algebra -->
+		
+		<!-- five years, two months, and 10 days after 2011-03-21T10:00:00-04:00  -->
+		<Time>			
+			<After>
+				<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+				<Time type="ruleml:TimeInterval"><Data xsi:type="xs:duration">P5Y2M10D</Data></Time>
+			</After>
+		</Time>
+		
+		<!-- five years, two months, and 10 days before 2011-03-21T10:00:00-04:00  -->
+		<Time>			
+			<Before>
+				<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+				<Time type="ruleml:TimeInterval"><Data xsi:type="xs:duration">P5Y2M10D</Data></Time>
+			</Before>
+		</Time>
+		
+		<!-- every Monday -->
+		<Time>
+			<Every> 
+				<Time><Ind>Monday</Ind></Time>
+			</Every>
+		</Time>
+
+		<!-- "at any Friday, Saturday, and Sunday" -->
+		<Time>
+			<Any>
+				<Time><Ind>Friday</Ind></Time>
+				<Time><Ind>Saturday</Ind></Time>
+				<Time><Ind>Sunday</Ind></Time>
+			</Any>     
+		</Time>
+
+		<!-- after 7 days every day (recurring timer) -->
+		<Time>
+			<Timer>
+				<Time><Data xsi:type="xs:duration">P7D</Data></Time>
+				<Time><Data xsi:type="xs:duration">P1D</Data></Time>
+			</Timer>
+		</Time>
+		
+		
+
+		<!-- different interval definitions -->
+		
+		<!-- Interval from  2011-03-21T10:00:00-04:00 to 2012-03-21T10:00:00-04:00 -->
+		<Interval>
+			<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+			<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2012-03-21T10:00:00-04:00</Data></Time>
+		</Interval>
+		
+		<!-- relative interval from 2011-03-21T10:00:00-04:00 to five years, two months, and 10 days after -->  
+		<Interval type="ruleml:TimeInterval"> 
+			<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+			<Time type="ruleml:TimePoint">
+				<!-- after a period of  five years, two months, and 10 days -->
+				<After><Time type="ruleml:TimeInterval"><Data xsi:type="xs:duration">P5Y2M10D</Data></Time></After>
+			</Time>
+		</Interval>
+		
+		<!-- left closed, right open interval [2011-03-21T10:00:00-04:00, 2012-03-21T10:00:00-04:00) -->
+		<Interval>
+			<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+			<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2012-03-21T10:00:00-04:00</Data></Time>
+		</Interval>
+		
+		<!-- left closed, right unbounded interval [2011-03-21T10:00:00-04:00, _ ) -->
+		<Interval type="ruleml:LeftClosedInterval">
+			<Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+		</Interval>
+				
+	 	<!-- rule 1  -->
+
+		<Rule>
+			<if> <!-- rule body using different times-->
+   				<And>
+   					
+   					<!-- time --> 
+   					<Time><Ind>t1</Ind></Time>
+   					<Time><Var>x</Var></Time>
+   					<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+   					<Time keyref="time1"/>
+   					<Time>	
+   						<content> <!-- xs:any content -->
+   							<owltime:inXSDDateTime>2003-01-09T12:39:09Z</owltime:inXSDDateTime>
+   						</content>				
+   					</Time>
+   					<Atom>
+   						<Rel iri="dc:date"/> <!-- Dublin Core date -->		
+   						<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>  			 
+   					</Atom>
+   					
+   					<!-- interval -->
+   					<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+   					<Interval><Var>Y</Var></Interval>
+   					<Interval><Time><Var>Y1</Var></Time><Time><Var>Y2</Var></Time></Interval>
+   					
+   					<!-- different interval algebra definitions -->
+   					
+   					<!-- [t2,t3] during [t1,4] -->
+   					<Interval>
+	   					<During>
+	   						<Interval><Time><Ind>t2</Ind></Time><Time><Ind>t3</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   					</During>
+   					</Interval>	
+   					
+   					<!-- [t1,t3] overlaps with [t2,t4] -->
+   					<Interval>
+	   					<Overlaps>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t3</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t2</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   					</Overlaps>
+   					</Interval>	
+   					
+   					<!-- [t1,t2] starts [t1,t4] -->
+   					<Interval>
+	   					<Starts>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   					</Starts>
+   					</Interval>
+   					
+   					<!-- [t1,t2] precedes [t3,t4] -->
+   					<Interval>
+	   					<Precedes>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t3</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   					</Precedes>
+   					</Interval>	
+   					
+   					<!-- [t3,t4] succeeds [t1,t2] -->
+   					<Interval>
+	   					<Succeeds>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t3</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   					</Succeeds>
+   					</Interval>	
+   					
+   					<!-- [t1,t2] meets [t2,t4] -->
+   					<Interval>
+	   					<Meets>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t2</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   					</Meets>
+   					</Interval>	
+   					
+   					<!-- [t1,t2] equals [t1,t2] -->
+   					<Interval>
+	   					<Equal>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+	   					</Equal>
+   					</Interval>	
+   					
+   					<!-- [t1,t4] finishes [t3,t4] -->
+   					<Interval>
+	   					<Finishes>
+	   						<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   						<Interval><Time><Ind>t3</Ind></Time><Time><Ind>t4</Ind></Time></Interval>
+	   					</Finishes>
+   					</Interval>	
+   					
+   					
+   				</And>
+   			</if>
+    		<then> <!-- rule head -->
+    			<Time><Ind>t2</Ind></Time>
+      		</then>
+		</Rule>
+			
+	</Rulebase>
+
+ </Assert>
+
+ <!-- query knowledge base -->
+ 
+ <Query>
+	<And>
+		<Time><Ind>t1</Ind></Time>
+		<Time><Var>x</Var></Time>
+	  <Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+		<Time keyref="time1"/>
+		<Time>	
+			<content> <!-- xs:any content -->
+				<owltime:inXSDDateTime>2003-01-09T12:39:09Z</owltime:inXSDDateTime>
+			</content>				
+		</Time>
+		<Atom>
+			<Rel iri="dc:date"/> <!-- Dublin Core date -->		
+			<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>  			 
+		</Atom>
+		
+		<Interval><Time><Ind>t1</Ind></Time><Time><Ind>t2</Ind></Time></Interval>
+		<Interval><Var>Y</Var></Interval>
+		<Interval><Time><Var>Y1</Var></Time><Time><Var>Y2</Var></Time></Interval>
+	</And>
+ </Query>
+ 
+ 
+</RuleML>

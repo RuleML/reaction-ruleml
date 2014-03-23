@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+  
+
+<!--
+The function symbol "owner" could be user-defined by a rule
+or 'directed Equaluation' owner(car17) = john. Now, the first premise of
+the 'functional Datalog' rule
+buy(Person,Object) <- pay(Person,owner(Object)) and take(Person,Object)
+is an "owner" function call nested into a "pay" relation call. With
+additional facts pay(fred,john) and take(fred,car17) also asserted,
+the "buy" relation call buy(fred,car17) would be computed thus:
+
+buy(fred,car17)
+pay(fred,owner(car17)) and take(fred,car17)
+pay(fred,john)         and true
+true                   and true
+true
+
+So, owner(car17) _computes_ the actual owner individual, rather than
+just _denoting_ it, as a cterm with a constructor symbol "owner"
+would. For this corresponding cterm in the first premise, we would
+have used square brackets like pay(Person,owner[car17]), but then one
+asserted fact would have to be the non-Datalog pay(fred,owner[car17]).
+Now, the above 'functional Datalog' rule can be flattened, obtaining
+
+buy(Person,Object) <- Own = owner(Object) and pay(Person,Own)
+                      and take(Person,Object)
+
+This flattened version, along with the directed Equaluation and facts, can
+be marked up in the current RuleML as follows:
+-->
+
+<Assert mapClosure="universal">
+
+    <Equal>
+      <Expr>
+        <op><Fun per="value">owner</Fun></op>
+        <Ind>car17</Ind>
+      </Expr>
+      <Ind>john</Ind>
+    </Equal>
+
+<Implies>
+ <then>
+  <Atom>
+    <op><Rel>buy</Rel></op>
+    <Var>person</Var>
+    <Var>object</Var>
+  </Atom>
+ </then>
+ <if>
+  <And>
+    <Equal>
+      <Var>own</Var>
+      <Expr>
+        <op><Fun per="value">owner</Fun></op>
+        <Var>object</Var>
+      </Expr>
+    </Equal>
+    <Atom>
+      <op><Rel>pay</Rel></op>
+      <Var>person</Var>
+      <Var>own</Var>
+    </Atom>
+    <Atom>
+      <op><Rel>take</Rel></op>
+      <Var>person</Var>
+      <Var>object</Var>
+    </Atom>
+  </And>
+ </if>
+</Implies>
+
+
+  <Atom>
+    <op><Rel>pay</Rel></op>
+    <Ind>fred</Ind>
+    <Ind>john</Ind>
+  </Atom>
+
+  <Atom>
+    <op><Rel>take</Rel></op>
+    <Ind>fred</Ind>
+    <Ind>car17</Ind>
+  </Atom>
+
+
+</Assert>
+
+</RuleML>

@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
-<RuleML xmlns="http://ruleml.org/spec"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:dc="http://purl.org/dc/elements/1.1"
-	xmlns:owltime="http://www.w3.org/2006/time"
-	xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1" xmlns:owltime="http://www.w3.org/2006/time">
 
 
 	<Assert>
@@ -257,7 +252,7 @@
 	<And>
 		<Time><Ind>t1</Ind></Time>
 		<Time><Var>x</Var></Time>
-		<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+	  <Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
 		<Time keyref="time1"/>
 		<Time>	
 			<content> <!-- xs:any content -->

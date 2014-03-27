@@ -176,13 +176,30 @@ include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" {
 #
 include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
   start |= notAllowed
+  NegFormula.choice |=
+  SimpleFormula-node.choice
+  | And-fo-node.choice
+  | Or-fo-node.choice
+  | Negation-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-fo-node.choice
 }
 # 
 # WEAK NEGATIONS INCLUDED
 #
 include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
   start |= notAllowed
+  NafFormula.choice |=
+  SimpleFormula-node.choice
+  | And-fo-node.choice
+  | Or-fo-node.choice
+  | Negation-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-fo-node.choice
 }
+
 # 
 # NODE IDENTIFIERS INCLUDED
 #

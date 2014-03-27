@@ -412,14 +412,13 @@ formula-negation.type.def = formula-negation.content, formula-negation.attlist
 formula-negation = element formula { formula-negation.type.def }
 edge.choice |= formula-negation
 # *** Naf ***
-Naf = NegationAsFailure-node.choice
 reNaf.attlist &= iri-att.choice?
 reNaf.attlist &= Type.attlist?
-NafFormula.choice |= NegationAsFailure-node.choice
 # *** Neg ***
 reNeg.attlist &= iri-att.choice?
 reNeg.attlist &= Type.attlist?
-NegFormula.choice |= NegationAsFailure-node.choice
+Negation-node.choice |= NegationAsFailure-node.choice
+
 # This module declares the following Reaction RuleML elements:
 # * Quantifier  generic quantifier
 # * Forall		predefined inner quantifier (used in quantification metatag)

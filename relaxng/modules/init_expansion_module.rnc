@@ -29,6 +29,9 @@ Spatial.attlist &= empty
 Spatial.content |= notAllowed
 arg_time.choice |= notAllowed
 DerivationRule.content |= notAllowed
+argumentsForTime.sequence |= notAllowed
+argumentsForSpatial.sequence |= notAllowed
+
 
 ## aliases
 slot |= notAllowed

@@ -474,7 +474,6 @@ Profile =
 # * Time
 Time.attlist &= generic-Node.attlist?
 Time.content |= Node.header, argumentsForTime.sequence
-argumentsForTime.sequence |= arg_time.choice*, repo?, slot*, resl?
 arg_time.choice |= arg_time
 Time.type.def = Time.content, Time.attlist
 Node.choice |= Time_formula
@@ -497,7 +496,6 @@ edge.choice |= arg_time
 #   *** Spatial ***
 Spatial.attlist &= generic-Node.attlist?
 Spatial.content |= Node.header, argumentsForSpatial.sequence
-argumentsForSpatial.sequence |= arg_spatial.choice*, repo?, slot*, resl?
 arg_spatial.choice |= arg_spatial
 Node.choice |= Spatial_formula
 Spatial.type.def = Spatial.content, Spatial.attlist
@@ -517,14 +515,14 @@ edge.choice |= arg_spatial
 # This module declares the following Reaction RuleML elements:
 # * Interval
 
-#   *** Interval ***
-Interval.attlist &= generic-Node.attlist?
-arg_interval.choice |= arg_interval
-Interval_term.content |= Node.header, arg_interval.choice, arg_interval.choice?
-Interval_formula.content |= Node.header, arg_interval.choice, arg_interval.choice?
-#
-Interval_term.type.def = Interval_term.content, Interval.attlist
-Interval_formula.type.def = Interval_formula.content, Interval.attlist
+    #   *** Interval ***
+    Interval.attlist &= generic-Node.attlist?
+    arg_interval.choice |= arg_interval
+    Interval_term.content |= Node.header, arg_interval.choice, arg_interval.choice?
+    Interval_formula.content |= Node.header, arg_interval.choice, arg_interval.choice?
+    #
+    Interval_term.type.def = Interval_term.content, Interval.attlist
+    Interval_formula.type.def = Interval_formula.content, Interval.attlist
 Node.choice |= Interval_formula
 Interval_term =
   

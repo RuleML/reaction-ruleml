@@ -87,7 +87,7 @@
 	-->
   <xs:attributeGroup name="Expr.attlist">
     <xs:attributeGroup ref="type.attrib"/>
-    <xs:attributeGroup ref="per.attrib"/>
+    <xs:attributeGroup ref="per-effect.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
@@ -179,7 +179,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
   <xs:attributeGroup name="Fun.attlist">
     <xs:attributeGroup ref="iri.attrib"/>
-    <xs:attributeGroup ref="per.attrib"/>
+    <xs:attributeGroup ref="per-effect.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
     <xs:attributeGroup ref="val.attrib"/>

@@ -417,7 +417,6 @@ reNaf.attlist &= Type.attlist?
 # *** Neg ***
 reNeg.attlist &= iri-att.choice?
 reNeg.attlist &= Type.attlist?
-Negation-node.choice |= NegationAsFailure-node.choice
 
 # This module declares the following Reaction RuleML elements:
 # * Quantifier  generic quantifier

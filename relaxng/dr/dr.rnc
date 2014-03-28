@@ -318,6 +318,7 @@ include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" inheri
 }
 # 
 # STRONG NEGATION INCLUDED
+# WITH NAF ALLOWED IN NEG
 #
 include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
   start |= notAllowed
@@ -326,12 +327,14 @@ include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
   | And-fo-node.choice
   | Or-fo-node.choice
   | Negation-node.choice
+  | NegationAsFailure-node.choice
   | Implication-fo-node.choice
   | Forall-fo-node.choice
   | Exists-fo-node.choice
 }
 # 
 # WEAK NEGATIONS INCLUDED
+# WITH NESTING ALLOWED
 #
 include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
   start |= notAllowed
@@ -340,12 +343,11 @@ include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
   | And-fo-node.choice
   | Or-fo-node.choice
   | Negation-node.choice
+  | NegationAsFailure-node.choice
   | Implication-fo-node.choice
   | Forall-fo-node.choice
   | Exists-fo-node.choice
-}
-
-# 
+}# 
 # EQUIVALENCES INCLUDED
 #
 include "http://ruleml.org/1.0/relaxng/modules/equivalent_expansion_module.rnc" inherit = ruleml {

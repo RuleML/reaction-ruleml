@@ -4,6 +4,7 @@ default namespace ruleml = "http://ruleml.org/spec"
 start |= Node.choice | edge.choice
 # 
 # ROOT NODE AND PERFORMATIVES INCLUDED
+# WITH SEPARATION OF ATTLIST FOR ASSERT AND RETRACT
 #
 include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
@@ -24,6 +25,7 @@ include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inheri
 }
 # 
 # CONJUNCTIONS AND DISJUNCTIONS INCLUDED
+# WITH EXTENDED CONTENT MODEL FOR AND/OR IN QUERIES
 #
 include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" {
   start |= notAllowed
@@ -44,6 +46,8 @@ include "http://ruleml.org/1.0/relaxng/modules/implication_expansion_module.rnc"
 }
 # 
 # QUANTIFICATION OVER VARIABLES INCLUDED
+# WITH EXTENDED CONTENT MODEL FOR EXISTENTIALS
+# ALLOWING QUERY VERSION OF AND/OR
 #
 include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
@@ -52,7 +56,7 @@ include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.r
     | And-Query-node.choice
     | Or-Query-node.choice
     | Negation-node.choice
-    | NegationAsFailure-node.notallowed
+    | NegationAsFailure-node.choice
     | Implication-fo-node.choice
     | Forall-fo-node.choice
     | Exists-node.choice
@@ -142,9 +146,9 @@ include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.r
 # 
 # xsi:schemaLocation ALLOWED IN RuleML
 #
-include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
 # 
 # UNIVERSAL RESOURCE IDENTIFIERS (URIs) INCLUDED
 #
@@ -172,6 +176,7 @@ include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" inher
 }
 # 
 # STRONG NEGATION INCLUDED
+# WITH NAF ALLOWED IN NEG
 #
 include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
   start |= notAllowed
@@ -180,12 +185,14 @@ include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
   | And-fo-node.choice
   | Or-fo-node.choice
   | Negation-node.choice
+  | NegationAsFailure-node.choice
   | Implication-fo-node.choice
   | Forall-fo-node.choice
   | Exists-fo-node.choice
 }
 # 
 # WEAK NEGATIONS INCLUDED
+# WITH NESTING ALLOWED
 #
 include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
   start |= notAllowed
@@ -194,6 +201,7 @@ include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
   | And-fo-node.choice
   | Or-fo-node.choice
   | Negation-node.choice
+  | NegationAsFailure-node.choice
   | Implication-fo-node.choice
   | Forall-fo-node.choice
   | Exists-fo-node.choice
@@ -207,6 +215,8 @@ include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.r
 }
 # 
 # IN-PLACE ANNOTATIONS INCLUDED
+# WITH OPTIONAL INDEX ATTRIBUTE
+# 
 #
 include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
@@ -317,6 +327,7 @@ include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module
 }
 # 
 # EXPLICIT TYPING OF TERMS INCLUDED
+# WITH CURIES
 #
 include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed

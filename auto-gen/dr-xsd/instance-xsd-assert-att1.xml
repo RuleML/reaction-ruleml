@@ -19481,7 +19481,7 @@
                                                                                                     <ruleml:Starts type="http://eykdlvLh/" iri="http://OyuaBTEW/" node="http://wljQkntX/" key="/%" keyref="Invalid" xml:base="http://XJygPtTr/"
                                                                                                        xml:id="I7782">
                                                                                                       <ruleml:Interval><ruleml:content/></ruleml:Interval>
-                                                                                                      <ruleml:Interval><ruleml:content/></ruleml:Interval>
+                                                                                                      <ruleml:Interval/>
                                                                                                     </ruleml:Starts>
                                                                                                   </ruleml:arg>
                                                                                                 </ruleml:During>

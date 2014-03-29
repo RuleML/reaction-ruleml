@@ -518,8 +518,8 @@ edge.choice |= arg_spatial
     #   *** Interval ***
     Interval.attlist &= generic-Node.attlist?
     arg_interval.choice |= arg_interval
-    Interval_term.content |= Node.header, arg_interval.choice, arg_interval.choice?
-    Interval_formula.content |= Node.header, arg_interval.choice, arg_interval.choice?
+    Interval_term.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
+    Interval_formula.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
     #
     Interval_term.type.def = Interval_term.content, Interval.attlist
     Interval_formula.type.def = Interval_formula.content, Interval.attlist

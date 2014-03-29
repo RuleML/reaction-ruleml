@@ -13,6 +13,11 @@ dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
+#
+argumentsForTime.sequence |= arg_time.choice*, repo?, slot*, resl?
+argumentsForSpatial.sequence |= arg_spatial.choice*, repo?, slot*, resl?
+
+
 # Managing the ordered and unordered forms of the extended Node header pattern in DR
 # 1. to deal with the different distribution of oid, define a new pattern for element oid that
 # is added to Node.header if the oid_all module is included. 

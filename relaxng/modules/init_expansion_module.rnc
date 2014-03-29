@@ -34,15 +34,15 @@ argumentsForSpatial.sequence |= notAllowed
 
 
 ## aliases
-slot |= notAllowed
-oid |= notAllowed
-repo |= notAllowed
-resl |= notAllowed
-signature |= notAllowed
-quantification |= notAllowed
-meta |= notAllowed
-guard |= notAllowed
-qualification |= notAllowed
-scope |= notAllowed
-evaluation |= notAllowed
-else |= notAllowed
+slot.choice |= notAllowed
+oid.choice |= notAllowed
+repo.choice |= notAllowed
+resl.choice |= notAllowed
+signature.choice |= notAllowed
+quantification.choice |= notAllowed
+meta.choice |= notAllowed
+guard.choice |= notAllowed
+qualification.choice |= notAllowed
+scope.choice |= notAllowed
+evaluation.choice |= notAllowed
+else.choice |= notAllowed

@@ -136,7 +136,7 @@ Atom = Atom-node.choice
 # *** Rel ***
 reRel.attlist &= per-effect-att.choice?
 # *** slot ***
-slot = slot-edge.choice
+slot.choice |= slot-edge.choice
 # *** arg ***
 arg = positionalArgument-edge.choice
 # *** Data ***
@@ -145,9 +145,9 @@ Data = DataTerm.choice
 Var = Variable-node.choice
 reVar.attlist &= mode-att.choice?
 # *** repo ***
-repo = restOfPositionalArguments-edge.choice
+repo.choice |= restOfPositionalArguments-edge.choice
 # *** resl ***
-resl = restOfSlots-edge.choice
+resl.choice |= restOfSlots-edge.choice
 # *** Equal ***
 Equal = Equal-node.choice
 # in time module
@@ -199,12 +199,12 @@ term.datatype |= xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 
 ## <oid>: defines the object id. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-oid
-oid = objectIdentifier-edge.choice
+oid.choice |= objectIdentifier-edge.choice
 #  *** meta ***
 
 ## <meta>: defines a descriptive metadata annotation. See 
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-meta
-meta = metaKnowledge-edge.choice
+meta.choice |= metaKnowledge-edge.choice
 
 ## the typical attribute list of edges in the header
 header.attlist &= index-attrib.choice?
@@ -215,6 +215,7 @@ header.attlist &= commonInit.attlist?
 scope.attlist &= header.attlist?
 scope.content |= formula-query.content?
 scope.type.def = scope.content, scope.attlist
+scope.choice |= scope
 scope =
   
   ## <scope>: allows defining a metadata-based scope on the knowledge base for scoped reasoning. See 
@@ -227,6 +228,7 @@ edge.choice |= scope
 guard.attlist &= header.attlist?
 guard.content |= PremiseFormula.choice
 guard.type.def = guard.content, guard.attlist
+guard.choice |= guard
 guard =
   
   ## <guard>: a guard defines a simple pre-constraint which applies before the main reasoning. See 
@@ -239,6 +241,7 @@ edge.choice |= guard
 evaluation.attlist &= header.attlist?
 evaluation.content |= Profile
 evaluation.type.def = evaluation.content, evaluation.attlist
+evaluation.choice |= evaluation
 evaluation =
   
   ## <evaluation>: defines the intended evaluation semantics as semantic <Profile>. See
@@ -251,6 +254,7 @@ edge.choice |= evaluation
 signature.attlist &= header.attlist?
 signature.content |= formula-query.content
 signature.type.def = signature.content, signature.attlist
+signature.choice |= signature
 signature =
   
   ## <signature>: defines the signature which can be used as public interface or pattern definition. See
@@ -263,6 +267,7 @@ edge.choice |= signature
 qualification.attlist &= header.attlist?
 qualification.content |= formula-assert.content
 qualification.type.def = qualification.content, qualification.attlist
+qualification.choice |= qualification
 qualification =
   
   ## <qualification>: defines the qualification (qualifying metadata). See
@@ -275,6 +280,7 @@ edge.choice |= qualification
 quantification.attlist &= header.attlist?
 quantification.content |= inner-quantifier.content
 quantification.type.def = quantification.content, quantification.attlist
+quantification.choice |= quantification
 quantification =
   
   ## <quantification>: defines the quantification (quantifier). See
@@ -375,6 +381,7 @@ AssertRetractFormula.choice |= Rule
 ForallFormula.choice |= Rule
 RulebaseFormula.choice |= Rule
 # *** else ***
+else.choice |= else
 else =
   
   ## <else>: edge defining an alternative conclusion in a if-then-else rule. See

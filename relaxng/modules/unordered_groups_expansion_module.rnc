@@ -15,9 +15,9 @@ dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
 
 # unordered
-argumentsForTime.sequence |= arg_time.choice* & repo? & slot* & resl?
+argumentsForTime.sequence |= arg_time.choice* & repo.choice? & slot.choice* & resl.choice?
 # unordered
-argumentsForSpatial.sequence |= arg_spatial.choice* & repo? & slot* & resl?
+argumentsForSpatial.sequence |= arg_spatial.choice* & repo.choice? & slot.choice* & resl.choice?
 
 
 
@@ -25,15 +25,15 @@ argumentsForSpatial.sequence |= arg_spatial.choice* & repo? & slot* & resl?
 # content model: meta* & scope* & guard* & evaluation* & signature* & qualification* & quantification* & oid?
 # In the modules for the corresponding features
 # metadata.content, interface.content, instance.content
-metadata_unordered.header &= meta*
-metadata_unordered.header &= scope*
-metadata_unordered.header &= guard*
-interface_unordered.header &= evaluation*
-interface_unordered.header &= signature*
-instance_unordered.header &= qualification*
-instance_unordered.header &= quantification*
+metadata_unordered.header &= meta.choice*
+metadata_unordered.header &= scope.choice*
+metadata_unordered.header &= guard.choice*
+interface_unordered.header &= evaluation.choice*
+interface_unordered.header &= signature.choice*
+instance_unordered.header &= qualification.choice*
+instance_unordered.header &= quantification.choice*
 # special case
-instance_unordered.header &= oid?
+instance_unordered.header &= oid.choice?
 #
 Node_unordered.header &= metadata_unordered.header?
 Node_unordered.header &= interface_unordered.header?
@@ -44,7 +44,7 @@ Node.header &= Node_unordered.header?
 arg-datt.choice |= empty
 
 # *** Derivation Rule content model ***
-DerivationRule.content |= Implies.main & else?
+DerivationRule.content |= Implies.main & else.choice?
 
 
 

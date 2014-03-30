@@ -30,14 +30,15 @@ include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" {
 #
 include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" {
   start |= notAllowed
-  And-Query.Node.def =
-    
-    ##
-    element And { (And-Query-datt.choice & reAnd-Query.attlist), And.header, And-Query.main }
-  Or-Query.Node.def =
-    
-    ##
-    element Or { (Or-Query-datt.choice & reOr-Query.attlist), Or.header, Or-Query.main }
+  #  And-Query.Node.def =
+  
+  # 
+  #    element And { (And-Query-datt.choice & reAnd-Query.attlist), And.header, And-Query.main }
+  #  Or-Query.Node.def =
+  
+  # 
+  #    element Or { (Or-Query-datt.choice & reOr-Query.attlist), Or.header, Or-Query.main }
+  
 }
 # 
 # IMPLICATIONS INCLUDED
@@ -187,35 +188,25 @@ include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" {
 }
 # 
 # STRONG NEGATION INCLUDED
-# WITH NAF ALLOWED IN NEG
+# WITH NEGATION ALLOWED IN NEG
 #
 include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
   start |= notAllowed
   NegFormula.choice |=
-  SimpleFormula-node.choice
-  | And-fo-node.choice
-  | Or-fo-node.choice
-  | Negation-node.choice
-  | NegationAsFailure-node.choice
-  | Implication-fo-node.choice
-  | Forall-fo-node.choice
-  | Exists-fo-node.choice
+    SimpleFormula-node.choice
+    | And-fo-node.choice
+    | Or-fo-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-node.notallowed
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
 }
 # 
 # WEAK NEGATIONS INCLUDED
-# WITH NESTING ALLOWED
 #
 include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
   start |= notAllowed
-  NafFormula.choice |=
-  SimpleFormula-node.choice
-  | And-fo-node.choice
-  | Or-fo-node.choice
-  | Negation-node.choice
-  | NegationAsFailure-node.choice
-  | Implication-fo-node.choice
-  | Forall-fo-node.choice
-  | Exists-fo-node.choice
 }
 # 
 # NODE IDENTIFIERS INCLUDED

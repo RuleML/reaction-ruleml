@@ -13,14 +13,6 @@ dc:relation [ "http://reaction.ruleml.org/1.0" ]
 start = Node.choice | edge.choice
 include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" {
   start |= notAllowed
-  And-Query.Node.def =
-    
-    ##
-    element And { (And-Query-datt.choice & reAnd-Query.attlist), And.header, And-Query.main }
-  Or-Query.Node.def =
-    
-    ##
-    element Or { (Or-Query-datt.choice & reOr-Query.attlist), Or.header, Or-Query.main }
 }
 include "http://ruleml.org/1.0/relaxng/modules/asynchronous_stripe_skipping_entailment_expansion_module.rnc" {
   start |= notAllowed
@@ -131,6 +123,15 @@ include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
 }
 include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
   start |= notAllowed
+  NegFormula.choice |=
+    SimpleFormula-node.choice
+    | And-fo-node.choice
+    | Or-fo-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-node.notallowed
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
 }
 include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.rnc" {
   start |= notAllowed
@@ -182,7 +183,7 @@ include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.r
     | And-Query-node.choice
     | Or-Query-node.choice
     | Negation-node.choice
-    | NegationAsFailure-node.notallowed
+    | NegationAsFailure-node.choice
     | Implication-fo-node.choice
     | Forall-fo-node.choice
     | Exists-node.choice

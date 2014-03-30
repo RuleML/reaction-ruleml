@@ -87,7 +87,7 @@ AndQueryFormula.choice |=
   | And-Query-node.choice
   | Or-Query-node.choice
   | Negation-node.choice
-  | NegationAsFailure-node.choice
+  | NegationAsFailure-node.notallowed
   | Implication-fo-node.choice
   | Forall-fo-node.choice
   | Exists-fo-node.choice
@@ -115,7 +115,7 @@ OrQueryFormula.choice |=
   | And-Query-node.choice
   | Or-Query-node.choice
   | Negation-node.choice
-  | NegationAsFailure-node.choice
+  | NegationAsFailure-node.notallowed
   | Implication-fo-node.choice
   | Forall-fo-node.choice
   | Exists-fo-node.choice

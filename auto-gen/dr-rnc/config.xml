@@ -17,7 +17,7 @@
     <generateOptionalAttributes>true</generateOptionalAttributes>
     <valuesForContentType>RANDOM</valuesForContentType>
     <preferredNumberOfRepetitions>1</preferredNumberOfRepetitions>
-    <maximumRecursivityLevel>10</maximumRecursivityLevel>
+    <maximumRecursivityLevel>9</maximumRecursivityLevel>
     <alternativeStrategy>RANDOM</alternativeStrategy>
     <choicesAndSubstitutions strategy="RANDOM" generateOthersAsComments="false"/>
     <attribute namespace="&lt;ANY>" name="&lt;ANY>">

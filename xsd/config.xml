@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
   <schemaSystemId>file:/Users/taraathan/Repositories/RuleML/Github/reaction-ruleml/xsd/dr.xsd</schemaSystemId>
-  <documentRoot>Query</documentRoot>
-  <outputFolder>/Users/taraathan/Repositories/RuleML/Github/reaction-ruleml/xsd</outputFolder>
-  <filenamePrefix>instance-xsd-query</filenamePrefix>
+  <documentRoot>Assert</documentRoot>
+  <outputFolder>/Users/taraathan/Repositories/RuleML/Github/reaction-ruleml/auto-gen/dr-xsd</outputFolder>
+  <filenamePrefix>instance-xsd-assert</filenamePrefix>
   <filenameExtension>xml</filenameExtension>
   <noOfInstances>1</noOfInstances>
   <openFirstInstance>true</openFirstInstance>
@@ -16,10 +16,10 @@
   <namespaceMapping ns="http://purl.org/dc/elements/1.1/" proxy="dc"/>
   <element namespace="&lt;ANY>" name="&lt;ANY>">
     <generateOptionalElements>true</generateOptionalElements>
-    <generateOptionalAttributes>false</generateOptionalAttributes>
+    <generateOptionalAttributes>true</generateOptionalAttributes>
     <valuesForContentType>RANDOM</valuesForContentType>
     <preferredNumberOfRepetitions>1</preferredNumberOfRepetitions>
-    <maximumRecursivityLevel>10</maximumRecursivityLevel>
+    <maximumRecursivityLevel>9</maximumRecursivityLevel>
     <alternativeStrategy>RANDOM</alternativeStrategy>
     <choicesAndSubstitutions strategy="RANDOM" generateOthersAsComments="false"/>
     <attribute namespace="&lt;ANY>" name="&lt;ANY>">

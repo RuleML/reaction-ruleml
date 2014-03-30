@@ -38,7 +38,7 @@
 
 
 	<!--
-      *** generic connective operator ***
+      *** generic connective Operator ***
       
       	content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval)* )
@@ -64,5 +64,6 @@
 		<xs:group ref="ConnectiveOperator.content"/>
 		<xs:attributeGroup ref="ConnectiveOperator.attlist"/>
 	</xs:complexType>
-
+	<xs:element name="Operator" type="ConnectiveOperator.type"/>
+	
 </xs:schema>

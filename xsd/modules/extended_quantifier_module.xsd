@@ -67,7 +67,7 @@
 	<!--
 	make the quantifier constraint restrictions ("such that") optional
 	
-	(  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+	(  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Operator | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
 -->
 	<xs:group name="Exists-quantifier.content">
 		<xs:sequence>

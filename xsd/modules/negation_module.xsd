@@ -41,8 +41,8 @@
  		@key, @keyref, @node
 
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
 -->
 	<xs:attributeGroup name="Negation.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -88,8 +88,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Naf
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
 	-->
 	<xs:attributeGroup name="Naf.attlist">
 		<xs:attributeGroup ref="Negation.attlist"/>
@@ -116,8 +116,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-weak
 		
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
 	-->
 	<xs:attributeGroup name="weak.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -140,8 +140,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Neg
 		
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
 	-->
 	<xs:attributeGroup name="Neg.attlist">
 		<xs:attributeGroup ref="Negation.attlist"/>
@@ -168,8 +168,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-strong
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )	-->
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )	-->
 	<xs:attributeGroup name="strong.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>

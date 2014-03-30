@@ -61,6 +61,7 @@
 	<xs:include schemaLocation="modules/desc_module.xsd"/> <!-- extended descriptors in Reaction RuleML -->
 	<xs:include schemaLocation="modules/quantifier_module.xsd"/>
 	<xs:include schemaLocation="modules/connective_module.xsd"/>
+	<xs:include schemaLocation="modules/connective_operator_module.xsd"/>
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
@@ -175,12 +176,13 @@
          
      An internal group for the query connectives in the Reaction RuleML language
     
-     content model: (And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -195,12 +197,13 @@
      An internal group for the inner connectives in the Reaction RuleML language
     
     
-     content model: (And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -215,12 +218,13 @@
      An internal group for the outer connectives in the Reaction RuleML language
     
     
-     content model: (Negation | Neg | Equal )
+     content model: (Operator | Negation | Neg | Equal )
           
 	-->
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 

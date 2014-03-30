@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model ?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
+  
+  <!-- This example shows how deontic operators are defined as fluents in the Event Calclulus. -->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+
+    <!-- reified deontic EC rule: "if happens(p(X),T) and holds(obliged(not(p(X))),T) then initiates(p(X),obliged(not(q(X))),T)"   -->
+    
+    <Rule>
+      <if>
+        <And>
+          
+          <Happens>
+            <Action><Expr><Fun>p</Fun><Var>X</Var></Expr></Action>
+            <Time><Var>T</Var></Time>
+          </Happens>
+          
+          <Holds>
+            <Situation>
+              <Expr per="modal">
+                <Fun per="modal" iri="ruleml:Obliged"/>
+                <Expr per="modal">
+                    <Fun iri="ruleml:Neg"/>
+                    <Expr><Fun>p</Fun><Var>X</Var></Expr>
+                </Expr>  
+              </Expr>            
+            </Situation>
+            <Time><Var mode="+">T</Var></Time>
+          </Holds>  
+          
+        </And>  
+      </if>
+      <then>
+        <Initiates>
+          <Action><Expr><Fun per="value">p</Fun><Var>X</Var></Expr></Action>
+          <Situation>
+            <Expr per="modal">
+              <Fun per="modal" iri="ruleml:Obliged"/>
+              <Expr per="modal">
+                <Fun iri="ruleml:Neg"/>
+                <Expr><Fun>p</Fun><Var>X</Var></Expr>
+              </Expr>  
+            </Expr>            
+          </Situation>
+          <Time><Var mode="+">T</Var></Time>
+        </Initiates> 
+      </then>
+    </Rule>
+
+    <!-- reified deontic EC rule using Reify: "if happens(p(X),T) and holds(obliged(not(p(X))),T) then initiates(p(X),obliged(not(q(X))),T)"   -->
+    
+    <Rule>
+      <if>
+        <And>
+          
+          <Happens>
+            <Action><Reify><Atom><Rel>p</Rel><Var>X</Var></Atom></Reify></Action>
+            <Time><Var>T</Var></Time>
+          </Happens>
+          
+          <Holds>
+            <Situation>
+              <Reify>
+                <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+                  <Neg>
+                    <Atom><Rel>p</Rel><Var>X</Var></Atom>
+                  </Neg>
+                </Operator>
+              </Reify>              
+            </Situation>
+            <Time><Var mode="+">T</Var></Time>
+          </Holds>  
+          
+        </And>  
+      </if>
+      <then>
+        <Initiates>
+          <Action><Reify><Atom><Rel per="value">p</Rel><Var>X</Var></Atom></Reify></Action>
+          <Situation>
+            <Reify>
+              <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+                <Neg>
+                  <Atom><Rel>q</Rel><Var>X</Var></Atom>
+                </Neg>
+              </Operator>
+            </Reify>              
+          </Situation>          
+          <Time><Var mode="+">T</Var></Time>
+        </Initiates> 
+      </then>
+    </Rule>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+
+  <!-- Query with using reified modal expressions -->
+  <Query>
+    <Holds>
+      <Situation>
+          <Expr per="modal">
+            <Fun per="modal" iri="ruleml:Obliged"/>
+            <Expr per="modal">
+              <Fun iri="ruleml:Neg"/>
+              <Expr><Fun>p</Fun><Var>X</Var></Expr>
+            </Expr>  
+          </Expr>            
+      </Situation>
+      <Time><Ind>t1</Ind></Time>
+    </Holds>
+  </Query>
+
+  <!-- Query using Reify -->
+  <Query>
+    <Holds>
+      <Situation>
+        <Reify>
+          <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+            <Neg>
+              <Atom><Rel>q</Rel><Var>X</Var></Atom>
+            </Neg>
+          </Operator>        
+        </Reify>
+      </Situation>  
+      <Time><Ind>t1</Ind></Time>
+    </Holds>
+  </Query>
+</RuleML>

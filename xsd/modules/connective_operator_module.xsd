@@ -54,7 +54,7 @@
 	<xs:group name="ConnectiveOperator.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
-			<xs:choice>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element name="formula" type="formula-rulebase.type"/>
 				<xs:group ref="formula-rulebase.content"/>
 			</xs:choice>

@@ -188,7 +188,7 @@ This example shows how the generic Operator is used as modal connective in modal
             <Time><Var mode="+">T</Var></Time>
           </Atom>  
           
-        </And>  
+        </Operator>  
       </if>
       <then>
         <Atom>

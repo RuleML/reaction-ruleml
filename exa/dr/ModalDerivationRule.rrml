@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model ?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../xsd/dr.xsd">
+  <!-- 
+This example shows how the generic Operator is used as modal connective in modal logic programs
+
+-->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+    
+    <!-- it is possible that -->
+    <Operator type="ruleml:AlethicOperator" iri="ruleml:Possible">
+      <Atom>
+        <Rel per="modal">p</Rel>
+      </Atom>
+    </Operator>
+
+    <!-- it is not necessary that not  (= it is possible that) -->
+    <Neg>
+      <Operator type="ruleml:AlethicOperator" iri="ruleml:Necessary">
+        <Neg>
+          <Atom>
+            <Rel per="modal">p</Rel>
+          </Atom>
+        </Neg>
+      </Operator>
+    </Neg>
+
+    <Equivalent>
+      <!-- it is not necessary that -->
+      <Neg>
+        <Operator type="ruleml:AlethicOperator" iri="ruleml:Necessary">
+          <Atom>
+            <Rel per="modal">p</Rel>
+          </Atom>
+        </Operator>
+      </Neg>
+      <!-- it is possible that not -->
+      <Operator type="ruleml:AlethicOperator" iri="ruleml:Possible">        
+        <Neg>
+          <Atom>
+            <Rel per="modal">p</Rel>
+          </Atom>
+        </Neg>
+      </Operator>
+    </Equivalent>
+ 
+    <!-- For all X it is necessary that p(X) -->
+    <Forall>
+      <Var>X</Var>
+      <Operator type="ruleml:AlethicOperator" iri="ruleml:Necessary">
+        <Atom>
+          <Rel per="modal">p</Rel>
+          <Var>X</Var>
+        </Atom>
+      </Operator>
+    </Forall>
+
+    <!-- Barcan formulae: it is necessary that for all X it is p(X) (= For all X it is necessary that p(X)) -->
+    <Operator type="ruleml:AlethicOperator" iri="ruleml:Necessary">
+      <Atom>
+        <quantification>
+          <Forall><Var>X</Var></Forall>
+        </quantification>
+        <Rel per="modal">p</Rel>
+        <Var>X</Var>
+      </Atom>
+    </Operator>  
+       
+       
+    <!-- modal rule: "if obliged(p(X)) then permitted(p(X))" -->    
+    <Rule>
+      <if>
+        <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">            
+          <Atom>
+            <Rel per="modal">p</Rel>
+            <Var>X</Var>
+          </Atom>
+        </Operator>
+      </if>
+      <then>
+        <Operator type="ruleml:DeonticOperator" iri="ruleml:Permitted"> 
+          <Atom>
+            <Rel per="modal">p</Rel>
+            <Var>X</Var>
+          </Atom>
+        </Operator>   
+      </then>
+    </Rule>
+    
+    
+    <!-- modal rule: "obliged(if p(X) then q(X))" -->
+    
+    <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+      <Rule>
+        <if>
+          <Atom>
+              <Rel per="modal">p</Rel>
+              <Var>X</Var>
+          </Atom>
+        </if>
+        <then>
+          <Atom>
+              <Rel per="modal">q</Rel>
+              <Var>X</Var>
+          </Atom>
+        </then>
+      </Rule>
+    </Operator>
+
+    <!-- modal rule: "if obliged(p(X)) then obliged(q(X))" -->
+    
+   <Rule>
+        <if>
+          <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">            
+              <Atom>
+                <Rel per="modal">p</Rel>
+                <Var>X</Var>
+              </Atom>
+          </Operator>  
+        </if>
+        <then>
+          <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged"> 
+            <Atom>
+              <Rel per="modal">q</Rel>
+              <Var>X</Var>
+            </Atom>
+          </Operator>   
+        </then>
+   </Rule>
+
+    <!-- modal rule: "if obliged(neg(p(X))) and p(X) then obliged(q(X))" (Contrary-to-duty obligation) -->
+    
+    <Rule>
+      <if>
+        <And>
+          <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+            <Neg>            
+              <Atom>
+                <Rel per="modal">p</Rel>
+                <Var>X</Var>
+              </Atom>
+            </Neg>  
+          </Operator>
+
+          <Atom>
+            <Rel per="value">p</Rel>
+            <Var>X</Var>
+          </Atom>
+          
+        </And>  
+      </if>
+      <then>
+        <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged"> 
+          <Atom>
+            <Rel per="modal">q</Rel>
+            <Var>X</Var>
+          </Atom>
+        </Operator>   
+      </then>
+    </Rule>
+
+
+    <!-- reified modal rule: "if happens(p(X),T) and holds(forbidden(p(X)),T) then initiates(p(X),obliged(q(X)),T)" 
+        (note: in KR Reaction RuleML this Event Calculus formalization is directly supported)  -->
+    
+    <Rule>
+      <if>
+        <And>
+          
+          <Atom>
+            <Rel per="value" iri="ruleml:Happens"/>
+            <Expr><Fun per="value">p</Fun><Var>X</Var></Expr>
+            <Time><Var>T</Var></Time>
+          </Atom>
+          
+          <Atom>
+            <Rel per="value" iri="ruleml:Holds"/>
+            <Expr>
+              <Fun per="modal" iri="ruleml:Forbidden"/>
+              <Expr><Fun per="modal">p</Fun><Var>X</Var></Expr>
+            </Expr>
+            <Time><Var mode="+">T</Var></Time>
+          </Atom>  
+          
+        </And>  
+      </if>
+      <then>
+        <Atom>
+          <Rel per="value" iri="ruleml:Initiates"/>
+          <Expr><Fun per="value">p</Fun><Var>X</Var></Expr>
+          <Expr>
+            <Fun per="modal" iri="ruleml:Obliged"/>
+            <Expr><Fun per="modal">q</Fun><Var>X</Var></Expr>
+          </Expr>
+          <Time><Var mode="+">T</Var></Time>
+        </Atom> 
+      </then>
+    </Rule>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <Query>
+    <Neg>
+      <Operator type="ruleml:AlethicOperator" iri="ruleml:necessary">
+        <Atom>
+          <Rel per="modal">p</Rel>
+        </Atom>
+      </Operator>
+    </Neg>
+  </Query>
+  
+  <Query>
+    <Operator type="ruleml:AlethicOperator" iri="ruleml:possible">        
+      <Neg>
+        <Atom>
+          <Rel per="modal">p</Rel>
+        </Atom>
+      </Neg>
+    </Operator>
+  </Query>
+  
+</RuleML>

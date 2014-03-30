@@ -67,6 +67,7 @@
 	<xs:attributeGroup name="formula-negation.attlist"/>
 	<xs:group name="formula-negation.content">
 		<xs:choice>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="Atom" type="Atom.type"/>
 			<xs:element ref="Equal"/>
 			<xs:element ref="Negation"/>

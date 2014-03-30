@@ -41,8 +41,8 @@
       *** generic connective operator ***
       
       	content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
 
 	-->
 	<xs:attributeGroup name="ConnectiveOperator.attlist">
@@ -55,8 +55,8 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:choice>
-				<xs:element name="formula" type="formula-and-or.type"/>
-				<xs:group ref="formula-and-or.content"/>
+				<xs:element name="formula" type="formula-rulebase.type"/>
+				<xs:group ref="formula-rulebase.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>

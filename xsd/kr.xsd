@@ -65,6 +65,8 @@
 	<xs:include schemaLocation="modules/spatial_module.xsd"/>	
 	<xs:include schemaLocation="modules/interval_module.xsd"/>
 	
+	<xs:include schemaLocation="modules/spatial_temporal_interval_algebra_module.xsd"/>
+	
 	<!-- include from the knowledge representation (KR) rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/situation_module.xsd" />
 	<xs:include schemaLocation="modules/situationreasoning_module.xsd" />

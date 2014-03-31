@@ -82,7 +82,11 @@
 	<xs:include schemaLocation="../modules/time_module.xsd"/>
 	<xs:include schemaLocation="../modules/spatial_module.xsd"/>	
 	<xs:include schemaLocation="../modules/interval_module.xsd"/>
+	
+	<xs:include schemaLocation="../modules/connective_operator_module.xsd"/>
 
+	<!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
+	<xs:include schemaLocation="../modules/spatial_temporal_interval_algebra_module.xsd"/>
 
 	<!--
      metadata group
@@ -130,8 +134,8 @@
 			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:group>
-
-
+	
+	
 	<!--
          
      An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
@@ -173,12 +177,13 @@
          
      An internal group for the query connectives in the Reaction RuleML language
     
-     content model: (And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
+			<xs:element ref="Operator"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -193,12 +198,13 @@
      An internal group for the inner connectives in the Reaction RuleML language
     
     
-     content model: (And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
+			<xs:element ref="Operator"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -213,12 +219,13 @@
      An internal group for the outer connectives in the Reaction RuleML language
     
     
-     content model: (Negation | Neg | Equal )
+     content model: (Operator | Negation | Neg | Equal )
           
 	-->
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
+			<xs:element ref="Operator"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 
@@ -308,40 +315,39 @@
 			<xs:element ref="Interval"/>	
 		</xs:choice>
 	</xs:group>
-
+	
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
-		in DR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
+			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
-
+	
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
-		in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		in DR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
 	-->
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
+			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
-
+	
 	<!-- Interval primitives
 		content model: 
-		in ([Time,Time?] | [Spatial, Spatial?] | [Interval, Interval?] | [(Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Skolem | Var | Reify | Expr | Plex | Time | Spatial | Interval)?]) -->
+		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  -->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>
-			<xs:sequence>
-				<xs:group ref="arg.content"/>
-				<xs:group ref="arg.content" minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>	
-			
+			<xs:group ref="arg.content"/>	
+			<xs:group ref="interval_algebra_group.content"/>			
 		</xs:choice>
 	</xs:group>
-
+	
 	<!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
 		in DR Reaction RuleML: ()
@@ -350,7 +356,7 @@
 		<xs:choice>
 		</xs:choice>
 	</xs:group>
-
+	
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
 		in DR Reaction RuleML: ()
@@ -359,7 +365,7 @@
 		<xs:choice>
 		</xs:choice>
 	</xs:group>
-
+	
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		in DR Reaction RuleML: ()
@@ -368,7 +374,7 @@
 		<xs:choice>
 		</xs:choice>
 	</xs:group>
-
+	
 	<!--
     *** @style ***
     
@@ -377,7 +383,7 @@
 	 optional attribute
 -->
 	<xs:attributeGroup name="style.attrib">
-		<xs:attribute name="style" type="style.datatype" use="optional" default="reasoning"/>
+		<xs:attribute name="style" type="style.datatype" use="optional"/>
 	</xs:attributeGroup>
 
 </xs:schema>

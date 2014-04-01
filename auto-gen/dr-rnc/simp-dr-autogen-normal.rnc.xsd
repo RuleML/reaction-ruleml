@@ -716,6 +716,7 @@
             <xs:enumeration value="value"/>
             <xs:enumeration value="open"/>
             <xs:enumeration value="effect"/>
+            <xs:enumeration value="modal"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -782,6 +783,7 @@
             <xs:enumeration value="value"/>
             <xs:enumeration value="open"/>
             <xs:enumeration value="effect"/>
+            <xs:enumeration value="modal"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -3422,6 +3424,7 @@
             <xs:group ref="spec:Or"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Naf"/>
             <xs:group ref="spec:Exists"/>
             <xs:element ref="spec:Quantifier"/>
           </xs:choice>
@@ -3703,6 +3706,8 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
       </xs:choice>
       <xs:attribute name="key">
         <xs:simpleType>
@@ -4602,6 +4607,8 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
           </xs:choice>
           <xs:attribute name="key">
             <xs:simpleType>

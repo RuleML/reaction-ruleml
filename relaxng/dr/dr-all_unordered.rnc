@@ -273,6 +273,12 @@ include "../modules/dr-all_module.rnc" {
 include "../modules/any_content_expansion_module.rnc" {
   start |= notAllowed
 }
+include "../modules/per_effect_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/per_modal_expansion_module.rnc" {
+  start |= notAllowed
+}
 include "../modules/stripe_skipping_expansion_module.rnc" {
   start |= notAllowed
 }

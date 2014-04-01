@@ -427,5 +427,11 @@ include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" inheri
 include "../modules/dr-all_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+include "../modules/per_effect_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/per_modal_expansion_module.rnc" {
+  start |= notAllowed
+}
 include "../modules/ordered_groups_expansion_module.rnc" inherit = ruleml {start |= notAllowed}
 

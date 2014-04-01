@@ -1,0 +1,18 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Effects in Reaction RuleML" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Effects" ]
+dc:description [
+  "The expansion module for predicates and relations with effects."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+start |= notAllowed
+
+## the interpretation attribute may also have the "effect" value, indicating an effectful evaluation
+interpretation_non-default.value |= "effect"

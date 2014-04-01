@@ -132,7 +132,7 @@ closure.attrib = closure-att.choice?
 # *** Atom ***
 Atom = Atom-node.choice
 # *** Rel ***
-reRel.attlist &= per-effect-att.choice?
+reRel.attlist &= per-rel-att.choice?
 # *** slot ***
 slot.choice |= slot-edge.choice
 # *** arg ***
@@ -309,21 +309,15 @@ safety.attrib.def = attribute safety { safety.datatype }
 safety.datatype |= "non-interrupting" | "interrupting" | "transactional"
 # *** @per ***
 
-## the interpretation attribute may also have the "effect" value, indicating an effectful evaluation
-interpretation_non-default.value |= "effect"
-
-## @per: an attribute indicating the execution/interpretation semantics of a function or expression. See
+## @per: an attribute indicating the execution/interpretation semantics of a relation. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@per
-per-effect-att.choice |= per-effect.attrib.def
-per-effect.attrib.def = attribute per { per-effect.datatype }
+per-rel-att.choice |= per-rel.attrib.def
+per-rel.attrib.def = attribute per { per-rel.datatype }
 
 ## the interpretation attribute on relations can take all values allowed for the
 ## interpretation attribute on functions
-per-effect.datatype |= interpretation.value
+per-rel.datatype |= interpretation.value
 
-## the interpretation attribute on relations can also have a value "modal",
-## indicating interpretation as a modal operator
-per-effect.datatype |= "modal"
 # *** @size ***
 
 ## @size: an attribute acting as a counter for the number of occurences of events, actions and updates. See

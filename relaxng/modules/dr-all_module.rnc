@@ -74,8 +74,7 @@ formula_And-query-edge.choice |= formula_And-query.edge.def
 ## Within And ...
 formula_And-query.edge.def =
   
-  ## <formula>: contains a single formula. See  
-  ## http://www.ruleml.org/1.0/glossary/#gloss-formula
+  ##
   element formula { formula_And.attlist? & formula_And-query.content }
 
 ## Formulas within conjunctions consist of a single formula
@@ -102,8 +101,7 @@ formula_Or-query-edge.choice |= formula_Or-query.edge.def
 ## Within Or ...
 formula_Or-query.edge.def =
   
-  ## <formula>: contains a single formula. See  
-  ## http://www.ruleml.org/1.0/glossary/#gloss-formula
+  ## 
   element formula { formula_Or.attlist? & formula_Or-query.content }
 
 ## Formulas within conjunctions consist of a single formula
@@ -533,7 +531,7 @@ edge.choice |= arg_spatial
 Node.choice |= Interval_formula
 Interval_term =
   
-  ## <Time>: generic Interval element. See
+  ## <Interval>: generic Interval element. See
   ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Interval
   element Interval { Interval_term.type.def }
 Interval_formula = element Interval { Interval_formula.type.def }

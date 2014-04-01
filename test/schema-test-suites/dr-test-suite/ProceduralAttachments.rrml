@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+
+
+<!-- Procedural Attachments with constructor calls, object - variable bindings, static and dynamic method calls -->
+<RuleML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd" xmlns="http://ruleml.org/spec">
+  
+  
+  
+<!-- ContractLog/Prova formalization (ISO Prolog syntax)
+    
+% rule example 1 with constructor call, variable binding and later method call
+files(Files) :- 
+	Dir=java.io.File("."),
+	Files=Dir.list().
+	
+% rule example 2 with static method call
+date(T) :-
+	T = java.util.Calendar.getInstance().
+	
+% rule example 3 with call to C# instead of Java
+println(Out):-	
+	System.Console.WriteLine(Out)
+	
+ -->
+
+  
+  
+  
+  <Assert>
+    
+    <Rule>	
+      <if>
+        <And>
+          
+          <Equal>				  
+            <Var>Dir</Var>				      
+            <Expr>		
+              
+<!-- class -->
+
+              <oid><Ind iri="java://java.io.File"/></oid> 
+              
+<!-- constructor  -->
+
+              <Fun per="effect">new</Fun>
+              
+<!-- argument 1 -->
+
+              <Ind>.</Ind>
+            </Expr>
+            
+          </Equal>
+          
+          <Equal>				    
+            <Var>Files</Var>
+            <Expr>
+              
+<!-- object previously bound to variable -->
+
+              <oid><Var>Dir</Var></oid>
+              
+<!-- method -->
+
+              <Fun per="effect">list</Fun>
+              
+<!-- no arguments -->
+
+            </Expr>
+          </Equal>
+        </And>
+      </if>		
+      <then>
+        <Atom>
+          <op><Rel>files</Rel></op>
+          <Var>Files</Var>
+        </Atom>
+      </then>
+      
+    </Rule>
+    
+    
+    <Rule>	
+      <if>
+        <And>
+          <Equal>				  
+            <Var>T</Var>
+            <Expr>
+              
+<!-- class -->
+
+              <oid><Ind iri="java.util.Calendar"/></oid>				           				       
+              
+<!-- static method -->
+
+              <Fun>getInstance</Fun>
+            </Expr>
+          </Equal>
+        </And>
+      </if>
+      <then>
+        <Atom>
+          <op><Rel>date</Rel></op>
+          <Var>T</Var>
+        </Atom>
+      </then>
+    </Rule>	
+    
+    <Rule>
+      <if>
+        <Atom>
+          
+<!-- C# class -->
+
+          <oid><Ind iri="c-sharp://System.Console"/></oid>
+          
+<!-- method -->
+
+          <Rel iri="WriteLine"/>
+          
+<!-- argument 1 -->
+
+          <Var>Out</Var>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <Rel>println</Rel>
+          <Var>Out</Var>
+        </Atom>
+      </then>
+    </Rule>
+    
+    
+  </Assert>
+  
+</RuleML>

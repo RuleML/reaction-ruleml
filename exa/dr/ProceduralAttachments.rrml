@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
 
 
 <!-- Procedural Attachments with constructor calls, object - variable bindings, static and dynamic method calls -->
 <RuleML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://ruleml.org/spec ../../xsd/dr.xsd" xmlns="http://ruleml.org/spec">
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd" xmlns="http://ruleml.org/spec">
   
   
   
@@ -39,7 +40,7 @@ println(Out):-
               
 <!-- class -->
 
-              <!--<oid xmlns="http://www.ruleml.org/0.91/xsd"><Ind xmlns="http://ruleml.org/spec" iri="java://java.io.File"/></oid>--> 
+              <oid><Ind iri="java://java.io.File"/></oid> 
               
 <!-- constructor  -->
 
@@ -58,7 +59,7 @@ println(Out):-
               
 <!-- object previously bound to variable -->
 
-              <!--<oid xmlns="http://www.ruleml.org/0.91/xsd"><Var xmlns="http://ruleml.org/spec">Dir</Var></oid>-->
+              <oid><Var>Dir</Var></oid>
               
 <!-- method -->
 
@@ -89,7 +90,7 @@ println(Out):-
               
 <!-- class -->
 
-              <!--<oid xmlns="http://www.ruleml.org/0.91/xsd"><Ind xmlns="http://ruleml.org/spec" iri="java.util.Calendar"/></oid>-->				           				        
+              <oid><Ind iri="java.util.Calendar"/></oid>				           				       
               
 <!-- static method -->
 
@@ -112,7 +113,7 @@ println(Out):-
           
 <!-- C# class -->
 
-          <!--<oid xmlns="http://www.ruleml.org/0.91/xsd"><Ind xmlns="http://ruleml.org/spec" iri="c-sharp://System.Console"/></oid>-->
+          <oid><Ind iri="c-sharp://System.Console"/></oid>
           
 <!-- method -->
 

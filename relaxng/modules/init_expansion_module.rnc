@@ -18,6 +18,7 @@ formula_Or-query.content |= notAllowed
 if.content |= notAllowed
 then.content |= notAllowed
 slot-edge.choice |= notAllowed
+formula_Rulebase-edge.choice |= notAllowed
 
 ## RR patterns
 formula-negation.content |= notAllowed

@@ -560,13 +560,19 @@ edge.choice |= arg_interval
 #                  * Finishes
 
 # (After | Before | Any | Every | Timer | Operator)
-spatial_temporal_algebra_group.content |= After | Before | Every | Any | Timer | Operator_any
-Operator_any =
+spatial_temporal_algebra_group.content |= After | Before | Every | Any | Timer | Operator_any_term
+Operator_any_term =
   
   ## <Operator>: a generic Operator element which can be overloaded. See
   ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Operator    
   element Operator { Any.type.def }
-Node.choice |= Operator_any
+Operator_any_formula.choice |= Operator_any_formula.def
+Operator_any_formula.def = element Operator {Operator_any_formula.type.def}
+Operator_any_formula.type.def = Operator_any_formula.attlist, Operator_any_formula.content
+Operator_any_formula.attlist &= generic-Node.attlist?
+Operator_any_formula.content |= Node.header, formula_Rulebase-edge.choice
+Node.choice |= Operator_any_formula.def
+SimpleFormula-node.choice |= Operator_any_formula.choice
 # (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator)
 interval_algebra_group.content |=
   During

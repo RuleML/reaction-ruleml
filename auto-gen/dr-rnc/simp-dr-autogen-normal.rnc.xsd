@@ -2048,7 +2048,7 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
             <xs:element minOccurs="0" ref="spec:oid"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:arg_4"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_7"/>
           </xs:sequence>
           <xs:attribute name="iri" type="xs:anyURI"/>
           <xs:attribute name="type">
@@ -2949,6 +2949,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
             <xs:element ref="spec:Implies"/>
@@ -3007,6 +3008,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:group ref="spec:And"/>
             <xs:group ref="spec:Or"/>
             <xs:element ref="spec:Neg"/>
@@ -3110,6 +3112,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:group ref="spec:And_2"/>
             <xs:group ref="spec:Or_2"/>
             <xs:element ref="spec:Neg"/>
@@ -3164,6 +3167,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:group ref="spec:And_2"/>
             <xs:group ref="spec:Or_2"/>
             <xs:element ref="spec:Neg"/>
@@ -3218,6 +3222,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
           </xs:choice>
@@ -3269,6 +3274,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:group ref="spec:And_2"/>
             <xs:group ref="spec:Or_2"/>
             <xs:element ref="spec:Neg"/>
@@ -3364,6 +3370,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
             <xs:element ref="spec:Implies"/>
@@ -3420,6 +3427,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:group ref="spec:And"/>
             <xs:group ref="spec:Or"/>
             <xs:element ref="spec:Neg"/>
@@ -3521,6 +3529,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
             <xs:element ref="spec:Implies"/>
@@ -3706,6 +3715,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
       </xs:choice>
@@ -3753,6 +3763,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
       </xs:choice>
@@ -3800,6 +3811,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
         <xs:element ref="spec:Implies"/>
@@ -3855,6 +3867,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
       </xs:choice>
@@ -4256,6 +4269,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:group ref="spec:And"/>
         <xs:group ref="spec:Or"/>
         <xs:element ref="spec:Neg"/>
@@ -4311,6 +4325,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:group ref="spec:And_2"/>
         <xs:group ref="spec:Or_2"/>
         <xs:element ref="spec:Neg"/>
@@ -4404,6 +4419,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:group ref="spec:And"/>
         <xs:group ref="spec:Or"/>
         <xs:element ref="spec:Neg"/>
@@ -4459,6 +4475,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
         <xs:element ref="spec:Implies"/>
@@ -4558,6 +4575,7 @@
         <xs:element ref="spec:Time"/>
         <xs:element ref="spec:Spatial"/>
         <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
       </xs:choice>
@@ -4607,6 +4625,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
           </xs:choice>
@@ -4667,7 +4686,7 @@
             <xs:element ref="spec:Every"/>
             <xs:element ref="spec:Any"/>
             <xs:element ref="spec:Timer"/>
-            <xs:group ref="spec:Operator"/>
+            <xs:group ref="spec:Operator_2"/>
           </xs:choice>
           <xs:attribute name="index" type="xs:positiveInteger"/>
           <xs:attribute name="key">
@@ -4727,7 +4746,7 @@
             <xs:element ref="spec:Every"/>
             <xs:element ref="spec:Any"/>
             <xs:element ref="spec:Timer"/>
-            <xs:group ref="spec:Operator"/>
+            <xs:group ref="spec:Operator_2"/>
           </xs:choice>
           <xs:attribute name="index" type="xs:positiveInteger"/>
           <xs:attribute name="key">
@@ -4790,7 +4809,7 @@
             <xs:element ref="spec:Meets"/>
             <xs:group ref="spec:Equal_2"/>
             <xs:element ref="spec:Finishes"/>
-            <xs:group ref="spec:Operator_2"/>
+            <xs:group ref="spec:Operator_3"/>
           </xs:choice>
           <xs:attribute name="index" type="xs:positiveInteger"/>
           <xs:attribute name="key">
@@ -4890,6 +4909,7 @@
             <xs:element ref="spec:Time"/>
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
             <xs:element ref="spec:Implies"/>
@@ -5264,6 +5284,78 @@
       </xs:element>
     </xs:sequence>
   </xs:group>
+  <xs:group name="Operator_2">
+    <xs:sequence>
+      <xs:element name="Operator">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:element minOccurs="0" ref="spec:oid"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:arg_4"/>
+          </xs:sequence>
+          <xs:attribute name="iri" type="xs:anyURI"/>
+          <xs:attribute name="type">
+            <xs:simpleType>
+              <xs:union memberTypes="xs:anyURI">
+                <xs:simpleType>
+                  <xs:restriction base="xs:Name">
+                    <xs:pattern value="[\i-[:]][/\c-[:]]*"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="node" type="xs:anyURI"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
   <xs:group name="Equal_2">
     <xs:sequence>
       <xs:element name="Equal">
@@ -5337,7 +5429,7 @@
       </xs:element>
     </xs:sequence>
   </xs:group>
-  <xs:group name="Operator_2">
+  <xs:group name="Operator_3">
     <xs:sequence>
       <xs:element name="Operator">
         <xs:complexType>

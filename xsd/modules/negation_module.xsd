@@ -64,7 +64,9 @@
 		<xs:attributeGroup ref="Negation.attlist"/>
 	</xs:complexType>
 	<xs:element name="Negation" type="Negation.type"/>
-	<xs:attributeGroup name="formula-negation.attlist"/>
+	<xs:attributeGroup name="formula-negation.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
 	<xs:group name="formula-negation.content">
 		<xs:choice>
 			<xs:element name="Operator" type="ConnectiveOperator.type"/>

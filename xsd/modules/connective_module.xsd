@@ -314,6 +314,7 @@
 	-->
   <xs:attributeGroup name="And-inner.attlist">
     <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="And-query.attlist">
     <xs:attributeGroup ref="closure.attrib"/>
@@ -359,6 +360,7 @@
   </xs:attributeGroup>
   <xs:attributeGroup name="Or-inner.attlist">
     <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Or.content">
     <xs:sequence>

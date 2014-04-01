@@ -54,7 +54,9 @@
     <xs:attribute name="node" type="xs:anyURI" use="optional"/>
   </xs:attributeGroup>
 
-  <xs:attributeGroup name="oid.attlist"/>
+  <xs:attributeGroup name="oid.attlist">
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
   <xs:group name="oid.content">
     <xs:choice>
       <xs:element ref="Ind"/>

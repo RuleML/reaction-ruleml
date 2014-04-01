@@ -73,7 +73,7 @@
 		<!-- a user-defined functional time definition defining a time function "datetime" -->
 		<formula><Time>
 			<arg><Expr per="copy">
-				<op><Fun per="copy">datetime</Fun></op>
+				<op><Fun per="copy" val="0..">datetime</Fun></op>
 				<arg index="1"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg>
 			</Expr></arg>
 		</Time></formula>
@@ -108,9 +108,9 @@
 		<!-- "at any Friday, Saturday, and Sunday" -->
 		<formula><Time>
 			<arg><Any>
-				<arg index="1"><Time><Ind>Friday</Ind></Time></arg>
-				<arg index="2"><Time><Ind>Saturday</Ind></Time></arg>
-				<arg index="3"><Time><Ind>Sunday</Ind></Time></arg>
+			  <arg index="1"><Time><arg><Ind>Friday</Ind></arg></Time></arg>
+				<arg index="2"><Time><arg><Ind>Saturday</Ind></arg></Time></arg>
+				<arg index="3"><Time><arg><Ind>Sunday</Ind></arg></Time></arg>
 			</Any></arg>     
 		</Time></formula>
 
@@ -137,7 +137,7 @@
 			<arg index="1"><Time type="ruleml:TimePoint"><arg><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg></Time></arg>
 			<arg index="2"><Time type="ruleml:TimePoint">
 				<!-- after a period of  five years, two months, and 10 days -->
-				<arg><After><Time type="ruleml:TimeInterval"><Data xsi:type="xs:duration">P5Y2M10D</Data></Time></After></arg>
+				<arg><After><arg><Time type="ruleml:TimeInterval"><arg><Data xsi:type="xs:duration">P5Y2M10D</Data></arg></Time></arg></After></arg>
 			</Time></arg>
 		</Interval></formula>
 		
@@ -199,8 +199,8 @@
    					<!-- [t1,t2] starts [t1,t4] -->
    					<formula><Interval>
 	   					<arg index="1"><Starts>
-	   						<arg index="1"><Interval><arg index="1"><Time><Ind>t1</Ind></Time></arg><arg index="2"><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
-	   						<arg index="2"><Interval><arg index="2"><Time><Ind>t1</Ind></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
+	   						<arg index="1"><Interval><arg index="1"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
+	   						<arg index="2"><Interval><arg index="2"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
 	   					</Starts></arg>
    					</Interval></formula>
    					

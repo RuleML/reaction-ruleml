@@ -182,7 +182,7 @@ This example shows how the generic Operator is used as modal connective in modal
           <Atom>
             <Rel per="value" iri="ruleml:Holds"/>
             <Expr>
-              <Fun per="modal" iri="ruleml:Forbidden"/>
+              <Fun per="value" iri="ruleml:Forbidden"/>
               <Expr><Fun per="modal">p</Fun><Var>X</Var></Expr>
             </Expr>
             <Time><Var mode="+">T</Var></Time>
@@ -195,7 +195,7 @@ This example shows how the generic Operator is used as modal connective in modal
           <Rel per="value" iri="ruleml:Initiates"/>
           <Expr><Fun per="value">p</Fun><Var>X</Var></Expr>
           <Expr>
-            <Fun per="modal" iri="ruleml:Obliged"/>
+            <Fun per="value" iri="ruleml:Obliged"/>
             <Expr><Fun per="modal">q</Fun><Var>X</Var></Expr>
           </Expr>
           <Time><Var mode="+">T</Var></Time>

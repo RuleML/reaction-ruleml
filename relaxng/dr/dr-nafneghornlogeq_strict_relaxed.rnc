@@ -374,7 +374,7 @@ include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" {
   start |= notAllowed
 }
 #
-include "../modules/any_content_expansion_module.rnc" {
+include "../modules/any_content_strict_expansion_module.rnc" {
   start |= notAllowed
 }
 include "../modules/attributes_expansion_module.rnc" {

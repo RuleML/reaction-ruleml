@@ -1,0 +1,18 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- First Order Logic" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, First Order Logic" ]
+dc:description [
+  "The expansion module for first-order logic."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "http://ruleml.org/1.0/relaxng/modules/folog_cl_expansion_module.rnc" {
+}
+NegationAsFailure-fo-node.choice |= NegationAsFailure-node.choice
+Quantifier-fo-node.choice |= Quantifier

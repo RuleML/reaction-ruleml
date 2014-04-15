@@ -1,0 +1,25 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation" ]
+dc:description [
+  "The expansion module for reserved spatial and temporal predicates and relations."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "dr-all_module.rnc" {
+
+
+# Restricted from
+# AndQueryFormula.choice |= Quantifier-node.choice
+# OrQueryFormula.choice |= Quantifier-node.choice
+# PremiseFormula.choice |= Quantifier-node.choice
+AndQueryFormula.choice |= Quantifier-fo-node.choice
+OrQueryFormula.choice |= Quantifier-fo-node.choice
+PremiseFormula.choice |= Quantifier-fo-node.choice
+}

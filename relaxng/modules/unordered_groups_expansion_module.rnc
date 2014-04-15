@@ -6,21 +6,29 @@ dc:version [ "1.0" ]
 dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
 dc:creator [ "Adrian Paschke" ]
 dc:subject [ "RuleML, Reaction, positional independence" ]
-dc:description [
-  "The expansion module for positional independence."
-]
+dc:description [ "The expansion module for positional independence." ]
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-start |= notAllowed
-
+# 
+# ORDER MODE - UNORDERED GROUPS ENABLED
+# REFACTORED TO ACCOMMODATE OIDS ON ALL NODES
+#
+include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" {
+  start |= notAllowed
+  Atom.header &= (Node.header? & degree-edge.choice?)?
+  Expr.header &= Node.header?
+  Implies.main |=
+    (if_Rule-edge.choice & then_Rule-edge.choice)
+    | (then_Rule-ss.content, if_Rule-edge.choice)
+    | (then_Rule-edge.choice, if_Rule-ss.content)
+}
+if_Rule-ss.content |= notAllowed
+then_Rule-ss.content |= notAllowed
 # unordered
 argumentsForTime.sequence |= arg_time.choice* & repo.choice? & slot.choice* & resl.choice?
 # unordered
 argumentsForSpatial.sequence |= arg_spatial.choice* & repo.choice? & slot.choice* & resl.choice?
-
-
-
 # Node_unordered.header
 # content model: meta* & scope* & guard* & evaluation* & signature* & qualification* & quantification* & oid?
 # In the modules for the corresponding features
@@ -42,14 +50,5 @@ Node_unordered.header &= instance_unordered.header?
 Node.header &= Node_unordered.header?
 #
 arg-datt.choice |= empty
-
 # *** Derivation Rule content model ***
-DerivationRule.content |= Implies.main & else.choice?
-
-
-
-
-
-
-
-
+DerivationRule.content |= Implies.main & (else_Rule-edge.choice?)

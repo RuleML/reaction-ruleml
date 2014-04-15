@@ -14,7 +14,6 @@ dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
 formula-assert.content |= formula_AssertRetract.content
-formula-query.content |= formula_Query.content
 commonInit.attlist &= key-att.choice?
 commonInit.attlist &= keyref-att.choice?
 
@@ -41,113 +40,20 @@ interval_primitives.content |= arg.content | interval_algebra_group.content
 
 ## <Forall>: "forall declared variables [such that formula]". See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Forall
-Forall = Forall-node.choice
-Forall-node.choice |= Quantifier
-# *** Exists ***
-
-## <Exists>: "exists declared variables [such that formula]". See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Forall
-Exists = Exists-node.choice
-Exists-node.choice |= Quantifier
 # needed for Quantifier and quantification
 formula-forall.type.def = formula_Forall.content, formula_Forall.attlist
 formula-forall = element formula { formula-forall.type.def }
-# *** Implies ***
-Implies = Implies-node.choice
-# *** then ***
-then.content |= head_Implies.content
-then.type.def = head_Implies.attlist? & head_Implies.content
-# *** Entails ***
-Entails = Entails-node.choice
-# *** Equivalent ***
-Equivalent = Equivalent-node.choice
-# *** Rulebase ***
-Rulebase = Rulebase-node.choice
-# *** And ***
-And = And-node.choice
-And-Query.main |= formula_And-query-edge.choice*
 
-## an extension point for stripe skipping as well as alternate spellings and internationalization of the formula tag name in conjunctions.  
-formula_And-query-edge.choice |= formula_And-query.edge.def
-
-## The formula role of a conjunctive (<And>) expression, 
-## Within And ...
-formula_And-query.edge.def =
-  
-  ##
-  element formula { formula_And.attlist? & formula_And-query.content }
-
-## Formulas within conjunctions consist of a single formula
-formula_And-query.content |= AndQueryFormula.choice
-
-## formulas allowed to participate in conjunctions. 
-AndQueryFormula.choice |=
-  SimpleFormula-node.choice
-  | And-Query-node.choice
-  | Or-Query-node.choice
-  | Negation-node.choice
-  | NegationAsFailure-node.notallowed
-  | Implication-fo-node.choice
-  | Forall-fo-node.choice
-  | Exists-fo-node.choice
-# *** Or ***
-Or = Or-node.choice
-Or-Query.main |= formula_Or-query-edge.choice*
-
-## an extension point for stripe skipping as well as alternate spellings and internationalization of the formula tag name in conjunctions.  
-formula_Or-query-edge.choice |= formula_Or-query.edge.def
-
-## The formula role of a conjunctive (<Or>) expression, 
-## Within Or ...
-formula_Or-query.edge.def =
-  
-  ## 
-  element formula { formula_Or.attlist? & formula_Or-query.content }
-
-## Formulas within conjunctions consist of a single formula
-formula_Or-query.content |= OrQueryFormula.choice
-
-## formulas allowed to participate in conjunctions. 
-OrQueryFormula.choice |=
-  SimpleFormula-node.choice
-  | And-Query-node.choice
-  | Or-Query-node.choice
-  | Negation-node.choice
-  | NegationAsFailure-node.notallowed
-  | Implication-fo-node.choice
-  | Forall-fo-node.choice
-  | Exists-fo-node.choice
-# *** @mapMaterial ***
-mapMaterial.attrib = mapMaterial-att-inf.choice
-# *** @material ***
-material.attrib = material-att-inf.choice
-# *** @mapDirection ***
-mapDirection.attrib = mapDirection-att-inf.choice
-# *** @direction ***
-direction.attrib = direction-att-inf.choice
-# *** @mapClosure ***
-mapClosure.attrib = mapClosure-att.choice?
-# *** @closure ***
-closure.attrib = closure-att.choice?
-# *** Atom ***
-Atom = Atom-node.choice
 # *** Rel ***
 reRel.attlist &= per-rel-att.choice?
 # *** slot ***
 slot.choice |= slot-edge.choice
-# *** arg ***
-arg = positionalArgument-edge.choice
-# *** Data ***
-Data = DataTerm.choice
 #	*** Var with mode attribute ***
-Var = Variable-node.choice
 reVar.attlist &= mode-att.choice?
 # *** repo ***
 repo.choice |= restOfPositionalArguments-edge.choice
 # *** resl ***
 resl.choice |= restOfSlots-edge.choice
-# *** Equal ***
-Equal = Equal-node.choice
 # in time module
 SimpleKeyTerm.choice |= Time_term
 SimpleFormula-node.choice |= Time_formula
@@ -157,11 +63,6 @@ SimpleFormula-node.choice |= Spatial_formula
 # in interval module
 SimpleKeyTerm.choice |= Interval_term
 SimpleFormula-node.choice |= Interval_formula
-#	    *** Assert ***
-reAssert.attlist &= commonNode.attlist?
-reAssert.attlist &= mapClosure-att.choice?
-reAssert.attlist &= safety-att.choice?
-reAssert.attlist &= size-att.choice?
 
 ## data type definition 
 curieOrIRI.datatype |= curie.datatype | xsd:anyURI
@@ -211,7 +112,7 @@ header.attlist &= commonInit.attlist?
 
 ##
 scope.attlist &= header.attlist?
-scope.content |= formula-query.content?
+scope.content |= formula_Query.content?
 scope.type.def = scope.content, scope.attlist
 scope.choice |= scope
 scope =
@@ -250,7 +151,7 @@ edge.choice |= evaluation
 
 ## the attribute list of the signature edge
 signature.attlist &= header.attlist?
-signature.content |= formula-query.content
+signature.content |= formula_Query.content
 signature.type.def = signature.content, signature.attlist
 signature.choice |= signature
 signature =
@@ -307,6 +208,10 @@ mode.datatype |= "+" | "-" | "?"
 safety-att.choice |= safety.attrib.def
 safety.attrib.def = attribute safety { safety.datatype }
 safety.datatype |= "non-interrupting" | "interrupting" | "transactional"
+
+##
+reAssert.attlist &= safety-att.choice?
+
 # *** @per ***
 
 ## @per: an attribute indicating the execution/interpretation semantics of a relation. See
@@ -317,7 +222,6 @@ per-rel.attrib.def = attribute per { per-rel.datatype }
 ## the interpretation attribute on relations can take all values allowed for the
 ## interpretation attribute on functions
 per-rel.datatype |= interpretation.value
-
 # *** @size ***
 
 ## @size: an attribute acting as a counter for the number of occurences of events, actions and updates. See
@@ -325,6 +229,9 @@ per-rel.datatype |= interpretation.value
 size-att.choice |= size.attrib.def
 size.attrib.def = attribute size { size.datatype }
 size.datatype |= xsd:int
+##
+reAssert.attlist &= size-att.choice?
+
 # *** @key ***
 
 ## @key: defines a unique key attribute which can be used for distributed referencing from a keyref attribute. See
@@ -347,11 +254,7 @@ style.attrib = style-att.choice
 style-att.choice |= style.attrib.def
 style.attrib.def = attribute style { style.datatype }
 style.datatype |= "active" | "messaging" | "reasoning"
-# This module declares the following Reaction RuleML elements:
-# * Rule
-# * if
-# * then
-# * else
+
 
 # *** Rule ***
 
@@ -372,14 +275,6 @@ Node.choice |= Rule
 AssertRetractFormula.choice |= Rule
 ForallFormula.choice |= Rule
 RulebaseFormula.choice |= Rule
-# *** else ***
-else.choice |= else
-else =
-  
-  ## <else>: edge defining an alternative conclusion in a if-then-else rule. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-else
-  element else { then.type.def }
-edge.choice |= else
 
 ##
 generic-Node.attlist &= iri-att.choice?
@@ -387,8 +282,6 @@ generic-Node.attlist &= Type.attlist?
 generic-Node.attlist &= commonNode.attlist?
 # This module declares the following Reaction RuleML elements:
 # * Negation		generic polymorphig negation
-# * Naf           negation as failure (inflationary negation in production rules), weak negation
-# * Neg           classical negation, strong negation
 
 # *** Negation ***
 
@@ -413,10 +306,11 @@ edge.choice |= formula-negation
 # *** Naf ***
 reNaf.attlist &= iri-att.choice?
 reNaf.attlist &= Type.attlist?
+NegationAsFailure-fo-node.choice |= notAllowed
+
 # *** Neg ***
 reNeg.attlist &= iri-att.choice?
 reNeg.attlist &= Type.attlist?
-
 # This module declares the following Reaction RuleML elements:
 # * Quantifier  generic quantifier
 # * Forall		predefined inner quantifier (used in quantification metatag)
@@ -438,6 +332,25 @@ Quantifier =
   ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
   element Quantifier { Quantifier.type.def }
 Node.choice |= Quantifier
+#
+Quantifier-node.choice |= Quantifier
+Quantifier-fo-node.choice |= notAllowed
+QueryFormula.choice |= Quantifier-node.choice
+AssertRetractFormula.choice |= Quantifier-node.choice
+AndFormula.choice |= Quantifier-fo-node.choice
+OrFormula.choice |= Quantifier-fo-node.choice
+AndQueryFormula.choice |= Quantifier-node.choice
+OrQueryFormula.choice |= Quantifier-node.choice
+PremiseFormula.choice |= Quantifier-node.choice
+ConclusionFormula.choice |= Quantifier-fo-node.choice
+RulebaseFormula.choice |= Quantifier-node.choice
+NegationFormula.choice |= Quantifier-fo-node.choice
+NegFormula.choice |= Quantifier-fo-node.choice
+NafFormula.choice |= Quantifier-fo-node.choice
+ForallFormula.choice |= Quantifier-node.choice
+ExistsFormula.choice |= Quantifier-node.choice
+ExistsQueryFormula.choice |= Quantifier-node.choice
+#
 # make the quantifier constraint restrictions ("such that") optional
 Exists-quantifier.content |= Exists.header, Exists-quantifier.main
 Exists-quantifier.main |= boundVariables.choice, formula-quant.choice?
@@ -453,7 +366,7 @@ Forall-quantifier.type.def = (Forall-datt.choice & reForall.attlist), Forall-qua
 
 ## Profile attribute list with @type, @iri, @direction, @safety, @size
 Profile.attlist &= iri-att.choice?
-Profile.attlist &= direction.attrib?
+Profile.attlist &= direction-att-inf.choice?
 Profile.attlist &= Type.attlist?
 Profile.attlist &= commonNode.attlist?
 Profile.attlist &= safety-att.choice?
@@ -514,14 +427,14 @@ edge.choice |= arg_spatial
 # This module declares the following Reaction RuleML elements:
 # * Interval
 
-    #   *** Interval ***
-    Interval.attlist &= generic-Node.attlist?
-    arg_interval.choice |= arg_interval
-    Interval_term.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
-    Interval_formula.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
-    #
-    Interval_term.type.def = Interval_term.content, Interval.attlist
-    Interval_formula.type.def = Interval_formula.content, Interval.attlist
+#   *** Interval ***
+Interval.attlist &= generic-Node.attlist?
+arg_interval.choice |= arg_interval
+Interval_term.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
+Interval_formula.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
+#
+Interval_term.type.def = Interval_term.content, Interval.attlist
+Interval_formula.type.def = Interval_formula.content, Interval.attlist
 Node.choice |= Interval_formula
 Interval_term =
   
@@ -567,7 +480,7 @@ Operator_any_term =
   ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Operator    
   element Operator { Any.type.def }
 Operator_any_formula.choice |= Operator_any_formula.def
-Operator_any_formula.def = element Operator {Operator_any_formula.type.def}
+Operator_any_formula.def = element Operator { Operator_any_formula.type.def }
 Operator_any_formula.type.def = Operator_any_formula.attlist, Operator_any_formula.content
 Operator_any_formula.attlist &= generic-Node.attlist?
 Operator_any_formula.content |= Node.header, formula_Rulebase-edge.choice

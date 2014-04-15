@@ -12,7 +12,15 @@ dc:description [
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-start |= notAllowed
+# 
+# ORDER MODE - UNORDERED GROUPS DISABLED
+#
+include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.rnc" {
+  start |= notAllowed
+  Implies.main |= if_Rule-edge.choice, then_Rule-edge.choice
+  Atom.header &= (Node.header?, degree-edge.choice?)?
+  Expr.header &= Node.header?
+}
 #
 argumentsForTime.sequence |= arg_time.choice*, repo.choice?, slot.choice*, resl.choice?
 argumentsForSpatial.sequence |= arg_spatial.choice*, repo.choice?, slot.choice*, resl.choice?
@@ -36,7 +44,7 @@ Node_ordered-header.choice |=
 #
 Node.header &= Node_ordered-header.choice?
 # *** Derivation Rule content model ***
-DerivationRule.content |= Implies.main, else.choice?
+DerivationRule.content |= Implies.main, else_Rule-edge.choice?
 
 
 

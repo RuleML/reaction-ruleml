@@ -1,0 +1,83 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Con/DisJunctions" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Conjunction, Disjunction" ]
+dc:description [
+  "The expansion module for extended conjunctions and disjunctions."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" {
+  AndFormula.choice |=
+    SimpleFormula-node.choice
+    | And-node.choice
+    | Or-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-fo-node.choice
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
+  OrFormula.choice |=
+    SimpleFormula-node.choice
+    | And-node.choice
+    | Or-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-fo-node.choice
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
+  And-Query.Node.def =
+    element And { (And-Query-datt.choice & reAnd-Query.attlist), And-Query.header, And-Query.main }
+  Or-Query.Node.def =
+    element Or { (Or-Query-datt.choice & reOr-Query.attlist), Or-Query.header, Or-Query.main }
+}
+
+# *** And ***
+And-Query.header &= And.header?
+And-Query.main |= formula_And-query-edge.choice*
+formula_And-query-edge.choice |= formula_And-query.edge.def
+
+## Within And in Query ...
+formula_And-query.edge.def =
+  
+  ##
+  element formula { formula_And.attlist? & formula_And-query.content }
+formula_And-query.content |= AndQueryFormula.choice
+
+## formulas allowed to participate in conjunctions in Query. 
+AndQueryFormula.choice |=
+  SimpleFormula-node.choice
+  | And-Query-node.choice
+  | Or-Query-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-Query-node.choice
+# *** Or ***
+Or-Query.header &= Or.header?
+Or-Query.main |= formula_Or-query-edge.choice*
+formula_Or-query-edge.choice |= formula_Or-query.edge.def
+
+## Within Or in Query ...
+formula_Or-query.edge.def =
+  
+  ##
+  element formula { formula_Or.attlist? & formula_Or-query.content }
+formula_Or-query.content |= OrQueryFormula.choice
+
+## formulas allowed to participate in disjunctions in Query. 
+OrQueryFormula.choice |=
+  SimpleFormula-node.choice
+  | And-Query-node.choice
+  | Or-Query-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-Query-node.choice

@@ -1,0 +1,56 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Quantifications" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Quantification" ]
+dc:description [
+  "The expansion module for extended quantifications."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.rnc" {
+  ExistsFormula.choice |=
+    SimpleFormula-node.choice
+    | And-node.choice
+    | Or-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-node.notallowed
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-node.choice
+}
+Exists-Query-node.choice |= Exists-Query.Node.def
+Exists-Query.Node.def =
+  
+  ##
+  element Exists {
+    (Exists-Query-datt.choice & reExists-Query.attlist), Exists-Query.header, Exists-Query.main
+  }
+Exists-Query-datt.choice |= Exists-datt.choice
+reExists-Query.attlist &= reExists.attlist?
+Exists-Query.header &= Exists.header?
+Exists-Query.main |= boundVariables.choice, formula_Exists-query-edge.choice
+formula_Exists-query-edge.choice |= formula_Exists-query.edge.def
+formula_Exists-query.edge.def =
+  
+  ## Within Exists in Query or if...
+  element formula { formula_Exists-query.attlist? & formula_Exists-query.content }
+formula_Exists-query.attlist &= formula_Exists.attlist?
+
+## The formula role of existential quantifications contains a single formula.
+formula_Exists-query.content |= ExistsQueryFormula.choice
+
+## formulas allowed to be existentially quantified.
+ExistsQueryFormula.choice |=
+  SimpleFormula-node.choice
+  | And-Query-node.choice
+  | Or-Query-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-Query-node.choice

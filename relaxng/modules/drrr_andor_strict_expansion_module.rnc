@@ -1,0 +1,97 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Con/DisJunctions" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Conjunction, Disjunction" ]
+dc:description [
+  "The expansion module for extended conjunctions and disjunctions."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "drrr_andor_expansion_module.rnc" {
+# Restricted From
+#  AndFormula.choice |=
+#    SimpleFormula-node.choice
+#    | And-node.choice
+#    | Or-node.choice
+#    | Negation-node.choice
+#    | NegationAsFailure-fo-node.choice
+#    | Implication-fo-node.choice
+#    | Forall-fo-node.choice
+#    | Exists-fo-node.choice
+
+  AndFormula.choice |=
+    SimpleFormula-node.choice
+    | And-node.choice
+    | Or-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-node.choice
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
+# Restricted From
+#   OrFormula.choice |=
+#    SimpleFormula-node.choice
+#    | And-node.choice
+#    | Or-node.choice
+#    | Negation-node.choice
+#    | NegationAsFailure-fo-node.choice
+#    | Implication-fo-node.choice
+#    | Forall-fo-node.choice
+#    | Exists-fo-node.choice
+
+  OrFormula.choice |=
+    SimpleFormula-node.choice
+    | And-node.choice
+    | Or-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-node.choice
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
+
+
+# Restricted from
+#AndQueryFormula.choice |=
+#  SimpleFormula-node.choice
+#  | And-Query-node.choice
+#  | Or-Query-node.choice
+#  | Negation-node.choice
+#  | NegationAsFailure-node.choice
+#  | Implication-fo-node.choice
+#  | Forall-fo-node.choice
+#  | Exists-Query-node.choice
+AndQueryFormula.choice |=
+  SimpleFormula-node.choice
+  | And-node.choice
+  | Or-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-fo-node.choice
+
+# formulas allowed to participate in disjunctions in Query. 
+#OrQueryFormula.choice |=
+#  SimpleFormula-node.choice
+#  | And-Query-node.choice
+#  | Or-Query-node.choice
+#  | Negation-node.choice
+#  | NegationAsFailure-node.choice
+#  | Implication-fo-node.choice
+#  | Forall-fo-node.choice
+#  | Exists-Query-node.choice
+OrQueryFormula.choice |=
+  SimpleFormula-node.choice
+  | And-node.choice
+  | Or-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.choice
+  | Implication-fo-node.choice
+  | Forall-fo-node.choice
+  | Exists-fo-node.choice
+}

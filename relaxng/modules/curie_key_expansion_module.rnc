@@ -1,0 +1,53 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR CURIEs" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, CURIE" ]
+dc:description [
+  "The expansion module for CURIE datatypes."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+start |= notAllowed
+commonInit.attlist &= key-att.choice?
+commonInit.attlist &= keyref-att.choice?
+
+# *** @key ***
+
+## @key: defines a unique key attribute which can be used for distributed referencing from a keyref attribute. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@key
+key-att.choice |= key.attrib.def
+key.attrib.def = attribute key { key.datatype }
+key.datatype |= curieOrAbsIRI.datatype
+
+## @keyref: defines a reference to a corresponding unique key. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@keyref
+keyref-att.choice |= keyref.attrib.def
+keyref.attrib.def = attribute keyref { keyref.datatype }
+keyref.datatype |= curieOrAbsIRI.datatype
+## data type definition 
+curieOrIRI.datatype |= curie.datatype | xsd:anyURI
+
+## data type definition         
+curieOrAbsIRI.datatype |= curie.datatype | absIRI.datatype
+
+## data type definition         
+termOrCurieOrIRI.datatype |= term.datatype | curie.datatype | xsd:anyURI
+
+## data type definition         
+termOrCurieOrAbsIRI = term.datatype | curie.datatype | absIRI.datatype
+absIRI.datatype |= xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+
+## data type definition         
+curie.datatype |=
+  xsd:string {
+    minLength = "1"
+    pattern = "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+  }
+term.datatype |= xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
+
+

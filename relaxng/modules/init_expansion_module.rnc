@@ -22,6 +22,7 @@ then_Rule-ss.content |= notAllowed
 slot-edge.choice |= notAllowed
 formula_Rulebase-edge.choice |= notAllowed
 NegationAsFailure-fo-node.choice |= notAllowed
+generic-Node.attlist &= empty
 
 ## RR patterns
 formula-negation.content |= notAllowed
@@ -42,16 +43,20 @@ then_Rule-edge.choice |= notAllowed
 else_Rule-edge.choice |= notAllowed
 if_Rule.content |= notAllowed
 then_Rule.content |= notAllowed
-
-## aliases
-slot.choice |= notAllowed
-oid.choice |= notAllowed
-repo.choice |= notAllowed
-resl.choice |= notAllowed
+formula-quant.choice |= notAllowed
+safety-att.choice |= notAllowed
+size-att.choice |= notAllowed
+Profile |= notAllowed
+Interval_term.content |= notAllowed
+arg_interval.choice |= notAllowed
+interval_algebra_group.content |= notAllowed
+spatial_temporal_algebra_group.content |= notAllowed
+header.attlist &= empty
 signature.choice |= notAllowed
 quantification.choice |= notAllowed
-meta.choice |= notAllowed
 guard.choice |= notAllowed
 qualification.choice |= notAllowed
 scope.choice |= notAllowed
 evaluation.choice |= notAllowed
+Quantifier |= notAllowed
+time_primitives.content |= notAllowed

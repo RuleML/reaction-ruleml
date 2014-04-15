@@ -1,0 +1,47 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR Intervals" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Interval" ]
+dc:description [
+  "The expansion module for intervals."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+start |= notAllowed
+# This module declares the following Reaction RuleML elements:
+# * Interval
+
+#   *** Interval ***
+Interval.attlist &= generic-Node.attlist?
+arg_interval.choice |= arg_interval
+Interval_term.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
+Interval_formula.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
+#
+Interval_term.type.def = Interval_term.content, Interval.attlist
+Interval_formula.type.def = Interval_formula.content, Interval.attlist
+Node.choice |= Interval_formula
+Interval_term =
+  
+  ## <Interval>: generic Interval element. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Interval
+  element Interval { Interval_term.type.def }
+Interval_formula = element Interval { Interval_formula.type.def }
+# *** arg ***
+arg_interval.attlist &= index-attrib.choice?
+arg_interval.attlist &= commonInit.attlist?
+arg_interval.content |= interval_primitives.content
+arg_interval.type.def = arg_interval.content, arg_interval.attlist
+arg_interval = element arg { arg_interval.type.def }
+edge.choice |= arg_interval
+
+# in interval module
+SimpleKeyTerm.choice |= Interval_term
+SimpleFormula-node.choice |= Interval_formula
+
+## Interval primitives
+interval_primitives.content |= arg.content | interval_algebra_group.content

@@ -1,19 +1,19 @@
 namespace dc = "http://purl.org/dc/elements/1.1/"
 namespace dcterms = "http://purl.org/dc/terms/"
 
-dc:title [ "Reaction RuleML for DR" ]
+dc:title [ "Reaction RuleML for DR Generic Quantifier - Strict Version" ]
 dc:version [ "1.0" ]
 dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
 dc:creator [ "Adrian Paschke" ]
-dc:subject [ "RuleML, Reaction, Deliberation" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Quantifier" ]
 dc:description [
-  "The expansion module for reserved spatial and temporal predicates and relations."
+  "The expansion module for a generic quantifier."
 ]
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-include "dr-all_module.rnc" {
 
+include "extended_quantifier_expansion_module.rnc" {
 
 # Restricted from
 # AndQueryFormula.choice |= Quantifier-node.choice

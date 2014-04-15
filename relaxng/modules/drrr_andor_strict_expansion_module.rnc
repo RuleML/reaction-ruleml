@@ -1,7 +1,7 @@
 namespace dc = "http://purl.org/dc/elements/1.1/"
 namespace dcterms = "http://purl.org/dc/terms/"
 
-dc:title [ "Reaction RuleML for DR- Extended Con/DisJunctions" ]
+dc:title [ "Reaction RuleML for DR- Extended Con/DisJunctions - Strict Version" ]
 dc:version [ "1.0" ]
 dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
 dc:creator [ "Adrian Paschke" ]

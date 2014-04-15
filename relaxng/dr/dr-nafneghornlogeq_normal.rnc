@@ -375,10 +375,31 @@ include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" {
   start |= notAllowed
 }
 #
-include "../modules/dr-all_module.rnc" {
+include "../modules/any_content_expansion_module.rnc" {
   start |= notAllowed
 }
-include "../modules/any_content_expansion_module.rnc" {
+include "../modules/attributes_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/curie_key_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/extended_quantifier_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/instance_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/interface_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/interval_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/negation_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/ordered_groups_expansion_module.rnc" {
   start |= notAllowed
 }
 include "../modules/per_effect_expansion_module.rnc" {
@@ -387,13 +408,24 @@ include "../modules/per_effect_expansion_module.rnc" {
 include "../modules/per_modal_expansion_module.rnc" {
   start |= notAllowed
 }
+include "../modules/profile_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/rule_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/spatial_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/spatial_temporal_interval_algebra_expansion_module.rnc" {
+  start |= notAllowed
+}
 #include "../modules/stripe_skipping_expansion_module.rnc" {
 #  start |= notAllowed
 #}
-include "../modules/ordered_groups_expansion_module.rnc" {
+include "../modules/time_expansion_module.rnc" {
   start |= notAllowed
 }
 #include "../modules/unordered_groups_expansion_module.rnc" {
 #  start |= notAllowed
 #}
-

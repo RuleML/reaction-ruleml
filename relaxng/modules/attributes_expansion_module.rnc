@@ -1,0 +1,78 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR Attributes" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Attributes" ]
+dc:description [ "The expansion module for miscellaneous attributes." ]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+start |= notAllowed
+# This module declares the following Reaction RuleML attributes:
+#    * @mode (mode declaration)
+#    * @safety (transactional)
+#    * @per (usage)
+#    * @all (yes|no)
+#    * @style (execution style)	
+#    * @key and @keyref for modularization of knowledge bases
+
+# *** @mode ***
+
+## @mode: input-output mode declaration of the arguments in predicates and functions. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@mode
+mode-att.choice |= mode.attrib.def
+mode.attrib.def = attribute mode { mode.datatype }
+mode.datatype |= "+" | "-" | "?"
+#	*** Var with mode attribute ***
+reVar.attlist &= mode-att.choice?
+# *** @safety ***
+
+## @safety: attribute defining the safety of the execution semantics for events, actions and primitives. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@safety    
+safety-att.choice |= safety.attrib.def
+safety.attrib.def = attribute safety { safety.datatype }
+safety.datatype |= "non-interrupting" | "interrupting" | "transactional"
+# *** Assert with safety attribute ***
+reAssert.attlist &= safety-att.choice?
+# *** @per ***
+
+## @per: an attribute indicating the execution/interpretation semantics of a relation. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@per
+per-rel-att.choice |= per-rel.attrib.def
+per-rel.attrib.def = attribute per { per-rel.datatype }
+
+## the interpretation attribute on relations can take all values allowed for the
+## interpretation attribute on functions
+per-rel.datatype |= interpretation.value
+# *** Rel with per attribute ***
+reRel.attlist &= per-rel-att.choice?
+# *** @size ***
+
+## @size: an attribute acting as a counter for the number of occurences of events, actions and updates. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@size
+size-att.choice |= size.attrib.def
+size.attrib.def = attribute size { size.datatype }
+size.datatype |= xsd:int
+
+# *** Assert with size attribute ***
+reAssert.attlist &= size-att.choice?
+# *** @style ***
+#  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
+style.attrib = style-att.choice
+
+## @style: defines a reference to a corresponding unique key. See
+## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@style
+style-att.choice |= style.attrib.def
+style.attrib.def = attribute style { style.datatype }
+style.datatype |= "active" | "messaging" | "reasoning"
+# *** Rule with style attribute ***
+reRule.attlist &= style-att.choice?
+
+
+##
+generic-Node.attlist &= iri-att.choice?
+generic-Node.attlist &= Type.attlist?
+generic-Node.attlist &= commonNode.attlist?

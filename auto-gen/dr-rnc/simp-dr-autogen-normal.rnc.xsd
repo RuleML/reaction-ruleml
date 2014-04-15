@@ -395,7 +395,7 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
             <xs:element minOccurs="0" ref="spec:oid"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_3"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_9"/>
           </xs:sequence>
           <xs:attribute name="closure">
             <xs:simpleType>
@@ -457,7 +457,7 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
             <xs:element minOccurs="0" ref="spec:oid"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_4"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_10"/>
           </xs:sequence>
           <xs:attribute name="closure">
             <xs:simpleType>
@@ -517,8 +517,8 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
         <xs:element minOccurs="0" ref="spec:oid"/>
-        <xs:group ref="spec:if"/>
-        <xs:group ref="spec:then"/>
+        <xs:group ref="spec:if_2"/>
+        <xs:group ref="spec:then_2"/>
       </xs:sequence>
       <xs:attribute name="direction" use="required">
         <xs:simpleType>
@@ -919,8 +919,8 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
         <xs:element minOccurs="0" ref="spec:oid"/>
-        <xs:group ref="spec:if_2"/>
-        <xs:group ref="spec:then_2"/>
+        <xs:group ref="spec:if_3"/>
+        <xs:group ref="spec:then_3"/>
       </xs:sequence>
       <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
@@ -1505,8 +1505,8 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
         <xs:element minOccurs="0" ref="spec:oid"/>
         <xs:sequence minOccurs="0">
-          <xs:group ref="spec:if"/>
-          <xs:group ref="spec:then"/>
+          <xs:group ref="spec:if_2"/>
+          <xs:group ref="spec:then_2"/>
           <xs:element minOccurs="0" ref="spec:else"/>
         </xs:sequence>
       </xs:sequence>
@@ -1678,7 +1678,7 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
         <xs:element minOccurs="0" ref="spec:oid"/>
         <xs:element maxOccurs="unbounded" ref="spec:declare"/>
-        <xs:group minOccurs="0" ref="spec:formula_9"/>
+        <xs:group minOccurs="0" ref="spec:formula_11"/>
       </xs:sequence>
       <xs:attribute name="iri" type="xs:anyURI"/>
       <xs:attribute name="type">
@@ -2048,7 +2048,7 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
             <xs:element minOccurs="0" ref="spec:oid"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_7"/>
+            <xs:group ref="spec:formula_7"/>
           </xs:sequence>
           <xs:attribute name="iri" type="xs:anyURI"/>
           <xs:attribute name="type">
@@ -2955,10 +2955,10 @@
             <xs:element ref="spec:Implies"/>
             <xs:element ref="spec:Equivalent"/>
             <xs:group ref="spec:Forall"/>
-            <xs:element ref="spec:Quantifier"/>
             <xs:element ref="spec:Entails"/>
             <xs:element ref="spec:Rulebase"/>
             <xs:element ref="spec:Rule"/>
+            <xs:element ref="spec:Quantifier"/>
           </xs:choice>
           <xs:attribute name="key">
             <xs:simpleType>
@@ -3014,10 +3014,10 @@
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
             <xs:element ref="spec:Naf"/>
-            <xs:group ref="spec:Exists"/>
-            <xs:element ref="spec:Quantifier"/>
+            <xs:group ref="spec:Exists_2"/>
             <xs:element ref="spec:Entails"/>
             <xs:element ref="spec:Rulebase"/>
+            <xs:element ref="spec:Quantifier"/>
           </xs:choice>
           <xs:attribute name="key">
             <xs:simpleType>
@@ -3319,6 +3319,161 @@
       </xs:element>
     </xs:sequence>
   </xs:group>
+  <xs:group name="if_2">
+    <xs:sequence>
+      <xs:element name="if">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:group ref="spec:Equal"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
+            <xs:group ref="spec:And_2"/>
+            <xs:group ref="spec:Or_2"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Naf"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="then_2">
+    <xs:sequence>
+      <xs:element name="then">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:group ref="spec:Equal"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="else">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="spec:Atom"/>
+        <xs:group ref="spec:Equal"/>
+        <xs:element ref="spec:Time"/>
+        <xs:element ref="spec:Spatial"/>
+        <xs:element ref="spec:Interval"/>
+        <xs:group ref="spec:Operator"/>
+        <xs:element ref="spec:Neg"/>
+        <xs:element ref="spec:Negation"/>
+      </xs:choice>
+      <xs:attribute name="key">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="keyref">
+        <xs:simpleType>
+          <xs:union>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="declare">
     <xs:complexType>
       <xs:sequence>
@@ -3376,8 +3531,8 @@
             <xs:element ref="spec:Implies"/>
             <xs:element ref="spec:Equivalent"/>
             <xs:group ref="spec:Forall"/>
-            <xs:element ref="spec:Quantifier"/>
             <xs:element ref="spec:Rule"/>
+            <xs:element ref="spec:Quantifier"/>
           </xs:choice>
           <xs:attribute name="key">
             <xs:simpleType>
@@ -3428,11 +3583,10 @@
             <xs:element ref="spec:Spatial"/>
             <xs:element ref="spec:Interval"/>
             <xs:group ref="spec:Operator"/>
-            <xs:group ref="spec:And"/>
-            <xs:group ref="spec:Or"/>
+            <xs:group ref="spec:And_2"/>
+            <xs:group ref="spec:Or_2"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
-            <xs:element ref="spec:Naf"/>
             <xs:group ref="spec:Exists"/>
             <xs:element ref="spec:Quantifier"/>
           </xs:choice>
@@ -3535,8 +3689,8 @@
             <xs:element ref="spec:Implies"/>
             <xs:element ref="spec:Equivalent"/>
             <xs:group ref="spec:Forall"/>
-            <xs:element ref="spec:Quantifier"/>
             <xs:element ref="spec:Rule"/>
+            <xs:element ref="spec:Quantifier"/>
           </xs:choice>
           <xs:attribute name="key">
             <xs:simpleType>
@@ -3576,7 +3730,7 @@
       </xs:element>
     </xs:sequence>
   </xs:group>
-  <xs:group name="then_2">
+  <xs:group name="then_3">
     <xs:sequence>
       <xs:element name="then">
         <xs:complexType>
@@ -3621,7 +3775,7 @@
       </xs:element>
     </xs:sequence>
   </xs:group>
-  <xs:group name="if_2">
+  <xs:group name="if_3">
     <xs:sequence>
       <xs:element name="if">
         <xs:complexType>
@@ -3817,10 +3971,10 @@
         <xs:element ref="spec:Implies"/>
         <xs:element ref="spec:Equivalent"/>
         <xs:group ref="spec:Forall"/>
-        <xs:element ref="spec:Quantifier"/>
         <xs:element ref="spec:Entails"/>
         <xs:element ref="spec:Rulebase"/>
         <xs:element ref="spec:Rule"/>
+        <xs:element ref="spec:Quantifier"/>
       </xs:choice>
       <xs:attribute name="index" type="xs:positiveInteger"/>
       <xs:attribute name="key">
@@ -4275,10 +4429,10 @@
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
         <xs:element ref="spec:Naf"/>
-        <xs:group ref="spec:Exists"/>
-        <xs:element ref="spec:Quantifier"/>
+        <xs:group ref="spec:Exists_2"/>
         <xs:element ref="spec:Entails"/>
         <xs:element ref="spec:Rulebase"/>
+        <xs:element ref="spec:Quantifier"/>
       </xs:choice>
       <xs:attribute name="index" type="xs:positiveInteger"/>
       <xs:attribute name="key">
@@ -4425,10 +4579,10 @@
         <xs:element ref="spec:Neg"/>
         <xs:element ref="spec:Negation"/>
         <xs:element ref="spec:Naf"/>
-        <xs:group ref="spec:Exists"/>
-        <xs:element ref="spec:Quantifier"/>
+        <xs:group ref="spec:Exists_2"/>
         <xs:element ref="spec:Entails"/>
         <xs:element ref="spec:Rulebase"/>
+        <xs:element ref="spec:Quantifier"/>
       </xs:choice>
       <xs:attribute name="index" type="xs:positiveInteger"/>
       <xs:attribute name="key">
@@ -4481,10 +4635,10 @@
         <xs:element ref="spec:Implies"/>
         <xs:element ref="spec:Equivalent"/>
         <xs:group ref="spec:Forall"/>
-        <xs:element ref="spec:Quantifier"/>
         <xs:element ref="spec:Entails"/>
         <xs:element ref="spec:Rulebase"/>
         <xs:element ref="spec:Rule"/>
+        <xs:element ref="spec:Quantifier"/>
       </xs:choice>
       <xs:attribute name="index" type="xs:positiveInteger"/>
       <xs:attribute name="key">
@@ -4527,58 +4681,10 @@
     <xs:complexType>
       <xs:choice>
         <xs:group ref="spec:Forall_2"/>
-        <xs:group ref="spec:Exists_2"/>
+        <xs:group ref="spec:Exists_3"/>
         <xs:element ref="spec:Quantifier"/>
       </xs:choice>
       <xs:attribute name="index" type="xs:positiveInteger"/>
-      <xs:attribute name="key">
-        <xs:simpleType>
-          <xs:union>
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:minLength value="1"/>
-                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
-              </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType>
-              <xs:restriction base="xs:anyURI">
-                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:union>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="keyref">
-        <xs:simpleType>
-          <xs:union>
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:minLength value="1"/>
-                <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
-              </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType>
-              <xs:restriction base="xs:anyURI">
-                <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:union>
-        </xs:simpleType>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="else">
-    <xs:complexType>
-      <xs:choice>
-        <xs:element ref="spec:Atom"/>
-        <xs:group ref="spec:Equal"/>
-        <xs:element ref="spec:Time"/>
-        <xs:element ref="spec:Spatial"/>
-        <xs:element ref="spec:Interval"/>
-        <xs:group ref="spec:Operator"/>
-        <xs:element ref="spec:Neg"/>
-        <xs:element ref="spec:Negation"/>
-      </xs:choice>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -4894,12 +5000,122 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
+  <xs:group name="formula_9">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:group ref="spec:Equal"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
+            <xs:group ref="spec:And_2"/>
+            <xs:group ref="spec:Or_2"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Naf"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="formula_10">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:group ref="spec:Equal"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
+            <xs:group ref="spec:And_2"/>
+            <xs:group ref="spec:Or_2"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Naf"/>
+          </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
   <xs:group name="_1">
     <xs:sequence>
       <xs:any processContents="lax"/>
     </xs:sequence>
   </xs:group>
-  <xs:group name="formula_9">
+  <xs:group name="formula_11">
     <xs:sequence>
       <xs:element name="formula">
         <xs:complexType>
@@ -4915,9 +5131,64 @@
             <xs:element ref="spec:Implies"/>
             <xs:element ref="spec:Equivalent"/>
             <xs:group ref="spec:Forall"/>
-            <xs:element ref="spec:Quantifier"/>
             <xs:element ref="spec:Rule"/>
+            <xs:element ref="spec:Quantifier"/>
           </xs:choice>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Exists_2">
+    <xs:sequence>
+      <xs:element name="Exists">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:meta"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:scope"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:guard"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:evaluation"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:signature"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
+            <xs:element minOccurs="0" ref="spec:oid"/>
+            <xs:element maxOccurs="unbounded" ref="spec:declare"/>
+            <xs:group ref="spec:formula_12"/>
+          </xs:sequence>
+          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5188,7 +5459,7 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
             <xs:element minOccurs="0" ref="spec:oid"/>
             <xs:element maxOccurs="unbounded" ref="spec:declare"/>
-            <xs:group minOccurs="0" ref="spec:formula_9"/>
+            <xs:group minOccurs="0" ref="spec:formula_11"/>
           </xs:sequence>
           <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
@@ -5229,7 +5500,7 @@
       </xs:element>
     </xs:sequence>
   </xs:group>
-  <xs:group name="Exists_2">
+  <xs:group name="Exists_3">
     <xs:sequence>
       <xs:element name="Exists">
         <xs:complexType>
@@ -5243,7 +5514,7 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
             <xs:element minOccurs="0" ref="spec:oid"/>
             <xs:element maxOccurs="unbounded" ref="spec:declare"/>
-            <xs:group minOccurs="0" ref="spec:formula_9"/>
+            <xs:group minOccurs="0" ref="spec:formula_11"/>
           </xs:sequence>
           <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
@@ -5464,6 +5735,63 @@
             </xs:simpleType>
           </xs:attribute>
           <xs:attribute name="node" type="xs:anyURI"/>
+          <xs:attribute name="key">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="keyref">
+            <xs:simpleType>
+              <xs:union>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:anyURI">
+                    <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="formula_12">
+    <xs:sequence>
+      <xs:element name="formula">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="spec:Atom"/>
+            <xs:group ref="spec:Equal"/>
+            <xs:element ref="spec:Time"/>
+            <xs:element ref="spec:Spatial"/>
+            <xs:element ref="spec:Interval"/>
+            <xs:group ref="spec:Operator"/>
+            <xs:group ref="spec:And"/>
+            <xs:group ref="spec:Or"/>
+            <xs:element ref="spec:Neg"/>
+            <xs:element ref="spec:Negation"/>
+            <xs:element ref="spec:Naf"/>
+            <xs:group ref="spec:Exists_2"/>
+            <xs:element ref="spec:Quantifier"/>
+          </xs:choice>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>

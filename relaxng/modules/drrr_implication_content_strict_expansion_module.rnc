@@ -1,0 +1,52 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Implications - Strict Version" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Implication" ]
+dc:description [ "The expansion module for extended implication." ]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "drrr_implication_content_expansion_module.rnc" {
+  # Restricted From
+  #  PremiseFormula.choice |=
+  #    SimpleFormula-node.choice
+  #    | And-Query-node.choice
+  #    | Or-Query-node.choice
+  #    | Negation-node.choice
+  #    | NegationAsFailure-node.choice
+  #    | Implication-fo-node.choice
+  #    | Forall-fo-node.choice
+  #    | Exists-Query-node.choice
+  PremiseFormula.choice |=
+    SimpleFormula-node.choice
+    | And-node.choice
+    | Or-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-node.choice
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
+  # Restricted from
+  #  ConclusionFormula.choice |=
+  #    SimpleFormula-node.choice
+  #    | And-node.choice
+  #    | Or-dis-node.choice
+  #    | Negation-node.choice
+  #    | NegationAsFailure-fo-node.choice
+  #    | Implication-fo-node.choice
+  #    | Forall-fo-node.choice
+  #    | Exists-fo-node.choice 
+  ConclusionFormula.choice |=
+    SimpleFormula-node.choice
+    | And-fo-node.choice
+    | Or-dis-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-fo-node.choice
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-fo-node.choice
+}

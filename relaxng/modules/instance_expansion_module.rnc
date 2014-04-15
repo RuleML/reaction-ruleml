@@ -1,0 +1,64 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR Instances" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Instance" ]
+dc:description [
+  "The expansion module for instances."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+start |= notAllowed
+
+# This module declares the following Reaction RuleML elements:
+#   * qualification   qualification, e.g. priorities, validity, strategy
+#   * quantification  quantification
+
+## the typical attribute list of edges in the header
+header.attlist &= index-attrib.choice?
+header.attlist &= commonInit.attlist?
+#  *** qualification ***
+
+## the attribute list of the qualification edge
+qualification.attlist &= header.attlist?
+qualification.content |= formula_AssertRetract.content
+qualification.type.def = qualification.content, qualification.attlist
+qualification.choice |= qualification
+qualification =
+  
+  ## <qualification>: defines the qualification (qualifying metadata). See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-qualification
+  element qualification { qualification.type.def }
+edge.choice |= qualification
+# *** quantification ***
+## An internal group for the inner quantifiers in the Reaction RuleML language
+inner-quantifier.content |=
+  element Forall { Forall-quantifier.type.def }
+  | element Exists { Exists-quantifier.type.def }
+  | Quantifier
+
+# make the quantifier constraint restrictions ("such that") optional
+Exists-quantifier.content |= Exists.header, Exists-quantifier.main
+Exists-quantifier.main |= boundVariables.choice, formula-quant.choice?
+Exists-quantifier.type.def = (Exists-datt.choice & reExists.attlist), Exists-quantifier.content
+# make the quantifier constraint restrictions ("such that") optional
+Forall-quantifier.content |= Forall.header, Forall-quantifier.main
+Forall-quantifier.main |= boundVariables.choice, formula-quant.choice?
+Forall-quantifier.type.def = (Forall-datt.choice & reForall.attlist), Forall-quantifier.content
+
+## the attribute list of the quantification
+quantification.attlist &= header.attlist?
+quantification.content |= inner-quantifier.content
+
+quantification.type.def = quantification.content, quantification.attlist
+quantification.choice |= quantification
+quantification =
+  
+  ## <quantification>: defines the quantification (quantifier). See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-quantification
+  element quantification { quantification.type.def }
+edge.choice |= quantification

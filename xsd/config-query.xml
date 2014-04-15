@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <schemaSystemId>file:/Users/taraathan/Repositories/RuleML/Github/reaction-ruleml/xsd/dr.xsd</schemaSystemId>
+  <documentRoot>Query</documentRoot>
+  <outputFolder>/Users/taraathan/Repositories/RuleML/Github/reaction-ruleml/xsd</outputFolder>
+  <filenamePrefix>instance-xsd-query</filenamePrefix>
+  <filenameExtension>xml</filenameExtension>
+  <noOfInstances>1</noOfInstances>
+  <openFirstInstance>true</openFirstInstance>
+  <defaultNamespace>http://ruleml.org/spec</defaultNamespace>
+  <valuesMaxLength>30</valuesMaxLength>
+  <isUseIncrementalNamesForValues>true</isUseIncrementalNamesForValues>
+  <discardOptionalElementsAfterNestedLevel>6</discardOptionalElementsAfterNestedLevel>
+  <namespaceMapping ns="http://ruleml.org/spec" proxy="spec"/>
+  <namespaceMapping ns="http://purl.org/dc/terms/" proxy="dcterms"/>
+  <namespaceMapping ns="http://purl.org/dc/elements/1.1/" proxy="dc"/>
+  <element namespace="&lt;ANY>" name="&lt;ANY>">
+    <generateOptionalElements>true</generateOptionalElements>
+    <generateOptionalAttributes>true</generateOptionalAttributes>
+    <valuesForContentType>RANDOM</valuesForContentType>
+    <preferredNumberOfRepetitions>1</preferredNumberOfRepetitions>
+    <maximumRecursivityLevel>9</maximumRecursivityLevel>
+    <alternativeStrategy>RANDOM</alternativeStrategy>
+    <choicesAndSubstitutions strategy="RANDOM" generateOthersAsComments="false"/>
+    <attribute namespace="&lt;ANY>" name="&lt;ANY>">
+    </attribute>
+  </element>
+  <element namespace="http://ruleml.org/spec" name="content">
+    <generateOptionalElements>false</generateOptionalElements>
+    <generateOptionalAttributes>false</generateOptionalAttributes>
+    <valuesForContentType>DEFAULT</valuesForContentType>
+    <preferredNumberOfRepetitions>1</preferredNumberOfRepetitions>
+    <maximumRecursivityLevel>1</maximumRecursivityLevel>
+    <alternativeStrategy>FIRST</alternativeStrategy>
+    <choicesAndSubstitutions strategy="FIRST" generateOthersAsComments="false"/>
+    <elementValue>anything</elementValue>
+    <attribute namespace="&lt;ANY>" name="&lt;ANY>">
+    </attribute>
+  </element>
+</settings>

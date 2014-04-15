@@ -7,16 +7,8 @@ start |= Node.choice | edge.choice
 # ROOT NODE AND PERFORMATIVES INCLUDED
 # WITH SEPARATION OF ATTLIST FOR ASSERT AND RETRACT
 #
-include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" {
+include "../modules/drrr_performative_expansion_module.rnc" {
   start |= notAllowed
-  Assert.Node.def =
-    
-    ## A KQML-like performative acting as a wrapper specifying that its content is 
-    ## asserted, making an 'implicit <Rulebase>' assumption.
-    ## See http://www.ruleml.org/1.0/glossary/#gloss-Assert
-    element Assert {
-      (AssertRetract-datt.choice & reAssert.attlist), AssertRetract.header, AssertRetract.main
-    }
 }
 # 
 # ATOMIC FORMULAS INCLUDED
@@ -28,22 +20,16 @@ include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" {
 # CONJUNCTIONS AND DISJUNCTIONS INCLUDED
 # WITH EXTENDED CONTENT MODEL FOR AND/OR IN QUERIES
 #
-include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" {
+include "../modules/drrr_andor_strict_expansion_module.rnc" {
   start |= notAllowed
-  #  And-Query.Node.def =
-  
-  # 
-  #    element And { (And-Query-datt.choice & reAnd-Query.attlist), And.header, And-Query.main }
-  #  Or-Query.Node.def =
-  
-  # 
-  #    element Or { (Or-Query-datt.choice & reOr-Query.attlist), Or.header, Or-Query.main }
-  
 }
 # 
 # IMPLICATIONS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/implication_expansion_module.rnc" {
+include "../modules/drrr_implication_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/drrr_implication_content_strict_expansion_module.rnc" {
   start |= notAllowed
 }
 # 
@@ -51,17 +37,8 @@ include "http://ruleml.org/1.0/relaxng/modules/implication_expansion_module.rnc"
 # WITH EXTENDED CONTENT MODEL FOR EXISTENTIALS
 # ALLOWING QUERY VERSION OF AND/OR
 #
-include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.rnc" {
+include "../modules/drrr_quantification_expansion_module.rnc" {
   start |= notAllowed
-  ExistsFormula.choice |=
-    SimpleFormula-node.choice
-    | And-Query-node.choice
-    | Or-Query-node.choice
-    | Negation-node.choice
-    | NegationAsFailure-node.choice
-    | Implication-fo-node.choice
-    | Forall-fo-node.choice
-    | Exists-node.choice
 }
 # 
 # EXPRESSIONS INCLUDED
@@ -79,7 +56,7 @@ include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" {
 # RESTRICTIONS ON COMPOUNDING CLASSICAL FORMULAS REMOVED 
 #   FULL FIRST-ORDER EXPRESSIVITY (INCLUDING NEGATION) IS AVAILABLE 
 # 
-# include "http://ruleml.org/1.0/relaxng/modules/folog_cl_expansion_module.rnc" {
+# include "../modules/drrr_fo_expansion_module.rnc" {
 #  start |= notAllowed
 # }
 # 
@@ -110,37 +87,6 @@ include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.
 # POLYADIC TERM (ONE OR MORE TERMS) SEQUENCES INCLUDED
 #
 include "http://ruleml.org/1.0/relaxng/modules/termseq_poly_expansion_module.rnc" {
-  start |= notAllowed
-}
-# 
-# ORDER MODE - UNORDERED GROUPS DISABLED
-# REFACTORED TO ACCOMMODATE OIDS ON ALL NODES
-# 
-# include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.rnc" {
-#  start |= notAllowed
-#  Atom.header &= (Node.header? , degree-edge.choice?)?
-#  Expr.header &= Node.header?
-# }
-# 
-# ORDER MODE - UNORDERED GROUPS ENABLED
-# REFACTORED TO ACCOMMODATE OIDS ON ALL NODES
-#
-include "http://ruleml.org/1.0/relaxng/modules/unordered_groups_expansion_module.rnc" {
-  start |= notAllowed
-  Atom.header &= (Node.header? & degree-edge.choice?)?
-  Expr.header &= Node.header?
-}
-# STRIPE-SKIPPING MODE ENABLED
-#
-include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" {
-  start |= notAllowed
-}
-#
-include "http://ruleml.org/1.0/relaxng/modules/asynchronous_stripe_skipping_entailment_expansion_module.rnc" {
-  start |= notAllowed
-}
-#
-include "http://ruleml.org/1.0/relaxng/modules/asynchronous_stripe_skipping_implication_expansion_module.rnc" {
   start |= notAllowed
 }
 # 
@@ -190,22 +136,13 @@ include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" {
 # STRONG NEGATION INCLUDED
 # WITH NEGATION ALLOWED IN NEG
 #
-include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
+include "../modules/drrr_neg_expansion_module.rnc" {
   start |= notAllowed
-  NegFormula.choice |=
-    SimpleFormula-node.choice
-    | And-fo-node.choice
-    | Or-fo-node.choice
-    | Negation-node.choice
-    | NegationAsFailure-node.notallowed
-    | Implication-fo-node.choice
-    | Forall-fo-node.choice
-    | Exists-fo-node.choice
 }
 # 
 # WEAK NEGATIONS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
+include "../modules/drrr_naf_expansion_module.rnc" {
   start |= notAllowed
 }
 # 
@@ -218,13 +155,8 @@ include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.r
 # IN-PLACE ANNOTATIONS INCLUDED
 # WITH OPTIONAL INDEX ATTRIBUTE
 #
-include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" {
+include "../modules/drrr_meta_expansion_module.rnc" {
   start |= notAllowed
-  meta.edge.def =
-    element meta {
-      index-attrib.choice? & formula_AssertRetract.attlist? & formula_AssertRetract.content
-    }
-  Node.header &= empty
 }
 # 
 # XML BASE ATTRIBUTE INCLUDED
@@ -331,10 +263,8 @@ include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module
 # EXPLICIT TYPING OF TERMS INCLUDED
 # WITH CURIES
 #
-include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" {
+include "../modules/drrr_type_expansion_module.rnc" {
   start |= notAllowed
-  # Note: In Reaction RuleML the type is changed to Term or Curie or IRI
-  type.value = termOrCurieOrIRI.datatype
 }
 # 
 # DATA TERMS INCLUDED
@@ -444,19 +374,55 @@ include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" {
   start |= notAllowed
 }
 #
-include "../modules/dr-all_module.rnc" {
-  start |= notAllowed
-}
 include "../modules/any_content_expansion_module.rnc" {
   start |= notAllowed
 }
+include "../modules/attributes_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/curie_key_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/extended_quantifier_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/instance_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/interface_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/interval_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/negation_expansion_module.rnc" {
+  start |= notAllowed
+}
+#include "../modules/ordered_groups_expansion_module.rnc" {
+#  start |= notAllowed
+#}
 include "../modules/per_effect_expansion_module.rnc" {
   start |= notAllowed
 }
 include "../modules/per_modal_expansion_module.rnc" {
   start |= notAllowed
 }
+include "../modules/profile_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/rule_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/spatial_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/spatial_temporal_interval_algebra_expansion_module.rnc" {
+  start |= notAllowed
+}
 include "../modules/stripe_skipping_expansion_module.rnc" {
+  start |= notAllowed
+}
+include "../modules/time_expansion_module.rnc" {
   start |= notAllowed
 }
 include "../modules/unordered_groups_expansion_module.rnc" {

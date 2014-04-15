@@ -1,0 +1,38 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Performatives" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Performative" ]
+dc:description [
+  "The expansion module for extended performatives."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" {
+  Assert.Node.def =
+    
+    ## A KQML-like performative acting as a wrapper specifying that its content is 
+    ## asserted, making an 'implicit <Rulebase>' assumption.
+    ## See http://www.ruleml.org/1.0/glossary/#gloss-Assert
+    element Assert {
+      (AssertRetract-datt.choice & reAssert.attlist), AssertRetract.header, AssertRetract.main
+    }
+  QueryFormula.choice |=
+    SimpleFormula-node.choice
+    | And-Query-node.choice
+    | Or-Query-node.choice
+    | Negation-node.choice
+    | NegationAsFailure-node.choice
+    | Implication-fo-node.choice
+    | Forall-fo-node.choice
+    | Exists-Query-node.choice
+    | Entails-node.choice 
+    | Rulebase-node.choice
+}
+#	    *** Assert ***
+reAssert.attlist &= commonNode.attlist?
+reAssert.attlist &= mapClosure-att.choice?

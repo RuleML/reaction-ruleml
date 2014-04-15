@@ -1,3 +1,0 @@
-include "../modules/dr-all_module.rnc"
-include "../modules/init_expansion_module.rnc"
-include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc"

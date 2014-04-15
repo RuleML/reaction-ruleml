@@ -1,0 +1,20 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Implications" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Implication" ]
+dc:description [
+  "The expansion module for extended implication."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "http://ruleml.org/1.0/relaxng/modules/implication_expansion_module.rnc" {
+  PremiseFormula.choice |= notAllowed
+  ConclusionFormula.choice |= notAllowed
+  body_Implies.name.choice |= notAllowed
+  head_Implies.name.choice |= notAllowed
+}

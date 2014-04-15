@@ -12,10 +12,18 @@ dc:description [
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-start |= notAllowed
+# 
+# ORDER MODE - UNORDERED GROUPS DISABLED
 #
-argumentsForTime.sequence |= arg_time.choice*, repo.choice?, slot.choice*, resl.choice?
-argumentsForSpatial.sequence |= arg_spatial.choice*, repo.choice?, slot.choice*, resl.choice?
+include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.rnc" {
+  start |= notAllowed
+  Implies.main |= if_Rule-edge.choice, then_Rule-edge.choice
+  Atom.header &= (Node.header?, degree-edge.choice?)?
+  Expr.header &= Node.header?
+}
+#
+argumentsForTime.sequence |= arg_time.choice*, restOfPositionalArguments-edge.choice?, slot-edge.choice*, restOfSlots-edge.choice?
+argumentsForSpatial.sequence |= arg_spatial.choice*, restOfPositionalArguments-edge.choice?, slot-edge.choice*, restOfSlots-edge.choice?
 
 
 # Managing the ordered and unordered forms of the extended Node header pattern in DR
@@ -28,15 +36,15 @@ argumentsForSpatial.sequence |= arg_spatial.choice*, repo.choice?, slot.choice*,
 # 
 # Node_ordered.header
 # content model: meta* , scope* , guard* , evaluation* , signature* , qualification* , quantification* , oid?
-metadata_ordered-header.choice |= meta.choice*, scope.choice*, guard.choice*
+metadata_ordered-header.choice |= metaKnowledge-edge.choice*, scope.choice*, guard.choice*
 interface_ordered-header.choice |= evaluation.choice*, signature.choice*
-instance_ordered-header.choice |= qualification.choice*, quantification.choice*, oid.choice?
+instance_ordered-header.choice |= qualification.choice*, quantification.choice*, objectIdentifier-edge.choice?
 Node_ordered-header.choice |=
   metadata_ordered-header.choice, interface_ordered-header.choice, instance_ordered-header.choice
 #
 Node.header &= Node_ordered-header.choice?
 # *** Derivation Rule content model ***
-DerivationRule.content |= Implies.main, else.choice?
+DerivationRule.content |= Implies.main, else_Rule-edge.choice?
 
 
 

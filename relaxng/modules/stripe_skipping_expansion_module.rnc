@@ -10,8 +10,26 @@ dc:description [ "The expansion module for stripe-skipping." ]
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-start |= notAllowed
-DerivationRule.content |= body_Implies.content, then.content, then.content
+# 
+# STRIPE-SKIPPING MODE ENABLED
+#
+include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" {
+  start |= notAllowed
+  # both stripes skipped
+  Implies.main |=
+    (if_Rule-ss.content, then_Rule-ss.content)
+    | (if_Rule-ss.content, then_Rule-edge.choice)
+    | (if_Rule-edge.choice, then_Rule-ss.content)
+}
+#
+include "http://ruleml.org/1.0/relaxng/modules/asynchronous_stripe_skipping_entailment_expansion_module.rnc" {
+  start |= notAllowed
+}
+#
+if_Rule-ss.content |= if_Rule.content
+then_Rule-ss.content |= then_Rule.content
+# all stripes, including else, skipped
+DerivationRule.content |= if_Rule-ss.content, then_Rule-ss.content, then_Rule-ss.content
 formula-negation.choice |= formula-negation.content
 arg_time.choice |= time_primitives.content
 arg_spatial.choice |= spatial_primitives.content
@@ -20,3 +38,4 @@ formula-quant.choice |= formula_Forall.content
 #
 formula_And-query-edge.choice |= formula_And-query.content
 formula_Or-query-edge.choice |= formula_Or-query.content
+formula_Exists-query-edge.choice |= formula_Exists-query.content

@@ -1,0 +1,158 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR Spatial-Temporal Algebra" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Spatial, Temporal, Algebra" ]
+dc:description [
+  "The expansion module for spatial-temporal algebra."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+start |= notAllowed
+
+# This module declares the following Reaction RuleML elements:
+#                 * Operator (generic operator)
+#                  
+#                  Spatial, Temporal, Interval Function Constructs 
+#                  
+#                  * After
+#                  * Before
+#				  * Every
+#                  * Any
+#                  * Timer
+#                  
+#                  
+#                  (Allen's) Interval Relations
+#                  
+#                  * During
+#                  * Overlaps
+#                  * Starts
+#                  * Precedes
+#                  * Succeeds
+#                  * Meets
+#                  * Equal
+#                  * Finishes
+
+# (After | Before | Any | Every | Timer | Operator)
+spatial_temporal_algebra_group.content |= After | Before | Every | Any | Timer | Operator_any_term
+Operator_any_term =
+  
+  ## <Operator>: a generic Operator element which can be overloaded. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Operator    
+  element Operator { Any.type.def }
+Operator_any_formula.choice |= Operator_any_formula.def
+Operator_any_formula.def = element Operator { Operator_any_formula.type.def }
+Operator_any_formula.type.def = Operator_any_formula.attlist, Operator_any_formula.content
+Operator_any_formula.attlist &= generic-Node.attlist?
+Operator_any_formula.content |= Node.header, formula_Rulebase-edge.choice
+Node.choice |= Operator_any_formula.def
+SimpleFormula-node.choice |= Operator_any_formula.choice
+# (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes | Operator)
+interval_algebra_group.content |=
+  During
+  | Overlaps
+  | Starts
+  | Precedes
+  | Succeeds
+  | Meets
+  | IntervalAlgebraEqual
+  | Finishes
+  | IntervalAlgebraOperator
+IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type.def }
+IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type.def }
+IntervalAlgebraOperator.attlist &= generic-Node.attlist?
+# *** After / Before***
+After.attlist &= IntervalAlgebraOperator.attlist?
+After.content |= Interval_term.content
+After.type.def = After.content, After.attlist
+Node.choice |= After
+After =
+  
+  ## <After>: a temporal operator "t2 after t1". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After  
+  element After { After.type.def }
+Node.choice |= Before
+Before =
+  
+  ## <Before>: a temporal operator "t1 before t2". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-After
+  element Before { After.type.def }
+# *** Every ***
+Every.attlist &= IntervalAlgebraOperator.attlist?
+Every.content |= Node.header, arg_interval.choice?
+Every.type.def = Every.content, Every.attlist
+Node.choice |= Every
+Every =
+  
+  ## <Every>: a temporal operator "every t". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Every
+  element Every { Every.type.def }
+# *** Any ***
+Any.attlist &= IntervalAlgebraOperator.attlist?
+Any.content |= Node.header, arg_interval.choice*
+Any.type.def = Any.content, Any.attlist
+Node.choice |= Any
+Any =
+  
+  ## <Any>: a temporal operator "any t1, .., tn". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Any
+  element Any { Any.type.def }
+# *** (Recurring) Timer ***
+Timer.attlist &= IntervalAlgebraOperator.attlist?
+Timer.content |= Interval_term.content
+Timer.type.def = Timer.content, Timer.attlist
+Node.choice |= Timer
+Timer =
+  
+  ## <Timer>: a temporal operator "After t Every tx". See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Timer
+  element Timer { Timer.type.def }
+# *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equals | Finishes) ***
+IntervalAlgebraOperator.content |= Node.header, arg_interval.choice, arg_interval.choice
+IntervalAlgebraOperator.type.def = IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
+Node.choice |= During
+During =
+  
+  ## <During>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-During
+  element During { IntervalAlgebraOperator.type.def }
+Node.choice |= Overlaps
+Overlaps =
+  
+  ## <Overlaps>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Overlaps
+  element Overlaps { IntervalAlgebraOperator.type.def }
+Node.choice |= Starts
+Starts =
+  
+  ## <Starts>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Starts
+  element Starts { IntervalAlgebraOperator.type.def }
+Node.choice |= Precedes
+Precedes =
+  
+  ## <Precedes>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Precedes
+  element Precedes { IntervalAlgebraOperator.type.def }
+Node.choice |= Succeeds
+Succeeds =
+  
+  ## <Succeeds>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Succeeds
+  element Succeeds { IntervalAlgebraOperator.type.def }
+Node.choice |= Meets
+Meets =
+  
+  ## <Meets>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Meets
+  element Meets { IntervalAlgebraOperator.type.def }
+Node.choice |= Finishes
+Finishes =
+  
+  ## <Finishes>: an interval operator. See
+  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Finishes
+  element Finishes { IntervalAlgebraOperator.type.def }

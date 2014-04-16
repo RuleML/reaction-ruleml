@@ -49,7 +49,7 @@ include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" inheri
 # 
 # DISJUNCTIONS IN CONCLUSIONS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/dis_expansion_module.rnc" {
+include "http://ruleml.org/1.0/relaxng/modules/dis_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -95,26 +95,26 @@ include "http://ruleml.org/1.0/relaxng/modules/termseq_poly_expansion_module.rnc
 }
 # 
 # EXPLICIT DATATYPING ENABLED
-#
-#include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc"
+# 
+# include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc"
 #        inherit = ruleml {
 #  start |= notAllowed
-#}
-#include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc"
+# }
+# include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc"
 #        inherit = ruleml {
 #  start |= notAllowed
-#}
-#include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc"
+# }
+# include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc"
 #        inherit = ruleml {
 #  start |= notAllowed
-#}
+# }
 # 
 # xsi:schemaLocation ALLOWED IN RuleML
-#
-#include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc"
+# 
+# include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc"
 #        inherit = ruleml {
 #  start |= notAllowed
-#}
+# }
 # 
 # UNIVERSAL RESOURCE IDENTIFIERS (URIs) INCLUDED
 #
@@ -395,57 +395,57 @@ include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" inheri
   start |= notAllowed
 }
 #
-include "../modules/any_content_expansion_module.rnc" {
+include "../modules/any_content_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/attributes_expansion_module.rnc" {
+include "../modules/attributes_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/curie_key_expansion_module.rnc" {
+include "../modules/curie_key_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/extended_quantifier_expansion_module.rnc" {
+include "../modules/extended_quantifier_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/instance_expansion_module.rnc" {
+include "../modules/instance_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/interface_expansion_module.rnc" {
+include "../modules/interface_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/interval_expansion_module.rnc" {
+include "../modules/interval_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/negation_expansion_module.rnc" {
+include "../modules/negation_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-#include "../modules/ordered_groups_expansion_module.rnc" {
+# include "../modules/ordered_groups_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
-#}
-include "../modules/per_effect_expansion_module.rnc" {
+# }
+include "../modules/per_effect_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/per_modal_expansion_module.rnc" {
+include "../modules/per_modal_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/profile_expansion_module.rnc" {
+include "../modules/profile_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/rule_expansion_module.rnc" {
+include "../modules/rule_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/spatial_expansion_module.rnc" {
+include "../modules/spatial_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/spatial_temporal_interval_algebra_expansion_module.rnc" {
+include "../modules/spatial_temporal_interval_algebra_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-#include "../modules/stripe_skipping_expansion_module.rnc" {
-#  start |= notAllowed
-#}
-include "../modules/time_expansion_module.rnc" {
+include "../modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/unordered_groups_expansion_module.rnc" {
+include "../modules/time_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+include "../modules/unordered_groups_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }

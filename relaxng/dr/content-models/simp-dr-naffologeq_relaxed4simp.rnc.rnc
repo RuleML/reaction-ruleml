@@ -26,13 +26,12 @@ start =
   | Ind
   | Var
   | Plex
-  | Rule
-  | Negation
   | Quantifier
-  | Profile
-  | Time
-  | Spatial
   | Interval
+  | Negation
+  | Profile
+  | Rule
+  | Spatial
   | Operator
   | After
   | Before
@@ -46,6 +45,7 @@ start =
   | Succeeds
   | Meets
   | Finishes
+  | Time
   | formula
   | formula_2
   | op
@@ -67,6 +67,8 @@ start =
   | strong
   | weak
   | meta
+  | scope
+  | guard
   | torso
   | oid
   | slot
@@ -75,17 +77,15 @@ start =
   | arg
   | resl
   | repo
-  | scope
-  | guard
-  | evaluation
-  | signature
+  | content
   | qualification
   | quantification
-  | formula_8
+  | evaluation
+  | signature
   | arg_2
+  | formula_8
   | arg_3
   | arg_4
-  | content
 RuleML =
   element RuleML {
     (attribute node { xsd:anyURI }?
@@ -158,10 +158,10 @@ Assert =
     (formula
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -172,8 +172,8 @@ Assert =
      | Exists
      | Entails
      | Rulebase
-     | Rule
-     | Quantifier)*
+     | Quantifier
+     | Rule)*
   }
 Retract =
   element Retract {
@@ -212,10 +212,10 @@ Retract =
     (formula
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -226,8 +226,8 @@ Retract =
      | Exists
      | Entails
      | Rulebase
-     | Rule
-     | Quantifier)*
+     | Quantifier
+     | Rule)*
   }
 Query =
   element Query {
@@ -267,10 +267,10 @@ Query =
     (formula_2
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And
      | Or
      | Neg
@@ -321,9 +321,9 @@ Atom =
         | Reify
         | Ind
         | Data
-        | Time
-        | Spatial
         | Interval_2
+        | Spatial
+        | Time
         | Var
         | Expr
         | Plex)*
@@ -396,10 +396,10 @@ And =
     (formula_9
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And
      | Or
      | Neg
@@ -449,10 +449,10 @@ Or =
     (formula_10
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And
      | Or
      | Neg
@@ -503,10 +503,10 @@ Implies =
      & oid?),
     (((Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And
        | Or
        | Neg
@@ -519,10 +519,10 @@ Implies =
        | Quantifier),
       (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -535,10 +535,10 @@ Implies =
        | Quantifier))
      | ((Atom
          | Equal
-         | Time
-         | Spatial
          | Interval
+         | Spatial
          | Operator
+         | Time
          | And
          | Or
          | Neg
@@ -553,10 +553,10 @@ Implies =
      | (if_2,
         (Atom
          | Equal
-         | Time
-         | Spatial
          | Interval
+         | Spatial
          | Operator
+         | Time
          | And_2
          | Or_2
          | Neg
@@ -570,10 +570,10 @@ Implies =
      | (if_2 & then_2)
      | ((Atom
          | Equal
-         | Time
-         | Spatial
          | Interval
+         | Spatial
          | Operator
+         | Time
          | And_2
          | Or_2
          | Neg
@@ -588,10 +588,10 @@ Implies =
      | (then_2,
         (Atom
          | Equal
-         | Time
-         | Spatial
          | Interval
+         | Spatial
          | Operator
+         | Time
          | And
          | Or
          | Neg
@@ -641,10 +641,10 @@ Forall =
     (formula_5
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -653,8 +653,8 @@ Forall =
      | Equivalent
      | Forall
      | Exists
-     | Rule
-     | Quantifier)
+     | Quantifier
+     | Rule)
   }
 Exists =
   element Exists {
@@ -694,10 +694,10 @@ Exists =
     (formula_6
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -753,9 +753,9 @@ Expr =
         | Reify
         | Ind
         | Data
-        | Time
-        | Spatial
         | Interval_2
+        | Spatial
+        | Time
         | Var
         | Expr
         | Plex)*
@@ -826,10 +826,10 @@ Rulebase =
     (formula_7
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -838,8 +838,8 @@ Rulebase =
      | Equivalent
      | Forall
      | Exists
-     | Rule
-     | Quantifier)*
+     | Quantifier
+     | Rule)*
   }
 Entails =
   element Entails {
@@ -924,10 +924,10 @@ Neg =
     (strong
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -985,10 +985,10 @@ Naf =
     (weak
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -1037,10 +1037,10 @@ Equivalent =
     (torso
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -1054,10 +1054,10 @@ Equivalent =
     (torso
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -1105,9 +1105,9 @@ Equal =
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex),
@@ -1116,9 +1116,9 @@ Equal =
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex)
@@ -1225,13 +1225,12 @@ Reify =
        | Ind
        | Var
        | Plex
-       | Rule
-       | Negation
        | Quantifier
-       | Profile
-       | Time
-       | Spatial
        | Interval
+       | Negation
+       | Profile
+       | Rule
+       | Spatial
        | Operator
        | After
        | Before
@@ -1245,6 +1244,7 @@ Reify =
        | Succeeds
        | Meets
        | Finishes
+       | Time
        | formula
        | formula_2
        | op
@@ -1266,6 +1266,8 @@ Reify =
        | strong
        | weak
        | meta
+       | scope
+       | guard
        | torso
        | oid
        | slot
@@ -1274,17 +1276,15 @@ Reify =
        | arg
        | resl
        | repo
-       | scope
-       | guard
-       | evaluation
-       | signature
+       | content
        | qualification
        | quantification
-       | formula_8
+       | evaluation
+       | signature
        | arg_2
+       | formula_8
        | arg_3
-       | arg_4
-       | content)*
+       | arg_4)*
   }
 Ind =
   element Ind {
@@ -1386,9 +1386,9 @@ Plex =
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex)*
@@ -1396,8 +1396,8 @@ Plex =
      & slot*
      & resl?)
   }
-Rule =
-  element Rule {
+Quantifier =
+  element Quantifier {
     (meta*
      & scope*
      & guard*
@@ -1406,160 +1406,107 @@ Rule =
      & qualification*
      & quantification*
      & oid?),
-    (((Atom
-       | Equal
-       | Time
-       | Spatial
-       | Interval
-       | Operator
-       | And
-       | Or
-       | Neg
-       | Negation
-       | Naf
-       | Implies
-       | Equivalent
-       | Forall
-       | Exists_2
-       | Quantifier),
-      (Atom
-       | Equal
-       | Time
-       | Spatial
-       | Interval
-       | Operator
-       | And_2
-       | Or_2
-       | Neg
-       | Negation
-       | Naf
-       | Implies
-       | Equivalent
-       | Forall
-       | Exists
-       | Quantifier),
-      (Atom
-       | Equal
-       | Time
-       | Spatial
-       | Interval
-       | Operator
-       | And_2
-       | Or_2
-       | Neg
-       | Negation
-       | Naf
-       | Implies
-       | Equivalent
-       | Forall
-       | Exists
-       | Quantifier))
-     | ((((Atom
-           | Equal
-           | Time
-           | Spatial
-           | Interval
-           | Operator
-           | And
-           | Or
-           | Neg
-           | Negation
-           | Naf
-           | Implies
-           | Equivalent
-           | Forall
-           | Exists_2
-           | Quantifier),
-          (Atom
-           | Equal
-           | Time
-           | Spatial
-           | Interval
-           | Operator
-           | And_2
-           | Or_2
-           | Neg
-           | Negation
-           | Naf
-           | Implies
-           | Equivalent
-           | Forall
-           | Exists
-           | Quantifier))
-         | ((Atom
-             | Equal
-             | Time
-             | Spatial
-             | Interval
-             | Operator
-             | And
-             | Or
-             | Neg
-             | Negation
-             | Naf
-             | Implies
-             | Equivalent
-             | Forall
-             | Exists_2
-             | Quantifier),
-            then_2)
-         | (if_2,
-            (Atom
-             | Equal
-             | Time
-             | Spatial
-             | Interval
-             | Operator
-             | And_2
-             | Or_2
-             | Neg
-             | Negation
-             | Naf
-             | Implies
-             | Equivalent
-             | Forall
-             | Exists
-             | Quantifier))
-         | (if_2 & then_2)
-         | ((Atom
-             | Equal
-             | Time
-             | Spatial
-             | Interval
-             | Operator
-             | And_2
-             | Or_2
-             | Neg
-             | Negation
-             | Naf
-             | Implies
-             | Equivalent
-             | Forall
-             | Exists
-             | Quantifier),
-            if_2)
-         | (then_2,
-            (Atom
-             | Equal
-             | Time
-             | Spatial
-             | Interval
-             | Operator
-             | And
-             | Or
-             | Neg
-             | Negation
-             | Naf
-             | Implies
-             | Equivalent
-             | Forall
-             | Exists_2
-             | Quantifier)))
-        & else?))?,
-    (attribute direction { "bidirectional" | "forward" | "backward" }?
-     & attribute material { "yes" | "no" }?
-     & attribute style { "active" | "messaging" | "reasoning" }?
-     & attribute closure { "universal" | "existential" }?
+    (declare | Var)+,
+    (formula_11
+     | Atom
+     | Equal
+     | Interval
+     | Spatial
+     | Operator
+     | Time
+     | And_2
+     | Or_2
+     | Neg
+     | Negation
+     | Implies
+     | Equivalent
+     | Forall
+     | Exists
+     | Quantifier
+     | Rule)?,
+    (attribute iri { xsd:anyURI }?
+     & attribute type {
+         xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
+         | xsd:string {
+             minLength = "1"
+             pattern =
+               "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+           }
+         | xsd:anyURI
+       }?
+     & attribute node { xsd:anyURI }?
+     & attribute xml:base { xsd:anyURI }?
+     & attribute xml:id { xsd:NCName }?
+     & attribute key {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?
+     & attribute keyref {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?)
+  }
+Interval =
+  element Interval {
+    (meta*
+     & scope*
+     & guard*
+     & evaluation*
+     & signature*
+     & qualification*
+     & quantification*
+     & oid?),
+    ((content_2
+      | arg_2
+      | Skolem
+      | Reify
+      | Ind
+      | Data
+      | Interval_2
+      | Spatial
+      | Time
+      | Var
+      | Expr
+      | Plex
+      | During
+      | Overlaps
+      | Starts
+      | Precedes
+      | Succeeds
+      | Meets
+      | Equal_2
+      | Finishes
+      | Operator_2),
+     (content_2
+      | arg_2
+      | Skolem
+      | Reify
+      | Ind
+      | Data
+      | Interval_2
+      | Spatial
+      | Time
+      | Var
+      | Expr
+      | Plex
+      | During
+      | Overlaps
+      | Starts
+      | Precedes
+      | Succeeds
+      | Meets
+      | Equal_2
+      | Finishes
+      | Operator_2)?)?,
+    (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
          | xsd:string {
@@ -1602,10 +1549,10 @@ Negation =
     (formula_8
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -1615,64 +1562,6 @@ Negation =
      | Forall
      | Exists
      | Quantifier),
-    (attribute iri { xsd:anyURI }?
-     & attribute type {
-         xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
-         | xsd:string {
-             minLength = "1"
-             pattern =
-               "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-           }
-         | xsd:anyURI
-       }?
-     & attribute node { xsd:anyURI }?
-     & attribute xml:base { xsd:anyURI }?
-     & attribute xml:id { xsd:NCName }?
-     & attribute key {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?
-     & attribute keyref {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?)
-  }
-Quantifier =
-  element Quantifier {
-    (meta*
-     & scope*
-     & guard*
-     & evaluation*
-     & signature*
-     & qualification*
-     & quantification*
-     & oid?),
-    (declare | Var)+,
-    (formula_11
-     | Atom
-     | Equal
-     | Time
-     | Spatial
-     | Interval
-     | Operator
-     | And_2
-     | Or_2
-     | Neg
-     | Negation
-     | Implies
-     | Equivalent
-     | Forall
-     | Exists
-     | Rule
-     | Quantifier)?,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -1713,13 +1602,14 @@ Profile =
      & qualification*
      & quantification*
      & oid?),
-    (formula
+    (content
+     | formula
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -1730,9 +1620,8 @@ Profile =
      | Exists
      | Entails
      | Rulebase
-     | Rule
      | Quantifier
-     | content)*,
+     | Rule)*,
     (attribute iri { xsd:anyURI }?
      & attribute direction { "bidirectional" | "forward" | "backward" }?
      & attribute type {
@@ -1768,8 +1657,8 @@ Profile =
        }?
      & attribute size { xsd:int }?)
   }
-Time =
-  element Time {
+Rule =
+  element Rule {
     (meta*
      & scope*
      & guard*
@@ -1778,28 +1667,160 @@ Time =
      & qualification*
      & quantification*
      & oid?),
-    (content_2*
-     | ((arg_2
-         | Skolem
-         | Reify
-         | Ind
-         | Data
-         | Time
-         | Spatial
-         | Interval_2
-         | Var
-         | Expr
-         | Plex
-         | After
-         | Before
-         | Every
-         | Any
-         | Timer
-         | Operator_2)*
-        & repo?
-        & slot*
-        & resl?)),
-    (attribute iri { xsd:anyURI }?
+    (((Atom
+       | Equal
+       | Interval
+       | Spatial
+       | Operator
+       | Time
+       | And
+       | Or
+       | Neg
+       | Negation
+       | Naf
+       | Implies
+       | Equivalent
+       | Forall
+       | Exists_2
+       | Quantifier),
+      (Atom
+       | Equal
+       | Interval
+       | Spatial
+       | Operator
+       | Time
+       | And_2
+       | Or_2
+       | Neg
+       | Negation
+       | Naf
+       | Implies
+       | Equivalent
+       | Forall
+       | Exists
+       | Quantifier),
+      (Atom
+       | Equal
+       | Interval
+       | Spatial
+       | Operator
+       | Time
+       | And_2
+       | Or_2
+       | Neg
+       | Negation
+       | Naf
+       | Implies
+       | Equivalent
+       | Forall
+       | Exists
+       | Quantifier))
+     | ((((Atom
+           | Equal
+           | Interval
+           | Spatial
+           | Operator
+           | Time
+           | And
+           | Or
+           | Neg
+           | Negation
+           | Naf
+           | Implies
+           | Equivalent
+           | Forall
+           | Exists_2
+           | Quantifier),
+          (Atom
+           | Equal
+           | Interval
+           | Spatial
+           | Operator
+           | Time
+           | And_2
+           | Or_2
+           | Neg
+           | Negation
+           | Naf
+           | Implies
+           | Equivalent
+           | Forall
+           | Exists
+           | Quantifier))
+         | ((Atom
+             | Equal
+             | Interval
+             | Spatial
+             | Operator
+             | Time
+             | And
+             | Or
+             | Neg
+             | Negation
+             | Naf
+             | Implies
+             | Equivalent
+             | Forall
+             | Exists_2
+             | Quantifier),
+            then_2)
+         | (if_2,
+            (Atom
+             | Equal
+             | Interval
+             | Spatial
+             | Operator
+             | Time
+             | And_2
+             | Or_2
+             | Neg
+             | Negation
+             | Naf
+             | Implies
+             | Equivalent
+             | Forall
+             | Exists
+             | Quantifier))
+         | (if_2 & then_2)
+         | ((Atom
+             | Equal
+             | Interval
+             | Spatial
+             | Operator
+             | Time
+             | And_2
+             | Or_2
+             | Neg
+             | Negation
+             | Naf
+             | Implies
+             | Equivalent
+             | Forall
+             | Exists
+             | Quantifier),
+            if_2)
+         | (then_2,
+            (Atom
+             | Equal
+             | Interval
+             | Spatial
+             | Operator
+             | Time
+             | And
+             | Or
+             | Neg
+             | Negation
+             | Naf
+             | Implies
+             | Equivalent
+             | Forall
+             | Exists_2
+             | Quantifier)))
+        & else?))?,
+    (attribute direction { "bidirectional" | "forward" | "backward" }?
+     & attribute material { "yes" | "no" }?
+     & attribute style { "active" | "messaging" | "reasoning" }?
+     & attribute closure { "universal" | "existential" }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
          | xsd:string {
@@ -1845,9 +1866,9 @@ Spatial =
          | Reify
          | Ind
          | Data
-         | Time
-         | Spatial
          | Interval_2
+         | Spatial
+         | Time
          | Var
          | Expr
          | Plex
@@ -1856,92 +1877,10 @@ Spatial =
          | Every
          | Any
          | Timer
-         | Operator_2)*
+         | Operator_3)*
         & repo?
         & slot*
         & resl?)),
-    (attribute iri { xsd:anyURI }?
-     & attribute type {
-         xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
-         | xsd:string {
-             minLength = "1"
-             pattern =
-               "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-           }
-         | xsd:anyURI
-       }?
-     & attribute node { xsd:anyURI }?
-     & attribute xml:base { xsd:anyURI }?
-     & attribute xml:id { xsd:NCName }?
-     & attribute key {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?
-     & attribute keyref {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?)
-  }
-Interval =
-  element Interval {
-    (meta*
-     & scope*
-     & guard*
-     & evaluation*
-     & signature*
-     & qualification*
-     & quantification*
-     & oid?),
-    ((arg_4
-      | content_4
-      | Skolem
-      | Reify
-      | Ind
-      | Data
-      | Time
-      | Spatial
-      | Interval_2
-      | Var
-      | Expr
-      | Plex
-      | During
-      | Overlaps
-      | Starts
-      | Precedes
-      | Succeeds
-      | Meets
-      | Equal_2
-      | Finishes
-      | Operator_3),
-     (arg_4
-      | content_4
-      | Skolem
-      | Reify
-      | Ind
-      | Data
-      | Time
-      | Spatial
-      | Interval_2
-      | Var
-      | Expr
-      | Plex
-      | During
-      | Overlaps
-      | Starts
-      | Precedes
-      | Succeeds
-      | Meets
-      | Equal_2
-      | Finishes
-      | Operator_3)?)?,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2014,10 +1953,10 @@ Operator =
     (formula_7
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -2026,8 +1965,8 @@ Operator =
      | Equivalent
      | Forall
      | Exists
-     | Rule
-     | Quantifier)
+     | Quantifier
+     | Rule)*
   }
 After =
   element After {
@@ -2039,15 +1978,15 @@ After =
      & qualification*
      & quantification*
      & oid?),
-    ((arg_4
-      | content_4
+    ((content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -2059,16 +1998,16 @@ After =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3),
-     (arg_4
-      | content_4
+      | Operator_2),
+     (content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -2080,7 +2019,7 @@ After =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3)?)?,
+      | Operator_2)?)?,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2121,15 +2060,15 @@ Before =
      & qualification*
      & quantification*
      & oid?),
-    ((arg_4
-      | content_4
+    ((content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -2141,16 +2080,16 @@ Before =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3),
-     (arg_4
-      | content_4
+      | Operator_2),
+     (content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -2162,7 +2101,7 @@ Before =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3)?)?,
+      | Operator_2)?)?,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2203,15 +2142,15 @@ Every =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2223,7 +2162,7 @@ Every =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3)?,
+     | Operator_2)?,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2264,15 +2203,15 @@ Any =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2284,7 +2223,7 @@ Any =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3)*,
+     | Operator_2)*,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2325,15 +2264,15 @@ Timer =
      & qualification*
      & quantification*
      & oid?),
-    ((arg_4
-      | content_4
+    ((content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -2345,16 +2284,16 @@ Timer =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3),
-     (arg_4
-      | content_4
+      | Operator_2),
+     (content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -2366,7 +2305,7 @@ Timer =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3)?)?,
+      | Operator_2)?)?,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2407,15 +2346,15 @@ During =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2427,16 +2366,16 @@ During =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
+     | Operator_2),
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2448,7 +2387,7 @@ During =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
+     | Operator_2),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2489,15 +2428,15 @@ Overlaps =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2509,16 +2448,16 @@ Overlaps =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
+     | Operator_2),
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2530,7 +2469,7 @@ Overlaps =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
+     | Operator_2),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2571,15 +2510,15 @@ Starts =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2591,16 +2530,16 @@ Starts =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
+     | Operator_2),
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2612,7 +2551,7 @@ Starts =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
+     | Operator_2),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2653,15 +2592,15 @@ Precedes =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2673,16 +2612,16 @@ Precedes =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
+     | Operator_2),
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2694,7 +2633,7 @@ Precedes =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
+     | Operator_2),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2735,15 +2674,15 @@ Succeeds =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2755,16 +2694,16 @@ Succeeds =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
+     | Operator_2),
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2776,7 +2715,7 @@ Succeeds =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
+     | Operator_2),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2817,15 +2756,15 @@ Meets =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2837,16 +2776,16 @@ Meets =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
+     | Operator_2),
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2858,7 +2797,7 @@ Meets =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
+     | Operator_2),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2899,15 +2838,15 @@ Finishes =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2919,16 +2858,16 @@ Finishes =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
+     | Operator_2),
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -2940,7 +2879,68 @@ Finishes =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
+     | Operator_2),
+    (attribute iri { xsd:anyURI }?
+     & attribute type {
+         xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
+         | xsd:string {
+             minLength = "1"
+             pattern =
+               "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+           }
+         | xsd:anyURI
+       }?
+     & attribute node { xsd:anyURI }?
+     & attribute xml:base { xsd:anyURI }?
+     & attribute xml:id { xsd:NCName }?
+     & attribute key {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?
+     & attribute keyref {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?)
+  }
+Time =
+  element Time {
+    (meta*
+     & scope*
+     & guard*
+     & evaluation*
+     & signature*
+     & qualification*
+     & quantification*
+     & oid?),
+    (content_4*
+     | ((Skolem
+         | Reify
+         | Ind
+         | Data
+         | Interval_2
+         | Spatial
+         | Time
+         | Var
+         | Expr
+         | Plex
+         | After
+         | Before
+         | Every
+         | Any
+         | Timer
+         | Operator_3
+         | arg_4)*
+        & repo?
+        & slot*
+        & resl?)),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -2993,10 +2993,10 @@ formula =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3007,8 +3007,8 @@ formula =
        | Exists
        | Entails
        | Rulebase
-       | Rule
-       | Quantifier)
+       | Quantifier
+       | Rule)
   }
 formula_2 =
   element formula {
@@ -3032,10 +3032,10 @@ formula_2 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And
        | Or
        | Neg
@@ -3093,10 +3093,10 @@ formula_3 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3130,10 +3130,10 @@ formula_4 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3167,10 +3167,10 @@ then =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3204,10 +3204,10 @@ if =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And
        | Or
        | Neg
@@ -3241,10 +3241,10 @@ if_2 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And
        | Or
        | Neg
@@ -3278,10 +3278,10 @@ then_2 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3315,10 +3315,10 @@ else =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3374,10 +3374,10 @@ formula_5 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3386,8 +3386,8 @@ formula_5 =
        | Equivalent
        | Forall
        | Exists
-       | Rule
-       | Quantifier)
+       | Quantifier
+       | Rule)
   }
 formula_6 =
   element formula {
@@ -3411,10 +3411,10 @@ formula_6 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3469,10 +3469,10 @@ formula_7 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3481,8 +3481,8 @@ formula_7 =
        | Equivalent
        | Forall
        | Exists
-       | Rule
-       | Quantifier)
+       | Quantifier
+       | Rule)
   }
 then_3 =
   element then {
@@ -3572,10 +3572,10 @@ strong =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3608,10 +3608,10 @@ weak =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3645,10 +3645,10 @@ meta =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3659,8 +3659,86 @@ meta =
        | Exists
        | Entails
        | Rulebase
-       | Rule
-       | Quantifier)
+       | Quantifier
+       | Rule)
+  }
+scope =
+  element scope {
+    (Atom
+     | Equal
+     | Interval
+     | Spatial
+     | Operator
+     | Time
+     | And
+     | Or
+     | Neg
+     | Negation
+     | Naf
+     | Implies
+     | Equivalent
+     | Forall
+     | Exists_2
+     | Entails
+     | Rulebase
+     | Quantifier)?,
+    (attribute index { xsd:positiveInteger }?
+     & attribute xml:base { xsd:anyURI }?
+     & attribute xml:id { xsd:NCName }?
+     & attribute key {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?
+     & attribute keyref {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?)
+  }
+guard =
+  element guard {
+    (Atom
+     | Equal
+     | Interval
+     | Spatial
+     | Operator
+     | Time
+     | And
+     | Or
+     | Neg
+     | Negation
+     | Naf
+     | Implies
+     | Equivalent
+     | Forall
+     | Exists_2
+     | Quantifier),
+    (attribute index { xsd:positiveInteger }?
+     & attribute xml:base { xsd:anyURI }?
+     & attribute xml:id { xsd:NCName }?
+     & attribute key {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?
+     & attribute keyref {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?)
   }
 torso =
   element torso {
@@ -3684,10 +3762,10 @@ torso =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And_2
        | Or_2
        | Neg
@@ -3723,9 +3801,9 @@ oid =
        | Reify
        | Ind
        | Data
-       | Time
-       | Spatial
        | Interval_2
+       | Spatial
+       | Time
        | Var
        | Expr
        | Plex)
@@ -3754,14 +3832,14 @@ slot =
          }
          | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
        }?),
-    (Ind | Data | Time | Spatial | Interval_2 | Expr | Plex),
+    (Ind | Data | Interval_2 | Spatial | Time | Expr | Plex),
     (Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex)
@@ -3790,9 +3868,9 @@ left =
        | Reify
        | Ind
        | Data
-       | Time
-       | Spatial
        | Interval_2
+       | Spatial
+       | Time
        | Var
        | Expr
        | Plex)
@@ -3821,9 +3899,9 @@ right =
        | Reify
        | Ind
        | Data
-       | Time
-       | Spatial
        | Interval_2
+       | Spatial
+       | Time
        | Var
        | Expr
        | Plex)
@@ -3853,9 +3931,9 @@ arg =
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex)
@@ -3904,26 +3982,133 @@ repo =
       }?
     & (Var | Plex_3)
   }
-scope =
-  element scope {
-    (Atom
-     | Equal
-     | Time
-     | Spatial
-     | Interval
-     | Operator
+content =
+  element content {
+    ((text & _2*)
+     | RuleML
+     | Assert
+     | Retract
+     | Query
+     | Atom
+     | Rel
      | And
      | Or
+     | Implies
+     | Forall
+     | Exists
+     | Expr
+     | Fun
+     | Rulebase
+     | Entails
+     | Neg
+     | Naf
+     | Equivalent
+     | Equal
+     | Data
+     | Skolem
+     | Reify
+     | Ind
+     | Var
+     | Plex
+     | Quantifier
+     | Interval
+     | Negation
+     | Profile
+     | Rule
+     | Spatial
+     | Operator
+     | After
+     | Before
+     | Every
+     | Any
+     | Timer
+     | During
+     | Overlaps
+     | Starts
+     | Precedes
+     | Succeeds
+     | Meets
+     | Finishes
+     | Time
+     | formula
+     | formula_2
+     | op
+     | formula_3
+     | formula_4
+     | then
+     | if
+     | if_2
+     | then_2
+     | else
+     | declare
+     | formula_5
+     | formula_6
+     | op_2
+     | formula_7
+     | then_3
+     | if_3
+     | degree
+     | strong
+     | weak
+     | meta
+     | scope
+     | guard
+     | torso
+     | oid
+     | slot
+     | left
+     | right
+     | arg
+     | resl
+     | repo
+     | content
+     | qualification
+     | quantification
+     | evaluation
+     | signature
+     | arg_2
+     | formula_8
+     | arg_3
+     | arg_4),
+    (attribute xml:base { xsd:anyURI }?
+     & attribute xml:id { xsd:NCName }?
+     & attribute key {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?
+     & attribute keyref {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?)
+  }
+qualification =
+  element qualification {
+    (Atom
+     | Equal
+     | Interval
+     | Spatial
+     | Operator
+     | Time
+     | And_2
+     | Or_2
      | Neg
      | Negation
-     | Naf
      | Implies
      | Equivalent
      | Forall
-     | Exists_2
+     | Exists
      | Entails
      | Rulebase
-     | Quantifier)?,
+     | Quantifier
+     | Rule),
     (attribute index { xsd:positiveInteger }?
      & attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
@@ -3944,24 +4129,9 @@ scope =
          | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
        }?)
   }
-guard =
-  element guard {
-    (Atom
-     | Equal
-     | Time
-     | Spatial
-     | Interval
-     | Operator
-     | And
-     | Or
-     | Neg
-     | Negation
-     | Naf
-     | Implies
-     | Equivalent
-     | Forall
-     | Exists_2
-     | Quantifier),
+quantification =
+  element quantification {
+    (Forall_2 | Exists_3 | Quantifier),
     (attribute index { xsd:positiveInteger }?
      & attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
@@ -4009,10 +4179,10 @@ signature =
   element signature {
     (Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And
      | Or
      | Neg
@@ -4045,49 +4215,27 @@ signature =
          | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
        }?)
   }
-qualification =
-  element qualification {
-    (Atom
-     | Equal
-     | Time
+arg_2 =
+  element arg {
+    (Skolem
+     | Reify
+     | Ind
+     | Data
+     | Interval_2
      | Spatial
-     | Interval
-     | Operator
-     | And_2
-     | Or_2
-     | Neg
-     | Negation
-     | Implies
-     | Equivalent
-     | Forall
-     | Exists
-     | Entails
-     | Rulebase
-     | Rule
-     | Quantifier),
-    (attribute index { xsd:positiveInteger }?
-     & attribute xml:base { xsd:anyURI }?
-     & attribute xml:id { xsd:NCName }?
-     & attribute key {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?
-     & attribute keyref {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?)
-  }
-quantification =
-  element quantification {
-    (Forall_2 | Exists_3 | Quantifier),
+     | Time
+     | Var
+     | Expr
+     | Plex
+     | During
+     | Overlaps
+     | Starts
+     | Precedes
+     | Succeeds
+     | Meets
+     | Equal_2
+     | Finishes
+     | Operator_2),
     (attribute index { xsd:positiveInteger }?
      & attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
@@ -4112,10 +4260,10 @@ formula_8 =
   element formula {
     (Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -4144,53 +4292,15 @@ formula_8 =
          | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
        }?)
   }
-arg_2 =
-  element arg {
-    (Skolem
-     | Reify
-     | Ind
-     | Data
-     | Time
-     | Spatial
-     | Interval_2
-     | Var
-     | Expr
-     | Plex
-     | After
-     | Before
-     | Every
-     | Any
-     | Timer
-     | Operator_2),
-    (attribute index { xsd:positiveInteger }?
-     & attribute xml:base { xsd:anyURI }?
-     & attribute xml:id { xsd:NCName }?
-     & attribute key {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?
-     & attribute keyref {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?)
-  }
 arg_3 =
   element arg {
     (Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -4199,7 +4309,7 @@ arg_3 =
      | Every
      | Any
      | Timer
-     | Operator_2),
+     | Operator_3),
     (attribute index { xsd:positiveInteger }?
      & attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
@@ -4226,130 +4336,20 @@ arg_4 =
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
-     | Var
-     | Expr
-     | Plex
-     | During
-     | Overlaps
-     | Starts
-     | Precedes
-     | Succeeds
-     | Meets
-     | Equal_2
-     | Finishes
-     | Operator_3),
-    (attribute index { xsd:positiveInteger }?
-     & attribute xml:base { xsd:anyURI }?
-     & attribute xml:id { xsd:NCName }?
-     & attribute key {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?
-     & attribute keyref {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?)
-  }
-content =
-  element content {
-    ((text & _2*)
-     | RuleML
-     | Assert
-     | Retract
-     | Query
-     | Atom
-     | Rel
-     | And
-     | Or
-     | Implies
-     | Forall
-     | Exists
-     | Expr
-     | Fun
-     | Rulebase
-     | Entails
-     | Neg
-     | Naf
-     | Equivalent
-     | Equal
-     | Data
-     | Skolem
-     | Reify
-     | Ind
-     | Var
-     | Plex
-     | Rule
-     | Negation
-     | Quantifier
-     | Profile
-     | Time
      | Spatial
-     | Interval
-     | Operator
+     | Time
+     | Var
+     | Expr
+     | Plex
      | After
      | Before
      | Every
      | Any
      | Timer
-     | During
-     | Overlaps
-     | Starts
-     | Precedes
-     | Succeeds
-     | Meets
-     | Finishes
-     | formula
-     | formula_2
-     | op
-     | formula_3
-     | formula_4
-     | then
-     | if
-     | if_2
-     | then_2
-     | else
-     | declare
-     | formula_5
-     | formula_6
-     | op_2
-     | formula_7
-     | then_3
-     | if_3
-     | degree
-     | strong
-     | weak
-     | meta
-     | torso
-     | oid
-     | slot
-     | left
-     | right
-     | arg
-     | resl
-     | repo
-     | scope
-     | guard
-     | evaluation
-     | signature
-     | qualification
-     | quantification
-     | formula_8
-     | arg_2
-     | arg_3
-     | arg_4
-     | content),
-    (attribute xml:base { xsd:anyURI }?
+     | Operator_3),
+    (attribute index { xsd:positiveInteger }?
+     & attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
      & attribute key {
          xsd:string {
@@ -4428,10 +4428,10 @@ And_2 =
     (formula_3
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -4480,10 +4480,10 @@ Or_2 =
     (formula_4
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -4533,10 +4533,10 @@ Exists_2 =
     (formula_12
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And
      | Or
      | Neg
@@ -4558,15 +4558,15 @@ Interval_2 =
      & qualification*
      & quantification*
      & oid?),
-    ((arg_4
-      | content_4
+    ((content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -4578,16 +4578,16 @@ Interval_2 =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3),
-     (arg_4
-      | content_4
+      | Operator_2),
+     (content_2
+      | arg_2
       | Skolem
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex
@@ -4599,7 +4599,7 @@ Interval_2 =
       | Meets
       | Equal_2
       | Finishes
-      | Operator_3)?)?,
+      | Operator_2)?)?,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -4652,10 +4652,10 @@ formula_9 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And
        | Or
        | Neg
@@ -4689,10 +4689,10 @@ formula_10 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And
        | Or
        | Neg
@@ -4713,10 +4713,10 @@ formula_11 =
   element formula {
     (Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -4725,8 +4725,8 @@ formula_11 =
      | Equivalent
      | Forall
      | Exists
-     | Rule
-     | Quantifier),
+     | Quantifier
+     | Rule),
     (attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
      & attribute key {
@@ -4748,6 +4748,24 @@ formula_11 =
   }
 content_2 =
   element content {
+    (attribute xml:base { xsd:anyURI }?
+     & attribute xml:id { xsd:NCName }?
+     & attribute key {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?
+     & attribute keyref {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?),
     ((text & _2*)
      | RuleML
      | Assert
@@ -4774,13 +4792,12 @@ content_2 =
      | Ind
      | Var
      | Plex
-     | Rule
-     | Negation
      | Quantifier
-     | Profile
-     | Time
-     | Spatial
      | Interval
+     | Negation
+     | Profile
+     | Rule
+     | Spatial
      | Operator
      | After
      | Before
@@ -4794,6 +4811,7 @@ content_2 =
      | Succeeds
      | Meets
      | Finishes
+     | Time
      | formula
      | formula_2
      | op
@@ -4815,6 +4833,8 @@ content_2 =
      | strong
      | weak
      | meta
+     | scope
+     | guard
      | torso
      | oid
      | slot
@@ -4823,18 +4843,80 @@ content_2 =
      | arg
      | resl
      | repo
-     | scope
-     | guard
-     | evaluation
-     | signature
+     | content
      | qualification
      | quantification
-     | formula_8
+     | evaluation
+     | signature
      | arg_2
+     | formula_8
      | arg_3
-     | arg_4
-     | content),
-    (attribute xml:base { xsd:anyURI }?
+     | arg_4)
+  }
+Equal_2 =
+  element Equal {
+    (meta*
+     & scope*
+     & guard*
+     & evaluation*
+     & signature*
+     & qualification*
+     & quantification*
+     & oid?),
+    (content_2
+     | arg_2
+     | Skolem
+     | Reify
+     | Ind
+     | Data
+     | Interval_2
+     | Spatial
+     | Time
+     | Var
+     | Expr
+     | Plex
+     | During
+     | Overlaps
+     | Starts
+     | Precedes
+     | Succeeds
+     | Meets
+     | Equal_2
+     | Finishes
+     | Operator_2),
+    (content_2
+     | arg_2
+     | Skolem
+     | Reify
+     | Ind
+     | Data
+     | Interval_2
+     | Spatial
+     | Time
+     | Var
+     | Expr
+     | Plex
+     | During
+     | Overlaps
+     | Starts
+     | Precedes
+     | Succeeds
+     | Meets
+     | Equal_2
+     | Finishes
+     | Operator_2),
+    (attribute iri { xsd:anyURI }?
+     & attribute type {
+         xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
+         | xsd:string {
+             minLength = "1"
+             pattern =
+               "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+           }
+         | xsd:anyURI
+       }?
+     & attribute node { xsd:anyURI }?
+     & attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
      & attribute key {
          xsd:string {
@@ -4863,15 +4945,15 @@ Operator_2 =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -4883,7 +4965,28 @@ Operator_2 =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3)*,
+     | Operator_2),
+    (content_2
+     | arg_2
+     | Skolem
+     | Reify
+     | Ind
+     | Data
+     | Interval_2
+     | Spatial
+     | Time
+     | Var
+     | Expr
+     | Plex
+     | During
+     | Overlaps
+     | Starts
+     | Precedes
+     | Succeeds
+     | Meets
+     | Equal_2
+     | Finishes
+     | Operator_2),
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -4942,13 +5045,12 @@ content_3 =
      | Ind
      | Var
      | Plex
-     | Rule
-     | Negation
      | Quantifier
-     | Profile
-     | Time
-     | Spatial
      | Interval
+     | Negation
+     | Profile
+     | Rule
+     | Spatial
      | Operator
      | After
      | Before
@@ -4962,6 +5064,7 @@ content_3 =
      | Succeeds
      | Meets
      | Finishes
+     | Time
      | formula
      | formula_2
      | op
@@ -4983,6 +5086,8 @@ content_3 =
      | strong
      | weak
      | meta
+     | scope
+     | guard
      | torso
      | oid
      | slot
@@ -4991,207 +5096,16 @@ content_3 =
      | arg
      | resl
      | repo
-     | scope
-     | guard
-     | evaluation
-     | signature
+     | content
      | qualification
      | quantification
-     | formula_8
-     | arg_2
-     | arg_3
-     | arg_4
-     | content),
-    (attribute xml:base { xsd:anyURI }?
-     & attribute xml:id { xsd:NCName }?
-     & attribute key {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?
-     & attribute keyref {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?)
-  }
-content_4 =
-  element content {
-    (attribute xml:base { xsd:anyURI }?
-     & attribute xml:id { xsd:NCName }?
-     & attribute key {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?
-     & attribute keyref {
-         xsd:string {
-           minLength = "1"
-           pattern =
-             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-         }
-         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
-       }?),
-    ((text & _2*)
-     | RuleML
-     | Assert
-     | Retract
-     | Query
-     | Atom
-     | Rel
-     | And
-     | Or
-     | Implies
-     | Forall
-     | Exists
-     | Expr
-     | Fun
-     | Rulebase
-     | Entails
-     | Neg
-     | Naf
-     | Equivalent
-     | Equal
-     | Data
-     | Skolem
-     | Reify
-     | Ind
-     | Var
-     | Plex
-     | Rule
-     | Negation
-     | Quantifier
-     | Profile
-     | Time
-     | Spatial
-     | Interval
-     | Operator
-     | After
-     | Before
-     | Every
-     | Any
-     | Timer
-     | During
-     | Overlaps
-     | Starts
-     | Precedes
-     | Succeeds
-     | Meets
-     | Finishes
-     | formula
-     | formula_2
-     | op
-     | formula_3
-     | formula_4
-     | then
-     | if
-     | if_2
-     | then_2
-     | else
-     | declare
-     | formula_5
-     | formula_6
-     | op_2
-     | formula_7
-     | then_3
-     | if_3
-     | degree
-     | strong
-     | weak
-     | meta
-     | torso
-     | oid
-     | slot
-     | left
-     | right
-     | arg
-     | resl
-     | repo
-     | scope
-     | guard
      | evaluation
      | signature
-     | qualification
-     | quantification
-     | formula_8
      | arg_2
+     | formula_8
      | arg_3
-     | arg_4
-     | content)
-  }
-Equal_2 =
-  element Equal {
-    (meta*
-     & scope*
-     & guard*
-     & evaluation*
-     & signature*
-     & qualification*
-     & quantification*
-     & oid?),
-    (arg_4
-     | content_4
-     | Skolem
-     | Reify
-     | Ind
-     | Data
-     | Time
-     | Spatial
-     | Interval_2
-     | Var
-     | Expr
-     | Plex
-     | During
-     | Overlaps
-     | Starts
-     | Precedes
-     | Succeeds
-     | Meets
-     | Equal_2
-     | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
-     | Skolem
-     | Reify
-     | Ind
-     | Data
-     | Time
-     | Spatial
-     | Interval_2
-     | Var
-     | Expr
-     | Plex
-     | During
-     | Overlaps
-     | Starts
-     | Precedes
-     | Succeeds
-     | Meets
-     | Equal_2
-     | Finishes
-     | Operator_3),
-    (attribute iri { xsd:anyURI }?
-     & attribute type {
-         xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
-         | xsd:string {
-             minLength = "1"
-             pattern =
-               "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
-           }
-         | xsd:anyURI
-       }?
-     & attribute node { xsd:anyURI }?
-     & attribute xml:base { xsd:anyURI }?
+     | arg_4),
+    (attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
      & attribute key {
          xsd:string {
@@ -5220,15 +5134,15 @@ Operator_3 =
      & qualification*
      & quantification*
      & oid?),
-    (arg_4
-     | content_4
+    (content_2
+     | arg_2
      | Skolem
      | Reify
      | Ind
      | Data
-     | Time
-     | Spatial
      | Interval_2
+     | Spatial
+     | Time
      | Var
      | Expr
      | Plex
@@ -5240,28 +5154,7 @@ Operator_3 =
      | Meets
      | Equal_2
      | Finishes
-     | Operator_3),
-    (arg_4
-     | content_4
-     | Skolem
-     | Reify
-     | Ind
-     | Data
-     | Time
-     | Spatial
-     | Interval_2
-     | Var
-     | Expr
-     | Plex
-     | During
-     | Overlaps
-     | Starts
-     | Precedes
-     | Succeeds
-     | Meets
-     | Equal_2
-     | Finishes
-     | Operator_3),
+     | Operator_2)*,
     (attribute iri { xsd:anyURI }?
      & attribute type {
          xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
@@ -5274,6 +5167,113 @@ Operator_3 =
        }?
      & attribute node { xsd:anyURI }?
      & attribute xml:base { xsd:anyURI }?
+     & attribute xml:id { xsd:NCName }?
+     & attribute key {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?
+     & attribute keyref {
+         xsd:string {
+           minLength = "1"
+           pattern =
+             "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+         }
+         | xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+       }?)
+  }
+content_4 =
+  element content {
+    ((text & _2*)
+     | RuleML
+     | Assert
+     | Retract
+     | Query
+     | Atom
+     | Rel
+     | And
+     | Or
+     | Implies
+     | Forall
+     | Exists
+     | Expr
+     | Fun
+     | Rulebase
+     | Entails
+     | Neg
+     | Naf
+     | Equivalent
+     | Equal
+     | Data
+     | Skolem
+     | Reify
+     | Ind
+     | Var
+     | Plex
+     | Quantifier
+     | Interval
+     | Negation
+     | Profile
+     | Rule
+     | Spatial
+     | Operator
+     | After
+     | Before
+     | Every
+     | Any
+     | Timer
+     | During
+     | Overlaps
+     | Starts
+     | Precedes
+     | Succeeds
+     | Meets
+     | Finishes
+     | Time
+     | formula
+     | formula_2
+     | op
+     | formula_3
+     | formula_4
+     | then
+     | if
+     | if_2
+     | then_2
+     | else
+     | declare
+     | formula_5
+     | formula_6
+     | op_2
+     | formula_7
+     | then_3
+     | if_3
+     | degree
+     | strong
+     | weak
+     | meta
+     | scope
+     | guard
+     | torso
+     | oid
+     | slot
+     | left
+     | right
+     | arg
+     | resl
+     | repo
+     | content
+     | qualification
+     | quantification
+     | evaluation
+     | signature
+     | arg_2
+     | formula_8
+     | arg_3
+     | arg_4),
+    (attribute xml:base { xsd:anyURI }?
      & attribute xml:id { xsd:NCName }?
      & attribute key {
          xsd:string {
@@ -5357,13 +5357,19 @@ Plex_3 =
       | Reify
       | Ind
       | Data
-      | Time
-      | Spatial
       | Interval_2
+      | Spatial
+      | Time
       | Var
       | Expr
       | Plex)*
      & repo?)
+  }
+_2 =
+  element * - ruleml:* {
+    (_3
+     | attribute * { text }
+     | text)+
   }
 Forall_2 =
   element Forall {
@@ -5403,10 +5409,10 @@ Forall_2 =
     (formula_11
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -5415,8 +5421,8 @@ Forall_2 =
      | Equivalent
      | Forall
      | Exists
-     | Rule
-     | Quantifier)?
+     | Quantifier
+     | Rule)?
   }
 Exists_3 =
   element Exists {
@@ -5456,10 +5462,10 @@ Exists_3 =
     (formula_11
      | Atom
      | Equal
-     | Time
-     | Spatial
      | Interval
+     | Spatial
      | Operator
+     | Time
      | And_2
      | Or_2
      | Neg
@@ -5468,14 +5474,8 @@ Exists_3 =
      | Equivalent
      | Forall
      | Exists
-     | Rule
-     | Quantifier)?
-  }
-_2 =
-  element * - ruleml:* {
-    (_3
-     | attribute * { text }
-     | text)+
+     | Quantifier
+     | Rule)?
   }
 formula_12 =
   element formula {
@@ -5499,10 +5499,10 @@ formula_12 =
       }?
     & (Atom
        | Equal
-       | Time
-       | Spatial
        | Interval
+       | Spatial
        | Operator
+       | Time
        | And
        | Or
        | Neg

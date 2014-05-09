@@ -369,7 +369,19 @@
 			<xs:group ref="arg.content"/>
 		</xs:choice>
 	</xs:group>
-	
+
+	<!-- An internal group for the performative primitives
+		content model: 
+		in KR Reaction RuleML: (Assert|Retract|Query)
+	-->
+	<xs:group name="performative_primitives.content">
+		<xs:choice>
+			<xs:element ref="Assert"/>
+			<xs:element ref="Retract"/>
+			<xs:element ref="Query"/>
+		</xs:choice>
+	</xs:group>
+
 	<!--
     *** @style ***
     

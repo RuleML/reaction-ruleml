@@ -86,7 +86,8 @@
 
 	<!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
 	<xs:include schemaLocation="modules/spatial_temporal_interval_algebra_module.xsd"/>
-
+	
+	
 	<!--
      metadata group
      
@@ -371,6 +372,18 @@
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
+		</xs:choice>
+	</xs:group>
+
+	<!-- An internal group for the performative primitives
+		content model: 
+		in DR Reaction RuleML: (Assert|Retract|Query)
+	-->
+	<xs:group name="performative_primitives.content">
+		<xs:choice>
+			<xs:element ref="Assert"/>
+			<xs:element ref="Retract"/>
+			<xs:element ref="Query"/>
 		</xs:choice>
 	</xs:group>
 

@@ -20,6 +20,7 @@
 				* fluent
 				* Holds
 				* Situation
+				* Do
 			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
 			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with

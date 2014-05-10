@@ -50,9 +50,7 @@
       <xs:group ref="meta-roles.content"/>     
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="act"/>
-        <xs:element ref="Assert"/>
-        <xs:element ref="Retract"/>
-        <xs:element ref="Query"/>
+        <xs:group ref="act.content"/>
       </xs:choice>
     </xs:sequence>
   </xs:group>

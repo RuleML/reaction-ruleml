@@ -152,6 +152,15 @@
    					<Time><Ind>t1</Ind></Time>
    					<Time><Var>x</Var></Time>
    					<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>
+   					<Time>
+   						<slot><Ind>year</Ind><Var>Y</Var></slot>
+   						<slot><Ind>month</Ind><Var>M</Var></slot>
+   						<slot><Ind>day</Ind><Var>D</Var></slot>
+   					</Time>
+   					<Time>
+   						<!-- after(2 years) -> Y -->
+   						<slot><Time><After><Data xsi:type="xs:duration">P2Y</Data></After></Time><Var>Y</Var></slot>
+   					</Time>
    					<Time keyref="time1"/>
    					<Time>	
    						<content> <!-- xs:any content -->

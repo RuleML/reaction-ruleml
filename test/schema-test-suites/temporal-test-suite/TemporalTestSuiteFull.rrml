@@ -162,6 +162,15 @@
    					<formula><Time><arg><Ind>t1</Ind></arg></Time></formula>
    					<formula><Time><arg><Var>x</Var></arg></Time></formula>
    					<formula><Time><arg><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg></Time></formula>
+   					<formula><Time>
+   						<slot><Ind>year</Ind><Var>Y</Var></slot>
+   						<slot><Ind>month</Ind><Var>M</Var></slot>
+   						<slot><Ind>day</Ind><Var>D</Var></slot>
+   					</Time></formula>
+   					<formula><Time>
+   						<!-- after(2 years) -> Y -->
+   						<slot><Time><arg><After><arg><Data xsi:type="xs:duration">P2Y</Data></arg></After></arg></Time><Var>Y</Var></slot>
+   					</Time></formula>
    					<formula><Time keyref="time1"/></formula>
    					<formula><Time>	
    						<content> <!-- xs:any content -->

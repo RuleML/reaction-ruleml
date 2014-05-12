@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/pr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/pr.xsd">
+  <!-- Clocksin/Mellish sample rule 
+
+This example shows how production rules and facts are asserted, queried and retracted from the knowledge base
+
+-->
+
+  <!-- assert rules -->
+
+  <Assert>
+    <!-- rule 1 -->
+    <Rule>
+      <if>
+        <Atom>
+          <Rel>likes</Rel>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <do>
+        <Assert>
+          <Atom>
+            <Rel>likes</Rel>            
+            <Ind>John</Ind>
+            <Var>X</Var>
+          </Atom>
+        </Assert>
+      </do>
+    </Rule>
+    
+    <!-- rule 2 -->
+    <Rule>
+      <if>
+        <Naf>
+          <Atom>
+            <Rel>likes</Rel>
+            <Var>X</Var>
+            <Ind>wine</Ind>
+          </Atom>
+        </Naf>    
+      </if>
+      <do>
+        <Retract>
+          <Atom>
+            <Rel>likes</Rel>            
+            <Ind>John</Ind>
+            <Var>X</Var>
+          </Atom>
+        </Retract>
+      </do>
+    </Rule>
+    
+  </Assert> 
+  
+  <Assert>
+    <!-- fact -->
+    <Atom>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
+
+  <!-- retract from knowledge base -> negated rule 2 fires -->
+
+  <Retract>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+  </Retract>
+
+  <!-- query knowledge base -->
+  
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
+
+</RuleML>

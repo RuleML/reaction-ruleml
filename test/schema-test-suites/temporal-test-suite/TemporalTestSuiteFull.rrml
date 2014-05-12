@@ -19,6 +19,30 @@
 		</Atom>
 	</meta>
 
+		<!-- frame signature definitions -->
+		
+		<signature>
+			<Time>
+				<oid><Ind>DatetimeClass1</Ind></oid>
+				<slot><Ind>date</Ind><Data type="xs:date"/></slot>
+				<slot><Ind>time</Ind><Data type="xs:time"/></slot>
+			</Time>
+		</signature>
+		
+		<signature>
+			<Time>
+				<oid><Ind>DatetimeClass2</Ind></oid>
+				<slot><Ind>datetime</Ind><Plex><arg><Data type="xs:date"/></arg><arg><Data type="xs:time"/></arg></Plex></slot>
+			</Time>
+		</signature>
+		
+		<signature>
+			<Time>
+				<oid><Ind>TimeIntervalClass</Ind></oid>
+				<slot><Ind>start</Ind><Data type="xs:time"/></slot>
+				<slot><Ind>end</Ind><Data type="xs:time"/></slot>
+			</Time>
+		</signature>
 
 	<!-- qualifying metadata defining validitiy interval-->
 	<qualification>
@@ -56,6 +80,31 @@
 			<slot><Ind>month</Ind><Ind>03</Ind></slot>
 			<slot><Ind>day</Ind><Ind>21</Ind></slot>
 		</Time></formula>		
+
+			<!-- definition of a time instant as frame   --> 
+			<formula><Time key="time1" type="ruleml:TimeInstant">
+				<oid><Ind>time1</Ind></oid>
+				<slot><Ind>year</Ind><Ind>2011</Ind></slot>
+				<slot><Ind>month</Ind><Ind>03</Ind></slot>
+				<slot><Ind>day</Ind><Ind>21</Ind></slot>
+			</Time></formula>		
+			
+			<formula><Time>
+				<oid><Ind type="DatetimeClass1">datetime1</Ind></oid>
+				<slot><Ind>date</Ind><Data>2011-03-21</Data></slot>
+				<slot><Ind>time</Ind><Data>10:00:00-04:00</Data></slot>
+			</Time></formula>	
+			
+			<formula><Time>
+				<oid><Ind type="DatetimeClass2">datetime2</Ind></oid>
+				<slot><Ind>datetime</Ind><Plex><arg><Data>2011-03-21</Data></arg><arg><Data>10:00:00-04:00</Data></arg></Plex></slot>
+			</Time></formula>	
+			
+			<formula><Time>
+				<oid><Ind type="TimeIntervalClass">interval1</Ind></oid>
+				<slot><Ind>start</Ind><Time type="ruleml:TimePoint"><arg><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg></Time></slot>
+				<slot><Ind>end</Ind><Time type="ruleml:TimePoint"><arg><Data xsi:type="xs:dateTime">2012-03-21T10:00:00-04:00</Data></arg></Time></slot>
+			</Time></formula>
 
 		<!-- time definition using the xs:any content model to define the time as OWL time instant --> 
 		<formula><Time>	
@@ -166,6 +215,20 @@
    						<slot><Ind>year</Ind><Var>Y</Var></slot>
    						<slot><Ind>month</Ind><Var>M</Var></slot>
    						<slot><Ind>day</Ind><Var>D</Var></slot>
+   					</Time></formula>
+   					<formula><Time> <!-- frame representation -->
+   						<oid><Var type="DatetimeClass1">X</Var></oid>
+   						<slot><Ind>date</Ind><Var>Date</Var></slot>
+   						<slot><Ind>time</Ind><Var>Time</Var></slot>
+   					</Time></formula>	
+   					<formula><Time> <!-- frame representation -->
+   						<oid><Ind type="DatetimeClass2">datetime2</Ind></oid>
+   						<slot><Ind>datetime</Ind><Var>DT</Var></slot>
+   					</Time></formula>	
+   					<formula><Time> <!-- frame representation -->
+   						<oid><Ind type="TimeIntervalClass">interval1</Ind></oid>
+   						<slot><Ind>start</Ind><Time><arg><Var>T1</Var></arg></Time></slot>
+   						<slot><Ind>end</Ind><Time><arg><Var>T2</Var></arg></Time></slot>
    					</Time></formula>
    					<formula><Time>
    						<!-- after(2 years) -> Y -->

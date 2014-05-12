@@ -29,27 +29,28 @@
 
   <!--
         *** Atom ***
-		A logical atom, i.e. an expression formed from a predicate
+		A logical atom , i.e. an expression formed from a predicate
 		applied to a collection of its (logical) arguments.
+		Or a frame object with slots
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-Atom
 	
 		content model:
 		in DR Reaction RuleML:
 		(
-			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
+			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
 			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval)*, repo?) | repo), slot*, resl?
 		)
 		
 		in KR Reaction RuleML:
 		(
-			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
+			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
 			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo?) | repo), slot*, resl?
 		)
 		
 		in PR Reaction RuleML:
 		(
-			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel), slot*,
+			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
 			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex)*, repo?) | repo), slot*, resl?
 		)
 		
@@ -57,7 +58,7 @@
 		so it is (equivalently) restructured as follows:
 		in DR Reaction RuleML:
 		(
-				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel), slot*,
+				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel)?, slot*,
 				( 
 					( 
 						((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?)
@@ -70,7 +71,7 @@
 			
 		in KR Reaction RuleML
 		(
-				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel), slot*,
+				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel)?, slot*,
 				( 
 					( 
 						((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo?)
@@ -81,8 +82,6 @@
 				resl?
 			)
 	
-		Note the 'positionalized' normal form where the oid and op roles
-		are at the beginning of the atom.
 	-->
   <xs:attributeGroup name="Atom.attlist">
     <xs:attributeGroup ref="closure.attrib"/>
@@ -123,7 +122,7 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element ref="degree" minOccurs="0"/>
-      <xs:choice>
+      <xs:choice minOccurs="0"> <!-- operator optional for frame representation -->
         <xs:element name="op" type="op-atom.type"/>
         <xs:group ref="op-atom.content"/>
       </xs:choice>

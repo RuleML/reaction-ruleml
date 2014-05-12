@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
+  <!-- Clocksin/Mellish sample rule 
+
+  Shows the frame representation 
+
+  -->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+    
+    <!-- signature definition -->
+    <signature>
+      <Atom>
+        <oid>person</oid>
+        <slot><Ind>likes</Ind><Data type="wine"/></slot>
+      </Atom>
+    </signature>
+        
+    <!-- rule -->
+
+    <Rule>
+      <if>
+        <Atom>
+          <oid><Var type="person">X</Var></oid>
+          <slot><Ind>likes</Ind><Ind>wine</Ind></slot>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <oid><Ind>John</Ind></oid>
+          <slot><Ind>likes</Ind><Var>X</Var></slot>
+        </Atom>
+      </then>
+    </Rule>
+
+    <!-- fact -->
+
+    <Atom>
+      <oid><Ind type="person">Mary</Ind></oid>
+      <slot><Ind>likes</Ind><Ind>wine</Ind></slot>
+    </Atom>
+
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <Query>
+    <Atom>
+      <oid><Ind>John</Ind></oid>
+      <slot>
+        <Ind>likes</Ind>      
+        <Var>whom</Var>
+      </slot>  
+    </Atom>
+  </Query>
+
+</RuleML>

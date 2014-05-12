@@ -5,7 +5,6 @@
 
 	<Assert>
 		
-
 	<!-- descriptive metadata with date -->
   	<meta>
   		<Atom>
@@ -13,6 +12,31 @@
   			<Time><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time>  			 
 		</Atom>
 	</meta>
+
+		<!-- frame signature definitions -->
+		
+		<signature>
+			<Time>
+				<oid><Ind>DatetimeClass1</Ind></oid>
+				<slot><Ind>date</Ind><Data type="xs:date"/></slot>
+				<slot><Ind>time</Ind><Data type="xs:time"/></slot>
+			</Time>
+		</signature>
+		
+		<signature>
+			<Time>
+				<oid><Ind>DatetimeClass2</Ind></oid>
+				<slot><Ind>datetime</Ind><Plex><arg><Data type="xs:date"/></arg><arg><Data type="xs:time"/></arg></Plex></slot>
+			</Time>
+		</signature>
+		
+		<signature>
+			<Time>
+				<oid><Ind>TimeIntervalClass</Ind></oid>
+				<slot><Ind>start</Ind><Data type="xs:time"/></slot>
+				<slot><Ind>end</Ind><Data type="xs:time"/></slot>
+			</Time>
+		</signature>
 
 
 	<!-- qualifying metadata defining validitiy interval-->
@@ -46,6 +70,32 @@
 			<slot><Ind>month</Ind><Ind>03</Ind></slot>
 			<slot><Ind>day</Ind><Ind>21</Ind></slot>
 		</Time>		
+		
+		
+		<!-- definition of a time instant as frame   --> 
+		<Time key="time1" type="ruleml:TimeInstant">
+			<oid><Ind>time1</Ind></oid>
+			<slot><Ind>year</Ind><Ind>2011</Ind></slot>
+			<slot><Ind>month</Ind><Ind>03</Ind></slot>
+			<slot><Ind>day</Ind><Ind>21</Ind></slot>
+		</Time>		
+		
+		<Time>
+			<oid><Ind type="DatetimeClass1">datetime1</Ind></oid>
+			<slot><Ind>date</Ind><Data>2011-03-21</Data></slot>
+			<slot><Ind>time</Ind><Data>10:00:00-04:00</Data></slot>
+		</Time>	
+		
+		<Time>
+			<oid><Ind type="DatetimeClass2">datetime2</Ind></oid>
+			<slot><Ind>datetime</Ind><Plex><Data>2011-03-21</Data><Data>10:00:00-04:00</Data></Plex></slot>
+		</Time>	
+		
+		<Time>
+			<oid><Ind type="TimeIntervalClass">interval1</Ind></oid>
+			<slot><Ind>start</Ind><Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></Time></slot>
+			<slot><Ind>end</Ind><Time type="ruleml:TimePoint"><Data xsi:type="xs:dateTime">2012-03-21T10:00:00-04:00</Data></Time></slot>
+		</Time>
 
 		<!-- time definition using the xs:any content model to define the time as OWL time instant --> 
 		<Time>	
@@ -156,6 +206,20 @@
    						<slot><Ind>year</Ind><Var>Y</Var></slot>
    						<slot><Ind>month</Ind><Var>M</Var></slot>
    						<slot><Ind>day</Ind><Var>D</Var></slot>
+   					</Time>
+   					<Time> <!-- frame representation -->
+   						<oid><Var type="DatetimeClass1">X</Var></oid>
+   						<slot><Ind>date</Ind><Var>Date</Var></slot>
+   						<slot><Ind>time</Ind><Var>Time</Var></slot>
+   					</Time>	
+   					<Time> <!-- frame representation -->
+   						<oid><Ind type="DatetimeClass2">datetime2</Ind></oid>
+   						<slot><Ind>datetime</Ind><Var>DT</Var></slot>
+   					</Time>	
+   					<Time> <!-- frame representation -->
+   						<oid><Ind type="TimeIntervalClass">interval1</Ind></oid>
+   						<slot><Ind>start</Ind><Time><Var>T1</Var></Time></slot>
+   						<slot><Ind>end</Ind><Time><Var>T2</Var></Time></slot>
    					</Time>
    					<Time>
    						<!-- after(2 years) -> Y -->

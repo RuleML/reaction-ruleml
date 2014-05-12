@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+            action algebra module part of Reaction RuleML
+			This is the XML Schema of the algebra module for Reaction RuleML
+			File: action_algebra_module.xsd
+			Version: 1.0
+			Last Modification: 2011-03-22
+			
+			This schema declares the following Reaction RuleML elements and attributes:
+                                   
+                  Actions
+                  
+                  * Action (generic action)
+                  * Assert
+                  * Retract
+				  * Update (modify)
+                  
+                  Action Algebra Operators
+                  
+                  * Operator (generic action operator)
+                  * Succession 
+                  * Choice 
+                  * Flow 
+                  * Loop                 
+
+ 			
+			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
+			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
+			[http://www.w3.org/TR/xhtml-modularization/].
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>Reaction RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-22T29:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>		
+	</xs:annotation>		
+	
+	
+	<!--( Succession | Choice | Flow | Loop | Operator )-->
+	
+	<xs:group name="action_algebra_group.content">
+		<xs:choice>
+			<xs:element ref="Succession"/>
+			<xs:element ref="Choice"/>
+			<xs:element ref="Flow"/>
+			<xs:element ref="Loop"/>
+			<xs:element name="Operator" type="ActionAlgebraOperator.type"/> 
+		</xs:choice>
+	</xs:group>	
+	
+	<!--
+      *** (Operator) ***
+      
+      content model: 
+      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Succession | Choice | Flow | Loop)* ) 
+	-->
+	<xs:attributeGroup name="ActionAlgebraOperator.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="ActionAlgebraOperator.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="do"/>
+				<xs:group ref="do.content"/>				
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="ActionAlgebraOperator.type">
+		<xs:group ref="ActionAlgebraOperator.content"/>
+		<xs:attributeGroup ref="ActionAlgebraOperator.attlist"/>
+	</xs:complexType>
+	<xs:element name="Succession" type="ActionAlgebraOperator.type"/>
+	<xs:element name="Choice" type="ActionAlgebraOperator.type"/>
+	<xs:element name="Flow" type="ActionAlgebraOperator.type"/>
+	<xs:element name="Loop" type="ActionAlgebraOperator.type"/>
+	
+
+	<!--
+      *** Update ***
+      Update action
+      
+      content model: 
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
+		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
+      Update has the following attributes:
+      @safety, @all
+      
+-->
+	<xs:attributeGroup name="Update.attlist">
+		<xs:attributeGroup ref="Assert.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Update.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:sequence minOccurs="1" maxOccurs="2">
+				<xs:choice>
+					<xs:element name="formula" type="formula-assert.type"/>
+					<xs:group ref="formula-assert.content"/>
+				</xs:choice>
+			</xs:sequence>	
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Update.type">
+		<xs:group ref="Update.content"/>
+		<xs:attributeGroup ref="Update.attlist"/>
+	</xs:complexType>
+	<xs:element name="Update" type="Update.type"/>
+
+</xs:schema>
+
+

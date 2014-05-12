@@ -183,7 +183,7 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -204,7 +204,7 @@
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -225,7 +225,7 @@
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 
@@ -237,14 +237,13 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: (Exists | Quantifier)
+     content model: (Exists )
           
 	-->
 	
 	<xs:group name="query-quantifier.content">
 		<xs:choice>
 			<xs:element ref="Exists"/>
-			<xs:element ref="Quantifier"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -270,14 +269,13 @@
      An internal group for the outer quantifiers in the Reaction RuleML language
     
     
-     content model: ( Forall | Quantifier )
+     content model: ( Forall  )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
 		<xs:choice>
 			<xs:element ref="Forall"/>
-			<xs:element ref="Quantifier"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -287,12 +285,13 @@
     
      In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
     
-     content model: (Time | Spatial | Interval)
+     content model: (Atom | Time | Spatial | Interval)
           
 	-->
 	
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
+			<xs:element name="Atom" type="Atom.type"/>
 			<xs:group ref="extended-signature-function-sorts.content"/>
 		</xs:choice>
 	</xs:group>
@@ -304,12 +303,16 @@
     
      In the DR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
     
-     content model: (Time | Spatial | Interval)
+     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval)
           
 	-->
 	
 	<xs:group name="extended-signature-function-sorts.content">
 		<xs:choice>
+			<xs:element ref="Ind"/>
+			<xs:element ref="Data"/>
+			<xs:element ref="Expr"/>
+			<xs:element ref="Plex"/>
 			<xs:element ref="Time"/>
 			<xs:element ref="Spatial"/>
 			<xs:element ref="Interval"/>	
@@ -365,6 +368,17 @@
 		<xs:choice>
 		</xs:choice>
 	</xs:group>
+	
+	<!-- An internal group for events
+		content model:
+		
+		DR Reaction RuleML ( )-->
+	
+	<xs:group name="event_group.content">
+		<xs:choice>
+			
+		</xs:choice>
+	</xs:group>	
 
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
@@ -374,6 +388,17 @@
 		<xs:choice>
 		</xs:choice>
 	</xs:group>
+
+	<!-- An internal group for actions
+		content model:
+		
+		DR Reaction RuleML ( )-->
+	
+	<xs:group name="action_group.content">
+		<xs:choice>
+
+		</xs:choice>
+	</xs:group>	
 
 	<!-- An internal group for the performative primitives
 		content model: 

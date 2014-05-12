@@ -12,7 +12,7 @@
 		Version: 1.0
 		Last Modification: 2011-03-22
 			
-		* Quantifier    generic quantifier
+		* Quantifier    generic quantifier (used in quantification metatag)
 		* Forall		predefined inner quantifier (used in quantification metatag)
 		* Exist			predefined inner quantifier (used in qualification metatag)
 			
@@ -38,7 +38,12 @@
       @type attribute and the @iri attribute can point to an external definition
       of the quantifier.
 		
-	content model: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
+	content model: 
+	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
+	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
+    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
+
+
 -->
 	<xs:attributeGroup name="Quantifier.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -54,8 +59,8 @@
 				<xs:element ref="Var"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-forall.type"/>
-				<xs:group ref="formula-forall.content"/>
+				<xs:element name="formula" type="formula-inner-quantifier.type"/>
+				<xs:group ref="formula-inner-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -67,8 +72,12 @@
 	<!--
 	make the quantifier constraint restrictions ("such that") optional
 	
-	(  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula | Operator | Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
--->
+	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
+	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
+    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
+
+
+    -->
 	<xs:group name="Exists-quantifier.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
@@ -77,8 +86,8 @@
 				<xs:group ref="declare.content"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-forall.type"/>
-				<xs:group ref="formula-forall.content"/>
+				<xs:element name="formula" type="formula-inner-quantifier.type"/>
+				<xs:group ref="formula-inner-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -89,8 +98,9 @@
 	<!--
 	make the quantifier constraint restrictions ("such that") optional
 	
-	( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (declare|Var)+, (formula|Atom|Rule|Negation|Naf|Neg|Equivalent|Equal|And|Or|Exists|Forall|Quantifier)? )
-
+	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
+	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
+    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
 
 -->
 	<xs:group name="Forall-quantifier.content">
@@ -101,8 +111,8 @@
 				<xs:group ref="declare.content"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-forall.type"/>
-				<xs:group ref="formula-forall.content"/>
+				<xs:element name="formula" type="formula-inner-quantifier.type"/>
+				<xs:group ref="formula-inner-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -112,6 +122,30 @@
 	</xs:complexType>
 
 	
+	<!--
+		*** formula ***
+		The 'such that' guard formula role of a quantifier (<Forall> or <Exists>).
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-formula
+		
+	     DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+     	 KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
+     	 PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf  ) 
+		
+		Other (context-sensitive) versions of <formula> are in the
+		connective and performative modules.
+	-->
+	<!-- the (empty) attribute list is declared in the connective module -->
+	<xs:group name="formula-inner-quantifier.content">
+		<xs:choice>
+			<xs:group ref="guard.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="formula-inner-quantifier.type">
+		<xs:group ref="formula-inner-quantifier.content"/>
+		<xs:attributeGroup ref="formula.attlist"/>
+	</xs:complexType>
 
+	
 	
 </xs:schema>

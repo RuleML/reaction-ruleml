@@ -76,7 +76,7 @@
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
 									<xs:element name="arg" type="arg_event.type"/>
-									<xs:group ref="arg.content"/>
+									<xs:group ref="arg_event.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>

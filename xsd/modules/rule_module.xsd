@@ -124,7 +124,7 @@
      
      content model:  
      DR Reaction RuleML: (  )
-     KR Reaction RuleML: ( Action  )
+     KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation  )
 -->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
-	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	targetNamespace="http://ruleml.org/spec">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-          
+			
 			Action module part of Reaction RuleML. It defines the core 
 			action constructs
 			
@@ -12,11 +12,11 @@
 			File: event_module.xsd
 			Version: 1.0
 			Last Modification: 2011-03-29
-
+			
 			This schema declares the following Reaction RuleML elements and attributes:
-
-			  * Action
-
+			
+			* Action
+			
 		</xs:documentation>
 		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
 		<xs:appinfo>
@@ -31,8 +31,8 @@
 			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
 		</xs:appinfo>
 	</xs:annotation>
-
-
+	
+	
 	<!--
 	*** Action ***
 	  Explicit generic Action. The action can be defined internally 
@@ -62,21 +62,21 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
 			<xs:choice minOccurs="0">
-			  <xs:sequence>
-					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:sequence>
+					<xs:element ref="slot" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element ref="resl" minOccurs="0"/>
 					<xs:sequence minOccurs="0">
 						<xs:choice>
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
 									<xs:element name="arg" type="arg_action.type"/>
-									<xs:group ref="arg.content"/>
+									<xs:group ref="arg_action.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
 							<xs:element ref="repo"/>
 						</xs:choice>
-						<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="slot"  minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="resl" minOccurs="0"/>
 					</xs:sequence>
 				</xs:sequence>            								
@@ -89,14 +89,14 @@
 		<xs:attributeGroup ref="Action.attlist"/>
 	</xs:complexType>
 	<xs:element name="Action" type="Action.type"/>
-
+	
 	<!--
      *** arg ***
      
      Definition of the the arg role for Action
      
      content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
+     in DR Reaction RuleML: not used in DR Reaction RuleML
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
      
           
@@ -114,8 +114,8 @@
 		<xs:group ref="arg_action.content"/>
 		<xs:attributeGroup ref="arg_action.attlist"/>
 	</xs:complexType>
-
-
+	
+	
 	<!--
      *** content ***
      
@@ -133,6 +133,6 @@
 		<xs:group ref="action_anycontent.content"/>
 		<xs:attributeGroup ref="action_anycontent.attlist"/>
 	</xs:complexType>
-
-
+	
+	
 </xs:schema>

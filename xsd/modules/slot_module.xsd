@@ -32,12 +32,10 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-slot
 
 		content model:
-		DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
-		KR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Event|Situation), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation) )
+		DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
+		KR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation) )
+		PR Reaction RuleML: ( (Ind|Data|Expr|Plex), (Ind|Data|Skolem|Var|Reify|Expr|Plex) )
 		
-		
-		this allows using time and spatial as slot names to define nominal units, e.g. time1(years->3 months->2)  
-			location1(x -> 10 y -> 10)
 	-->
   <xs:attributeGroup name="slot.attlist">
     <xs:attributeGroup ref="card.attrib"/>
@@ -46,10 +44,6 @@
   </xs:attributeGroup>
   <xs:group name="slot-name.extend">
     <xs:choice>
-      <xs:element ref="Ind"/>
-      <xs:element ref="Data"/>
-      <xs:element ref="Expr"/>
-      <xs:element ref="Plex"/>
       <xs:group ref="extended-signature-function-sorts.content"/>
     </xs:choice>
   </xs:group>

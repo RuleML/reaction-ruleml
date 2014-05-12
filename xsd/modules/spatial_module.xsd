@@ -49,6 +49,7 @@
 	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
+	PR Reaction RuleML: not used in PR Reaction RuleML
 	-->
 	<xs:attributeGroup name="Spatial.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -96,7 +97,7 @@
      content model:  
      in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
-     
+     in PR Reaction RuleML: not used in PR Reaction RuleML
           
 -->
 	<xs:attributeGroup name="arg_spatial.attlist">

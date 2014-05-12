@@ -57,6 +57,10 @@
 		  repo?, slot*, resl?
 		)
 
+		PR Reaction RuleML:
+		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
+		  (op|Fun), slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl?		)
+
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
 		DR Reaction RuleML:
 		(
@@ -175,7 +179,7 @@
 		
 		See http://www.ruleml.org/0.91/glossary/#gloss-Fun
 
-content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
+    content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
   <xs:attributeGroup name="Fun.attlist">
     <xs:attributeGroup ref="iri.attrib"/>
@@ -227,6 +231,10 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
     KR Reaction RuleML
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
 		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Interval)*, repo?, slot*, resl? )
+		  
+		PR Reaction RuleML:
+		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
+		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl? )
 		
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
 		

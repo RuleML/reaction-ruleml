@@ -36,7 +36,7 @@
 	<!--
 	*** Action ***
 	  Explicit generic Action. The action can be defined internally 
-     	* with positional arguments <arg>, e.g., <arg><Ind>a1</Ind></arg>
+     	* with positional arguments <arg>, e.g., <arg><Ind>a1</Ind></arg> (atomic actions | complex actions)
       	* with unpositional slots <slot>, e.g., <slot><Ind>name</Ind><Ind>a1</Ind></slot><slot><Ind>processingDate</Ind><Time>....</Time></slot>
       	* as interpretation as event with <do>, e.g., <do><Atom>...</Atom></do>
       	* by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for actions
@@ -49,6 +49,9 @@
 	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 	                ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Action|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )? 
+	  PR Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
+	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+	                (content(xs:any)) )?              
 	-->
 	<xs:attributeGroup name="Action.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -98,7 +101,7 @@
      content model:  
      in DR Reaction RuleML: not used in DR Reaction RuleML
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
-     
+     in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)) 
           
 -->
 	<xs:attributeGroup name="arg_action.attlist">
@@ -133,6 +136,7 @@
 		<xs:group ref="action_anycontent.content"/>
 		<xs:attributeGroup ref="action_anycontent.attlist"/>
 	</xs:complexType>
+	
 	
 	
 </xs:schema>

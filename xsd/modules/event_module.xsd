@@ -54,7 +54,8 @@
 	  content model: 
 	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 	                ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-	                (content(xs:any)) )? 
+	                (content(xs:any)) )?
+	  PR Reaction RuleML: not used in PR Reaction RuleML
 	-->
 	<xs:attributeGroup name="Event.attlist">
 		<xs:attributeGroup ref="type.attrib"/>

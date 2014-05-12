@@ -45,6 +45,7 @@
 			(left, right) |
 			(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)  )
 		)
+		in PR Reaction RuleML:  (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?,	(left, right) |	( (Ind | Data | Var | Skolem | Reify  | Expr | Plex ), (Ind | Data | Var | Skolem | Reify  | Expr | Plex ) ))
 	-->
   <xs:attributeGroup name="Equal.attlist">
     <xs:attributeGroup ref="oriented.attrib"/>
@@ -100,8 +101,9 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-left
 
 		content model: 
-		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+		in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+		in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+		in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
 	-->
   <xs:attributeGroup name="left.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -126,6 +128,7 @@
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+		in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
 	-->
   <xs:attributeGroup name="right.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

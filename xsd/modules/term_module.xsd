@@ -35,6 +35,7 @@
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
+		in PR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
 	-->
   <xs:attributeGroup name="arg.attlist">
     <xs:attributeGroup ref="index.attrib"/>
@@ -42,13 +43,9 @@
   </xs:attributeGroup>
   <xs:group name="arg.content">
     <xs:choice>
-      <xs:element ref="Ind"/>
-      <xs:element ref="Data"/>
       <xs:element ref="Var"/>
       <xs:element ref="Skolem"/>
       <xs:element ref="Reify"/>
-      <xs:element ref="Expr"/>
-      <xs:element ref="Plex"/>  
       <xs:group ref="extended-signature-function-sorts.content"/>
     </xs:choice>
   </xs:group>

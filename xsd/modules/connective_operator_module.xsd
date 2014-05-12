@@ -43,7 +43,7 @@
       	content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval)* )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
-
+        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal)* ) 
 	-->
 	<xs:attributeGroup name="ConnectiveOperator.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -64,6 +64,5 @@
 		<xs:group ref="ConnectiveOperator.content"/>
 		<xs:attributeGroup ref="ConnectiveOperator.attlist"/>
 	</xs:complexType>
-	<xs:element name="Operator" type="ConnectiveOperator.type"/>
 	
 </xs:schema>

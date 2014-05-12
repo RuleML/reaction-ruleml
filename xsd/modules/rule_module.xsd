@@ -48,9 +48,13 @@
       content model: 
  	 
  	 In (temporal) DR Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (if, then, else?)? ) )
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
+	 
 	 In KR Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (if, then, else?)? ) )
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
+	 
+	 In PR Reaction RuleML:
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?) ) )
 	 
       Rule has the following attributes:
       @key @keyref @type @style @closure @direction @material @node 
@@ -80,14 +84,14 @@
      content model: 
      DR Reaction RuleMl: (  )
      KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-          
+     PR Reaction RuleML: ( )     
 -->
 	<xs:attributeGroup name="on.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="on.content">
 		<xs:choice>
-			<xs:group ref="event_primitives.content"/>
+			<xs:group ref="event_group.content"/>
 		</xs:choice>
 	</xs:group>
 	<xs:complexType name="on.type">
@@ -101,9 +105,9 @@
      *** after ***
      
      content model:   
-     DR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-     KR Reaction RuleML: (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-         
+     DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+     KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
+     PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf  )    
 	-->
 	<xs:element name="after" type="if.type"/>
 
@@ -114,7 +118,7 @@
      content model: 
      DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
      KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation )
-     
+     PR Reaction RuleML: not used in PR Reaction RuleML (only in combination with DR)
 	-->
 	<xs:element name="else" type="then.type"/>
 	
@@ -124,15 +128,15 @@
      
      content model:  
      DR Reaction RuleML: (  )
-     KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation  )
+     KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
+     PR Reaction RuleML: (Action | Assert | Retract | Update | Succession | Choice | Flow | Loop)
 -->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="do.content">
 		<xs:choice>
-			<xs:group ref="action_primitives.content"/>
-			
+			<xs:group ref="action_group.content"/>
 		</xs:choice>
 	</xs:group>
 	<xs:complexType name="do.type">
@@ -169,7 +173,7 @@
 
 	<!--
    *** Production Rule content model ***
-   ((elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?))
+   ((if, do, elseDo?) | (elseDo?, do, if))
 -->
 	<xs:group name="ProductionRule.content">
 		<xs:choice>
@@ -182,11 +186,6 @@
 				<xs:element ref="if"/>
 				<xs:element ref="do"/>
 				<xs:element ref="elseDo" minOccurs="0"/>
-			</xs:sequence>
-			<xs:sequence>
-				<xs:group ref="if.content"/>
-				<xs:group ref="do.content"/>
-				<xs:group ref="do.content" minOccurs="0"/>
 			</xs:sequence>
 		</xs:choice>
 		

@@ -36,8 +36,9 @@
 	 the DR schema redefines the RuleML element
 	 and adds meta, evaluation, signature, qualification, quantification, and scope so that the content model is:
 	 
-	( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert | Retract | Query)* )
-
+	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert | Retract | Query)* )
+	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Action | Assert | Retract | Update | Query)* )
+	
  	 Note: key and keyref object identifier are defined to be unique under the RuleML document root
 				
 	-->
@@ -77,8 +78,9 @@
     
     See http://www.ruleml.org/1.0/glossary/#gloss-act
     
-    content model  (Assert|Retract|Query)
-    
+    content model  
+    DR/KR Reaction RuleML (Assert|Retract|Query)
+    PR Reaction RuleML (Assert|Retract|Query|Update|Action)
   -->
   <xs:group name="act.content">
     <xs:choice>
@@ -102,8 +104,9 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Assert 
 
 		content model:
-		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)	
+		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
 	-->
   <xs:attributeGroup name="Assert.attlist">
     <xs:attributeGroup ref="mapDirection.attrib"/>
@@ -137,8 +140,9 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Retract
 
 		content model:
-		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
+		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
 	-->
   <xs:attributeGroup name="Retract.attlist">
     <xs:attributeGroup ref="mapDirection.attrib"/>
@@ -170,8 +174,9 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Query 
 
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
+		PR Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )* )
 	-->
   <xs:attributeGroup name="Query.attlist">
     <xs:attributeGroup ref="closure.attrib"/>
@@ -200,14 +205,14 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-formula
 
 		content model (below Assert formula): 
-		DR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  | Event | Situation | Holds | Initiates | Terminates | Happens )
-		PR Reaction RuleML (Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Action | Assert | Retract | Update )
+		DR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval )
+		KR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval  | Event | Situation | Holds | Initiates | Terminates | Happens )
+		PR Reaction RuleML (Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
 		
 		content model (below Query): 
-		DR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
-    PR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal )
+		DR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval )
+		KR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
+    PR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )
 
 		Other (context-sensitive) versions of <formula> are in the
 		connective and quantifier modules.
@@ -216,7 +221,6 @@
   <xs:group name="formula-assert.content">
     <xs:choice>
       <xs:element ref="Rulebase"/>
-      <xs:element name="Atom" type="Atom.type"/>
       <xs:element ref="Implies"/>
       <xs:element ref="Rule"/>	
       <xs:element ref="Equivalent"/>
@@ -229,7 +233,6 @@
   <xs:group name="formula-query.content">
     <xs:choice>
       <xs:element ref="Rulebase"/>
-      <xs:element name="Atom" type="Atom.type"/>
       <xs:element ref="Entails"/>
       <xs:group ref="query-connective.content"/>
       <xs:group ref="query-quantifier.content"/>

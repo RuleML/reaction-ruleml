@@ -59,13 +59,9 @@
   </xs:attributeGroup>
   <xs:group name="oid.content">
     <xs:choice>
-      <xs:element ref="Ind"/>
-      <xs:element ref="Data"/>
       <xs:element ref="Var"/>
       <xs:element ref="Skolem"/>
       <xs:element ref="Reify"/>
-      <xs:element ref="Expr"/>
-      <xs:element name="Plex" type="Plex.type"/> 
       <xs:group ref="extended-signature-function-sorts.content"/>
     </xs:choice>
   </xs:group>
@@ -85,6 +81,7 @@
   content model: 
   in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
   in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+  in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex)
   -->
   <xs:element name="oid" type="oid.type"/>
   
@@ -117,6 +114,7 @@
      content model: 
      in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
      in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
+     in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
         
      Multiple Metadata annotations are possible by repreating <meta>
 -->
@@ -186,8 +184,10 @@
      Note: multiple scopes can be defined by repeating the <scope> role element
      Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
      
-     content model: ( (Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval)? )
-          
+     content model: 
+     DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
+     KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
+     PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
 -->
   <xs:attributeGroup name="scope.attlist">
     <xs:attributeGroup ref="index.attrib"/>
@@ -211,7 +211,8 @@
 	
      content model: 
      in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
-     in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation )
+     in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
+     in PR Reaction RuleML: ( Operator | Atom | And | Or | Equal | Negation | Naf )
           
 -->
   <xs:attributeGroup name="guard.attlist">
@@ -271,8 +272,9 @@
 	Multiple signatures are possible by repreating the <signature> element
 	
      content model: 
-     in DR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval )
-     in KR Reaction RuleML: ( Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists | Quantifier | Time | Spatial | Interval | Event | Situation )
+     DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
+     KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
+     PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
           
 -->
   <xs:attributeGroup name="signature.attlist">
@@ -304,8 +306,9 @@
 	That would mean the qualification of the rule changes depending on the situation (the truth value of the fluent in KR RuleML)
 	
      content model: 
-     in DR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval)
-     in KR Reaction RuleML: (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation)
+     in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
+     in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
+     in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
 
 -->
   <xs:attributeGroup name="qualification.attlist">

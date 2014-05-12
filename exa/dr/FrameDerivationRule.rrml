@@ -17,8 +17,8 @@
     <!-- signature definition -->
     <signature>
       <Atom>
-        <oid>person</oid>
-        <slot><Ind>likes</Ind><Data type="wine"/></slot>
+        <oid><Ind>person</Ind></oid>
+        <slot><Ind>likes</Ind><Ind type="wine"/></slot>
       </Atom>
     </signature>
         

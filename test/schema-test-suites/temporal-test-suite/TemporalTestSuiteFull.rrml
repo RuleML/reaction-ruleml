@@ -24,23 +24,23 @@
 		<signature>
 			<Time>
 				<oid><Ind>DatetimeClass1</Ind></oid>
-				<slot><Ind>date</Ind><Data type="xs:date"/></slot>
-				<slot><Ind>time</Ind><Data type="xs:time"/></slot>
+				<slot><Ind>date</Ind><Var type="xs:date"/></slot>
+				<slot><Ind>time</Ind><Var type="xs:time"/></slot>
 			</Time>
 		</signature>
 		
 		<signature>
 			<Time>
 				<oid><Ind>DatetimeClass2</Ind></oid>
-				<slot><Ind>datetime</Ind><Plex><arg><Data type="xs:date"/></arg><arg><Data type="xs:time"/></arg></Plex></slot>
+				<slot><Ind>datetime</Ind><Plex><arg index="1"><Var type="xs:date"/></arg><arg index="2"><Var type="xs:time"/></arg></Plex></slot>
 			</Time>
 		</signature>
 		
 		<signature>
 			<Time>
 				<oid><Ind>TimeIntervalClass</Ind></oid>
-				<slot><Ind>start</Ind><Data type="xs:time"/></slot>
-				<slot><Ind>end</Ind><Data type="xs:time"/></slot>
+				<slot><Ind>start</Ind><Var type="xs:time"/></slot>
+				<slot><Ind>end</Ind><Var type="xs:time"/></slot>
 			</Time>
 		</signature>
 
@@ -82,7 +82,7 @@
 		</Time></formula>		
 
 			<!-- definition of a time instant as frame   --> 
-			<formula><Time key="time1" type="ruleml:TimeInstant">
+			<formula><Time type="ruleml:TimeInstant">
 				<oid><Ind>time1</Ind></oid>
 				<slot><Ind>year</Ind><Ind>2011</Ind></slot>
 				<slot><Ind>month</Ind><Ind>03</Ind></slot>
@@ -97,7 +97,7 @@
 			
 			<formula><Time>
 				<oid><Ind type="DatetimeClass2">datetime2</Ind></oid>
-				<slot><Ind>datetime</Ind><Plex><arg><Data>2011-03-21</Data></arg><arg><Data>10:00:00-04:00</Data></arg></Plex></slot>
+				<slot><Ind>datetime</Ind><Plex><arg index="1"><Data>2011-03-21</Data></arg><arg index="2"><Data>10:00:00-04:00</Data></arg></Plex></slot>
 			</Time></formula>	
 			
 			<formula><Time>

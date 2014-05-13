@@ -6,7 +6,7 @@
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/pr.xsd">
 
 <!-- 
-This example illustrates the use of negation, assert, retract, update in Production Rules
+This example illustrates inflationary negation and the interpretation with a inflationary semantic profile.
 
      p :- q
      q :- NOT r

@@ -13,11 +13,24 @@ This example illustrates inflationary negation and the interpretation with a inf
      s :- NOT p
 
 
+The semantic profile uses the typical inflationary semantics of production rules which interprets Naf as inflationary negation
+  
+  Round 0: None of p, q, r, and s are true. 
+  Round 1: From falsehood of r it is possible to infer q, and the falsehood of p infers s. The inflationary model now is {q,s}. 
+  Round 2: The truth of q infers p. The inflationary model is now {p,q,s}. Note that even though p is now true, the use of NOT p to infer s stands. 
+  Round 3: No new inferences are possible; the inflationary model is {p,q,s} and the query succeeds.
+  
+  Note: the inflationary model is different from e.g. the well-founded model or the answer-set/stable model which would not infer "s"
+
 -->
 
   <!-- assert knowledge -->
 
   <Assert>
+
+    <evaluation>
+      <Profile type="ruleml:InflationarySemantics"/>
+    </evaluation>
 
     <Rule>
       <if><Atom><Rel>q</Rel></Atom></if>
@@ -37,20 +50,9 @@ This example illustrates inflationary negation and the interpretation with a inf
 
   </Assert>
 
-  <!-- query knowledge base using the typical inflationary semantics of production rules which interprets Naf as inflationry negation
-  
-  Round 0: None of p, q, r, and s are true. 
-  Round 1: From falsehood of r it is possible to infer q, and the falsehood of p infers s. The inflationary model now is {q,s}. 
-  Round 2: The truth of q infers p. The inflationary model is now {p,q,s}. Note that even though p is now true, the use of NOT p to infer s stands. 
-  Round 3: No new inferences are possible; the inflationary model is {p,q,s} and the query succeeds.
-  
-  Note: the inflationary model is different from e.g. the well-founded model or the answer-set/stable model which would not infer "s"
-  -->
+  <!-- query knowledge base   -->
 
   <Query>
-    <evaluation>
-      <Profile type="ruleml:InflationarySemantics"/>
-    </evaluation>
     <And>
       <Atom><Rel>p</Rel></Atom>
       <Atom><Rel>q</Rel></Atom>

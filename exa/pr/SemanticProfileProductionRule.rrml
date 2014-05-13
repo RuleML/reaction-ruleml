@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/pr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/pr.xsd">
+
+<!-- 
+
+This example illustrates the use of semantic profiles for the definition of the 
+intended evaluation semantics and conflict resolution strategy. 
+
+In the example a priority based conflict resolution strategy is defined 
+and priority values are specified by the qualifying metadata for each rulebase.
+
+-->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+    
+    <!-- the intended semantic profile is inflationary semantics with Priority conflict resolution strategy -->
+    <evaluation>
+      <Profile type="ruleml:ruleml:InflationarySemantics">
+        <evaluation> 
+          <Profile type="ruleml:PriorityConflictResolutionStrategy"/>
+        </evaluation>
+      </Profile>
+    </evaluation>
+    
+    <Rulebase key="higher-priority-module1">
+      <qualification>
+        <Atom><Rel>priority</Rel><Data>10</Data></Atom>
+      </qualification>
+      <!-- rules within the rulebase module inherit the priority defined in the qualifying metadata of the rulebase  -->
+      <Rule> <!-- rule definition -->  </Rule>
+    </Rulebase>
+    
+    <Rulebase key="lower-priority-module2">
+      <qualification>
+        <Atom><Rel>priority</Rel><Data>9</Data></Atom>
+      </qualification>
+      <!-- rules -->
+      <Rule> <!-- rule definition -->  </Rule>
+    </Rulebase>
+    
+  </Assert>
+   
+</RuleML>

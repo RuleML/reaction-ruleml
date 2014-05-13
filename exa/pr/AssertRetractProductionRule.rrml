@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/pr.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/pr.xsd">
+
+<!-- Clocksin/Mellish sample rule 
+
+This example illustrates the use of negation, assert, retract, update in Production Rules
+
+-->
+
+  <!-- assert knowledge -->
+
+  <Assert>
+
+    <!-- facts -->
+    
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Ind>Mary</Ind>
+    </Atom>
+
+    <!-- rule -->
+
+    <Rule>
+
+      <!-- if ?X does not like wine -->
+
+      <if>
+
+        <!-- inflationary negation as failure in the condition    -->
+        <Naf>
+          <Atom>
+            <Rel>likes</Rel>            
+            <Var>X</Var>
+            <Ind>wine</Ind>
+          </Atom>
+        </Naf>
+
+      </if>
+
+      <!-- then John does not like ?X -->
+
+      <do>
+
+        <!-- in Production Rules this is represented by retracting "John likes X" -->
+        <Retract>
+          <Atom>
+            <Rel>likes</Rel>
+            <Ind>John</Ind>
+            <Var>X</Var>
+          </Atom>          
+        </Retract>
+
+      </do>
+    </Rule>
+
+    <!-- rule -->
+    
+    <Rule>
+      
+      <!-- if John does not like ?X  -->
+      
+      <if>
+        <Naf>
+          <Atom>
+            <Rel>likes</Rel>            
+            <Ind>John</Ind>
+            <Var>X</Var>
+          </Atom>
+        </Naf>
+      </if>
+      
+      <!-- then ?X likes beer instead of wine  -->
+      
+      <do>
+        
+        <!-- The action operator <Succession> defines an orderd succession of actions. 
+             Here we first retract that "X likes wine" and then assert that "X likes beer" instead.
+             The @safety attribute defines that the complex actions is executed as one atomic transaction.
+             That is the internal retract does not have an effect outside of the atomic transaction, i.e. on other negated rules.
+          
+             Note, this transactional retract-assert succession is equivalent to an <Update> action, which can be used as a short cut notation -->
+        
+        <Succession safety="transactional">
+          <Retract>
+            <Atom>
+              <Rel>likes</Rel>
+              <Var>X</Var>
+              <Ind>wine</Ind>
+            </Atom>          
+          </Retract>
+          <Assert>
+            <Atom>
+              <Rel>likes</Rel>
+              <Var>X</Var>
+              <Ind>beer</Ind>
+            </Atom>         
+          </Assert>          
+        </Succession>
+        
+      </do>
+    </Rule>
+
+
+  </Assert>
+
+  <!-- we explicitly state that Mary dislikes wine by retracting the fact that Mary likes wine. -->
+  
+  <Retract>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+  </Retract>
+
+  <!-- query knowledge base -->
+
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Ind>Mary</Ind>
+    </Atom>
+  </Query>
+
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>Mary</Ind>
+      <Ind>beer</Ind>
+    </Atom>
+  </Query>
+</RuleML>

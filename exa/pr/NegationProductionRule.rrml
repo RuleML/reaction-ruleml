@@ -5,9 +5,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/pr.xsd">
 
-<!-- Clocksin/Mellish sample rule 
-
+<!-- 
 This example illustrates the use of negation, assert, retract, update in Production Rules
+
+     p :- q
+     q :- NOT r
+     s :- NOT p
+
 
 -->
 
@@ -15,130 +19,43 @@ This example illustrates the use of negation, assert, retract, update in Product
 
   <Assert>
 
-    <!-- facts -->
-    
-    <Atom>
-      <Rel>likes</Rel>
-      <Ind>Mary</Ind>
-      <Ind>wine</Ind>
-    </Atom>
-
-    <Atom>
-      <Rel>likes</Rel>
-      <Ind>John</Ind>
-      <Ind>Mary</Ind>
-    </Atom>
-
-    <!-- rule -->
-
     <Rule>
-
-      <!-- if ?X does not like wine -->
-
-      <if>
-
-        <!-- inflationary negation as failure in the condition    -->
-        <Naf>
-          <Atom>
-            <Rel>likes</Rel>            
-            <Var>X</Var>
-            <Ind>wine</Ind>
-          </Atom>
-        </Naf>
-
-      </if>
-
-      <!-- then John does not like ?X -->
-
-      <do>
-
-        <!-- in Production Rules this is represented by retracting "John likes X" -->
-        <Retract>
-          <Atom>
-            <Rel>likes</Rel>
-            <Ind>John</Ind>
-            <Var>X</Var>
-          </Atom>          
-        </Retract>
-
-      </do>
+      <if><Atom><Rel>q</Rel></Atom></if>
+      <do><Assert><Atom><Rel>p</Rel></Atom></Assert></do>
     </Rule>
 
-    <!-- rule -->
-    
     <Rule>
-      
-      <!-- if John does not like ?X  -->
-      
-      <if>
-        <Naf>
-          <Atom>
-            <Rel>likes</Rel>            
-            <Ind>John</Ind>
-            <Var>X</Var>
-          </Atom>
-        </Naf>
-      </if>
-      
-      <!-- then ?X likes beer instead of wine  -->
-      
-      <do>
-        
-        <!-- The action operator <Succession> defines an orderd succession of actions. 
-             Here we first retract that "X likes wine" and then assert that "X likes beer" instead.
-             The @safety attribute defines that the complex actions is executed as one atomic transaction.
-             That is the internal retract does not have an effect outside of the atomic transaction, i.e. on other negated rules.
-          
-             Note, this transactional retract-assert succession is equivalent to an <Update> action, which can be used as a short cut notation -->
-        
-        <Succession safety="transactional">
-          <Retract>
-            <Atom>
-              <Rel>likes</Rel>
-              <Var>X</Var>
-              <Ind>wine</Ind>
-            </Atom>          
-          </Retract>
-          <Assert>
-            <Atom>
-              <Rel>likes</Rel>
-              <Var>X</Var>
-              <Ind>beer</Ind>
-            </Atom>         
-          </Assert>          
-        </Succession>
-        
-      </do>
+      <if><Naf><Atom><Rel>r</Rel></Atom></Naf></if>
+      <do><Assert><Atom><Rel>q</Rel></Atom></Assert></do>
     </Rule>
 
+    <Rule>
+      <!-- using the generic <Negation> typed with InflationaryNegation is equivalent to <Naf> in production rules with inflationary semantics -->
+      <if><Negation type="ruleml:InflationaryNegation"><Atom><Rel>p</Rel></Atom></Negation></if>
+      <do><Assert><Atom><Rel>s</Rel></Atom></Assert></do>
+    </Rule>
 
   </Assert>
 
-  <!-- we explicitly state that Mary dislikes wine by retracting the fact that Mary likes wine. -->
+  <!-- query knowledge base using the typical inflationary semantics of production rules which interprets Naf as inflationry negation
   
-  <Retract>
-    <Atom>
-      <Rel>likes</Rel>
-      <Ind>Mary</Ind>
-      <Ind>wine</Ind>
-    </Atom>
-  </Retract>
-
-  <!-- query knowledge base -->
+  Round 0: None of p, q, r, and s are true. 
+  Round 1: From falsehood of r it is possible to infer q, and the falsehood of p infers s. The inflationary model now is {q,s}. 
+  Round 2: The truth of q infers p. The inflationary model is now {p,q,s}. Note that even though p is now true, the use of NOT p to infer s stands. 
+  Round 3: No new inferences are possible; the inflationary model is {p,q,s} and the query succeeds.
+  
+  Note: the inflationary model is different from e.g. the well-founded model or the answer-set/stable model which would not infer "s"
+  -->
 
   <Query>
-    <Atom>
-      <Rel>likes</Rel>
-      <Ind>John</Ind>
-      <Ind>Mary</Ind>
-    </Atom>
+    <evaluation>
+      <Profile type="ruleml:InflationarySemantics"/>
+    </evaluation>
+    <And>
+      <Atom><Rel>p</Rel></Atom>
+      <Atom><Rel>q</Rel></Atom>
+      <Atom><Rel>s</Rel></Atom>
+    </And>
   </Query>
 
-  <Query>
-    <Atom>
-      <Rel>likes</Rel>
-      <Ind>Mary</Ind>
-      <Ind>beer</Ind>
-    </Atom>
-  </Query>
 </RuleML>

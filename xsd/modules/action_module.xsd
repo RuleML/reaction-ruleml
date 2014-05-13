@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
-	targetNamespace="http://ruleml.org/spec">
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
 			
@@ -32,6 +32,50 @@
 		</xs:appinfo>
 	</xs:annotation>
 	
+	
+	<!--
+     *** arg ***
+     
+     Definition of the the arg role for Action
+     
+     content model:  
+     in DR Reaction RuleML: not used in DR Reaction RuleML
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
+     in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)) 
+          
+-->
+	<xs:attributeGroup name="arg_action.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="arg_action.content">
+		<xs:choice>
+			<xs:group ref="action_primitives.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="arg_action.type">
+		<xs:group ref="arg_action.content"/>
+		<xs:attributeGroup ref="arg_action.attlist"/>
+	</xs:complexType>
+	
+	
+	<!--
+     *** content ***
+     
+     content model:  xs:any*
+    -->
+	<xs:attributeGroup name="action_anycontent.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="action_anycontent.content">
+		<xs:choice>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="action_anycontent.type">
+		<xs:group ref="action_anycontent.content"/>
+		<xs:attributeGroup ref="action_anycontent.attlist"/>
+	</xs:complexType>
 	
 	<!--
 	*** Action ***
@@ -92,51 +136,5 @@
 		<xs:attributeGroup ref="Action.attlist"/>
 	</xs:complexType>
 	<xs:element name="Action" type="Action.type"/>
-	
-	<!--
-     *** arg ***
-     
-     Definition of the the arg role for Action
-     
-     content model:  
-     in DR Reaction RuleML: not used in DR Reaction RuleML
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
-     in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)) 
-          
--->
-	<xs:attributeGroup name="arg_action.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
-		<xs:attributeGroup ref="xml.attlist"/>
-	</xs:attributeGroup>
-	<xs:group name="arg_action.content">
-		<xs:choice>
-			<xs:group ref="action_primitives.content"/>
-		</xs:choice>
-	</xs:group>
-	<xs:complexType name="arg_action.type">
-		<xs:group ref="arg_action.content"/>
-		<xs:attributeGroup ref="arg_action.attlist"/>
-	</xs:complexType>
-	
-	
-	<!--
-     *** content ***
-     
-     content model:  xs:any*
-    -->
-	<xs:attributeGroup name="action_anycontent.attlist">
-		<xs:attributeGroup ref="xml.attlist"/>
-	</xs:attributeGroup>
-	<xs:group name="action_anycontent.content">
-		<xs:choice>
-			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:choice>
-	</xs:group>
-	<xs:complexType name="action_anycontent.type">
-		<xs:group ref="action_anycontent.content"/>
-		<xs:attributeGroup ref="action_anycontent.attlist"/>
-	</xs:complexType>
-	
-	
-	
+		
 </xs:schema>

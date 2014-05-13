@@ -88,6 +88,7 @@
 -->
 	<xs:attributeGroup name="on.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
+		<xs:attributeGroup ref="index.attrib"/>
 	</xs:attributeGroup>
 	<xs:group name="on.content">
 		<xs:choice>
@@ -133,6 +134,7 @@
 -->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
+		<xs:attributeGroup ref="index.attrib"/>
 	</xs:attributeGroup>
 	<xs:group name="do.content">
 		<xs:choice>

@@ -150,6 +150,8 @@
     <xs:attributeGroup ref="mapMaterial.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
+    <xs:attributeGroup ref="safety.attrib"/>
+    <xs:attributeGroup ref="size.attrib"/>
   </xs:attributeGroup>
   <xs:group name="Retract.content">
     <xs:sequence>
@@ -182,6 +184,8 @@
     <xs:attributeGroup ref="closure.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
+    <xs:attributeGroup ref="safety.attrib"/>
+    <xs:attributeGroup ref="size.attrib"/>
   </xs:attributeGroup>
   <xs:group name="Query.content">
     <xs:sequence>

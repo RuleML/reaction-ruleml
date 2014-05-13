@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../xsd/pr.xsd"?> 
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec ../../xsd/pr.xsd">
+  <!-- W3C RIF Production Rules Dialect Example
+    
+    Running example of W3C RIF-PRD http://www.w3.org/TR/rif-prd/#Running_example
+    
+    Gold rule: A "Silver" customer with a shopping cart worth at least $2,000 is awarded the "Gold" status.
+    Discount rule: "Silver" and "Gold" customers are awarded a 5% discount on the total worth of their shopping cart.
+    New customer and widget rule: A "New" customer who buys a widget is awarded a 10% discount on the total worth of her shopping cart, but she looses any voucher she may have been awarded.
+    Unknown status rule: A message must be printed, identifying any customer whose status is unknown (that is, neither "New", "Bronze", "Silver" or "Gold"), and the customer must be assigned the status: "New". 
+
+    The example in RIF PRD presentation syntax:
+
+    Document(
+    
+    Prefix( ex1 <http://example.com/2009/prd2> )
+    
+    (* ex1:CheckoutRuleset *)
+    Group  (
+      (* ex1:GoldRule *)
+      Group  (
+        Forall ?customer such that And(?customer # ex1:Customer
+                                       ?customer[ex1:status -> "Silver"])
+          (Forall ?shoppingCart such that ?customer[ex1:shoppingCart -> ?shoppingCart]
+             (If Exists ?value (And(?shoppingCart[ex1:value -> ?value]
+                                    External(pred:numeric-greater-than-or-equal(?value 2000))))
+              Then Do(Modify(?customer[ex1:status -> "Gold"])))))
+    
+      (* ex1:DiscountRule *)
+      Group (
+        Forall ?customer such that ?customer # ex1:Customer
+          (If Or( ?customer[ex1:status -> "Silver"]
+                  ?customer[ex1:status -> "Gold"])
+           Then Do ((?s ?customer[ex1:shoppingCart ->  ?s])
+                    (?v ?s[ex1:value -> ?v])
+                    Modify(?s [ex1:value -> External(func:numeric-multiply (?v 0.95))]))))
+    
+      (* ex1:NewCustomerAndWidgetRule *)
+      Group (
+        Forall ?customer such that And(?customer # ex1:Customer
+                                        ?customer[ex1:status -> "New"] )
+          (If Exists ?shoppingCart ?item
+                     (And(?customer[ex1:shoppingCart -> ?shoppingCart]
+                          ?shoppingCart[ex1:containsItem -> ?item]
+                          ?item # ex1:Widget ) )
+           Then Do( (?s ?customer[ex1:shoppingCart -> ?s])
+                    (?val ?s[ex1:value -> ?val])
+                    Retract(?customer ex1:voucher)
+                    Modify(?s[ex1:value -> External(func:numeric-multiply(?val 0.90))]))))
+    
+      (* ex1:UnknownStatusRule *)
+      Group (
+        Forall ?customer such that ?customer # ex1:Customer
+          (If Not(Exists ?status
+                         (And(?customer[ex1:status -> ?status]
+                              External(pred:list-contains(List("New" "Bronze" "Silver" "Gold") ?status)) )))
+           Then Do( Execute(act:print(External(func:concat("New customer: " ?customer))))
+                    Assert(?customer[ex1:status -> "New"]))))
+     )
+    )
+
+
+-->
+
+  <!-- assert rules -->
+
+  <act>
+    <!-- (* ex1:CheckoutRuleset *) -->
+    <Assert>
+
+      <!-- (* ex1:GoldRule *)-->
+      <formula>
+        <Rulebase>
+          
+          <!--      
+              
+               Forall ?customer such that And(?customer # ex1:Customer
+                                       ?customer[ex1:status -> "Silver"])
+              (Forall ?shoppingCart such that ?customer[ex1:shoppingCart -> ?shoppingCart]
+              (If Exists ?value (And(?shoppingCart[ex1:value -> ?value]
+                                    External(pred:numeric-greater-than-or-equal(?value 2000))))
+              Then Do(Modify(?customer[ex1:status -> "Gold"])))))
+            
+            -->
+          <formula>            
+            <Rule>
+              <quantification>
+                <Forall>
+                  <declare>
+                    <Var>customer</Var>
+                  </declare>
+                  <formula> <!-- such that -->
+                    <And>
+                      <formula>
+                        <!-- frame object -->
+                        <Atom>
+                          <oid><Var type="ex1:Customer">customer</Var></oid>
+                          <slot><Ind iri="ex1:status"/><Ind>Silver</Ind></slot>
+                        </Atom>
+                      </formula>
+                    </And>
+                  </formula>
+                </Forall>
+              </quantification>
+              <quantification>
+                <Forall>
+                  <declare>
+                    <Var>shoppingCart</Var>
+                  </declare>
+                  <formula> <!-- such that -->
+                    <!-- frame object -->
+                    <Atom>
+                      <oid><Var>customer</Var></oid>
+                      <slot><Ind iri="ex1:shoppingCart"/><Var>shoppingCart</Var></slot>
+                    </Atom>
+                  </formula>
+                </Forall>
+              </quantification>
+              <if>
+                <And>
+                  <quantification>
+                    <Exists><declare>
+                      <Var>value</Var>
+                    </declare></Exists>
+                  </quantification>
+                  <formula>
+                    <Atom>
+                      <oid><Var>shoppingCart</Var></oid>
+                      <slot><Ind iri="ex1:value"/><Var>value</Var></slot>
+                    </Atom>
+                  </formula>
+                  <formula>
+                    <Atom>
+                      <op><Rel iri="pred:numeric-greater-than-or-equal"/></op>
+                      <arg><Var>value</Var></arg>
+                      <arg><Data>2000</Data></arg>
+                    </Atom>
+                  </formula>
+                </And>
+              </if>
+              <do>
+                <Update>
+                  <formula>
+                    <Atom>
+                      <oid><Var>customer</Var></oid>
+                      <slot><Ind iri="ex1:status"/><Ind>Gold</Ind></slot>
+                    </Atom>
+                  </formula>
+                </Update>
+              </do>
+            </Rule>
+            
+          </formula>      
+        </Rulebase>
+      </formula>
+      
+      <!--       (* ex1:DiscountRule *) -->
+      <formula>
+        <Rulebase>
+          
+          <!-- 
+          
+          Forall ?customer such that ?customer # ex1:Customer
+          (If Or( ?customer[ex1:status -> "Silver"]
+                  ?customer[ex1:status -> "Gold"])
+           Then Do ((?s ?customer[ex1:shoppingCart ->  ?s])
+                    (?v ?s[ex1:value -> ?v])
+                    Modify(?s [ex1:value -> External(func:numeric-multiply (?v 0.95))])))          
+          -->
+          <formula>
+            <Rule>
+              <quantification>
+                <Forall>
+                  <declare>
+                    <Var type="ex1:Customer">customer</Var>
+                  </declare>
+                </Forall>
+              </quantification>
+              <if>
+                <Or>
+                  <formula>
+                    <Atom>
+                      <oid><Var>customer</Var></oid>
+                      <slot><Ind iri="ex1:status"/><Ind>Silver</Ind></slot>
+                      <slot><Ind iri="ex1:status"/><Ind>Gold</Ind></slot>
+                    </Atom>  
+                  </formula>
+                </Or>
+              </if>
+              <do>
+                <Update>
+                  <quantification>
+                    <Forall>
+                      <declare><Var>s</Var></declare>
+                      <declare><Var>v</Var></declare>
+                      <formula><And>
+                        <formula>
+                          <Atom>
+                            <oid><Var>customer</Var></oid>
+                            <slot><Ind iri="ex1:shoppingCart"/><Var>s</Var></slot>
+                          </Atom>                          
+                        </formula>
+                        <formula>
+                          <Atom>
+                            <oid><Var>s</Var></oid>
+                            <slot><Ind iri="ex1:value"/><Var>v</Var></slot>
+                          </Atom>                          
+                        </formula>
+                      </And></formula>
+                    </Forall>
+                  </quantification>
+                  <formula>
+                    <Atom>
+                      <oid><Var>s</Var></oid>
+                      <slot>
+                        <Ind iri="ex1:value"/>
+                        <Expr>
+                          <op>
+                            <Fun iri="func:numeric-multiply"/>
+                          </op>
+                          <arg><Var>v</Var></arg>
+                          <arg><Data xsi:type="xs:decimal">0.95</Data></arg>
+                        </Expr>
+                      </slot>
+                    </Atom>                          
+                  </formula>
+                </Update>
+              </do>
+            </Rule>
+          </formula>
+        </Rulebase>
+      </formula>
+      
+      <!--       (* ex1:NewCustomerAndWidgetRule *) -->
+      <formula>
+        <Rulebase>
+          
+          <!-- 
+          Forall ?customer such that And(?customer # ex1:Customer
+                                        ?customer[ex1:status -> "New"] )
+          (If Exists ?shoppingCart ?item
+                     (And(?customer[ex1:shoppingCart -> ?shoppingCart]
+                          ?shoppingCart[ex1:containsItem -> ?item]
+                          ?item # ex1:Widget ) )
+           Then Do( (?s ?customer[ex1:shoppingCart -> ?s])
+                    (?val ?s[ex1:value -> ?val])
+                    Retract(?customer ex1:voucher)
+                    Modify(?s[ex1:value -> External(func:numeric-multiply(?val 0.90))])))
+          -->
+          <formula>
+            <Rule>
+              <quantification>
+                <Forall>
+                  <declare><Var>customer</Var></declare>
+                  <formula>
+                    <Atom>
+                      <oid><Var type="ex1:Customer">customer</Var></oid>
+                      <slot><Ind iri="ex1:status"/><Ind>New</Ind></slot>                      
+                    </Atom>
+                  </formula>
+                </Forall>
+              </quantification>
+              <if>
+                <And>
+                  <quantification>
+                    <Exists>
+                      <declare><Var>shoppingCart</Var></declare>
+                      <declare><Var>item</Var></declare>
+                    </Exists>
+                  </quantification>
+                  <formula>
+                    <Atom>
+                      <oid><Var>customer</Var></oid>
+                      <slot><Ind iri="ex1:shoppingCart"/><Var>shoppingCart</Var></slot>
+                    </Atom>
+                  </formula>
+                  <formula>
+                    <Atom>
+                      <oid><Var>shoppingCart</Var></oid>
+                      <slot><Ind iri="ex1:containsItem"/><Var type="ex1:Widget">item</Var></slot>
+                    </Atom>
+                  </formula>
+                </And>
+              </if>
+              <do>
+                <Succession>
+                  <quantification>
+                    <Forall>
+                      <declare><Var>s</Var></declare>
+                      <declare><Var>val</Var></declare>
+                      <formula>
+                        <And>
+                          <Atom>
+                            <oid><Var>customer</Var></oid>
+                            <slot><Ind iri="ex1:shoppingCart"/><Var>s</Var></slot>
+                          </Atom>
+                          <Atom>
+                            <oid><Var>s</Var></oid>
+                            <slot><Ind iri="ex1:value"/><Var>val</Var></slot>
+                          </Atom>
+                        </And>
+                      </formula>
+                    </Forall>
+                  </quantification>
+                  <do>
+                    <Retract><formula>
+                      <Atom>
+                        <oid><Var>customer</Var></oid>
+                        <slot><Ind iri="ex1:value"/><Var/></slot>
+                      </Atom>
+                    </formula></Retract>
+                  </do>
+                  <do>
+                    <Update>
+                      <formula>
+                        <Atom>
+                          <oid><Var>s</Var></oid>
+                          <slot>
+                            <Ind iri="ex1:value"/>
+                            <Expr>
+                              <op><Fun iri="func:numeric-multiply"/></op>
+                              <Var>val</Var>
+                              <arg><Data xsi:type="xs:decimal">0.90</Data></arg>
+                            </Expr>
+                          </slot>
+                        </Atom>
+                      </formula>
+                    </Update>
+                  </do>
+                </Succession>
+              </do>
+            </Rule> 
+          </formula>
+        </Rulebase>
+      </formula>
+      
+      <!-- (* ex1:UnknownStatusRule *) -->
+      <formula>
+        <Rulebase>
+         <!-- 
+            Group (
+            Forall ?customer such that ?customer # ex1:Customer
+            (If Not(Exists ?status
+            (And(?customer[ex1:status -> ?status]
+            External(pred:list-contains(List("New" "Bronze" "Silver" "Gold") ?status)) )))
+            Then Do( Execute(act:print(External(func:concat("New customer: " ?customer))))
+            Assert(?customer[ex1:status -> "New"])))         
+         --> 
+          <Rule>
+            <quantification>
+              <Forall>
+                <declare><Var type="ex1:Customer">customer</Var></declare>
+              </Forall>              
+            </quantification>
+            <if>
+                <And>
+                  <quantification>
+                    <Forall>
+                      <declare><Var>status</Var></declare>
+                    </Forall>
+                  </quantification>
+                  <formula>
+                    <Atom>
+                      <oid><Var>customer</Var></oid>
+                      <slot><Ind iri="ex1:status"/><Var>status</Var></slot>
+                    </Atom>
+                  </formula>
+                  <formula>
+                    <Naf><weak>
+                    <Atom>
+                      <op><Rel iri="pred:list-contains" per="value"/></op>
+                      <arg><Plex>
+                        <arg index="1"><Ind>New</Ind></arg>
+                        <arg index="2"><Ind>Bronze</Ind></arg>
+                        <arg index="3"><Ind>Silver</Ind></arg>
+                        <arg index="4"><Ind>Gold</Ind></arg>
+                      </Plex></arg>
+                      <arg><Var>status</Var></arg>
+                    </Atom>
+                    </weak></Naf>  
+                  </formula>
+                </And>
+            </if>
+            <do>
+              <Succession>
+                <do index="1">
+                  <Action>  
+                    <arg>
+                      <Expr>
+                        <op><Fun iri="act:print"/></op>
+                        <arg><Expr>
+                          <op><Fun iri="func:concat"/></op>
+                          <arg><Ind>New customer: </Ind></arg>
+                          <arg><Var>customer</Var></arg>
+                        </Expr></arg>  
+                      </Expr>
+                    </arg>
+                  </Action>
+                </do>
+                <do index="2">
+                  <Assert>                   
+                    <formula>
+                      <Atom>
+                        <oid><Var>customer</Var></oid>
+                        <slot><Ind iri="ex1:status"/><Ind>New</Ind></slot>
+                      </Atom>
+                    </formula>
+                  </Assert>
+                </do>
+              </Succession>
+            </do>
+          </Rule>
+        </Rulebase>
+      </formula>
+      
+    </Assert>  
+  </act>
+    
+    
+    
+
+
+</RuleML>

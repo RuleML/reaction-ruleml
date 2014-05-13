@@ -19,7 +19,7 @@
        Note: it is also possible to reference external semantic profiles which are formalized in other non RuleML languages such as e.g. Common Logic. 
   -->
   
-  <xi:include href="../../profiles/SituationCalculusProfile.rrml" xpointer="xpointer(/RuleML/*)"/>
+  <xi:include href="http://reaction.ruleml.org/1.0/profiles/SituationCalculusProfile.rrml" xpointer="xpointer(/RuleML/*)"/>
 
   <!-- assert knowledge -->
 

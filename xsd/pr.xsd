@@ -20,7 +20,7 @@
 			This schema declares the following Reaction RuleML elements and attributes:
 				  								  
 				  
-				  * exte ds Rule by adding do, elseDo (alternative action)  				 		
+				  * extends Rule by adding do, elseDo (alternative action)  				 		
 				  * add transaction update primitives (Assert, Retract)		  				  				  				  
 				  * extends Assert by adding @safety (transactional update) and @all 
 				  * extends Retract by adding @safety (transactional update) and @all
@@ -88,7 +88,7 @@
 
 	<!-- include actions from the PR rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/action_module.xsd" />
-	
+	<xs:include schemaLocation="modules/action_algebra_module.xsd" />
 
 	<!--
      metadata group
@@ -185,7 +185,7 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -205,7 +205,7 @@
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -218,15 +218,14 @@
          
      An internal group for the outer connectives in the Reaction RuleML language
     
-    
-     content model: (Operator | Action | Assert | Retract | Update)
+     content model: (Operator | Equal )
           
 	-->
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
-			<xs:group ref="action_primitives.content"/>				
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element ref="Equal"/>			
 		</xs:choice>
 	</xs:group>
 	
@@ -235,14 +234,13 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: (Exists | Quantifier)
+     content model: not used - PR Reaction RuleML only supports inner quantifiers in <quantification>
           
 	-->
 	
 	<xs:group name="query-quantifier.content">
 		<xs:choice>
-			<xs:element ref="Exists"/>
-			<xs:element ref="Quantifier"/>
+
 		</xs:choice>
 	</xs:group>
 	
@@ -282,15 +280,13 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the PR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
-    
-     empty in PR RuleML (only used in combination with signature extension with KR,DR, ECA/CEP Reaction RuleML)
+    content model: (Atom)
           
 	-->
 	
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
-
+			<xs:element name="Atom" type="Atom.type"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -299,12 +295,16 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-		empty in PR RuleML (only in combination with signature extension with KR,DR, ECA/CEP Reaction RuleML)
+		content model: (Ind | Data | Expr | Plex)
           
 	-->
 	
 	<xs:group name="extended-signature-function-sorts.content">
 		<xs:choice>
+			<xs:element ref="Ind"/>
+			<xs:element ref="Data"/>
+			<xs:element ref="Expr"/>
+			<xs:element ref="Plex"/>
 		</xs:choice>
 	</xs:group>
 
@@ -359,17 +359,52 @@
 		</xs:choice>
 	</xs:group>
 
+	<!-- An internal group for events
+		content model:
+		not used in PR RuleML (only in combination with KR RuleML or ECA/CEP RuleML)-->
+	
+	<xs:group name="event_group.content">
+		<xs:choice>
+		</xs:choice>
+	</xs:group>	
+
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		
-		in PR Reaction RuleML: (Action | Assert | Retract | Update)
+		in PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex |  Succession | Choice | Flow | Loop | Operator )
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
-			<xs:element ref="Action"/>
+			<xs:group ref="arg.content"/>
+			<xs:group ref="action_algebra_group.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- An internal group for actions
+		content model:
+		PR Reaction RuleML (Assert | Retract | Update | Action | Succession | Choice | Flow | Loop )-->
+	
+	<xs:group name="action_group.content">
+		<xs:choice>
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
+			<xs:element ref="Action"/>
+			<xs:group ref="action_algebra_group.content"/>
+		</xs:choice>
+	</xs:group>	
+
+	<!-- An internal group for the performative primitives
+		content model: 
+		in DR Reaction RuleML: (Assert|Retract|Update|Query|Action)
+	-->
+	<xs:group name="performative_primitives.content">
+		<xs:choice>
+			<xs:element ref="Assert"/>
+			<xs:element ref="Retract"/>
+			<xs:element ref="Update"/>
+			<xs:element ref="Action"/>
+			<xs:element ref="Query"/>
 		</xs:choice>
 	</xs:group>
 

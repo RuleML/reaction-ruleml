@@ -178,9 +178,9 @@
       content model: 
       in KR Reaction RuleML:
       (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
-      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation ),  
-      (fluent |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation ), 
-      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation )?)
+      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ),  
+      (fluent |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ), 
+      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )?)
 	-->
 	<xs:attributeGroup name="Initiates.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -219,9 +219,9 @@
       content model: 
 	   in KR Reaction RuleML:
       (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
-      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation ),  
-      (fluent |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation ), 
-      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation )?)
+      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ),  
+      (fluent |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ), 
+      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )?)
 	-->
 	<xs:attributeGroup name="Terminates.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -267,8 +267,8 @@
       content model:
       in KR Reaction RuleML:
       (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
-      (fluent |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation ), 
-      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)? )
+      (fluent |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ), 
+      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
 	-->
 	<xs:attributeGroup name="Holds.attlist">
 		<xs:attributeGroup ref="type.attrib"/>

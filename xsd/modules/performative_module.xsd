@@ -38,7 +38,8 @@
 	 
 	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert | Retract | Query)* )
 	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Action | Assert | Retract | Update | Query)* )
-	
+	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Action | Assert | Retract | Update | Query)* )
+		
  	 Note: key and keyref object identifier are defined to be unique under the RuleML document root
 				
 	-->
@@ -81,6 +82,7 @@
     content model  
     DR/KR Reaction RuleML (Assert|Retract|Query)
     PR Reaction RuleML (Assert|Retract|Query|Update|Action)
+    ECA Reaction RuleML (Assert|Retract|Query|Update|Action)
   -->
   <xs:group name="act.content">
     <xs:choice>
@@ -105,8 +107,9 @@
 
 		content model:
 		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
     PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
+    ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)
 	-->
   <xs:attributeGroup name="Assert.attlist">
     <xs:attributeGroup ref="mapDirection.attrib"/>
@@ -141,8 +144,9 @@
 
 		content model:
 		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
     PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
+ 		ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)   
 	-->
   <xs:attributeGroup name="Retract.attlist">
     <xs:attributeGroup ref="mapDirection.attrib"/>
@@ -177,8 +181,9 @@
 
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
 		PR Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )* )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )* )		
 	-->
   <xs:attributeGroup name="Query.attlist">
     <xs:attributeGroup ref="closure.attrib"/>
@@ -210,13 +215,15 @@
 
 		content model (below Assert formula): 
 		DR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval  | Event | Situation | Holds | Initiates | Terminates | Happens )
+		KR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval  | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
 		PR Reaction RuleML (Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
+		ECA Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval | Event | Action )
 		
 		content model (below Query): 
 		DR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
+		KR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
     PR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )
+		ECA Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Action )    
 
 		Other (context-sensitive) versions of <formula> are in the
 		connective and quantifier modules.

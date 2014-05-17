@@ -54,8 +54,13 @@
 			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex)*, repo?) | repo), slot*, resl?
 		)
 		
+		in ECA Reaction RuleML
+		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
+			((arg | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)*, repo?) | repo), slot*, resl?)
+		
 		however, the above content model is non-deterministic,
 		so it is (equivalently) restructured as follows:
+		
 		in DR Reaction RuleML:
 		(
 				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel)?, slot*,
@@ -172,6 +177,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Rel
 		
 		content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
+		
+		attribute: @iri, @node @per 
 	-->
   <xs:attributeGroup name="Rel.attlist">
     <xs:attributeGroup ref="iri.attrib"/>

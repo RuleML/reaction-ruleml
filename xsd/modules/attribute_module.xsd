@@ -39,7 +39,7 @@
 	
 	<!--
            *** @mode ***
-           A attribute for optionally specifing the intended input-output constellations of the predicate terms with the
+           An attribute for optionally specifying the intended input-output constellations of the predicate terms with the
            following semantics:
         
            "+" The term is intended to be input
@@ -80,7 +80,7 @@
 	</xs:attributeGroup>
 	<!--
 		*** @per ***
-		An attribute indicating whether a function or expression is interpreted.
+		An attribute indicating how a relation, function or expression is interpreted.
 		
 	-->
 	<xs:attributeGroup name="per-effect.attrib">
@@ -99,7 +99,7 @@
 	
 	<!--
 		*** @size ***
-		An attribute indicating the size / number		
+		An attribute indicating the size of a counter		
 		-1 = unbound / all
 	-->
 	<xs:attributeGroup name="size.attrib">

@@ -37,6 +37,7 @@
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
 		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
 	-->
   <xs:attributeGroup name="Forall.attlist">
     <xs:attributeGroup ref="node.attrib"/>
@@ -71,6 +72,7 @@
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
     PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
   -->
   <xs:attributeGroup name="Exists.attlist">
     <xs:attributeGroup ref="node.attrib"/>
@@ -126,13 +128,15 @@
 		
 		content model (below Forall): 
 		DR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
-		KR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)
+		KR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
 		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		ECA Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action)
 
 		content model (below Exists): 
 		DR Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval )
 		KR Reaction RuleML ( Atom | Exists  | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
 		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		ECA Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)		
 		
 		Other (context-sensitive) versions of <formula> are in the
 		connective and performative modules.

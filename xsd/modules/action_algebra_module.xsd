@@ -12,14 +12,7 @@
 			Last Modification: 2011-03-22
 			
 			This schema declares the following Reaction RuleML elements and attributes:
-                                   
-                  Actions
-                  
-                  * Action (generic action)
-                  * Assert
-                  * Retract
-				  * Update (modify)
-                  
+                                                    
                   Action Algebra Operators
                   
                   * Operator (generic action operator)
@@ -65,13 +58,15 @@
       *** (Operator) ***
       
       content model: 
-      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Succession | Choice | Flow | Loop)* ) 
+      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* ) 
 	-->
 	<xs:attributeGroup name="ActionAlgebraOperator.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
+		<xs:attributeGroup ref="safety.attrib"/>
+		<xs:attributeGroup ref="size.attrib"/>
 	</xs:attributeGroup>
 	<xs:group name="ActionAlgebraOperator.content">
 		<xs:sequence>
@@ -90,38 +85,6 @@
 	<xs:element name="Choice" type="ActionAlgebraOperator.type"/>
 	<xs:element name="Flow" type="ActionAlgebraOperator.type"/>
 	<xs:element name="Loop" type="ActionAlgebraOperator.type"/>
-	
-
-	<!--
-      *** Update ***
-      Update action
-      
-      content model: 
-       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
-		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
-      Update has the following attributes:
-      @safety, @all
-      
--->
-	<xs:attributeGroup name="Update.attlist">
-		<xs:attributeGroup ref="Assert.attlist"/>
-	</xs:attributeGroup>
-	<xs:group name="Update.content">
-		<xs:sequence>
-			<xs:group ref="meta-roles.content"/>
-			<xs:sequence minOccurs="1" maxOccurs="2">
-				<xs:choice>
-					<xs:element name="formula" type="formula-assert.type"/>
-					<xs:group ref="formula-assert.content"/>
-				</xs:choice>
-			</xs:sequence>	
-		</xs:sequence>			
-	</xs:group>
-	<xs:complexType name="Update.type">
-		<xs:group ref="Update.content"/>
-		<xs:attributeGroup ref="Update.attlist"/>
-	</xs:complexType>
-	<xs:element name="Update" type="Update.type"/>
 
 </xs:schema>
 

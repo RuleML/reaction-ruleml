@@ -56,6 +56,9 @@
 	 In PR Reaction RuleML:
 	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?) ) )
 	 
+	 in ECA Reaction RuleML:
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, (if?, then?, do, after?,else?, elseDo?)? ) )
+	 
       Rule has the following attributes:
       @key @keyref @type @style @closure @direction @material @node 
       
@@ -84,7 +87,8 @@
      content model: 
      DR Reaction RuleMl: (  )
      KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-     PR Reaction RuleML: ( )     
+     PR Reaction RuleML: ( )
+     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)     
 -->
 	<xs:attributeGroup name="on.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -109,6 +113,7 @@
      DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
      KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
      PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf  )    
+     ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
 	-->
 	<xs:element name="after" type="if.type"/>
 
@@ -120,6 +125,7 @@
      DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
      KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation )
      PR Reaction RuleML: not used in PR Reaction RuleML (only in combination with DR)
+     ECA Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action )
 	-->
 	<xs:element name="else" type="then.type"/>
 	
@@ -130,7 +136,8 @@
      content model:  
      DR Reaction RuleML: (  )
      KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: (Action | Assert | Retract | Update | Succession | Choice | Flow | Loop)
+     PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
+     ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
 -->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>

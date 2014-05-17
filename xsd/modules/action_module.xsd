@@ -42,6 +42,7 @@
      in DR Reaction RuleML: not used in DR Reaction RuleML
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
      in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)) 
+     in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operator))
           
 -->
 	<xs:attributeGroup name="arg_action.attlist">
@@ -95,7 +96,10 @@
 	                (content(xs:any)) )? 
 	  PR Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-	                (content(xs:any)) )?              
+	                (content(xs:any)) )? 
+	  ECA Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
+	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operator)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+	                (content(xs:any)) )?             
 	-->
 	<xs:attributeGroup name="Action.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -136,5 +140,36 @@
 		<xs:attributeGroup ref="Action.attlist"/>
 	</xs:complexType>
 	<xs:element name="Action" type="Action.type"/>
-		
+
+	<!--
+      *** Update ***
+      Update action
+      
+      content model: 
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
+		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
+      Update has the following attributes:
+      @safety, @all
+      
+-->
+	<xs:attributeGroup name="Update.attlist">
+		<xs:attributeGroup ref="Assert.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Update.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:sequence minOccurs="1" maxOccurs="2">
+				<xs:choice>
+					<xs:element name="formula" type="formula-assert.type"/>
+					<xs:group ref="formula-assert.content"/>
+				</xs:choice>
+			</xs:sequence>	
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Update.type">
+		<xs:group ref="Update.content"/>
+		<xs:attributeGroup ref="Update.attlist"/>
+	</xs:complexType>
+	<xs:element name="Update" type="Update.type"/>
+
 </xs:schema>

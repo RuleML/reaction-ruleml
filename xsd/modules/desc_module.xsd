@@ -82,6 +82,7 @@
   in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
   in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
   in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex)
+  in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
   -->
   <xs:element name="oid" type="oid.type"/>
   
@@ -115,7 +116,8 @@
      in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
      in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
      in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-        
+     in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Action )
+
      Multiple Metadata annotations are possible by repreating <meta>
 -->
   
@@ -188,6 +190,8 @@
      DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
      KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
      PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
+     ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )
+    
 -->
   <xs:attributeGroup name="scope.attlist">
     <xs:attributeGroup ref="index.attrib"/>
@@ -213,7 +217,8 @@
      in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
      in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
      in PR Reaction RuleML: ( Operator | Atom | And | Or | Equal | Negation | Naf )
-          
+     in ECA Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)    
+    
 -->
   <xs:attributeGroup name="guard.attlist">
     <xs:attributeGroup ref="index.attrib"/>
@@ -233,8 +238,7 @@
   <!--
      *** evaluation ***
      
-     The intended evaluation semantics of the rule, 
-     e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
+     The intended evaluation semantics, e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
      
      Note: multiple Profiles can be defined by repreating the <evaluation> role element
      The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
@@ -275,7 +279,7 @@
      DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
      KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
      PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
-          
+     ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )         
 -->
   <xs:attributeGroup name="signature.attlist">
     <xs:attributeGroup ref="index.attrib"/>
@@ -295,9 +299,9 @@
   <!--
      *** qualification ***
      
-    Definition of the rule's qualification (qualifying metadata), e.g. validity time of the rule, priorities, etc.
+    Definition of the rule's qualification (qualifying metadata), e.g. validity time, priorities, etc.
      
-    Note: the qualification can be also defined as a situation  <Situation> 
+    Note: the qualification can be also defined as a situation  <Situation> in KR Reaction RuleML 
 	A situation could be also modelled as a changeable situation called fluent (in the KR dialect of Reaction RuleML),
 	which changes its truth value depending on the context (context can be time, events/actions which 
 	initiate/terminate the changeable situation, or a history of occured events/actions which leads to an occured situation
@@ -309,6 +313,7 @@
      in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
      in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
      in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
+     in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Action )
 
 -->
   <xs:attributeGroup name="qualification.attlist">

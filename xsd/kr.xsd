@@ -275,7 +275,12 @@
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
 			<xs:element name="Atom" type="Atom.type"/>
-			<xs:group ref="extended-signature-function-sorts.content"/>
+			<xs:element ref="Time"/>
+			<xs:element ref="Spatial"/>
+			<xs:element ref="Interval"/>
+			<xs:element ref="Event"/>			
+			<xs:element ref="Action"/>			
+			<xs:element ref="Situation"/>	
 			<xs:element ref="Holds" />	
 			<xs:element ref="Initiates" />
 			<xs:element ref="Terminates" />

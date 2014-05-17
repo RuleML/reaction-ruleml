@@ -29,7 +29,7 @@
     <!-- 
 		<xs:appinfo>
 
-		<sch:ns prefix="r" iri="http://www.ruleml.org/0.91/xsd"/>
+		<sch:ns prefix="r" iri="http://www.ruleml.org/1.0/xsd"/>
 		-->
 
   </xs:annotation>
@@ -38,7 +38,7 @@
 		*** Expr ***
 		A logical function of the form "f(...)" where f is a function name.
 
-		See http://www.ruleml.org/0.91/glossary/#gloss-Expr
+		See http://www.ruleml.org/1.0/glossary/#gloss-Expr
 
 		content model:
 		DR Reaction RuleML:
@@ -60,6 +60,11 @@
 		PR Reaction RuleML:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
 		  (op|Fun), slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl?		)
+		  
+		ECA Reaction RuleML:
+		( 		   
+		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op|Fun), slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)*, repo?, slot*, resl?
+		)  
 
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
 		DR Reaction RuleML:
@@ -157,7 +162,7 @@
 		*** op ***
 		An operator expression including the function name of an expression.
 		
-		See http://www.ruleml.org/0.91/glossary/#gloss-op
+		See http://www.ruleml.org/1.0/glossary/#gloss-op
 				
 		content model (within Expr): (Fun)
 		
@@ -177,7 +182,7 @@
 		*** Fun ***
 		A user-defined function name.
 		
-		See http://www.ruleml.org/0.91/glossary/#gloss-Fun
+		See http://www.ruleml.org/1.0/glossary/#gloss-Fun
 
     content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
@@ -204,7 +209,7 @@
 		
 		May be unified with @card/@minCard/@maxCard for slots in a future version.
 		
-		See http://www.ruleml.org/0.91/glossary/#gloss-@val
+		See http://www.ruleml.org/1.0/glossary/#gloss-@val
 	-->
   <xs:attributeGroup name="val.attrib">
     <xs:attribute name="val" use="optional" default="0..">
@@ -221,7 +226,7 @@
 		*** Plex ***
 		An unordered collection of arguments without a constructor.
 
-		See http://www.ruleml.org/0.91/glossary/#gloss-Plex
+		See http://www.ruleml.org/1.0/glossary/#gloss-Plex
 		
 		content model (within Atom, Plex, slot):
 		DR Reaction RuleML:
@@ -235,6 +240,10 @@
 		PR Reaction RuleML:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
 		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl? )
+		
+		ECA Reaction RuleML:
+		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
+		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Atom|Event)*, repo?, slot*, resl? )
 		
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
 		
@@ -267,10 +276,13 @@
 		content model (within repo): 
 		DR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval )*, repo? )
 		KR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo? )
+		PR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex )*, repo? )
+		ECA Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action )*, repo? )
 		
 		content model (within resl):
-		DR Reaction RuleML: (slot*, resl? )
-		KR Reaction RuleML: (slot*, resl? )
+		DR/KR/PR/ECA/CEP Reaction RuleML: (slot*, resl? )
+		
+		
 	-->
   <xs:attributeGroup name="Plex.attlist">
     <xs:attributeGroup ref="node.attrib"/>
@@ -336,7 +348,7 @@
 		*** @per ***
 		An attribute indicating whether a function or expression is interpreted.
 		
-		See http://www.ruleml.org/0.91/glossary/#gloss-@per
+		See http://www.ruleml.org/1.0/glossary/#gloss-@per
 	-->
   <xs:attributeGroup name="per.attrib">
     <xs:attribute name="per" use="optional" default="copy">

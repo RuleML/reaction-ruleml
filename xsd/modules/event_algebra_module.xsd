@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+            event algebra module part of Reaction RuleML
+			This is the XML Schema of the event algebra module for Reaction RuleML
+			File: event_algebra_module.xsd
+			Version: 1.0
+			Last Modification: 2011-03-22
+			
+			This schema declares the following Reaction RuleML elements and attributes:
+                                                    
+                  Event Algebra Operators
+                  
+                  * Operator (generic event operator)
+                  * Sequence 
+                  * Disjunction 
+                  * Xor 
+                  * Conjunction 
+                  * Concurrent 
+                  * Not 
+                  * Any 
+                  * Aperiodic 
+                  * Periodic 
+                  * AtLeast 
+                  * ATMost 
+                  * Operator             
+
+ 			
+			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
+			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
+			[http://www.w3.org/TR/xhtml-modularization/].
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>Reaction RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-22T29:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>		
+	</xs:annotation>		
+	
+	
+	<!--( Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )-->
+	
+	<xs:group name="event_algebra_group.content">
+		<xs:choice>
+			<xs:element ref="Sequence"/>
+			<xs:element ref="Disjunction"/>
+			<xs:element ref="Xor"/>
+			<xs:element ref="Conjunction"/>
+			<xs:element ref="Concurrent"/>
+			<xs:element ref="Not"/>
+			<xs:element name="Any" type="EventAlgebraOperator.type"/>
+			<xs:element ref="Aperiodic"/>
+			<xs:element ref="Periodic"/>
+			<xs:element ref="AtLeast"/>
+			<xs:element ref="AtMost"/>
+			<xs:element name="Operator" type="EventAlgebraOperator.type"/> 
+		</xs:choice>
+	</xs:group>	
+	
+	<!--
+      *** (Operator) ***
+      
+      content model: 
+      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on | (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  )* ) 
+	-->
+	<xs:attributeGroup name="EventAlgebraOperator.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+		<xs:attributeGroup ref="safety.attrib"/>
+		<xs:attributeGroup ref="size.attrib"/>
+	</xs:attributeGroup>
+	<xs:group name="EventAlgebraOperator.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="on"/>
+				<xs:group ref="on.content"/>				
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="EventAlgebraOperator.type">
+		<xs:group ref="EventAlgebraOperator.content"/>
+		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
+	</xs:complexType>
+	<xs:element name="Sequence" type="EventAlgebraOperator.type"/>
+	<xs:element name="Disjunction" type="EventAlgebraOperator.type"/>
+	<xs:element name="Xor" type="EventAlgebraOperator.type"/>
+	<xs:element name="Conjunction" type="EventAlgebraOperator.type"/>
+	<xs:element name="Concurrent" type="EventAlgebraOperator.type"/>
+	<xs:element name="Not" type="EventAlgebraOperator.type"/>
+	<xs:element name="Aperiodic" type="EventAlgebraOperator.type"/>
+	<xs:element name="Periodic" type="EventAlgebraOperator.type"/>
+	<xs:element name="AtLeast" type="EventAlgebraOperator.type"/>
+	<xs:element name="AtMost" type="EventAlgebraOperator.type"/>
+	
+</xs:schema>
+
+

@@ -46,6 +46,7 @@
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
 	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
     PR Reaction RuleML: not used in PR Reaction RuleML 
+	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)?])) 
 	-->
 	<xs:attributeGroup name="Interval.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -75,9 +76,10 @@
      Definition of the the arg role for Intervals
      
      content model:  
-     in DR Reaction RuleML: Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex
-     in KR Reaction RuleML: Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex 
+     in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)
+     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex )
      not used in PR Reaction RuleML     
+     ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)
 -->
 	<xs:attributeGroup name="arg_interval.attlist">
 		<xs:attributeGroup ref="index.attrib"/>

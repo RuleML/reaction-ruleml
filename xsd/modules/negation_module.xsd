@@ -42,8 +42,9 @@
 
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
         PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action) )
 	-->
 	<xs:attributeGroup name="Negation.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -92,8 +93,9 @@
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
    		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
+ 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )  		
 	-->
 	<xs:attributeGroup name="Naf.attlist">
 		<xs:attributeGroup ref="Negation.attlist"/>
@@ -121,8 +123,9 @@
 		
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
 		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action ) )
 	-->
 	<xs:attributeGroup name="weak.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -146,8 +149,9 @@
 		
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
 		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )
 	-->
 	<xs:attributeGroup name="Neg.attlist">
 		<xs:attributeGroup ref="Negation.attlist"/>
@@ -175,8 +179,10 @@
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Situation | Holds | Happens | Initates | Terminates ) )	
-		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML -->
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )	
+		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML 
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )	
+	-->
 	<xs:attributeGroup name="strong.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>

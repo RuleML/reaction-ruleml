@@ -33,8 +33,9 @@
 
 		content model:
 		DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
-		KR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation) )
+		KR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation) )
 		PR Reaction RuleML: ( (Ind|Data|Expr|Plex), (Ind|Data|Skolem|Var|Reify|Expr|Plex) )
+		ECA Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval|Event|Action), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action) )
 		
 	-->
   <xs:attributeGroup name="slot.attlist">

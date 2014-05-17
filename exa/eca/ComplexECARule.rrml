@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/eca.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/eca.xsd">
+  <!-- 
+    This examples show the definition of a complex event pattern
+   -->
+
+  <!-- assert rule -->
+
+  <Assert>
+    <!-- rule 1 -->
+    <formula>
+      <Rule style="active">
+        <on>
+          <Event type="ruleml:ComplexEvent">
+            <signature> <!-- define the event pattern for the complex event (a;(b;c)) -->
+              <Event type="ruleml:ComplexEvent">
+                  <Sequence>
+                    <Event type="ruleml:SimpleEvent"><Ind>a</Ind></Event>
+                    <Sequence>
+                      <Event type="ruleml:SimpleEvent"><Ind>b</Ind></Event>
+                      <Event  type="ruleml:SimpleEvent"><Ind>c</Ind></Event>
+                    </Sequence>
+                  </Sequence>
+              </Event>
+            </signature>
+          </Event>
+        </on>
+        <do>
+          <Action><Ind>d</Ind></Action>
+        </do>
+      </Rule>
+    </formula>
+  </Assert> 
+  
+  <Assert>
+      <!-- event instance sequence -->
+      <Event><Ind>a</Ind></Event>
+      <Event><Ind>b</Ind></Event>
+      <Event><Ind>c</Ind></Event>    
+  </Assert>
+
+</RuleML>

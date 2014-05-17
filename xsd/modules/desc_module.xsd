@@ -113,10 +113,10 @@
 	Used for descriptive Metadata annotations in Reaction RuleML
 	
      content model: 
-     in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
-     in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
+     in DR Reaction RuleML: ( Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
+     in KR Reaction RuleML: ( Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
      in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-     in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Action )
+     in ECA Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
 
      Multiple Metadata annotations are possible by repreating <meta>
 -->
@@ -310,10 +310,10 @@
 	That would mean the qualification of the rule changes depending on the situation (the truth value of the fluent in KR RuleML)
 	
      content model: 
-     in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval  )
-     in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Situation )
+     in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
+     in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
      in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-     in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval | Event | Action )
+     in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
 
 -->
   <xs:attributeGroup name="qualification.attlist">

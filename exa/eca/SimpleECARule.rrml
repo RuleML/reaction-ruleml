@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/eca.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/eca.xsd">
+  <!-- 
+
+    This example defines a simple Event-Condition-Action rule which is triggered by an event pattern in the on part.
+    A matching event instance is asserted which triggers the pattern in the ECA rule. The ECA rule proofs the condition and
+    executed the action which asserts a new fact to the knowledge base. This fact is queried.
+
+   -->
+
+  <!-- assert rule -->
+
+  <Assert>
+    <!-- rule 1 -->
+    <formula>
+      <Rule style="active">
+        <on>
+          <Event>
+            <signature> <!-- define the event pattern for the detection -->
+              <Event>
+                <arg>
+                  <Expr>
+                    <op><Fun>orders</Fun></op>
+                    <arg><Var>Person</Var></arg>
+                    <arg><Var>Drink</Var></arg>
+                  </Expr>     
+                </arg>
+              </Event>
+            </signature>
+          </Event>
+        </on>
+        <if>
+          <Equal>
+            <left><Var>Drink</Var></left>
+            <right><Ind>wine</Ind></right>
+          </Equal>
+        </if>
+        <do>
+          <Assert>
+            <formula>
+              <Atom>
+                <op><Rel>likes</Rel></op> 
+                <arg><Ind>John</Ind></arg>
+                <arg><Var>Person</Var></arg>
+              </Atom>
+            </formula>
+          </Assert>
+        </do>
+      </Rule>
+    </formula>
+  </Assert> 
+  
+  <Assert>
+    <!-- event -->
+    <formula>
+      <Event>
+        <arg>
+          <Expr>
+            <op><Fun>orders</Fun></op>
+            <arg><Ind>Mary</Ind></arg>
+            <arg><Ind>wine</Ind></arg>
+          </Expr>
+        </arg>
+      </Event>
+    </formula>
+    
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>Whom</Var>
+    </Atom>
+  </Query>
+
+</RuleML>

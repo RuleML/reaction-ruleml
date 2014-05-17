@@ -145,9 +145,16 @@
       *** Update ***
       Update action
       
-      content model: 
+      content model:
+      
+      in PR Reaction RuleML
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
 		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
+		 
+	  in ECA Reaction RuleML
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action),
+		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
+	  
       Update has the following attributes:
       @safety, @all
       

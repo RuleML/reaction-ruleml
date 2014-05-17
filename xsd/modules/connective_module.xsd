@@ -282,7 +282,7 @@
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
 		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal )* )
-    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
+    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
   -->
   <xs:attributeGroup name="Rulebase.attlist">
     <xs:attributeGroup ref="mapClosure.attrib"/>
@@ -359,7 +359,7 @@
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* )
 	  PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Equal | Negation | Naf )* )
-	  DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
+	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
 		
 		Under Query, Or may have attribute closure="existential"; elsewhere, it may not
 		have any attributes.
@@ -408,7 +408,7 @@
 		DR Reaction RuleML (Operator | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval)
 		KR Reaction RuleML (Operator | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
 		PR Reaction RuleML (Operator | Atom | Rule | Equivalent | Equal )
-		ECA Reaction RuleML (Operator | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)
+		ECA Reaction RuleML (Operator | Atom | Rule | Equivalent |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)
 		
 		Other (context-sensitive) versions of <formula> are in the
 		performative and quantifier modules.

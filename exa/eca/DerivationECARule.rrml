@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/eca.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/eca.xsd">
+  <!-- 
+
+    This example show the combination of ECA rules and Derivation rules. 
+    It defines an Event-Condition-Action rule where the condition in the if part is proofen by a seperated backward-reasoning derivation rule and facts.
+    
+   -->
+
+  <!-- assert rule -->
+
+  <Assert mapDirection="bidirectional">
+    
+    <!--  on the order of a person for a drink if the drink is not expenssive do assert that John likes the person   -->
+    <formula>
+      <Rule style="active" direction="bidirectional">
+        <on>
+          <Event>
+            <signature> <!-- define the event pattern for the detection -->
+              <Event>
+                <arg>
+                  <Expr>
+                    <op><Fun>orders</Fun></op>
+                    <arg><Var>Person</Var></arg>
+                    <arg><Var>Drink</Var></arg>
+                  </Expr>     
+                </arg>
+              </Event>
+            </signature>
+          </Event>
+        </on>
+        <if>
+          <Naf> <!-- negation as failure with closed world assumption -->
+            <Atom> <!-- condition goal-->
+              <op><Rel>expensive</Rel></op>
+              <arg><Var>Drink</Var></arg>
+            </Atom>
+          </Naf>  
+        </if>
+        <do>
+          <Assert>
+            <formula>
+              <Atom>
+                <op><Rel>likes</Rel></op> 
+                <arg><Ind>John</Ind></arg>
+                <arg><Var>Person</Var></arg>
+              </Atom>
+            </formula>
+          </Assert>
+        </do>
+      </Rule>
+    </formula>
+    
+    <!-- if price of drink is more than 19 then it is expensive -->
+    <formula>
+      <Rule style="reasoning" direction="backward">
+        <if>
+          <And>
+            <formula>
+               <Atom>
+                 <op><Rel>price</Rel></op>
+                 <arg><Var>Drink</Var></arg>
+                 <arg><Var>P</Var></arg>
+               </Atom>
+            </formula>  
+            <formula>
+              <Atom>
+                <op><Rel per="value" iri="ruleml:more" /></op>
+                <arg><Ind>15</Ind></arg>
+              </Atom> 
+            </formula>
+          </And>  
+        </if>
+        <then>
+          <Atom>
+            <op><Rel>expensive</Rel></op>
+            <arg><Var>Drink</Var></arg>
+          </Atom>
+        </then>
+      </Rule>
+    </formula>
+    
+    <!-- price of beer is 5 -->
+    <formula>
+      <Atom>
+        <op><Rel>price</Rel></op>
+        <arg><Ind>beer</Ind></arg>
+        <arg><Data>5</Data></arg>
+      </Atom>
+    </formula>
+    
+    <!-- price of wine is 8 -->
+    <formula>
+      <Atom>
+        <op><Rel>price</Rel></op>
+        <arg><Ind>wine</Ind></arg>
+        <arg><Data>8</Data></arg>
+      </Atom>
+    </formula>
+    
+    <!-- price of champagne is 19 -->
+    <formula>
+      <Atom>
+        <op><Rel>price</Rel></op>
+        <arg><Ind>champagne</Ind></arg>
+        <arg><Data>19</Data></arg>
+      </Atom>
+    </formula>
+        
+  </Assert> 
+  
+  <Assert>
+    <!-- event -->
+    <formula>
+      <Event>
+        <arg>
+          <Expr>
+            <op><Fun>orders</Fun></op>
+            <arg><Ind>Mary</Ind></arg>
+            <arg><Ind>wine</Ind></arg>
+          </Expr>
+        </arg>
+      </Event>
+    </formula>
+  </Assert>
+
+  <!-- query knowledge base -->
+
+  <Query>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>Whom</Var>
+    </Atom>
+  </Query>
+
+</RuleML>

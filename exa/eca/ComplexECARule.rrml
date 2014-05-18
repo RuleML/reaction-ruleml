@@ -5,13 +5,33 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/eca.xsd">
   <!-- 
-    This examples show the definition of a complex event pattern
+    This examples show the definition of a complex event pattern which is used for the event detection in the on part of an ECA Rule.
+    The asserted event instance sequence triggers the ECA rule according to the matching event pattern signature.
    -->
 
   <!-- assert rule -->
 
   <Assert>
-    <!-- rule 1 -->
+    
+    <!-- "Datetime" time frame type signature -->
+    <signature>
+      <Time>
+        <oid><Ind>Datetime</Ind></oid>
+        <slot><Ind>date</Ind><Var type="xs:date"/></slot>
+        <slot><Ind>time</Ind><Var type="xs:time"/></slot>
+      </Time>	  	
+    </signature>
+    
+    <!-- Event Type definition of a "DateTimeEvent" as event frame type signature -->
+    <signature>
+      <Event>
+        <oid><Ind>DateTimeEvent</Ind></oid>
+        <slot><Ind>event</Ind><Var type="xs:string"></Var></slot>
+        <slot><Ind>time</Ind><Var type="Datetime"/></slot>
+      </Event>
+    </signature>
+       
+    <!-- EA trigger rule  -->
     <formula>
       <Rule style="active">
         <on>
@@ -19,10 +39,34 @@
             <signature> <!-- define the event pattern for the complex event (a;(b;c)) -->
               <Event type="ruleml:ComplexEvent">
                   <Sequence>
-                    <Event type="ruleml:SimpleEvent"><Ind>a</Ind></Event>
+                    <Event type="ruleml:SimpleEvent"> <!-- event "a"-->
+                      <oid><Var type="DateTimeEvent">ID</Var></oid> <!-- event of event frame type "DateTimeEvent" -->
+                      <slot><Ind>event</Ind><Ind>a</Ind></slot> <!-- event attribute value is "a" -->
+                      <slot><Ind>time</Ind><Time>
+                          <oid><Var type="Datetime"/></oid> <!-- time of time frame type "Datetime" -->
+                          <slot><Ind>date</Ind><Var type="xs:date">Date</Var></slot>
+                          <slot><Ind>time</Ind><Var type="xs:time">Time</Var></slot>
+                      </Time></slot>
+                    </Event>
                     <Sequence>
-                      <Event type="ruleml:SimpleEvent"><Ind>b</Ind></Event>
-                      <Event  type="ruleml:SimpleEvent"><Ind>c</Ind></Event>
+                      <Event type="ruleml:SimpleEvent"> <!-- event "b" -->
+                        <oid><Var type="DateTimeEvent">ID</Var></oid> 
+                        <slot><Ind>event</Ind><Ind>b</Ind></slot> 
+                        <slot><Ind>time</Ind><Time>
+                          <oid><Var type="Datetime"/></oid> 
+                          <slot><Ind>date</Ind><Var type="xs:date">Date</Var></slot>
+                          <slot><Ind>time</Ind><Var type="xs:time">Time</Var></slot>
+                        </Time></slot>
+                      </Event>
+                      <Event type="ruleml:SimpleEvent"> <!-- event "c" -->
+                        <oid><Var type="DateTimeEvent">ID</Var></oid> 
+                        <slot><Ind>event</Ind><Ind>c</Ind></slot> 
+                        <slot><Ind>time</Ind><Time>
+                          <oid><Var type="Datetime"/></oid> 
+                          <slot><Ind>date</Ind><Var type="xs:date">Date</Var></slot>
+                          <slot><Ind>time</Ind><Var type="xs:time">Time</Var></slot>
+                        </Time></slot>
+                      </Event>
                     </Sequence>
                   </Sequence>
               </Event>
@@ -30,17 +74,52 @@
           </Event>
         </on>
         <do>
-          <Action><Ind>d</Ind></Action>
+          <!-- built-in action -->
+          <Action type="ruleml:BuiltInAction"><Expr><op><Fun per="effect" iri="rulemlb:println"/></op><arg><Ind>event detected</Ind></arg></Expr></Action>
         </do>
       </Rule>
     </formula>
   </Assert> 
   
   <Assert>
-      <!-- event instance sequence -->
-      <Event><Ind>a</Ind></Event>
-      <Event><Ind>b</Ind></Event>
-      <Event><Ind>c</Ind></Event>    
+    
+      <!-- assert event instance sequence -->
+    
+    <formula>
+      <Event>
+        <oid><Ind>e1</Ind></oid>
+        <slot><Ind>event</Ind><Ind>a</Ind></slot> <!-- event instance e1 with event value "a" -->
+        <slot><Ind>time</Ind><Time type="ruleml:TimePoint">
+          <oid><Ind>t1</Ind></oid>
+          <slot><Ind>date</Ind><Data xsi:type="xs:date">2011-03-21</Data></slot>
+          <slot><Ind>time</Ind><Data xsi:type="xs:time">10:00:00</Data></slot>
+        </Time></slot>
+      </Event>
+    </formula>  
+    
+    <formula>
+      <Event>
+        <oid><Ind>e2</Ind></oid>
+        <slot><Ind>event</Ind><Ind>b</Ind></slot>
+        <slot><Ind>time</Ind><Time>
+          <oid><Ind>t2</Ind></oid>
+          <slot><Ind>date</Ind><Data xsi:type="xs:date">2011-03-21</Data></slot>
+          <slot><Ind>time</Ind><Data xsi:type="xs:time">10:00:05</Data></slot>
+        </Time></slot>
+      </Event>
+    </formula>  
+    
+    <formula>
+      <Event>
+        <oid><Ind>e3</Ind></oid>
+        <slot><Ind>event</Ind><Ind>b</Ind></slot>
+        <slot><Ind>time</Ind><Time>
+          <oid><Ind>t3</Ind></oid>
+          <slot><Ind>date</Ind><Data xsi:type="xs:date">2011-03-21</Data></slot>
+          <slot><Ind>time</Ind><Data xsi:type="xs:time">10:01:00</Data></slot>
+        </Time></slot>
+      </Event>
+    </formula>  
   </Assert>
 
 </RuleML>

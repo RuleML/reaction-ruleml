@@ -51,10 +51,10 @@
 	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
 	 
 	 In KR Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (else?, then, if) | (if, then, else?)))
 	 
 	 In PR Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?) ) )
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (elseDo?, do, if) | (if, do, elseDo?)))
 	 
 	 in ECA Reaction RuleML:
 	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, (if?, then?, do, after?,else?, elseDo?)? ) )

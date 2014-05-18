@@ -174,15 +174,16 @@
     
      content model:
      
-     in ECA Reaction RuleML: 
+     in ECA Reaction RuleML: (Reaction Rule | Derivation Rule)
      
-     (on, (if?, then?, do, after?,else?, elseDo?)? )
+     ( (on, (if?, then?, do, after?,else?, elseDo?)? ) | ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?)))
           
 	-->
 	
 	<xs:group name="rule-implementation.content">
 		<xs:choice>
 			<xs:group ref="ReactionRule.content"/>
+			<xs:group ref="DerivationRule.content"/>
 		</xs:choice>
 	</xs:group>
 	

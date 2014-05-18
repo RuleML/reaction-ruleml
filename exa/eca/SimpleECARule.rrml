@@ -8,15 +8,16 @@
 
     This example defines a simple Event-Condition-Action rule which is triggered by an event pattern in the on part.
     A matching event instance is asserted which triggers the pattern in the ECA rule. The ECA rule proofs the condition and
-    executed the action which asserts a new fact to the knowledge base. This fact is queried.
+    executes the action which asserts a new fact to the knowledge base. This fact is then queried.
 
    -->
 
   <!-- assert rule -->
 
   <Assert>
-    <!-- rule 1 -->
+
     <formula>
+      <!-- rule "on the order of a person for a drink if the drink is wine do assert that John likes the person" --> 
       <Rule style="active">
         <on>
           <Event>
@@ -55,7 +56,7 @@
   </Assert> 
   
   <Assert>
-    <!-- event -->
+    <!-- event "Mary orders wine"-->
     <formula>
       <Event>
         <arg>

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			
+			Message module part of Reaction RuleML.
+			
+			This is the XML Schema Message module for Reaction RuleML.
+			File: message_module.xsd
+			Version: 1.0
+			Last Modification: 2011-07-20
+			
+			This schema declares the following Reaction RuleML elements and attributes:		  
+			
+			* Message
+			* Agent
+			* Protocol
+			* protocol
+			* sender
+			* receiver			 
+			* content | payload
+			* @mode
+			* @directive
+			* Send
+			* Receive
+			* Consult
+			* enclosed
+			
+			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
+			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
+			[http://www.w3.org/TR/xhtml-modularization/].
+			
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>Reaction RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-29T23:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>
+	</xs:annotation>
+	
+
+	<!--
+      *** Message ***
+      A Message element that provides the syntax for inbound and outbound messages / notifications 
+
+      content model: 
+       ( meta*, qualification*, oid, protocol?, sender?, receiver?, (content | payload)? )
+      
+      Message has the following attributes:
+      @mode?, @directive?, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      
+-->
+	<xs:attributeGroup name="Message.attlist">
+		<xs:attributeGroup ref="message-mode.attrib"/>
+		<xs:attributeGroup ref="message-directive.attrib"/>
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Message.content">
+		<xs:sequence>
+			<xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="qualification" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="oid"/>
+			<xs:choice minOccurs="0">
+				<xs:element ref="protocol"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element ref="sender"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element ref="receiver"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element name="content" type="message_anycontent.type"/>
+				<xs:element ref="payload"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Message.type">
+		<xs:group ref="Message.content"/>
+		<xs:attributeGroup ref="Message.attlist"/>
+	</xs:complexType>
+	<xs:element name="Message" type="Message.type"/>
+	
+	<!--
+      *** Agent ***
+      Generic Agent element for defining Agents locally or for referencing existing external Agents
+      
+      content model: ( (content(xs:any))? )
+	  
+      Agent has the following attributes:
+      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      
+	-->
+	<xs:attributeGroup name="Agent.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Agent.content">
+		<xs:sequence>
+			<xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="qualification" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="content" type="message_anycontent.type"/>				
+			</xs:choice>	
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Agent.type">
+		<xs:group ref="Agent.content"/>
+		<xs:attributeGroup ref="Agent.attlist"/>
+	</xs:complexType>
+	<xs:element name="Agent" type="Agent.type"/>
+	
+	
+	<!--
+      *** Protocol ***
+      Generic Protocol element for defining protocols locally or for referencing existing external protocols
+      
+      content model: ( (content(xs:any) )? )
+	  
+      Protocol has the following attributes:
+      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      
+-->
+	<xs:attributeGroup name="Protocol.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Protocol.content">
+		<xs:sequence>
+			<xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="qualification" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="content" type="message_anycontent.type"/>
+							
+			</xs:choice>	
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Protocol.type">
+		<xs:group ref="Protocol.content"/>
+		<xs:attributeGroup ref="Protocol.attlist"/>
+	</xs:complexType>
+	<xs:element name="Protocol" type="Protocol.type"/>
+	
+	<!--
+     *** protocol ***
+     
+     content model: (Protocol | Ind | Data | Var | Expr | Plex )
+-->
+	<xs:attributeGroup name="protocol.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="protocol.content">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="Protocol"/>
+				<xs:element ref="Ind"/>
+				<xs:element ref="Data"/>
+				<xs:element ref="Var"/>
+				<xs:element ref="Expr"/>
+				<xs:element ref="Plex"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="protocol.type">
+		<xs:group ref="protocol.content"/>
+		<xs:attributeGroup ref="protocol.attlist"/>
+	</xs:complexType>
+	<xs:element name="protocol" type="protocol.type"/>
+	
+	<!--
+     *** sender ***
+     *** receiver ***
+     
+     content model: (Agent | Ind | Data | Var | Expr | Plex )
+-->
+	<xs:attributeGroup name="sender.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="sender.content">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="Agent"/>
+				<xs:element ref="Ind"/>
+				<xs:element ref="Data"/>
+				<xs:element ref="Var"/>
+				<xs:element ref="Expr"/>
+				<xs:element ref="Plex"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="sender.type">
+		<xs:group ref="sender.content"/>
+		<xs:attributeGroup ref="sender.attlist"/>
+	</xs:complexType>
+	<xs:element name="sender" type="sender.type"/>
+	<xs:element name="receiver" type="sender.type"/>
+	
+	<!--
+     *** content ***
+     
+     content model:  xs:any*
+    -->
+	<xs:attributeGroup name="message_anycontent.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="message_anycontent.content">
+		<xs:choice>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="message_anycontent.type">
+		<xs:group ref="message_anycontent.content"/>
+		<xs:attributeGroup ref="message_anycontent.attlist"/>
+	</xs:complexType>
+	
+	
+	<!--
+     *** payload ***
+     
+     content model: (RuleML | Reify | Var)
+	-->
+	<xs:attributeGroup name="payload.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="payload.content">
+		<xs:choice>
+			<xs:element ref="RuleML"/> <!-- a RuleML knowledge base -->
+			<xs:element ref="Reify"/> <!-- reified knowledge as payload -->
+			<xs:element ref="Var"/> <!-- for  binding knowledge to variables in meta programming -->
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="payload.type">
+		<xs:group ref="payload.content"/>
+		<xs:attributeGroup ref="payload.attlist"/>
+	</xs:complexType>
+	<xs:element name="payload" type="payload.type"/>
+	
+	<!--
+    *** @mode ***
+
+     restriction: inbound | outbound | bidirectional ; 
+	 optional attribute
+-->
+	<xs:attributeGroup name="message-mode.attrib">
+		<xs:attribute name="mode" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inbound"/>
+					<xs:enumeration value="outbound"/>
+					<xs:enumeration value="bidirectional"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	
+	<!--
+    *** @directive ***
+
+     restriction: different performatives / directives, e.g. ACL:inform 
+	 required attribute
+-->
+	<xs:attributeGroup name="message-directive.attrib">
+		<xs:attribute name="directive" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	
+	
+	<!--
+      *** Consult ***
+      Consult (import) action 
+      
+      dynamically "consults" (imports) a message or external resource (with the @iri attribute).
+      
+      content model:
+ 		 
+	  in CEP Reaction RuleML
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (enclosed | Message)* )
+	  
+      Consult has the following attributes:
+      @safety, @size      
+    -->
+	<xs:attributeGroup name="Consult.attlist">
+		<xs:attributeGroup ref="safety.attrib"/>
+		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Consult.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="enclosed"/>
+				<xs:element ref="Message"/>
+			</xs:choice>				
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Consult.type">
+		<xs:group ref="Consult.content"/>
+		<xs:attributeGroup ref="Consult.attlist"/>
+	</xs:complexType>
+	<xs:element name="Consult" type="Consult.type"/>
+	
+	<!--
+      *** Send and Receive ***
+      Send  and Receive action
+      
+      content model:
+ 		 
+	  in CEP Reaction RuleML
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (enclosed | Message )* )
+	  
+      Send / Receive has the following attributes:
+      @safety, @size
+      
+      The @size attribute defines the number of messages to be received. Default value for size is "1". 
+      If -1 is used it will wait infinitely for incoming messages. 
+      The qualification can be used e.g. to define timouts and validity intervals which are tested by scoped guard constraints.
+      
+    -->
+	<xs:attributeGroup name="Send.attlist">
+		<xs:attributeGroup ref="safety.attrib"/>
+		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Send.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="enclosed"/>
+				<xs:element ref="Message"/>
+			</xs:choice>				
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Send.type">
+		<xs:group ref="Send.content"/>
+		<xs:attributeGroup ref="Send.attlist"/>
+	</xs:complexType>
+	<xs:element name="Send" type="Send.type"/>
+	
+	<xs:attributeGroup name="Receive.attlist">
+		<xs:attributeGroup ref="safety.attrib"/>
+		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Receive.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="enclosed"/>
+				<xs:element ref="Message"/>
+			</xs:choice>				
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Receive.type">
+		<xs:group ref="Receive.content"/>
+		<xs:attributeGroup ref="Receive.attlist"/>
+	</xs:complexType>
+	<xs:element name="Receive" type="Receive.type"/>
+	
+	<!--
+     *** enclosed ***
+     
+     Definition of the the enclosed role for Send and Receive actions
+     
+     content model:  
+      in CEP Reaction RuleML: (Message)
+     attributes: index?      
+-->
+	<xs:attributeGroup name="enclosed.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="enclosed.content">
+		<xs:choice>
+			<xs:element ref="Message"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="enclosed.type">
+		<xs:group ref="enclosed.content"/>
+		<xs:attributeGroup ref="enclosed.attlist"/>
+	</xs:complexType>
+	<xs:element name="enclosed" type="enclosed.type"/>
+</xs:schema>

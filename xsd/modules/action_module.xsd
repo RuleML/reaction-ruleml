@@ -16,6 +16,7 @@
 			This schema declares the following Reaction RuleML elements and attributes:
 			
 			* Action
+			* Update
 			
 		</xs:documentation>
 		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
@@ -156,7 +157,7 @@
 		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
 	  
       Update has the following attributes:
-      @safety, @all
+      @safety, @size
       
 -->
 	<xs:attributeGroup name="Update.attlist">
@@ -178,5 +179,5 @@
 		<xs:attributeGroup ref="Update.attlist"/>
 	</xs:complexType>
 	<xs:element name="Update" type="Update.type"/>
-
+	
 </xs:schema>

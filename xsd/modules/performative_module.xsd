@@ -39,7 +39,8 @@
 	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert | Retract | Query)* )
 	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Action | Assert | Retract | Update | Query)* )
 	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Action | Assert | Retract | Update | Query)* )
-		
+	CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)* )
+			
  	 Note: key and keyref object identifier are defined to be unique under the RuleML document root
 				
 	-->
@@ -83,6 +84,7 @@
     DR/KR Reaction RuleML (Assert|Retract|Query)
     PR Reaction RuleML (Assert|Retract|Query|Update|Action)
     ECA Reaction RuleML (Assert|Retract|Query|Update|Action)
+    CEP Reaction RuleML (Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)
   -->
   <xs:group name="act.content">
     <xs:choice>

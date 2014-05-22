@@ -338,7 +338,7 @@
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
 
-		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+		in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
 
 	-->
 	<xs:group name="time_primitives.content">
@@ -351,7 +351,7 @@
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
 
-		in DR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+		in ECA Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
 
 	-->
 	<xs:group name="spatial_primitives.content">
@@ -364,7 +364,7 @@
 	<!-- Interval primitives
 		content model: 
 		
-		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  
+		in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  
 	-->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>	
@@ -397,7 +397,7 @@
 
 	<!-- An internal group for events
 		content model:
-		in KR Reaction RuleML:  ( Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )
+		in ECA Reaction RuleML:  ( Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )
 	-->
 	
 	<xs:group name="event_group.content">
@@ -422,7 +422,7 @@
 	
 	<!-- An internal group for actions
 		content model:
-		PR Reaction RuleML (Assert | Retract | Update | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
+		ECA Reaction RuleML (Assert | Retract | Update | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
@@ -437,7 +437,7 @@
 
 	<!-- An internal group for the performative primitives
 		content model: 
-		in DR Reaction RuleML: (Assert|Retract|Update|Query|Action)
+		in ECA Reaction RuleML: (Assert|Retract|Update|Query|Action)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>

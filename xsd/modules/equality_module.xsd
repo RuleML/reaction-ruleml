@@ -30,7 +30,7 @@
 		*** Equal ***
 		An equational formula consisting of two expressions.
 
-		See http://www.ruleml.org/0.91/glossary/#gloss-Equal
+		See http://www.ruleml.org/1.0/glossary/#gloss-Equal
 
 		content model:
 		in DR Reaction RuleML:
@@ -154,7 +154,7 @@
 		An attribute indicating whether an equation is oriented (directed)
 		or unoriented (symmetric).
 		
-		See http://www.ruleml.org/0.91/glossary/#gloss-@oriented
+		See http://www.ruleml.org/1.0/glossary/#gloss-@oriented
 	-->
   <xs:attributeGroup name="oriented.attrib">
     <xs:attribute name="oriented" use="optional" default="no">

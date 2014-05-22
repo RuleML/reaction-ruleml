@@ -38,7 +38,6 @@
 	Explicit generic Situation. The situation can be defined internally 
 	   	* with positional arguments <arg>, e.g., <arg><Ind>s1</Ind></arg>
       	* with unpositional slots <slot>, e.g., <slot><Ind>name</Ind><Ind>s1</Ind></slot><slot><Ind>occursAt</Ind><Time>....</Time></slot>
-      	* as interpretation of the knowledge as situation with <formula>, e.g., <formula><Atom>...</Atom></formula>
       	* by the any content model (<content>xs:any Element</content>), which acts as an extension point
       or externally, where the optional @iri attribute points to an external definition of the situation.
       The optional @type attribute defines the type of the situation.

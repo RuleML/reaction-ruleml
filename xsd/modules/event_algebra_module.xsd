@@ -73,7 +73,8 @@
       *** (Operator) ***
       
       content model: 
-      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on | (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  )* ) 
+      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on | (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  )* ) 
+      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on | (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  )* ) 
 	-->
 	<xs:attributeGroup name="EventAlgebraOperator.attlist">
 		<xs:attributeGroup ref="type.attrib"/>

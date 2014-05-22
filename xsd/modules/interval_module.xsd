@@ -43,10 +43,10 @@
        interval ontology of Reaction RuleML (defining different types of intervals).
 		
 	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?] )) 
     PR Reaction RuleML: not used in PR Reaction RuleML 
-	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)?])) 
+	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
 	-->
 	<xs:attributeGroup name="Interval.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -77,7 +77,7 @@
      
      content model:  
      in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)
-     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex )
+     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator) )
      not used in PR Reaction RuleML     
      ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)
 -->

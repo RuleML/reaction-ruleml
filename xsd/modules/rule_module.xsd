@@ -58,6 +58,14 @@
 	 
 	 in ECA Reaction RuleML:
 	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, (if?, then?, do, after?,else?, elseDo?)? ) )
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
+
+	 
+	 in CEP Reaction RuleML:
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, (if?, then?, do, after?,else?, elseDo?)* ) )
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( do )
+	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
+
 	 
       Rule has the following attributes:
       @key @keyref @type @style @closure @direction @material @node 
@@ -88,7 +96,8 @@
      DR Reaction RuleMl: (  )
      KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
      PR Reaction RuleML: ( )
-     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)     
+     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  
+     CEP Reaction RuleML: (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator) 
 -->
 	<xs:attributeGroup name="on.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -138,6 +147,7 @@
      KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
      PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
      ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
+     CEP Reaction RuleML:  (Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
 -->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -202,7 +212,7 @@
 
 	<!--
    *** Reaction Rule content model ***
-   (on, (if?, then?, do, after?,else?, elseDo?)? )
+   (on, (if?, then?, do?, after?,else?, elseDo?)? )
 -->
 	<xs:group name="ReactionRule.content">
 		<xs:sequence>
@@ -210,7 +220,7 @@
 			<xs:sequence minOccurs="0">
 				<xs:element ref="if" minOccurs="0"/>
 				<xs:element ref="then" minOccurs="0"/>
-				<xs:element ref="do"/>
+				<xs:element ref="do" minOccurs="0"/>
 				<xs:element ref="after" minOccurs="0"/>
 				<xs:element ref="else" minOccurs="0"/>
 				<xs:element ref="elseDo" minOccurs="0"/>

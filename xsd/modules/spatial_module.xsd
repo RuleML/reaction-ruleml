@@ -44,10 +44,10 @@
 		
 	content model: 
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 	PR Reaction RuleML: not used in PR Reaction RuleML
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
@@ -98,10 +98,10 @@
      Definition of the the arg role for Spatial
      
      content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
+     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operator))
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operator))
      in PR Reaction RuleML: not used in PR Reaction RuleML
-     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)          
+     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))          
 -->
 	<xs:attributeGroup name="arg_spatial.attlist">
 		<xs:attributeGroup ref="index.attrib"/>

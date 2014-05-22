@@ -32,7 +32,7 @@
 
 	<!--
 	*** Profile ***
-	Explicit generic semantic profile defining the semantics of the rule. The semantic profile can be
+	Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. The semantic profile can be
       defined internally by the any content model (xs:any Element) or externally, where 
       the optional @type attribute defines the name/type of the used sematics profile,
       the optional @iri attribute points to an external definition of the semantics profile, and

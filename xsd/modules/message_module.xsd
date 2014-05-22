@@ -26,7 +26,9 @@
 			* Send
 			* Receive
 			* Consult
+			* Answer
 			* enclosed
+			* formula (Answer)
 			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
 			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
@@ -285,7 +287,7 @@
 	
 	<!--
       *** Consult ***
-      Consult (import) action 
+      Consult (import) performative / action 
       
       dynamically "consults" (imports) a message or external resource (with the @iri attribute).
       
@@ -320,7 +322,7 @@
 	
 	<!--
       *** Send and Receive ***
-      Send  and Receive action
+      Send  and Receive performative / action
       
       content model:
  		 
@@ -376,6 +378,98 @@
 		<xs:attributeGroup ref="Receive.attlist"/>
 	</xs:complexType>
 	<xs:element name="Receive" type="Receive.type"/>
+	
+	<!--
+      *** Answer ***
+      Answer performative / action 
+      
+      It delivers the answer to a Query. The answer is given in terms of solved formulas, e.g.
+      
+      as a <Rulebase> that contains just 'solved' equations with the variable bindings
+
+	  <Rulebase>
+  		<Equal><Var>x</Var><Ind>a</Ind></Equal>
+  		<Equal><Var>y</Var><Ind>b</Ind></Equal>
+  		<Equal><Var>z</Var><Ind>c</Ind></Equal>
+	  </Rulebase>
+	  
+	  as ground fact <Atom> matching the query / goal 
+	  
+	  <Atom>
+	  	<Rel>p</Rel>
+	  	<Ind>a</Ind>
+	  	<Ind>b</Ind>
+	  	<Ind>c</Ind>
+	  </Atom>
+	  
+	  as entailment <Entails> of the answer from the queried (possibly ground or instantiated / forward chained) rule base  
+	  
+	  With the optional <degree> rule an optional uncertainty value (between 0.0 and 1.0) may be assigned to the whole answer.
+	  An answer may be also given by reference to anothere sepearted answert set using the optional @key-keyref mechanism for local reference (within one knowledge base instance) 
+	  or by the optional @iri attribute pointing to the @node. With the optional @type attribute a particular answer type can be specified.	  
+	  
+	  @safety optionally defines if the answer (event) is interrupting or non-interrupting
+	  @size optionally defines the number of answers contained
+	   
+	  
+      content model:
+ 		 
+	  in CEP Reaction RuleML
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
+	  
+      Consult has the following attributes:
+      @degree @safety, @size @type? @iri? @node? @key @keyref @xml:id? @xml:base?  
+    -->
+	<xs:attributeGroup name="Answer.attlist">		
+		<xs:attributeGroup ref="safety.attrib"/>
+		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Answer.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="formula" type="formula-answer.type"/>
+				<xs:group ref="formula-answer.content"/>
+			</xs:choice>		
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Answer.type">
+		<xs:group ref="Answer.content"/>
+		<xs:attributeGroup ref="Answer.attlist"/>
+	</xs:complexType>
+	<xs:element name="Answer" type="Answer.type"/>
+	
+	<!--
+		*** formula ***
+		The formula role of a performative (<Answer>).
+		
+		See http://www.reaction.ruleml.org/1.0/glossary/#gloss-formula
+		
+		content model (below Answer formula): 
+		(Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)
+  		
+		Other (context-sensitive) versions of <formula> are in the
+		connective and quantifier modules.
+	-->
+	<!-- the (empty) attribute list is declared in the connective module -->
+	<xs:group name="formula-answer.content">
+		<xs:choice>
+			<xs:element ref="Rulebase"/>
+			<xs:element ref="Entails"/>
+			<xs:group ref="query-connective.content"/>
+			<xs:group ref="query-quantifier.content"/>
+			<xs:group ref="extended-signature-predicate-sorts.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="formula-answer.type">
+		<xs:group ref="formula-answer.content"/>
+		<xs:attributeGroup ref="formula.attlist"/>
+	</xs:complexType>
 	
 	<!--
      *** enclosed ***

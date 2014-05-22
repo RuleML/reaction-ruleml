@@ -58,7 +58,8 @@
       *** (Operator) ***
       
       content model: 
-      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* ) 
+      PR and ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* )
+      CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* ) 
 	-->
 	<xs:attributeGroup name="ActionAlgebraOperator.attlist">
 		<xs:attributeGroup ref="type.attrib"/>

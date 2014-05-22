@@ -348,6 +348,8 @@
 		*** @per ***
 		An attribute indicating whether a function or expression is interpreted.
 		
+		Note @per.attribute is extended in Reaction RuleML 1.0 
+		
 		See http://www.ruleml.org/1.0/glossary/#gloss-@per
 	-->
   <xs:attributeGroup name="per.attrib">

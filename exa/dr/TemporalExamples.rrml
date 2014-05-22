@@ -191,7 +191,7 @@
 		</Interval></formula>
 		
 		<!-- left closed, right open interval [2011-03-21T10:00:00-04:00, 2012-03-21T10:00:00-04:00) -->
-		<formula><Interval>
+		<formula><Interval type="ruleml:LeftClosedRightOpenInterval">
 			<arg index="1"><Time type="ruleml:TimePoint"><arg><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg></Time></arg>
 			<arg index="2"><Time type="ruleml:TimePoint"><arg><Data xsi:type="xs:dateTime">2012-03-21T10:00:00-04:00</Data></arg></Time></arg>
 		</Interval></formula>

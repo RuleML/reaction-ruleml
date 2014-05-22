@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/cep.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xcl2="http://purl.org/xcl/2.0/"
+	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/cep.xsd">
+	<!-- 
+		
+    This example shows how RuleML can be used for message interchange
+    
+   -->
+
+	<!-- An outgoing query message with query as payload "r1(X,Y,"Dummy Message Payload",r2(Z))" and two variants of the answer message to the query -->
+
+<Consult>
+	
+	<!-- query message -->
+	<enclosed index="1">
+		<Message mode="outbound" directive="acl:query-ref">
+			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
+			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<sender><Ind>Agent1</Ind></sender> <!-- sender "Agent1" -->
+			<receiver><Ind>Agent2</Ind></receiver> <!-- receiver "Agent2" -->
+			<payload>
+			  <RuleML>
+			  	<Query> <!-- query -->
+					<Atom>
+						<Rel>r1</Rel>
+						<Var>X</Var>
+						<Var>Y</Var>
+						<Ind>Dummy Message Payload</Ind>
+						<Expr>
+							<Fun>r2</Fun>
+							<Var>Z</Var>
+						</Expr>	
+					</Atom>
+			  	</Query>	
+			  </RuleML>
+			</payload>
+		</Message>
+	</enclosed>
+	
+	<!-- answer message - variant 1 -->
+	<enclosed index="2">
+		<Message directive="acl:inform">
+			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
+			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<sender><Ind>Agent2</Ind></sender> <!-- sender "Agent2" -->
+			<receiver><Ind>Agent1</Ind></receiver> <!-- receiver "Agent1" -->
+			<payload>
+				<RuleML>
+					<Answer> <!-- answer with ground goal -->
+						<degree><Data>1</Data></degree>
+						<Atom>
+							<Rel>r1</Rel>
+							<Var>1</Var>
+							<Var>2</Var>
+							<Ind>Dummy Message Payload</Ind>
+							<Expr>
+								<Fun>r2</Fun>
+								<Var>3</Var>
+							</Expr>	
+						</Atom>
+					</Answer>	
+				</RuleML>
+			</payload>
+		</Message>
+	</enclosed>
+	
+	<!-- answer message - variant 2 -->
+	<enclosed index="3">
+		<Message directive="acl:inform">
+			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
+			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<sender><Ind>Agent2</Ind></sender> <!-- sender "Agent2" -->
+			<receiver><Ind>Agent1</Ind></receiver> <!-- receiver "Agent1" -->
+			<payload>
+				<RuleML>
+					<Answer> <!-- answer with variable binding in equations -->
+						<degree><Data>1</Data></degree>
+						<Equal><Var>X</Var><Ind>1</Ind></Equal>
+						<Equal><Var>Y</Var><Ind>2</Ind></Equal>
+						<Equal><Var>Z</Var><Ind>3</Ind></Equal>
+					</Answer>	
+				</RuleML>
+			</payload>
+		</Message>
+	</enclosed>
+	
+	<!-- answer message - variant 3 which points to an external resource with the answers -->
+	<enclosed index="3">
+		<Message directive="acl:inform" iri="http://responder.ruleml.org/answers/answer.rrml">
+			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
+			<sender><Ind>Agent2</Ind></sender> <!-- sender "Agent2" -->
+			<receiver><Ind>Agent1</Ind></receiver> <!-- receiver "Agent1" -->
+		</Message>
+	</enclosed>
+
+	<!-- query message with non-RuleML XML as payload -->
+	<enclosed index="4">
+		<Message mode="outbound" directive="acl:query-ref">
+			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
+			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<sender><Ind>Agent1</Ind></sender> <!-- sender "Agent1" -->
+			<receiver><Ind>Agent2</Ind></receiver> <!-- receiver "Agent2" -->
+			<content> <!-- with content role which takes arbitrary XML (e.g. XCL2 syntax)  -->
+				<xcl2:Atom>
+					<xcl2:Name>married</xcl2:Name>
+					<xcl2:Name>John</xcl2:Name>
+					<xcl2:Name>someone</xcl2:Name>
+				</xcl2:Atom> 
+			</content>
+		</Message>
+	</enclosed>
+
+ </Consult>
+	
+</RuleML>

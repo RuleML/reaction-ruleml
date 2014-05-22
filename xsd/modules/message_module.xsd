@@ -59,7 +59,7 @@
        ( meta*, qualification*, oid, protocol?, sender?, receiver?, (content | payload)? )
       
       Message has the following attributes:
-      @mode?, @directive?, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      @mode?, @directive, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
       
 -->
 	<xs:attributeGroup name="Message.attlist">
@@ -259,7 +259,7 @@
 	<!--
     *** @mode ***
 
-     restriction: inbound | outbound | bidirectional ; 
+     restriction: inbound | outbound  ; 
 	 optional attribute
 -->
 	<xs:attributeGroup name="message-mode.attrib">
@@ -297,11 +297,12 @@
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (enclosed | Message)* )
 	  
       Consult has the following attributes:
-      @safety, @size      
+      @safety, @size  @iri    
     -->
 	<xs:attributeGroup name="Consult.attlist">
 		<xs:attributeGroup ref="safety.attrib"/>
 		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
@@ -334,7 +335,7 @@
       
       The @size attribute defines the number of messages to be received. Default value for size is "1". 
       If -1 is used it will wait infinitely for incoming messages. 
-      The qualification can be used e.g. to define timouts and validity intervals which are tested by scoped guard constraints.
+      The qualification can be used e.g. to define timeouts and validity intervals which are tested by scoped guard constraints.
       
     -->
 	<xs:attributeGroup name="Send.attlist">
@@ -404,12 +405,15 @@
 	  
 	  as entailment <Entails> of the answer from the queried (possibly ground or instantiated / forward chained) rule base  
 	  
-	  With the optional <degree> rule an optional uncertainty value (between 0.0 and 1.0) may be assigned to the whole answer.
-	  An answer may be also given by reference to anothere sepearted answert set using the optional @key-keyref mechanism for local reference (within one knowledge base instance) 
-	  or by the optional @iri attribute pointing to the @node. With the optional @type attribute a particular answer type can be specified.	  
+	  With the optional <degree> role a truth/uncertainty value (between 0.0 and 1.0; 
+	  with the truth values "1" for true and "0" for false in two-valued logics and "0.5" for unknown in three-valued logics) can be assigned to the answer. 
 	  
-	  @safety optionally defines if the answer (event) is interrupting or non-interrupting
-	  @size optionally defines the number of answers contained
+	  An answer maybe be also just referenced by the local @key-@keyref mechanism  
+	  or by the optional @iri attribute, in case of externally published answers. 
+	  
+	  With the optional @type attribute an answer type can be specified. 
+	  The @safety optionally defines if the answer (event) is interrupting or non-interrupting 
+	  and the @size attribute optionally defines the number of results contained in an Answer.
 	   
 	  
       content model:
@@ -417,8 +421,8 @@
 	  in CEP Reaction RuleML
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
 	  
-      Consult has the following attributes:
-      @degree @safety, @size @type? @iri? @node? @key @keyref @xml:id? @xml:base?  
+      Answer has the following attributes:
+      @safety?, @size? @type? @iri? @node? @key @keyref @xml:id? @xml:base?  
     -->
 	<xs:attributeGroup name="Answer.attlist">		
 		<xs:attributeGroup ref="safety.attrib"/>

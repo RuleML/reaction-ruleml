@@ -22,7 +22,7 @@
 			* receiver			 
 			* content | payload
 			* @mode
-			* @directive
+			* directive
 			* Send
 			* Receive
 			* Consult
@@ -56,15 +56,14 @@
       A Message element that provides the syntax for inbound and outbound messages / notifications 
 
       content model: 
-       ( meta*, qualification*, oid, protocol?, sender?, receiver?, (content | payload)? )
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, protocol?, directive?, sender?, receiver?, (content | payload)? )
       
       Message has the following attributes:
-      @mode?, @directive, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      @mode?, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
       
 -->
 	<xs:attributeGroup name="Message.attlist">
 		<xs:attributeGroup ref="message-mode.attrib"/>
-		<xs:attributeGroup ref="message-directive.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -72,12 +71,13 @@
 	</xs:attributeGroup>
 	<xs:group name="Message.content">
 		<xs:sequence>
-			<xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/> 
-			<xs:element ref="qualification" minOccurs="0" maxOccurs="unbounded"/> 
-			<xs:element ref="oid"/>
+			<xs:group ref="meta-roles.content"/>
 			<xs:choice minOccurs="0">
 				<xs:element ref="protocol"/>
 			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element ref="directive"/>
+			</xs:choice>			
 			<xs:choice minOccurs="0">
 				<xs:element ref="sender"/>
 			</xs:choice>
@@ -189,6 +189,31 @@
 	<xs:element name="protocol" type="protocol.type"/>
 	
 	<!--
+     *** directive ***
+     
+     content model: (Ind | Data | Var | Expr | Plex )
+-->
+	<xs:attributeGroup name="directive.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="directive.content">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="Ind"/>
+				<xs:element ref="Data"/>
+				<xs:element ref="Var"/>
+				<xs:element ref="Expr"/>
+				<xs:element ref="Plex"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="directive.type">
+		<xs:group ref="directive.content"/>
+		<xs:attributeGroup ref="directive.attlist"/>
+	</xs:complexType>
+	<xs:element name="directive" type="directive.type"/>
+	
+	<!--
      *** sender ***
      *** receiver ***
      
@@ -272,16 +297,6 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-	</xs:attributeGroup>
-	
-	<!--
-    *** @directive ***
-
-     restriction: different performatives / directives, e.g. ACL:inform 
-	 required attribute
--->
-	<xs:attributeGroup name="message-directive.attrib">
-		<xs:attribute name="directive" type="xs:string" use="required"/>
 	</xs:attributeGroup>
 	
 	

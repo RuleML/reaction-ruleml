@@ -17,9 +17,10 @@
 	
 	<!-- query message -->
 	<enclosed index="1">
-		<Message mode="outbound" directive="acl:query-ref">
+		<Message mode="outbound">
 			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
 			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<directive><Ind>ACL:query-ref</Ind></directive>
 			<sender><Ind>Agent1</Ind></sender> <!-- sender "Agent1" -->
 			<receiver><Ind>Agent2</Ind></receiver> <!-- receiver "Agent2" -->
 			<payload>
@@ -43,9 +44,10 @@
 	
 	<!-- answer message - variant 1 -->
 	<enclosed index="2">
-		<Message directive="acl:inform">
+		<Message>
 			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
 			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<directive><Ind>ACL:inform</Ind></directive>
 			<sender><Ind>Agent2</Ind></sender> <!-- sender "Agent2" -->
 			<receiver><Ind>Agent1</Ind></receiver> <!-- receiver "Agent1" -->
 			<payload>
@@ -70,9 +72,10 @@
 	
 	<!-- answer message - variant 2 -->
 	<enclosed index="3">
-		<Message directive="acl:inform">
+		<Message>
 			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
 			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<directive><Ind>ACL:inform</Ind></directive>
 			<sender><Ind>Agent2</Ind></sender> <!-- sender "Agent2" -->
 			<receiver><Ind>Agent1</Ind></receiver> <!-- receiver "Agent1" -->
 			<payload>
@@ -90,8 +93,9 @@
 	
 	<!-- answer message - variant 3 which points to an external resource with the answers -->
 	<enclosed index="3">
-		<Message directive="acl:inform" iri="http://responder.ruleml.org/answers/answer.rrml">
+		<Message iri="http://responder.ruleml.org/answers/answer.rrml">
 			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
+			<directive><Ind>ACL:inform</Ind></directive>
 			<sender><Ind>Agent2</Ind></sender> <!-- sender "Agent2" -->
 			<receiver><Ind>Agent1</Ind></receiver> <!-- receiver "Agent1" -->
 		</Message>
@@ -99,9 +103,10 @@
 
 	<!-- query message with non-RuleML XML as payload -->
 	<enclosed index="4">
-		<Message mode="outbound" directive="acl:query-ref">
+		<Message mode="outbound">
 			<oid><Ind>cid1</Ind></oid> <!-- conversation identifier "cid1" -->
 			<protocol><Ind>esb</Ind></protocol> <!-- protocol "esb" for Enterprise Service Bus -->
+			<directive><Ind>acl:query-ref</Ind></directive>
 			<sender><Ind>Agent1</Ind></sender> <!-- sender "Agent1" -->
 			<receiver><Ind>Agent2</Ind></receiver> <!-- receiver "Agent2" -->
 			<content> <!-- with content role which takes arbitrary XML (e.g. XCL2 syntax)  -->

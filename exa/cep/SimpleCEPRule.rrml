@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/cep.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/cep.xsd">
+  <!-- 
+
+    This example defines a simple Event-Condition-Action rule which is triggered by an event pattern in the on part.
+    A matching event instance is asserted which triggers the pattern in the ECA rule. The ECA rule proofs the condition and
+    executes the action which asserts a new fact to the knowledge base. This fact is then queried.
+
+   -->
+
+  <!-- assert rule -->
+
+  <Assert>
+
+    <formula>
+      <!-- rule "on receiving the order of a person for a drink if the drink is wine do tell person (=send to person message) that John likes the person" --> 
+      <Rule style="active">
+        <on>
+          <Receive> <!-- receive action waiting for incoming messages -->
+            <enclosed>
+              <Message>   <!-- message pattern definition matching against incoming messages --> 
+                <signature> <!-- define the message's signature as event pattern for the detection -->
+                  <Atom>
+                        <op><Rel>order</Rel></op>
+                        <arg><Var>Person</Var></arg>
+                        <arg><Var>Drink</Var></arg>
+                  </Atom>     
+                </signature>
+              </Message>
+            </enclosed>
+          </Receive>
+        </on>
+        
+        <if>
+          <Equal>
+            <left><Var>Drink</Var></left>
+            <right><Ind>wine</Ind></right>
+          </Equal>
+        </if>
+        
+        <do>
+          <Send>
+            <enclosed>
+              <Message>
+                <receiver><Var>Person</Var></receiver> <!-- receiver is THE "Person" -->
+                <payload> <!-- payload of message is a RuleML knowledge base -->
+                  <RuleML>
+                    <act>
+                      <Assert>
+                        <formula>
+                          <Atom>
+                            <op><Rel>likes</Rel></op> 
+                            <arg><Ind>John</Ind></arg>
+                            <arg><Var>Person</Var></arg>
+                          </Atom>
+                        </formula>
+                      </Assert>
+                    </act>
+                  </RuleML>
+                </payload>
+              </Message>
+            </enclosed>
+          </Send>
+        </do>
+      </Rule>
+    </formula>
+  </Assert> 
+  
+  <!-- send message that "Mary orders wine" which triggers the messaging reaction rule which is waiting for orders -->
+  
+  <Send>
+    <enclosed>
+      <Message>
+        <oid><Ind>cid1</Ind></oid> <!-- conversation identifier -->
+        <sender><Ind>Mary</Ind></sender> <!-- sender -->
+        <receiver><Ind>John</Ind></receiver> <!-- receiver -->
+        <payload> <!-- payload -->
+          <RuleML>
+            <Assert>
+              <Atom>
+                <op><Rel>orders</Rel></op>
+                <arg><Ind>Mary</Ind></arg>
+                <arg><Ind>wine</Ind></arg>
+              </Atom>
+            </Assert>
+          </RuleML>
+        </payload>
+      </Message>
+    </enclosed>
+  </Send>
+
+</RuleML>

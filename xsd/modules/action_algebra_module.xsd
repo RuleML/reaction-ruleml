@@ -60,6 +60,8 @@
       content model: 
       PR and ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* )
       CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* ) 
+      
+      attributes: @safety?, @size?, @type?, @iri?, @node?, @key? @keyref?, @xml:id? @xml:base? 
 	-->
 	<xs:attributeGroup name="ActionAlgebraOperator.attlist">
 		<xs:attributeGroup ref="type.attrib"/>

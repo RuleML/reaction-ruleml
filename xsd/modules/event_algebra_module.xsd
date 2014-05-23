@@ -73,8 +73,10 @@
       *** (Operator) ***
       
       content model: 
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on | (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  )* ) 
-      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on | (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  )* ) 
+      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
+      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
+      
+      attributes: @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base? 
 	-->
 	<xs:attributeGroup name="EventAlgebraOperator.attlist">
 		<xs:attributeGroup ref="type.attrib"/>
@@ -88,8 +90,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element ref="on"/>
-				<xs:group ref="on.content"/>				
+				<xs:element ref="on"/>				
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -97,14 +98,99 @@
 		<xs:group ref="EventAlgebraOperator.content"/>
 		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
 	</xs:complexType>
+	
 	<xs:element name="Sequence" type="EventAlgebraOperator.type"/>
 	<xs:element name="Disjunction" type="EventAlgebraOperator.type"/>
 	<xs:element name="Xor" type="EventAlgebraOperator.type"/>
 	<xs:element name="Conjunction" type="EventAlgebraOperator.type"/>
 	<xs:element name="Concurrent" type="EventAlgebraOperator.type"/>
-	<xs:element name="Not" type="EventAlgebraOperator.type"/>
-	<xs:element name="Aperiodic" type="EventAlgebraOperator.type"/>
-	<xs:element name="Periodic" type="EventAlgebraOperator.type"/>
+
+	<!--
+      *** Not ***
+      
+      "Not on Even2 at [Event1, Event3]" ("Event 2 does not occur between [Event 1 and Event 3]")
+      
+      content model: 
+      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
+      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
+      
+      attributes:  @safety?, @size?, @type?, @iri?, @node?, @key? @keyref?, @xml:id? @xml:base? 
+	-->
+	<xs:attributeGroup name="Not.attlist">
+		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Not.content">
+		<xs:sequence>
+			<xs:element ref="oid" minOccurs="0"/>
+			<xs:choice>
+				<xs:element ref="on"/>				
+			</xs:choice>
+			<xs:choice>
+				<xs:element ref="at"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Not.type">
+		<xs:group ref="Not.content"/>
+		<xs:attributeGroup ref="Not.attlist"/>
+	</xs:complexType>
+	<xs:element name="Not" type="Not.type"/>
+
+	<!--
+      *** Aperiodic ***
+      
+      "Aperiodic on Event2 at [Event1, Event3]" ("Event2 does occur aperiodically between [Event 1 and Event3]")
+      possibly with multiple accumlated occurences of Event 2 (@size attribute) 
+      
+      content model: 
+      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
+      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
+      
+      attributes: @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base?  -->
+
+	<xs:element name="Aperiodic" type="Not.type"/>
+	
+	<!--
+      *** Periodic ***
+      
+      "Periodic at TimeEvent2 at [Event1, Event3]" ("at TimeEvent2 does occur periodically between time interval [Event 1 and Event3]")
+      
+      content model: 
+      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (at, at)? ) 
+      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (at, at)? ) 
+-->
+	<xs:attributeGroup name="Periodic.attlist">
+		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Periodic.content">
+		<xs:sequence>
+			<xs:element ref="oid" minOccurs="0"/>
+			<xs:choice>
+				<xs:element ref="at"/>
+			</xs:choice>
+			<xs:choice>
+				<xs:element ref="at"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Periodic.type">
+		<xs:group ref="Periodic.content"/>
+		<xs:attributeGroup ref="Periodic.attlist"/>
+	</xs:complexType>
+	<xs:element name="Periodic" type="Periodic.type"/>
+
+	<!--
+      *** AtLeast / AtMost ***
+      
+      "AtLeast @size occurences on Event"
+      "AtMost @size occurences on Event"
+      
+      content model: 
+      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
+      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
+      
+      attributes: @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base? 
+	-->  
 	<xs:element name="AtLeast" type="EventAlgebraOperator.type"/>
 	<xs:element name="AtMost" type="EventAlgebraOperator.type"/>
 	

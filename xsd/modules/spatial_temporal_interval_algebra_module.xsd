@@ -14,6 +14,7 @@
 			This schema declares the following Reaction RuleML elements and attributes:
                   
                   Operator (generic operator)
+                  at (general role "at Time | Spatial | Interval)
                   
                   Spatial, Temporal, Interval Function Constructs 
                   
@@ -34,6 +35,8 @@
                   * Meets
                   * Equal
                   * Finishes
+                  
+                  
  			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
 			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
@@ -83,6 +86,30 @@
 		</xs:choice>
 	</xs:group>
 	
+
+	<!--
+      *** at ***
+      
+	  Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
+	
+      content model: 
+      in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
+      in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+      in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+	-->
+	<xs:attributeGroup name="at.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="at.content">
+		<xs:choice>							
+			<xs:group ref="time_primitives.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="at.type">
+		<xs:group ref="at.content"/>
+		<xs:attributeGroup ref="at.attlist"/>
+	</xs:complexType>
+	<xs:element name="at" type="at.type"/>
 
 	<!--
       *** After / Before***

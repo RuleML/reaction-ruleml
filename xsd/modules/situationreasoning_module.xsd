@@ -70,28 +70,6 @@
 	</xs:complexType>
 	<xs:element name="fluent" type="fluent.type"/>
 	
-	<!--
-      *** at ***
-
-	  Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
-	
-      content model: 
-      in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
-	-->
-	<xs:attributeGroup name="at.attlist">
-		<xs:attributeGroup ref="xml.attlist"/>
-	</xs:attributeGroup>
-	<xs:group name="at.content">
-		<xs:choice>							
-			<xs:group ref="time_primitives.content"/>
-		</xs:choice>
-	</xs:group>
-	<xs:complexType name="at.type">
-		<xs:group ref="at.content"/>
-		<xs:attributeGroup ref="at.attlist"/>
-	</xs:complexType>
-	<xs:element name="at" type="at.type"/>
-
 
 	<!--     *** Do ***
 		

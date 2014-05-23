@@ -179,18 +179,6 @@
   <xs:element name="Reify" type="Reify.type"/>
 
   <!--
-		*** @type ***
-		An attribute for optionally specifying a term's (user-defined) type.
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@type
-		
-		Note: In Reaction RuleML the type is changed to Term or Curie or IRI
-	-->
-  <xs:attributeGroup name="type.attrib">
-    <xs:attribute name="type" type="termOrCurieOrIRI.datatype" use="optional"/>
-  </xs:attributeGroup>
-
-  <!--
 		*** @index ***
 		A required attribute for specifying the position of a positional
 		argument within an atom.

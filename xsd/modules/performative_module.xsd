@@ -42,9 +42,14 @@
 	CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)* )
 			
  	 Note: key and keyref object identifier are defined to be unique under the RuleML document root
+ 	 
+ 	 @vocab: an IRI that defines the mapping to use when a type term (e.g. a frame signature type) is referenced in an attribute value
+ 	 @prefix: a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
 				
 	-->
   <xs:attributeGroup name="RuleML.attlist">
+    <xs:attributeGroup ref="vocab.attrib"/>
+    <xs:attributeGroup ref="prefix.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>

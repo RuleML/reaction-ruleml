@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xh11d="http://www.w3.org/1999/xhtml/datatypes/"
 	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
@@ -13,6 +14,7 @@
 			
 			This module declares the following Reaction RuleML elements and attributes:
                   
+                  * @node
                   * @mode (mode declaration)
                   * @safety (transactional)
                   * @per (usage)
@@ -130,7 +132,7 @@
 	 optinal attribute
 -->
 	<xs:attributeGroup name="key.attrib">
-		<xs:attribute name="key" type="termOrCurieOrIRI.datatype" use="optional"/>
+		<xs:attribute name="key" type="curieOrAbsIRI.datatype" use="optional"/>
 	</xs:attributeGroup>
 	
 	<!--
@@ -140,8 +142,63 @@
 	 optinal attribute
 -->
 	<xs:attributeGroup name="keyref.attrib">
-		<xs:attribute name="keyref" type="termOrCurieOrIRI.datatype" use="optional"/>
+		<xs:attribute name="keyref" type="curieOrAbsIRI.datatype" use="optional"/>
 	</xs:attributeGroup> 
 
+	<!--
+    *** @node ***
+    An optional identification label for a Node, creating accessibility within
+    the knowledge representation.
+    This can help for representing prioritization between rules, for example. 
+    The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
+    such a label.
+    
+    See http://www.ruleml.org/1.0/glossary/#gloss-@node
+    
+    content model: (curieOrAbsIRI.datatype)
+  -->
+	<xs:attributeGroup name="node.attrib">
+		<xs:attribute name="node" type="curieOrAbsIRI.datatype" use="optional"/>
+	</xs:attributeGroup>
+	
+	<!--
+		*** @type ***
+		An attribute for optionally specifying a (user-defined) type.
+		
+		See http://www.ruleml.org/1.0/glossary/#gloss-@type
+		
+		Note: In Reaction RuleML the type is changed to Term or Curie or absolute IRI
+	-->
+	<xs:attributeGroup name="type.attrib">
+		<xs:attribute name="type" type="termOrCurieOrAbsIRI.datatype" use="optional"/>
+	</xs:attributeGroup>
+	
+	<!--
+		*** @prefix ***
+		
+		a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
+		
+		
+	-->
+	<xs:attributeGroup name="prefix.attrib">
+		<xs:attribute name="prefix" type="prefix.datatype" use="optional"/>
+	</xs:attributeGroup>
+
+	<xs:simpleType name="prefix.datatype">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:pattern value="([\i-[:]][\c-[:]]*)?"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!--
+		*** @vocab ***
+		
+		an IRI that defines the mapping to use when a TERM is referenced in an attribute value.
+				
+	-->
+	<xs:attributeGroup name="vocab.attrib">
+		<xs:attribute name="vocab" type="xs:anyURI" use="optional"/>
+	</xs:attributeGroup>
 	
 </xs:schema>

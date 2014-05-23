@@ -10,7 +10,7 @@
       elements. File: desc_module.xsd Version: 1.0 Last Modification: 2012-05-17 [Adrian Paschke]
       This module declares the following RuleML elements:   
       
-      * @node
+    
       * meta            descriptive metadata 
       * scope           scope  (e.g. for scoped reasoning)	
       * guard			      guard (e.g. for guard constraints in scoped reasoning)
@@ -38,21 +38,6 @@
     </xs:appinfo> 
   </xs:annotation>
 
-  <!--
-    *** @node ***
-    An optional identification label for a Node, creating accessibility within
-    the knowledge representation.
-    This can help for representing prioritization between rules, for example. 
-    The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
-    such a label.
-    
-    See http://www.ruleml.org/1.0/glossary/#gloss-@node
-    
-    content model: (curieOrIRI)
-  -->
-  <xs:attributeGroup name="node.attrib">
-    <xs:attribute name="node" type="curieOrIRI.datatype" use="optional"/>
-  </xs:attributeGroup>
 
   <xs:attributeGroup name="oid.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

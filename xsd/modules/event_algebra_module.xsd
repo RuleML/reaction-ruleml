@@ -182,14 +182,14 @@
 	<!--
       *** AtLeast / AtMost ***
       
-      "AtLeast @size occurences on Event"
-      "AtMost @size occurences on Event"
+      "AtLeast @size occurrences on Event"
+      "AtMost @size occurrences on Event"
       
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       
-      attributes: @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base? 
+      attributes: @size, @type?, @iri?, @node?, @xml?, @safety?, @key? @keyref?, @xml:id? @xml:base? 
 	-->  
 	<xs:element name="AtLeast" type="EventAlgebraOperator.type"/>
 	<xs:element name="AtMost" type="EventAlgebraOperator.type"/>

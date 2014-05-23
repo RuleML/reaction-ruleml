@@ -29,30 +29,19 @@
   </xs:annotation>
       
   <xs:simpleType name="curieOrIRI.datatype">
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
     <xs:union memberTypes="curie.datatype xs:anyURI"/>
   </xs:simpleType>
   
   <xs:simpleType name="curieOrAbsIRI.datatype">
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
+
     <xs:union memberTypes="curie.datatype absIRI.datatype"/>
   </xs:simpleType>
   
   <xs:simpleType name="termOrCurieOrIRI.datatype">
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
     <xs:union memberTypes="term.datatype curie.datatype xs:anyURI" />
   </xs:simpleType> 
   
-  <xs:simpleType name="termOrCurieOrAbsIRI">
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
+  <xs:simpleType name="termOrCurieOrAbsIRI.datatype">
     <xs:union memberTypes="term.datatype curie.datatype absIRI.datatype" />
   </xs:simpleType>
   
@@ -63,9 +52,6 @@
   </xs:simpleType>
   
   <xs:simpleType name="curie.datatype">
-    <xs:annotation>
-      <xs:documentation/>
-    </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:minLength value="1"/>
       <xs:pattern value="(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"/>

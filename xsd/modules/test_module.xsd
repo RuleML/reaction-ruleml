@@ -7,10 +7,13 @@
 			
 			Test and Proof module part of Reaction RuleML.
 			
-			This is the XML Schema Message module for Reaction RuleML.
-			File: message_module.xsd
+			This is the XML Schema Test module for Reaction RuleML.
+			File: test_module.xsd
 			Version: 1.0
 			Last Modification: 2011-07-20
+			
+			Further information - see RBSLA project (http://rbsla.ruleml.org)
+			ContractLog framework VVI Testing: http://rbsla.ruleml.org/docs/ContractLog_VVI.pdf
 			
 			This schema declares the following Reaction RuleML elements and attributes:		  
 			
@@ -46,7 +49,9 @@
 
 	<!--
       *** Test ***
-      A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Ttsting 
+      A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Testing.
+      
+      An optional scope (<scope>) can be defined so that the test applies only to the scope (constructed view) on the knowledge base.
 
       content model: 
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (vvi | Entails | TestItem | TestSuite)*)

@@ -26,12 +26,12 @@
 
 	<!--
 		*** @iri ***
-		An attribute for referring to a IRI.
+		An attribute for referring to a Curie or IRI.
 		
 		See http://www.ruleml.org/1.0/glossary/#gloss-@iri
 	-->
 	<xs:attributeGroup name="iri.attrib">
-		<xs:attribute name="iri" type="xs:anyURI" use="optional"/>
+		<xs:attribute name="iri" type="curieOrIRI.datatype" use="optional"/>
 	</xs:attributeGroup>
 
 </xs:schema>

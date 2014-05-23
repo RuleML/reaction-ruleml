@@ -130,7 +130,7 @@
 	 optinal attribute
 -->
 	<xs:attributeGroup name="key.attrib">
-		<xs:attribute name="key" type="curieOrAbsIRI.datatype" use="optional"/>
+		<xs:attribute name="key" type="termOrCurieOrIRI.datatype" use="optional"/>
 	</xs:attributeGroup>
 	
 	<!--
@@ -140,7 +140,7 @@
 	 optinal attribute
 -->
 	<xs:attributeGroup name="keyref.attrib">
-		<xs:attribute name="keyref" type="curieOrAbsIRI.datatype" use="optional"/>
+		<xs:attribute name="keyref" type="termOrCurieOrIRI.datatype" use="optional"/>
 	</xs:attributeGroup> 
 
 	

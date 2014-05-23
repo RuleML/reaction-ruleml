@@ -107,6 +107,7 @@
 	
 	<!-- include events from the CEP rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/message_module.xsd" />
+	<xs:include schemaLocation="modules/test_module.xsd" />
 
 	<!--
      metadata group
@@ -458,7 +459,7 @@
 			<xs:element ref="Update"/>
 			<xs:element ref="Query"/>
 			<xs:element ref="Answer"/>
-			<!-- <xs:element ref="Test"/> --> <!-- for test-driven validation -->
+			<xs:element ref="Test"/>  <!-- for test-driven verification, validation and integrity testing -->
 			<xs:element ref="Send"/>
 			<xs:element ref="Receive"/>
 			<xs:element ref="Action"/>

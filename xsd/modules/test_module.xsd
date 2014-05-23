@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			
+			Test and Proof module part of Reaction RuleML.
+			
+			This is the XML Schema Message module for Reaction RuleML.
+			File: message_module.xsd
+			Version: 1.0
+			Last Modification: 2011-07-20
+			
+			This schema declares the following Reaction RuleML elements and attributes:		  
+			
+			* Test
+			* vvi
+			* TestSuite
+			* base
+			* TestItem
+			* Answer	
+			* formula (Answer)
+			* expectedResult
+			
+			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
+			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
+			[http://www.w3.org/TR/xhtml-modularization/].
+			
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>Reaction RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-29T23:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>
+	</xs:annotation>
+	
+
+	<!--
+      *** Test ***
+      A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Ttsting 
+
+      content model: 
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (vvi | Entails | TestItem | TestSuite)*)
+      
+      Test has the following attributes:
+      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+	-->
+	<xs:attributeGroup name="Test.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Test.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="vvi"/>
+				<xs:group ref="vvi.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Test.type">
+		<xs:group ref="Test.content"/>
+		<xs:attributeGroup ref="Test.attlist"/>
+	</xs:complexType>
+	<xs:element name="Test" type="Test.type"/>
+		
+	<!--
+     *** vvi ***
+     
+     vvi role - "verification, validation, integrity" tests
+     
+     content model: ( Entails | TestItem | TestSuite )
+     
+      vvi has the following attributes:
+      @index?, @key?, @keyref?, @xml:id? @xml:base?
+-->
+	<xs:attributeGroup name="vvi.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="vvi.content">
+		<xs:choice>
+			<xs:element ref="Entails"/>
+			<xs:element ref="TestSuite"/>
+			<xs:element ref="TestItem"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="vvi.type">
+		<xs:group ref="vvi.content"/>
+		<xs:attributeGroup ref="vvi.attlist"/>
+	</xs:complexType>
+	<xs:element name="vvi" type="vvi.type"/>
+
+	<!--
+     *** base ***
+     
+     base role for the test assertion | consultation base
+     
+     content model: ( Consult | Assert )
+     
+      base has the following attributes:
+      @key?, @keyref?, @xml:id? @xml:base?
+-->
+	<xs:attributeGroup name="base.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="base.content">
+		<xs:choice>
+			<xs:element ref="Consult"/>
+			<xs:element ref="Assert"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="base.type">
+		<xs:group ref="base.content"/>
+		<xs:attributeGroup ref="base.attlist"/>
+	</xs:complexType>
+	<xs:element name="base" type="base.type"/>
+
+	<!--
+      *** TestSuite ***
+      A TestSuite consiting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites       
+      content model: 
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (base | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
+      
+      Test has the following attributes:
+      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+	-->
+	<xs:attributeGroup name="TestSuite.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="TestSuite.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="base"/>
+				<xs:element ref="Assert"/>
+				<xs:element ref="Consult"/>
+			</xs:choice>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="vvi"/>
+				<xs:group ref="vvi.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="TestSuite.type">
+		<xs:group ref="TestSuite.content"/>
+		<xs:attributeGroup ref="TestSuite.attlist"/>
+	</xs:complexType>
+	<xs:element name="TestSuite" type="TestSuite.type"/>
+	
+	<!--
+      *** TestItem ***
+      TestItem describing one particular test consisting of the test act (typcially a Query) and the expected result (an Answer with predefined truth valuation (<degree>) and result/bindings)
+      
+      content model:
+ 		 
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Query|Assert|Retract|Update|Send|Receive|Consult|Test|Action), (expectedResult|Answer) )
+	  
+    -->
+	<xs:attributeGroup name="TestItem.attlist">
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="TestItem.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="act"/> 
+					<xs:group ref="act.content"/>
+				</xs:choice>
+				<xs:choice>
+					<xs:element ref="expectedResult"/>
+					<xs:group ref="expectedResult.content"/>	
+				</xs:choice>
+			</xs:sequence>	
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="TestItem.type">
+		<xs:group ref="TestItem.content"/>
+		<xs:attributeGroup ref="TestItem.attlist"/>
+	</xs:complexType>
+	<xs:element name="TestItem" type="TestItem.type"/>
+		
+	<!--
+      *** Answer ***
+      Answer performative / action 
+      
+      It delivers the answer to a Query . The answer is given in terms of solved formulas, e.g.
+      
+      as a <Rulebase> that contains just 'solved' equations with the variable bindings
+
+	  <Rulebase>
+  		<Equal><Var>x</Var><Ind>a</Ind></Equal>
+  		<Equal><Var>y</Var><Ind>b</Ind></Equal>
+  		<Equal><Var>z</Var><Ind>c</Ind></Equal>
+	  </Rulebase>
+	  
+	  as ground fact <Atom> matching the query / goal 
+	  
+	  <Atom>
+	  	<Rel>p</Rel>
+	  	<Ind>a</Ind>
+	  	<Ind>b</Ind>
+	  	<Ind>c</Ind>
+	  </Atom>
+	  
+	  as solved ground entailments <Entails> of the answer from the queried (ground or instantiated / forward chained) rule base  
+	  
+	  With the optional <degree> role a truth/uncertainty value (between 0.0 and 1.0; 
+	  with the truth values "1" for true and "0" for false in two-valued logics and "0.5" for unknown in three-valued logics) can be assigned to the answer. 
+	  
+	  An answer maybe be also just referenced by the local @key-@keyref mechanism  
+	  or by the optional @iri attribute, in case of externally published answers. 
+	  
+	  With the optional @type attribute an answer type can be specified. 
+	  The @safety optionally defines if the answer (event) is interrupting or non-interrupting 
+	  and the @size attribute optionally defines the number of results contained in an Answer.
+	   
+	  
+      content model:
+ 		 
+	  in CEP Reaction RuleML
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
+	  
+      Answer has the following attributes:
+      @safety?, @size? @type? @iri? @node? @key @keyref @xml:id? @xml:base?  
+    -->
+	<xs:attributeGroup name="Answer.attlist">		
+		<xs:attributeGroup ref="safety.attrib"/>
+		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Answer.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="formula" type="formula-answer.type"/>
+				<xs:group ref="formula-answer.content"/>
+			</xs:choice>		
+		</xs:sequence>			
+	</xs:group>
+	<xs:complexType name="Answer.type">
+		<xs:group ref="Answer.content"/>
+		<xs:attributeGroup ref="Answer.attlist"/>
+	</xs:complexType>
+	<xs:element name="Answer" type="Answer.type"/>
+	
+	<!--
+		*** formula ***
+		The formula role of a performative (<Answer>).
+		
+		See http://www.reaction.ruleml.org/1.0/glossary/#gloss-formula
+		
+		content model (below Answer formula): 
+		(Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)
+  		
+		Other (context-sensitive) versions of <formula> are in the
+		connective and quantifier modules.
+	-->
+	<!-- the (empty) attribute list is declared in the connective module -->
+	<xs:group name="formula-answer.content">
+		<xs:choice>
+			<xs:element ref="Rulebase"/>
+			<xs:element ref="Entails"/>
+			<xs:group ref="query-connective.content"/>
+			<xs:group ref="query-quantifier.content"/>
+			<xs:group ref="extended-signature-predicate-sorts.content"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="formula-answer.type">
+		<xs:group ref="formula-answer.content"/>
+		<xs:attributeGroup ref="formula.attlist"/>
+	</xs:complexType>
+	
+	<!--
+     *** expectedResult***
+     
+     Definition of the the enclosed role for Send and Receive actions
+     
+     content model:  
+      in CEP Reaction RuleML: (Answer)
+
+-->
+	<xs:attributeGroup name="expectedResult.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="expectedResult.content">
+		<xs:choice>
+			<xs:element ref="Answer"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="expectedResult.type">
+		<xs:group ref="expectedResult.content"/>
+		<xs:attributeGroup ref="expectedResult.attlist"/>
+	</xs:complexType>
+	<xs:element name="expectedResult" type="expectedResult.type"/>
+
+</xs:schema>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="http://reaction.ruleml.org/1.0/xsd/cep.xsd"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xcl2="http://purl.org/xcl/2.0/"
+	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/cep.xsd">
+	<!-- 
+		
+    This example shows how RuleML makes use of Tests for Verification, Validation and Integrity testing (VVI)
+    
+    
+   -->
+
+	<!-- An asserted rule base with a set of rules -->
+
+	<Assert>
+		<Rulebase>
+			<Rule></Rule>
+			<Rule></Rule>
+			<Rule></Rule>
+		</Rulebase>
+	</Assert>
+	
+	<!-- a typical test (template) which applies on the knowledge base -->
+	<Test>
+		<vvi>
+			<TestSuite>
+				<!-- semantic profiles which should be us for the test suite -->
+				<evaluation><Profile></Profile></evaluation>
+				<!-- test assertion base, such as ground test facts -->
+				<base><Assert></Assert></base>
+				<vvi>
+					<!-- one particular test item of a test suite -->
+					<TestItem>
+						<!-- test query -->
+						<act><Query></Query></act>
+						<!-- exepected result -->
+						<expectedResult>
+							<Answer>
+								<degree><Data>1</Data></degree> <!-- expected "1" = query succeeds -->
+								<!-- resulting query variable bindings with the variables on the left and the predefined variable instantiations on the right hand side of the equations  -->
+								<Equal></Equal> 
+								<Equal></Equal>	
+								<Equal></Equal>	
+							</Answer>
+						</expectedResult>
+					</TestItem>
+				</vvi>
+			</TestSuite>
+		</vvi>
+	</Test>
+	
+</RuleML>

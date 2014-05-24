@@ -78,7 +78,6 @@
 -->
 	<xs:attributeGroup name="profile_anycontent.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="prefix.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="profile_anycontent.content">

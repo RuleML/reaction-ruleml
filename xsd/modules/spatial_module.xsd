@@ -128,7 +128,6 @@
 -->
 	<xs:attributeGroup name="spatial_anycontent.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="prefix.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="spatial_anycontent.content">

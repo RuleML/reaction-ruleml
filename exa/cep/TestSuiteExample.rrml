@@ -29,7 +29,7 @@
 				<!-- semantic profiles which should be us for the test suite -->
 				<evaluation><Profile></Profile></evaluation>
 				<!-- test assertion base, such as ground test facts -->
-				<base><Assert></Assert></base>
+				<testbase><Assert></Assert></testbase>
 				<vvi>
 					<!-- one particular test item of a test suite -->
 					<TestItem>

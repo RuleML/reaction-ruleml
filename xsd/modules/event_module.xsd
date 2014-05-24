@@ -139,8 +139,7 @@
      See CURIE to IRI and term to IRI translation
     -->
 	<xs:attributeGroup name="event_anycontent.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="prefix.attrib"/>		
+		<xs:attributeGroup ref="vocab.attrib"/>		
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="event_anycontent.content">

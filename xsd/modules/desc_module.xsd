@@ -3,8 +3,7 @@
 <xs:schema targetNamespace="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
    xmlns="http://ruleml.org/spec" elementFormDefault="qualified">
-  
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml_module.xsd"/>  
+    
   <xs:annotation>
     <xs:documentation xml:lang="en"> This is the XML Schema module for description-related RuleML
       elements. File: desc_module.xsd Version: 1.0 Last Modification: 2012-05-17 [Adrian Paschke]
@@ -71,23 +70,6 @@
   -->
   <xs:element name="oid" type="oid.type"/>
   
-  <!-- 
- 	
-	@key @keyref @xml:id @xml:base
- 
-  @key and @keyref attributes for modularization of the knowledge base
-
-  -->
-
-  <xs:attributeGroup name="xml.attlist">
-    <xs:attributeGroup ref="key.attrib"/>
-    <xs:attributeGroup ref="keyref.attrib"/>
-    <xs:attribute ref="xml:base" use="optional"/>
-    <xs:attribute ref="xml:id" use="optional"/>
-  </xs:attributeGroup>
-  
-
-
   <!-- 
      *** meta ***     
      

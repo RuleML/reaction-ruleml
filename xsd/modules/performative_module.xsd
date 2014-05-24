@@ -49,7 +49,6 @@
 	-->
   <xs:attributeGroup name="RuleML.attlist">
     <xs:attributeGroup ref="vocab.attrib"/>
-    <xs:attributeGroup ref="prefix.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>

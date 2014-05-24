@@ -3,6 +3,9 @@
 	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
 	xmlns:xh11d="http://www.w3.org/1999/xhtml/datatypes/"
 	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml_module.xsd"/>
+	
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
             
@@ -15,12 +18,15 @@
 			This module declares the following Reaction RuleML elements and attributes:
                   
                   * @node
+                  * @type (types / sorts used in sorted logics)
                   * @mode (mode declaration)
                   * @safety (transactional)
                   * @per (usage)
                   * @all (yes|no)
                   * @style (execution style)	
                   * @key and @keyref for modularization of knowledge bases
+                  * @prefix defines prefixes for the mapping of Curie attributes values into IRIs
+                  * @vocab defines vocabulary IRIs for the mapping of term attributes values into IRIs
              
 		</xs:documentation>
 		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
@@ -201,4 +207,20 @@
 		<xs:attribute name="vocab" type="xs:anyURI" use="optional"/>
 	</xs:attributeGroup>
 	
+	
+	<!-- 
+ 	
+	@prefix @key @keyref @xml:id @xml:base
+ 
+  	@key and @keyref attributes for modularization of the knowledge base
+  
+  	-->
+	
+	<xs:attributeGroup name="xml.attlist">
+		<xs:attributeGroup ref="prefix.attrib"/>
+		<xs:attributeGroup ref="key.attrib"/>
+		<xs:attributeGroup ref="keyref.attrib"/>
+		<xs:attribute ref="xml:base" use="optional"/>
+		<xs:attribute ref="xml:id" use="optional"/>
+	</xs:attributeGroup>
 </xs:schema>

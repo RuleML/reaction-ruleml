@@ -65,8 +65,15 @@
      *** content ***
      
      content model:  xs:any*
+     
+     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+     See CURIE to IRI and term to IRI translation
+     
+     attributes
     -->
 	<xs:attributeGroup name="action_anycontent.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
+		<xs:attributeGroup ref="prefix.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="action_anycontent.content">

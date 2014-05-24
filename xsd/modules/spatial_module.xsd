@@ -121,9 +121,14 @@
 	<!--
      *** content ***
      
+     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+     	See CURIE to IRI and term to IRI translation
+     
      content model:  xs:any*
 -->
 	<xs:attributeGroup name="spatial_anycontent.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
+		<xs:attributeGroup ref="prefix.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="spatial_anycontent.content">

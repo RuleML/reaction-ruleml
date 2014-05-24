@@ -108,7 +108,7 @@
 	<xs:element name="vvi" type="vvi.type"/>
 
 	<!--
-     *** base ***
+     *** testsbase ***
      
      base role for the test assertion | consultation base
      
@@ -117,26 +117,26 @@
       base has the following attributes:
       @key?, @keyref?, @xml:id? @xml:base?
 -->
-	<xs:attributeGroup name="base.attlist">
+	<xs:attributeGroup name="testbase.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="base.content">
+	<xs:group name="testbase.content">
 		<xs:choice>
 			<xs:element ref="Consult"/>
 			<xs:element ref="Assert"/>
 		</xs:choice>
 	</xs:group>
-	<xs:complexType name="base.type">
-		<xs:group ref="base.content"/>
-		<xs:attributeGroup ref="base.attlist"/>
+	<xs:complexType name="testbase.type">
+		<xs:group ref="testbase.content"/>
+		<xs:attributeGroup ref="testbase.attlist"/>
 	</xs:complexType>
-	<xs:element name="base" type="base.type"/>
+	<xs:element name="testbase" type="base.type"/>
 
 	<!--
       *** TestSuite ***
       A TestSuite consiting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites       
       content model: 
-       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (base | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (testbase | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
       
       Test has the following attributes:
       @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
@@ -151,7 +151,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element ref="base"/>
+				<xs:element ref="testbase"/>
 				<xs:element ref="Assert"/>
 				<xs:element ref="Consult"/>
 			</xs:choice>

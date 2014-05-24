@@ -55,9 +55,10 @@
 
       content model: 
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, protocol?, directive?, sender?, receiver?, (content | payload)? )
+       
       
       Message has the following attributes:
-      @mode?, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      @prefix? @vocab? @mode?, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
       
 -->
 	<xs:attributeGroup name="Message.attlist">
@@ -242,9 +243,14 @@
 	<!--
      *** content ***
      
+     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+     	See CURIE to IRI and term to IRI translation
+     	
      content model:  xs:any*
     -->
 	<xs:attributeGroup name="message_anycontent.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
+		<xs:attributeGroup ref="prefix.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="message_anycontent.content">

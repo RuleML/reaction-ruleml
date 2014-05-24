@@ -67,6 +67,7 @@
 
 	-->
   <xs:attributeGroup name="Ind.attlist">
+    <xs:attributeGroup ref="vocab.attrib"/>
     <xs:attributeGroup ref="type.attrib"/>
     <xs:attributeGroup ref="iri.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
@@ -110,6 +111,7 @@
 
 	-->
   <xs:attributeGroup name="Var.attlist">
+    <xs:attributeGroup ref="vocab.attrib"/>
     <xs:attributeGroup ref="type.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
@@ -134,6 +136,7 @@
 
 	-->
   <xs:attributeGroup name="Skolem.attlist">
+    <xs:attributeGroup ref="vocab.attrib"/>
     <xs:attributeGroup ref="type.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>

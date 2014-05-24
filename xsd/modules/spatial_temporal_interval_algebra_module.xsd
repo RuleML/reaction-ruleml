@@ -124,6 +124,7 @@
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)?])) 	  
     -->
 	<xs:attributeGroup name="After.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -154,6 +155,7 @@
       DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
 	-->
 	<xs:attributeGroup name="Every.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -188,6 +190,7 @@
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval | Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
 	-->
 	<xs:attributeGroup name="Any.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -225,6 +228,7 @@
        
     -->
 	<xs:attributeGroup name="Timer.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -250,6 +254,7 @@
       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval]) 
 	-->
 	<xs:attributeGroup name="IntervalAlgebraOperator.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>

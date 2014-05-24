@@ -57,9 +57,10 @@
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (vvi | Entails | TestItem | TestSuite)*)
       
       Test has the following attributes:
-      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+      @vocab? @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
 	-->
 	<xs:attributeGroup name="Test.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -134,14 +135,15 @@
 
 	<!--
       *** TestSuite ***
-      A TestSuite consiting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites       
+      A TestSuite consisting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites       
       content model: 
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (testbase | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
       
       Test has the following attributes:
-      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+      @vocab? @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
 	-->
 	<xs:attributeGroup name="TestSuite.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -169,7 +171,7 @@
 	
 	<!--
       *** TestItem ***
-      TestItem describing one particular test consisting of the test act (typcially a Query) and the expected result (an Answer with predefined truth valuation (<degree>) and result/bindings)
+      TestItem describing one particular test consisting of the test act (typically a Query) and the expected result (the expected Answer with the predefined expected truth valuation (<degree>) and results/variable bindings)
       
       content model:
  		 
@@ -243,11 +245,12 @@
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
 	  
       Answer has the following attributes:
-      @safety?, @size? @type? @iri? @node? @key @keyref @xml:id? @xml:base?  
+      @safety?, @size? @vocab? @type? @iri? @node? @key @keyref @xml:id? @xml:base?  
     -->
 	<xs:attributeGroup name="Answer.attlist">		
 		<xs:attributeGroup ref="safety.attrib"/>
 		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>

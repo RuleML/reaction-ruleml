@@ -109,6 +109,7 @@
 	                (content(xs:any)) )?             
 	-->
 	<xs:attributeGroup name="Action.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>

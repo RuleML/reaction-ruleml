@@ -82,6 +82,7 @@
       		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
 	-->
 	<xs:attributeGroup name="Do.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -125,6 +126,7 @@
       		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
 	-->
 	<xs:attributeGroup name="Happens.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -162,6 +164,7 @@
       (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )?)
 	-->
 	<xs:attributeGroup name="Initiates.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -203,6 +206,7 @@
       (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )?)
 	-->
 	<xs:attributeGroup name="Terminates.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -250,6 +254,7 @@
       (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
 	-->
 	<xs:attributeGroup name="Holds.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -284,6 +289,7 @@
 			content(xs:any) )?) 
 	-->
 	<xs:attributeGroup name="Fluent.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>

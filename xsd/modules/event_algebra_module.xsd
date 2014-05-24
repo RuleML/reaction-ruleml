@@ -76,9 +76,10 @@
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       
-      attributes: @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base? 
+      attributes: @vocab? @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base? 
 	-->
 	<xs:attributeGroup name="EventAlgebraOperator.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>

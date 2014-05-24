@@ -63,6 +63,7 @@
 -->
 	<xs:attributeGroup name="Message.attlist">
 		<xs:attributeGroup ref="message-mode.attrib"/>
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -106,6 +107,7 @@
       
 	-->
 	<xs:attributeGroup name="Agent.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -139,6 +141,7 @@
       
 -->
 	<xs:attributeGroup name="Protocol.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>

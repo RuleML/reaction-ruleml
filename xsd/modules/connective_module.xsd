@@ -278,6 +278,9 @@
 
 		See http://www.ruleml.org/1.0/glossary/#gloss-Rulebase
 		
+		@prefix for default prefix definitions 
+		@vocab for default vocab definitions
+		
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
@@ -289,6 +292,7 @@
     <xs:attributeGroup ref="mapDirection.attrib"/>
     <xs:attributeGroup ref="mapMaterial.attrib"/>
     <xs:attributeGroup ref="vocab.attrib"/>
+    <xs:attributeGroup ref="prefix.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>

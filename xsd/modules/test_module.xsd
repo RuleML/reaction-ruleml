@@ -20,7 +20,7 @@
 			* Test
 			* vvi
 			* TestSuite
-			* base
+			* testbase
 			* TestItem
 			* Answer	
 			* formula (Answer)
@@ -130,7 +130,7 @@
 		<xs:group ref="testbase.content"/>
 		<xs:attributeGroup ref="testbase.attlist"/>
 	</xs:complexType>
-	<xs:element name="testbase" type="base.type"/>
+	<xs:element name="testbase" type="testbase.type"/>
 
 	<!--
       *** TestSuite ***

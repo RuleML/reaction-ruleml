@@ -250,7 +250,6 @@
     -->
 	<xs:attributeGroup name="message_anycontent.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="prefix.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="message_anycontent.content">

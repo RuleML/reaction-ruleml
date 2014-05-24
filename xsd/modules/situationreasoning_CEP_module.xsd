@@ -1,0 +1,345 @@
+<?xml version="1.0"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+	targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+			KR situation reasoning module part of Reaction RuleML.
+
+			This is the XML Schema KR module for Reaction RuleML.
+			File: state_module.xsd
+			Version: 1.0
+			Last Modification: 2011-03-22
+
+			This schema declares the following Reaction RuleML elements and attributes:
+
+				* Happens
+				* Initiates
+				* Terminates
+				* fluent
+				* Holds
+				* Situation
+				* Do
+			
+			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
+			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
+			[http://www.w3.org/TR/xhtml-modularization/].
+		</xs:documentation>
+		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		<xs:appinfo>
+			<dc:title>Reaction RuleML Schema</dc:title>
+			<dc:version>1.0</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
+			<dc:date>2011-03-22T29:11:17-0300</dc:date>
+			<dc:language>en</dc:language>
+			<dcterms:rights>LGPL-3.0</dcterms:rights> 
+			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+		</xs:appinfo>		
+	</xs:annotation>
+
+
+	<!--
+      *** fluent ***
+      
+      A fluent is a fluent situation which holds true or false as a condition which changes over time - a changeable situation. 
+      In Situation Calculus, fluents (changable situations) are expressions which hold true or false and take an occured situation (as a history of action events; note: there is no distinction in events and actions in such calculi) 
+      as their final argument (see Holds below).
+      
+ 	  Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
+		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
+ 
+      content model: 
+      in KR Reaction RuleML: (Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
+	-->
+	<xs:attributeGroup name="fluent.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="fluent.content">
+			<xs:choice>								
+				<xs:group ref="situation_primitives.content"/>
+				<xs:element ref="Fluent"/>
+			</xs:choice>		
+	</xs:group>
+	<xs:complexType name="fluent.type">
+		<xs:group ref="fluent.content"/>
+		<xs:attributeGroup ref="fluent.attlist"/>
+	</xs:complexType>
+	<xs:element name="fluent" type="fluent.type"/>
+	
+
+	<!--     *** Do ***
+		
+	  The function do maps (reified) actions into situations; do: A x S -> S
+			
+      content model: 
+      in KR CEP Reaction RuleML: 
+      		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, do, at? )
+	-->
+	<xs:attributeGroup name="Do.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Do.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:sequence>
+				<xs:choice>	
+					<xs:element ref="do"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">					
+					<xs:element ref="at"/>				
+				</xs:choice>	
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Do.type">
+		<xs:group ref="Do.content"/>
+		<xs:attributeGroup ref="Do.attlist"/>
+	</xs:complexType>
+	<xs:element name="Do" type="Do.type"/>
+
+	<!--     *** Happens ***
+		
+		Different happens / happenings can be defined by pointing to an external vocabulary with @iri, e.g. a vocabulary for a calculi
+		which distinguishes between events which acutally happen and other event relations to time or situations  (e.g. poss, planned, etc.)
+		
+		In Situation Calculus happens can be used to define action effects. 
+		
+ 		Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
+		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
+		
+      content model: 
+      in KR CEP Reaction RuleML: 
+      		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at? )
+	-->
+	<xs:attributeGroup name="Happens.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Happens.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:sequence>
+				<xs:choice>	
+					<xs:element ref="on"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">					
+					<xs:element ref="at"/>
+				</xs:choice>	
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Happens.type">
+		<xs:group ref="Happens.content"/>
+		<xs:attributeGroup ref="Happens.attlist"/>
+	</xs:complexType>
+	<xs:element name="Happens" type="Happens.type"/>
+
+	
+ 	<!--     *** Initiates ***
+
+      content model: 
+      in KR Reaction RuleML:
+      (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, on, fluent, at?)
+	-->
+	<xs:attributeGroup name="Initiates.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>		
+	</xs:attributeGroup>
+	<xs:group name="Initiates.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="on"/>
+				</xs:choice>			
+				<xs:choice>
+					<xs:element ref="fluent"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">
+					<xs:element ref="at"/>
+				</xs:choice>				
+			</xs:sequence>	
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Initiates.type">
+		<xs:group ref="Initiates.content"/>
+		<xs:attributeGroup ref="Initiates.attlist"/>
+	</xs:complexType>
+	<xs:element name="Initiates" type="Initiates.type"/>
+
+	<!--
+      *** Terminates ***
+
+      content model: 
+	   in KR Reaction RuleML:
+      (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, on, fluent, at?)
+	-->
+	<xs:attributeGroup name="Terminates.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Terminates.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice>
+				<xs:element ref="on"/>
+			</xs:choice>			
+			<xs:choice>
+				<xs:element ref="fluent"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element ref="at"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Terminates.type">
+		<xs:group ref="Terminates.content"/>
+		<xs:attributeGroup ref="Terminates.attlist"/>
+	</xs:complexType>
+	<xs:element name="Terminates" type="Terminates.type"/>
+	
+	
+	
+	<!--
+      *** Holds ***
+      
+      In Event Calculus, Feature and Fluent Calculus reified fluents hold at a time. 
+      In reified Situation Calculus a Fluent Situation (a statement whose truth value may change) holds at a particular Situation 
+      
+  		Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
+		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
+     
+
+      content model:
+      in KR Reaction RuleML:
+      (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
+      (fluent ), 
+      (at)? )
+	-->
+	<xs:attributeGroup name="Holds.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Holds.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>		
+			<xs:choice>
+				<xs:element ref="fluent"/>
+				<xs:group ref="fluent.content"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:element ref="at"/>
+				<xs:group ref="at.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Holds.type">
+		<xs:group ref="Holds.content"/>
+		<xs:attributeGroup ref="Holds.attlist"/>
+	</xs:complexType>
+	<xs:element name="Holds" type="Holds.type"/>	
+
+	<!--
+	*** Fluent ***
+		
+	content model: 
+	in KR Reaction RuleML: 
+			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (
+		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Fluent)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
+			content(xs:any) )?) 
+	-->
+	<xs:attributeGroup name="Fluent.attlist">
+		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="iri.attrib"/>
+		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Fluent.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0">
+				<xs:sequence>
+					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="resl" minOccurs="0"/>
+					<xs:sequence minOccurs="0">
+						<xs:choice>
+							<xs:sequence>
+								<xs:choice maxOccurs="unbounded">
+									<xs:element name="arg" type="arg_fluent.type"/>
+								</xs:choice>
+								<xs:element ref="repo" minOccurs="0"/>
+							</xs:sequence>
+							<xs:element ref="repo"/>
+						</xs:choice>
+						<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="resl" minOccurs="0"/>
+					</xs:sequence>
+				</xs:sequence>    				
+				<xs:element name="content" type="fluent_anycontent.type"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Fluent.type">
+		<xs:group ref="Fluent.content"/>
+		<xs:attributeGroup ref="Fluent.attlist"/>
+	</xs:complexType>
+	<xs:element name="Fluent" type="Fluent.type"/>
+	
+	<!--
+     *** arg ***
+     
+     Definition of the the arg role for Fluent
+     
+     content model:  
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Fluent)
+     
+          
+-->
+	<xs:attributeGroup name="arg_fluent.attlist">
+		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="arg_fluent.content">
+		<xs:choice>
+			<xs:group ref="situation_primitives.content"/>
+			<xs:element ref="Fluent"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="arg_fluent.type">
+		<xs:group ref="arg_fluent.content"/>
+		<xs:attributeGroup ref="arg_fluent.attlist"/>
+	</xs:complexType>
+	
+	<!--
+     *** content ***
+     
+     content model:  xs:any*
+-->
+	<xs:attributeGroup name="fluent_anycontent.attlist">
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="fluent_anycontent.content">
+		<xs:choice>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="fluent_anycontent.type">
+		<xs:group ref="fluent_anycontent.content"/>
+		<xs:attributeGroup ref="fluent_anycontent.attlist"/>
+	</xs:complexType>
+</xs:schema>

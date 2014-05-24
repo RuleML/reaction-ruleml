@@ -292,7 +292,6 @@
     <xs:attributeGroup ref="mapDirection.attrib"/>
     <xs:attributeGroup ref="mapMaterial.attrib"/>
     <xs:attributeGroup ref="vocab.attrib"/>
-    <xs:attributeGroup ref="prefix.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>

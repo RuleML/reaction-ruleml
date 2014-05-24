@@ -128,7 +128,6 @@
 -->
 	<xs:attributeGroup name="situation_anycontent.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="prefix.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="situation_anycontent.content">

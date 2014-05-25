@@ -7,8 +7,8 @@
           
 			KR situation reasoning module part of Reaction RuleML.
 
-			This is the XML Schema KR module for Reaction RuleML.
-			File: state_module.xsd
+			This is the XML Schema KR-CEP module for Reaction RuleML.
+			File: situation_CEP_module.xsd
 			Version: 1.0
 			Last Modification: 2011-03-22
 
@@ -18,6 +18,7 @@
 				* Initiates
 				* Terminates
 				* fluent
+				* Fluent
 				* Holds
 				* Situation
 				* Do
@@ -53,7 +54,7 @@
 		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
  
       content model: 
-      in KR Reaction RuleML: (Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
+      in KR Reaction RuleML: (Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )
 	-->
 	<xs:attributeGroup name="fluent.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -61,7 +62,6 @@
 	<xs:group name="fluent.content">
 			<xs:choice>								
 				<xs:group ref="situation_primitives.content"/>
-				<xs:element ref="Fluent"/>
 			</xs:choice>		
 	</xs:group>
 	<xs:complexType name="fluent.type">
@@ -76,7 +76,7 @@
 	  The function do maps (reified) actions into situations; do: A x S -> S
 			
       content model: 
-      in KR CEP Reaction RuleML: 
+      in KR Reaction RuleML: 
       		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, do, at? )
 	-->
 	<xs:attributeGroup name="Do.attlist">
@@ -116,8 +116,8 @@
 		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
 		
       content model: 
-      in KR CEP Reaction RuleML: 
-      		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at? )
+      in KR Reaction RuleML: 
+      		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, on, at? )
 	-->
 	<xs:attributeGroup name="Happens.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
@@ -134,7 +134,7 @@
 					<xs:element ref="on"/>
 				</xs:choice>
 				<xs:choice minOccurs="0">					
-					<xs:element ref="at"/>
+					<xs:element ref="at"/>				
 				</xs:choice>	
 			</xs:sequence>
 		</xs:sequence>
@@ -168,7 +168,7 @@
 				</xs:choice>			
 				<xs:choice>
 					<xs:element ref="fluent"/>
-				</xs:choice>
+					</xs:choice>
 				<xs:choice minOccurs="0">
 					<xs:element ref="at"/>
 				</xs:choice>				
@@ -229,11 +229,10 @@
 
       content model:
       in KR Reaction RuleML:
-      (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
-      (fluent ), 
-      (at)? )
+      (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, fluent, at? )
 	-->
 	<xs:attributeGroup name="Holds.attlist">
+		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
@@ -244,11 +243,9 @@
 			<xs:group ref="meta-roles.content"/>		
 			<xs:choice>
 				<xs:element ref="fluent"/>
-				<xs:group ref="fluent.content"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
 				<xs:element ref="at"/>
-				<xs:group ref="at.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -264,7 +261,7 @@
 	content model: 
 	in KR Reaction RuleML: 
 			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (
-		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Fluent)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
+		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation|Fluent)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
 			content(xs:any) )?) 
 	-->
 	<xs:attributeGroup name="Fluent.attlist">
@@ -286,6 +283,7 @@
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
 									<xs:element name="arg" type="arg_fluent.type"/>
+									<xs:group ref="arg_fluent.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
@@ -311,7 +309,7 @@
      Definition of the the arg role for Fluent
      
      content model:  
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Fluent)
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation|Fluent)
      
           
 -->
@@ -321,8 +319,7 @@
 	</xs:attributeGroup>
 	<xs:group name="arg_fluent.content">
 		<xs:choice>
-			<xs:group ref="situation_primitives.content"/>
-			<xs:element ref="Fluent"/>
+			<xs:group ref="arg.content"/>
 		</xs:choice>
 	</xs:group>
 	<xs:complexType name="arg_fluent.type">

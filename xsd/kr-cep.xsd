@@ -322,7 +322,7 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-    content model: (Atom | Time | Spatial | Interval | Event | Action)
+    content model: (Atom | Time | Spatial | Interval | Event | Action | Fluent | Holds | Initiates | Terminates | Happens)
           
 	-->
 	
@@ -334,6 +334,7 @@
 			<xs:element ref="Interval"/>
 			<xs:element ref="Event"/>			
 			<xs:element ref="Action"/>	
+			<xs:element ref="Fluent" /> <!-- only in non-reified calculi used as predicate -->
 			<xs:element ref="Situation"/>	
 			<xs:element ref="Holds" />	
 			<xs:element ref="Initiates" />
@@ -347,7 +348,7 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action)
+		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)
           
 	-->
 	
@@ -362,6 +363,7 @@
 			<xs:element ref="Interval"/>
 			<xs:element ref="Event"/>			
 			<xs:element ref="Action"/>	
+			<xs:element ref="Fluent" /> <!-- in reified calculi used as function -->
 		</xs:choice>
 	</xs:group>
 

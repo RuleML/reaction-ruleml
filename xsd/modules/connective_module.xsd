@@ -194,12 +194,13 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-Equivalent
 
 		content model: 		
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | Atom | Equal | Negation | Neg |  Time | Spatial | Interval), (Atom | Equal | Negation | Neg | Time | Spatial | Interval) ) ) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | Atom | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens), 
-		                      (Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens) ) ) )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | Atom | Equal ), (Operator | Atom | Equal ) ) ) )                     
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action), (Atom | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action) ) ) )
-	-->
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens), 
+		                      (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens) ) ) )
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Negation | Naf | Atom | Equal), (Operator | And | Or | Negation | Naf | Atom | Equal ) ) ) )                     
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
+		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
+  -->
   <xs:attributeGroup name="Equivalent.attlist">
     <xs:attributeGroup ref="closure.attrib"/>
     <xs:attributeGroup ref="node.attrib"/>
@@ -252,17 +253,17 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-torso
 
 		content model: 
-		DR Reaction RuleML (Operator | Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
-		KR Reaction RuleML (Operator | Atom |  Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operator | Atom | Equal )
-		ECA Reaction RuleML (Operator | Atom |  Negation | Neg | Equal | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
+		KR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operator | And | Or | Negation | Naf | Atom | Equal )
+		ECA Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
 	-->
   <xs:attributeGroup name="torso.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="torso.content">
     <xs:choice>
-      <xs:group ref="outer-connective.content"/>
+      <xs:group ref="inner-connective.content"/>
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>

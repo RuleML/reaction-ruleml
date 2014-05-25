@@ -268,7 +268,7 @@
     
      In the KR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial, Interval, Event, Action, Situation, Holds, Initiates, Terminates, Happens
     
-     content model: (Atom | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+     content model: (Atom | Time | Spatial | Interval | Event | Action | Situation | Fluent | Holds | Initiates | Terminates | Happens)
           
 	-->
 	
@@ -280,7 +280,8 @@
 			<xs:element ref="Interval"/>
 			<xs:element ref="Event"/>			
 			<xs:element ref="Action"/>			
-			<xs:element ref="Situation"/>	
+			<xs:element ref="Situation"/>
+			<xs:element ref="Fluent" /> <!-- only in non-reified calculi used as predicate -->
 			<xs:element ref="Holds" />	
 			<xs:element ref="Initiates" />
 			<xs:element ref="Terminates" />
@@ -295,7 +296,7 @@
     
      In the KR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial, Interval, Event, Action, and Situation
     
-     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
+     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)
           
 	-->
 	
@@ -310,14 +311,15 @@
 			<xs:element ref="Interval"/>
 			<xs:element ref="Event"/>			
 			<xs:element ref="Action"/>			
-			<xs:element ref="Situation"/>			
+			<xs:element ref="Situation"/>
+			<xs:element ref="Fluent" /> <!-- in reified calculi used as function -->			
 		</xs:choice>
 	</xs:group>
 
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
-		in KR RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval  | Event | Action | Situation) | (After | Before | Any | Every | Timer | Operator)
+		in KR RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval  | Event | Action | Situation | Fluent) | (After | Before | Any | Every | Timer | Operator)
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>
@@ -328,7 +330,7 @@
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
-		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) | (After | Before | Any | Every | Timer | Operator)
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent) | (After | Before | Any | Every | Timer | Operator)
 	-->
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>
@@ -339,7 +341,7 @@
 	
 	<!-- Interval primitives
 		content model: 
-		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator) -->
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator) -->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>							
 			<xs:group ref="arg.content"/>
@@ -349,7 +351,7 @@
 	
 	<!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
-		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Do)
+		in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | Do)
 	-->
 	<xs:group name="situation_primitives.content">
 		<xs:choice>
@@ -360,7 +362,7 @@
 	
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
-		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
+		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>			
@@ -370,7 +372,7 @@
 	
 	<!-- An internal group for events
 		content model:
-		KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )-->
+		KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )-->
 	
 	<xs:group name="event_group.content">
 		<xs:choice>
@@ -380,7 +382,7 @@
 	
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
-		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
+		in KR Reaction RuleML:  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
@@ -390,7 +392,7 @@
 	
 	<!-- An internal group for actions
 		content model:
-		KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )-->
+		KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
@@ -418,7 +420,7 @@
 	 optional attribute
 -->
 	<xs:attributeGroup name="style.attrib">
-		<xs:attribute name="style" type="style.datatype" use="optional" default="reasoning"/>
+		<xs:attribute name="style" type="style.datatype" use="optional"/>
 	</xs:attributeGroup>
 	
 

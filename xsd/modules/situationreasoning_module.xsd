@@ -53,7 +53,7 @@
 		The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
  
       content model: 
-      in KR Reaction RuleML: (Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
+      in KR Reaction RuleML: (Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )
 	-->
 	<xs:attributeGroup name="fluent.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -61,7 +61,6 @@
 	<xs:group name="fluent.content">
 			<xs:choice>								
 				<xs:group ref="situation_primitives.content"/>
-				<xs:element ref="Fluent"/>
 			</xs:choice>		
 	</xs:group>
 	<xs:complexType name="fluent.type">
@@ -78,8 +77,8 @@
       content model: 
       in KR Reaction RuleML: 
       		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  
-      		(do | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), 
-      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
+      		(do | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent), 
+      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)? )
 	-->
 	<xs:attributeGroup name="Do.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
@@ -122,8 +121,8 @@
       content model: 
       in KR Reaction RuleML: 
       		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-      		(on | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), 
-      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
+      		(on | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent), 
+      		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)? )
 	-->
 	<xs:attributeGroup name="Happens.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
@@ -159,9 +158,9 @@
       content model: 
       in KR Reaction RuleML:
       (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
-      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ),  
-      (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ), 
-      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )?)
+      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ),  
+      (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ), 
+      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )?)
 	-->
 	<xs:attributeGroup name="Initiates.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
@@ -201,9 +200,9 @@
       content model: 
 	   in KR Reaction RuleML:
       (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
-      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ),  
-      (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ), 
-      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )?)
+      (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ),  
+      (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ), 
+      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )?)
 	-->
 	<xs:attributeGroup name="Terminates.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
@@ -250,8 +249,8 @@
       content model:
       in KR Reaction RuleML:
       (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
-      (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation ), 
-      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)? )
+      (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ), 
+      (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)? )
 	-->
 	<xs:attributeGroup name="Holds.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
@@ -307,6 +306,7 @@
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
 									<xs:element name="arg" type="arg_fluent.type"/>
+									<xs:group ref="arg_fluent.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
@@ -342,8 +342,7 @@
 	</xs:attributeGroup>
 	<xs:group name="arg_fluent.content">
 		<xs:choice>
-			<xs:group ref="situation_primitives.content"/>
-			<xs:element ref="Fluent"/>
+			<xs:group ref="arg.content"/>
 		</xs:choice>
 	</xs:group>
 	<xs:complexType name="arg_fluent.type">

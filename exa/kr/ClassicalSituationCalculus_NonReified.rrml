@@ -1,120 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.0/xsd/kr.xsd"?>
+<!-- <?xml-model href="http://reaction.ruleml.org/1.0/xsd/kr.xsd"?> -->
 <RuleML xmlns="http://ruleml.org/spec"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
+  xsi:schemaLocation="http://ruleml.org/spec ../../xsd/kr.xsd">
 
-<!-- Example: manage server load in task scheduling using a Situation Calculus formalization 
+<!-- Example: Block World example represented in non-reified situation calculus
   
     Classical Situation Calculus with purely non-reified fluents and action (SCpnr)
   
   -->
 
-  <!-- assert knowledge -->
+  <evaluation>
+    <Profile type="ruleml:PurelyNonReifiedClassicalSituationCalculus"/> <!-- use non-reified classical situation calculus semantic profile -->
+  </evaluation>
+  
+  
+  <!-- assert block wrold axioms -->
 
   <Assert>
   
-  <evaluation>
-    <Profile type="ruleml:PurelyNonReifiedClassicalSituationCalculus"/>
-  </evaluation>
   
-  <!-- Action Precondition Axioms -->
+  <!-- Precondition Axioms -->
   
   <Rulebase>    
 
-    <!--   poss(move(X,Y,S)) :- clear(X,S), clear(Y,S), not X = Y.  -->
-    <Rule>
-      <if>
-        <And>         
-          <Situation type="ruleml:Fluent">
-              <Expr>
-                <Fun>clear</Fun>
-                <Var>X</Var>
-                <Situation type="ruleml:History">
-                  <Var>S</Var>
-                </Situation>
-              </Expr>  
-          </Situation>
-          
-          <Situation type="ruleml:Fluent">
-            <Expr>
-              <Fun>clear</Fun>
+    <!--   poss(move(X,Y), S) <-> clear(X,S), clear(Y,S), not(X = Y).  -->
+    
+    <!-- variant 1: rule whithout syntactic notations for actions, fluents and situations -->
+    <Equivalent>
+      <torso>
+        <And>     
+          <Atom>
+              <Rel>clear</Rel>
+              <Var>X</Var>
+              <Var>S</Var>
+          </Atom>
+          <Atom>
+              <Rel>clear</Rel>
               <Var>Y</Var>
-              <Situation type="ruleml:History">
-                <Var>S</Var>
-              </Situation>
-            </Expr>  
-          </Situation>
-          
+              <Var>S</Var>              
+          </Atom>  
           <Negation>
             <Equal>
               <Var>X</Var>
               <Var>Y</Var>
             </Equal>
-          </Negation>
-  
+          </Negation>          
         </And>
-      </if>
-      <then>
-        
+      </torso>
+      <torso>
         <Atom>
           <Rel>poss</Rel>
-          <Situation type="ruleml:History">
-            <Expr> 
+          <Expr> 
               <Fun>move</Fun>
               <Var>X</Var>
               <Var>Y</Var>
-              <Var>S</Var>
-            </Expr>
-          </Situation>
+          </Expr>
+         <Var>S</Var>          
         </Atom>
-       </then>
-      
-    </Rule>
+      </torso>
+    </Equivalent>
+    
+    <!-- variant 2: rule with syntax for actions, fluents and situations -->
+    <Equivalent>
+      <torso>
+        <And>     
+          <Fluent><Expr per="value">  <!-- interpretation per truth value in non reified calculi -->
+              <Fun>clear</Fun><Var>X</Var>
+              <Situation><Var>S</Var></Situation>
+          </Expr></Fluent>
+          <Fluent><Expr per="value">
+              <Fun>clear</Fun><Var>Y</Var>
+              <Situation><Var>S</Var></Situation>
+          </Expr></Fluent>
+          <Negation><Equal><Var>X</Var><Var>Y</Var></Equal></Negation>
+        </And>
+      </torso>
+      <torso>
+        <Atom>
+          <Rel>poss</Rel>
+          <Action><Expr per="copy"> <!-- interpretation as function (complex term) -->
+              <Fun>move</Fun>
+              <Var>X</Var>
+              <Var>Y</Var>
+          </Expr></Action>
+          <Situation><Var>S</Var></Situation>
+        </Atom>
+      </torso>
+    </Equivalent>
 
-    <!--     poss(putOnTable(X,S)) :- clear(X,S), not onTable(X,S).-->  
-    <Rule>
-      <if>
+
+    <!--     poss(putOnTable(X), S) <-> clear(X,S), not(onTable(X,S)).-->  
+    
+    <!-- rule variant 1: without using the syntax for fluents, situations, actions -->
+    <Equivalent>
+      <torso>
         <And>
-          
-          <Situation type="ruleml:Fluent">
-            <Expr>
+          <Atom>
+            <Rel>clear</Rel>
+            <Var>X</Var>
+            <Var>S</Var>            
+          </Atom>  
+          <Negation>
+            <Atom>
+              <Rel>onTable</Rel>
+              <Var>X</Var>
+              <Var>S</Var>              
+            </Atom>  
+          </Negation>
+        </And>
+      </torso>
+      <torso>
+        <Atom>
+         <Rel>poss</Rel>
+         <Expr> 
+          <Fun>putOnTable</Fun>
+          <Var>X</Var>
+        </Expr>
+        <Var>S</Var>  
+        </Atom>
+      </torso>
+    </Equivalent>
+
+    <!-- rule variant 2: using the syntax for fluents, situations, actions -->
+    <Equivalent>
+      <torso>
+        <And>
+          <Fluent>
+            <Expr per="value"> <!-- per value interpretation -->
               <Fun>clear</Fun>
               <Var>X</Var>
-              <Situation type="ruleml:History">
+              <Situation>
                 <Var>S</Var>
               </Situation>
             </Expr>  
-          </Situation>
-          
+          </Fluent>
           <Negation>
-            <Situation type="ruleml:Fluent">
-              <Expr>
+            <Fluent>
+              <Expr per="value">
                 <Fun>onTable</Fun>
                 <Var>X</Var>
-                <Situation type="ruleml:History">
+                <Situation>
                   <Var>S</Var>
                 </Situation>
               </Expr>  
-            </Situation>            
-          </Negation>
-          
+            </Fluent>            
+          </Negation>      
         </And>
-      </if>
-      <then>
+      </torso>
+      <torso>
         <Atom>
           <Rel>poss</Rel>
-          <Situation type="ruleml:History">
-            <Expr> 
+          <Action>
+            <Expr per="copy"> 
               <Fun>putOnTable</Fun>
               <Var>X</Var>
-              <Var>S</Var>
             </Expr>
+          </Action>
+          <Situation>
+            <Var>S</Var>
           </Situation>
         </Atom>
-      </then>
-    </Rule>
+      </torso>
+    </Equivalent>
 
   </Rulebase>  
     
@@ -122,203 +171,702 @@
   <Rulebase>
 
   
-  <!-- clear(X,A) :- (A = move(Y,Z,S) ;
-                              A = putOnTable(Y,S)),
-                              on(Y,X,S) ;
-                              clear(X,S), not A = move(Y,X,S). --> 
+    <!-- clear(X,do(A,S)) <-> (A = move(Y,Z) ; A = putOnTable(Y)), on(Y,X,S);
+                               clear(X,S), not(A = move(Y,X)). -->
 
-    
-  <Rule>
-    <if>
-      <Or>
-        <And>
-          <Or>
-            <Equal>
-              <Var>A</Var>
-              <Situation type="ruleml:History">
+    <!-- variant 1: without syntax for Action, Fluent, Situation -->        
+    <Equivalent>
+      <torso>
+        <Or>
+          <And>
+            <Or>
+              <Equal>
+                <Var>A</Var>
                 <Expr>
                   <Fun>move</Fun> 
                   <Var>X</Var> 
                   <Var>Z</Var> 
-                  <Var>S</Var>
-                </Expr>    
-              </Situation>  
-            </Equal>
-            <Equal>
-              <Var>A</Var>
-              <Situation type="ruleml:History">
+               </Expr>    
+              </Equal>
+              <Equal>
+                <Var>A</Var>
                 <Expr>
                   <Fun>putOnTable</Fun> 
                   <Var>Y</Var>
                   <Var>S</Var>
+                </Expr>                  
+              </Equal>
+            </Or>
+            <Atom>
+              <Rel>on</Rel>
+              <Var>Y</Var>
+              <Var>X</Var>
+              <Situation><Var>S</Var></Situation>
+            </Atom>
+          </And>
+          <And>
+            <Atom>
+              <Rel>clear</Rel>
+              <Var>X</Var>
+              <Var>S</Var>              
+            </Atom>  
+            <Negation>
+              <Equal>
+                <Var>A</Var>
+                <Expr>
+                    <Fun>move</Fun> 
+                    <Var>Y</Var> 
+                    <Var>X</Var> 
+                </Expr>                      
+              </Equal>
+            </Negation>
+          </And>
+        </Or>        
+      </torso>
+      <torso>
+        <Atom>
+          <Rel>clear</Rel> 
+          <Var>X</Var>
+          <Expr>
+            <Fun>do</Fun>
+            <Var>A</Var>
+            <Var>S</Var>
+          </Expr>
+        </Atom>
+      </torso>
+    </Equivalent>  
+
+   <!-- variant 2: with syntax for Action, Fluent, Situation -->        
+  <Equivalent>
+    <torso>
+      <Or>
+        <And>
+          <Or>
+            <Equal>
+              <Action><Var>A</Var></Action>
+              <Action>
+                <Expr per="copy">
+                  <Fun>move</Fun> 
+                  <Var>X</Var> 
+                  <Var>Z</Var> 
+                </Expr>    
+              </Action>  
+            </Equal>
+            <Equal>
+              <Action><Var>A</Var></Action>
+              <Action>
+                <Expr per="copy">
+                  <Fun>putOnTable</Fun> 
+                  <Var>Y</Var>
+                  <Var>S</Var>
                 </Expr>  
-              </Situation>
+              </Action>
             </Equal>
           </Or>
-          <Situation type="ruleml:Fluent">
-            <Expr>
+          <Fluent>
+            <Expr per="value">
               <Fun>on</Fun>
               <Var>Y</Var>
               <Var>X</Var>
-              <Situation type="ruleml:History"><Var>S</Var></Situation>
+              <Situation><Var>S</Var></Situation>
             </Expr>
-          </Situation>
+          </Fluent>
         </And>
         <And>
-          <Situation type="ruleml:Fluent">
-            <Expr>
+          <Fluent>
+            <Expr per="value">
               <Fun>clear</Fun>
               <Var>X</Var>
-              <Situation type="ruleml:History">
+              <Situation>
                 <Var>S</Var>
               </Situation>
             </Expr>  
-          </Situation>
+          </Fluent>
           <Negation>
             <Equal>
-              <Var>A</Var>
-              <Situation type="ruleml:History">
-                <Expr>
+              <Action><Var>A</Var></Action>
+              <Action>
+                <Expr per="copy">
                   <Fun>move</Fun> 
                   <Var>Y</Var> 
                   <Var>X</Var> 
-                  <Var>S</Var>
                 </Expr>    
-              </Situation>  
+              </Action>  
             </Equal>
           </Negation>
         </And>
       </Or>        
-    </if>
-    <then>
-      <Situation type="ruleml:Fluent">
-        <Expr>
-              <Fun>clear</Fun> 
-              <Var>X</Var>
-              <Var>A</Var>
+    </torso>
+    <torso>
+      <Fluent>
+        <Expr per="value">
+          <Fun>clear</Fun> 
+          <Var>X</Var>
+          <Situation>
+            <Do>
+              <Action><Var>A</Var></Action>
+              <Situation><Var>S</Var></Situation>
+            </Do>
+          </Situation>
         </Expr>
-      </Situation>      
-    </then>
-  </Rule>  
+      </Fluent>      
+    </torso>
+  </Equivalent>  
     
-    <!-- on(X,Y,A) :- A = move(X,Y,S) ;
-                            on(X,Y,S), not A = putOnTable(X,S),
-                            not A = move(X,Z,S). -->
+    <!-- on(X,Y,do(A,S)) <-> A = move(X,Y) ;
+                            on(X,Y,S), not(A = putOnTable(X)),
+                            not(A = move(X,Z)). -->
 
-   <Rule>
-     <if>
-       <Or>
-         <Equal>
-           <Var>A</Var>
-           <Situation> 
-             <Expr>
-               <Fun>move</Fun> 
-               <Var>X</Var> 
-               <Var>Y</Var>
-               <Var>S</Var>
-             </Expr>
-           </Situation>            
-         </Equal>
-         <And>
-           <Situation type="ruleml:Fluent">
-             <Expr>
-               <Fun>on</Fun>
-               <Var>Y</Var>
-               <Var>X</Var>
-               <Situation type="ruleml:History"><Var>S</Var></Situation>
-             </Expr>
-           </Situation>
-           <Negation>
-             <Equal>
-               <Situation><Var>A</Var></Situation>
-               <Situation> 
-                 <Expr>
-                   <Fun>putOnTable</Fun> 
-                   <Var>X</Var>
-                   <Var>S</Var>
-                 </Expr>
-               </Situation>            
-             </Equal>
-           </Negation>
-           <Negation>
-             <Equal>
-               <Var>A</Var>
-               <Situation> 
-                 <Expr>
-                   <Fun>move</Fun> 
-                   <Var>Y</Var> 
-                   <Var>X</Var> 
-                   <Var>S</Var>
-                 </Expr>
-               </Situation>            
-             </Equal>
-           </Negation>
-         </And>
-       </Or>
-     </if>
-     <then>
-       <Situation type="ruleml:Fluent">
-         <Expr>
-           <Fun>on</Fun> 
-           <Var>X</Var>
-           <Var>Y</Var>
-           <Situation type="ruleml:History">
-             <Var>A</Var>
-           </Situation>           
-         </Expr>
-       </Situation>      
-     </then>
-   </Rule> 
-    
-    <!-- ontable(X,A) :- A = putOnTable(X,S) ;
-                               onTable(X,S), not A = move(X,Y,S). -->
-    <Rule>
-      <if>
+    <!-- rule variant 1: without special syntax for Actions, Fluents, Situations -->
+    <Equivalent>
+      <torso>
         <Or>
           <Equal>
-            <Var type="ruleml:Situation">A</Var>
-              <Expr>
-                <Fun>putOnTable</Fun> 
-                <Var>X</Var>
-                <Var type="ruleml:History">S</Var>
-              </Expr>                       
+            <Var>A</Var>
+            <Expr>
+              <Fun>move</Fun> 
+              <Var>X</Var> 
+              <Var>Y</Var>
+            </Expr>     
           </Equal>
           <And>
-            <Situation type="ruleml:Fluent">
-              <Expr>
-                <Fun>onTable</Fun>
-                <Var>X</Var>
-                <Situation><Var type="ruleml:History">S</Var></Situation>
-              </Expr>
-            </Situation>
+            <Atom>
+              <Rel>on</Rel>
+              <Var>Y</Var>
+              <Var>X</Var>
+              <Var>S</Var>
+            </Atom>
             <Negation>
               <Equal>
-                <Var type="ruleml:History">A</Var>
-                <Situation> 
-                  <Expr>
-                    <Fun>move</Fun> 
-                    <Var>X</Var> 
-                    <Var>Y</Var>
-                    <Var>S</Var>
-                  </Expr>
-                </Situation>            
+                <Var>A</Var>
+                <Expr>
+                  <Fun>putOnTable</Fun> 
+                  <Var>X</Var>
+                </Expr>
+              </Equal>
+            </Negation>
+            <Negation>
+              <Equal>
+                <Var>A</Var>
+                <Expr>
+                  <Fun>move</Fun> 
+                  <Var>X</Var> 
+                  <Var>Z</Var> 
+                </Expr>       
               </Equal>
             </Negation>
           </And>
         </Or>
-      </if>
-      <then>
-        <Situation type="ruleml:Fluent">
+      </torso>
+      <torso>
+        <Atom>
+          <Rel>on</Rel> 
+          <Var>X</Var>
+          <Var>Y</Var>
           <Expr>
+            <Fun>do</Fun>
+              <Var>A</Var>
+              <Var>S</Var>
+          </Expr>           
+        </Atom>              
+      </torso>
+    </Equivalent> 
+    
+   <!-- rule variant 2: with syntax for Actions, Fluents, Situations -->
+   <Equivalent>
+     <torso>
+       <Or>
+         <Equal>
+           <Action><Var>A</Var></Action>
+           <Action> 
+             <Expr per="copy">
+               <Fun>move</Fun> 
+               <Var>X</Var> 
+               <Var>Y</Var>
+             </Expr>
+           </Action>            
+         </Equal>
+         <And>
+           <Fluent>
+             <Expr per="value">
+               <Fun>on</Fun>
+               <Var>Y</Var>
+               <Var>X</Var>
+               <Situation><Var>S</Var></Situation>
+             </Expr>
+           </Fluent>
+           <Negation>
+             <Equal>
+               <Action><Var>A</Var></Action>
+               <Action> 
+                 <Expr per="copy">
+                   <Fun>putOnTable</Fun> 
+                   <Var>X</Var>
+                 </Expr>
+               </Action>            
+             </Equal>
+           </Negation>
+           <Negation>
+             <Equal>
+               <Action><Var>A</Var></Action>
+               <Action> 
+                 <Expr per="copy">
+                   <Fun>move</Fun> 
+                   <Var>X</Var> 
+                   <Var>Z</Var> 
+                 </Expr>
+               </Action>            
+             </Equal>
+           </Negation>
+         </And>
+       </Or>
+     </torso>
+     <torso>
+       <Fluent>
+         <Expr per="value">
+           <Fun>on</Fun> 
+           <Var>X</Var>
+           <Var>Y</Var>
+           <Situation>
+             <Do>
+               <Action><Var>A</Var></Action>
+               <Situation><Var>S</Var></Situation>               
+             </Do>
+           </Situation>           
+         </Expr>
+       </Fluent>      
+     </torso>
+   </Equivalent> 
+    
+    <!-- ontable(X,do(A,S)) <-> A = putOnTable(X) ;
+                               onTable(X,S), not(A = move(X,Y)). -->
+    
+    <!-- variant 1: without special syntax for Fluent, Situation, Action -->
+    <Equivalent>
+      <torso>
+        <Or>
+          <Equal>
+            <Var>A</Var>
+            <Expr>
+                <Fun>putOnTable</Fun> 
+                <Var>X</Var>
+            </Expr>              
+          </Equal>
+          <And>
+            <Atom>
+              <Rel>onTable</Rel>
+              <Var>X</Var>
+              <Var>S</Var>
+            </Atom>
+            <Negation>
+              <Equal>
+                 <Var>A</Var>
+                 <Expr>
+                      <Fun>move</Fun> 
+                      <Var>X</Var> 
+                      <Var>Y</Var>
+                </Expr>                            
+              </Equal>
+            </Negation>
+          </And>
+        </Or>
+      </torso>
+      <torso>
+         <Atom>
+          <Rel>onTable</Rel> 
+          <Var>X</Var>
+          <Expr>
+            <Fun>do</Fun>
+            <Var>A</Var>
+            <Var>S</Var>
+          </Expr>
+        </Atom>
+      </torso>
+    </Equivalent>
+
+    <!-- variant 2: with special syntax for Fluent, Situation, Action -->
+    <Equivalent>
+      <torso>
+        <Or>
+          <Equal>
+            <Action><Var>A</Var></Action>
+            <Action>
+              <Expr per="copy">
+                <Fun>putOnTable</Fun> 
+                <Var>X</Var>
+              </Expr>
+            </Action>  
+          </Equal>
+          <And>
+            <Fluent>
+              <Expr>
+                <Fun>onTable</Fun>
+                <Var>X</Var>
+                <Situation><Var>S</Var></Situation>
+              </Expr>
+            </Fluent>
+            <Negation>
+              <Equal>
+                <Action><Var>A</Var></Action>
+                <Action> 
+                  <Expr per="copy">
+                    <Fun>move</Fun> 
+                    <Var>X</Var> 
+                    <Var>Y</Var>
+                  </Expr>
+                </Action>            
+              </Equal>
+            </Negation>
+          </And>
+        </Or>
+      </torso>
+      <torso>
+        <Fluent>
+          <Expr per="value">
             <Fun>onTable</Fun> 
             <Var>X</Var>
-            <Var type="ruleml:Situation">A</Var>
-         </Expr>
-        </Situation>      
-      </then>
-    </Rule>
-  </Rulebase>
-
+            <Situation><Do><Action><Var>A</Var><Var>S</Var></Action></Do></Situation>
+          </Expr>
+        </Fluent>      
+      </torso>
+    </Equivalent>
+   </Rulebase>
+    
+    <!-- UNA -->
+    
+    <Rulebase>
+      
+      <!-- not(move(X,Y) = putOnTable(Z)) -->
+      
+      <!-- Variant 1: without special syntax for Situation, Fluent, Action -->
+      <Negation>
+        <Equal>
+          <Expr>
+            <Fun>move</Fun>
+            <Var>X</Var>
+            <Var>Y</Var>
+          </Expr>
+          <Expr>
+            <Fun>putOnTable</Fun>
+            <Var>Z</Var>
+          </Expr>
+        </Equal>
+      </Negation>
+      
+      <!-- Variant 2: without special syntax for Situation, Fluent, Action -->
+      <Negation>
+        <Equal>
+          <Action>
+            <Expr per="copy">
+              <Fun>move</Fun>
+              <Var>X</Var>
+              <Var>Y</Var>
+            </Expr>
+          </Action>
+          <Action>
+            <Expr per="copy">
+              <Fun>putOnTable</Fun>
+              <Var>Z</Var>
+            </Expr>            
+          </Action>
+        </Equal>
+      </Negation>
+      
+      <!-- (X1=X2, Y1=Y2) <- move(X1,Y1) = move(X2,Y2) -->
+      
+      <!-- variant 1: without special syntax for Fluents, Situations, Actions -->
+      <Rule>
+        <if>
+          <Equal>
+            <Expr>
+              <Fun>move</Fun>
+              <Var>X1</Var>
+              <Var>Y1</Var>
+            </Expr>
+            <Expr>
+              <Fun>move</Fun>
+              <Var>X2</Var>
+              <Var>Y2</Var>
+            </Expr>
+          </Equal>
+        </if>
+        <then>
+          <Equal>
+            <Var>X1</Var>
+            <Var>X2</Var>
+          </Equal>
+        </then>
+      </Rule>
+      <Rule>
+        <if>
+          <Equal>
+            <Expr>
+              <Fun>move</Fun>
+              <Var>X1</Var>
+              <Var>Y1</Var>
+            </Expr>
+            <Expr>
+              <Fun>move</Fun>
+              <Var>X2</Var>
+              <Var>Y2</Var>
+            </Expr>
+          </Equal>
+        </if>
+        <then>
+          <Equal>
+            <Var>Y1</Var>
+            <Var>Y2</Var>
+          </Equal>
+        </then>
+      </Rule>
+      
+      <!-- variant 2: with special syntax for Fluents, Situations, Actions -->
+      <Rule>
+        <if>
+          <Equal>
+            <Action>
+              <Expr per="copy">
+                <Fun>move</Fun>
+                <Var>X1</Var>
+                <Var>Y1</Var>
+              </Expr>              
+            </Action>
+            <Action>
+              <Expr per="copy">
+                <Fun>move</Fun>
+                <Var>X2</Var>
+                <Var>Y2</Var>
+              </Expr>
+            </Action>  
+          </Equal>
+        </if>
+        <then>
+          <Equal>
+            <Var>X1</Var>
+            <Var>X2</Var>
+          </Equal>
+        </then>
+      </Rule>
+      <Rule>
+        <if>
+          <Equal>
+            <Action>
+              <Expr per="copy">
+                <Fun>move</Fun>
+                <Var>X1</Var>
+                <Var>Y1</Var>
+              </Expr>              
+            </Action>
+            <Action>
+              <Expr per="copy">
+                <Fun>move</Fun>
+                <Var>X2</Var>
+                <Var>Y2</Var>
+              </Expr>
+            </Action>  
+          </Equal>
+        </if>
+        <then>
+          <Equal>
+            <Var>Y1</Var>
+            <Var>Y2</Var>
+          </Equal>
+        </then>
+      </Rule>
+    </Rulebase>
+  </Assert>
+  
+  <!-- assert initial situation -->
+  <Assert>
+    
+    <!-- block(a) -->
+    <Atom>
+      <Rel>block</Rel>
+      <Ind>a</Ind>
+    </Atom>
+    
+    <!-- block(b) -->
+    <Atom>
+      <Rel>block</Rel>
+      <Ind>b</Ind>
+    </Atom>
+    
+    <!-- block(c) -->
+    <Atom>
+      <Rel>block</Rel>
+      <Ind>c</Ind>
+    </Atom>
+    
+    <!-- block(d) -->
+    <Atom>
+      <Rel>block</Rel>
+      <Ind>d</Ind>
+    </Atom>
+    
+    <!-- block(e) -->
+    <Atom>
+      <Rel>block</Rel>
+      <Ind>e</Ind>
+    </Atom>
+    
+    <!-- block(f) -->
+    <Atom>
+      <Rel>block</Rel>
+      <Ind>f</Ind>
+    </Atom>
+    
+    <!-- on(c,b, s0) -->
+    
+    <!-- variant1: without fluent syntax -->
+    <Atom>
+      <Rel>on</Rel>
+      <Ind>c</Ind>
+      <Ind>b</Ind>
+      <Ind>s0</Ind>
+    </Atom>
+    <!-- variant2: with fluent syntax -->
+    <Fluent>
+      <Expr per="value">
+        <Fun>on</Fun>
+        <Ind>c</Ind>
+        <Ind>b</Ind>
+        <Situation><Ind>s0</Ind></Situation>
+      </Expr>
+    </Fluent>
+    
+    <!-- on(b,a, s0) -->
+    
+    <!-- variant1: without fluent syntax -->
+    <Atom>
+      <Rel>on</Rel>
+      <Ind>b</Ind>
+      <Ind>a</Ind>
+      <Ind>s0</Ind>
+    </Atom>
+    <!-- variant2: with fluent syntax -->
+    <Fluent>
+      <Expr per="value">
+        <Fun>on</Fun>
+        <Ind>b</Ind>
+        <Ind>a</Ind>
+        <Situation><Ind>s0</Ind></Situation>
+      </Expr>
+    </Fluent>
+    
+    <!-- on(a,table, s0) -->
+    
+    <!-- variant1: without fluent syntax -->
+    <Atom>
+      <Rel>on</Rel>
+      <Ind>a</Ind>
+      <Ind>table</Ind>
+      <Ind>s0</Ind>
+    </Atom>
+    <!-- variant2: with fluent syntax -->
+    <Fluent>
+      <Expr per="value">
+        <Fun>on</Fun>
+        <Ind>a</Ind>
+        <Ind>table</Ind>
+        <Situation><Ind>s0</Ind></Situation>
+      </Expr>
+    </Fluent>
+    
+    <!-- on(e,d, s0) -->
+    
+    <!-- variant1: without fluent syntax -->
+    <Atom>
+      <Rel>on</Rel>
+      <Ind>e</Ind>
+      <Ind>d</Ind>
+      <Ind>s0</Ind>
+    </Atom>
+    <!-- variant2: with fluent syntax -->
+    <Fluent>
+      <Expr per="value">
+        <Fun>on</Fun>
+        <Ind>e</Ind>
+        <Ind>d</Ind>
+        <Situation><Ind>s0</Ind></Situation>
+      </Expr>
+    </Fluent>
+    
+    <!-- on(d,table, s0) -->
+    
+    <!-- variant1: without fluent syntax -->
+    <Atom>
+      <Rel>on</Rel>
+      <Ind>d</Ind>
+      <Ind>table</Ind>
+      <Ind>s0</Ind>
+    </Atom>
+    <!-- variant2: with fluent syntax -->
+    <Fluent>
+      <Expr per="value">
+        <Fun>on</Fun>
+        <Ind>d</Ind>
+        <Ind>table</Ind>
+        <Situation><Ind>s0</Ind></Situation>
+      </Expr>
+    </Fluent>
+    
+    <!-- on(f,table, s0) -->
+    
+    <!-- variant1: without fluent syntax -->
+    <Atom>
+      <Rel>on</Rel>
+      <Ind>f</Ind>
+      <Ind>table</Ind>
+      <Ind>s0</Ind>
+    </Atom>
+    <!-- variant2: with fluent syntax -->
+    <Fluent>
+      <Expr per="value">
+        <Fun>on</Fun>
+        <Ind>f</Ind>
+        <Ind>table</Ind>
+        <Situation><Ind>s0</Ind></Situation>
+      </Expr>
+    </Fluent>
+    
+    <!-- there are no other blocks -->
+    <Equivalent>
+      <torso>
+        <Atom>
+          <Rel>block</Rel>
+          <Var>X</Var>
+        </Atom>        
+      </torso>
+      <torso>
+        <Or>
+          <Equal>
+            <Var>X</Var>
+            <Ind>a</Ind>
+          </Equal>
+          <Equal>
+            <Var>X</Var>
+            <Ind>b</Ind>
+          </Equal>
+          <Equal>
+            <Var>X</Var>
+            <Ind>c</Ind>
+          </Equal>
+          <Equal>
+            <Var>X</Var>
+            <Ind>d</Ind>
+          </Equal>
+          <Equal>
+            <Var>X</Var>
+            <Ind>e</Ind>
+          </Equal>
+          <Equal>
+            <Var>X</Var>
+            <Ind>f</Ind>
+          </Equal>
+        </Or>
+      </torso> 
+    </Equivalent>
+    
   </Assert>
 
 </RuleML>

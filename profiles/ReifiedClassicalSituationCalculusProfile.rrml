@@ -5,16 +5,16 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
   
+  <!-- Semantic Profile for the reified Situation Calculus with reified fluents, actions and situations (SCr).
+    
+    The formalization of the axioms originates from Pinto's reified situation calculus which extends the basic axioms of Reiter's classcial situation calculus.
+  
   <!-- assert knowledge -->
 
   <Assert>
     
   <evaluation>
     
-    <!-- Semantic Profile for the reified Situation Calculus with reified fluents, actions and situations (SCr).
-    
-    The formalization of the axioms originates from Pinto's reified situation calculus which extends the basic axioms of Reiter's classcial situation calculus.
-  
     -->
     
     <Profile key="ruleml:ReifiedClassicalSituationCalculus">

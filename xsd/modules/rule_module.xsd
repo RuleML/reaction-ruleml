@@ -198,7 +198,7 @@
 	<xs:group name="ProductionRule.content">
 		<xs:choice>
 			<xs:sequence>
-				<xs:element ref="else" minOccurs="0"/>
+				<xs:element ref="elseDo" minOccurs="0"/>
 				<xs:element ref="do"/>
 				<xs:element ref="if"/>
 			</xs:sequence>
@@ -206,6 +206,32 @@
 				<xs:element ref="if"/>
 				<xs:element ref="do"/>
 				<xs:element ref="elseDo" minOccurs="0"/>
+			</xs:sequence>
+		</xs:choice>
+		
+	</xs:group>
+	
+	
+	<!--
+   *** Combined DR Production Rule content model ***
+   Production Rule       Derivation Rule    Production Rule with conclusion   inverse Production Rule with conclusion 
+   ((if, do, elseDo?) | (if, then, else) | (if, do, then?, elseDo?, else?) | (else?, elseDo?, then?, do, if))
+-->
+	<xs:group name="DRProductionRule.content">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element ref="else" minOccurs="0"/>
+				<xs:element ref="elseDo" minOccurs="0"/>
+				<xs:element ref="then" minOccurs="0"/>
+				<xs:element ref="do" />
+				<xs:element ref="if"/>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:element ref="if"/>
+				<xs:element ref="do" minOccurs="0"/>
+				<xs:element ref="then" minOccurs="0"/>
+				<xs:element ref="elseDo" minOccurs="0"/>
+				<xs:element ref="else" minOccurs="0"/>
 			</xs:sequence>
 		</xs:choice>
 		

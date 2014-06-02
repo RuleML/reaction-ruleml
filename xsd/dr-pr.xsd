@@ -6,39 +6,51 @@
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
           
-           Event-Condition-Action Rule (ECA) dialect of Reaction RuleML 
+            The combined Derivation Rule (DR) and Production Rule (PR) dialect of Reaction RuleML 
 			
-			This layer defines the ECA Rule dialect of Reaction RuleML.
-			It adds necessary extensions to the shared condition language including
-			transactional actions (do) and events (on)
+			This layer defines the combined Derivation Rule and Production Rule dialect of Reaction RuleML.			
 			
-			
-			File: eca.xsd
+			File: dr-pr.xsd
 			Version: 1.0
 			Last Modification: 2011-03-22
 			
 			This schema declares the following Reaction RuleML elements and attributes:
 				  								  
-				  
-				  * extends Rule by adding do, after (post-condition), elseDo (alternative action)
-				  * adds Event and event operators for complex event definitions
-				  * adds Action and action operators for complex action definitions
-				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
-				  * extends actions by adding @safety (transactional update) and @size
-				  * add meta, scope, guard, evaluation, signature, qualification, quantification
-				  * add generic Operator
-				  * extends Assert, Retract, Update by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification
-				  * extends Query by adding Negation, Naf, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
+				  * rename Implies into Rule (if-then-else)
+				  * extends RuleML by adding meta, scope, guard, evaluation, signature, qualification, quantification 
+				  * extends Assert, Retract by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification,  @safety and @size
+				  * extends Query by adding Negation, Naf, Neg Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
 				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends if and then, on , do by adding Time, Spatial, Interval
+				  * extends if and then by adding Time, Spatial, Interval
 				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
 				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification and Time, Spatial, Interval
 				  * extends slot by adding Time, Spatial, Interval
 				  * extends oid by adding Time, Spatial, Interval
 				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
 				  * extends Rel by adding @per	
-				  * extends And/Or by adding Negation, Naf, Rule
+				  * extends And/Or by adding Negation, Neg, Naf, Rule
 				  * extends torso by  Negation, Neg, Naf 
+				  * extends @type to be of type termOrCurieOrIRI.datatype
+				  * add Negation, Neg, Naf 
+				  * add Time, Interval, Spatial
+				  * add Quantifier, Forall, Exists (quantification) 
+				  * add @key, @keyref (with key and keyref of type curieORAbsIRI)
+				  
+				  * extends Rule by adding on, do, elseDo (alternative action) 
+				  * adds Action and action operators for complex action definitions
+				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
+				  * extends actions by adding @safety (transactional update) and @size
+				  * add meta, scope, guard, evaluation, signature, qualification, quantification
+				  * add generic Operator
+				  * extends Assert, Retract, Update by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification
+				  * extends Query by adding Negation, Naf, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
+				  * extends Rulebase by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 
+				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
+				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification
+				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
+				  * extends Rel by adding @per	
+				  * extends And/Or by adding Negation, Naf, Rule
+				  * extends torso by  Negation, Naf 
 				  * extends @type to be of type termOrCurieOrIRI.datatype
 				  * add Negation, Naf 				  
 				  * add Quantifier, Forall, Exists (quantification) 
@@ -49,7 +61,7 @@
 		</xs:documentation>
 		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
 		<xs:appinfo>
-			<dc:title>ECA Reaction RuleML Schema</dc:title>
+			<dc:title>DR-PR Reaction RuleML Schema</dc:title>
 			<dc:version>1.0</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
 			<dc:subject>Reaction RuleML 1.0</dc:subject> 
@@ -80,7 +92,7 @@
 	<!-- includes the equalog layer with the 'equality' module -->
 	<xs:include schemaLocation="modules/equality_module.xsd"/>
 
-	<!-- include from the derivation rule layer of reaction ruleml   -->
+	<!-- include from the (spatial-temporal) derivation rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/attribute_module.xsd"/>
 	<xs:include schemaLocation="modules/rule_module.xsd"/>
 	<xs:include schemaLocation="modules/negation_module.xsd"/>
@@ -92,15 +104,12 @@
 
 	<!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
 	<xs:include schemaLocation="modules/spatial_temporal_interval_algebra_module.xsd"/>
-
+	
 	<!-- include actions from the PR rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/action_module.xsd" />
 	<xs:include schemaLocation="modules/action_algebra_module.xsd" />
 	
-	<!-- include events from the ECA rule layer of reaction ruleml   -->
-	<xs:include schemaLocation="modules/event_module.xsd" />
-	<xs:include schemaLocation="modules/event_algebra_module.xsd" />
-
+	
 	<!--
      metadata group
      
@@ -174,16 +183,17 @@
     
      content model:
      
-     in ECA Reaction RuleML: (Reaction Rule | Derivation Rule)
+     in DR-PR Reaction RuleML: 
      
-     ( (on, (if?, then?, do, after?,else?, elseDo?)? ) | ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?)))
+     ((if, do, then?, elseDo?, else?) | (else?, elseDo?, then?, do, if)) |
+     ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?)) 
+     
           
 	-->
 	
 	<xs:group name="rule-implementation.content">
-		<xs:choice>
-			<xs:group ref="ReactionRule.content"/>
-			<xs:group ref="DerivationRule.content"/>
+		<xs:choice>			
+			<xs:group ref="DRProductionRule.content"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -203,7 +213,7 @@
 			<xs:element ref="Negation"/>
 			<xs:element ref="Naf"/>
 			<xs:element ref="Neg"/>
-			<xs:element ref="Equal"/>
+			<xs:element ref="Equal"/> 
 		</xs:choice>
 	</xs:group>
 	
@@ -232,7 +242,8 @@
          
      An internal group for the outer connectives in the Reaction RuleML language
     
-     content model: (Operator | Negation | Neg | Equal)
+    
+     content model: (Operator | Negation | Neg | Equal )
           
 	-->
 	
@@ -241,7 +252,7 @@
 			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
-			<xs:element ref="Equal"/> 			
+			<xs:element ref="Equal"/> 
 		</xs:choice>
 	</xs:group>
 	
@@ -250,13 +261,13 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: not used - PR Reaction RuleML only supports inner quantifiers in <quantification>
+     content model: ( )
           
 	-->
 	
 	<xs:group name="query-quantifier.content">
 		<xs:choice>
-			<xs:element ref="Exists"/>
+			
 		</xs:choice>
 	</xs:group>
 	
@@ -280,16 +291,15 @@
 	<!--
          
      An internal group for the outer quantifiers in the Reaction RuleML language
-	 
-	 ECA Reaction RuleML does not allow outer quantifiers - Quantifiers are defined internally in the <quantification>    
     
-     content model: ( )
+    
+     content model: (  )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
 		<xs:choice>
-
+			
 		</xs:choice>
 	</xs:group>
 	
@@ -297,7 +307,9 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-    content model: (Atom | Time | Spatial | Interval | Event | Action)
+     In the DR-PR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
+    
+     content model: (Atom | Time | Spatial | Interval)
           
 	-->
 	
@@ -307,8 +319,6 @@
 			<xs:element ref="Time"/>
 			<xs:element ref="Spatial"/>
 			<xs:element ref="Interval"/>
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>	
 		</xs:choice>
 	</xs:group>
 	
@@ -317,7 +327,9 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action)
+     In the DR-PR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
+    
+     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval)
           
 	-->
 	
@@ -329,20 +341,16 @@
 			<xs:element ref="Plex"/>
 			<xs:element ref="Time"/>
 			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>	
+			<xs:element ref="Interval"/>	
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
-
-		in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
-
+		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
 	-->
 	<xs:group name="time_primitives.content">
-		<xs:choice>	
+		<xs:choice>			
 			<xs:group ref="arg.content"/>
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
@@ -350,12 +358,10 @@
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
-
-		in ECA Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
-
+		in DR-PR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
 	-->
 	<xs:group name="spatial_primitives.content">
-		<xs:choice>	
+		<xs:choice>			
 			<xs:group ref="arg.content"/>
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
@@ -363,20 +369,17 @@
 
 	<!-- Interval primitives
 		content model: 
-		
-		in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  
-	-->
+		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  -->
 	<xs:group name="interval_primitives.content">
-		<xs:choice>	
+		<xs:choice>
 			<xs:group ref="arg.content"/>	
-			<xs:group ref="interval_algebra_group.content"/>
+			<xs:group ref="interval_algebra_group.content"/>			
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
-		
-		not used in ECA RuleML (only in combination with KR RuleML)
+		in DR-PR Reaction RuleML: ()
 	-->
 	<xs:group name="situation_primitives.content">
 		<xs:choice>
@@ -385,33 +388,27 @@
 
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
-		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )		
+		in DR-PR Reaction RuleML: ()
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>
-			<xs:group ref="arg.content"/>
-			<xs:group ref="event_algebra_group.content"/>
 		</xs:choice>
-	</xs:group>	
-
+	</xs:group>
+	
 	<!-- An internal group for events
 		content model:
-		in ECA Reaction RuleML:  ( Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )
-	-->
+		
+		DR-PR Reaction RuleML ( )-->
 	
 	<xs:group name="event_group.content">
 		<xs:choice>
-			<xs:element ref="Event"/>
-			<xs:element ref="Action"/>
-			<xs:group ref="event_algebra_group.content"/>
+			
 		</xs:choice>
 	</xs:group>	
 
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
-		
-		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action |  Succession | Choice | Flow | Loop | Operator )
+		in DR-PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex |  Succession | Choice | Flow | Loop | Operator)
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
@@ -419,10 +416,11 @@
 			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
-	
+
 	<!-- An internal group for actions
 		content model:
-		ECA Reaction RuleML (Assert | Retract | Update | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
+		
+		DR-PR Reaction RuleML (Assert | Retract | Update | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
@@ -437,7 +435,7 @@
 
 	<!-- An internal group for the performative primitives
 		content model: 
-		in ECA Reaction RuleML: (Assert|Retract|Update|Query|Action)
+		in DR-PR Reaction RuleML: (Assert|Retract|Update|Query|Action)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>
@@ -453,7 +451,7 @@
     *** @style ***
     
      restriction: active | messaging | reasoning
-	 default value: active (in ECA Reaction RuleML)
+	 default value: active (in DR Reaction RuleML)
 	 optional attribute
 -->
 	<xs:attributeGroup name="style.attrib">

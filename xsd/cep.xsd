@@ -53,7 +53,7 @@
 		</xs:documentation>
 		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
 		<xs:appinfo>
-			<dc:title>DR Reaction RuleML Schema</dc:title>
+			<dc:title>CEP Reaction RuleML Schema</dc:title>
 			<dc:version>1.0</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
 			<dc:subject>Reaction RuleML 1.0</dc:subject> 

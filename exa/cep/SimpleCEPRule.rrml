@@ -74,7 +74,7 @@
   <Send>
     <enclosed>
       <Message>
-        <oid><Ind>cid1</Ind></oid> <!-- conversation identifier -->
+        <cid><Ind>cid1</Ind></cid> <!-- conversation identifier -->
         <sender><Ind>Mary</Ind></sender> <!-- sender -->
         <receiver><Ind>John</Ind></receiver> <!-- receiver -->
         <payload> <!-- payload -->

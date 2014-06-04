@@ -68,6 +68,7 @@
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="safety.attrib"/>
 		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="closure.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Event.content">

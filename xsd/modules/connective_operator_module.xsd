@@ -47,6 +47,7 @@
         ECA Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)* )
 	-->
 	<xs:attributeGroup name="ConnectiveOperator.attlist">
+		<xs:attributeGroup ref="closure.attrib"/>
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>

@@ -45,8 +45,12 @@
 
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
-	-->
+
+    attributes: @closure? @direction? @material? @safety? @size? @node? @key? @keyref? @xml:id? @xml:base? 
+  -->
   <xs:attributeGroup name="Implies.attlist">
+    <xs:attributeGroup ref="safety.attrib"/>
+    <xs:attributeGroup ref="size.attrib"/>
     <xs:attributeGroup ref="closure.attrib"/>
     <xs:attributeGroup ref="direction.attrib"/>
     <xs:attributeGroup ref="material.attrib"/>
@@ -289,6 +293,8 @@
     ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
   -->
   <xs:attributeGroup name="Rulebase.attlist">
+    <xs:attributeGroup ref="mapSafety.attrib"/>
+    <xs:attributeGroup ref="mapSize.attrib"/>
     <xs:attributeGroup ref="mapClosure.attrib"/>
     <xs:attributeGroup ref="mapDirection.attrib"/>
     <xs:attributeGroup ref="mapMaterial.attrib"/>

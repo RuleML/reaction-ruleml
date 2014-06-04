@@ -318,11 +318,14 @@
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (enclosed | Message)* )
 	  
       Consult has the following attributes:
-      @safety, @size  @iri    
+      @mapSafety? @mapSize? @mapDirection?, @mapClosure? @mapMaterial? @node? @iri? @prefix? @key? @keyref? @xml:id? @xml:base? 
     -->
 	<xs:attributeGroup name="Consult.attlist">
-		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="mapSafety.attrib"/>
+		<xs:attributeGroup ref="mapSize.attrib"/>
+		<xs:attributeGroup ref="mapClosure.attrib"/>
+		<xs:attributeGroup ref="mapDirection.attrib"/>
+		<xs:attributeGroup ref="mapMaterial.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -352,7 +355,7 @@
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (enclosed | Message )* )
 	  
       Send / Receive has the following attributes:
-      @safety, @size
+      @safety, @size, @closure
       
       The @size attribute defines the number of messages to be received. Default value for size is "1". 
       If -1 is used it will wait infinitely for incoming messages. 
@@ -362,6 +365,7 @@
 	<xs:attributeGroup name="Send.attlist">
 		<xs:attributeGroup ref="safety.attrib"/>
 		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="closure.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>

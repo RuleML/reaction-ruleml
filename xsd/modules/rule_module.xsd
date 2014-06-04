@@ -68,7 +68,7 @@
 
 	 
       Rule has the following attributes:
-      @key @keyref @vocab? @type @style @closure @direction @material @node 
+      @style? @vocab? @type? @closure? @direction? @material? @safety? @size? @node? @prefix? @key? @keyref? @xml:id? @xml:base?  
       
 -->
 	<xs:attributeGroup name="Rule.attlist">

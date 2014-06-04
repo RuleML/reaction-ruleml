@@ -96,6 +96,7 @@
       The optional @type attribute defines the type of the action,
       the optional @safety attribute indicates if this is an interrupting, non-interrupting, transactional action
       the optional @size attribute acts as a generic size counter for the number of actions to be done 
+      optional @closure defines the default quantification
              
 	  content model: 
 	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
@@ -115,6 +116,7 @@
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="safety.attrib"/>
 		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="closure.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Action.content">
@@ -164,7 +166,7 @@
 		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
 	  
       Update has the following attributes:
-      @safety, @size
+      @mapSafety?, @mapSize?, @mapClosure?, @mapDirection?, @mapMaterial?, @node?, @key?, @keyref?, @xml:id? @xml:base?
       
 -->
 	<xs:attributeGroup name="Update.attlist">

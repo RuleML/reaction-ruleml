@@ -76,7 +76,7 @@
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       
-      attributes: @vocab? @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base? 
+      attributes: @vocab? @type?, @iri?, @node?, @xml?, @safety?, @size?, @closure?, @key? @keyref?, @xml:id? @xml:base? 
 	-->
 	<xs:attributeGroup name="EventAlgebraOperator.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
@@ -86,6 +86,7 @@
 		<xs:attributeGroup ref="xml.attlist"/>
 		<xs:attributeGroup ref="safety.attrib"/>
 		<xs:attributeGroup ref="size.attrib"/>
+		<xs:attributeGroup ref="closure.attrib"/>
 	</xs:attributeGroup>
 	<xs:group name="EventAlgebraOperator.content">
 		<xs:sequence>
@@ -115,7 +116,7 @@
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       
-      attributes:  @safety?, @size?, @type?, @iri?, @node?, @key? @keyref?, @xml:id? @xml:base? 
+      attributes:  @safety?, @size?, @closure?, @type?, @iri?, @node?, @key? @keyref?, @xml:id? @xml:base? 
 	-->
 	<xs:attributeGroup name="Not.attlist">
 		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
@@ -147,7 +148,7 @@
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       
-      attributes: @type?, @iri?, @node?, @xml?, @safety?, @size?, @key? @keyref?, @xml:id? @xml:base?  -->
+      attributes: @type?, @iri?,  @node?, @xml?, @safety?, @size?, @closure? @key? @keyref?, @xml:id? @xml:base?  -->
 
 	<xs:element name="Aperiodic" type="Not.type"/>
 	
@@ -190,7 +191,7 @@
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       
-      attributes: @size, @type?, @iri?, @node?, @xml?, @safety?, @key? @keyref?, @xml:id? @xml:base? 
+      attributes: @size, @type?, @iri?, @node?, @xml?, @safety?, @closure?, @key? @keyref?, @xml:id? @xml:base? 
 	-->  
 	<xs:element name="AtLeast" type="EventAlgebraOperator.type"/>
 	<xs:element name="AtMost" type="EventAlgebraOperator.type"/>

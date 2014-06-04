@@ -20,7 +20,8 @@
                   * @node
                   * @type (types / sorts used in sorted logics)
                   * @mode (mode declaration)
-                  * @safety (transactional)
+                  * @safety / mapSafety (transactional)
+                  * @size / mapSize (maximum counter)
                   * @per (usage)
                   * @all (yes|no)
                   * @style (execution style)	
@@ -69,12 +70,13 @@
 		</xs:attribute>
 	</xs:attributeGroup>
 	<!--
-	  *** @safety ***
+	  *** @safety / @mapSafety ***
 
 	     restriction: interrupting, non-interrupting or transactional
 		 default: non-interrupting
 		 optional attribute
 	-->
+
 	<xs:attributeGroup name="safety.attrib">
 		<xs:attribute name="safety" use="optional" default="non-interrupting">
 			<xs:simpleType>
@@ -86,6 +88,18 @@
 			</xs:simpleType>
 		</xs:attribute>
 	</xs:attributeGroup>
+	<xs:attributeGroup name="mapSafety.attrib">
+		<xs:attribute name="mapSafety" use="optional" default="non-interrupting">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="non-interrupting"/>
+					<xs:enumeration value="interrupting"/>
+					<xs:enumeration value="transactional"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	
 	<!--
 		*** @per ***
 		An attribute indicating how a relation, function or expression is interpreted.
@@ -106,12 +120,15 @@
 	</xs:attributeGroup>	
 	
 	<!--
-		*** @size ***
+		*** @size / @mapSize ***
 		An attribute indicating the size of a counter		
 		-1 = unbound / all
 	-->
 	<xs:attributeGroup name="size.attrib">
 		<xs:attribute name="size" type="xs:int" use="optional" default="-1"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="mapSize.attrib">
+		<xs:attribute name="mapSize" type="xs:int" use="optional" default="-1"/>
 	</xs:attributeGroup>
 	
 	<!--

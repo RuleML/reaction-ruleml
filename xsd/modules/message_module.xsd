@@ -54,7 +54,7 @@
       A Message element that provides the syntax for inbound and outbound messages / notifications 
 
       content model: 
-       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, protocol?, directive?, sender?, receiver?, (content | payload)? )
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, cid?, protocol?, directive?, sender?, receiver?, (content | payload)? )
        
       
       Message has the following attributes:
@@ -72,6 +72,9 @@
 	<xs:group name="Message.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="cid" type="oid.type"/>
+			</xs:choice>
 			<xs:choice minOccurs="0">
 				<xs:element ref="protocol"/>
 			</xs:choice>

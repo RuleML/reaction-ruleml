@@ -58,13 +58,14 @@
        
       
       Message has the following attributes:
-      @prefix? @vocab? @mode?, @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      @prefix? @vocab? @mode?, @type?, @arity?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
       
 -->
 	<xs:attributeGroup name="Message.attlist">
 		<xs:attributeGroup ref="message-mode.attrib"/>
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -106,12 +107,13 @@
       content model: ( (content(xs:any))? )
 	  
       Agent has the following attributes:
-      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      @type?, arity?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
       
 	-->
 	<xs:attributeGroup name="Agent.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -140,12 +142,13 @@
       content model: ( (content(xs:any) )? )
 	  
       Protocol has the following attributes:
-      @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
+      @type?, @arity?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?
       
 -->
 	<xs:attributeGroup name="Protocol.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>

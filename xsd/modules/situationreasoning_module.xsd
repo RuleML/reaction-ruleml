@@ -84,6 +84,7 @@
 	<xs:attributeGroup name="Do.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -128,6 +129,7 @@
 	<xs:attributeGroup name="Happens.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -166,6 +168,7 @@
 	<xs:attributeGroup name="Initiates.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>		
@@ -208,6 +211,7 @@
 	<xs:attributeGroup name="Terminates.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -256,6 +260,7 @@
 	<xs:attributeGroup name="Holds.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -291,6 +296,7 @@
 	<xs:attributeGroup name="Fluent.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>

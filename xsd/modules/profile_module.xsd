@@ -50,6 +50,7 @@
 	<xs:attributeGroup name="Profile.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="mapDirection.attrib"/>
 		<xs:attributeGroup ref="mapClosure.attrib"/>

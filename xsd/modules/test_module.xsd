@@ -57,7 +57,7 @@
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (vvi | Entails | TestItem | TestSuite)*)
       
       Test has the following attributes:
-      @safety? @size? @closure? @direction? @vocab? @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+      @safety? @size? @closure? @direction? @vocab? @type?, arity?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
 	-->
 	<xs:attributeGroup name="Test.attlist">
 		<xs:attributeGroup ref="safety.attrib"/>
@@ -66,6 +66,7 @@
 		<xs:attributeGroup ref="direction.attrib"/>
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -144,11 +145,12 @@
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (testbase | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
       
       Test has the following attributes:
-      @vocab? @type?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+      @vocab? @type?, @arity?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
 	-->
 	<xs:attributeGroup name="TestSuite.attlist">
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -249,7 +251,7 @@
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
 	  
       Answer has the following attributes:
-      @safety?, @size? @closure? @vocab? @type? @iri? @node? @key @keyref @xml:id? @xml:base?  
+      @safety?, @size? @closure? @vocab? @type? @arity? @iri? @node? @key @keyref @xml:id? @xml:base?  
     -->
 	<xs:attributeGroup name="Answer.attlist">		
 		<xs:attributeGroup ref="safety.attrib"/>
@@ -257,6 +259,7 @@
 		<xs:attributeGroup ref="closure.attrib"/>
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="node.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>

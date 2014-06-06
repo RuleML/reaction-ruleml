@@ -68,13 +68,14 @@
 
 	 
       Rule has the following attributes:
-      @style? @vocab? @type? @closure? @direction? @material? @safety? @size? @node? @prefix? @key? @keyref? @xml:id? @xml:base?  
+      @style? @vocab? @type? @arity? @closure? @direction? @material? @safety? @size? @node? @prefix? @key? @keyref? @xml:id? @xml:base?  
       
 -->
 	<xs:attributeGroup name="Rule.attlist">
 		<xs:attributeGroup ref="style.attrib"/>
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="type.attrib"/>
+		<xs:attributeGroup ref="arity.attrib"/>
 		<xs:attributeGroup ref="Implies.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Rule.content">

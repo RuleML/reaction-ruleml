@@ -19,6 +19,7 @@
                   
                   * @node
                   * @type (types / sorts used in sorted logics)
+                  * @arity (the arity of the signature associated with the symbol)
                   * @mode (mode declaration)
                   * @safety / mapSafety (transactional)
                   * @size / mapSize (maximum counter)
@@ -196,6 +197,20 @@
 		<xs:attribute name="type" type="termOrCurieOrAbsIRI.datatype" use="optional"/>
 	</xs:attributeGroup>
 	
+	
+	<!--
+		*** @arity ***
+		An optional attribute for specifying the arity of the signature which is assigned with the symbol.
+		The arity of constants / individual objects is zero.
+		The arity of predicates and functions is the number of arguments they have.
+		
+		
+		See http://www.reaction.ruleml.org/1.0/glossary/#gloss-@arity
+	-->
+	<xs:attributeGroup name="arity.attrib">
+		<xs:attribute name="arity" type="xs:nonNegativeInteger" use="optional"/>
+	</xs:attributeGroup>
+	
 	<!--
 		*** @prefix ***
 		
@@ -223,7 +238,6 @@
 	<xs:attributeGroup name="vocab.attrib">
 		<xs:attribute name="vocab" type="xs:anyURI" use="optional"/>
 	</xs:attributeGroup>
-	
 	
 	<!-- 
  	

@@ -275,9 +275,10 @@
      	
      content model:  xs:any*
      
-     attributes:  @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
 	<xs:attributeGroup name="message_anycontent.attlist">
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="message_anycontent.content">
@@ -377,10 +378,10 @@
      
      content model:  
       in CEP Reaction RuleML: (Message)
-     attributes: index?      
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
 	<xs:attributeGroup name="enclosed.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="enclosed.content">

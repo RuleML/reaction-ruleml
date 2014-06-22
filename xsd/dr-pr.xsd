@@ -307,8 +307,9 @@
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
      In the DR-PR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
+     Update actions can be also used as predicates, i.e. having a value interpretation.
     
-     content model: (Atom | Time | Spatial | Interval)
+     content model: (Atom | Time | Spatial | Interval | (Assert|Retract|Update|Consult|Query|Action) )
           
 	-->
 	
@@ -318,6 +319,7 @@
 			<xs:element ref="Time"/>
 			<xs:element ref="Spatial"/>
 			<xs:element ref="Interval"/>
+			<xs:group ref="performative_primitives.content"/>
 		</xs:choice>
 	</xs:group>
 	

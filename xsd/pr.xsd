@@ -85,6 +85,9 @@
 	<!-- include actions from the PR rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/action_module.xsd" />
 	<xs:include schemaLocation="modules/action_algebra_module.xsd" />
+	
+	<!-- include test suites   -->
+	<xs:include schemaLocation="modules/test_module.xsd" />
 
 	<!--
      metadata group
@@ -378,16 +381,18 @@
 	
 	<!-- An internal group for actions
 		content model:
-		PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
+		PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Answer | Test | Action | Succession | Choice | Flow | Loop | Operator )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
+			<xs:element ref="Consult"/>
 			<xs:element ref="Action"/>
 			<xs:element ref="Query"/>
-			<xs:element ref="Consult"/>
+			<xs:element ref="Answer"/>
+			<xs:element ref="Test"/>
 			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
@@ -405,7 +410,7 @@
 
 	<!-- An internal group for the performative primitives
 		content model: 
-		in PR Reaction RuleML: (Assert|Retract|Update|Consult|Query|Action)
+		in PR Reaction RuleML: (Assert|Retract|Update|Consult|Query|Answer|Test|Action)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>
@@ -415,6 +420,8 @@
 			<xs:element ref="Consult"/>
 			<xs:element ref="Action"/>
 			<xs:element ref="Query"/>
+			<xs:element ref="Answer"/>
+			<xs:element ref="Test"/>
 		</xs:choice>
 	</xs:group>
 

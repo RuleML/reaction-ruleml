@@ -458,7 +458,7 @@
 	
 	<!-- An internal group for actions
 		content model:
-		CEP Reaction RuleML (Send | Consult | Assert | Retract | Update | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
+		CEP Reaction RuleML (Send | Consult | Assert | Retract | Update | Query | Test | Action | Succession | Choice | Flow | Loop | Operator )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
@@ -466,7 +466,8 @@
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
 			<xs:element ref="Action"/>
-			<xs:element ref="Query"/> 
+			<xs:element ref="Query"/>
+			<xs:element ref="Test"/>
 			<xs:element ref="Send"/>
 			<xs:element ref="Consult"/>
 			<xs:group ref="action_algebra_group.content"/>

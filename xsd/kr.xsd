@@ -72,7 +72,9 @@
 	<xs:include schemaLocation="modules/event_module.xsd" />
 	<xs:include schemaLocation="modules/action_module.xsd" />
 
-
+	<!-- include test suites   -->
+	<xs:include schemaLocation="modules/test_module.xsd" />
+	
 	<!--
      metadata group
      
@@ -412,7 +414,7 @@
 
 	<!-- An internal group for the performative primitives
 		content model: 
-		in KR Reaction RuleML: (Consult|Assert|Retract|Query)
+		in KR Reaction RuleML: (Consult|Assert|Retract|Query|Answer|Test)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>
@@ -420,6 +422,8 @@
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Query"/>
+			<xs:element ref="Answer"/>
+			<xs:element ref="Test"/>
 		</xs:choice>
 	</xs:group>
 

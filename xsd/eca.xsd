@@ -99,6 +99,9 @@
 	<!-- include events from the ECA rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="modules/event_module.xsd" />
 	<xs:include schemaLocation="modules/event_algebra_module.xsd" />
+	
+	<!-- include test suites   -->
+	<xs:include schemaLocation="modules/test_module.xsd" />
 
 	<!--
      metadata group
@@ -421,7 +424,7 @@
 	
 	<!-- An internal group for actions
 		content model:
-		ECA Reaction RuleML (Assert | Retract | Update | Query | Consult | Action | Succession | Choice | Flow | Loop | Operator )-->
+		ECA Reaction RuleML (Assert | Retract | Update | Query | Answer | Test | Consult | Action | Succession | Choice | Flow | Loop | Operator )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
@@ -431,6 +434,8 @@
 			<xs:element ref="Consult"/>
 			<xs:element ref="Action"/>
 			<xs:element ref="Query"/>
+			<xs:element ref="Answer"/>
+			<xs:element ref="Test"/>
 			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
@@ -448,16 +453,18 @@
 
 	<!-- An internal group for the performative primitives
 		content model: 
-		in ECA Reaction RuleML: (Assert|Retract|Update|Query|Consult|Action)
+		in ECA Reaction RuleML: (Assert|Retract|Update|Query|Consult|Answer|Test|Action)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
-			<xs:element ref="Action"/>
 			<xs:element ref="Consult"/>
+			<xs:element ref="Action"/>
 			<xs:element ref="Query"/>
+			<xs:element ref="Answer"/>
+			<xs:element ref="Test"/>
 		</xs:choice>
 	</xs:group>
 

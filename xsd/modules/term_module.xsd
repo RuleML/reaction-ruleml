@@ -7,7 +7,7 @@
   <xs:annotation>
     <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML terms. File:
       term_module.xsd Version: 1.0 Last Modification: 2012-04-03 This module declares the following
-      RuleML elements and attributes: * arg * Ind * Data * Var * Skolem * Reify * @type * @index as
+      RuleML elements and attributes: * arg * Ind * Data * Var * Skolem * Reify as
       well as including a number of complex types for use in expicitly-typed data Nodes. See
       http://www.ruleml.org/modularization for details about this modularization approach.
     </xs:documentation>
@@ -30,16 +30,18 @@
 		*** arg ***
 		A role used for the positional arguments of a logical atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-arg
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
 
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 		in PR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
-		in ECA RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)		
+		in ECA RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
+
+    attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
   <xs:attributeGroup name="arg.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="arg.content">
@@ -61,17 +63,15 @@
 		An individual constant, as in predicate logic, which can also be considered to
 		be a fixed argument like RDF resources.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Ind
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Ind
 		
 		content model: text
 
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Ind.attlist">
-    <xs:attributeGroup ref="vocab.attrib"/>
-    <xs:attributeGroup ref="type.attrib"/>
-    <xs:attributeGroup ref="arity.attrib"/>
-    <xs:attributeGroup ref="iri.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="term-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Ind.content">
@@ -90,9 +90,11 @@
 		(see http://www.w3.org/TR/xmlschema-2/#built-in-datatypes)
 		using the built-in xsi:type attribute.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Data
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Data
 		
 		content model: xs:anytype [optionally datatyped]
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:element name="Data" type="xs:anyType"/>
 
@@ -100,7 +102,7 @@
 		*** Var ***
 		A logical variable, as in logic programming.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Var
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Var
 
 		content model: text
 		
@@ -109,15 +111,13 @@
 	  + input variable which must be bound
         - output variable which must be free (unbound)
         ? can be both input / bound or output / free
-
+    
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Var.attlist">
-    <xs:attributeGroup ref="vocab.attrib"/>
-    <xs:attributeGroup ref="type.attrib"/>
-    <xs:attributeGroup ref="arity.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="term-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
-    <xs:attributeGroup ref="mode.attrib"/>
   </xs:attributeGroup>
   <xs:group name="Var.content">
     <xs:sequence/>
@@ -132,16 +132,15 @@
 		*** Skolem ***
 		A Skolem individual constant, like RDF's blank nodes.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Skolem
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Skolem
 
 		content model: text
-
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Skolem.attlist">
-    <xs:attributeGroup ref="vocab.attrib"/>
-    <xs:attributeGroup ref="type.attrib"/>
-    <xs:attributeGroup ref="arity.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="term-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Skolem.content">
@@ -161,12 +160,15 @@
 		current sublanguage as content, treating it as a term for performing
 		reasoning on.
 				
-		See http://www.ruleml.org/1.0/glossary/#gloss-Reify		
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Reify		
 		
 		content model: (any valid RuleML formula)
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Reify.attlist">
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="term-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Reify.content">
@@ -184,17 +186,6 @@
   </xs:complexType>
   <xs:element name="Reify" type="Reify.type"/>
 
-  <!--
-		*** @index ***
-		A required attribute for specifying the position of a positional
-		argument within an atom.
-		
-		Note: in Reaction RuleML @index is optional
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@index
-	-->
-  <xs:attributeGroup name="index.attrib">
-    <xs:attribute name="index" type="xs:positiveInteger" use="optional"/>
-  </xs:attributeGroup>
+
 
 </xs:schema>

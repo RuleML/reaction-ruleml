@@ -46,6 +46,8 @@
 	<!--
       *** fluent ***
       
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-fluent
+      
       A fluent is a fluent situation which holds true or false as a condition which changes over time - a changeable situation. 
       In Situation Calculus, fluents (changable situations) are expressions which hold true or false and take an occured situation (as a history of action events; note: there is no distinction in events and actions in such calculi) 
       as their final argument (see Holds below).
@@ -55,6 +57,7 @@
  
       content model: 
       in KR Reaction RuleML: (Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )
+      attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
 	<xs:attributeGroup name="fluent.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -74,19 +77,20 @@
 	<!--     *** Do ***
 		
 	  The function do maps (reified) actions into situations; do: A x S -> S
+	  
+	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Do
 			
       content model: 
       in KR Reaction RuleML: 
       		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  
       		(do | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent), 
       		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)? )
+      		
+       attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Do.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="term-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Do.content">
@@ -115,6 +119,8 @@
 		Different happens / happenings can be defined by pointing to an external vocabulary with @iri, e.g. a vocabulary for a calculi
 		which distinguishes between events which acutally happen and other event relations to time or situations  (e.g. poss, planned, etc.)
 		
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Happens
+		
 		In Situation Calculus happens can be used to define action effects. 
 		
  		Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
@@ -125,13 +131,12 @@
       		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
       		(on | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent), 
       		(at | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)? )
+      		
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?      
 	-->
 	<xs:attributeGroup name="Happens.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Happens.content">
@@ -157,6 +162,8 @@
 
 	
  	<!--     *** Initiates ***
+ 		
+ 		 see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Initiates 
 
       content model: 
       in KR Reaction RuleML:
@@ -164,14 +171,13 @@
       (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ),  
       (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ), 
       (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )?)
-	-->
+
+ 	      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+ 	-->
 	<xs:attributeGroup name="Initiates.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
-		<xs:attributeGroup ref="xml.attlist"/>		
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>	
 	</xs:attributeGroup>
 	<xs:group name="Initiates.content">
 		<xs:sequence>
@@ -200,6 +206,8 @@
 
 	<!--
       *** Terminates ***
+      
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Terminates
 
       content model: 
 	   in KR Reaction RuleML:
@@ -207,13 +215,12 @@
       (on |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ),  
       (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ), 
       (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent )?)
+	
+	      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Terminates.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Terminates.content">
@@ -243,6 +250,8 @@
 	
 	<!--
       *** Holds ***
+ 
+       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Holds
       
       In Event Calculus, Feature and Fluent Calculus reified fluents hold at a time. 
       In reified Situation Calculus a Fluent Situation (a statement whose truth value may change) holds at a particular Situation 
@@ -256,13 +265,12 @@
       (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, 
       (fluent | Fluent | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent ), 
       (at |  Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent)? )
+	
+	      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Holds.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Holds.content">
@@ -286,19 +294,20 @@
 
 	<!--
 	*** Fluent ***
+	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Fluent	
 		
 	content model: 
 	in KR Reaction RuleML: 
 			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (
 		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Fluent)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
 			content(xs:any) )?) 
+			
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?	
 	-->
 	<xs:attributeGroup name="Fluent.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Fluent.content">
@@ -337,14 +346,16 @@
      *** arg ***
      
      Definition of the the arg role for Fluent
-     
+
+    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+    
      content model:  
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Fluent)
      
-          
+      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?         
 -->
 	<xs:attributeGroup name="arg_fluent.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="arg_fluent.content">
@@ -360,9 +371,14 @@
 	<!--
      *** content ***
      
+         see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     
      content model:  xs:any*
+     
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="fluent_anycontent.attlist">
+		<xs:attributeGroup ref="edge-element.attlist"/>	
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="fluent_anycontent.content">

@@ -7,8 +7,8 @@
   <xs:annotation>
     <xs:documentation xml:lang="en"> This is the XML Schema module for equality in RuleML. File:
       equality_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module
-      declares the following RuleML elements and attributes: * Equal * left * right * @oriented *
-      @val See http://www.ruleml.org/modularization for details about this modularization approach. </xs:documentation>
+      declares the following RuleML elements and attributes: * Equal * left * right 
+      See http://www.ruleml.org/modularization for details about this modularization approach. </xs:documentation>
 
     <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
     <xs:appinfo>
@@ -30,7 +30,7 @@
 		*** Equal ***
 		An equational formula consisting of two expressions.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Equal
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equal
 
 		content model:
 		in DR Reaction RuleML:
@@ -48,10 +48,13 @@
 		in PR Reaction RuleML:  (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?,	(left, right) |	( (Ind | Data | Var | Skolem | Reify  | Expr | Plex ), (Ind | Data | Var | Skolem | Reify  | Expr | Plex ) ))
 		in ECA Reaction RuleML:	(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?,	(left, right) |	(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)  )
 		)		
+		
+		attributes: @oriented?, @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Equal.attlist">
     <xs:attributeGroup ref="oriented.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="formula-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Equal.content">
@@ -100,13 +103,15 @@
 		*** left ***
 		The left-hand side of an equational formula.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-left
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-left
 
 		content model: 
 		in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 		in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 		in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
 		in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	
 	-->
   <xs:attributeGroup name="left.attlist">
@@ -127,13 +132,15 @@
 		*** right***
 		The right-hand side of an equational formula.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-right
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-right
 
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
 		in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
 		in ECA RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)		
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="right.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -148,25 +155,6 @@
     <xs:attributeGroup ref="right.attlist"/>
   </xs:complexType>
   <xs:element name="right" type="right.type"/>
-
-  <!--
-		*** @oriented ***
-		An attribute indicating whether an equation is oriented (directed)
-		or unoriented (symmetric).
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@oriented
-	-->
-  <xs:attributeGroup name="oriented.attrib">
-    <xs:attribute name="oriented" use="optional" default="no">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="yes"/>
-          <xs:enumeration value="no"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
-
 
 
 </xs:schema>

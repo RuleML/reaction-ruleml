@@ -65,7 +65,6 @@
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
-	<xs:include schemaLocation="modules/iri_module.xsd"/>
 
 	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
 	<xs:include schemaLocation="modules/expr_module.xsd"/>
@@ -390,7 +389,7 @@
 		<xs:choice>
 		</xs:choice>
 	</xs:group>
-
+	
 	<!-- An internal group for actions
 		content model:
 		
@@ -402,12 +401,25 @@
 		</xs:choice>
 	</xs:group>	
 
+	<!-- An internal group for the imports of the consult primitive
+		content model: 
+		in DR Reaction RuleML: (payload | RuleML | Reify | Var)
+	-->
+	<xs:group name="consult_imports.content">
+		<xs:choice>
+			<xs:element ref="payload"/>
+			<xs:group ref="payload.content"/>
+		</xs:choice>
+	</xs:group>
+	
+
 	<!-- An internal group for the performative primitives
 		content model: 
-		in DR Reaction RuleML: (Assert|Retract|Query)
+		in DR Reaction RuleML: (Consult|Assert|Retract|Query)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>
+			<xs:element ref="Consult"/>
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Query"/>

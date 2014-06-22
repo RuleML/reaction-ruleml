@@ -38,7 +38,7 @@
 		*** Expr ***
 		A logical function of the form "f(...)" where f is a function name.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Expr
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Expr
 
 		content model:
 		DR Reaction RuleML:
@@ -93,13 +93,12 @@
 		)
 		Note the 'positionalized' normal form where the op role is only
 		at the beginning of the Expr.
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Expr.attlist">
-    <xs:attributeGroup ref="vocab.attrib"/>
-    <xs:attributeGroup ref="type.attrib"/>
-    <xs:attributeGroup ref="arity.attrib"/>
-    <xs:attributeGroup ref="per-effect.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="term-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Expr.content">
@@ -164,11 +163,13 @@
 		*** op ***
 		An operator expression including the function name of an expression.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-op
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-op
 				
 		content model (within Expr): (Fun)
 		
 		Other (context-sensitive) versions of <op> are in the atom and holog modules.
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <!-- the (empty) attribute list is declared in the atom module -->
   <xs:group name="op-Expr.content">
@@ -184,16 +185,15 @@
 		*** Fun ***
 		A user-defined function name.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Fun
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Fun
 
     content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
+    attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Fun.attlist">
-    <xs:attributeGroup ref="iri.attrib"/>
-     <xs:attributeGroup ref="per-effect.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
-    <xs:attributeGroup ref="val.attrib"/>
   </xs:attributeGroup>
   <xs:group name="Fun.content">
     <xs:sequence> </xs:sequence>
@@ -205,30 +205,10 @@
   <xs:element name="Fun" type="Fun.type"/>
 
   <!--
-		*** @val ***
-		An attribute indicating whether a function is deterministic (exactly one)
-		or non-deterministic (set-valued).
-		
-		May be unified with @card/@minCard/@maxCard for slots in a future version.
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@val
-	-->
-  <xs:attributeGroup name="val.attrib">
-    <xs:attribute name="val" use="optional" default="0..">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="1"/>
-          <xs:enumeration value="0.."/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
-
-  <!--
 		*** Plex ***
 		An unordered collection of arguments without a constructor.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Plex
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Plex
 		
 		content model (within Atom, Plex, slot):
 		DR Reaction RuleML:
@@ -284,10 +264,11 @@
 		content model (within resl):
 		DR/KR/PR/ECA/CEP Reaction RuleML: (slot*, resl? )
 		
-		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Plex.attlist">
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="term-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Plex.content">
@@ -345,25 +326,5 @@
     <xs:attributeGroup ref="Plex.attlist"/>
   </xs:complexType>
   <xs:element name="Plex" type="Plex.type"/>
-
-  <!--
-		*** @per ***
-		An attribute indicating whether a function or expression is interpreted.
-		
-		Note @per.attribute is extended in Reaction RuleML 1.0 
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@per
-	-->
-  <xs:attributeGroup name="per.attrib">
-    <xs:attribute name="per" use="optional" default="copy">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="copy"/>
-          <xs:enumeration value="value"/>
-          <xs:enumeration value="open"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
 
 </xs:schema>

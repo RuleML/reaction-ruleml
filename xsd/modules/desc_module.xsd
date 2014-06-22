@@ -37,7 +37,22 @@
     </xs:appinfo> 
   </xs:annotation>
 
-
+  <!--
+  *** oid ***
+  An optional object identifier for an atomic formula, expression or the unifed terms
+  of the SWSL branch, as needed for PSOA semantics.
+  Note that oids are not required to be unique within a rulebase.
+  
+  See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-oid
+  
+  content model: 
+  in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
+  in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
+  in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex)
+  in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
+  
+  attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+  -->
   <xs:attributeGroup name="oid.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
@@ -54,20 +69,7 @@
     <xs:group ref="oid.content"/>
     <xs:attributeGroup ref="oid.attlist"/>
   </xs:complexType>
-  <!--
-  *** oid ***
-  An optional object identifier for an atomic formula, expression or the unifed terms
-  of the SWSL branch, as needed for PSOA semantics.
-  Note that oids are not required to be unique within a rulebase.
-  
-  See http://www.ruleml.org/1.0/glossary/#gloss-oid
-  
-  content model: 
-  in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-  in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-  in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex)
-  in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
-  -->
+
   <xs:element name="oid" type="oid.type"/>
   
   <!-- 
@@ -75,7 +77,7 @@
      
     An optional container for meta-knowledge about a Node.
     
-    See http://www.ruleml.org/1.0/glossary/#gloss-meta
+    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-meta
     
 	Used for descriptive Metadata annotations in Reaction RuleML
 	
@@ -86,10 +88,12 @@
      in ECA Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
 
      Multiple Metadata annotations are possible by repreating <meta>
+     
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
   
   <xs:attributeGroup name="meta.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="meta.content">
@@ -107,8 +111,11 @@
   <!--
      *** scope ***
      
-     Note: scope of the rule, e.g. defining a constructive view on the rules and facts
-     using the metadata annotations and the qualifications annotations. 
+     metadata-based scope definition defined over the metadata annotations and the qualifications annotations.
+     
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-scope
+     
+     Note: scope reasoning in rules can use the metadata scopes to define a constructive view on the rules and facts in the KB.    
      The scoped rule/literal goal only applies in this scope (scoped reasoning/processing)
      
      For an implementation of scoped reasoning as a mechanism to dynamicaly create a scope (a constructive view)
@@ -158,10 +165,11 @@
      KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
      PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
      ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )
-    
+
+  attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
   <xs:attributeGroup name="scope.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="scope.content">
@@ -180,15 +188,18 @@
      
 	guard constraints 
 	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-guard
+	
      content model: 
      in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
      in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
      in PR Reaction RuleML: ( Operator | Atom | And | Or | Equal | Negation | Naf )
      in ECA Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)    
     
+    attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
   <xs:attributeGroup name="guard.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="guard.content">
@@ -207,12 +218,17 @@
      
      The intended evaluation semantics, e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
      
+     	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-evaluation
+     
      Note: multiple Profiles can be defined by repreating the <evaluation> role element
      The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
      
-     content model: (Profile )     -->
+     content model: (Profile )     
+  
+    attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+  -->
   <xs:attributeGroup name="evaluation.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="evaluation.content">
@@ -229,17 +245,16 @@
   <!--
      *** signature ***
      
-     The signature defines the signature with optional input / output mode declarations. The signature declaration can act as public interface and
+     The signature defines the signature of knowledge (formula and terms) with optional input / output mode declarations. The signature declaration can act as public interface and
 	can be published together with the intended evaluation semantics. 
+	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-signature
 	
 	Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
 	for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
 	pattern machting, i.e. in the on part of a reaction rule it triggers the reaction rule if the template matches with required event instances, which are
 	instantiations of the event type / class to which make up the required properties of the event template.
-	
-	In backward-reasoning derivation rules the signature interface description defines a query template for the head of the rule. 
-	In forward-(reasoning) reaction rules the signature interface description  defines the event template for the event pattern matching which triggers the rules.  
-	
+		
 	Multiple signatures are possible by repreating the <signature> element
 	
      content model: 
@@ -247,9 +262,11 @@
      KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
      PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
      ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )         
--->
+
+  attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+  -->
   <xs:attributeGroup name="signature.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="signature.content">
@@ -266,7 +283,9 @@
   <!--
      *** qualification ***
      
-    Definition of the rule's qualification (qualifying metadata), e.g. validity time, priorities, etc.
+    Definition of the qualification (qualifying metadata), e.g. validity time, priorities, etc.
+    
+    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-qualification
      
     Note: the qualification can be also defined as a situation  <Situation> in KR Reaction RuleML 
 	A situation could be also modelled as a changeable situation called fluent (in the KR dialect of Reaction RuleML),
@@ -281,10 +300,11 @@
      in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
      in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
      in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
-
+  
+  attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
   <xs:attributeGroup name="qualification.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="qualification.content">
@@ -301,13 +321,17 @@
   <!--
      *** quantification ***
      
-     Definition of the rules' quantifier. 
+     Definition of the quantifier. 
+     
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-quantification
      
      content model: (Forall | Exists | Quantifier)
+     
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
           
 -->
   <xs:attributeGroup name="quantification.attlist">
-    <xs:attributeGroup ref="index.attrib"/>
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="quantification.content">

@@ -72,22 +72,18 @@
 	<!--
       *** (Operator) ***
       
+      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operator
+      
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
-      
-      attributes: @vocab? @type?, @arity?, @iri?, @node?, @xml?, @safety?, @size?, @closure?, @key? @keyref?, @xml:id? @xml:base? 
+            
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="EventAlgebraOperator.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+	<xs:attributeGroup name="EventAlgebraOperator.attlist">	
+		<xs:attributeGroup ref="event-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
-		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="size.attrib"/>
-		<xs:attributeGroup ref="closure.attrib"/>
 	</xs:attributeGroup>
 	<xs:group name="EventAlgebraOperator.content">
 		<xs:sequence>
@@ -113,11 +109,13 @@
       
       "Not on Even2 at [Event1, Event3]" ("Event 2 does not occur between [Event 1 and Event 3]")
       
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Not
+      
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       
-      attributes:  @safety?, @size?, @closure?, @type?, @iri?, @node?, @key? @keyref?, @xml:id? @xml:base? 
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
 	<xs:attributeGroup name="Not.attlist">
 		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
@@ -145,11 +143,14 @@
       "Aperiodic on Event2 at [Event1, Event3]" ("Event2 does occur aperiodically between [Event 1 and Event3]")
       possibly with multiple accumlated occurences of Event 2 (@size attribute) 
       
+            see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Aperiodic
+      
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
       
-      attributes: @type?, @iri?,  @node?, @xml?, @safety?, @size?, @closure? @key? @keyref?, @xml:id? @xml:base?  -->
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	-->
 
 	<xs:element name="Aperiodic" type="Not.type"/>
 	
@@ -158,9 +159,13 @@
       
       "Periodic at TimeEvent2 at [Event1, Event3]" ("at TimeEvent2 does occur periodically between time interval [Event 1 and Event3]")
       
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Periodic
+      
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (at, at)? ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (at, at)? ) 
+      
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="Periodic.attlist">
 		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
@@ -188,11 +193,14 @@
       "AtLeast @size occurrences on Event"
       "AtMost @size occurrences on Event"
       
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-AtLeast
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-AtMost
+      
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
       
-      attributes: @size, @type?, @iri?, @node?, @xml?, @safety?, @closure?, @key? @keyref?, @xml:id? @xml:base? 
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->  
 	<xs:element name="AtLeast" type="EventAlgebraOperator.type"/>
 	<xs:element name="AtMost" type="EventAlgebraOperator.type"/>

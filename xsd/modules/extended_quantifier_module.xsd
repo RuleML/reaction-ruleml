@@ -38,6 +38,8 @@
     @type attribute and the @iri attribute can point to an external definition
     of the quantifier.
     
+    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Quantifier
+    
     Format: "quantifier declare(Var)+ such that guard formula(...)?" 
 		
 	content model: 
@@ -46,13 +48,11 @@
     PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
     ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )?
 
+	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="Quantifier.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="quantifier-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Quantifier.content">
@@ -73,14 +73,17 @@
 		<xs:attributeGroup ref="Quantifier.attlist"/>
 	</xs:complexType>
 	<xs:element name="Quantifier" type="Quantifier.type"/>
-	<!--
+	<!-- Exists
 	make the quantifier constraint restrictions ("such that") optional
+	
+	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Exists
 	
 	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
 	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
     PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
     ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
 
+	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
 	<xs:group name="Exists-quantifier.content">
 		<xs:sequence>
@@ -97,16 +100,20 @@
 	</xs:group>
 	<xs:complexType name="Exists-quantifier.type">
 		<xs:group ref="Exists-quantifier.content"/>
-		<xs:attributeGroup ref="Exists.attlist"/>
+		<xs:attributeGroup ref="Quantifier.attlist"/>
 	</xs:complexType>
-	<!--
+	<!-- Forall
 	make the quantifier constraint restrictions ("such that") optional
+	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Forall
 	
 	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
 	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
     PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
     ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
--->
+	
+	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	-->
 	<xs:group name="Forall-quantifier.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
@@ -122,7 +129,7 @@
 	</xs:group>
 	<xs:complexType name="Forall-quantifier.type">
 		<xs:group ref="Forall-quantifier.content"/>
-		<xs:attributeGroup ref="Exists.attlist"/>
+		<xs:attributeGroup ref="Quantifier.attlist"/>
 	</xs:complexType>
 
 	
@@ -130,7 +137,7 @@
 		*** formula ***
 		The 'such that' guard formula role of a quantifier (<Forall> or <Exists>).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-formula
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 		
 	     DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
      	 KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
@@ -139,8 +146,10 @@
 		
 		Other (context-sensitive) versions of <formula> are in the
 		connective and performative modules.
+		
+		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<!-- the (empty) attribute list is declared in the connective module -->
+	
 	<xs:group name="formula-inner-quantifier.content">
 		<xs:choice>
 			<xs:group ref="guard.content"/>

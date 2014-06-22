@@ -67,7 +67,6 @@
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
-	<xs:include schemaLocation="modules/iri_module.xsd"/>
 
 	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
 	<xs:include schemaLocation="modules/expr_module.xsd"/>
@@ -379,7 +378,7 @@
 	
 	<!-- An internal group for actions
 		content model:
-		PR Reaction RuleML (Assert | Retract | Update | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
+		PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Action | Succession | Choice | Flow | Loop | Operator )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
@@ -388,19 +387,32 @@
 			<xs:element ref="Update"/>
 			<xs:element ref="Action"/>
 			<xs:element ref="Query"/>
+			<xs:element ref="Consult"/>
 			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
+	
+	<!-- An internal group for the imports of the consult primitive
+		content model: 
+		in PR Reaction RuleML: (payload | RuleML | Reify | Var)
+	-->
+	<xs:group name="consult_imports.content">
+		<xs:choice>
+			<xs:element ref="payload"/>
+			<xs:group ref="payload.content"/>
+		</xs:choice>
+	</xs:group>
 
 	<!-- An internal group for the performative primitives
 		content model: 
-		in PR Reaction RuleML: (Assert|Retract|Update|Query|Action)
+		in PR Reaction RuleML: (Assert|Retract|Update|Consult|Query|Action)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
+			<xs:element ref="Consult"/>
 			<xs:element ref="Action"/>
 			<xs:element ref="Query"/>
 		</xs:choice>

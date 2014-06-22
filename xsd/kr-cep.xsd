@@ -472,6 +472,19 @@
 			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
+	
+	<!-- An internal group for the imports of the consult primitive
+		content model: 
+		in DR Reaction RuleML: ((payload | RuleML | Reify | Var) | (enclosed | Message))
+	-->
+	<xs:group name="consult_imports.content">
+		<xs:choice>
+			<xs:element ref="payload"/>
+			<xs:group ref="payload.content"/>
+			<xs:element ref="enclosed"/>
+			<xs:element ref="Message"/>
+		</xs:choice>
+	</xs:group>
 
 	<!-- An internal group for the performative primitives
 		content model: 

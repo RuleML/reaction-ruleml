@@ -44,6 +44,8 @@
       *** Rule ***
       The Rule element that provides the basic syntax for rules
       in Reaction RuleML.
+      
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Rule
 
       content model: 
  	 
@@ -68,15 +70,13 @@
 
 	 
       Rule has the following attributes:
-      @style? @vocab? @type? @arity? @closure? @direction? @material? @safety? @size? @node? @prefix? @key? @keyref? @xml:id? @xml:base?  
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
       
 -->
 	<xs:attributeGroup name="Rule.attlist">
-		<xs:attributeGroup ref="style.attrib"/>
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="Implies.attlist"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="material.attrib"/>
+		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Rule.content">
 		<xs:sequence>
@@ -94,16 +94,20 @@
 	<!--
      *** on ***
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-on
+     
      content model: 
      DR Reaction RuleMl: (  )
      KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
      PR Reaction RuleML: ( )
      ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  
      CEP Reaction RuleML: (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator) 
+     
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="on.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="on.content">
 		<xs:choice>
@@ -120,11 +124,16 @@
      *** if ***
      *** after ***
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-if
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-after
+     
      content model:   
      DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
      KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
      PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf  )    
      ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
+	
+	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:element name="after" type="if.type"/>
 
@@ -132,11 +141,16 @@
 	 *** then ***	
      *** else ***
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-then
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-else
+     
      content model: 
      DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
      KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation )
      PR Reaction RuleML: not used in PR Reaction RuleML (only in combination with DR)
      ECA Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action )
+	
+	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:element name="else" type="then.type"/>
 	
@@ -144,16 +158,21 @@
      *** do ***
      *** elseDo ***
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-do
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-elseDo
+     
      content model:  
      DR Reaction RuleML: (  )
      KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
      PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
      ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
      CEP Reaction RuleML:  (Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
--->
+
+	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	-->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="do.content">
 		<xs:choice>

@@ -16,7 +16,6 @@
 			This schema declares the following Reaction RuleML elements and attributes:
 			
 			* Action
-			* Update
 			
 		</xs:documentation>
 		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
@@ -38,16 +37,20 @@
      *** arg ***
      
      Definition of the the arg role for Action
+
+
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
      
      content model:  
      in DR Reaction RuleML: not used in DR Reaction RuleML
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
      in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)) 
      in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operator))
-          
+    
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="arg_action.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="arg_action.content">
@@ -69,10 +72,12 @@
      @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
      See CURIE to IRI and term to IRI translation
      
-     attributes
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     
+     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
 	<xs:attributeGroup name="action_anycontent.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="action_anycontent.content">
@@ -108,16 +113,14 @@
 	  ECA Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operator)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )?             
+	                
+	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Action
+	                
+	  attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
 	<xs:attributeGroup name="Action.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
-		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="size.attrib"/>
-		<xs:attributeGroup ref="closure.attrib"/>
+		<xs:attributeGroup ref="action-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Action.content">
@@ -151,43 +154,5 @@
 		<xs:attributeGroup ref="Action.attlist"/>
 	</xs:complexType>
 	<xs:element name="Action" type="Action.type"/>
-
-	<!--
-      *** Update ***
-      Update action
-      
-      content model:
-      
-      in PR Reaction RuleML
-       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
-		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
-		 
-	  in ECA Reaction RuleML
-	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action),
-		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
-	  
-      Update has the following attributes:
-      @mapSafety?, @mapSize?, @mapClosure?, @mapDirection?, @mapMaterial?, @node?, @key?, @keyref?, @xml:id? @xml:base?
-      
--->
-	<xs:attributeGroup name="Update.attlist">
-		<xs:attributeGroup ref="Assert.attlist"/>
-	</xs:attributeGroup>
-	<xs:group name="Update.content">
-		<xs:sequence>
-			<xs:group ref="meta-roles.content"/>
-			<xs:sequence minOccurs="1" maxOccurs="2">
-				<xs:choice>
-					<xs:element name="formula" type="formula-assert.type"/>
-					<xs:group ref="formula-assert.content"/>
-				</xs:choice>
-			</xs:sequence>	
-		</xs:sequence>			
-	</xs:group>
-	<xs:complexType name="Update.type">
-		<xs:group ref="Update.content"/>
-		<xs:attributeGroup ref="Update.attlist"/>
-	</xs:complexType>
-	<xs:element name="Update" type="Update.type"/>
 	
 </xs:schema>

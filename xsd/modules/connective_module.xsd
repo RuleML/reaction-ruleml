@@ -10,8 +10,8 @@
     <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML connectives. File:
       connective_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module
       declares the following RuleML elements and attributes: * Implies * if * then * Entails *
-      Equivalent * torso * Rulebase * And * Or * formula * @mapMaterial * @material * @mapDirection
-      * @direction * @mapClosure * @closure See http://www.ruleml.org/modularization for details
+      Equivalent * torso * Rulebase * And * Or * formula 
+      See http://www.ruleml.org/modularization for details
       about this modularization approach. </xs:documentation>
     <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
     <xs:appinfo>
@@ -41,20 +41,17 @@
 		*** Implies ***
 		An implication rule.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Implies
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Implies
 
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
 
-    attributes: @closure? @direction? @material? @safety? @size? @node? @key? @keyref? @xml:id? @xml:base? 
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+
   -->
   <xs:attributeGroup name="Implies.attlist">
-    <xs:attributeGroup ref="safety.attrib"/>
-    <xs:attributeGroup ref="size.attrib"/>
-    <xs:attributeGroup ref="closure.attrib"/>
-    <xs:attributeGroup ref="direction.attrib"/>
+    <xs:attributeGroup ref="formula-interface.attlist"/>
     <xs:attributeGroup ref="material.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
 
@@ -88,13 +85,15 @@
 		The if of an implication rule containing the premise(s),
 		also known as the "antecedent" or "if" part of the rule.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-if
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-if
 
 		content model: 
 		DR Reaction RuleML (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
 		KR Reaction RuleML (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
 		PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf ) 
 		ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="if.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -125,13 +124,15 @@
 		The then of an implication rule containing the conclusion,
 		also known as the "consequent" or "then" part of the rule.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-then
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-then
 
 		content model: 
 		DR Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
 		KR Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
 		PR Reaction RuleML does not support "then"  (except in combination with DR/KR Reaction RuleML)
 		ECA Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action )
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="then.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -162,13 +163,16 @@
 		Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
 		Kowalski/Bowen's object/meta-level-amalgamated logic).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Entails
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Entails
 		
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Entails.attlist">
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="group-formula-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Entails.content">
@@ -195,7 +199,7 @@
 		An equivalence expression, which is "syntactic sugar" for a pair
 		of conjoined converse implication rules.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Equivalent
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equivalent
 
 		content model: 		
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
@@ -204,10 +208,12 @@
 		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Negation | Naf | Atom | Equal), (Operator | And | Or | Negation | Naf | Atom | Equal ) ) ) )                     
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
 		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="Equivalent.attlist">
-    <xs:attributeGroup ref="closure.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="formula-interface.attlist"/>
+    <xs:attributeGroup ref="material.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Equivalent.content">
@@ -254,13 +260,15 @@
 		A symmetric role used in an equivalence expression combining
 		the asymmetric <then> and <if>.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-torso
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-torso
 
 		content model: 
 		DR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
 		KR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens)
 		PR Reaction RuleML (Operator | And | Or | Negation | Naf | Atom | Equal )
 		ECA Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="torso.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -281,7 +289,7 @@
 		*** Rulebase ***
 		A collection of rules that can be ordered or unordered, without or with duplicates.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Rulebase
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Rulebase
 		
 		@prefix for default prefix definitions 
 		@vocab for default vocab definitions
@@ -291,15 +299,12 @@
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
 		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal )* )
     ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
+    
+    attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="Rulebase.attlist">
-    <xs:attributeGroup ref="mapSafety.attrib"/>
-    <xs:attributeGroup ref="mapSize.attrib"/>
-    <xs:attributeGroup ref="mapClosure.attrib"/>
-    <xs:attributeGroup ref="mapDirection.attrib"/>
-    <xs:attributeGroup ref="mapMaterial.attrib"/>
-    <xs:attributeGroup ref="vocab.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="group-formula-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Rulebase.content">
@@ -321,7 +326,7 @@
 		*** And ***
 		A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-And
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-And
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -329,16 +334,18 @@
 		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Equal | Negation | Naf )* )
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
 
-		Under Query, And may have attribute closure="existential"; elsewhere, it may
-		not have any attributes.
+		Under Query, And may have attribute closure="existential"; 
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="And-inner.attlist">
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="And-query.attlist">
-    <xs:attributeGroup ref="closure.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="And.content">
@@ -364,7 +371,7 @@
 		*** Or ***
 		A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Or
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Or
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -372,16 +379,18 @@
 	  PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Equal | Negation | Naf )* )
 	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
 		
-		Under Query, Or may have attribute closure="existential"; elsewhere, it may not
-		have any attributes.
+		Under Query, Or may have attribute closure="existential"; 
+		
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Or-query.attlist">
-    <xs:attributeGroup ref="closure.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="Or-inner.attlist">
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Or.content">
@@ -407,7 +416,7 @@
 		*** formula ***
 		The formula role of a conjunctive/disjunctive expression or a rulebase.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-formula
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 
 		content model (below And/Or): 
 		DR Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
@@ -423,8 +432,11 @@
 		
 		Other (context-sensitive) versions of <formula> are in the
 		performative and quantifier modules.
+		
+		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="formula.attlist">
+    <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="formula-and-or.content">
@@ -462,111 +474,7 @@
     <xs:attributeGroup ref="formula.attlist"/>
   </xs:complexType>
 
-  <!--
-		*** @mapMaterial ***
-		An attribute indicating the kind of all implication rules 
-		falling within its scope (i.e. child elements).
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@mapMaterial
-	-->
-  <xs:attributeGroup name="mapMaterial.attrib">
-    <xs:attribute name="mapMaterial" use="optional" default="yes">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="no"/>
-          <xs:enumeration value="yes"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
+ 
 
-  <!--
-		*** @material ***
-		An attribute indicating the kind of an implication rule.
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@material
-	-->
-  <xs:attributeGroup name="material.attrib">
-    <xs:attribute name="material" use="optional" default="yes">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="no"/>
-          <xs:enumeration value="yes"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
-
-  <!--
-		*** @mapDirection ***
-		An attribute indicating the intended direction of implication rule inferencing
-		of elements falling within its scope (i.e. child elements).
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@mapDirection
-	-->
-  <xs:attributeGroup name="mapDirection.attrib">
-    <xs:attribute name="mapDirection" use="optional" default="bidirectional">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="forward"/>
-          <xs:enumeration value="backward"/>
-          <xs:enumeration value="bidirectional"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
-
-  <!--
-		*** @direction ***
-		An attribute indicating the intended direction of an implication rule's inferencing.
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@direction
-	-->
-  <xs:attributeGroup name="direction.attrib">
-    <xs:attribute name="direction" use="optional" default="bidirectional">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="forward"/>
-          <xs:enumeration value="backward"/>
-          <xs:enumeration value="bidirectional"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
-
-  <!--
-		*** @mapClosure ***
-		An attribute indicating how the free variables falling within
-		its scope (i.e. child elements) are quantified.
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@mapClosure
-	-->
-  <xs:attributeGroup name="mapClosure.attrib">
-    <xs:attribute name="mapClosure" use="optional">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="universal"/>
-          <xs:enumeration value="existential"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
-
-  <!--
-		*** @closure ***
-		An attribute indicating how the contained free variables are quantified.
-		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@closure		
-	-->
-  <xs:attributeGroup name="closure.attrib">
-    <xs:attribute name="closure" use="optional">
-      <xs:simpleType>
-        <xs:restriction base="xs:NMTOKEN">
-          <xs:enumeration value="universal"/>
-          <xs:enumeration value="existential"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
 
 </xs:schema>

@@ -35,7 +35,11 @@
 
 	<!--
 	*** Situation ***
-	Explicit generic Situation. The situation can be defined internally 
+	Explicit generic Situation. 
+	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Situation
+	
+	The situation can be defined internally 
 	   	* with positional arguments <arg>, e.g., <arg><Ind>s1</Ind></arg>
       	* with unpositional slots <slot>, e.g., <slot><Ind>name</Ind><Ind>s1</Ind></slot><slot><Ind>occursAt</Ind><Time>....</Time></slot>
       	* by the any content model (<content>xs:any Element</content>), which acts as an extension point
@@ -54,13 +58,12 @@
 			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (
 		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Do)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
 			content(xs:any) )? 
+			
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Situation.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Situation.content">
@@ -100,14 +103,16 @@
      
      Definition of the the arg role for Situation
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+     
      content model:  
      in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Do)
      
-          
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?     
 -->
 	<xs:attributeGroup name="arg_situation.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="arg_situation.content">
@@ -123,13 +128,16 @@
 	<!--
      *** content ***
      
-     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     
+     @prefix ais used to define a prefix and a term mapping vocabulary for the XML content
      	See CURIE to IRI and term to IRI translation
      
      content model:  xs:any*
+     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="situation_anycontent.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>	
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="situation_anycontent.content">

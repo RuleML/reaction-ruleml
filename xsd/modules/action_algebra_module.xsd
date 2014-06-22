@@ -61,18 +61,15 @@
       PR and ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* )
       CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* ) 
       
-      attributes: @safety?, @size?, closure?, @vocab?, @type?, @arity?, @iri?, @node?, @key? @keyref?, @xml:id? @xml:base? 
+      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operator
+      
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+       
 	-->
 	<xs:attributeGroup name="ActionAlgebraOperator.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="action-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
-		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="size.attrib"/>
-		<xs:attributeGroup ref="closure.attrib"/>
 	</xs:attributeGroup>
 	<xs:group name="ActionAlgebraOperator.content">
 		<xs:sequence>

@@ -35,7 +35,11 @@
 
 	<!--
 	*** Interval ***
-	Explicit generic Interval. The interval can be
+	Explicit generic Interval. 
+	
+    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Interval
+	
+	The interval can be
       defined internally by the any content model (xs:any Element) or externally, where 
       the optional @type attribute defines the name/type of the interval,
       the optional @iri attribute points to an external definition of the interval, and
@@ -47,13 +51,12 @@
 	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?] )) 
     PR Reaction RuleML: not used in PR Reaction RuleML 
 	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
+	
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Interval.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Interval.content">
@@ -77,14 +80,18 @@
      
      Definition of the the arg role for Intervals
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+     
      content model:  
      in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)
      in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator) )
      not used in PR Reaction RuleML     
      ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)
+     
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="arg_interval.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="arg_interval.content">
@@ -100,13 +107,17 @@
 	<!--
      *** content ***
      
+          see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     
      content model:  xs:any*
      
-     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+     @prefix is used to define a prefix and a term mapping vocabulary for the XML content
      See CURIE to IRI and term to IRI translation
+     
+     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="interval_anycontent.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>	
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="interval_anycontent.content">

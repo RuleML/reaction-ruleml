@@ -33,18 +33,25 @@
   </xs:simpleType>
   
   <xs:simpleType name="curieOrAbsIRI.datatype">
-
     <xs:union memberTypes="curie.datatype absIRI.datatype"/>
   </xs:simpleType>
   
   <xs:simpleType name="termOrCurieOrIRI.datatype">
     <xs:union memberTypes="term.datatype curie.datatype xs:anyURI" />
   </xs:simpleType> 
-  
+
+  <xs:simpleType name="termOrCurieOrIRIs.datatype">
+    <xs:list itemType="termOrCurieOrIRI.datatype"/>
+  </xs:simpleType> 
+
   <xs:simpleType name="termOrCurieOrAbsIRI.datatype">
     <xs:union memberTypes="term.datatype curie.datatype absIRI.datatype" />
   </xs:simpleType>
-  
+
+  <xs:simpleType name="termOrCurieOrAbsIRIs.datatype">
+    <xs:list itemType="termOrCurieOrAbsIRI.datatype"/>
+  </xs:simpleType>
+
   <xs:simpleType name="absIRI.datatype">
     <xs:restriction base="xs:anyURI">
       <xs:pattern value="[\i-[:]][\c-[:]]+:.+"/>

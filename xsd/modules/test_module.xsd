@@ -51,24 +51,19 @@
       *** Test ***
       A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Testing.
       
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Test
+      
       An optional scope (<scope>) can be defined so that the test applies only to the scope (constructed view) on the knowledge base.
 
       content model: 
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (vvi | Entails | TestItem | TestSuite)*)
       
       Test has the following attributes:
-      @safety? @size? @closure? @direction? @vocab? @type?, arity?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?   
 	-->
 	<xs:attributeGroup name="Test.attlist">
-		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="size.attrib"/>
-		<xs:attributeGroup ref="closure.attrib"/>
-		<xs:attributeGroup ref="direction.attrib"/>
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="action-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Test.content">
@@ -91,13 +86,15 @@
      
      vvi role - "verification, validation, integrity" tests
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-vvi
+     
      content model: ( Entails | TestItem | TestSuite )
      
       vvi has the following attributes:
-      @index?, @key?, @keyref?, @xml:id? @xml:base?
+    attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 -->
 	<xs:attributeGroup name="vvi.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="vvi.content">
@@ -118,10 +115,12 @@
      
      base role for the test assertion | consultation base
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-testbase
+     
      content model: ( Consult | Assert )
      
       base has the following attributes:
-      @key?, @keyref?, @xml:id? @xml:base?
+         attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 -->
 	<xs:attributeGroup name="testbase.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -140,19 +139,19 @@
 
 	<!--
       *** TestSuite ***
-      A TestSuite consisting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites       
+      A TestSuite consisting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites 
+
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-TestSuite
+
       content model: 
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (testbase | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
       
-      Test has the following attributes:
-      @vocab? @type?, @arity?, @iri?, @node?, @key?, @keyref?, @xml:id? @xml:base?  
+      TestSuite has the following attributes:
+      attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="TestSuite.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="group-formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="TestSuite.content">
@@ -179,13 +178,18 @@
       *** TestItem ***
       TestItem describing one particular test consisting of the test act (typically a Query) and the expected result (the expected Answer with the predefined expected truth valuation (<degree>) and results/variable bindings)
       
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-TestItem
+      
       content model:
  		 
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Query|Assert|Retract|Update|Send|Receive|Consult|Test|Action), (expectedResult|Answer) )
+
+     attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	  
     -->
 	<xs:attributeGroup name="TestItem.attlist">
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="group-formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="TestItem.content">
@@ -212,6 +216,8 @@
 	<!--
       *** Answer ***
       Answer performative / action 
+      
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Answer
       
       It delivers the answer to a Query . The answer is given in terms of solved formulas, e.g.
       
@@ -251,17 +257,11 @@
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
 	  
       Answer has the following attributes:
-      @safety?, @size? @closure? @vocab? @type? @arity? @iri? @node? @key @keyref @xml:id? @xml:base?  
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
 	<xs:attributeGroup name="Answer.attlist">		
-		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="size.attrib"/>
-		<xs:attributeGroup ref="closure.attrib"/>
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="action-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Answer.content">
@@ -284,15 +284,17 @@
 		*** formula ***
 		The formula role of a performative (<Answer>).
 		
-		See http://www.reaction.ruleml.org/1.0/glossary/#gloss-formula
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 		
 		content model (below Answer formula): 
 		(Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)
   		
 		Other (context-sensitive) versions of <formula> are in the
 		connective and quantifier modules.
+		
+		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<!-- the (empty) attribute list is declared in the connective module -->
+
 	<xs:group name="formula-answer.content">
 		<xs:choice>
 			<xs:element ref="Rulebase"/>
@@ -312,8 +314,12 @@
      
      Definition of the the enclosed role for Send and Receive actions
      
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-expectedResult
+     
      content model:  
       in CEP Reaction RuleML: (Answer)
+      
+      attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 
 -->
 	<xs:attributeGroup name="expectedResult.attlist">

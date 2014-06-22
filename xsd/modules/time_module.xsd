@@ -35,7 +35,11 @@
 
 	<!--
 	*** Time ***
-	Explicit generic Time construct. The time can be represented internally 
+	Explicit generic Time construct. 
+	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Situation
+	
+	The time can be represented internally 
       * with positional arguments <arg>, e.g., <arg><Data xsi:type="xs:dateTime>2011-10-02T10:45:34-00:00</Data></arg>
       * with unpositional slots <slot>, e.g., <slot><Ind>year</Ind><Ind>2011</Ind></slot><slot><Ind>month</Ind><Ind>10</Ind></slot>
       * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for time
@@ -53,14 +57,13 @@
 				content(xs:any*)* ) ) 
 	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
-				content(xs:any*)* ) ) 				
+				content(xs:any*)* ) ) 	
+	
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Time.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Time.content">
@@ -101,14 +104,18 @@
      
      Definition of the the arg role for Time
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+     
      content model:  
      in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval | (After | Before | Any | Every | Timer | Operator))
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operator))
-     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))     
+     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))  
+     
+     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
           
 -->
 	<xs:attributeGroup name="arg_time.attlist">
-		<xs:attributeGroup ref="index.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="arg_time.content">
@@ -125,13 +132,17 @@
 	<!--
      *** content ***
      
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     
      @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
      	See CURIE to IRI and term to IRI translation
      
      content model:  xs:any*
+
+     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="time_anycontent.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
+		<xs:attributeGroup ref="edge-element.attlist"/>	
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="time_anycontent.content">

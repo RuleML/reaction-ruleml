@@ -30,9 +30,10 @@
 		*** repo ***
 		A positional rest variable.
 		
-		See http://www.ruleml.org/0.91/glossary/#gloss-repo
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-repo
 
 		content model: (Var | Plex)
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="repo.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -53,9 +54,10 @@
 		*** resl ***
 		A slotted rest variable.
 		
-		See http://www.ruleml.org/0.91/glossary/#gloss-resl		
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-resl		
 
 		content model: (Var | Plex)
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="resl.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

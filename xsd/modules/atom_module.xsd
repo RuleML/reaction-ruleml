@@ -33,7 +33,7 @@
 		applied to a collection of its (logical) arguments.
 		Or a frame object with slots
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Atom
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Atom
 	
 		content model:
 		in DR Reaction RuleML:
@@ -87,10 +87,12 @@
 				resl?
 			)
 	
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	
 	-->
   <xs:attributeGroup name="Atom.attlist">
-    <xs:attributeGroup ref="closure.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="formula-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <!--
@@ -149,11 +151,13 @@
 		*** op ***
 		An operator expression including the relation of an atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-op
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-op
 
 		content model (within Atom): (Rel)
 		
 		Other (context-sensitive) versions of <op> are in the expr and holog modules.
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="op.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -174,17 +178,16 @@
 		*** Rel ***
 		A relation, i.e. a logical predicate, of an atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Rel
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Rel
 		
 		content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		
-		attribute: @iri, @node @per 
+		attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Rel.attlist">
-    <xs:attributeGroup ref="iri.attrib"/>
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
-    <xs:attributeGroup ref="per-effect.attrib"/>
   </xs:attributeGroup>
   <xs:group name="Rel.content">
     <xs:sequence> </xs:sequence>
@@ -201,9 +204,11 @@
 		An optional uncertainty value (between 0.0 and 1.0)
 		that may be assigned to facts and rules.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-degree
+		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-degree
 
 		content model: (Data)
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="degree.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

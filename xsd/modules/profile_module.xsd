@@ -32,7 +32,11 @@
 
 	<!--
 	*** Profile ***
-	Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. The semantic profile can be
+	Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. 
+	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Profile
+	
+	The semantic profile can be
       defined internally by the any content model (xs:any Element) or externally, where 
       the optional @type attribute defines the name/type of the used sematics profile,
       the optional @iri attribute points to an external definition of the semantics profile, and
@@ -46,18 +50,12 @@
     KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
     PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
  	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
+	
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
 	<xs:attributeGroup name="Profile.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="iri.attrib"/>
-		<xs:attributeGroup ref="mapDirection.attrib"/>
-		<xs:attributeGroup ref="mapClosure.attrib"/>
-		<xs:attributeGroup ref="mapMaterial.attrib"/>
-		<xs:attributeGroup ref="node.attrib"/>
-		<xs:attributeGroup ref="mapSafety.attrib"/>
-		<xs:attributeGroup ref="mapSize.attrib"/>
+		<xs:attributeGroup ref="group-formula-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Profile.content">
@@ -79,11 +77,14 @@
 	<!--
      *** content ***
      
+     	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     
      the optional @prefix and @vocab are used to define a prefix and a term mapping vocabulary for the XML content (see CURIE to IRI and term to IRI translation)
      content model:  (xs:any*)
+     
+     attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="profile_anycontent.attlist">
-		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="profile_anycontent.content">

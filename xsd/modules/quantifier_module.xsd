@@ -38,9 +38,12 @@
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
 		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
-	-->
+
+    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+  -->
   <xs:attributeGroup name="Forall.attlist">
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="quantifier-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Forall.content">
@@ -73,9 +76,12 @@
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
     PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
+ 
+    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="Exists.attlist">
-    <xs:attributeGroup ref="node.attrib"/>
+    <xs:attributeGroup ref="quantifier-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
   <xs:group name="Exists.content">
@@ -104,6 +110,8 @@
 		See http://www.ruleml.org/1.0/glossary/#gloss-declare
 
 		content model: ( Var )
+		
+		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="declare.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -140,8 +148,10 @@
 		
 		Other (context-sensitive) versions of <formula> are in the
 		connective and performative modules.
+		
+		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-  <!-- the (empty) attribute list is declared in the connective module -->
+
   <xs:group name="formula-forall.content">
     <xs:choice>
       <xs:element ref="Implies"/>

@@ -61,10 +61,10 @@
 	<xs:include schemaLocation="../modules/desc_module.xsd"/> <!-- extended descriptors in Reaction RuleML -->
 	<xs:include schemaLocation="../modules/quantifier_module.xsd"/>
 	<xs:include schemaLocation="../modules/connective_module.xsd"/>
+	<xs:include schemaLocation="../modules/connective_operator_module.xsd"/>
 	<xs:include schemaLocation="../modules/atom_module.xsd"/>
 	<xs:include schemaLocation="../modules/slot_module.xsd"/>
 	<xs:include schemaLocation="../modules/term_module.xsd"/>
-	<xs:include schemaLocation="../modules/iri_module.xsd"/>
 
 	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
 	<xs:include schemaLocation="../modules/expr_module.xsd"/>
@@ -73,7 +73,7 @@
 	<!-- includes the equalog layer with the 'equality' module -->
 	<xs:include schemaLocation="../modules/equality_module.xsd"/>
 
-	<!-- include from the (spatio-temporal) derivation rule layer of reaction ruleml   -->
+	<!-- include from the (spatial-temporal) derivation rule layer of reaction ruleml   -->
 	<xs:include schemaLocation="../modules/attribute_module.xsd"/>
 	<xs:include schemaLocation="../modules/rule_module.xsd"/>
 	<xs:include schemaLocation="../modules/negation_module.xsd"/>
@@ -82,12 +82,13 @@
 	<xs:include schemaLocation="../modules/time_module.xsd"/>
 	<xs:include schemaLocation="../modules/spatial_module.xsd"/>	
 	<xs:include schemaLocation="../modules/interval_module.xsd"/>
-	
-	<xs:include schemaLocation="../modules/connective_operator_module.xsd"/>
 
 	<!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
 	<xs:include schemaLocation="../modules/spatial_temporal_interval_algebra_module.xsd"/>
-
+	
+	<!-- include test suites   -->
+	<xs:include schemaLocation="../modules/test_module.xsd" />
+	
 	<!--
      metadata group
      
@@ -134,8 +135,8 @@
 			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:group>
-	
-	
+
+
 	<!--
          
      An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
@@ -183,7 +184,7 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -204,7 +205,7 @@
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -225,7 +226,7 @@
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element ref="Operator"/>
+			<xs:element name="Operator" type="ConnectiveOperator.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 
@@ -237,14 +238,13 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: (Exists | Quantifier)
+     content model: (Exists )
           
 	-->
 	
 	<xs:group name="query-quantifier.content">
 		<xs:choice>
 			<xs:element ref="Exists"/>
-			<xs:element ref="Quantifier"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -270,14 +270,13 @@
      An internal group for the outer quantifiers in the Reaction RuleML language
     
     
-     content model: ( Forall | Quantifier )
+     content model: ( Forall  )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
 		<xs:choice>
 			<xs:element ref="Forall"/>
-			<xs:element ref="Quantifier"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -287,13 +286,16 @@
     
      In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
     
-     content model: (Time | Spatial | Interval)
+     content model: (Atom | Time | Spatial | Interval)
           
 	-->
 	
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
-			<xs:group ref="extended-signature-function-sorts.content"/>
+			<xs:element name="Atom" type="Atom.type"/>
+			<xs:element ref="Time"/>
+			<xs:element ref="Spatial"/>
+			<xs:element ref="Interval"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -304,18 +306,22 @@
     
      In the DR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
     
-     content model: (Time | Spatial | Interval)
+     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval)
           
 	-->
 	
 	<xs:group name="extended-signature-function-sorts.content">
 		<xs:choice>
+			<xs:element ref="Ind"/>
+			<xs:element ref="Data"/>
+			<xs:element ref="Expr"/>
+			<xs:element ref="Plex"/>
 			<xs:element ref="Time"/>
 			<xs:element ref="Spatial"/>
 			<xs:element ref="Interval"/>	
 		</xs:choice>
 	</xs:group>
-	
+
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
 		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
@@ -326,7 +332,7 @@
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
-	
+
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
 		in DR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
@@ -337,7 +343,7 @@
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
-	
+
 	<!-- Interval primitives
 		content model: 
 		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  -->
@@ -347,7 +353,7 @@
 			<xs:group ref="interval_algebra_group.content"/>			
 		</xs:choice>
 	</xs:group>
-	
+
 	<!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
 		in DR Reaction RuleML: ()
@@ -356,7 +362,7 @@
 		<xs:choice>
 		</xs:choice>
 	</xs:group>
-	
+
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
 		in DR Reaction RuleML: ()
@@ -366,6 +372,17 @@
 		</xs:choice>
 	</xs:group>
 	
+	<!-- An internal group for events
+		content model:
+		
+		DR Reaction RuleML ( )-->
+	
+	<xs:group name="event_group.content">
+		<xs:choice>
+			
+		</xs:choice>
+	</xs:group>	
+
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		in DR Reaction RuleML: ()
@@ -375,6 +392,44 @@
 		</xs:choice>
 	</xs:group>
 	
+	<!-- An internal group for actions
+		content model:
+		
+		DR Reaction RuleML ( )-->
+	
+	<xs:group name="action_group.content">
+		<xs:choice>
+
+		</xs:choice>
+	</xs:group>	
+
+	<!-- An internal group for the imports of the consult primitive
+		content model: 
+		in DR Reaction RuleML: (payload | RuleML | Reify | Var)
+	-->
+	<xs:group name="consult_imports.content">
+		<xs:choice>
+			<xs:element ref="payload"/>
+			<xs:group ref="payload.content"/>
+		</xs:choice>
+	</xs:group>
+	
+
+	<!-- An internal group for the performative primitives
+		content model: 
+		in DR Reaction RuleML: (Consult|Assert|Retract|Query|Answer|Test)
+	-->
+	<xs:group name="performative_primitives.content">
+		<xs:choice>
+			<xs:element ref="Consult"/>
+			<xs:element ref="Assert"/>
+			<xs:element ref="Retract"/>
+			<xs:element ref="Query"/>
+			<xs:element ref="Answer"/>
+			<xs:element ref="Test"/>
+		</xs:choice>
+	</xs:group>
+
 	<!--
     *** @style ***
     

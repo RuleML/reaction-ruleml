@@ -85,9 +85,9 @@
     See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-act
     
     content model  
-    DR/KR Reaction RuleML (Assert|Retract|Query)
-    PR Reaction RuleML (Assert|Retract|Query|Update|Action)
-    ECA Reaction RuleML (Assert|Retract|Query|Update|Action)
+    DR/KR Reaction RuleML (Consult|Assert|Retract|Query|Answer|Test)
+    PR Reaction RuleML (Assert|Retract|Update|Consult|Query|Answer|Test|Action)
+    ECA Reaction RuleML (Assert|Retract|Update|Query|Consult|Answer|Test|Action)
     CEP Reaction RuleML (Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)
     
     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?

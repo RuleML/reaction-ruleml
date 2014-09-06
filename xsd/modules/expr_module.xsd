@@ -44,7 +44,7 @@
 		DR Reaction RuleML:
 		( 		   
 		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun), slot*, 
+		  (op|Fun)?, slot*, 
       (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*,
 		  repo?, slot*, resl?
 		)
@@ -52,24 +52,24 @@
     KR Reaction RuleML:
 		( 		   
 		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun), slot*, 
+		  (op|Fun)?, slot*, 
       (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*,
 		  repo?, slot*, resl?
 		)
 
 		PR Reaction RuleML:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun), slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl?		)
+		  (op|Fun)?, slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl?		)
 		  
 		ECA Reaction RuleML:
 		( 		   
-		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op|Fun), slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)*, repo?, slot*, resl?
+		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op|Fun)?, slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)*, repo?, slot*, resl?
 		)  
 
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
 		DR Reaction RuleML:
 		(
-		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
+		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun)?, slot*,
 			( 
 				( 
 					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo? )
@@ -81,7 +81,7 @@
 		)
 		KR Reaction RuleML:
 				(
-		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
+		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun)?, slot*,
 			( 
 				( 
 					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo? )
@@ -104,7 +104,7 @@
   <xs:group name="Expr.content">
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
-      <xs:choice>
+      <xs:choice minOccurs="0">
         <xs:element name="op" type="op-Expr.type"/>
         <xs:group ref="op-Expr.content"/>
       </xs:choice>

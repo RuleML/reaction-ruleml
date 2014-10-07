@@ -19,8 +19,21 @@ include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc
     ## asserted, making an 'implicit <Rulebase>' assumption.
     ## See http://www.ruleml.org/1.0/glossary/#gloss-Assert
     element Assert {
+    # was  (AssertRetract-datt.choice & reAssertRetract.attlist),
       (AssertRetract-datt.choice & reAssert.attlist), AssertRetract.header, AssertRetract.main
     }
+  AssertRetractFormula.choice |=
+  SimpleFormula-node.choice
+  | And-fo-node.choice
+  | Or-fo-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-node.notallowed
+  | Implication-node.choice
+  | Forall-node.choice
+  | Exists-fo-node.choice  
+  | Entails-node.choice 
+  | Rulebase-node.choice
+
   QueryFormula.choice |=
     SimpleFormula-node.choice
     | And-Query-node.choice
@@ -29,6 +42,7 @@ include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc
     | NegationAsFailure-node.choice
     | Implication-fo-node.choice
     | Forall-fo-node.choice
+    # was  | Exists-node.choice
     | Exists-Query-node.choice
     | Entails-node.choice 
     | Rulebase-node.choice

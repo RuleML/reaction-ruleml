@@ -13,30 +13,13 @@ dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" {
-  AndFormula.choice |=
-    SimpleFormula-node.choice
-    | And-node.choice
-    | Or-node.choice
-    | Negation-node.choice
-    | NegationAsFailure-fo-node.choice
-    | Implication-fo-node.choice
-    | Forall-fo-node.choice
-    | Exists-fo-node.choice
-  OrFormula.choice |=
-    SimpleFormula-node.choice
-    | And-node.choice
-    | Or-node.choice
-    | Negation-node.choice
-    | NegationAsFailure-fo-node.choice
-    | Implication-fo-node.choice
-    | Forall-fo-node.choice
-    | Exists-fo-node.choice
+## Within Query...
   And-Query.Node.def =
     element And { (And-Query-datt.choice & reAnd-Query.attlist), And-Query.header, And-Query.main }
   Or-Query.Node.def =
     element Or { (Or-Query-datt.choice & reOr-Query.attlist), Or-Query.header, Or-Query.main }
 }
-
+#
 # *** And ***
 And-Query.header &= And.header?
 And-Query.main |= formula_And-query-edge.choice*
@@ -59,6 +42,7 @@ AndQueryFormula.choice |=
   | Implication-fo-node.choice
   | Forall-fo-node.choice
   | Exists-Query-node.choice
+#
 # *** Or ***
 Or-Query.header &= Or.header?
 Or-Query.main |= formula_Or-query-edge.choice*

@@ -13,85 +13,31 @@ dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 include "drrr_andor_expansion_module.rnc" {
-# Restricted From
-#  AndFormula.choice |=
-#    SimpleFormula-node.choice
-#    | And-node.choice
-#    | Or-node.choice
-#    | Negation-node.choice
-#    | NegationAsFailure-fo-node.choice
-#    | Implication-fo-node.choice
-#    | Forall-fo-node.choice
-#    | Exists-fo-node.choice
-
-  AndFormula.choice |=
-    SimpleFormula-node.choice
-    | And-node.choice
-    | Or-node.choice
-    | Negation-node.choice
-    | NegationAsFailure-node.choice
-    | Implication-fo-node.choice
-    | Forall-fo-node.choice
-    | Exists-fo-node.choice
-# Restricted From
-#   OrFormula.choice |=
-#    SimpleFormula-node.choice
-#    | And-node.choice
-#    | Or-node.choice
-#    | Negation-node.choice
-#    | NegationAsFailure-fo-node.choice
-#    | Implication-fo-node.choice
-#    | Forall-fo-node.choice
-#    | Exists-fo-node.choice
-
-  OrFormula.choice |=
-    SimpleFormula-node.choice
-    | And-node.choice
-    | Or-node.choice
-    | Negation-node.choice
-    | NegationAsFailure-node.choice
-    | Implication-fo-node.choice
-    | Forall-fo-node.choice
-    | Exists-fo-node.choice
-
-
-# Restricted from
-#AndQueryFormula.choice |=
-#  SimpleFormula-node.choice
-#  | And-Query-node.choice
-#  | Or-Query-node.choice
-#  | Negation-node.choice
-#  | NegationAsFailure-node.choice
-#  | Implication-fo-node.choice
-#  | Forall-fo-node.choice
-#  | Exists-Query-node.choice
+# formulas allowed to participate in conjunctions in Query. 
 AndQueryFormula.choice |=
   SimpleFormula-node.choice
+# was   | And-Query-node.choice  
   | And-node.choice
+# was   | Or-Query-node.choice  
   | Or-node.choice
   | Negation-node.choice
   | NegationAsFailure-node.choice
   | Implication-fo-node.choice
   | Forall-fo-node.choice
+# was  | Exists-Query-node.choice
   | Exists-fo-node.choice
 
 # formulas allowed to participate in disjunctions in Query. 
-#OrQueryFormula.choice |=
-#  SimpleFormula-node.choice
-#  | And-Query-node.choice
-#  | Or-Query-node.choice
-#  | Negation-node.choice
-#  | NegationAsFailure-node.choice
-#  | Implication-fo-node.choice
-#  | Forall-fo-node.choice
-#  | Exists-Query-node.choice
 OrQueryFormula.choice |=
   SimpleFormula-node.choice
+# was   | And-Query-node.choice  
   | And-node.choice
+# was   | Or-Query-node.choice  
   | Or-node.choice
   | Negation-node.choice
   | NegationAsFailure-node.choice
   | Implication-fo-node.choice
   | Forall-fo-node.choice
+  # was   | Exists-Query-node.choice
   | Exists-fo-node.choice
 }

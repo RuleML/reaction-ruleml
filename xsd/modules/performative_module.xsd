@@ -32,13 +32,10 @@
 		The n-ary top-level of a RuleML document.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-RuleML
-		
-	 the DR schema redefines the RuleML element
-	 and adds meta, evaluation, signature, qualification, quantification, and scope so that the content model is:
-	 
-	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert | Retract | Query)* )
-	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Action | Assert | Retract | Update | Query)* )
-	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Action | Assert | Retract | Update | Query)* )
+			 
+	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Consult|Assert|Retract|Query|Answer|Test)* )
+	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert|Retract|Update|Consult|Query|Answer|Test|Action)* )
+	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert|Retract|Update|Query|Consult|Answer|Test|Action)* )
 	CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)* )
 			
  	 Note: key and keyref object identifier are defined to be unique under the RuleML document root

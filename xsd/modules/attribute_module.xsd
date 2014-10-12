@@ -21,7 +21,6 @@
                   * @arity (the arity of a signature associated with the symbol)
                   * @mode (mode declaration)
                   * @safety  (transactional)
-                  * @size (maximum counter)
                   * @per (usage)
                   * @style (semantic evaluation styles)	
                   * @key and @keyref a local key for for syntactic modularization of knowledge

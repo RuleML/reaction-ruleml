@@ -353,7 +353,7 @@
 	  
 	  With the optional @type attribute an answer type can be specified. 
 	  The @safety optionally defines if the answer (event) is interrupting or non-interrupting 
-	  and the @size attribute optionally defines the number of results contained in an Answer.
+	  and the @card attribute optionally defines the number of results contained in an Answer.
 	   
 	  
       content model:

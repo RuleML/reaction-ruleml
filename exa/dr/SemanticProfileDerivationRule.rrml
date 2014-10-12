@@ -30,7 +30,7 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
       
       <!-- the primary intended semantics is well founded semantics -->
       
-      <Profile type="ruleml:WellFoundedSemantics" mapDirection="backward"/>
+      <Profile type="ruleml:WellFoundedSemantics" direction="backward"/>
       
     </evaluation>
     
@@ -38,7 +38,7 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
     
     <evaluation index="2">
       
-      <Profile type="ruleml:AnswerSetSemantics" mapDirection="backward"/>
+      <Profile type="ruleml:AnswerSetSemantics" direction="backward"/>
       
     </evaluation>
 

@@ -13,12 +13,11 @@ It explicitly shows all metadata information
 -->
 
   <!-- assert knowledge base (KB)
-	 the quantification closure (mapClosure) for the asserted KB is "universal" quantification
-	 the inference direction (mapDirection) for the asserted KB is "backward" reasoning
-       material implication (mapMaterial) applies to all derivation rules in the asserted KB  
+	 the quantification closure for the asserted KB is "universal" quantification
+	 the inference direction for the asserted KB is "backward" reasoning
   -->
 
-  <Assert key="#kb1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">
+  <Assert key="#kb1" closure="universal" direction="backward">
 
     <!-- general metadata of the asserted knowledge -->
 
@@ -85,7 +84,7 @@ It explicitly shows all metadata information
     <!-- rule base 1 with one rule -->
 
     <formula>
-      <Rulebase key="#rulebase1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">
+      <Rulebase key="#rulebase1" closure="universal" direction="backward">
 
         <!-- general metadata of the asserted rule base -->
 
@@ -127,8 +126,7 @@ It explicitly shows all metadata information
 
           <!-- the rule is a backward reasoning material implication rule with universal variable closure -->
 
-          <Rule key="#rule1" style="reasoning" closure="universal" direction="backward"
-            material="yes">
+          <Rule key="#rule1" style="reasoning" closure="universal" direction="backward" material="yes">
 
             <!-- general metadata of the rule -->
 

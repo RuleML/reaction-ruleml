@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
 
 <act index="1">
-	<Assert mapDirection="bidirectional" mapMaterial="yes">
+	<Assert direction="bidirectional">
 		
 
 	<!-- descriptive metadata with date -->
@@ -64,7 +64,7 @@
 
 	<!-- rule base  -->
 	<formula>
-		<Rulebase mapMaterial="yes" mapDirection="bidirectional">
+		<Rulebase direction="bidirectional">
 
 		<!-- different time definitions -->
 		
@@ -122,7 +122,7 @@
 		<!-- a user-defined functional time definition defining a time function "datetime" -->
 		<formula><Time>
 			<arg><Expr per="copy">
-				<op><Fun per="copy" val="0..">datetime</Fun></op>
+				<op><Fun per="copy">datetime</Fun></op>
 				<arg index="1"><Data xsi:type="xs:dateTime">2011-03-21T10:00:00-04:00</Data></arg>
 			</Expr></arg>
 		</Time></formula>

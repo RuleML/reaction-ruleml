@@ -45,8 +45,9 @@ interval_anycontent.type = interval_anycontent.attlist, interval_anycontent.cont
 interval_anycontent.content |= anycontent.content
 interval_anycontent.attlist &= commonInit.attlist?
 
-##
+# was anycontent.content |= (text & foreign-element*) | Node.choice | edge.choice
 anycontent.content |= (text & any-element*) | Node.choice | edge.choice
 
+# was foreign-element = element * - (this:*) { anything }
 any-element = element * { anything }
 anything = ( element * { anything } | attribute * { text } | text )*

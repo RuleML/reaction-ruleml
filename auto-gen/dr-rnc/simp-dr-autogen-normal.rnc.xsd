@@ -2905,7 +2905,6 @@
             <xs:group ref="spec:Forall"/>
             <xs:element ref="spec:Entails"/>
             <xs:element ref="spec:Rulebase"/>
-            <xs:element ref="spec:Quantifier"/>
             <xs:element ref="spec:Rule"/>
           </xs:choice>
           <xs:attribute name="key">
@@ -3921,7 +3920,6 @@
         <xs:group ref="spec:Forall"/>
         <xs:element ref="spec:Entails"/>
         <xs:element ref="spec:Rulebase"/>
-        <xs:element ref="spec:Quantifier"/>
         <xs:element ref="spec:Rule"/>
       </xs:choice>
       <xs:attribute name="index" type="xs:positiveInteger"/>
@@ -4487,7 +4485,6 @@
         <xs:group ref="spec:Forall"/>
         <xs:element ref="spec:Entails"/>
         <xs:element ref="spec:Rulebase"/>
-        <xs:element ref="spec:Quantifier"/>
         <xs:element ref="spec:Rule"/>
       </xs:choice>
       <xs:attribute name="index" type="xs:positiveInteger"/>

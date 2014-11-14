@@ -48,7 +48,7 @@ Node.choice |= Quantifier
 Quantifier-node.choice |= Quantifier
 Quantifier-fo-node.choice |= notAllowed
 QueryFormula.choice |= Quantifier-node.choice
-AssertRetractFormula.choice |= Quantifier-node.choice
+AssertRetractFormula.choice |= Quantifier-fo-node.choice
 AndFormula.choice |= Quantifier-fo-node.choice
 OrFormula.choice |= Quantifier-fo-node.choice
 AndQueryFormula.choice |= Quantifier-node.choice
@@ -59,7 +59,7 @@ RulebaseFormula.choice |= Quantifier-node.choice
 NegationFormula.choice |= Quantifier-fo-node.choice
 NegFormula.choice |= Quantifier-fo-node.choice
 NafFormula.choice |= Quantifier-fo-node.choice
-ForallFormula.choice |= Quantifier-node.choice
+ForallFormula.choice |= Quantifier-fo-node.choice
 ExistsFormula.choice |= Quantifier-node.choice
 ExistsQueryFormula.choice |= Quantifier-node.choice
 #

@@ -116,7 +116,7 @@ include "http://ruleml.org/1.0/relaxng/modules/iri_expansion_module.rnc" inherit
 # 
 # RULEBASES INCLUDED
 #
-include "../modules/drrr_rulebase_expansion_module.rnc" inherit = ruleml {
+include "../modules/drrr_rulebase_strict_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -377,7 +377,7 @@ include "../modules/init_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 #
-#include "../modules/any_content_expansion_module.rnc" inherit = ruleml { 
+#include "../modules/any_content_strict_expansion_module.rnc" inherit = ruleml { 
 #  start |= notAllowed
 #}
 include "../modules/attributes_expansion_module.rnc" inherit = ruleml { 

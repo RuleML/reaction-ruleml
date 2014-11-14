@@ -13,7 +13,6 @@
         <xs:element minOccurs="0" ref="spec:oid"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:act"/>
       </xs:sequence>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -80,7 +79,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -173,7 +171,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -231,7 +228,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -280,7 +276,7 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
         <xs:element minOccurs="0" ref="spec:oid"/>
         <xs:element minOccurs="0" ref="spec:degree"/>
-        <xs:group ref="spec:op"/>
+        <xs:group minOccurs="0" ref="spec:op"/>
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:arg"/>
         <xs:element minOccurs="0" ref="spec:repo"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
@@ -294,7 +290,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -334,7 +329,6 @@
   <xs:element name="Rel">
     <xs:complexType mixed="true">
       <xs:attribute name="iri" type="xs:anyURI"/>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -405,7 +399,6 @@
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -467,7 +460,6 @@
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -545,7 +537,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -598,7 +589,6 @@
             <xs:element maxOccurs="unbounded" ref="spec:declare"/>
             <xs:group ref="spec:formula_5"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -653,7 +643,6 @@
             <xs:element maxOccurs="unbounded" ref="spec:declare"/>
             <xs:group ref="spec:formula_6"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -703,7 +692,7 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
         <xs:element minOccurs="0" ref="spec:oid"/>
-        <xs:group ref="spec:op_2"/>
+        <xs:group minOccurs="0" ref="spec:op_2"/>
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:arg"/>
         <xs:element minOccurs="0" ref="spec:repo"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
@@ -737,7 +726,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -787,16 +775,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="val" use="required">
-        <xs:simpleType>
-          <xs:restriction base="xs:token">
-            <xs:enumeration value="1"/>
-            <xs:enumeration value="0.."/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
       <xs:attribute name="iri" type="xs:anyURI"/>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -871,7 +850,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -922,7 +900,6 @@
         <xs:group ref="spec:if_3"/>
         <xs:group ref="spec:then_3"/>
       </xs:sequence>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -972,7 +949,6 @@
         <xs:element minOccurs="0" ref="spec:oid"/>
         <xs:element ref="spec:strong"/>
       </xs:sequence>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1040,7 +1016,6 @@
         <xs:element minOccurs="0" ref="spec:oid"/>
         <xs:element ref="spec:weak"/>
       </xs:sequence>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1117,7 +1092,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1179,7 +1153,6 @@
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -1221,7 +1194,6 @@
   <xs:element name="Data">
     <xs:complexType mixed="true">
       <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:_1"/>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1277,7 +1249,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1334,7 +1305,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1390,7 +1360,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1454,7 +1423,6 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
             <xs:element minOccurs="0" ref="spec:resl"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -1525,7 +1493,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1596,7 +1563,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1664,7 +1630,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1741,7 +1706,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1856,7 +1820,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1927,7 +1890,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -1997,7 +1959,6 @@
               </xs:union>
             </xs:simpleType>
           </xs:attribute>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -2070,7 +2031,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2141,7 +2101,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2209,7 +2168,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2277,7 +2235,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2348,7 +2305,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2417,7 +2373,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2486,7 +2441,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2555,7 +2509,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2624,7 +2577,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2693,7 +2645,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2762,7 +2713,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2831,7 +2781,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -2902,7 +2851,6 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="node" type="xs:anyURI"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -4402,7 +4350,7 @@
             <xs:element ref="spec:Expr"/>
             <xs:group ref="spec:Plex"/>
           </xs:choice>
-          <xs:attribute name="index" use="required" type="xs:positiveInteger"/>
+          <xs:attribute name="index" type="xs:positiveInteger"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -4965,7 +4913,7 @@
         <xs:element ref="spec:Retract"/>
         <xs:element ref="spec:Query"/>
       </xs:choice>
-      <xs:attribute name="index" use="required" type="xs:positiveInteger"/>
+      <xs:attribute name="index" type="xs:positiveInteger"/>
       <xs:attribute name="key">
         <xs:simpleType>
           <xs:union>
@@ -5190,7 +5138,6 @@
             <xs:element maxOccurs="unbounded" ref="spec:declare"/>
             <xs:group ref="spec:formula_12"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5244,7 +5191,6 @@
             <xs:element minOccurs="0" ref="spec:oid"/>
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_3"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5298,7 +5244,6 @@
             <xs:element minOccurs="0" ref="spec:oid"/>
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_4"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5353,7 +5298,6 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:slot"/>
             <xs:element minOccurs="0" ref="spec:resl"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5408,7 +5352,6 @@
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:arg"/>
             <xs:element minOccurs="0" ref="spec:repo"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5463,7 +5406,6 @@
             <xs:element maxOccurs="unbounded" ref="spec:declare"/>
             <xs:group minOccurs="0" ref="spec:formula_11"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5518,7 +5460,6 @@
             <xs:element maxOccurs="unbounded" ref="spec:declare"/>
             <xs:group minOccurs="0" ref="spec:formula_11"/>
           </xs:sequence>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5591,7 +5532,6 @@
               </xs:union>
             </xs:simpleType>
           </xs:attribute>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5664,7 +5604,6 @@
               </xs:union>
             </xs:simpleType>
           </xs:attribute>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>
@@ -5736,7 +5675,6 @@
               </xs:union>
             </xs:simpleType>
           </xs:attribute>
-          <xs:attribute name="node" type="xs:anyURI"/>
           <xs:attribute name="key">
             <xs:simpleType>
               <xs:union>

@@ -18,7 +18,7 @@ start |= notAllowed
 #    * @all (yes|no)
 #    * @style (execution style)	
 #    * @key and @keyref for modularization of knowledge bases
-
+#     * allows @index to be optional on arg edges
 # *** @mode ***
 
 ## @mode: input-output mode declaration of the arguments in predicates and functions. See
@@ -76,3 +76,7 @@ reRule.attlist &= style-att.choice?
 generic-Node.attlist &= iri-att.choice?
 generic-Node.attlist &= Type.attlist?
 generic-Node.attlist &= commonNode.attlist?
+
+## adding optional index attribute on argument and act edges
+arg-datt.choice |= empty
+act-datt.choice |= empty

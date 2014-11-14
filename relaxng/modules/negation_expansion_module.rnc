@@ -41,7 +41,7 @@ edge.choice |= formula-negation
 # *** Naf ***
 reNaf.attlist &= iri-att.choice?
 reNaf.attlist &= Type.attlist?
-NegationAsFailure-fo-node.choice |= notAllowed
+#NegationAsFailure-fo-node.choice |= notAllowed
 
 # *** Neg ***
 reNeg.attlist &= iri-att.choice?

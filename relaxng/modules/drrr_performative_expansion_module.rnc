@@ -27,7 +27,8 @@ include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc
   | And-fo-node.choice
   | Or-fo-node.choice
   | Negation-node.choice
-  | NegationAsFailure-node.notallowed
+#  | NegationAsFailure-node.notallowed
+  | NegationAsFailure-ae-node.choice
   | Implication-node.choice
   | Forall-node.choice
   | Exists-fo-node.choice  

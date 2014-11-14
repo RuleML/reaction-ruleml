@@ -25,7 +25,8 @@ start |= notAllowed
     | And-node.choice
     | Or-dis-node.choice
     | Negation-node.choice
-    | NegationAsFailure-fo-node.choice
+#     | NegationAsFailure-node.notallowed
+    | NegationAsFailure-ae-node.choice
     | Implication-fo-node.choice
     | Forall-fo-node.choice
     | Exists-fo-node.choice

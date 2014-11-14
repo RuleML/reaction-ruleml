@@ -11,6 +11,9 @@ dc:language [ "en" ]
 dc:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org/1.0" ]
 start = Node.choice | edge.choice
+include "../modules/ae_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 include "../modules/drrr_andor_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
@@ -164,7 +167,7 @@ include "http://ruleml.org/1.0/relaxng/modules/repo_expansion_module.rnc" inheri
 include "http://ruleml.org/1.0/relaxng/modules/resl_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/rulebase_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_rulebase_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/short_name_contraction_module.rnc" inherit = ruleml { 

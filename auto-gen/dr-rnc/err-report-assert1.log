@@ -1,0 +1,414 @@
+Description: Attribute @mapMaterial is not allowed on element <Assert>
+Start location: 5:49
+
+Description: Attribute @mapDirection is not allowed on element <Assert>
+Start location: 5:49
+
+Description: Attribute @mapClosure is not allowed on element <Assert>
+Start location: 5:49
+
+Description: Attribute @size is not allowed on element <Assert>
+Start location: 5:49
+
+Description: Attribute @node is not allowed on element <Implies>
+Start location: 7:125
+
+Description: Attribute @safety is not allowed on element <Profile>
+Start location: 52:56
+
+Description: Attribute @size is not allowed on element <Profile>
+Start location: 52:56
+
+Description: Attribute @val is not allowed on element <Fun>
+Start location: 64:133
+
+Description: Attribute @node is not allowed on element <Equivalent>
+Start location: 268:102
+
+Description: Attribute @safety is not allowed on element <Profile>
+Start location: 525:61
+
+Description: Attribute @size is not allowed on element <Profile>
+Start location: 525:61
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 809:128
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 816:55
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 822:87
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Or> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 824:88
+
+Description: Attribute @mapMaterial is not allowed on element <Rulebase>
+Start location: 2752:33
+
+Description: Attribute @mapDirection is not allowed on element <Rulebase>
+Start location: 2752:33
+
+Description: Attribute @mapClosure is not allowed on element <Rulebase>
+Start location: 2752:33
+
+Description: Attribute @node is not allowed on element <Rule>
+Start location: 2755:51
+
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 3198:121
+
+Description: Attribute @mapMaterial is not allowed on element <Rulebase>
+Start location: 3279:37
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 4363:117
+
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 4412:34
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 8356:38
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 8399:41
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 13628:47
+
+Description: Attribute @node is not allowed on element <Rule>
+Start location: 14792:49
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 14952:95
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 16976:141
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 18277:119
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 18283:110
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 19980:136
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 21485:76
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Naf> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 21487:132
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 21518:131
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 22580:48
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 23068:77
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 23070:78
+
+Description: In content of element <signature>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 23096:124
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 24914:48
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 25780:122
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 28273:111
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 29316:141
+
+Description: In content of element <signature>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 32414:124
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 32421:51
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 32456:129
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 35530:45
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 37248:121
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 40273:33
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 40275:102
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 41758:129
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 41769:45
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 42130:78
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 43967:49
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 52853:124
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 52879:45
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 57953:73
+
+Description: In content of element <signature>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 58230:127
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 62519:124
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 62783:75
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 63199:129
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 64925:115
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 64931:110
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 67234:45
+
+Description: In content of element <qualification>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 67333:111
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 67576:39
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 68759:81
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 68967:102
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 71822:38
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 71824:121
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 71830:112
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Forall> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 72817:75
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Forall> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 73047:74
+
+Description: In content of element <signature>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 74742:115
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 74748:131
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 74754:137
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 78245:93
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 79753:141
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 79759:154
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 80710:128
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 80745:113
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 80751:125
+
+Description: In content of element <qualification>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 81340:122
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 81836:137
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 89358:69
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 94539:81
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 98889:37
+
+Description: In content of element <meta>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 105232:116
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 105238:106
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 108122:77
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 108776:37
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 109409:37
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Forall> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 109411:84
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 114019:49
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 114021:138
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 114145:73
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 115719:113
+
+Description: In content of element <meta>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 116729:121
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 117135:132
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 117142:56
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 117190:112
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 119297:101
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 121974:43
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 121977:47
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 124517:110
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 124523:115
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 125421:81
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 128808:114
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 129747:51
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 130134:160
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 130137:61
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 130139:145
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 130145:139
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Forall> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 130151:113
+
+Description: In content of element <qualification>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 131087:118
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 131094:48
+
+Description: In content of element <scope>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 133927:124
+
+Description: In content of element <signature>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 134446:111
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 134501:51
+
+Description: In content of element <qualification>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 138286:111
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 138293:51
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 138732:133
+
+Description: In content of element <qualification>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 141816:126
+
+Description: In content of element <scope>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Exists, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 144144:111
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 145377:129
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 145931:82
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}And> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 147190:95
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Rule> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 148139:45
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Rulebase> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 148756:44
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 154934:128
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 154940:142
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Implies> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 155956:136
+
+Description: In content of element <formula>: The content model does not allow element <{http://ruleml.org/spec}Forall> to appear here. Expected one of: {http://ruleml.org/spec}Naf, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Or, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}And, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Equal
+Start location: 157996:79
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 158004:124
+
+Description: In content of element <meta>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 165779:108
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Quantifier> to appear here. Expected one of: {http://ruleml.org/spec}Equivalent, {http://ruleml.org/spec}Rulebase, {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Implies, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Entails, {http://ruleml.org/spec}Operator, {http://ruleml.org/spec}Forall, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Rule
+Start location: 166308:133
+
+Description: In content of element <formula>: The content model does not allow element <{...ruleml.org/spec}Equivalent> to appear here. Expected one of: {http://ruleml.org/spec}Neg, {http://ruleml.org/spec}Negation, {http://ruleml.org/spec}Equal, {http://ruleml.org/spec}Spatial, {http://ruleml.org/spec}Interval, {http://ruleml.org/spec}Atom, {http://ruleml.org/spec}Time, {http://ruleml.org/spec}Operator
+Start location: 166314:105
+
+Description: One or more validation errors were reported

@@ -13,12 +13,26 @@ dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 include "http://ruleml.org/1.0/relaxng/modules/quantification_expansion_module.rnc" {
+
+ForallFormula.choice |=
+    SimpleFormula-node.choice
+    | And-fo-node.choice
+    | Or-fo-node.choice
+    | Negation-node.choice
+#    | NegationAsFailure-node.notallowed
+    | NegationAsFailure-ae-node.choice
+    | Implication-node.choice
+    | Forall-node.choice
+    | Exists-fo-node.choice
+
+
   ExistsFormula.choice |=
     SimpleFormula-node.choice
     | And-node.choice
     | Or-node.choice
     | Negation-node.choice
-    | NegationAsFailure-node.notallowed
+#    | NegationAsFailure-node.notallowed
+    | NegationAsFailure-ae-node.choice
     | Implication-fo-node.choice
     | Forall-fo-node.choice
     | Exists-node.choice

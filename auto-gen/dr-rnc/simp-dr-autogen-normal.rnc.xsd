@@ -1977,7 +1977,7 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:qualification"/>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="spec:quantification"/>
             <xs:element minOccurs="0" ref="spec:oid"/>
-            <xs:group ref="spec:formula_7"/>
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="spec:formula_7"/>
           </xs:sequence>
           <xs:attribute name="iri" type="xs:anyURI"/>
           <xs:attribute name="type">
@@ -3684,11 +3684,13 @@
             <xs:element ref="spec:Spatial"/>
             <xs:group ref="spec:Operator"/>
             <xs:element ref="spec:Time"/>
+            <xs:group ref="spec:And_2"/>
             <xs:element ref="spec:Neg"/>
             <xs:element ref="spec:Negation"/>
             <xs:element ref="spec:Implies"/>
             <xs:element ref="spec:Equivalent"/>
             <xs:group ref="spec:Forall"/>
+            <xs:element ref="spec:Rulebase"/>
             <xs:element ref="spec:Quantifier"/>
             <xs:element ref="spec:Rule"/>
           </xs:choice>

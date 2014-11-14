@@ -36,7 +36,7 @@ include "drrr_implication_content_expansion_module.rnc" {
   #    | And-node.choice
   #    | Or-dis-node.choice
   #    | Negation-node.choice
-  #    | NegationAsFailure-fo-node.choice
+  #    | NegationAsFailure-ae-node.choice
   #    | Implication-fo-node.choice
   #    | Forall-fo-node.choice
   #    | Exists-fo-node.choice 
@@ -45,7 +45,7 @@ include "drrr_implication_content_expansion_module.rnc" {
     | And-fo-node.choice
     | Or-dis-node.choice
     | Negation-node.choice
-    | NegationAsFailure-fo-node.choice
+    | NegationAsFailure-ae-node.choice
     | Implication-fo-node.choice
     | Forall-fo-node.choice
     | Exists-fo-node.choice

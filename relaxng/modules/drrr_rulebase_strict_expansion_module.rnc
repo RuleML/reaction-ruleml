@@ -1,0 +1,29 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Rulebases" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Performative" ]
+dc:description [
+  "The expansion module for extended rulebases."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "http://ruleml.org/1.0/relaxng/modules/rulebase_expansion_module.rnc" {
+RulebaseFormula.choice |=
+  SimpleFormula-node.choice
+# was  | And-node.choice
+  | And-fo-node.choice
+# was  | Or-dis-node.choice
+  | Or-fo-node.choice
+  | Negation-node.choice
+  | NegationAsFailure-ae-node.choice
+  | Implication-node.choice
+  | Forall-node.choice
+  | Exists-fo-node.choice
+# was | Rulebase-node.choice
+
+}

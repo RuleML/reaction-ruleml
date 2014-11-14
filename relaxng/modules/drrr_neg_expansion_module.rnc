@@ -18,7 +18,8 @@ include "http://ruleml.org/1.0/relaxng/modules/neg_expansion_module.rnc" {
     | And-fo-node.choice
     | Or-fo-node.choice
     | Negation-node.choice
-    | NegationAsFailure-node.notallowed
+#    | NegationAsFailure-node.notallowed
+    | NegationAsFailure-ae-node.choice
     | Implication-fo-node.choice
     | Forall-fo-node.choice
     | Exists-fo-node.choice

@@ -2,8 +2,8 @@
 
 <?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_strict_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1"
-  xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1">
+  <!--xsi:schemaLocation="http://ruleml.org/spec ../../../xsd/dr.xsd">-->
 
   <!-- Clocksin/Mellish sample rule 
 

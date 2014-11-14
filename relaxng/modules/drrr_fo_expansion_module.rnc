@@ -14,5 +14,5 @@ dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 include "http://ruleml.org/1.0/relaxng/modules/folog_cl_expansion_module.rnc" {
 }
-NegationAsFailure-fo-node.choice |= NegationAsFailure-node.choice
+#NegationAsFailure-fo-node.choice |= NegationAsFailure-node.choice
 Quantifier-fo-node.choice |= Quantifier

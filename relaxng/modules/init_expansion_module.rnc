@@ -21,7 +21,7 @@ if_Rule-ss.content |= notAllowed
 then_Rule-ss.content |= notAllowed
 slot-edge.choice |= notAllowed
 formula_Rulebase-edge.choice |= notAllowed
-NegationAsFailure-fo-node.choice |= notAllowed
+NegationAsFailure-ae-node.choice |= notAllowed
 generic-Node.attlist &= empty
 
 ## RR patterns

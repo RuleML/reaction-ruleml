@@ -146,11 +146,11 @@ include "../modules/drrr_naf_expansion_module.rnc" inherit = ruleml {
 }
 
 # 
-# NODE IDENTIFIERS INCLUDED
+# NODE IDENTIFIERS NOT INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
 # 
 # IN-PLACE ANNOTATIONS INCLUDED
 # WITH OPTIONAL INDEX ATTRIBUTE
@@ -329,27 +329,27 @@ include "http://ruleml.org/1.0/relaxng/modules/plex_expansion_module.rnc" inheri
 # 
 # SET-VALUED EXPRESSION ATTRIBUTE IS ABSENT OR OPTIONAL
 #
-#include "http://ruleml.org/1.0/relaxng/modules/val_absence_expansion_module.rnc" inherit = ruleml {
+include "http://ruleml.org/1.0/relaxng/modules/val_absence_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+# 
+# SET-VALUED EXPRESSION ATTRIBUTE IS NOT INCLUDED
+#
+#include "http://ruleml.org/1.0/relaxng/modules/val_attrib_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 #}
 # 
-# SET-VALUED EXPRESSION ATTRIBUTE IS INCLUDED
+# NON-DEFAULT VALUES OF THE SET-VALUED ATTRIBUTE NOT INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/val_attrib_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/val_non-default_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
 # 
-# NON-DEFAULT VALUES OF THE SET-VALUED ATTRIBUTE INCLUDED
+# DEFAULT VALUE OF THE SET-VALUED ATTRIBUTE NOT INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/val_non-default_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
-# 
-# DEFAULT VALUE OF THE SET-VALUED ATTRIBUTE INCLUDED
-#
-include "http://ruleml.org/1.0/relaxng/modules/val_default_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/val_default_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
 # INTERPRETED EXPRESSION ATTRIBUTE IS INCLUDED
 #
 include "http://ruleml.org/1.0/relaxng/modules/per_attrib_expansion_module.rnc" inherit = ruleml {
@@ -401,7 +401,7 @@ include "../modules/interval_expansion_module.rnc" inherit = ruleml {
 include "../modules/negation_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "../modules/ordered_groups_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_ordered_groups_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "../modules/per_effect_expansion_module.rnc" inherit = ruleml { 

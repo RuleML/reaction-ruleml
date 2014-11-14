@@ -68,7 +68,5 @@ Node_unordered.header &= interface_unordered.header?
 Node_unordered.header &= instance_unordered.header?
 #
 Node.header &= Node_unordered.header?
-#
-arg-datt.choice |= empty
 # *** Derivation Rule content model ***
 DerivationRule.content |= Implies.main & (else_Rule-edge.choice?)

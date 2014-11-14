@@ -245,7 +245,7 @@ include "../modules/interval_expansion_module.rnc" inherit = ruleml {
 include "../modules/negation_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-#include "../modules/ordered_groups_expansion_module.rnc" inherit = ruleml { 
+#include "../modules/drrr_ordered_groups_expansion_module.rnc" inherit = ruleml { 
 #  start |= notAllowed
 #}
 include "../modules/per_effect_expansion_module.rnc" inherit = ruleml { 

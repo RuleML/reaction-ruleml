@@ -17,11 +17,23 @@ dc:relation [ "http://reaction.ruleml.org" ]
 #
 include "http://ruleml.org/1.0/relaxng/modules/ordered_groups_expansion_module.rnc" {
   start |= notAllowed
+  # allowing the operator in Atom to be optional
+  Atom.main |=
+  operatorForAtoms-edge.choice?, argumentsForAtoms.sequence
+
+  # allowing the operator in Expr to be optional
+  Expr.main |=
+  operatorForExpressions-edge.choice?,
+  argumentsForExpressions.sequence
+
+  # synchronizing the implication content model with the if-then part of the rule content model
   Implies.main |= if_Rule-edge.choice, then_Rule-edge.choice
-  Atom.header &= (Node.header?, degree-edge.choice?)?
+  
+  # reversion to oids via Node.header (see below)
+  Atom.header &= (Node.header?, degree-edge.choice?)?  
   Expr.header &= Node.header?
 }
-#
+# adding patterns for spatial-temporal individuals
 argumentsForTime.sequence |= arg_time.choice*, restOfPositionalArguments-edge.choice?, slot-edge.choice*, restOfSlots-edge.choice?
 argumentsForSpatial.sequence |= arg_spatial.choice*, restOfPositionalArguments-edge.choice?, slot-edge.choice*, restOfSlots-edge.choice?
 

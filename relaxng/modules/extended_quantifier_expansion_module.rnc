@@ -14,29 +14,13 @@ dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 start |= Quantifier
 
-
-# *** Forall ***
-
-## <Forall>: "forall declared variables [such that formula]". See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Forall
-# needed for Quantifier and quantification
-formula-forall.type.def = formula_Forall.content, formula_Forall.attlist
-formula-forall = element formula { formula-forall.type.def }
-
-# This module declares the following Reaction RuleML elements:
-# * Quantifier  generic quantifier
-# * Forall		predefined inner quantifier (used in quantification metatag)
-# * Exist		predefined inner quantifier (used in qualification metatag)
-
 # *** Quantifier ***
 
 ## Quantifier attribute list with the @type and @iri
 Quantifier.attlist &= generic-Node.attlist?
 Quantifier.content |= Quantifier.header, Quantifier.main
 Quantifier.header &= Node.header?
-Quantifier.main |= boundVariables.choice, formula-quant.choice?
-formula-quant.choice |= formula-quant
-formula-quant = element formula { formula-forall.type.def }
+Quantifier.main |= boundVariables.choice, formula-inner-quant.choice?
 Quantifier.type.def = Quantifier.content, Quantifier.attlist
 Quantifier =
   
@@ -47,7 +31,7 @@ Node.choice |= Quantifier
 #
 Quantifier-node.choice |= Quantifier
 Quantifier-fo-node.choice |= notAllowed
-QueryFormula.choice |= Quantifier-node.choice
+QueryFormula.choice |= Quantifier-fo-node.choice
 AssertRetractFormula.choice |= Quantifier-fo-node.choice
 AndFormula.choice |= Quantifier-fo-node.choice
 OrFormula.choice |= Quantifier-fo-node.choice
@@ -55,11 +39,11 @@ AndQueryFormula.choice |= Quantifier-node.choice
 OrQueryFormula.choice |= Quantifier-node.choice
 PremiseFormula.choice |= Quantifier-node.choice
 ConclusionFormula.choice |= Quantifier-fo-node.choice
-RulebaseFormula.choice |= Quantifier-node.choice
+RulebaseFormula.choice |= Quantifier-fo-node.choice
 NegationFormula.choice |= Quantifier-fo-node.choice
 NegFormula.choice |= Quantifier-fo-node.choice
 NafFormula.choice |= Quantifier-fo-node.choice
 ForallFormula.choice |= Quantifier-fo-node.choice
-ExistsFormula.choice |= Quantifier-node.choice
-ExistsQueryFormula.choice |= Quantifier-node.choice
+ExistsFormula.choice |= Quantifier-fo-node.choice
+ExistsQueryFormula.choice |= Quantifier-fo-node.choice
 #

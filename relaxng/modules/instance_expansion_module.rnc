@@ -56,7 +56,8 @@ formula-inner-quant.def = element formula {
   formula-inner-quant.attlist, formula-inner-quant.content
 }
 formula-inner-quant.attlist &= header.attlist?
-formula-inner-quant.content |= PremiseFormula.choice
+formula-inner-quant.content |= QuantifierFormula.choice
+QuantifierFormula.choice |= PremiseFormula.choice
 
 ## the attribute list of the quantification
 quantification.attlist &= header.attlist?

@@ -43,12 +43,20 @@ inner-quantifier.content |=
 
 # make the quantifier constraint restrictions ("such that") optional
 Exists-quantifier.content |= Exists.header, Exists-quantifier.main
-Exists-quantifier.main |= boundVariables.choice, formula-quant.choice?
+Exists-quantifier.main |= boundVariables.choice, formula-inner-quant.choice?
 Exists-quantifier.type.def = (Exists-datt.choice & reExists.attlist), Exists-quantifier.content
 # make the quantifier constraint restrictions ("such that") optional
 Forall-quantifier.content |= Forall.header, Forall-quantifier.main
-Forall-quantifier.main |= boundVariables.choice, formula-quant.choice?
+Forall-quantifier.main |= boundVariables.choice, formula-inner-quant.choice?
 Forall-quantifier.type.def = (Forall-datt.choice & reForall.attlist), Forall-quantifier.content
+
+## formula-inner-quant
+formula-inner-quant.choice |= formula-inner-quant.def
+formula-inner-quant.def = element formula {
+  formula-inner-quant.attlist, formula-inner-quant.content
+}
+formula-inner-quant.attlist &= header.attlist?
+formula-inner-quant.content |= PremiseFormula.choice
 
 ## the attribute list of the quantification
 quantification.attlist &= header.attlist?

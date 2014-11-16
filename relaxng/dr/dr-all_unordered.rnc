@@ -272,6 +272,6 @@ include "../modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {
 include "../modules/time_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "../modules/unordered_groups_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_unordered_groups_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }

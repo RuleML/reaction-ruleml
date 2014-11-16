@@ -1,3 +1,3 @@
-include "../modules/drrr_quantification_expansion_module.rnc"
+include "../modules/drrr_rulebase_expansion_module.rnc"
 include "../modules/init_expansion_module.rnc"
 include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc"

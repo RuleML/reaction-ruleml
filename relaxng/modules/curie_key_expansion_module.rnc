@@ -39,7 +39,7 @@ curieOrAbsIRI.datatype |= curie.datatype | absIRI.datatype
 termOrCurieOrIRI.datatype |= term.datatype | curie.datatype | xsd:anyURI
 
 ## data type definition         
-termOrCurieOrAbsIRI = term.datatype | curie.datatype | absIRI.datatype
+termOrCurieOrAbsIRI.datatype = term.datatype | curie.datatype | absIRI.datatype
 absIRI.datatype |= xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
 
 ## data type definition         

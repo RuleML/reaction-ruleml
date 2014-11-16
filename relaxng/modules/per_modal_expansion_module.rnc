@@ -16,4 +16,4 @@ start |= notAllowed
 
 ## the interpretation attribute may also have the "effect" value, indicating evaluation as the 
 ## argument of a modal operator
-interpretation_non-default.value |= "modal"
+interpretation.value |= "modal"

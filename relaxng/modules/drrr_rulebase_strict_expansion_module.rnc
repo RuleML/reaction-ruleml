@@ -24,6 +24,5 @@ RulebaseFormula.choice |=
   | Implication-node.choice
   | Forall-node.choice
   | Exists-fo-node.choice
-# was | Rulebase-node.choice
 
 }

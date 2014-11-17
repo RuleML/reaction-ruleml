@@ -25,7 +25,5 @@ RulebaseFormula.choice |=
   | Implication-node.choice
   | Forall-node.choice
   | Exists-fo-node.choice
-# nesting was not allowed
-  | Rulebase-node.choice
 
 }

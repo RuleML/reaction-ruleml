@@ -213,7 +213,7 @@
 	  
 	  With the optional @type attribute an answer type can be specified. 
 	  The @safety optionally defines if the answer (event) is interrupting or non-interrupting 
-	  and the @size attribute optionally defines the number of results contained in an Answer.
+	  and the @card attribute optionally defines the number of results contained in an Answer.
 	   
 	  
       content model:
@@ -3157,11 +3157,12 @@
     PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
  	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @safety?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
     <xs:attributeGroup name="Profile.attlist">
         <xs:attributeGroup ref="group-formula-interface.attlist"/>
         <xs:attributeGroup ref="node-element.attlist"/>
+        <xs:attributeGroup ref="safety.attrib"/>
         <xs:attributeGroup ref="xml.attlist"/>
     </xs:attributeGroup>
     <xs:group name="Profile.content">

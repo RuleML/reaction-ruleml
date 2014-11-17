@@ -25,7 +25,7 @@ Profile.attlist &= direction-att-inf.choice?
 Profile.attlist &= Type.attlist?
 Profile.attlist &= commonNode.attlist?
 Profile.attlist &= safety-att.choice?
-Profile.attlist &= size-att.choice?
+Profile.attlist &= card-att.choice?
 Profile.content |= Node.header, formula_Profile-edge.choice*
 formula_Profile-edge.choice |= formula_AssertRetract-edge.choice
 # relaxed

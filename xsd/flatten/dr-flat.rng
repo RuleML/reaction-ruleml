@@ -3939,10 +3939,11 @@
     PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
  	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @safety?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
     <define name="Profile.attlist">
         <ref name="group-formula-interface.attlist"/>
+        <ref name="safety.attrib"/>
         <ref name="node-element.attlist"/>
         <ref name="xml.attlist"/>
     </define>

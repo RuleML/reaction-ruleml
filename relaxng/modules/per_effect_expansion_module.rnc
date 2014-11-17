@@ -15,4 +15,4 @@ dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
 
 ## the interpretation attribute may also have the "effect" value, indicating an effectful evaluation
-interpretation.value |= "effect"
+interpretation_non-default.value |= "effect"

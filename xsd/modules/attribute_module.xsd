@@ -154,7 +154,7 @@
 	
 	<!-- 
 		
-		replaced by card ?
+		replaced by card 
 		
 		<xs:attributeGroup name="size.attrib">
 		<xs:attribute name="size" type="xs:int" use="optional" default="-1"/>

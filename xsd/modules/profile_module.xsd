@@ -36,25 +36,18 @@
 	
 	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Profile
 	
-	The semantic profile can be
-      defined internally by the any content model (xs:any Element) or externally, where 
-      the optional @type attribute defines the name/type of the used sematics profile,
-      the optional @iri attribute points to an external definition of the semantics profile, and
-      the optional @mapDirection attribute indicates the default direction of the inference / execution.
-      the optional @mapClosure attribute indicates the default quantification.  Allowed values are "universal" and "existential".
-      the optional @mapMaterial attribute indicates the default quantification.  Allowed values are "universal" and "existential".
-      the optional @mapSafety attribute indicates if the execution / inference is transactional, interrupting, non-interrupting
-      the optional @mapSize attribute acts as a generic size boundary / counter in the operational semantic profiles    
+	The semantic profile can be defined internally by the any content model (xs:any Element) or externally  
 
 	DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | content(xs:any*)  )*)
     KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
     PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
  	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @safety, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
 	<xs:attributeGroup name="Profile.attlist">
 		<xs:attributeGroup ref="group-formula-interface.attlist"/>
+		<xs:attributeGroup ref="safety.attrib"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>

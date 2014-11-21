@@ -19,7 +19,7 @@ start |= notAllowed
 #    * @style (execution style)	
 #    * @key and @keyref for modularization of knowledge bases
 #     * allows @index to be optional on arg edges
-# *** @mode ***
+#    * @mode 
 #    * @arity (arity of signatures)
 #    * @card, @minCard, @maxCard (cardinality constraints)
 #    * @meta (reference to meta knowledge)
@@ -30,8 +30,7 @@ start |= notAllowed
 mode-att.choice |= mode.attrib.def
 mode.attrib.def = attribute mode { mode.datatype | termOrCurieOrAbsIRI.datatype }
 mode.datatype |= "+" | "-" | "?"
-#	*** Var with mode attribute ***
-reVar.attlist &= mode-att.choice?
+
 # *** @safety ***
 
 ## @safety: attribute defining the safety of the execution semantics for events, actions and primitives. See
@@ -39,23 +38,16 @@ reVar.attlist &= mode-att.choice?
 safety-att.choice |= safety.attrib.def
 safety.attrib.def = attribute safety { safety.datatype | termOrCurieOrAbsIRI.datatype }
 safety.datatype |= "non-interrupting" | "interrupting" | "transactional"
-# *** Assert with safety attribute ***
-reAssert.attlist &= safety-att.choice?
+
 # *** @per ***
 
 ## @per: an attribute indicating the execution/interpretation semantics of a relation. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@per
 per-rel-att.choice |= per-rel.attrib.def
 per-rel.attrib.def = attribute per { per-rel.datatype | termOrCurieOrAbsIRI.datatype }
-
 ## the interpretation attribute on relations can take all values allowed for the
 ## interpretation attribute on functions
 per-rel.datatype |= interpretation.value
-# *** Rel with per attribute ***
-reRel.attlist &= per-rel-att.choice?
-
-# *** Assert with card attribute ***
-reAssert.attlist &= card-att.choice?
 
 # *** @style ***
 #  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
@@ -65,8 +57,6 @@ style.attrib = style-att.choice
 style-att.choice |= style.attrib.def
 style.attrib.def = attribute style { style.datatype | termOrCurieOrAbsIRI.datatype }
 style.datatype |= "active" | "messaging" | "reasoning"
-# *** Rule with style attribute ***
-reRule.attlist &= style-att.choice?
 
 ## @arity: an attribute specifying the arity of a signature. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@arity
@@ -105,6 +95,18 @@ index.attrib = attribute index { xsd:positiveInteger }?
 arg-datt.choice |= empty
 act-datt.choice |= empty
 
+# *** Rule with @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per? attribute ***
+reRule.attlist &= formula-interface.attlist, material-att-inf.choice
+
+# *** Assert with @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per? attribute ***
+reAssert.attlist &= action-interface.attlist
+
+#	*** Var with mode attribute ***
+reVar.attlist &= mode-att.choice?
+
+# *** Rel with per attribute ***
+reRel.attlist &= per-rel-att.choice?
+
 ##
 generic-Node.attlist &= iri-att.choice?
 generic-Node.attlist &= Type.attlist?
@@ -137,6 +139,7 @@ node-element.attlist =
 # @index?
 #
 edge-element.attlist = index-att.choice
+
 # 
 # a group of attributes for the meta knowledge interface of all grouping formulas in Reaction RuleML
 # 
@@ -144,7 +147,7 @@ edge-element.attlist = index-att.choice
 # 
 # attributes of grouping formulas are automatically inherited as default attributes to all formulas in the group.
 group-formula-interface.attlist =
-  formula-interface.attlist, material-att.choice
+  formula-interface.attlist, material-att-inf.choice
 # 
 # a group of attributes for the meta knowledge interface of all knowledge formulas in Reaction RuleML
 # 

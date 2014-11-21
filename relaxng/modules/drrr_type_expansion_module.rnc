@@ -14,5 +14,5 @@ dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" {
   # Note: In Reaction RuleML the type is changed to Term or Curie or IRI
-  type.value = termOrCurieOrIRI.datatype
+  type.value = termOrCurieOrAbsIRI.datatype
 }

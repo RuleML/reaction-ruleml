@@ -5,3 +5,6 @@ dr-naffologeq_relaxed.rnc
 auto-gen/tmp
 exp
 drrr_andor_loop_expansion_module.rnc
+drrr4legalruleml-normal.rnc
+simp-drrr4legalruleml-normal.rnc.xsd
+xml.xsd

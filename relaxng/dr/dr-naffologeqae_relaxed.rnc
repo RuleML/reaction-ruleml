@@ -120,6 +120,7 @@ include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_modu
 #
 include "http://ruleml.org/1.0/relaxng/modules/iri_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
+  Resource.attlist &= empty
 }
 # 
 # 

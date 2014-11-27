@@ -1,6 +1,8 @@
 start = notAllowed
 
 ## DR patterns referenced in RR-DR, but not intialized in the DR init module
+AssertRetractFormula.choice |= notAllowed
+QueryFormula.choice |= notAllowed
 Implies-node.choice |= notAllowed
 formula_Exists-edge.choice |= notAllowed
 anyElement.choice |= notAllowed
@@ -9,6 +11,7 @@ formula_AssertRetract-edge.choice |= notAllowed
 Atom-node.choice |= notAllowed
 PremiseFormula.choice |= notAllowed
 iri-att.choice |= notAllowed
+node-att.choice |= notAllowed
 NegFormula.choice |= notAllowed
 declare-edge.choice |= notAllowed
 formula_Forall-edge.choice |= notAllowed
@@ -21,10 +24,11 @@ if_Rule-ss.content |= notAllowed
 then_Rule-ss.content |= notAllowed
 slot-edge.choice |= notAllowed
 formula_Rulebase-edge.choice |= notAllowed
-NegationAsFailure-ae-node.choice |= notAllowed
-generic-Node.attlist &= empty
+meta-att.choice |= notAllowed
 
 ## RR patterns
+NegationAsFailure-ae-node.choice |= notAllowed
+generic-Node.attlist &= empty
 formula-negation.content |= notAllowed
 time_primitives.content |= notAllowed
 spatial_primitives.content |= notAllowed
@@ -45,7 +49,6 @@ if_Rule.content |= notAllowed
 then_Rule.content |= notAllowed
 formula-quant.choice |= notAllowed
 safety-att.choice |= notAllowed
-size-att.choice |= notAllowed
 Profile |= notAllowed
 Interval_term.content |= notAllowed
 arg_interval.choice |= notAllowed
@@ -60,3 +63,12 @@ scope.choice |= notAllowed
 evaluation.choice |= notAllowed
 Quantifier |= notAllowed
 time_primitives.content |= notAllowed
+vocab-att.choice |= notAllowed
+key-att.choice |= notAllowed
+termOrCurieOrAbsIRI.datatype |= notAllowed
+termOrCurieOrAbsIRIs.datatype |= notAllowed
+prefix-att.choice |= notAllowed
+type-att.choice |= notAllowed
+card-att.choice |= notAllowed
+keyref-att.choice |= notAllowed
+formula-inner-quant.choice |= notAllowed

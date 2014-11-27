@@ -1,0 +1,50 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Performatives" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Performative" ]
+dc:description [
+  "The expansion module for extended performatives."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" {
+  start |= notAllowed
+  Node.choice |= notAllowed
+  edge.choice |= notAllowed
+  performative.Node.defs |= notAllowed
+  performative.edge.defs |= notAllowed
+  RuleML.def &= notAllowed
+  RuleML.header &= empty
+  RuleML.main |= notAllowed
+  act-edge.choice |= notAllowed
+  act.edge.def &= notAllowed
+  act-datt.choice |= notAllowed
+  act.content |= notAllowed
+  Performative.choice |= notAllowed
+  AssertRetract-node.choice |= notAllowed
+  Assert-node.choice |= notAllowed
+  Retract-node.choice |= notAllowed
+  Assert.Node.def &= notAllowed
+  Retract.Node.def &= notAllowed
+  AssertRetract.header &= empty
+  reAssertRetract.attlist &= empty
+  AssertRetract.main |= notAllowed
+  formula_AssertRetract-edge.choice |= notAllowed
+  formula_AssertRetract.edge.def &= notAllowed
+  formula_AssertRetract.content |= notAllowed
+  AssertRetractFormula.choice |= notAllowed
+  Query-node.choice |= notAllowed
+  Query.Node.def &= notAllowed
+  reQuery.attlist &= empty
+  Query.header &= empty
+  Query.main |= notAllowed
+  formula_Query-edge.choice |= notAllowed
+  formula_Query.edge.def &= notAllowed
+  formula_Query.content |= notAllowed
+  QueryFormula.choice |= notAllowed
+}

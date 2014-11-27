@@ -26,40 +26,50 @@ include "http://ruleml.org/1.0/relaxng/modules/card_expansion_module.rnc" inheri
 include "http://ruleml.org/1.0/relaxng/modules/closure_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/dataterm_any_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/dataterm_any_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/default_absent_folog_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/default_absent_folog_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/default_present_folog_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/default_present_folog_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/direction_attrib_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/direction_attrib_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/direction_default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/direction_default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/direction_non-default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/direction_non-default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/dis_expansion_module.rnc" inherit = ruleml { 
@@ -71,16 +81,23 @@ include "http://ruleml.org/1.0/relaxng/modules/equal_expansion_module.rnc" inher
 include "http://ruleml.org/1.0/relaxng/modules/equivalent_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" inherit = ruleml { 
+  start |= notAllowed
+}
+include "../modules/drrr_else_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/drrr_fo_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" inherit = ruleml { 
+  start |= notAllowed
+}
+include "../modules/guard_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/drrr_implication_expansion_module.rnc" inherit = ruleml { 
@@ -98,13 +115,16 @@ include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" inheri
 include "http://ruleml.org/1.0/relaxng/modules/iri_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/material_attrib_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/material_attrib_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/material_default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/material_default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/material_non-default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/material_non-default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/drrr_meta_expansion_module.rnc" inherit = ruleml { 
@@ -119,19 +139,23 @@ include "../modules/drrr_naf_expansion_module.rnc" inherit = ruleml {
 include "../modules/drrr_neg_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/node_attribute_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/oid_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/oriented_attrib_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/oriented_attrib_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/oriented_non-default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/oriented_non-default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/per_attrib_expansion_module.rnc" inherit = ruleml { 
@@ -140,7 +164,8 @@ include "http://ruleml.org/1.0/relaxng/modules/per_attrib_expansion_module.rnc" 
 include "http://ruleml.org/1.0/relaxng/modules/per_default_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/per_non-default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/per_non-default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/drrr_performative_expansion_module.rnc" inherit = ruleml { 
@@ -170,6 +195,9 @@ include "http://ruleml.org/1.0/relaxng/modules/resl_expansion_module.rnc" inheri
 include "../modules/drrr_rulebase_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+include "../modules/scope_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 include "http://ruleml.org/1.0/relaxng/modules/short_name_contraction_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
@@ -197,7 +225,8 @@ include "http://ruleml.org/1.0/relaxng/modules/val_attrib_expansion_module.rnc" 
 include "http://ruleml.org/1.0/relaxng/modules/val_default_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/val_non-default_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/val_non-default_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/variable_expansion_module.rnc" inherit = ruleml { 
@@ -218,7 +247,8 @@ include "http://ruleml.org/1.0/relaxng/modules/xml_lang_expansion_module.rnc" in
 include "http://ruleml.org/1.0/relaxng/modules/xml_space_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc" inherit = ruleml { 
+include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc"
+        inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/any_content_expansion_module.rnc" inherit = ruleml { 

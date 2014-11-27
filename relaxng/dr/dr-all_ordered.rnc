@@ -14,16 +14,16 @@ start = Node.choice | edge.choice
 include "../modules/ae_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/drrr_andor_expansion_module.rnc" inherit = ruleml {
+include "../modules/drrr_andor_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inherit = ruleml {
+include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/card_expansion_module.rnc" inherit = ruleml {
+include "http://ruleml.org/1.0/relaxng/modules/card_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/closure_expansion_module.rnc" inherit = ruleml {
+include "http://ruleml.org/1.0/relaxng/modules/closure_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc"
@@ -88,10 +88,16 @@ include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_mod
 include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
+include "../modules/drrr_else_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
 include "../modules/drrr_fo_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+include "../modules/guard_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/drrr_implication_expansion_module.rnc" inherit = ruleml {
@@ -187,6 +193,9 @@ include "http://ruleml.org/1.0/relaxng/modules/resl_expansion_module.rnc" inheri
   start |= notAllowed
 }
 include "../modules/drrr_rulebase_expansion_module.rnc" inherit = ruleml {
+  start |= notAllowed
+}
+include "../modules/scope_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/short_name_contraction_module.rnc" inherit = ruleml {

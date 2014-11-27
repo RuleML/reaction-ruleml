@@ -13,8 +13,6 @@ dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 start |= notAllowed
-commonInit.attlist &= key-att.choice?
-commonInit.attlist &= keyref-att.choice?
 
 # *** @key ***
 

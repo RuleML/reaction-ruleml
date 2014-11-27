@@ -47,16 +47,16 @@ include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" inheri
   start |= notAllowed
 }
 # 
-# DISJUNCTIONS IN CONCLUSIONS INCLUDED
+# DISJUNCTIONS IN CONCLUSIONS NOT INCLUDED
 # 
-# include "http://ruleml.org/1.0/relaxng/modules/dis_expansion_module.rnc" inherit = ruleml { 
+# include "http://ruleml.org/1.0/relaxng/modules/dis_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 # }
 # 
 # RESTRICTIONS ON COMPOUNDING CLASSICAL FORMULAS REMOVED 
 #   FULL FIRST-ORDER EXPRESSIVITY (INCLUDING NEGATION) IS AVAILABLE 
 # 
-# include "../modules/drrr_fo_expansion_module.rnc" inherit = ruleml { 
+# include "../modules/drrr_fo_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 # }
 # 
@@ -68,7 +68,7 @@ include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc"
 # 
 # ATTRIBUTES WITH DEFAULT VALUES ARE ABSENT OR OPTIONAL
 # 
-# include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" inherit = ruleml { 
+# include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 # }
 include "http://ruleml.org/1.0/relaxng/modules/default_absent_folog_expansion_module.rnc"
@@ -82,7 +82,7 @@ include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.
         inherit = ruleml {
   start |= notAllowed
 }
-# include "http://ruleml.org/1.0/relaxng/modules/default_present_folog_expansion_module.rnc" inherit = ruleml { 
+# include "http://ruleml.org/1.0/relaxng/modules/default_present_folog_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 # }
 # 
@@ -118,6 +118,7 @@ include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_modu
 #
 include "http://ruleml.org/1.0/relaxng/modules/iri_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
+  Resource.attlist &= empty
 }
 # 
 # 
@@ -276,8 +277,8 @@ include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module
   start |= notAllowed
 }
 # 
-# EXPLICIT TYPING OF TERMS INCLUDED
-# WITH CURIES
+# EXPLICIT TYPING OF TERMS AND NONLOGICAL SYMBOLS INCLUDED
+# WITH REACTION RULEML EXTENSION FOR CURIES
 #
 include "../modules/drrr_type_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
@@ -322,7 +323,7 @@ include "http://ruleml.org/1.0/relaxng/modules/variable_expansion_module.rnc" in
 # 
 # IMPLICIT CLOSURE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/closure_expansion_module.rnc" inherit = ruleml {
+include "../modules/drrr_closure_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -345,27 +346,8 @@ include "http://ruleml.org/1.0/relaxng/modules/plex_expansion_module.rnc" inheri
 }
 # 
 # SET-VALUED EXPRESSION ATTRIBUTE IS ABSENT OR OPTIONAL
-# 
-# include "http://ruleml.org/1.0/relaxng/modules/val_absence_expansion_module.rnc" inherit = ruleml { 
-#  start |= notAllowed
-# }
-# 
-# SET-VALUED EXPRESSION ATTRIBUTE IS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/val_attrib_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
-# 
-# NON-DEFAULT VALUES OF THE SET-VALUED ATTRIBUTE INCLUDED
-#
-include "http://ruleml.org/1.0/relaxng/modules/val_non-default_expansion_module.rnc"
-        inherit = ruleml {
-  start |= notAllowed
-}
-# 
-# DEFAULT VALUE OF THE SET-VALUED ATTRIBUTE INCLUDED
-#
-include "http://ruleml.org/1.0/relaxng/modules/val_default_expansion_module.rnc" inherit = ruleml {
+include "http://ruleml.org/1.0/relaxng/modules/val_absence_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # INTERPRETED EXPRESSION ATTRIBUTE IS INCLUDED
@@ -441,12 +423,12 @@ include "../modules/spatial_expansion_module.rnc" inherit = ruleml {
 include "../modules/spatial_temporal_interval_algebra_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-# include "../modules/stripe_skipping_expansion_module.rnc" inherit = ruleml { 
+# include "../modules/stripe_skipping_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 # }
 include "../modules/time_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-# include "../modules/unordered_groups_expansion_module.rnc" inherit = ruleml { 
+# include "../modules/unordered_groups_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 # }

@@ -25,7 +25,7 @@ header.attlist &= commonInit.attlist?
 
 ## the attribute list of the qualification edge
 qualification.attlist &= header.attlist?
-qualification.content |= formula_AssertRetract.content
+qualification.content |= AssertRetractFormula.choice
 qualification.type.def = qualification.content, qualification.attlist
 qualification.choice |= qualification
 qualification =

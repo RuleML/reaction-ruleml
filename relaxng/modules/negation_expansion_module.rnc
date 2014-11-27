@@ -39,10 +39,8 @@ formula-negation = element formula { formula-negation.type.def }
 edge.choice |= formula-negation
 
 # *** Naf ***
-reNaf.attlist &= iri-att.choice?
-reNaf.attlist &= Type.attlist?
+#reNaf.attlist &= iri-att.choice?
 #NegationAsFailure-fo-node.choice |= notAllowed
 
 # *** Neg ***
-reNeg.attlist &= iri-att.choice?
-reNeg.attlist &= Type.attlist?
+#reNeg.attlist &= iri-att.choice?

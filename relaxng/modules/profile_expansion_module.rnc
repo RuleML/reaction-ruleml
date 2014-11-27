@@ -20,9 +20,8 @@ start |= notAllowed
 #   *** Profile ***
 
 ## Profile attribute list with @type, @iri, @direction, @safety, @size
-Profile.attlist &= iri-att.choice?
+#Profile.attlist &= iri-att.choice?
 Profile.attlist &= direction-att-inf.choice?
-Profile.attlist &= Type.attlist?
 Profile.attlist &= commonNode.attlist?
 Profile.attlist &= safety-att.choice?
 Profile.attlist &= card-att.choice?

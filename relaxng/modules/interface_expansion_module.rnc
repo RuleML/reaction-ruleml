@@ -36,7 +36,7 @@ edge.choice |= evaluation
 
 ## the attribute list of the signature edge
 signature.attlist &= header.attlist?
-signature.content |= formula_Query.content
+signature.content |= QueryFormula.choice
 signature.type.def = signature.content, signature.attlist
 signature.choice |= signature
 signature =

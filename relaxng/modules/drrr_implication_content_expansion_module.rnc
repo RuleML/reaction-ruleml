@@ -50,11 +50,3 @@ then_Rule.type.def = then_Rule.attlist? & then_Rule.content
 then_Rule.content |= ConclusionFormula.choice
 then_Rule.attlist &= commonInit.attlist?
 edge.choice |= then_Rule.edge.def
-# *** else ***
-else_Rule-edge.choice |= else_Rule.edge.def
-else_Rule.edge.def =
-  
-  ## <else>: edge defining an alternative conclusion in a if-then-else rule. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-else
-  element else { then_Rule.type.def }
-edge.choice |= else_Rule.edge.def

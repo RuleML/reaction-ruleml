@@ -12,42 +12,15 @@ dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 # This module declares the following Reaction RuleML elements:
 #   * meta            descriptive metadata 
-#   * scope           scope  (e.g. for scoped reasoning)	
-#   * guard			  guard (e.g. for guard constraints in scoped reasoning)
 include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" {
   meta.edge.def =
     
     ## <meta>: defines a descriptive metadata annotation. See 
     ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-meta
     element meta {
-      index-attrib.choice? & formula_AssertRetract.attlist? & formula_AssertRetract.content
+      meta.attlist? & meta.content
     }
   Node.header &= empty
 }
-meta.choice |= metaKnowledge-edge.choice
-# *** scope ***
-
-##
-scope.attlist &= header.attlist?
-scope.content |= formula_Query.content?
-scope.type.def = scope.content, scope.attlist
-scope.choice |= scope
-scope =
-  
-  ## <scope>: allows defining a metadata-based scope on the knowledge base for scoped reasoning. See 
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-scope 
-  element scope { scope.type.def }
-edge.choice |= scope
-# *** guard ***     
-
-## the attribute list of the guard edge
-guard.attlist &= header.attlist?
-guard.content |= PremiseFormula.choice
-guard.type.def = guard.content, guard.attlist
-guard.choice |= guard
-guard =
-  
-  ## <guard>: a guard defines a simple pre-constraint which applies before the main reasoning. See 
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-guard 
-  element guard { guard.type.def }
-edge.choice |= guard
+meta.attlist &= header.attlist?
+meta.content |= AssertRetractFormula.choice

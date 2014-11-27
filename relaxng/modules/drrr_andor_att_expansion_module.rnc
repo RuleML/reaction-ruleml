@@ -14,10 +14,6 @@ dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 include "drrr_andor_strict_expansion_module.rnc" {
     
-    reAnd-Query.attlist &= operator-interface.attlist?
-    reOr-Query.attlist &= operator-interface.attlist?
-    reAnd.attlist &= operator-interface.attlist?
-    reOr.attlist &= operator-interface.attlist?
 }
 #
 # *** And ***

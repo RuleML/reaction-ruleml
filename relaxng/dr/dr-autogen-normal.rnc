@@ -417,7 +417,7 @@ include "../modules/per_modal_expansion_module.rnc" inherit = ruleml {
 include "../modules/profile_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "../modules/rule_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_rule_att_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "../modules/spatial_expansion_module.rnc" inherit = ruleml { 

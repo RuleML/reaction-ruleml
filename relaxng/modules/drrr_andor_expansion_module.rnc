@@ -18,6 +18,12 @@ include "http://ruleml.org/1.0/relaxng/modules/andor_expansion_module.rnc" {
     element And { (And-Query-datt.choice & reAnd-Query.attlist), And-Query.header, And-Query.main }
   Or-Query.Node.def =
     element Or { (Or-Query-datt.choice & reOr-Query.attlist), Or-Query.header, Or-Query.main }
+    
+      reAnd-Query.attlist &= operator-interface.attlist?
+    reOr-Query.attlist &= operator-interface.attlist?
+    reAnd.attlist &= operator-interface.attlist?
+    reOr.attlist &= operator-interface.attlist?
+  
 }
 #
 # *** And ***

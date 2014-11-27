@@ -17,4 +17,7 @@ include "http://ruleml.org/1.0/relaxng/modules/implication_expansion_module.rnc"
   ConclusionFormula.choice |= notAllowed
   body_Implies.name.choice |= notAllowed
   head_Implies.name.choice |= notAllowed
+  
+  reImplies.attlist &= operator-interface.attlist?
+
 }

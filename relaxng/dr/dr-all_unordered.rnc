@@ -49,9 +49,9 @@ include "http://ruleml.org/1.0/relaxng/modules/default_absent_folog_expansion_mo
         inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml { 
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml { 
+#  start |= notAllowed
+#}
 include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc"
         inherit = ruleml {
   start |= notAllowed
@@ -287,7 +287,7 @@ include "../modules/per_modal_expansion_module.rnc" inherit = ruleml {
 include "../modules/profile_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "../modules/rule_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_rule_att_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "../modules/spatial_expansion_module.rnc" inherit = ruleml { 

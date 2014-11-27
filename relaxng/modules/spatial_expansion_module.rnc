@@ -17,17 +17,21 @@ start |= notAllowed
 # * Spatial
 
 #   *** Spatial ***
-Spatial.attlist &= generic-Node.attlist?
+Spatial_term.attlist &= term-interface.attlist?
+Spatial_term.attlist &= commonNode.attlist?
+Spatial_formula.attlist &= operator-interface.attlist?
+Spatial_formula.attlist &= commonNode.attlist?
 Spatial.content |= Node.header, argumentsForSpatial.sequence
 arg_spatial.choice |= arg_spatial
 Node.choice |= Spatial_formula
-Spatial.type.def = Spatial.content, Spatial.attlist
+Spatial_term.type.def = Spatial.content, Spatial_term.attlist
+Spatial_formula.type.def = Spatial.content, Spatial_formula.attlist
 Spatial_term =
   
   ## <Spatial>: generic Spatial element. See
   ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Spatial
-  element Spatial { Spatial.type.def }
-Spatial_formula = element Spatial { Spatial.type.def }
+  element Spatial { Spatial_term.type.def }
+Spatial_formula = element Spatial { Spatial_formula.type.def }
 # *** arg ***
 arg_spatial.attlist &= index-attrib.choice?
 arg_spatial.attlist &= commonInit.attlist?

@@ -17,10 +17,10 @@ start |= Rule
 # *** Rule ***
 
 ##
-Rule-datt.choice |= commonNode.attlist?
-#reRule.attlist &= closure-att.choice?
-#reRule.attlist &= Type.attlist?
-#reRule.attlist &= commonNode.attlist?
+# In Deliberation RuleML, 
+Rule-datt.choice |= direction-att-inf.choice & material-att-inf.choice
+reRule.attlist &= formula-interface.attlist?
+reRule.attlist &= commonNode.attlist?
 Rule.content |= Node.header, rule-implementation.content?
 Rule.type.def = Rule.content, (Rule-datt.choice & reRule.attlist)
 Rule =

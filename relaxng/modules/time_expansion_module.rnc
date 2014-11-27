@@ -21,17 +21,21 @@ SimpleFormula-node.choice |= Time_formula
 
 # This module declares the following Reaction RuleML elements:
 # * Time
-Time.attlist &= generic-Node.attlist?
+Time_term.attlist &= term-interface.attlist?
+Time_term.attlist &= commonNode.attlist?
+Time_formula.attlist &= formula-interface.attlist?
+Time_formula.attlist &= commonNode.attlist?
 Time.content |= Node.header, argumentsForTime.sequence
 arg_time.choice |= arg_time
-Time.type.def = Time.content, Time.attlist
+Time_term.type.def = Time.content, Time_formula.attlist
+Time_formula.type.def = Time.content, Time_formula.attlist
 Node.choice |= Time_formula
 Time_term =
   
   ## <Time>: generic Time element. See
   ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Time
-  element Time { Time.type.def }
-Time_formula = element Time { Time.type.def }
+  element Time { Time_term.type.def }
+Time_formula = element Time { Time_formula.type.def }
 # *** arg ***
 arg_time.attlist &= index-attrib.choice?
 arg_time.attlist &= commonInit.attlist?

@@ -38,16 +38,23 @@ start |= notAllowed
 #                  * Finishes
 
 # (After | Before | Any | Every | Timer | Operator)
-spatial_temporal_algebra_group.content |= After | Before | Every | Any | Timer | Operator_any_term
-Operator_any_term =
+spatial_temporal_algebra_group.content |= After | Before | Every | Any | Timer | Operator_any_formula.choice
+#
+Operator_any_term.choice |= Operator_any_term.def
+Operator_any_term.type.def = Operator_any_term.attlist, Operator_any_term.content
+Operator_any_term.attlist &= operator-interface.attlist?
+Operator_any_term.attlist &= commonNode.attlist?
+Operator_any_term.content |= Node.header, formula_Rulebase-edge.choice*
+Operator_any_term.def =
   
   ## <Operator>: a generic Operator element which can be overloaded. See
   ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Operator    
-  element Operator { Any.type.def }
+  element Operator { Operator_any_term.type.def  }
 Operator_any_formula.choice |= Operator_any_formula.def
 Operator_any_formula.def = element Operator { Operator_any_formula.type.def }
 Operator_any_formula.type.def = Operator_any_formula.attlist, Operator_any_formula.content
-Operator_any_formula.attlist &= generic-Node.attlist?
+Operator_any_formula.attlist &= operator-interface.attlist?
+Operator_any_formula.attlist &= commonNode.attlist?
 Operator_any_formula.content |= Node.header, formula_Rulebase-edge.choice*
 Node.choice |= Operator_any_formula.def
 SimpleFormula-node.choice |= Operator_any_formula.choice
@@ -64,7 +71,8 @@ interval_algebra_group.content |=
   | IntervalAlgebraOperator
 IntervalAlgebraEqual = element Equal { IntervalAlgebraOperator.type.def }
 IntervalAlgebraOperator = element Operator { IntervalAlgebraOperator.type.def }
-IntervalAlgebraOperator.attlist &= generic-Node.attlist?
+IntervalAlgebraOperator.attlist &= operator-interface.attlist?
+IntervalAlgebraOperator.attlist &= commonNode.attlist?
 # *** After / Before***
 After.attlist &= IntervalAlgebraOperator.attlist?
 After.content |= Interval_term.content

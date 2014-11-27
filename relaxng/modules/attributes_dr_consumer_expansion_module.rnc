@@ -41,8 +41,6 @@ style.attrib = style-att.choice
 style-att.choice |= style.attrib.def
 style.attrib.def = attribute style { style.datatype }
 style.datatype |= termOrCurieOrAbsIRI.datatype
-# *** Rule with style attribute ***
-reRule.attlist &= style-att.choice?
 
 
 ## @scope: an attribute referencing a scope definition. See
@@ -56,13 +54,12 @@ vocab-scope.datatype = "local" | "global" | "private"
 # 
 # a group of attributes for all XML elements in Reaction RuleML
 # 
+# @key?, @keyref?
+# 
+# @key and @keyref attributes for local syntactic modularization of the knowledge base
+#
 commonInit.attlist &= key-att.choice?
 commonInit.attlist &= keyref-att.choice?
-#
-# a group of attributes for generic Nodes
-#
-generic-Node.attlist &= iri-att.choice?
-generic-Node.attlist &= commonNode.attlist?
 
 #
 # a group of attributes for all Nodes
@@ -70,11 +67,14 @@ generic-Node.attlist &= commonNode.attlist?
 commonNode.attlist &=  meta-att.choice?
 commonNode.attlist &=  vocab-att.choice? 
 
-# 
-# a group of attributes for all XML elements in Reaction RuleML
-# 
-# @prefix?, @key?, @keyref?
-# 
+#
+# a group of attributes for generic Nodes
+#
+generic-Node.attlist &= type-att.choice?
+generic-Node.attlist &= iri-att.choice?
+generic-Node.attlist &= commonNode.attlist?
+
+
 # @key and @keyref attributes for local syntactic modularization of the knowledge base
 #
 # 
@@ -84,6 +84,7 @@ formula-interface.attlist &= type-att.choice?
 formula-interface.attlist &= style-att.choice?
 formula-interface.attlist &= scope-formula-att.choice?
 formula-interface.attlist &= closure-att.choice?
+#
 # a group of attributes for the meta knowledge interface of all terms in Reaction RuleML
 # 
 term-interface.attlist &=  type-att.choice?
@@ -116,5 +117,9 @@ header.attlist &= index-attrib.choice?
 header.attlist &= commonInit.attlist?
 
 # *** Naf ***
-reNaf.attlist &= iri-att.choice?
+
+# Certain nodes allow @type as a mechanism for referring to 
+# an externally defined signature or semantics 
+reNaf.attlist &= Type.attlist?
+reNeg.attlist &= Type.attlist?
 

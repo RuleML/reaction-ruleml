@@ -15,15 +15,13 @@ start |= notAllowed
 #    * @mode (mode declaration)
 #    * @safety (transactional)
 #    * @per (usage)
-#    * @all (yes|no)
-#    * @style (execution style)	
-#    * @key and @keyref for modularization of knowledge bases
-#     * allows @index to be optional on arg edges
-#    * @mode 
 #    * @arity (arity of signatures)
 #    * @card, @minCard, @maxCard (cardinality constraints)
-#    * @meta (reference to meta knowledge)
-#    * @scope (reference to a scope definition)
+include "attributes_dr_consumer_expansion_module.rnc" {
+  start |= notAllowed
+  generic-Node.attlist &= commonNode.attlist?
+  reNaf.attlist &= empty
+}
 
 ## @mode: input-output mode declaration of the arguments in predicates and functions. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@mode
@@ -49,14 +47,7 @@ per-rel.attrib.def = attribute per { per-rel.datatype | termOrCurieOrAbsIRI.data
 ## interpretation attribute on functions
 per-rel.datatype |= interpretation.value
 
-# *** @style ***
-#  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
-style.attrib = style-att.choice
-## @style: defines a reference to a corresponding unique key. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@style
-style-att.choice |= style.attrib.def
-style.attrib.def = attribute style { style.datatype | termOrCurieOrAbsIRI.datatype }
-style.datatype |= "active" | "messaging" | "reasoning"
+# *** @arity ***
 
 ## @arity: an attribute specifying the arity of a signature. See
 ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@arity
@@ -73,30 +64,10 @@ card.att.def =
   attribute maxCard { xsd:int }?,
   attribute minCard { xsd:nonNegativeInteger }?
   
-## @meta: an attribute referencing meta knowledge. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@meta
-meta-att.choice |= meta.attrib.def
-meta.attrib.def =  attribute meta { termOrCurieOrAbsIRIs.datatype }?
-
-## @scope: an attribute referencing a scope definition. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@scope
-scope-formula-att.choice |= scope-formula-attrib.def
-scope-formula-attrib.def =  attribute scope { termOrCurieOrAbsIRIs.datatype | vocab-scope.datatype }?
-scope-term-att.choice |= scope-term-attrib.def
-scope-term-attrib.def =  attribute scope { termOrCurieOrAbsIRIs.datatype | vocab-scope.datatype }?
-vocab-scope.datatype = "local" | "global" | "private"
-
-## @index: An optional attribute for specifying an ordering on roles. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@index
-index-att.choice |= index.attrib
-index.attrib = attribute index { xsd:positiveInteger }?
 
 ## adding optional index attribute on argument and act edges
 arg-datt.choice |= empty
 act-datt.choice |= empty
-
-# *** Rule with @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per? attribute ***
-reRule.attlist &= formula-interface.attlist, material-att-inf.choice
 
 # *** Assert with @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per? attribute ***
 reAssert.attlist &= action-interface.attlist
@@ -107,38 +78,25 @@ reVar.attlist &= mode-att.choice?
 # *** Rel with per attribute ***
 reRel.attlist &= per-rel-att.choice?
 
-##
-generic-Node.attlist &= iri-att.choice?
-generic-Node.attlist &= Type.attlist?
-generic-Node.attlist &= commonNode.attlist?
-
-
 # 
 # a group of attributes for all XML elements in Reaction RuleML
 # 
 # @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-# 
-# @key and @keyref attributes for local syntactic modularization of the knowledge base
 #
-xml.attlist =
-  prefix-att.choice,
-  key-att.choice,
-  keyref-att.choice,
-  commonInit.attlist
+commonInit.attlist &= prefix-att.choice?
   
 # 
 # a group of attributes for all XML node elements (type elements) in Reaction RuleML
 # 
 # @meta?, @node?, @iri?, @vocab?
 #
-node-element.attlist =
-  node-att.choice, iri-att.choice, vocab-att.choice, meta-att.choice
+commonNode.attlist &= iri-att.choice?
 # 
 # a group of attributes for all XML edge elements (role elements) in Reaction RuleML
 # 
 # @index?
 #
-edge-element.attlist = index-att.choice
+edge-element.attlist = index-attrib.choice?
 
 # 
 # a group of attributes for the meta knowledge interface of all grouping formulas in Reaction RuleML
@@ -146,88 +104,72 @@ edge-element.attlist = index-att.choice
 # @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?  
 # 
 # attributes of grouping formulas are automatically inherited as default attributes to all formulas in the group.
-group-formula-interface.attlist =
-  formula-interface.attlist, material-att-inf.choice
+group-formula-interface.attlist &=
+  formula-interface.attlist?, material-att-inf.choice?
 # 
 # a group of attributes for the meta knowledge interface of all knowledge formulas in Reaction RuleML
 # 
 # @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?
 # 
 #
-formula-interface.attlist =
-  type-att.choice,
-  arity-att.choice,
-  card-att.choice,
-  weight-att.choice,
-  style-att.choice,
-  direction-att.choice,
-  scope-formula-att.choice,
-  closure-att.choice,
-  mode-att.choice,
-  per-rel-att.choice
+formula-interface.attlist &= arity-att.choice?
+formula-interface.attlist &= card-att.choice?
+formula-interface.attlist &= weight-att.choice?
+formula-interface.attlist &= direction-att.choice?
+formula-interface.attlist &=  mode-att.choice?
+formula-interface.attlist &= per-rel-att.choice?
 # 
 # a group of attributes for the meta knowledge interface of all terms in Reaction RuleML
 # 
 # @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?
 #
-term-interface.attlist =
-  type-att.choice,
-  arity-att.choice,
-  card-att.choice,
-  weight-att.choice,
-  scope-term-att.choice,
-  mode-att.choice,
-  per-rel-att.choice
+term-interface.attlist &=
+  arity-att.choice?,
+  card-att.choice?,
+  weight-att.choice?,
+  mode-att.choice?,
+  per-rel-att.choice?
 # 
 # a group of attributes for the meta knowledge interface of all quantifiers in Reaction RuleML
 # 
 # @type?, @card?, @minCard?, @maxCard?, @style?, @scope?
-quantifier-interface.attlist =
-  type-att.choice, card-att.choice, style-att.choice, scope-formula-att.choice
+quantifier-interface.attlist &=
+  card-att.choice?
 # 
 # a group of attributes for the meta knowledge interface of all connectives/operators in Reaction RuleML
 # 
 # @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?
-operator-interface.attlist =
-  type-att.choice,
-  arity-att.choice,
-  card-att.choice,
-  weight-att.choice,
-  style-att.choice,
-  direction-att.choice,
-  scope-formula-att.choice,
-  mode-att.choice,
-  closure-att.choice,
-  per-rel-att.choice
+operator-interface.attlist &=
+  arity-att.choice?,
+  card-att.choice?,
+  weight-att.choice?,
+  direction-att.choice?,
+  mode-att.choice?,
+  closure-att.choice?,
+  per-rel-att.choice?
 # 
 # a group of attributes for the meta knowledge interface of all action / performatives in Reaction RuleML
 # 
 # @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?
-action-interface.attlist =
-  type-att.choice,
-  arity-att.choice,
-  card-att.choice,
-  weight-att.choice,
-  style-att.choice,
-  direction-att.choice,
-  safety-att.choice,
-  scope-formula-att.choice,
-  mode-att.choice,
-  closure-att.choice,
-  per-rel-att.choice
+action-interface.attlist &=
+  arity-att.choice?,
+  card-att.choice?,
+  weight-att.choice?,
+  direction-att.choice?,
+  safety-att.choice?,
+  mode-att.choice?,
+  closure-att.choice?,
+  per-rel-att.choice?
 # 
 # a group of attributes for the meta knowledge interface of all events in Reaction RuleML
 # 
 # @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?
-event-interface.attlist =
-  type-att.choice,
-  arity-att.choice,
-  card-att.choice,
-  weight-att.choice,
-  style-att.choice,
-  direction-att.choice,
-  safety-att.choice,
-  scope-formula-att.choice,
-  mode-att.choice,
-  closure-att.choice,
-  per-rel-att.choice
+event-interface.attlist &=
+  arity-att.choice?,
+  card-att.choice?,
+  weight-att.choice?,
+  direction-att.choice?,
+  safety-att.choice?,
+  mode-att.choice?,
+  closure-att.choice?,
+  per-rel-att.choice?

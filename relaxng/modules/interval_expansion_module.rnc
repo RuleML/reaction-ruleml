@@ -17,13 +17,16 @@ start |= notAllowed
 # * Interval
 
 #   *** Interval ***
-Interval.attlist &= generic-Node.attlist?
+Interval_term.attlist &= term-interface.attlist?
+Interval_term.attlist &= commonNode.attlist?
+Interval_formula.attlist &= operator-interface.attlist?
+Interval_formula.attlist &= commonNode.attlist?
 arg_interval.choice |= arg_interval
 Interval_term.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
 Interval_formula.content |= Node.header, (arg_interval.choice, arg_interval.choice?)?
 #
-Interval_term.type.def = Interval_term.content, Interval.attlist
-Interval_formula.type.def = Interval_formula.content, Interval.attlist
+Interval_term.type.def = Interval_term.content, Interval_term.attlist
+Interval_formula.type.def = Interval_formula.content, Interval_formula.attlist
 Node.choice |= Interval_formula
 Interval_term =
   

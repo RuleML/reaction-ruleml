@@ -14,7 +14,7 @@ start = Node.choice | edge.choice
 include "../modules/ae_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/drrr_andor_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_andor_att_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inherit = ruleml { 
@@ -23,7 +23,7 @@ include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inheri
 include "http://ruleml.org/1.0/relaxng/modules/card_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/closure_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_closure_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc"
@@ -49,9 +49,9 @@ include "http://ruleml.org/1.0/relaxng/modules/default_absent_folog_expansion_mo
         inherit = ruleml {
   start |= notAllowed
 }
-include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml {
-  start |= notAllowed
-}
+#include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml {
+#  start |= notAllowed
+#}
 include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc"
         inherit = ruleml {
   start |= notAllowed
@@ -100,7 +100,7 @@ include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" inher
 include "../modules/guard_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/drrr_implication_expansion_module.rnc" inherit = ruleml {
+include "../modules/drrr_implication_att_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/drrr_implication_content_expansion_module.rnc" inherit = ruleml {
@@ -287,7 +287,7 @@ include "../modules/per_modal_expansion_module.rnc" inherit = ruleml {
 include "../modules/profile_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-include "../modules/rule_expansion_module.rnc" inherit = ruleml {
+include "../modules/drrr_rule_att_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/spatial_expansion_module.rnc" inherit = ruleml {

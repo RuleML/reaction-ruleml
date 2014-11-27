@@ -16,10 +16,3 @@ include "http://ruleml.org/1.0/relaxng/modules/type_expansion_module.rnc" {
   # Note: In Reaction RuleML the type is changed to Term or Curie or IRI
   type.value = termOrCurieOrAbsIRI.datatype
 }
-# Certain nodes allow @type as a mechanism for referring to 
-# an externally defined signature or semantics 
-generic-Node.attlist &= Type.attlist?
-reNaf.attlist &= Type.attlist?
-reNeg.attlist &= Type.attlist?
-Profile.attlist &= Type.attlist?
-reRule.attlist &= Type.attlist?

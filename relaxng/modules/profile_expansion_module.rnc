@@ -20,11 +20,8 @@ start |= notAllowed
 #   *** Profile ***
 
 ## Profile attribute list with @type, @iri, @direction, @safety, @size
-#Profile.attlist &= iri-att.choice?
-Profile.attlist &= direction-att-inf.choice?
-Profile.attlist &= commonNode.attlist?
+Profile.attlist &= group-formula-interface.attlist?
 Profile.attlist &= safety-att.choice?
-Profile.attlist &= card-att.choice?
 Profile.content |= Node.header, formula_Profile-edge.choice*
 formula_Profile-edge.choice |= formula_AssertRetract-edge.choice
 # relaxed

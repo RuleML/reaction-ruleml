@@ -1,0 +1,29 @@
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+
+dc:title [ "Reaction RuleML for DR- Extended Con/DisJunctions" ]
+dc:version [ "1.0" ]
+dc:creator [ "Tara Athan (taraathan AT gmail.com" ]
+dc:creator [ "Adrian Paschke" ]
+dc:subject [ "RuleML, Reaction, Deliberation, Conjunction, Disjunction" ]
+dc:description [
+  "The expansion module for extended conjunctions and disjunctions."
+]
+dc:language [ "en" ]
+dcterms:rights [ "TBD" ]
+dc:relation [ "http://reaction.ruleml.org" ]
+include "drrr_andor_strict_expansion_module.rnc" {
+    
+    reAnd-Query.attlist &= operator-interface.attlist?
+    reOr-Query.attlist &= operator-interface.attlist?
+    reAnd.attlist &= operator-interface.attlist?
+    reOr.attlist &= operator-interface.attlist?
+}
+#
+# *** And ***
+And-datt.choice |= empty
+And-Query-datt.choice |= empty
+#
+# *** Or ***
+Or-datt.choice |= empty
+Or-Query-datt.choice |= empty

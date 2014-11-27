@@ -33,7 +33,7 @@ include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inheri
 # CONJUNCTIONS AND DISJUNCTIONS INCLUDED
 # WITH EXTENDED CONTENT MODEL FOR AND/OR IN QUERIES
 #
-include "../modules/drrr_andor_strict_expansion_module.rnc" inherit = ruleml { 
+include "../modules/drrr_andor_att_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 # 

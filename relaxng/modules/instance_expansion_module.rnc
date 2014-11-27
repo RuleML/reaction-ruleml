@@ -18,9 +18,6 @@ start |= notAllowed
 #   * qualification   qualification, e.g. priorities, validity, strategy
 #   * quantification  quantification
 
-## the typical attribute list of edges in the header
-header.attlist &= index-attrib.choice?
-header.attlist &= commonInit.attlist?
 #  *** qualification ***
 
 ## the attribute list of the qualification edge

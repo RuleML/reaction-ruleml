@@ -5,6 +5,24 @@
     <xs:import namespace="http://www.w3.org/XML/1998/namespace"
         schemaLocation="../modules/xml_module.xsd"/>
     
+    <!--
+		*** RuleML ***
+		The n-ary top-level of a RuleML document.
+		
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-RuleML
+			 
+	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Consult|Assert|Retract|Query|Answer|Test)* )
+	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert|Retract|Update|Consult|Query|Answer|Test|Action)* )
+	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert|Retract|Update|Query|Consult|Answer|Test|Action)* )
+	CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)* )
+			
+ 	 Note: key and keyref object identifier are defined to be unique under the RuleML document root
+ 	 
+ 	 @vocab: an IRI that defines the mapping to use when a type term (e.g. a frame signature type) is referenced in an attribute value
+ 	 @prefix: a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
+				
+	attributes: @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	-->
     <xs:attributeGroup name="RuleML.attlist">
         <xs:attributeGroup ref="node-element.attlist"/>
         <xs:attributeGroup ref="xml.attlist"/>
@@ -23,6 +41,7 @@
         <xs:attributeGroup ref="RuleML.attlist"/>
     </xs:complexType>
     <xs:element name="RuleML" type="RuleML.type">
+        <!-- key object identifiers and key object references defined on the top level -->
         <xs:unique name="keyOID">
             <xs:selector xpath=".//*"/>
             <xs:field xpath="@key"/>
@@ -32,7 +51,20 @@
             <xs:field xpath="@keyref"/>
         </xs:keyref>
     </xs:element>
-
+    <!--
+    *** act ***
+    The act role of the root element (<RuleML>).
+    
+    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-act
+    
+    content model  
+    DR/KR Reaction RuleML (Consult|Assert|Retract|Query|Answer|Test)
+    PR Reaction RuleML (Assert|Retract|Update|Consult|Query|Answer|Test|Action)
+    ECA Reaction RuleML (Assert|Retract|Update|Query|Consult|Answer|Test|Action)
+    CEP Reaction RuleML (Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)
+    
+    attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+  -->
     <xs:group name="act.content">
         <xs:choice>
             <xs:group ref="performative_primitives.content"/>
@@ -47,7 +79,26 @@
         <xs:attributeGroup ref="act.attlist"/>
     </xs:complexType>
     <xs:element name="act" type="act.type"/>
+    <!--
+      *** Consult ***
+      Consult (import) performative / action 
+      
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Consult
+      
+      dynamically "consults" (imports) knowledge resource, e.g. a message, documents or external resource (with the @iri attribute).
+      
+      content model:
+ 		 
+ 		 in DR Reaction RuleML (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (payload | RuleML | Reify | Var))
+ 		 in KR Reaction RuleML (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (payload | RuleML | Reify | Var))
+ 		 in PR Reaction RuleML  (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (payload | RuleML | Reify | Var))
+ 		 in ECA Reaction RuleML (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (payload | RuleML | Reify | Var))
+	   in CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ((payload | RuleML | Reify | Var) | (enclosed | Message))* )
+	  
+      Consult has the following attributes:
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 
+    -->
     <xs:attributeGroup name="Consult.attlist">
         <xs:attributeGroup ref="action-interface.attlist"/>
         <xs:attributeGroup ref="node-element.attlist"/>
@@ -66,15 +117,26 @@
         <xs:attributeGroup ref="Consult.attlist"/>
     </xs:complexType>
     <xs:element name="Consult" type="Consult.type"/>
-
+    <!--
+     *** payload ***
+     
+    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-payload
+     
+     content model: (RuleML | Reify | Var)
+     
+     attributes:  @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	-->
     <xs:attributeGroup name="payload.attlist">
         <xs:attributeGroup ref="xml.attlist"/>
     </xs:attributeGroup>
     <xs:group name="payload.content">
         <xs:choice>
             <xs:element ref="RuleML"/>
+            <!-- a RuleML knowledge base -->
             <xs:element ref="Reify"/>
+            <!-- reified knowledge as payload -->
             <xs:element ref="Var"/>
+            <!-- for  binding knowledge to variables in meta programming -->
         </xs:choice>
     </xs:group>
     <xs:complexType name="payload.type">
@@ -82,7 +144,21 @@
         <xs:attributeGroup ref="payload.attlist"/>
     </xs:complexType>
     <xs:element name="payload" type="payload.type"/>
+    <!--
+		*** Assert ***
+		A KQML-like performative acting as a wrapper specifying that its content is
+		asserted, making an 'implicit <Rulebase>' assumption.
 
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Assert 
+
+		content model:
+		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
+    ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)
+
+   attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?  
+  -->
     <xs:attributeGroup name="Assert.attlist">
         <xs:attributeGroup ref="action-interface.attlist"/>
         <xs:attributeGroup ref="node-element.attlist"/>
@@ -102,7 +178,21 @@
         <xs:attributeGroup ref="Assert.attlist"/>
     </xs:complexType>
     <xs:element name="Assert" type="Assert.type"/>
+    <!--
+		*** Retract ***
+		A performative similar to KQML's 'untell' that acts as a wrapper specifying that its
+		content is to be deleted, making an 'implicit <Rulebase>' assumption.
 
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Retract
+
+		content model:
+		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
+ 		ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)   
+
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?   
+  -->
     <xs:attributeGroup name="Retract.attlist">
         <xs:attributeGroup ref="action-interface.attlist"/>
         <xs:attributeGroup ref="node-element.attlist"/>
@@ -122,7 +212,26 @@
         <xs:attributeGroup ref="Retract.attlist"/>
     </xs:complexType>
     <xs:element name="Retract" type="Retract.type"/>
-
+    <!--
+      *** Update ***
+      Update action
+      
+      See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Update
+      
+      content model:
+      
+      in PR Reaction RuleML
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
+		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
+		 
+	  in ECA Reaction RuleML
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action),
+		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
+	  
+      Update has the following attributes:
+      @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+      
+-->
     <xs:attributeGroup name="Update.attlist">
         <xs:attributeGroup ref="action-interface.attlist"/>
         <xs:attributeGroup ref="node-element.attlist"/>
@@ -131,8 +240,12 @@
     <xs:group name="Update.content">
         <xs:sequence>
             <xs:group ref="meta-roles.content"/>
-            <xs:sequence maxOccurs="2" minOccurs="1">
+            <xs:sequence>
                 <xs:choice>
+                    <xs:element form="qualified" name="formula" type="formula-assert.type"/>
+                    <xs:group ref="formula-assert.content"/>
+                </xs:choice>
+                <xs:choice minOccurs="0">
                     <xs:element form="qualified" name="formula" type="formula-assert.type"/>
                     <xs:group ref="formula-assert.content"/>
                 </xs:choice>
@@ -157,7 +270,7 @@
 		PR Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )* )
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )* )		
 
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
     <xs:attributeGroup name="Query.attlist">
         <xs:attributeGroup ref="action-interface.attlist"/>
@@ -222,7 +335,7 @@
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
 	  
       Answer has the following attributes:
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
     <xs:attributeGroup name="Answer.attlist">
         <xs:attributeGroup ref="action-interface.attlist"/>
@@ -324,7 +437,30 @@
         <xs:group ref="formula-query.content"/>
         <xs:attributeGroup ref="formula.attlist"/>
     </xs:complexType>
-
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for description-related
+            RuleML       elements. File: desc_module.xsd Version: 1.0 Last Modification: 2012-05-17
+            [Adrian Paschke]       This module declares the following RuleML elements:
+            * meta            descriptive metadata        * scope           scope  (e.g. for scoped
+            reasoning)        * guard         guard (e.g. for guard constraints in scoped reasoning)
+            * evaluation      semantic profile        * signature       interface signature, pattern
+            definition,       * qualification   qualification, e.g. priorities, validity, strategy
+            * quantification  quantification       * oid              See
+            http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2012-05-17T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
   *** oid ***
   An optional object identifier for an atomic formula, expression or the unifed terms
@@ -623,7 +759,25 @@
     <xs:element name="quantification" type="quantification.type"/>
     <!-- extended descriptors in Reaction RuleML -->
     <!-- note that elementFormDefault is qualified because of local declarations -->
-
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML quantifiers. File:
+            quantifier_module.xsd Version: 1.0 Last Modification: 2011-07-16 This module declares
+            the       following RuleML elements: * Forall * Exists * declare * formula See
+            http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-07-16T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 		*** Forall ***
 		Explicit universal quantifier.
@@ -636,7 +790,7 @@
 		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
 
-    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
   -->
     <xs:attributeGroup name="Forall.attlist">
         <xs:attributeGroup ref="quantifier-interface.attlist"/>
@@ -673,7 +827,7 @@
     PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
  
-    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
     <xs:attributeGroup name="Exists.attlist">
         <xs:attributeGroup ref="quantifier-interface.attlist"/>
@@ -769,7 +923,35 @@
         <xs:group ref="formula-exists.content"/>
         <xs:attributeGroup ref="formula.attlist"/>
     </xs:complexType>
-
+    <!-- note that elementFormDefault is qualified because of local declarations -->
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML connectives. File:
+            connective_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This
+            module       declares the following RuleML elements and attributes: * Implies * if *
+            then * Entails *       Equivalent * torso * Rulebase * And * Or * formula        See
+            http://www.ruleml.org/modularization for details       about this modularization
+            approach. </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2012-07-05T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
+    <!-- necessary for schematron -->
+    <!-- 
+	<xs:appinfo>
+		
+		<ns prefix="r" uri="http://ruleml.org/spec"/>
+	</xs:appinfo> 
+	-->
     <!--
 		*** Implies ***
 		An implication rule.
@@ -779,7 +961,7 @@
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
 
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 
   -->
     <xs:attributeGroup name="Implies.attlist">
@@ -897,7 +1079,7 @@
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Entails.attlist">
         <xs:attributeGroup ref="group-formula-interface.attlist"/>
@@ -937,7 +1119,7 @@
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
 		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
     <xs:attributeGroup name="Equivalent.attlist">
         <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -949,15 +1131,38 @@
             <xs:group ref="meta-roles.content"/>
             <xs:choice>
                 <xs:sequence>
-                    <xs:element maxOccurs="2" minOccurs="2" ref="torso"/>
+                    <xs:choice>
+                        <xs:element ref="torso"/>
+                        <xs:group ref="torso.content"/>
+                    </xs:choice>
+                    <xs:choice>
+                        <xs:element ref="torso"/>
+                        <xs:group ref="torso.content"/>
+                    </xs:choice>
                 </xs:sequence>
-                <xs:sequence>
-                    <xs:group maxOccurs="2" minOccurs="2" ref="torso.content"/>
-                </xs:sequence>
+                <xs:sequence> </xs:sequence>
             </xs:choice>
         </xs:sequence>
     </xs:group>
     <xs:complexType name="Equivalent.type">
+        <!--
+		<xs:annotation>
+			<xs:appinfo>
+				<pattern name="Equivalent">
+					<rule context="r:Equivalent[count( descendant::r:Equal/r:Expr | descendant::r:Equal/r:left/r:Expr )=2]">
+						<assert test=
+							"( descendant::r:Equal[1]/descendant::r:Fun[@per = 'copy']
+							   and descendant::r:Equal[2]/descendant::r:Fun[@per = 'copy'] )
+							 or
+							 ( descendant::r:Equal[1]/descendant::r:Fun[@per = 'open']
+							   and descendant::r:Equal[2]/descendant::r:Fun[@per = 'open'] )">
+						  Equalities within an equivalence expression must either both be interpreted or both uninterpreted.
+						</assert>
+					</rule>
+				</pattern>
+			</xs:appinfo>
+		</xs:annotation>
+                -->
         <xs:group ref="Equivalent.content"/>
         <xs:attributeGroup ref="Equivalent.attlist"/>
     </xs:complexType>
@@ -1006,7 +1211,7 @@
 		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal )* )
     ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
     
-    attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
     <xs:attributeGroup name="Rulebase.attlist">
         <xs:attributeGroup ref="group-formula-interface.attlist"/>
@@ -1041,7 +1246,7 @@
 
 		Under Query, And may have attribute closure="existential"; 
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="And-inner.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -1085,7 +1290,7 @@
 		
 		Under Query, Or may have attribute closure="existential"; 
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Or-query.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -1176,7 +1381,29 @@
         <xs:group ref="formula-rulebase.content"/>
         <xs:attributeGroup ref="formula.attlist"/>
     </xs:complexType>
- 
+    <xs:annotation>
+        <xs:documentation xml:lang="en">               generic connective operator module of
+            Reaction RuleML.     This is the XML Schema connective operator module for Reaction
+            RuleML.    File: connective_operator_module.xsd    Version: 1.0    Last Modification:
+            2011-03-22     This schema declares the following Reaction RuleML elements and
+            attributes:      * Operator (Connective)        The approach is modelled after that used
+            in "Modularization of XHTML in XML Schema"    WD
+            [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+            "Modularization of XHTML" (REC-xhtml-modularization-20010410)
+            [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>Reaction RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-22T29:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
       *** generic connective Operator ***
       
@@ -1188,7 +1415,7 @@
         PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal)* ) 
         ECA Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)* )
         
-        attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+        attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="ConnectiveOperator.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -1208,7 +1435,26 @@
         <xs:group ref="ConnectiveOperator.content"/>
         <xs:attributeGroup ref="ConnectiveOperator.attlist"/>
     </xs:complexType>
-   
+    <!-- note that elementFormDefault is qualified because of local declarations -->
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML atoms. File:
+            atom_module.xsd Version: 1.0 Last Modification: 2012-02-21 This module declares
+            the following RuleML elements and attributes: * Atom * op * Rel * degree See
+            http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2012-07-05T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
         *** Atom ***
 		A logical atom , i.e. an expression formed from a predicate
@@ -1269,7 +1515,7 @@
 				resl?
 			)
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	
 	-->
     <xs:attributeGroup name="Atom.attlist">
@@ -1318,10 +1564,12 @@
                 <xs:group ref="op-atom.content"/>
             </xs:choice>
             <xs:group ref="Atom-slots.extend1"/>
-            <xs:sequence minOccurs="0">
-                <xs:group ref="Atom-repo.extend"/>
-                <xs:group ref="Atom-slots.extend1"/>
-            </xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:sequence>
+                    <xs:group ref="Atom-repo.extend"/>
+                    <xs:group ref="Atom-slots.extend1"/>
+                </xs:sequence>
+            </xs:choice>
             <xs:group ref="Atom-slots.extend2"/>
         </xs:sequence>
     </xs:group>
@@ -1363,7 +1611,7 @@
 		
 		content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		
-		attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Rel.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -1403,7 +1651,25 @@
         <xs:attributeGroup ref="degree.attlist"/>
     </xs:complexType>
     <xs:element name="degree" type="degree.type"/>
- 
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML slots. File:
+            slot_module.xsd Version: 1.0 Last Modification: 2011-07-16 This module declares the
+            following       RuleML element and attributes: * slot        See
+            http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-07-16T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 		*** slot ***
 		A user-defined slot consisting of a name (first position) and a filler (second position).
@@ -1440,7 +1706,27 @@
         <xs:attributeGroup ref="slot.attlist"/>
     </xs:complexType>
     <xs:element name="slot" type="slot.type"/>
-  
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML terms. File:
+            term_module.xsd Version: 1.0 Last Modification: 2012-04-03 This module declares the
+            following       RuleML elements and attributes: * arg * Ind * Data * Var * Skolem *
+            Reify as       well as including a number of complex types for use in expicitly-typed
+            data Nodes. See       http://www.ruleml.org/modularization for details about this
+            modularization approach.     </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2012-04-03T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 		*** arg ***
 		A role used for the positional arguments of a logical atom.
@@ -1481,7 +1767,7 @@
 		
 		content model: text
 
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Ind.attlist">
         <xs:attributeGroup ref="term-interface.attlist"/>
@@ -1507,7 +1793,7 @@
 		
 		content model: xs:anytype [optionally datatyped]
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
     <xs:element name="Data" type="xs:anyType"/>
     <!--
@@ -1524,7 +1810,7 @@
         - output variable which must be free (unbound)
         ? can be both input / bound or output / free
     
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Var.attlist">
         <xs:attributeGroup ref="term-interface.attlist"/>
@@ -1547,7 +1833,7 @@
 
 		content model: text
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Skolem.attlist">
         <xs:attributeGroup ref="term-interface.attlist"/>
@@ -1573,7 +1859,7 @@
 		
 		content model: (any valid RuleML formula)
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Reify.attlist">
         <xs:attributeGroup ref="term-interface.attlist"/>
@@ -1594,7 +1880,34 @@
         <xs:attributeGroup ref="Reify.attlist"/>
     </xs:complexType>
     <xs:element name="Reify" type="Reify.type"/>
-   
+    <!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
+    <!-- note that elementFormDefault is qualified because of local declarations -->
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML expressions. File:
+            expr_module.xsd Version: 1.0 Last Modification: 2011-10-05 [Tara Athan] This module
+            declares       the following RuleML elements and attributes: * Expr * op * Fun * Plex *
+            @per See       http://www.ruleml.org/modularization for details about this
+            modularization approach. </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-10-05T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+        <!-- necessary for schematron -->
+        <!-- 
+		<xs:appinfo>
+
+		<sch:ns prefix="r" iri="http://www.ruleml.org/1.0/xsd"/>
+		-->
+    </xs:annotation>
     <!--
 		*** Expr ***
 		A logical function of the form "f(...)" where f is a function name.
@@ -1605,7 +1918,7 @@
 		DR Reaction RuleML:
 		( 		   
 		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun), slot*, 
+		  (op|Fun)?, slot*, 
       (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*,
 		  repo?, slot*, resl?
 		)
@@ -1613,24 +1926,24 @@
     KR Reaction RuleML:
 		( 		   
 		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun), slot*, 
+		  (op|Fun)?, slot*, 
       (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*,
 		  repo?, slot*, resl?
 		)
 
 		PR Reaction RuleML:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun), slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl?		)
+		  (op|Fun)?, slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl?		)
 		  
 		ECA Reaction RuleML:
 		( 		   
-		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op|Fun), slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)*, repo?, slot*, resl?
+		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op|Fun)?, slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)*, repo?, slot*, resl?
 		)  
 
 		however, this is non-deterministic, so it is (equivalently) restructured as follows:
 		DR Reaction RuleML:
 		(
-		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
+		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun)?, slot*,
 			( 
 				( 
 					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo? )
@@ -1642,7 +1955,7 @@
 		)
 		KR Reaction RuleML:
 				(
-		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun), slot*,
+		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun)?, slot*,
 			( 
 				( 
 					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo? )
@@ -1655,7 +1968,7 @@
 		Note the 'positionalized' normal form where the op role is only
 		at the beginning of the Expr.
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Expr.attlist">
         <xs:attributeGroup ref="term-interface.attlist"/>
@@ -1665,30 +1978,58 @@
     <xs:group name="Expr.content">
         <xs:sequence>
             <xs:group ref="meta-roles.content"/>
-            <xs:choice>
+            <xs:choice minOccurs="0">
                 <xs:element form="qualified" name="op" type="op-Expr.type"/>
                 <xs:group ref="op-Expr.content"/>
             </xs:choice>
             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                 type="slot.type"/>
-            <xs:sequence minOccurs="0">
-                <xs:choice>
-                    <xs:sequence>
-                        <xs:choice maxOccurs="unbounded">
-                            <xs:element ref="arg"/>
-                            <xs:group ref="arg.content"/>
-                        </xs:choice>
-                        <xs:element minOccurs="0" ref="repo"/>
-                    </xs:sequence>
-                    <xs:element ref="repo"/>
-                </xs:choice>
-                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                    type="slot.type"/>
-            </xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:sequence>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:choice maxOccurs="unbounded">
+                                <xs:element ref="arg"/>
+                                <xs:group ref="arg.content"/>
+                            </xs:choice>
+                            <xs:element minOccurs="0" ref="repo"/>
+                        </xs:sequence>
+                        <xs:element ref="repo"/>
+                    </xs:choice>
+                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
+                        type="slot.type"/>
+                </xs:sequence>
+            </xs:choice>
             <xs:element minOccurs="0" ref="resl"/>
         </xs:sequence>
     </xs:group>
     <xs:complexType name="Expr.type">
+        <!--
+		<xs:annotation>
+			<xs:appinfo>
+				<sch:pattern name="Uninterpreted functions">
+					<sch:rule context="r:Expr/r:Fun[@per='no']">
+						<sch:assert test=
+								"not(../r:Expr/r:Fun[@per='yes'] or
+									 ../r:arg/r:Expr/r:Fun[@per='yes'] or
+									 ../r:Expr/r:op/r:Fun[@per='yes'] or 
+									 ../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
+								Functions nested within an uninterpreted function must also be uninterpreted.
+						</sch:assert>
+					</sch:rule>
+					<sch:rule context="r:Expr/r:op/r:Fun[@per='no']">
+						<sch:assert test=
+								"not(../../r:Expr/r:Fun[@per='yes'] or
+									 ../../r:arg/r:Expr/r:Fun[@per='yes'] or
+									 ../../r:Expr/r:op/r:Fun[@per='yes'] or 
+									 ../../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
+								Functions nested within an uninterpreted function must also be uninterpreted.
+						</sch:assert>
+					</sch:rule>
+				</sch:pattern>
+			</xs:appinfo>
+		</xs:annotation>
+		-->
         <xs:group ref="Expr.content"/>
         <xs:attributeGroup ref="Expr.attlist"/>
     </xs:complexType>
@@ -1722,7 +2063,7 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Fun
 
     content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-    attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Fun.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -1797,7 +2138,7 @@
 		content model (within resl):
 		DR/KR/PR/ECA/CEP Reaction RuleML: (slot*, resl? )
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Plex.attlist">
         <xs:attributeGroup ref="term-interface.attlist"/>
@@ -1863,7 +2204,27 @@
         <xs:attributeGroup ref="Plex.attlist"/>
     </xs:complexType>
     <xs:element name="Plex" type="Plex.type"/>
-
+    <!-- note that elementFormDefault is qualified because of local declarations -->
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML rest variables.
+            File:       rest_module.xsd Version: 1.0 Last Modification: 2011-07-05 This module
+            declares the following       RuleML elements: * repo * resl See
+            http://www.ruleml.org/modularization for details about this       modularization
+            approach. </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-07-05T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 		*** repo ***
 		A positional rest variable.
@@ -1910,7 +2271,26 @@
         <xs:attributeGroup ref="resl.attlist"/>
     </xs:complexType>
     <xs:element name="resl" type="resl.type"/>
- 
+    <!-- includes the equalog layer with the 'equality' module -->
+    <xs:annotation>
+        <xs:documentation xml:lang="en"> This is the XML Schema module for equality in RuleML. File:
+            equality_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module
+            declares the following RuleML elements and attributes: * Equal * left * right        See
+            http://www.ruleml.org/modularization for details about this modularization approach. </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2012-02-21T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 		*** Equal ***
 		An equational formula consisting of two expressions.
@@ -1934,7 +2314,7 @@
 		in ECA Reaction RuleML:	(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?,	(left, right) |	(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)  )
 		)		
 		
-		attributes: @oriented?, @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @oriented?, @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Equal.attlist">
         <xs:attributeGroup ref="oriented.attrib"/>
@@ -1960,6 +2340,23 @@
         </xs:sequence>
     </xs:group>
     <xs:complexType name="Equal.type">
+        <!-- 
+			<xs:annotation>
+			<xs:appinfo>
+				<sch:pattern name="Defining equality">
+					<sch:rule context=
+						"r:Implies/r:then/r:Equal/r:left/r:Expr/r:Fun |
+						 r:Implies/r:Equal[2]/r:left/r:Expr/r:Fun |
+						 r:Implies/r:then/r:Equal/r:Expr[1]/r:Fun |
+						 r:Implies/r:Equal[2]/r:Expr[1]/r:Fun">
+						<sch:assert test="@per='yes'">
+							A defining equality must have an interpreted left-hand side.
+						</sch:assert>
+					</sch:rule>
+				</sch:pattern>
+			</xs:appinfo>
+		</xs:annotation>
+		-->
         <xs:group ref="Equal.content"/>
         <xs:attributeGroup ref="Equal.attlist"/>
     </xs:complexType>
@@ -2018,9 +2415,9 @@
         <xs:group ref="right.content"/>
         <xs:attributeGroup ref="right.attlist"/>
     </xs:complexType>
-    
     <xs:element name="right" type="right.type"/>
-     <xs:simpleType name="curieOrIRI.datatype">
+
+    <xs:simpleType name="curieOrIRI.datatype">
         <xs:union memberTypes="curie.datatype xs:anyURI"/>
     </xs:simpleType>
     <xs:simpleType name="curieOrAbsIRI.datatype">
@@ -2144,7 +2541,7 @@
 	-->
     <!-- 
 		
-		replaced by card ?
+		replaced by card 
 		
 		<xs:attributeGroup name="size.attrib">
 		<xs:attribute name="size" type="xs:int" use="optional" default="-1"/>
@@ -2252,9 +2649,28 @@
         </xs:attribute>
     </xs:attributeGroup>
     <!--
+    *** @qualify ***
+    
+     "[iri]" (term or curie or absolute IRI)
+     
+     Defines qualifying meta knowledge annotations. The IRI points to internal metadata definitions (defined in the <qualification> role)
+     or external metadata vocabularies.
+      
+	 optional attribute
+	 
+	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40qualify
+	-->
+    <xs:attributeGroup name="qualify.attrib">
+        <xs:attribute name="qualify" use="optional">
+            <xs:simpleType>
+                <xs:union memberTypes="termOrCurieOrAbsIRIs.datatype"/>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <!--
     *** @scope ***
     
-     restriction: global | local | private | "[iri]" (term or curie or absolute IRI)
+     restriction: global | local | private | "[iris]" (terms or curies or absolute IRIs)
      
      Defines a scope. Predefined scopes are global, local, private. 
      Internal dynamic scopes defined by metadata views (defined in the <scope> role) can be references by the oid name term (<oid>)
@@ -2268,14 +2684,14 @@
     <xs:attributeGroup name="scope-formula.attrib">
         <xs:attribute default="global" name="scope" use="optional">
             <xs:simpleType>
-                <xs:union memberTypes="termOrCurieOrAbsIRI.datatype vocab-scope.datatype"/>
+                <xs:union memberTypes="termOrCurieOrAbsIRIs.datatype vocab-scope.datatype"/>
             </xs:simpleType>
         </xs:attribute>
     </xs:attributeGroup>
     <xs:attributeGroup name="scope-term.attrib">
         <xs:attribute default="local" name="scope" use="optional">
             <xs:simpleType>
-                <xs:union memberTypes="termOrCurieOrAbsIRI.datatype vocab-scope.datatype"/>
+                <xs:union memberTypes="termOrCurieOrAbsIRIs.datatype vocab-scope.datatype"/>
             </xs:simpleType>
         </xs:attribute>
     </xs:attributeGroup>
@@ -2471,7 +2887,7 @@
  
   	a group of attributes for all XML node elements (type elements) in Reaction RuleML
   	
-	@meta?, @node?, @iri?, @vocab?
+	@meta?, @qualify?, @node?, @iri?, @vocab?
    	   
   	-->
     <xs:attributeGroup name="node-element.attlist">
@@ -2479,6 +2895,7 @@
         <xs:attributeGroup ref="iri.attrib"/>
         <xs:attributeGroup ref="vocab.attrib"/>
         <xs:attributeGroup ref="meta.attrib"/>
+        <xs:attributeGroup ref="qualify.attrib"/>
     </xs:attributeGroup>
     <!-- 
  
@@ -2606,7 +3023,28 @@
         <xs:attributeGroup ref="closure.attrib"/>
         <xs:attributeGroup ref="per.attrib"/>
     </xs:attributeGroup>
-    
+    <xs:annotation>
+        <xs:documentation xml:lang="en">                      Rules module part of Reaction RuleML.
+            It defines the core            Rule construct used as basis for all types of rules in
+            Reaction RuleML                      This is the XML Schema rule module for Reaction
+            RuleML.           File: rule_module.xsd           Version: 1.0           Last
+            Modification: 2011-03-29                      This schema declares the following
+            Reaction RuleML elements and attributes:                      * Rule           * on
+            * if           * then           * do           * after                     * else
+            * elseDo           * elseAfter                          </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>Reaction RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-29T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
       *** Rule ***
       The Rule element that provides the basic syntax for rules
@@ -2637,7 +3075,7 @@
 
 	 
       Rule has the following attributes:
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
       
 -->
     <xs:attributeGroup name="Rule.attlist">
@@ -2818,14 +3256,16 @@
     <xs:group name="ReactionRule.content">
         <xs:sequence>
             <xs:element ref="on"/>
-            <xs:sequence minOccurs="0">
-                <xs:element minOccurs="0" ref="if"/>
-                <xs:element minOccurs="0" ref="then"/>
-                <xs:element minOccurs="0" ref="do"/>
-                <xs:element minOccurs="0" ref="after"/>
-                <xs:element minOccurs="0" ref="else"/>
-                <xs:element minOccurs="0" ref="elseDo"/>
-            </xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:sequence>
+                    <xs:element minOccurs="0" ref="if"/>
+                    <xs:element minOccurs="0" ref="then"/>
+                    <xs:element minOccurs="0" ref="do"/>
+                    <xs:element minOccurs="0" ref="after"/>
+                    <xs:element minOccurs="0" ref="else"/>
+                    <xs:element minOccurs="0" ref="elseDo"/>
+                </xs:sequence>
+            </xs:choice>
         </xs:sequence>
     </xs:group>
     <!--
@@ -2837,7 +3277,26 @@
             <xs:element ref="do"/>
         </xs:sequence>
     </xs:group>
- 
+    <xs:annotation>
+        <xs:documentation xml:lang="en">         Negation module part of Reaction RuleML.   This
+            defines the negation elements for Reaction RuleML.   File: negation_module.xsd
+            Version: 1.0   Last Modification: 2011-03-22      * Negation  generic polymorphig
+            negation   * Naf           negation as failure (inflationary negation in production
+            rules), weak negation   * Neg           classical negation, strong negation   * weak
+            * strong   * formula        </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>Reaction RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-22T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 		*** Negation ***
 		A generic polymorphic negation
@@ -2855,7 +3314,7 @@
         PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action) )
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 		-->
     <xs:attributeGroup name="Negation.attlist">
         <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -2906,7 +3365,7 @@
    		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
  		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )  		
 	
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
     <xs:attributeGroup name="Naf.attlist">
         <xs:attributeGroup ref="Negation.attlist"/>
@@ -2964,7 +3423,7 @@
 		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )
 
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
     <xs:attributeGroup name="Neg.attlist">
         <xs:attributeGroup ref="Negation.attlist"/>
@@ -3010,7 +3469,27 @@
         <xs:attributeGroup ref="strong.attlist"/>
     </xs:complexType>
     <xs:element name="strong" type="strong.type"/>
- 
+    <xs:annotation>
+        <xs:documentation xml:lang="en">                                 Quantifier module part of
+            Reaction RuleML redefining the Forall, Exists and introduce the Quantifier element.
+            This is the XML Schema Quantifier element for Reaction RuleML.   File:
+            quantifier_module.xsd   Version: 1.0   Last Modification: 2011-03-22       * Quantifier
+            generic quantifier (used in quantification metatag)   * Forall  predefined inner
+            quantifier (used in quantification metatag)   * Exist   predefined inner quantifier
+            (used in qualification metatag)       </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-22T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 	*** Quantifier ***
 	Explicit generic quantifier, where the quantifier name can be defined by the 
@@ -3027,7 +3506,7 @@
     PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
     ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )?
 
-	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
     <xs:attributeGroup name="Quantifier.attlist">
         <xs:attributeGroup ref="quantifier-interface.attlist"/>
@@ -3062,7 +3541,7 @@
     PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
     ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
 
-	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
     <xs:group name="Exists-quantifier.content">
         <xs:sequence>
@@ -3091,7 +3570,7 @@
     PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
     ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
 	
-	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:group name="Forall-quantifier.content">
         <xs:sequence>
@@ -3135,34 +3614,45 @@
         <xs:group ref="formula-inner-quantifier.content"/>
         <xs:attributeGroup ref="formula.attlist"/>
     </xs:complexType>
-   
+    <xs:annotation>
+        <xs:documentation xml:lang="en">         Profile module part of Reaction RuleML.   This is
+            the XML Schema Profile element for Reaction RuleML for describing semantic profiles.
+            Semantic Profiles are used to define the interpretation evaluation semantics (under the
+            evaluation metatag)    either by referecing external existing profiles or by defining
+            them internally.   File: profile_module.xsd   Version: 1.0   Last Modification:
+            2011-03-22      * Profile         generic semantic profile       </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-22T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 	*** Profile ***
 	Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. 
 	
 	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Profile
 	
-	The semantic profile can be
-      defined internally by the any content model (xs:any Element) or externally, where 
-      the optional @type attribute defines the name/type of the used sematics profile,
-      the optional @iri attribute points to an external definition of the semantics profile, and
-      the optional @mapDirection attribute indicates the default direction of the inference / execution.
-      the optional @mapClosure attribute indicates the default quantification.  Allowed values are "universal" and "existential".
-      the optional @mapMaterial attribute indicates the default quantification.  Allowed values are "universal" and "existential".
-      the optional @mapSafety attribute indicates if the execution / inference is transactional, interrupting, non-interrupting
-      the optional @mapSize attribute acts as a generic size boundary / counter in the operational semantic profiles    
+	The semantic profile can be defined internally by the any content model (xs:any Element) or externally  
 
 	DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | content(xs:any*)  )*)
     KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
     PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
  	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @safety?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @safety, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
     <xs:attributeGroup name="Profile.attlist">
         <xs:attributeGroup ref="group-formula-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
         <xs:attributeGroup ref="safety.attrib"/>
+        <xs:attributeGroup ref="node-element.attlist"/>
         <xs:attributeGroup ref="xml.attlist"/>
     </xs:attributeGroup>
     <xs:group name="Profile.content">
@@ -3202,7 +3692,25 @@
         <xs:group ref="profile_anycontent.content"/>
         <xs:attributeGroup ref="profile_anycontent.attlist"/>
     </xs:complexType>
-  
+    <xs:annotation>
+        <xs:documentation xml:lang="en">               Time module part of Reaction RuleML. It
+            defines the core     time constructs        This is the XML Schema time module for
+            Reaction RuleML.    File: time_module.xsd    Version: 1.0    Last Modification:
+            2011-03-29     This schema declares the following Reaction RuleML elements and
+            attributes:       * Time    </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-29T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 	*** Time ***
 	Explicit generic Time construct. 
@@ -3229,7 +3737,7 @@
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 				content(xs:any*)* ) ) 	
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Time.attlist">
         <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -3244,21 +3752,23 @@
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
                     <xs:element minOccurs="0" ref="resl"/>
-                    <xs:sequence minOccurs="0">
-                        <xs:choice>
-                            <xs:sequence>
-                                <xs:choice maxOccurs="unbounded">
-                                    <xs:element form="qualified" name="arg" type="arg_time.type"/>
-                                    <xs:group ref="time_primitives.content"/>
-                                </xs:choice>
-                                <xs:element minOccurs="0" ref="repo"/>
-                            </xs:sequence>
-                            <xs:element ref="repo"/>
-                        </xs:choice>
-                        <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                            type="slot.type"/>
-                        <xs:element minOccurs="0" ref="resl"/>
-                    </xs:sequence>
+                    <xs:choice minOccurs="0">
+                        <xs:sequence>
+                            <xs:choice>
+                                <xs:sequence>
+                                    <xs:choice maxOccurs="unbounded">
+                                        <xs:element form="qualified" name="arg" type="arg_time.type"/>
+                                        <xs:group ref="time_primitives.content"/>
+                                    </xs:choice>
+                                    <xs:element minOccurs="0" ref="repo"/>
+                                </xs:sequence>
+                                <xs:element ref="repo"/>
+                            </xs:choice>
+                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
+                                name="slot" type="slot.type"/>
+                            <xs:element minOccurs="0" ref="resl"/>
+                        </xs:sequence>
+                    </xs:choice>
                 </xs:sequence>
                 <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
                     type="time_anycontent.type"/>
@@ -3323,7 +3833,25 @@
         <xs:group ref="time_anycontent.content"/>
         <xs:attributeGroup ref="time_anycontent.attlist"/>
     </xs:complexType>
-  
+    <xs:annotation>
+        <xs:documentation xml:lang="en">        Spatial module part of Reaction RuleML. It defines
+            the core     spatial constructs        This is the XML Schema spatial module for
+            Reaction RuleML.    File: spatial_module.xsd    Version: 1.0    Last Modification:
+            2011-03-29        This schema declares the following Reaction RuleML elements and
+            attributes:        * Spatial       </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-29T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 	*** Spatial ***
 	Explicit generic Spatial construct. 
@@ -3349,7 +3877,7 @@
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 				
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Spatial.attlist">
         <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -3364,21 +3892,24 @@
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
                     <xs:element minOccurs="0" ref="resl"/>
-                    <xs:sequence minOccurs="0">
-                        <xs:choice>
-                            <xs:sequence>
-                                <xs:choice maxOccurs="unbounded">
-                                    <xs:element form="qualified" name="arg" type="arg_spatial.type"/>
-                                    <xs:group ref="spatial_primitives.content"/>
-                                </xs:choice>
-                                <xs:element minOccurs="0" ref="repo"/>
-                            </xs:sequence>
-                            <xs:element ref="repo"/>
-                        </xs:choice>
-                        <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                            type="slot.type"/>
-                        <xs:element minOccurs="0" ref="resl"/>
-                    </xs:sequence>
+                    <xs:choice minOccurs="0">
+                        <xs:sequence>
+                            <xs:choice>
+                                <xs:sequence>
+                                    <xs:choice maxOccurs="unbounded">
+                                        <xs:element form="qualified" name="arg"
+                                            type="arg_spatial.type"/>
+                                        <xs:group ref="spatial_primitives.content"/>
+                                    </xs:choice>
+                                    <xs:element minOccurs="0" ref="repo"/>
+                                </xs:sequence>
+                                <xs:element ref="repo"/>
+                            </xs:choice>
+                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
+                                name="slot" type="slot.type"/>
+                            <xs:element minOccurs="0" ref="resl"/>
+                        </xs:sequence>
+                    </xs:choice>
                 </xs:sequence>
                 <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
                     type="spatial_anycontent.type"/>
@@ -3442,7 +3973,25 @@
         <xs:group ref="spatial_anycontent.content"/>
         <xs:attributeGroup ref="spatial_anycontent.attlist"/>
     </xs:complexType>
-   
+    <xs:annotation>
+        <xs:documentation xml:lang="en">               Interval module part of Reaction RuleML. It
+            defines the core     Interval construct        This is the XML Schema interval module
+            for Reaction RuleML.    File: interval_module.xsd    Version: 1.0    Last Modification:
+            2011-03-29     This schema declares the following Reaction RuleML elements and
+            attributes:       * Interval    </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-29T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
 	*** Interval ***
 	Explicit generic Interval. 
@@ -3462,7 +4011,7 @@
     PR Reaction RuleML: not used in PR Reaction RuleML 
 	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Interval.attlist">
         <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -3473,11 +4022,19 @@
         <xs:sequence>
             <xs:group ref="meta-roles.content"/>
             <xs:choice minOccurs="0">
-                <xs:element form="qualified" maxOccurs="2" minOccurs="1" name="arg"
-                    type="arg_interval.type"/>
-                <xs:group maxOccurs="2" minOccurs="1" ref="interval_primitives.content"/>
-                <xs:element form="qualified" maxOccurs="2" minOccurs="1" name="content"
-                    type="interval_anycontent.type"/>
+                <xs:sequence>
+                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
+                    <xs:element form="qualified" minOccurs="0" name="arg" type="arg_interval.type"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:group ref="interval_primitives.content"/>
+                    <xs:group minOccurs="0" ref="interval_primitives.content"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:element form="qualified" name="content" type="interval_anycontent.type"/>
+                    <xs:element form="qualified" minOccurs="0" name="content"
+                        type="interval_anycontent.type"/>
+                </xs:sequence>
             </xs:choice>
         </xs:sequence>
     </xs:group>
@@ -3539,7 +4096,37 @@
         <xs:group ref="interval_anycontent.content"/>
         <xs:attributeGroup ref="interval_anycontent.attlist"/>
     </xs:complexType>
-  
+    <!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
+    <xs:annotation>
+        <xs:documentation xml:lang="en">                        spatial-temporal-interval algebra
+            module part of Reaction RuleML    This is the XML Schema of the algebra module for
+            Reaction RuleML    File: spatial_temporal_interval_algebra_module.xsd    Version: 1.0
+            Last Modification: 2011-03-22        This schema declares the following Reaction RuleML
+            elements and attributes:                                      Operator (generic
+            operator)                   at (general role "at Time | Spatial | Interval)
+            Spatial, Temporal, Interval Function Constructs                                       *
+            After                   * Before       * Every                   * Any
+            * Timer                                                         (Allen's) Interval
+            Relations                                      * During                   * Overlaps
+            * Starts                   * Precedes                   * Succeeds                   *
+            Meets                   * Equal                   * Finishes
+            The approach is modelled after that used in "Modularization of XHTML in XML Schema"
+            WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
+            "Modularization of XHTML" (REC-xhtml-modularization-20010410)
+            [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>Reaction RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-22T29:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--(After | Before | Any | Every | Timer | Operator)-->
     <xs:group name="spatial_temporal_algebra_group.content">
         <xs:choice>
@@ -3607,7 +4194,7 @@
 	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] ))
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)?])) 	  
 
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="After.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -3639,7 +4226,7 @@
 	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) ))
       DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
 
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Every.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -3675,7 +4262,7 @@
 	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg*] | content(xs:any)* | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)* ))
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval | Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
 
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Any.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -3714,7 +4301,7 @@
 	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval | Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval | Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
        
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="Timer.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -3748,7 +4335,7 @@
       content model: 
       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval])
       
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="IntervalAlgebraOperator.attlist">
         <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -3758,11 +4345,16 @@
     <xs:group name="IntervalAlgebraOperator.content">
         <xs:sequence>
             <xs:group ref="meta-roles.content"/>
-            <xs:choice>
-                <xs:element form="qualified" maxOccurs="2" minOccurs="2" name="arg"
-                    type="arg_interval.type"/>
-                <xs:element maxOccurs="2" minOccurs="2" ref="Interval"/>
-            </xs:choice>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
+                    <xs:element ref="Interval"/>
+                </xs:choice>
+                <xs:choice>
+                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
+                    <xs:element ref="Interval"/>
+                </xs:choice>
+            </xs:sequence>
         </xs:sequence>
     </xs:group>
     <xs:complexType name="IntervalAlgebraOperator.type">
@@ -3776,7 +4368,32 @@
     <xs:element name="Succeeds" type="IntervalAlgebraOperator.type"/>
     <xs:element name="Meets" type="IntervalAlgebraOperator.type"/>
     <xs:element name="Finishes" type="IntervalAlgebraOperator.type"/>
- 
+    <!-- include test suites   -->
+    <xs:annotation>
+        <xs:documentation xml:lang="en">        Test and Proof module part of Reaction RuleML.
+            This is the XML Schema Test module for Reaction RuleML.    File: test_module.xsd
+            Version: 1.0    Last Modification: 2011-07-20        Further information - see RBSLA
+            project (http://rbsla.ruleml.org)    ContractLog framework VVI Testing:
+            http://rbsla.ruleml.org/docs/ContractLog_VVI.pdf        This schema declares the
+            following Reaction RuleML elements and attributes:            * Test    * vvi    *
+            TestSuite    * testbase    * TestItem    * Answer     * formula (Answer)    *
+            expectedResult        The approach is modelled after that used in "Modularization of
+            XHTML in XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be
+            integrated with    "Modularization of XHTML" (REC-xhtml-modularization-20010410)
+            [http://www.w3.org/TR/xhtml-modularization/].       </xs:documentation>
+        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        <xs:appinfo>
+            <dc:title>Reaction RuleML Schema</dc:title>
+            <dc:version>1.0</dc:version>
+            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+            <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject>
+            <dc:description>custom-built main module for Reaction RuleML</dc:description>
+            <dc:date>2011-03-29T23:11:17-0300</dc:date>
+            <dc:language>en</dc:language>
+            <dcterms:rights>LGPL-3.0</dcterms:rights>
+            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+        </xs:appinfo>
+    </xs:annotation>
     <!--
       *** Test ***
       A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Testing.
@@ -3789,7 +4406,7 @@
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (vvi | Entails | TestItem | TestSuite)*)
       
       Test has the following attributes:
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?   
+      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?   
 	-->
     <xs:attributeGroup name="Test.attlist">
         <xs:attributeGroup ref="action-interface.attlist"/>
@@ -3874,7 +4491,7 @@
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (testbase | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
       
       TestSuite has the following attributes:
-      attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+      attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
     <xs:attributeGroup name="TestSuite.attlist">
         <xs:attributeGroup ref="group-formula-interface.attlist"/>
@@ -3910,7 +4527,7 @@
  		 
 	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Query|Assert|Retract|Update|Send|Receive|Consult|Test|Action), (expectedResult|Answer) )
 
-     attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+     attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	  
     -->
     <xs:attributeGroup name="TestItem.attlist">

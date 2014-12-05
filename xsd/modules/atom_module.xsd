@@ -87,7 +87,7 @@
 				resl?
 			)
 	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	
 	-->
   <xs:attributeGroup name="Atom.attlist">
@@ -134,10 +134,12 @@
         <xs:group ref="op-atom.content"/>
       </xs:choice>
       <xs:group ref="Atom-slots.extend1"/>
-      <xs:sequence minOccurs="0">
-        <xs:group ref="Atom-repo.extend"/>
-        <xs:group ref="Atom-slots.extend1"/>
-      </xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:sequence>
+          <xs:group ref="Atom-repo.extend"/>
+          <xs:group ref="Atom-slots.extend1"/>
+        </xs:sequence>
+      </xs:choice>  
       <xs:group ref="Atom-slots.extend2"/>
     </xs:sequence>
   </xs:group>
@@ -182,7 +184,7 @@
 		
 		content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		
-		attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Rel.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>

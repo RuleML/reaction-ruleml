@@ -116,7 +116,7 @@
 	                
 	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Action
 	                
-	  attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+	  attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
 	<xs:attributeGroup name="Action.attlist">
 		<xs:attributeGroup ref="action-interface.attlist"/>
@@ -130,7 +130,8 @@
 				<xs:sequence>
 					<xs:element ref="slot" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element ref="resl" minOccurs="0"/>
-					<xs:sequence minOccurs="0">
+					<xs:choice minOccurs="0">
+						<xs:sequence>
 						<xs:choice>
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
@@ -143,7 +144,8 @@
 						</xs:choice>
 						<xs:element ref="slot"  minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element ref="resl" minOccurs="0"/>
-					</xs:sequence>
+						</xs:sequence>
+					</xs:choice>	
 				</xs:sequence>            								
 				<xs:element name="content" type="action_anycontent.type"/>				
 			</xs:choice>

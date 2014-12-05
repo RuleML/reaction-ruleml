@@ -70,7 +70,7 @@
 
 	 
       Rule has the following attributes:
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
       
 -->
 	<xs:attributeGroup name="Rule.attlist">
@@ -264,14 +264,16 @@
 	<xs:group name="ReactionRule.content">
 		<xs:sequence>
 			<xs:element ref="on"/>
-			<xs:sequence minOccurs="0">
+			<xs:choice minOccurs="0">
+				<xs:sequence>
 				<xs:element ref="if" minOccurs="0"/>
 				<xs:element ref="then" minOccurs="0"/>
 				<xs:element ref="do" minOccurs="0"/>
 				<xs:element ref="after" minOccurs="0"/>
 				<xs:element ref="else" minOccurs="0"/>
 				<xs:element ref="elseDo" minOccurs="0"/>
-			</xs:sequence>
+				</xs:sequence>
+			</xs:choice>
 		</xs:sequence>
 	</xs:group>
 

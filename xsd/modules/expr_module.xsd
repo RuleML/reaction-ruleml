@@ -94,7 +94,7 @@
 		Note the 'positionalized' normal form where the op role is only
 		at the beginning of the Expr.
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Expr.attlist">
     <xs:attributeGroup ref="term-interface.attlist"/>
@@ -109,7 +109,8 @@
         <xs:group ref="op-Expr.content"/>
       </xs:choice>
       <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:sequence minOccurs="0">
+      <xs:choice minOccurs="0">
+        <xs:sequence>
         <xs:choice>
           <xs:sequence>
             <xs:choice maxOccurs="unbounded">
@@ -121,7 +122,8 @@
           <xs:element ref="repo"/>
         </xs:choice>
         <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
-      </xs:sequence>
+        </xs:sequence>
+      </xs:choice>
       <xs:element ref="resl" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
@@ -188,7 +190,7 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Fun
 
     content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-    attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Fun.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -264,7 +266,7 @@
 		content model (within resl):
 		DR/KR/PR/ECA/CEP Reaction RuleML: (slot*, resl? )
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Plex.attlist">
     <xs:attributeGroup ref="term-interface.attlist"/>

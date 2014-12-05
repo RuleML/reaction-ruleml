@@ -27,7 +27,7 @@
                   * @prefix defines prefixes for the mapping of Curie attributes values into IRIs
                   * @vocab defines vocabulary IRIs for the mapping of term attributes values into IRIs
                   * @scope defines the scope 
-                  * @meta defines the metadata annotations
+                  * @meta / @qualify defines the metadata annotations (descriptive and qualifying metadata)
                   * @card defines the cardinality of set values
                   * @maxCard @minCard defines the minimum and maximum cardinality
                   * @material defines the interpretation of implication as material implication or not
@@ -266,6 +266,27 @@
 	
 	<xs:attributeGroup name="meta.attrib">
 		<xs:attribute name="meta" use="optional">
+			<xs:simpleType>
+				<xs:union memberTypes="termOrCurieOrAbsIRIs.datatype" />
+			</xs:simpleType> 
+		</xs:attribute>
+	</xs:attributeGroup>
+	
+	<!--
+    *** @qualify ***
+    
+     "[iri]" (term or curie or absolute IRI)
+     
+     Defines qualifying meta knowledge annotations. The IRI points to internal metadata definitions (defined in the <qualification> role)
+     or external metadata vocabularies.
+      
+	 optional attribute
+	 
+	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40qualify
+	-->
+	
+	<xs:attributeGroup name="qualify.attrib">
+		<xs:attribute name="qualify" use="optional">
 			<xs:simpleType>
 				<xs:union memberTypes="termOrCurieOrAbsIRIs.datatype" />
 			</xs:simpleType> 
@@ -513,7 +534,7 @@
  
   	a group of attributes for all XML node elements (type elements) in Reaction RuleML
   	
-	@meta?, @node?, @iri?, @vocab?
+	@meta?, @qualify?, @node?, @iri?, @vocab?
    	   
   	-->
 	
@@ -522,6 +543,7 @@
 		<xs:attributeGroup ref="iri.attrib"/>
 		<xs:attributeGroup ref="vocab.attrib"/>
 		<xs:attributeGroup ref="meta.attrib"/>
+		<xs:attributeGroup ref="qualify.attrib"/>
 	</xs:attributeGroup>
 	
 	

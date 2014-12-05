@@ -221,10 +221,17 @@
       <xs:group ref="meta-roles.content"/>
       <xs:choice>
         <xs:sequence>
-          <xs:element ref="torso" minOccurs="2" maxOccurs="2"/>
+          <xs:choice>
+            <xs:element ref="torso"/>
+            <xs:group ref="torso.content"/>
+          </xs:choice>
+          <xs:choice>
+            <xs:element ref="torso"/>
+            <xs:group ref="torso.content"/>
+          </xs:choice>
         </xs:sequence>
         <xs:sequence>
-          <xs:group ref="torso.content" minOccurs="2" maxOccurs="2"/>
+ 
         </xs:sequence>
       </xs:choice>
     </xs:sequence>

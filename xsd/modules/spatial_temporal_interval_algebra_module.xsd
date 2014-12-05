@@ -284,10 +284,16 @@
 	<xs:group name="IntervalAlgebraOperator.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
-			<xs:choice>
-				<xs:element name="arg" type="arg_interval.type" minOccurs="2" maxOccurs="2"/>
-				<xs:element ref="Interval" minOccurs="2" maxOccurs="2"/>			
-			</xs:choice>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="arg" type="arg_interval.type"/>
+					<xs:element ref="Interval"/>	
+				</xs:choice>
+				<xs:choice>
+					<xs:element name="arg" type="arg_interval.type"/>
+					<xs:element ref="Interval"/>	
+				</xs:choice>	
+			</xs:sequence>
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="IntervalAlgebraOperator.type">

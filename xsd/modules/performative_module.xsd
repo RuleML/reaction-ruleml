@@ -266,8 +266,12 @@
   <xs:group name="Update.content">
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
-      <xs:sequence minOccurs="1" maxOccurs="2">
+      <xs:sequence>
         <xs:choice>
+          <xs:element name="formula" type="formula-assert.type"/>
+          <xs:group ref="formula-assert.content"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
           <xs:element name="formula" type="formula-assert.type"/>
           <xs:group ref="formula-assert.content"/>
         </xs:choice>

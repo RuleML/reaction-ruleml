@@ -63,9 +63,9 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
 			<xs:choice minOccurs="0">
-				<xs:element name="arg" type="arg_interval.type" minOccurs="1" maxOccurs="2"/>
-				<xs:group ref="interval_primitives.content" minOccurs="1" maxOccurs="2"/>			
-				<xs:element name="content" type="interval_anycontent.type" minOccurs="1" maxOccurs="2"/>												
+				<xs:sequence><xs:element name="arg" type="arg_interval.type"/><xs:element name="arg" type="arg_interval.type" minOccurs="0"/></xs:sequence>
+				<xs:sequence><xs:group ref="interval_primitives.content"/><xs:group ref="interval_primitives.content" minOccurs="0"/></xs:sequence>
+				<xs:sequence><xs:element name="content" type="interval_anycontent.type"/><xs:element name="content" type="interval_anycontent.type" minOccurs="0"/></xs:sequence>																			
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>

@@ -296,7 +296,7 @@
 	<!--
     *** @scope ***
     
-     restriction: global | local | private | "[iri]" (term or curie or absolute IRI)
+     restriction: global | local | private | "[iris]" (terms or curies or absolute IRIs)
      
      Defines a scope. Predefined scopes are global, local, private. 
      Internal dynamic scopes defined by metadata views (defined in the <scope> role) can be references by the oid name term (<oid>)
@@ -311,14 +311,14 @@
 	<xs:attributeGroup name="scope-formula.attrib">
 		<xs:attribute name="scope" use="optional" default="global">
 			<xs:simpleType>
-				<xs:union memberTypes="termOrCurieOrAbsIRI.datatype vocab-scope.datatype" />
+				<xs:union memberTypes="termOrCurieOrAbsIRIs.datatype vocab-scope.datatype" />
 			</xs:simpleType> 
 		</xs:attribute>
 	</xs:attributeGroup>
 	<xs:attributeGroup name="scope-term.attrib">
 		<xs:attribute name="scope" use="optional" default="local">
 			<xs:simpleType>
-				<xs:union memberTypes="termOrCurieOrAbsIRI.datatype vocab-scope.datatype" />
+				<xs:union memberTypes="termOrCurieOrAbsIRIs.datatype vocab-scope.datatype" />
 			</xs:simpleType> 
 		</xs:attribute>
 	</xs:attributeGroup>

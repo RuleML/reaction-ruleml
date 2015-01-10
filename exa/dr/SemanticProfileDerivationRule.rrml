@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-model href="http://reaction.ruleml.org/1.0/relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9,7 +9,7 @@
   
   <!-- Clocksin/Mellish sample rule
     
-This example shows how the intended evaluation / semantic profiles can be defined.
+This example shows how the intended  semantic profiles can be defined.
 
 Since there are many existing semantics for derivation and reaction rules
 the generic Profile approach is extensible and allows pointing to externally defined semantic profiles as well as
@@ -47,6 +47,7 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
     <evaluation index="3">
       
       <Profile key="ruleml:SLDNF" direction="backward">
+        <oid><Ind>SLDNF</Ind></oid> <!-- the object identifier <oid> is used as referencable local indentifier for the profile -->
         <formula>
           <Rulebase>
             
@@ -95,7 +96,7 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
     <if>
       <Atom>
         <op><Rel>likes</Rel></op>
-        <Ind>Mary</Ind>
+        <Var>X</Var>
         <Ind>wine</Ind>
       </Atom>
     </if>
@@ -160,7 +161,7 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
    </Atom>
  </Query>
 
-  <!-- The intenteded semantics for this query is referencing the locally axiomatized SLDNF profile of the rulebase  -->
+  <!-- The intenteded semantics for this query is referencing the locally axiomatized SLDNF profile define locally in the rulebase  -->
   <Query>
     <evaluation>
       <Profile keyref="ruleml:SLDNF"/>      
@@ -171,4 +172,43 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
       <Var>Katy</Var>
     </Atom>
   </Query>
+  
+  
+  <!-- The negation as failure <Naf> is interpreted with the semantic profiles specified as 
+       intended evaluation semantics for the <Rulebase> on which the query is applied, i.e. WFS or ASS or SLDNF.  -->
+  <Query>
+    <Naf>
+      <Atom>
+        <Rel>likes</Rel>
+        <Ind>John</Ind>
+        <Var>Katy</Var>
+      </Atom>      
+    </Naf>
+  </Query>
+  
+  <!-- The sort of the generic <Negation> is referencing the NegationAsFailure type. 
+       The semantic (evaluation/interpretation) style is referencing the locally defined SLDNF semantic profile  -->
+  <Query>
+    <Negation style="SLDNF" type="ruleml:NegationAsFailure">
+      <Atom>
+        <Rel>likes</Rel>
+        <Ind>John</Ind>
+        <Var>Katy</Var>
+      </Atom>      
+    </Negation>
+  </Query>
+  
+  <!-- The generic logical operator is referencing the Naf element in the RuleML vocabulary.
+       Its sort is defined by a reference to the RuleML NegationAsFailure type. 
+       The semantic (evaluation/interpretation) style is referencing the predefined external RuleML WellFoundedSemantics profile  -->
+  <Query>
+    <Operator type="ruleml:NegationAsFailure" iri="rulemlv:Naf" style="ruleml:WellFoundedSemantics">
+      <Atom>
+        <Rel>likes</Rel>
+        <Ind>John</Ind>
+        <Var>Katy</Var>
+      </Atom>            
+    </Operator>
+  </Query>
+  
 </RuleML>

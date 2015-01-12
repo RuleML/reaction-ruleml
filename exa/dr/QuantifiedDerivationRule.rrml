@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-model href="http://reaction.ruleml.org/1.0/relaxng/dr/dr-nafneghornlogeq_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="http://reaction.ruleml.org/1.0/relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
-  <!-- Clocksin/Mellish sample rule 
+  <!-- The examples shows how derivation rules and queries are explicitly quantified.
 
-This example shows how derivation rules and queries are explicitly quantified.
-
-Note, this examples makes use of the generic Quantifier which is specialized by pointing
+Note, these examples makes use of generic Quantifier a which is specialized by pointing
 to an externally defined quantifier definition. This approach is extensible and allows 
 user-defined quantifiers as needed for certain logics. 
 
@@ -22,23 +20,24 @@ It also defines the shorter quantifier element
 
   <Assert>
 
-    <!-- rule -->
+    <!-- rule using generic Quantifier -->
 
     <Rule>
 
       <quantification>
         <!-- explicit quantification -->
 
-        <!-- "forall" quantifier; 
+        <!-- forall X such that X is not John if X likes wine then John likes X  
+          "forall" quantifier; 
 		     Note: Reaction RuleML 1.0 also supports the "shortcut" 
-                 element "Forall" as it is used in RuleML 1.0, see FullDerivationRule example -->
+                 element "Forall" see example rule below -->
 
         <Quantifier type="ruleml:Forall">
 
           <!-- for all ?x -->
           <Var>x</Var>
 
-          <!-- such that ?x is not John -->
+          <!-- guarded quantifier: such that ?x is not John -->
           <Neg>
             <Equal>
               <Var>x</Var>
@@ -69,10 +68,55 @@ It also defines the shorter quantifier element
         </Atom>
       </then>
     </Rule>
+    
+    <!-- forall X such that X is a Person and not John if X likes wine then John likes X the same rule using predefine 
+         uses predefined Forall quantifier -->
+    <Rule>
+      
+      <quantification>
+         
+        <!-- "forall" quantifier -->
+        
+        <Forall>
+          
+          <!-- for all ?x -->
+          <declare><Var>x</Var></declare>
+          
+          <!-- "such that" guard: ?x is a person and ?x is not John -->
+          <formula>
+            <Neg>
+              <Equal>
+                <Var type="Person">x</Var>
+                <Ind>John</Ind>
+              </Equal>
+            </Neg>
+          </formula>
+       
+        </Forall>
+      </quantification>
+      
+      <if>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+            <Rel>likes</Rel>
+            <Ind>John</Ind>
+            <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
 
     <!-- fact -->
 
     <Atom>
+      
       <op>
         <Rel>likes</Rel>
       </op>
@@ -91,7 +135,7 @@ It also defines the shorter quantifier element
 
       <!-- "Exists" quantifier; 
 		     Note: Reaction RuleML 1.0 also supports the "shortcut" 
-                 element "Exists", see FullDerivationRule example -->
+                 element "Exists", see example below -->
 
       <Quantifier type="ruleml:Exists">
         <Var>x</Var>
@@ -107,4 +151,127 @@ It also defines the shorter quantifier element
     </Atom>
   </Query>
 
+  <!-- the same query using predefine Exist quantifier -->
+
+  <Query>
+    <quantification>    
+      <!-- "Exists" quantifier -->
+      <Exists>
+        <declare>
+          <Var>x</Var>
+        </declare>  
+      </Exists>
+    </quantification>
+    <Atom>
+      <Rel>likes</Rel>
+      <Ind>John</Ind>
+      <Var>whom</Var>
+    </Atom>
+  </Query>
+
+  <!-- further examples showing the expressiveness -->
+  
+ <Assert>
+
+  <!-- if (forall X exists Y p(X,Y)) and q(X,Y) then exists Y r(Y) -->
+  <Rule>
+    <if>
+      <And>
+        <Atom>
+          <!-- the quantification scope is on the Atom formula -->
+          <quantification index="1"> 
+            <Forall><Var>X</Var></Forall>
+          </quantification>
+          <quantification index="2">
+            <Exists><Var>Y</Var></Exists>
+          </quantification>
+          <Rel>p</Rel>
+          <Var>X</Var>
+          <Var>Y</Var>
+        </Atom>        
+        <Atom> <!-- X and Y a free variables here -->
+          <Rel>q</Rel>
+          <Var>X</Var>
+          <Var>Y</Var>
+        </Atom>
+      </And>
+    </if>
+    <then>
+      <Atom>
+        <quantification>
+          <Exists>
+            <Var>Y</Var>
+          </Exists>
+        </quantification>
+        <Rel>r</Rel>
+        <Var>Y</Var>
+      </Atom>
+    </then>
+  </Rule>
+   
+  <!-- forall X if p(X) then q(X) --> 
+  <Rule>
+    <quantification>
+      <Forall><Var>X</Var></Forall>
+    </quantification>
+    <if>
+      <Atom>
+        <Rel>p</Rel>
+        <Var>X</Var>
+      </Atom>
+    </if>
+    <then>
+      <Atom>
+        <Rel>q</Rel>
+        <Var>X</Var>
+      </Atom>
+    </then>
+  </Rule>
+   
+   <!-- by the closure attribute the default assumption for all variables in the scope of the if-then rule is universal quantification -->
+   <Rule closure="universal">     
+     <if>
+       <Atom>
+         <Rel>p</Rel>
+         <Var>X</Var>
+       </Atom>
+     </if>
+     <then>
+       <Atom>
+         <Rel>q</Rel>
+         <Var>X</Var>
+       </Atom>
+     </then>
+   </Rule>
+   
+   <!-- distributed rule example with rule interface referenced by rule implementation -->
+   <Rule key="rule1">
+     <signature>
+       <Atom>
+         <Rel>q</Rel>
+         <Var mode="?"/>
+       </Atom>  
+     </signature>
+   </Rule>
+   
+   <Rule keyref="rule1">
+     <quantification>
+       <Forall><Var>X</Var></Forall>
+     </quantification>
+     <if>
+       <Atom>
+         <Rel>p</Rel>
+         <Var>X</Var>
+       </Atom>
+     </if>
+     <then>
+       <Atom>
+         <Rel>q</Rel>
+         <Var>X</Var>
+       </Atom>
+     </then>
+   </Rule>
+   
+ </Assert>
+  
 </RuleML>

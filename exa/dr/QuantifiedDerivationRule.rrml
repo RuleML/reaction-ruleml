@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-model href="http://reaction.ruleml.org/1.0/relaxng/dr/dr.rnc" type="application/relax-ng-compact-syntax"?>
+
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/dr.xsd">
@@ -244,6 +244,28 @@ It also defines the shorter quantifier element
      </then>
    </Rule>
    
+   <!-- if (there is one and only one X for p(X)) then q(X)  -->  
+   <Rule closure="uniqueX">
+     <if>
+       <Atom>
+         <quantification>
+           <Quantifier type="ruleml:Unique">
+             <oid><Ind>uniqueX</Ind></oid>
+             <declare><Var>X</Var></declare>
+           </Quantifier>
+         </quantification>
+         <Rel>p</Rel>
+         <Var>X</Var>
+       </Atom>
+     </if>
+     <then>
+       <Atom>
+         <Rel>q</Rel>
+         <Var>X</Var>
+       </Atom>
+     </then>
+   </Rule>
+      
    <!-- distributed rule example with rule interface referenced by rule implementation -->
    <Rule key="rule1">
      <signature>
@@ -271,6 +293,7 @@ It also defines the shorter quantifier element
        </Atom>
      </then>
    </Rule>
+     
    
  </Assert>
   

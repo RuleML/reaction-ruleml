@@ -27,7 +27,7 @@ Negation.type.def = Negation.content, Negation.attlist
 Negation =
   
   ## <Negation>: a generic polymorphic negation, which is interpreted by the intended semantics (i.e. semantic profile). See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Negation
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-Negation
   element Negation { Negation.type.def }
 Node.choice |= Negation
 Negation-node.choice |= Negation

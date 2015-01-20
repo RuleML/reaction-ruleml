@@ -10,7 +10,7 @@ dc:description [ "The expansion module for extended strong negations." ]
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-include "http://ruleml.org/1.0/relaxng/modules/naf_expansion_module.rnc" {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/naf_expansion_module.rnc" {
   NafFormula.choice |=
     SimpleFormula-node.choice
     | And-fo-node.choice

@@ -12,12 +12,12 @@ dc:description [
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/performative_expansion_module.rnc" {
   Assert.Node.def =
     
     ## A KQML-like performative acting as a wrapper specifying that its content is 
     ## asserted, making an 'implicit <Rulebase>' assumption.
-    ## See http://www.ruleml.org/1.0/glossary/#gloss-Assert
+    ## See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Assert
     element Assert {
     # was  (AssertRetract-datt.choice & reAssertRetract.attlist),
       (AssertRetract-datt.choice & reAssert.attlist), AssertRetract.header, AssertRetract.main

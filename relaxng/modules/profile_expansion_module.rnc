@@ -31,5 +31,5 @@ Node.choice |= Profile
 Profile =
   
   ## <Profile>: defines (or references) the intended semantics as a semantic profile. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-Quantifier
   element Profile { Profile.type.def }

@@ -33,7 +33,7 @@ Node.choice |= Time_formula
 Time_term =
   
   ## <Time>: generic Time element. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Time
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-Time
   element Time { Time_term.type.def }
 Time_formula = element Time { Time_formula.type.def }
 # *** arg ***

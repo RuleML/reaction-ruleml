@@ -26,7 +26,7 @@ include "../modules/drrr_performative_contraction_module.rnc" inherit = ruleml {
 # 
 # ATOMIC FORMULAS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/atom_expansion_module.rnc" inherit = ruleml { 
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/atom_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 # 
@@ -56,7 +56,7 @@ include "../modules/drrr_quantification_expansion_module.rnc" inherit = ruleml {
 # 
 # EXPRESSIONS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/expr_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -69,62 +69,62 @@ include "http://ruleml.org/1.0/relaxng/modules/expr_expansion_module.rnc" inheri
 # 
 # ATTRIBUTES WITH DEFAULT VALUES ARE INITIALIZED
 #
-include "http://ruleml.org/1.0/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/default_inf_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # ATTRIBUTES WITH DEFAULT VALUES ARE ABSENT OR OPTIONAL
 #
-#include "http://ruleml.org/1.0/relaxng/modules/default_absent_expansion_module.rnc" inherit = ruleml {
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/default_absent_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 #}
-include "http://ruleml.org/1.0/relaxng/modules/default_absent_folog_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/default_absent_folog_expansion_module.rnc" inherit = ruleml {
 start |= notAllowed
 }
 # 
 # ATTRIBUTES WITH DEFAULT VALUES REQUIRED
 #
-include "http://ruleml.org/1.0/relaxng/modules/default_present_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/default_present_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
-#include "http://ruleml.org/1.0/relaxng/modules/default_present_folog_expansion_module.rnc" inherit = ruleml {
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/default_present_folog_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 #}
 # 
 # POLYADIC TERM (ONE OR MORE TERMS) SEQUENCES INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/termseq_poly_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/termseq_poly_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # EXPLICIT DATATYPING ENABLED (include in RNC)
 #
-#include "http://ruleml.org/1.0/relaxng/modules/explicit_datatyping_expansion_module.rnc" inherit = ruleml { 
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/explicit_datatyping_expansion_module.rnc" inherit = ruleml { 
 #  start |= notAllowed
 #}
-#include "http://ruleml.org/1.0/relaxng/modules/dataterm_simple_expansion_module.rnc" inherit = ruleml { 
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/dataterm_simple_expansion_module.rnc" inherit = ruleml { 
 #  start |= notAllowed
 #}
-#include "http://ruleml.org/1.0/relaxng/modules/data_simple_content_expansion_module.rnc" inherit = ruleml { 
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/data_simple_content_expansion_module.rnc" inherit = ruleml { 
 #  start |= notAllowed
 #}
 # 
 # xsi:schemaLocation ALLOWED IN RuleML (include in RNC)
 #
-#include "http://ruleml.org/1.0/relaxng/modules/xsi_schemalocation_expansion_module.rnc"
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/xsi_schemalocation_expansion_module.rnc"
 #        inherit = ruleml {
 #  start |= notAllowed
 #}
 # 
 # UNIVERSAL RESOURCE IDENTIFIERS (URIs) INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/iri_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/iri_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DEGREE OF UNCERTAINTY INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/fuzzy_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/fuzzy_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -150,96 +150,96 @@ include "../modules/drrr_meta_expansion_module.rnc" inherit = ruleml {
 # 
 # XML BASE ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/xml_base_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/xml_base_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # XML ID ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/xml_id_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/xml_id_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # EQUIVALENCES INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/equivalent_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/equivalent_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # INFERENCE DIRECTION ATTRIBUTE IS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/direction_attrib_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/direction_attrib_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # NON-DEFAULT VALUES OF INFERENCE DIRECTION NOT INCLUDED
 #
-#include "http://ruleml.org/1.0/relaxng/modules/direction_non-default_expansion_module.rnc" inherit = ruleml {
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/direction_non-default_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 #}
 # 
 # DEFAULT VALUES OF INFERENCE DIRECTION INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/direction_default_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/direction_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # MATERIAL IMPLICATION ATTRIBUTE IS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/material_attrib_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/material_attrib_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # NON-DEFAULT VALUES OF MATERIAL IMPLICATION INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/material_non-default_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/material_non-default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DEFAULT VALUES OF MATERIAL IMPLICATION INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/material_default_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/material_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # OBJECT IDENTIFIERS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/oid_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/oid_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 }
 # 
 # SLOTS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/slot_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/slot_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # SLOT CARDINALITY INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/card_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/card_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # EQUATIONS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/equal_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/equal_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # ORIENTED EQUALITY ATTRIBUTE IS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/oriented_attrib_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/oriented_attrib_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # NON-DEFAULT VALUES OF ORIENTED EQUALITY ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/oriented_non-default_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/oriented_non-default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DEFAULT VALUE OF ORIENTED EQUALITY ATTRIBUTE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/oriented_default_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/oriented_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -252,37 +252,37 @@ include "../modules/drrr_type_expansion_module.rnc" inherit = ruleml {
 # 
 # DATA TERMS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/dataterm_any_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/dataterm_any_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DATA ELEMENTS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/data_any_content_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/data_any_content_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # SKOLEM CONSTANTS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/skolem_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/skolem_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # REIFICATION TERMS INCLUDED, EXPLICIT CONTENT (incude in RNC)
 #
-#include "http://ruleml.org/1.0/relaxng/modules/reify_expansion_module.rnc" inherit = ruleml {
+#include "http://deliberation.ruleml.org/1.02/relaxng/modules/reify_expansion_module.rnc" inherit = ruleml {
 #  start |= notAllowed
 #}
 # 
 # INDIVIDUAL TERMS (INTERPRETED NAMES) ARE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/individual_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/individual_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # VARIABLES (INTERPRETABLE NAMES) ARE INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/variable_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/variable_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
@@ -294,48 +294,48 @@ include "../modules/drrr_closure_expansion_module.rnc" inherit = ruleml {
 # 
 # SLOTTED REST VARIABLES INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/resl_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/resl_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # POSITIONAL REST VARIABLES INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/repo_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/repo_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # GENERALIZED LISTS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/plex_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/plex_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # SET-VALUED EXPRESSION ATTRIBUTE IS ABSENT OR OPTIONAL
 #
-include "http://ruleml.org/1.0/relaxng/modules/val_absence_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/val_absence_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # INTERPRETED EXPRESSION ATTRIBUTE IS INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/per_attrib_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/per_attrib_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # NON-DEFAULT VALUES OF EXPRESSION INTERPRETATION INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/per_non-default_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/per_non-default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 # 
 # DEFAULT VALUE OF EXPRESSION INTERPRETATION INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/per_default_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/per_default_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 #
 # INITIALIZATION MODULES INCLUDED
 #
-include "http://ruleml.org/1.0/relaxng/modules/init_expansion_module.rnc" inherit = ruleml {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/init_expansion_module.rnc" inherit = ruleml {
   start |= notAllowed
 }
 include "../modules/init_expansion_module.rnc" inherit = ruleml {

@@ -29,7 +29,7 @@
     <!-- 
 		<xs:appinfo>
 
-		<sch:ns prefix="r" iri="http://www.ruleml.org/1.0/xsd"/>
+		<sch:ns prefix="r" iri="http://www.deliberation.ruleml.org/1.02/xsd"/>
 		-->
 
   </xs:annotation>

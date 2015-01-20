@@ -89,7 +89,7 @@
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
-	<xs:include schemaLocation="modules/iri_module.xsd"/>
+	<xs:include schemaLocation="modules/curie_module.xsd"/>
 
 	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
 	<xs:include schemaLocation="modules/expr_module.xsd"/>

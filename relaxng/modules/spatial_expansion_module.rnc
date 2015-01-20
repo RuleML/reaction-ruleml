@@ -29,7 +29,7 @@ Spatial_formula.type.def = Spatial.content, Spatial_formula.attlist
 Spatial_term =
   
   ## <Spatial>: generic Spatial element. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Spatial
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-Spatial
   element Spatial { Spatial_term.type.def }
 Spatial_formula = element Spatial { Spatial_formula.type.def }
 # *** arg ***

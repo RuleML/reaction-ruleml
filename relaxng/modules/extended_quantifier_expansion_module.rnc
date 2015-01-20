@@ -25,7 +25,7 @@ Quantifier.type.def = Quantifier.content, Quantifier.attlist
 Quantifier =
   
   ## <Quantifier>: a generic quantifier - "quantify over declared variables such that ...".See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Quantifier
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-Quantifier
   element Quantifier { Quantifier.type.def }
 Node.choice |= Quantifier
 #

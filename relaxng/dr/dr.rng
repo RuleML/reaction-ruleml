@@ -67,7 +67,7 @@
 		*** RuleML ***
 		The n-ary top-level of a RuleML document.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-RuleML
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-RuleML
 		
 	 the DR schema redefines the RuleML element
 	 and adds meta, evaluation, signature, qualification, quantification, and scope so that the content model is:
@@ -119,7 +119,7 @@
     *** act ***
     The act role of the root element (<RuleML>).
     
-    See http://www.ruleml.org/1.0/glossary/#gloss-act
+    See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-act
     
     content model  (Assert|Retract|Query)
     
@@ -152,7 +152,7 @@
 		A KQML-like performative acting as a wrapper specifying that its content is
 		asserted, making an 'implicit <Rulebase>' assumption.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Assert 
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Assert 
 
 		content model:
 		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval  )*)
@@ -197,7 +197,7 @@
 		A performative similar to KQML's 'untell' that acts as a wrapper specifying that its
 		content is to be deleted, making an 'implicit <Rulebase>' assumption.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Retract
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Retract
 
 		content model:
 		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval  )*)
@@ -240,7 +240,7 @@
 		A KQML-like performative acting as a wrapper specifying that its content is
 		queried, making an 'implicit <Rulebase>' assumption.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Query 
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Query 
 
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Atom | Rulebase | And | Or | Entails | Exists | Quantifier | Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
@@ -280,7 +280,7 @@
 		*** formula ***
 		The formula role of a performative (<Assert>, <Retract> or <Query>).
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-formula
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-formula
 
 		content model (below Assert): 
 		DR Reaction RuleML (Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall | Quantifier | Time | Spatial | Interval )
@@ -364,7 +364,7 @@
     The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
     such a label.
     
-    See http://www.ruleml.org/1.0/glossary/#gloss-@node
+    See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@node
     
     content model: xs:anyURI
   -->
@@ -400,7 +400,7 @@
   of the SWSL branch, as needed for PSOA semantics.
   Note that oids are not required to be unique within a rulebase.
   
-  See http://www.ruleml.org/1.0/glossary/#gloss-oid
+  See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-oid
   
   content model: 
   in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -436,7 +436,7 @@
      
     An optional container for meta-knowledge about a Node.
     
-    See http://www.ruleml.org/1.0/glossary/#gloss-meta
+    See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-meta
     
 	Used for descriptive Metadata annotations in Reaction RuleML
 	
@@ -739,7 +739,7 @@
 		*** Forall ***
 		Explicit universal quantifier.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Forall
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Forall
 
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
@@ -783,7 +783,7 @@
 		*** Exists ***
 		Explicit existential quantifier.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Exists
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Exists
 
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
@@ -826,7 +826,7 @@
 		*** declare ***
 		A role used for variables declared within a quantifier.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-declare
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-declare
 
 		content model: ( Var )
 	-->
@@ -854,7 +854,7 @@
 		*** formula ***
 		The formula role of a quantifier (<Forall> or <Exists>).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-formula
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-formula
 		
 		content model (below Forall): 
 		DR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
@@ -933,7 +933,7 @@
 		*** Implies ***
 		An implication rule.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Implies
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Implies
 
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
@@ -981,7 +981,7 @@
 		The if of an implication rule containing the premise(s),
 		also known as the "antecedent" or "if" part of the rule.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-if
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-if
 
 		content model: 
 		DR Reaction RuleML (Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
@@ -1025,7 +1025,7 @@
 		The then of an implication rule containing the conclusion,
 		also known as the "consequent" or "then" part of the rule.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-then
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-then
 
 		content model: 
 		DR Reaction RuleML ( Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
@@ -1069,7 +1069,7 @@
 		Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
 		Kowalski/Bowen's object/meta-level-amalgamated logic).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Entails
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Entails
 		
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
@@ -1112,7 +1112,7 @@
 		An equivalence expression, which is "syntactic sugar" for a pair
 		of conjoined converse implication rules.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Equivalent
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Equivalent
 
 		content model: 		
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Atom | Equal | Negation | Neg |  Time | Spatial | Interval), (Atom | Equal | Negation | Neg | Time | Spatial | Interval) ) ) )
@@ -1174,7 +1174,7 @@
 		A symmetric role used in an equivalence expression combining
 		the asymmetric <then> and <if>.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-torso
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-torso
 
 		content model: 
 		DR Reaction RuleML (Atom |  Negation | Neg | Equal | Time | Spatial | Interval)
@@ -1208,7 +1208,7 @@
 		*** Rulebase ***
 		A collection of rules that can be ordered or unordered, without or with duplicates.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Rulebase
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Rulebase
 		
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
@@ -1250,7 +1250,7 @@
 		*** And ***
 		A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-And
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-And
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -1300,7 +1300,7 @@
 		*** Or ***
 		A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Or
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Or
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -1350,7 +1350,7 @@
 		*** formula ***
 		The formula role of a conjunctive/disjunctive expression or a rulebase.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-formula
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-formula
 
 		content model (below And/Or): 
 		DR Reaction RuleML (Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
@@ -1415,7 +1415,7 @@
 		An attribute indicating the kind of all implication rules 
 		falling within its scope (i.e. child elements).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@mapMaterial
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@mapMaterial
 	-->
     <rng:define name="mapMaterial.attrib">
         <rng:optional>
@@ -1433,7 +1433,7 @@
 		*** @material ***
 		An attribute indicating the kind of an implication rule.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@material
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@material
 	-->
     <rng:define name="material.attrib">
         <rng:optional>
@@ -1452,7 +1452,7 @@
 		An attribute indicating the intended direction of implication rule inferencing
 		of elements falling within its scope (i.e. child elements).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@mapDirection
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@mapDirection
 	-->
     <rng:define name="mapDirection.attrib">
         <rng:optional>
@@ -1471,7 +1471,7 @@
 		*** @direction ***
 		An attribute indicating the intended direction of an implication rule's inferencing.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@direction
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@direction
 	-->
     <rng:define name="direction.attrib">
         <rng:optional>
@@ -1491,7 +1491,7 @@
 		An attribute indicating how the free variables falling within
 		its scope (i.e. child elements) are quantified.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@mapClosure
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@mapClosure
 	-->
     <rng:define name="mapClosure.attrib">
         <rng:optional>
@@ -1509,7 +1509,7 @@
 		*** @closure ***
 		An attribute indicating how the contained free variables are quantified.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@closure		
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@closure		
 	-->
     <rng:define name="closure.attrib">
         <rng:optional>
@@ -1548,7 +1548,7 @@
 		A logical atom, i.e. an expression formed from a predicate
 		applied to a collection of its (logical) arguments.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Atom
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Atom
 	
 		content model:
 		in DR Reaction RuleML:
@@ -1675,7 +1675,7 @@
 		*** op ***
 		An operator expression including the relation of an atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-op
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-op
 
 		content model (within Atom): (Rel)
 		
@@ -1705,7 +1705,7 @@
 		*** Rel ***
 		A relation, i.e. a logical predicate, of an atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Rel
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Rel
 		
 		content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 	-->
@@ -1736,7 +1736,7 @@
 		An optional uncertainty value (between 0.0 and 1.0)
 		that may be assigned to facts and rules.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-degree
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-degree
 
 		content model: (Data)
 	-->
@@ -1783,7 +1783,7 @@
 		*** slot ***
 		A user-defined slot consisting of a name (first position) and a filler (second position).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-slot
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-slot
 
 		content model:
 		DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
@@ -1829,7 +1829,7 @@
 		*** @card ***
 		An attribute optionally specifying a slot's cardinality.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@card		
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@card		
 	-->
     <rng:define name="card.attrib">
         <rng:optional>
@@ -1842,7 +1842,7 @@
 		*** @weight ***
 		An attribute optionally specifying a slot's relative weight.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@weight		
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@weight		
 	-->
     <rng:define name="weight.attrib">
         <rng:optional>
@@ -1881,7 +1881,7 @@
 		*** arg ***
 		A role used for the positional arguments of a logical atom.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-arg
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-arg
 
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -1920,7 +1920,7 @@
 		An individual constant, as in predicate logic, which can also be considered to
 		be a fixed argument like RDF resources.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Ind
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Ind
 		
 		content model: text
 
@@ -1953,7 +1953,7 @@
 		(see http://www.w3.org/TR/xmlschema-2/#built-in-datatypes)
 		using the built-in xsi:type attribute.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Data
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Data
 		
 		content model: xs:anytype [optionally datatyped]
   -->
@@ -1969,7 +1969,7 @@
 		*** Var ***
 		A logical variable, as in logic programming.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Var
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Var
 
 		content model: text
 		
@@ -2005,7 +2005,7 @@
 		*** Skolem ***
 		A Skolem individual constant, like RDF's blank nodes.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-Skolem
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Skolem
 
 		content model: text
 
@@ -2037,7 +2037,7 @@
 		current sublanguage as content, treating it as a term for performing
 		reasoning on.
 				
-		See http://www.ruleml.org/1.0/glossary/#gloss-Reify		
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Reify		
 		
 		content model: (any valid RuleML formula)
 	-->
@@ -2075,7 +2075,7 @@
 		*** @type ***
 		An attribute for optionally specifying a term's (user-defined) type.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@type
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@type
 		
 		Note: In Reaction RuleML the type is changed to Term or Curie or IRI
 	-->
@@ -2093,7 +2093,7 @@
 		
 		Note: in Reaction RuleML @index is optional
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@index
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@index
 	-->
     <rng:define name="index.attrib">
         <rng:optional>
@@ -2125,7 +2125,7 @@
 		*** @iri ***
 		An attribute for referring to a IRI.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-@iri
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-@iri
 	-->
     <rng:define name="iri.attrib">
         <rng:optional>
@@ -2715,7 +2715,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		*** left ***
 		The left-hand side of an equational formula.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-left
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-left
 
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -2745,7 +2745,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		*** right***
 		The right-hand side of an equational formula.
 
-		See http://www.ruleml.org/1.0/glossary/#gloss-right
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-right
 
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -3352,7 +3352,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		A "by default" negation of a logical atom (i.e. "weak" negation or
 		negation-as-failure).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Naf
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Naf
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
@@ -3386,7 +3386,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		*** weak ***
 		A role used for negation as failure.
 	
-		See http://www.ruleml.org/1.0/glossary/#gloss-weak
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-weak
 		
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
@@ -3416,7 +3416,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		*** Neg ***
 		A classical negation of a logical atom (i.e. classical or "strong" negation).
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-Neg
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Neg
 		
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )
@@ -3450,7 +3450,7 @@ content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 		*** strong ***
 		A role used for classical negation.
 		
-		See http://www.ruleml.org/1.0/glossary/#gloss-strong
+		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-strong
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Atom | Equal | Negation | Naf | Neg | Time | Interval | Spatial ) )

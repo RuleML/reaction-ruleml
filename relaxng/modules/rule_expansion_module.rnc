@@ -26,7 +26,7 @@ Rule.type.def = Rule.content, (Rule-datt.choice & reRule.attlist)
 Rule =
   
   ## <Rule>: defines a rule in Reaction RuleML. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Rule
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-Rule
   element Rule { Rule.type.def }
 Node.choice |= Rule
 AssertRetractFormula.choice |= Rule

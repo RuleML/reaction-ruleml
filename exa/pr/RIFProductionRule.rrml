@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.0/xsd/pr.xsd"?> 
+<?xml-model href="http://reaction.ruleml.org/1.02/xsd/pr.xsd"?> 
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:ex1="http://example.com/2009/prd2"
   xmlns:pred="http://www.w3.org/2007/rif-builtin-function#"
   xmlns:func="http://www.w3.org/2007/rif-builtin-predicate#"
-  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/pr.xsd">
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/pr.xsd">
   <!-- W3C RIF Production Rules Dialect Example
     
     Running example of W3C RIF-PRD http://www.w3.org/TR/rif-prd/#Running_example

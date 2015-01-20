@@ -10,13 +10,13 @@
 
 
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-    xml:base="http://reaction.ruleml.org/1.0/ontology/EventMetaModel.owl"
+    xml:base="http://reaction.ruleml.org/1.02/ontology/EventMetaModel.owl"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     ontologyIRI="http://reaction.ruleml.org/1.0/ontology/EventMetaModel.owl"
-     versionIRI="http://reaction.ruleml.org/1.0/">
+     ontologyIRI="http://reaction.ruleml.org/1.02/ontology/EventMetaModel.owl"
+     versionIRI="http://reaction.ruleml.org/1.02/">
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>

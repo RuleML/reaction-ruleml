@@ -12,7 +12,7 @@ dc:description [
 dc:language [ "en" ]
 dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
-include "http://ruleml.org/1.0/relaxng/modules/performative_expansion_module.rnc" {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/performative_expansion_module.rnc" {
   start |= notAllowed
   Node.choice |= notAllowed
   edge.choice |= notAllowed

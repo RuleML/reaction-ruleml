@@ -16,7 +16,7 @@ else_Rule-edge.choice |= else_Rule.edge.def
 else_Rule.edge.def =
   
   ## <else>: edge defining an alternative conclusion in a if-then-else rule. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-else
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-else
   element else { else_Rule.type.def }
 edge.choice |= else_Rule.edge.def
 else_Rule.type.def = else_Rule.attlist? & else_Rule.content

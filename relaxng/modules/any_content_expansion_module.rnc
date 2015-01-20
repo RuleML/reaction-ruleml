@@ -21,7 +21,7 @@ edge.choice |= profile_anycontent
 formula_Profile-edge.choice |= profile_anycontent
 profile_anycontent = 
 ## <content>: predicate or function arguments expressed in other syntaxes, especially non-RuleML XML markup. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-content
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-content
 element content { profile_anycontent.type }
 profile_anycontent.type = profile_anycontent.content, profile_anycontent.attlist
 profile_anycontent.content |= anycontent.content

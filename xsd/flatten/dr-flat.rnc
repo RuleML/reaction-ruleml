@@ -583,7 +583,7 @@ quantification = element quantification { quantification.type }
 #	    *** Forall ***
 #	    Explicit universal quantifier.
 # 
-#	    See http://www.ruleml.org/1.0/glossary/#gloss-Forall
+#	    See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Forall
 # 
 #	    content model: 
 #	    DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
@@ -605,7 +605,7 @@ Forall = element Forall { Forall.type }
 #	    *** Exists ***
 #	    Explicit existential quantifier.
 # 
-#	    See http://www.ruleml.org/1.0/glossary/#gloss-Exists
+#	    See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Exists
 # 
 #	    content model: 
 #	    DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
@@ -627,7 +627,7 @@ Exists = element Exists { Exists.type }
 # *** declare ***
 # A role used for variables declared within a quantifier.
 # 
-# See http://www.ruleml.org/1.0/glossary/#gloss-declare
+# See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-declare
 # 
 # content model: ( Var )
 # 
@@ -640,7 +640,7 @@ declare = element declare { declare.type }
 # *** formula ***
 # The formula role of a quantifier (<Forall> or <Exists>).
 # 
-# See http://www.ruleml.org/1.0/glossary/#gloss-formula
+# See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-formula
 # 
 # content model (below Forall): 
 # DR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )

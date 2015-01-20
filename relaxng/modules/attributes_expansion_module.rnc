@@ -24,7 +24,7 @@ include "attributes_dr_consumer_expansion_module.rnc" {
 }
 
 ## @mode: input-output mode declaration of the arguments in predicates and functions. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@mode
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@mode
 mode-att.choice |= mode.attrib.def
 mode.attrib.def = attribute mode { mode.datatype | termOrCurieOrAbsIRI.datatype }
 mode.datatype |= "+" | "-" | "?"
@@ -32,7 +32,7 @@ mode.datatype |= "+" | "-" | "?"
 # *** @safety ***
 
 ## @safety: attribute defining the safety of the execution semantics for events, actions and primitives. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@safety    
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@safety    
 safety-att.choice |= safety.attrib.def
 safety.attrib.def = attribute safety { safety.datatype | termOrCurieOrAbsIRI.datatype }
 safety.datatype |= "non-interrupting" | "interrupting" | "transactional"
@@ -40,7 +40,7 @@ safety.datatype |= "non-interrupting" | "interrupting" | "transactional"
 # *** @per ***
 
 ## @per: an attribute indicating the execution/interpretation semantics of a relation. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@per
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@per
 per-rel-att.choice |= per-rel.attrib.def
 per-rel.attrib.def = attribute per { per-rel.datatype | termOrCurieOrAbsIRI.datatype }
 ## the interpretation attribute on relations can take all values allowed for the
@@ -50,14 +50,14 @@ per-rel.datatype |= interpretation.value
 # *** @arity ***
 
 ## @arity: an attribute specifying the arity of a signature. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@arity
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@arity
 arity-att.choice |= arity.attrib.def
 arity.attrib.def =  attribute arity { xsd:nonNegativeInteger }?
 
 ## @card @minCard @maxCard: an attribute optionally specifying the cardinality. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@card
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@maxCard
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@minCard
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@card
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@maxCard
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@minCard
 card-att.choice |= card.att.def
 card.att.def =
   attribute card { xsd:int }?,

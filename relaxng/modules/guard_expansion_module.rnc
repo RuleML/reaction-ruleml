@@ -23,6 +23,6 @@ guard.choice |= guard
 guard =
   
   ## <guard>: a guard defines a simple pre-constraint which applies before the main reasoning. See 
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-guard 
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-guard 
   element guard { guard.type.def }
 edge.choice |= guard

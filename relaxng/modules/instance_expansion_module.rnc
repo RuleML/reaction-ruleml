@@ -28,7 +28,7 @@ qualification.choice |= qualification
 qualification =
   
   ## <qualification>: defines the qualification (qualifying metadata). See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-qualification
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-qualification
   element qualification { qualification.type.def }
 edge.choice |= qualification
 # *** quantification ***
@@ -65,6 +65,6 @@ quantification.choice |= quantification
 quantification =
   
   ## <quantification>: defines the quantification (quantifier). See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-quantification
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-quantification
   element quantification { quantification.type.def }
 edge.choice |= quantification

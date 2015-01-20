@@ -13,7 +13,7 @@ dc:relation [ "http://reaction.ruleml.org" ]
 # 
 # STRIPE-SKIPPING MODE ENABLED
 #
-include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.rnc" {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/stripe_skipping_expansion_module.rnc" {
   start |= notAllowed
   # both stripes skipped
   Implies.main |=
@@ -22,7 +22,7 @@ include "http://ruleml.org/1.0/relaxng/modules/stripe_skipping_expansion_module.
     | (if_Rule-edge.choice, then_Rule-ss.content)
 }
 #
-include "http://ruleml.org/1.0/relaxng/modules/asynchronous_stripe_skipping_entailment_expansion_module.rnc" {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/asynchronous_stripe_skipping_entailment_expansion_module.rnc" {
   start |= notAllowed
 }
 #

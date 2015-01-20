@@ -12,11 +12,11 @@ dcterms:rights [ "TBD" ]
 dc:relation [ "http://reaction.ruleml.org" ]
 # This module declares the following Reaction RuleML elements:
 #   * meta            descriptive metadata 
-include "http://ruleml.org/1.0/relaxng/modules/meta_expansion_module.rnc" {
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/meta_expansion_module.rnc" {
   meta.edge.def =
     
     ## <meta>: defines a descriptive metadata annotation. See 
-    ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-meta
+    ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-meta
     element meta {
       meta.attlist? & meta.content
     }

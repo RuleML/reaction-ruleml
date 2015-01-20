@@ -34,7 +34,7 @@ start |= notAllowed
 if_Rule-edge.choice |= if_Rule.edge.def
 if_Rule.edge.def =
   ## <if>: contains the premises of the rule. See 
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-if
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-if
   element if {if_Rule.type.def}
 if_Rule.type.def = if_Rule.attlist? & if_Rule.content
 if_Rule.content |= PremiseFormula.choice
@@ -44,7 +44,7 @@ edge.choice |= if_Rule.edge.def
 then_Rule-edge.choice |= then_Rule.edge.def
 then_Rule.edge.def =
   ## <then>: contains the conclusion of the rule. See 
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-then
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-then
   element then {then_Rule.type.def}
 then_Rule.type.def = then_Rule.attlist? & then_Rule.content
 then_Rule.content |= ConclusionFormula.choice

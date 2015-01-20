@@ -3,7 +3,7 @@
 <?xml-model ?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/kr.xsd">
+  xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/kr.xsd">
   
   <!-- This example shows how deontic operators are defined as fluents in the Event Calclulus. -->
 

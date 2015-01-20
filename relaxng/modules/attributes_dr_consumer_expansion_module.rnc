@@ -20,12 +20,12 @@ start |= notAllowed
 
   
 ## @meta: an attribute referencing meta knowledge. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@meta
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@meta
 meta-att.choice |= meta.attrib.def
 meta.attrib.def =  attribute meta { termOrCurieOrAbsIRIs.datatype }?
 
 ## @index: An optional attribute for specifying an ordering on roles. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@index
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@index
 index-att.choice |= index.attrib
 index.attrib = attribute index { xsd:positiveInteger }?
 
@@ -37,14 +37,14 @@ act-datt.choice |= empty
 #  when absent, equivalent to: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
 style.attrib = style-att.choice
 ## @style: defines a reference to a corresponding unique key. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@style
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@style
 style-att.choice |= style.attrib.def
 style.attrib.def = attribute style { style.datatype }
 style.datatype |= termOrCurieOrAbsIRI.datatype
 
 
 ## @scope: an attribute referencing a scope definition. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@scope
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@scope
 scope-formula-att.choice |= scope-formula-attrib.def
 scope-formula-attrib.def =  attribute scope { termOrCurieOrAbsIRIs.datatype | vocab-scope.datatype }?
 scope-term-att.choice |= scope-term-attrib.def

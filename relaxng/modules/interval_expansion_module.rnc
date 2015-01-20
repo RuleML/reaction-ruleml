@@ -31,7 +31,7 @@ Node.choice |= Interval_formula
 Interval_term =
   
   ## <Interval>: generic Interval element. See
-  ## http://www.reaction.ruleml.org/1.0/glossary/#gloss-Interval
+  ## http://www.reaction.ruleml.org/1.02/glossary/#gloss-Interval
   element Interval { Interval_term.type.def }
 Interval_formula = element Interval { Interval_formula.type.def }
 # *** arg ***

@@ -17,26 +17,26 @@ start |= notAllowed
 # *** @key ***
 
 ## @key: defines a unique key attribute which can be used for distributed referencing from a keyref attribute. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@key
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@key
 key-att.choice |= key.attrib.def
 key.attrib.def = attribute key { key.datatype }
 key.datatype |= curieOrAbsIRI.datatype
 
 ## @keyref: defines a reference to a corresponding unique key. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@keyref
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@keyref
 keyref-att.choice |= keyref.attrib.def
 keyref.attrib.def = attribute keyref { keyref.datatype }
 keyref.datatype |= curieOrAbsIRI.datatype
 
 ## @prefix: defines a a white space separated list of prefix-name IRI pairs of the form NCName:xsd:anyURI. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@prefix
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@prefix
 prefix-att.choice |= prefix.attrib.def
 prefix.attrib.def = attribute prefix { prefix.datatype }?
 prefix.datatype =
   xsd:string { minLength = "1" pattern = "([\i-[:]][\c-[:]]*)?" }
 
 ## @vocab:  an IRI that defines the vocabulary mapping to use when a TERM is referenced in an attribute value.. See
-## http://www.reaction.ruleml.org/1.0/glossary/#gloss-@vocab
+## http://www.reaction.ruleml.org/1.02/glossary/#gloss-@vocab
 vocab-att.choice |= vocab.attrib.def
 vocab.attrib.def = attribute vocab { xsd:anyURI }?
 

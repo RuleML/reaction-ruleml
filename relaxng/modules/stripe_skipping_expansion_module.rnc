@@ -15,6 +15,9 @@ dc:relation [ "http://reaction.ruleml.org" ]
 #
 include "http://deliberation.ruleml.org/1.02/relaxng/modules/stripe_skipping_expansion_module.rnc" {
   start |= notAllowed
+}
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/stripe_skipping_ifthen_expansion_module.rnc" {
+  start |= notAllowed
   # both stripes skipped
   Implies.main |=
     (if_Rule-ss.content, then_Rule-ss.content)

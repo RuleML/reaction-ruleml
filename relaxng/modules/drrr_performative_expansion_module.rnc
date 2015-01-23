@@ -22,6 +22,7 @@ include "http://deliberation.ruleml.org/1.02/relaxng/modules/performative_expans
     # was  (AssertRetract-datt.choice & reAssertRetract.attlist),
       (AssertRetract-datt.choice & reAssert.attlist), AssertRetract.header, AssertRetract.main
     }
+} include "http://deliberation.ruleml.org/1.02/relaxng/modules/performative_content_expansion_module.rnc" {   
   AssertRetractFormula.choice |=
   SimpleFormula-node.choice
   | And-fo-node.choice

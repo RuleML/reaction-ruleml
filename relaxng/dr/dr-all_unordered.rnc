@@ -72,7 +72,7 @@ include "http://deliberation.ruleml.org/1.02/relaxng/modules/direction_non-defau
         inherit = ruleml {
   start |= notAllowed
 }
-include "http://deliberation.ruleml.org/1.02/relaxng/modules/dis_expansion_module.rnc" inherit = ruleml { 
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/discon_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 include "http://deliberation.ruleml.org/1.02/relaxng/modules/equal_expansion_module.rnc" inherit = ruleml { 

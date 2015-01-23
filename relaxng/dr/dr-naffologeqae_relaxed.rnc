@@ -49,7 +49,7 @@ include "http://deliberation.ruleml.org/1.02/relaxng/modules/expr_expansion_modu
 # 
 # DISJUNCTIONS IN CONCLUSIONS INCLUDED
 #
-include "http://deliberation.ruleml.org/1.02/relaxng/modules/dis_expansion_module.rnc" inherit = ruleml { 
+include "http://deliberation.ruleml.org/1.02/relaxng/modules/discon_expansion_module.rnc" inherit = ruleml { 
   start |= notAllowed
 }
 # 

@@ -143,7 +143,7 @@ operator-interface.attlist &=
   arity-att.choice?,
   card-att.choice?,
   weight-att.choice?,
-  direction-att.choice?,
+#  direction-att.choice?,
   mode-att.choice?,
   closure-att.choice?,
   per-rel-att.choice?

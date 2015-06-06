@@ -233,13 +233,13 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: not used - PR Reaction RuleML only supports inner quantifiers in <quantification>
+     content model: (Exists )
           
 	-->
 	
 	<xs:group name="query-quantifier.content">
 		<xs:choice>
-
+			<xs:element ref="Exists"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -272,6 +272,7 @@
 	
 	<xs:group name="outer-quantifier.content">
 		<xs:choice>
+			<xs:element ref="Forall"/>
 		</xs:choice>
 	</xs:group>
 	

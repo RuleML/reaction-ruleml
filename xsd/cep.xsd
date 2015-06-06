@@ -258,7 +258,7 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: not used - PR Reaction RuleML only supports inner quantifiers in <quantification>
+     content model: ( Exists )
           
 	-->
 	
@@ -289,15 +289,15 @@
          
      An internal group for the outer quantifiers in the Reaction RuleML language
 	 
-	 ECA Reaction RuleML does not allow outer quantifiers - Quantifiers are defined internally in the <quantification>    
+	  Quantifiers can be defined internally in the <quantification> too 
     
-     content model: ( )
+     content model: ( Forall )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
 		<xs:choice>
-
+			<xs:element ref="Forall"/>
 		</xs:choice>
 	</xs:group>
 	

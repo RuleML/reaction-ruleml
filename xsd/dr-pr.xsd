@@ -262,13 +262,13 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: ( )
+     content model: ( Exists )
           
 	-->
 	
 	<xs:group name="query-quantifier.content">
 		<xs:choice>
-			
+			<xs:element ref="Exists"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -294,13 +294,13 @@
      An internal group for the outer quantifiers in the Reaction RuleML language
     
     
-     content model: (  )
+     content model: ( Forall )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
 		<xs:choice>
-			
+			<xs:element ref="Forall"/>			
 		</xs:choice>
 	</xs:group>
 	

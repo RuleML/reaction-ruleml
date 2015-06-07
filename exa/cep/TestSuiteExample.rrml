@@ -40,9 +40,9 @@
 							<Answer>
 								<degree><Data>1</Data></degree> <!-- expected "1" = query succeeds -->
 								<!-- resulting query variable bindings with the variables on the left and the predefined variable instantiations on the right hand side of the equations  -->
-								<Equal></Equal> 
-								<Equal></Equal>	
-								<Equal></Equal>	
+								<Equal><Var>X</Var><Ind>1</Ind></Equal> 
+								<Equal><Var>Y</Var><Ind>2</Ind></Equal>	
+								<Equal><Var>Z</Var><Ind>3</Ind></Equal>	
 							</Answer>
 						</expectedResult>
 					</TestItem>

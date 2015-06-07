@@ -186,8 +186,7 @@
      
      in DR-PR Reaction RuleML: 
      
-     ((if, do, then?, elseDo?, else?) | (else?, elseDo?, then?, do, if)) |
-     ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?)) 
+     ((if, do, elseDo?) | (if, then, else) | (if, then?, else?, do, elseDo? ) | ( elseDo?, do, else?, then?, if))
      
           
 	-->

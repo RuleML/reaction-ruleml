@@ -235,56 +235,67 @@
 	<!--
    *** Combined DR Production Rule content model ***
    Production Rule       Derivation Rule    Production Rule with conclusion   inverse Production Rule with conclusion 
-   ((if, do, elseDo?) | (if, then, else) | (if, do, then?, elseDo?, else?) | (else?, elseDo?, then?, do, if))
--->
+   ((if, do, elseDo?) | (if, then, else) | (if, then?, do, else?, elseDo? ) | ( elseDo?, else?, do, then?, if))
+    -->
 	<xs:group name="DRProductionRule.content">
 		<xs:choice>
 			<xs:sequence>
-				<xs:element ref="else" minOccurs="0"/>
 				<xs:element ref="elseDo" minOccurs="0"/>
-				<xs:element ref="then" minOccurs="0"/>
+				<xs:element ref="else" minOccurs="0"/>
 				<xs:element ref="do" />
+				<xs:element ref="then" minOccurs="0"/>
 				<xs:element ref="if"/>
 			</xs:sequence>
 			<xs:sequence>
 				<xs:element ref="if"/>
-				<xs:element ref="do" minOccurs="0"/>
 				<xs:element ref="then" minOccurs="0"/>
-				<xs:element ref="elseDo" minOccurs="0"/>
+				<xs:element ref="do" minOccurs="0"/>
 				<xs:element ref="else" minOccurs="0"/>
+				<xs:element ref="elseDo" minOccurs="0"/>
 			</xs:sequence>
 		</xs:choice>
 		
 	</xs:group>
 
 	<!--
-   *** Reaction Rule content model ***
+   *** ECA Reaction Rule content model ***
    (on, (if?, then?, do?, after?,else?, elseDo?)? )
--->
+    -->
 	<xs:group name="ReactionRule.content">
 		<xs:sequence>
 			<xs:element ref="on"/>
 			<xs:choice minOccurs="0">
 				<xs:sequence>
-				<xs:element ref="if" minOccurs="0"/>
-				<xs:element ref="then" minOccurs="0"/>
-				<xs:element ref="do" minOccurs="0"/>
-				<xs:element ref="after" minOccurs="0"/>
-				<xs:element ref="else" minOccurs="0"/>
-				<xs:element ref="elseDo" minOccurs="0"/>
+					<xs:element ref="if" minOccurs="0"/>
+					<xs:element ref="then" minOccurs="0"/>
+					<xs:element ref="do" minOccurs="0"/>
+					<xs:element ref="after" minOccurs="0"/>
+					<xs:element ref="else" minOccurs="0"/>
+					<xs:element ref="elseDo" minOccurs="0"/>
 				</xs:sequence>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
 
 	<!--
-   *** Messaging Rule content model ***
-   (do)
--->
+   *** CEP Messaging Rule content model ***
+   
+   CEP rules allow arbitrary combinations and repititions of the rule's content model
+   
+   (on | if | then | do | after | else | elseDo)*
+   -->
 	<xs:group name="MessagingRule.content">
 		<xs:sequence>
-			<xs:element ref="do"/>
-		</xs:sequence>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="on"/>
+				<xs:element ref="if"/>
+				<xs:element ref="then"/>
+				<xs:element ref="do"/>
+				<xs:element ref="after"/>
+				<xs:element ref="else"/>
+				<xs:element ref="elseDo"/>
+			</xs:choice>	
+		</xs:sequence>		
 	</xs:group>
 
 </xs:schema>

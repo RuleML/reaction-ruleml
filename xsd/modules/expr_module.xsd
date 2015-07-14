@@ -94,7 +94,7 @@
 		Note the 'positionalized' normal form where the op role is only
 		at the beginning of the Expr.
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Expr.attlist">
     <xs:attributeGroup ref="term-interface.attlist"/>
@@ -266,7 +266,7 @@
 		content model (within resl):
 		DR/KR/PR/ECA/CEP Reaction RuleML: (slot*, resl? )
 		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Plex.attlist">
     <xs:attributeGroup ref="term-interface.attlist"/>

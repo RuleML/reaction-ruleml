@@ -319,6 +319,7 @@
 			<xs:element ref="Time"/>
 			<xs:element ref="Spatial"/>
 			<xs:element ref="Interval"/>	
+			<xs:group ref="spatial_temporal_algebra_group.content"/>	
 		</xs:choice>
 	</xs:group>
 
@@ -329,7 +330,6 @@
 	<xs:group name="time_primitives.content">
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
@@ -340,7 +340,6 @@
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
@@ -350,7 +349,6 @@
 	<xs:group name="interval_primitives.content">
 		<xs:choice>
 			<xs:group ref="arg.content"/>	
-			<xs:group ref="interval_algebra_group.content"/>			
 		</xs:choice>
 	</xs:group>
 

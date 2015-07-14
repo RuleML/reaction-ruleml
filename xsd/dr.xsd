@@ -13,8 +13,8 @@
 			the spatio-temporal Derivation Rule dialect.
 			
 			File: dr.xsd
-			Version: 1.0
-			Last Modification: 2011-03-22
+			Version: 1.02
+			Last Modification: 2015-07-14
 			
 			This schema declares the following Reaction RuleML elements and attributes:
 				  								  
@@ -48,7 +48,7 @@
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
 			<dc:subject>Reaction RuleML 1.0</dc:subject> 
 			<dc:description>spatio-temporal Derivation Rule dialect of Reaction RuleML</dc:description> 
-			<dc:date>2011-03-22T23:11:17-0300</dc:date>
+			<dc:date>2015-07-14T17:04:00+0200</dc:date>
 			<dc:language>en</dc:language>
 			<dcterms:rights>LGPL-3.0</dcterms:rights> 
 			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>

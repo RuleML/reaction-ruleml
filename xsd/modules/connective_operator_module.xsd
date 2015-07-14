@@ -14,7 +14,7 @@
 
 			This schema declares the following Reaction RuleML elements and attributes:
 
-				* Operator (Connective)
+				* Operation (Connective)
 			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
 			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
@@ -39,15 +39,15 @@
 
 
 	<!--
-      *** generic connective Operator ***
+      *** generic connective Operation ***
       
-      	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operator
+      	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operation
       
       	content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
-        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Rule | Equivalent | Equal)* ) 
-        ECA Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
+        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Rule | Equivalent | Equal)* ) 
+        ECA Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)* )
         
         attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->

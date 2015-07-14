@@ -44,8 +44,8 @@
      content model:  
      in DR Reaction RuleML: not used in DR Reaction RuleML
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
-     in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)) 
-     in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operator))
+     in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operation)) 
+     in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operation))
     
      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
@@ -108,10 +108,10 @@
 	                ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Action|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )? 
 	  PR Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operator)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operation)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )? 
 	  ECA Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operator)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operation)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )?             
 	                
 	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Action

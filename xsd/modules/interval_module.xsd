@@ -48,10 +48,10 @@
        interval ontology of Reaction RuleML (defining different types of intervals).
 		
 	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?] )) 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?])) 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?] )) 
     PR Reaction RuleML: not used in PR Reaction RuleML 
-	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
+	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?])) 
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -86,7 +86,7 @@
      
      content model:  
      in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)
-     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator) )
+     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation) )
      not used in PR Reaction RuleML     
      ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)
      

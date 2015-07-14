@@ -41,7 +41,7 @@
 				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
 				  * extends actions by adding @safety (transactional update) and @size
 				  * add meta, scope, guard, evaluation, signature, qualification, quantification
-				  * add generic Operator
+				  * add generic Operation
 				  * extends Assert, Retract, Update by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification
 				  * extends Query by adding Negation, Naf, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
 				  * extends Rulebase by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 
@@ -202,13 +202,13 @@
          
      An internal group for the query connectives in the Reaction RuleML language
     
-     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -223,13 +223,13 @@
      An internal group for the inner connectives in the Reaction RuleML language
     
     
-     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -244,13 +244,13 @@
      An internal group for the outer connectives in the Reaction RuleML language
     
     
-     content model: (Operator | Negation | Neg | Equal )
+     content model: (Operation | Negation | Neg | Equal )
           
 	-->
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 
@@ -350,7 +350,7 @@
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
-		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
+		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>			
@@ -361,7 +361,7 @@
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
-		in DR-PR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
+		in DR-PR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
 	-->
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>			
@@ -372,7 +372,7 @@
 
 	<!-- Interval primitives
 		content model: 
-		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  -->
+		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))  -->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>
 			<xs:group ref="arg.content"/>	
@@ -411,7 +411,7 @@
 
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
-		in DR-PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex |  Succession | Choice | Flow | Loop | Operator)
+		in DR-PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex |  Succession | Choice | Flow | Loop | Operation)
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
@@ -423,7 +423,7 @@
 	<!-- An internal group for actions
 		content model:
 		
-		DR-PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Answer | Test | Action | Succession | Choice | Flow | Loop | Operator )-->
+		DR-PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Answer | Test | Action | Succession | Choice | Flow | Loop | Operation )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>

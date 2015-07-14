@@ -35,7 +35,7 @@
 				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
 				  * extends actions by adding @safety (transactional update) and @size
 				  * add meta, scope, guard, evaluation, signature, qualification, quantification
-				  * add generic Operator
+				  * add generic Operation
 				  * extends Assert, Retract, Update by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification
 				  * extends Query by adding Negation, Naf, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
 				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
@@ -218,13 +218,13 @@
          
      An internal group for the query connectives in the Reaction RuleML language
     
-     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -239,13 +239,13 @@
      An internal group for the inner connectives in the Reaction RuleML language
     
     
-     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -259,13 +259,13 @@
          
      An internal group for the outer connectives in the Reaction RuleML language
     
-     content model: (Operator | Negation | Neg | Equal)
+     content model: (Operation | Negation | Neg | Equal)
           
 	-->
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 			
@@ -370,7 +370,7 @@
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
 
-		in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+		in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
 
 	-->
 	<xs:group name="time_primitives.content">
@@ -383,7 +383,7 @@
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
 
-		in CEP Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+		in CEP Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
 
 	-->
 	<xs:group name="spatial_primitives.content">
@@ -396,7 +396,7 @@
 	<!-- Interval primitives
 		content model: 
 		
-		in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  
+		in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))  
 	-->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>	
@@ -420,7 +420,7 @@
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
 		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )		
+		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )		
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>
@@ -431,7 +431,7 @@
 
 	<!-- An internal group for events
 		content model:
-		in CEP Reaction RuleML:  ( Receive | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )
+		in CEP Reaction RuleML:  ( Receive | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
 	-->
 	
 	<xs:group name="event_group.content">
@@ -447,7 +447,7 @@
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action |  Succession | Choice | Flow | Loop | Operator )
+		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action |  Succession | Choice | Flow | Loop | Operation )
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
@@ -458,7 +458,7 @@
 	
 	<!-- An internal group for actions
 		content model:
-		CEP Reaction RuleML (Send | Consult | Assert | Retract | Update | Query | Test | Action | Succession | Choice | Flow | Loop | Operator )-->
+		CEP Reaction RuleML (Send | Consult | Assert | Retract | Update | Query | Test | Action | Succession | Choice | Flow | Loop | Operation )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>

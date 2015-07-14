@@ -89,10 +89,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-if
 
 		content model: 
-		DR Reaction RuleML (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf ) 
-		ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
+		KR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf ) 
+		ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)
 		
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -203,12 +203,12 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equivalent
 
 		content model: 		
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens), 
-		                      (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens) ) ) )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operator | And | Or | Negation | Naf | Atom | Equal), (Operator | And | Or | Negation | Naf | Atom | Equal ) ) ) )                     
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
-		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens), 
+		                      (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens) ) ) )
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Negation | Naf | Atom | Equal), (Operation | And | Or | Negation | Naf | Atom | Equal ) ) ) )                     
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
+		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
 		
 		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -272,10 +272,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-torso
 
 		content model: 
-		DR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-		KR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operator | And | Or | Negation | Naf | Atom | Equal )
-		ECA Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
+		KR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operation | And | Or | Negation | Naf | Atom | Equal )
+		ECA Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
 		
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -304,10 +304,10 @@
 		@vocab for default vocab definitions
 		
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal )* )
-    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal )* )
+    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
     
     attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -338,10 +338,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-And
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* ) 
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Equal | Negation | Naf )* )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* ) 
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Equal | Negation | Naf )* )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
 
 		Under Query, And may have attribute closure="existential"; 
 		
@@ -384,10 +384,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Or
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* )
-	  PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Equal | Negation | Naf )* )
-	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* )
+	  PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Equal | Negation | Naf )* )
+	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
 		
 		Under Query, Or may have attribute closure="existential"; 
 		
@@ -430,16 +430,16 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 
 		content model (below And/Or): 
-		DR Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-		KR Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Equal )
-		ECA Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
+		KR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Equal )
+		ECA Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
 		
 		content model (below Rulebase): 
-		DR Reaction RuleML (Operator | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval)
-		KR Reaction RuleML (Operator | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operator | Atom | Rule | Equivalent | Equal )
-		ECA Reaction RuleML (Operator | Atom | Rule | Equivalent |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval)
+		KR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operation | Atom | Rule | Equivalent | Equal )
+		ECA Reaction RuleML (Operation | Atom | Rule | Equivalent |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)
 		
 		Other (context-sensitive) versions of <formula> are in the
 		performative and quantifier modules.

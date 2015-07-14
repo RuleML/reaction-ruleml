@@ -25,7 +25,7 @@
 				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
 				  * extends actions by adding @safety (transactional update) and @size
 				  * add meta, scope, guard, evaluation, signature, qualification, quantification
-				  * add generic Operator
+				  * add generic Operation
 				  * extends Assert, Retract, Update by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification
 				  * extends Query by adding Negation, Naf, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
 				  * extends Rulebase by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 
@@ -178,13 +178,13 @@
          
      An internal group for the query connectives in the Reaction RuleML language
     
-     content model: (Operator | And | Or | Negation | Naf | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Equal)
           
 	-->
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -198,13 +198,13 @@
      An internal group for the inner connectives in the Reaction RuleML language
     
     
-     content model: (Operator | And | Or | Negation | Naf | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Equal)
           
 	-->
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -217,13 +217,13 @@
          
      An internal group for the outer connectives in the Reaction RuleML language
     
-     content model: (Operator | Equal )
+     content model: (Operation | Equal )
           
 	-->
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element ref="Equal"/>			
 		</xs:choice>
 	</xs:group>
@@ -370,7 +370,7 @@
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		
-		in PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex |  Succession | Choice | Flow | Loop | Operator )
+		in PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex |  Succession | Choice | Flow | Loop | Operation )
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
@@ -381,7 +381,7 @@
 	
 	<!-- An internal group for actions
 		content model:
-		PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Answer | Test | Action | Succession | Choice | Flow | Loop | Operator )-->
+		PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Answer | Test | Action | Succession | Choice | Flow | Loop | Operation )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>

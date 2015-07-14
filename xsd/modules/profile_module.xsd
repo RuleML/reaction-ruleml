@@ -38,10 +38,10 @@
 	
 	The semantic profile can be defined internally by the any content model (xs:any Element) or externally  
 
-	DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | content(xs:any*)  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
-    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
- 	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
+	DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | content(xs:any*)  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
+ 	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @safety, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->

@@ -62,7 +62,7 @@
 	  PR Reaction RuleML: not used in PR Reaction RuleML
 	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
 	                ((slot)*,(resl)?,((((arg|Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )? )
 	                
 	    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -118,7 +118,7 @@
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
      in PR Reaction RuleML: not used
      in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )
+		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
      
       attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?     
 -->

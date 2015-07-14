@@ -82,10 +82,10 @@
 	Used for descriptive Metadata annotations in Reaction RuleML
 	
      content model: 
-     in DR Reaction RuleML: ( Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
-     in KR Reaction RuleML: ( Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
-     in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-     in ECA Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
+     in DR Reaction RuleML: ( Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
+     in KR Reaction RuleML: ( Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
+     in PR Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
+     in ECA Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
 
      Multiple Metadata annotations are possible by repreating <meta>
      
@@ -161,10 +161,10 @@
      Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
      
      content model: 
-     DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
-     KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
-     PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
-     ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )
+     DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
+     KR Reaction RuleML  ( Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
+     PR Reaction RuleML  ( Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
+     ECA Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )
 
   attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
@@ -193,7 +193,7 @@
      content model: 
      in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
      in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     in PR Reaction RuleML: ( Operator | Atom | And | Or | Equal | Negation | Naf )
+     in PR Reaction RuleML: ( Operation | Atom | And | Or | Equal | Negation | Naf )
      in ECA Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)    
     
     attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -258,10 +258,10 @@
 	Multiple signatures are possible by repreating the <signature> element
 	
      content model: 
-     DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
-     KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
-     PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
-     ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )         
+     DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
+     KR Reaction RuleML  ( Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
+     PR Reaction RuleML  ( Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
+     ECA Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )         
 
   attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -298,7 +298,7 @@
      content model: 
      in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
      in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
-     in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
+     in PR Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
      in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
   
   attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?

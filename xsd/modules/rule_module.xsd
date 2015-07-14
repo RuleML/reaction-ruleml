@@ -102,8 +102,8 @@
      DR Reaction RuleMl: (  )
      KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
      PR Reaction RuleML: ( )
-     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  
-     CEP Reaction RuleML: (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator) 
+     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation)  
+     CEP Reaction RuleML: (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation) 
      
      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
@@ -130,10 +130,10 @@
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-after
      
      content model:   
-     DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-     KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf  )    
-     ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
+     DR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+     KR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
+     PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf  )    
+     ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
 	
 	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -166,9 +166,9 @@
      content model:  
      DR Reaction RuleML: (  )
      KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
-     ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
-     CEP Reaction RuleML:  (Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
+     PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
+     ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
+     CEP Reaction RuleML:  (Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
 
 	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->

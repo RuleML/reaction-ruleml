@@ -46,10 +46,10 @@
  		@key, @keyref, @node
 
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Equal | Negation ) )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
+        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation ) )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action) )
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 		-->
@@ -78,7 +78,7 @@
 	</xs:attributeGroup>
 	<xs:group name="formula-negation.content">
 		<xs:choice>
-			<xs:element name="Operator" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperator.type"/>
 			<xs:element ref="Equal"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
@@ -99,10 +99,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Naf
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-   		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operator | Atom | Equal | Negation ) )
- 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )  		
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
+   		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation ) )
+ 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )  		
 	
 		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
@@ -132,10 +132,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-weak
 		
 		content model:
-		DR Reaction RuleML: ( Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial )
-		KR Reaction RuleML ( Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates )
-		PR Reaction RuleML: ( Operator | Atom | Equal | Negation )
-		ECA Reaction RuleML: ( Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action )
+		DR Reaction RuleML: ( Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial )
+		KR Reaction RuleML ( Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates )
+		PR Reaction RuleML: ( Operation | Atom | Equal | Negation )
+		ECA Reaction RuleML: ( Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action )
 		
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -160,10 +160,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Neg
 		
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
 		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )
 
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
@@ -193,10 +193,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-strong
 		
 		content model: 
-		DR Reaction RuleML: ( Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial )
-		KR Reaction RuleML (  Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates )	
+		DR Reaction RuleML: ( Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial )
+		KR Reaction RuleML (  Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates )	
 		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML 
-		ECA Reaction RuleML: ( Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action )	
+		ECA Reaction RuleML: ( Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action )	
 
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->

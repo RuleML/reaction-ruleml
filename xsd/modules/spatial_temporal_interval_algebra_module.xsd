@@ -13,7 +13,7 @@
 			
 			This schema declares the following Reaction RuleML elements and attributes:
                   
-                  Operator (generic operator)
+                  Operation (generic operator)
                   at (general role "at Time | Spatial | Interval)
                   
                   Spatial, Temporal, Interval Function Constructs 
@@ -59,7 +59,7 @@
 	</xs:annotation>		
 	
 	
-	<!--(After | Before | Any | Every | Timer | Operator)-->
+	<!--(After | Before | Any | Every | Timer | Operation)-->
 	
 	<xs:group name="spatial_temporal_algebra_group.content">
 		<xs:choice>
@@ -68,11 +68,11 @@
 			<xs:element ref="Every"/>
 			<xs:element ref="Any"/>			
 			<xs:element ref="Timer"/>
-			<xs:element name="Operator" type="Any.type"/> 
+			<xs:element name="Operation" type="Any.type"/> 
 		</xs:choice>
 	</xs:group>	
 
-	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operator) -->
+	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation) -->
 	<xs:group name="interval_algebra_group.content">
 		<xs:choice>
 			<xs:element ref="During"/>
@@ -83,7 +83,7 @@
 			<xs:element ref="Meets"/>
 			<xs:element name ="Equal"  type="IntervalAlgebraOperator.type"/>
 			<xs:element ref="Finishes"/>
-			<xs:element name="Operator" type="IntervalAlgebraOperator.type"/>
+			<xs:element name="Operation" type="IntervalAlgebraOperator.type"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -97,8 +97,8 @@
 	
       content model: 
       in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
-      in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
-      in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+      in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
+      in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
       
       attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->

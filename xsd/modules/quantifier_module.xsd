@@ -34,10 +34,10 @@
 		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Forall
 
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
 		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
 
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
   -->
@@ -73,10 +73,10 @@
 		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Exists
 
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
     PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
  
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->

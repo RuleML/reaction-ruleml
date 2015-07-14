@@ -15,7 +15,7 @@
                                                     
                   Action Algebra Operators
                   
-                  * Operator (generic action operator)
+                  * Operation (generic action operator)
                   * Succession 
                   * Choice 
                   * Flow 
@@ -42,7 +42,7 @@
 	</xs:annotation>		
 	
 	
-	<!--( Succession | Choice | Flow | Loop | Operator )-->
+	<!--( Succession | Choice | Flow | Loop | Operation )-->
 	
 	<xs:group name="action_algebra_group.content">
 		<xs:choice>
@@ -50,18 +50,18 @@
 			<xs:element ref="Choice"/>
 			<xs:element ref="Flow"/>
 			<xs:element ref="Loop"/>
-			<xs:element name="Operator" type="ActionAlgebraOperator.type"/> 
+			<xs:element name="Operation" type="ActionAlgebraOperator.type"/> 
 		</xs:choice>
 	</xs:group>	
 	
 	<!--
-      *** (Operator) ***
+      *** (Operation) ***
       
       content model: 
-      PR and ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* )
-      CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)* ) 
+      PR and ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)* )
+      CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)* ) 
       
-      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operator
+      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operation
       
       attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
        

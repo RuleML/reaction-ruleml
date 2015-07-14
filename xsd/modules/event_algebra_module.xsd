@@ -15,7 +15,7 @@
                                                     
                   Event Algebra Operators
                   
-                  * Operator (generic event operator)
+                  * Operation (generic event operator)
                   * Sequence 
                   * Disjunction 
                   * Xor 
@@ -27,7 +27,7 @@
                   * Periodic 
                   * AtLeast 
                   * ATMost 
-                  * Operator             
+                  * Operation             
 
  			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
@@ -50,7 +50,7 @@
 	</xs:annotation>		
 	
 	
-	<!--( Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )-->
+	<!--( Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )-->
 	
 	<xs:group name="event_algebra_group.content">
 		<xs:choice>
@@ -65,14 +65,14 @@
 			<xs:element ref="Periodic"/>
 			<xs:element ref="AtLeast"/>
 			<xs:element ref="AtMost"/>
-			<xs:element name="Operator" type="EventAlgebraOperator.type"/> 
+			<xs:element name="Operation" type="EventAlgebraOperator.type"/> 
 		</xs:choice>
 	</xs:group>	
 	
 	<!--
-      *** (Operator) ***
+      *** (Operation) ***
       
-      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operator
+      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operation
       
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 

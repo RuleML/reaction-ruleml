@@ -51,13 +51,13 @@
       		
 	content model: 
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 				content(xs:any*)* ) ) 
 	KR Reaction RuleML:  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
-				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
+				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 				content(xs:any*)* ) ) 
 	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 				content(xs:any*)* ) ) 	
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -111,9 +111,9 @@
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
      
      content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval | (After | Before | Any | Every | Timer | Operator))
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operator))
-     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))  
+     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval | (After | Before | Any | Every | Timer | Operation))
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operation))
+     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operation))  
      
      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
           

@@ -249,10 +249,10 @@
 		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Assert 
 
 		content model:
-		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
-    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
-    ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)
+		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
+    ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)
 
    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?  
   -->
@@ -294,10 +294,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Retract
 
 		content model:
-		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
-    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
- 		ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)   
+		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
+ 		ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)   
 
     attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?   
   -->
@@ -340,12 +340,12 @@
       content model:
       
       in PR Reaction RuleML
-       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
-		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
+       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
+		 (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
 		 
 	  in ECA Reaction RuleML
-	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action),
-		 (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action),
+		 (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
 	  
       Update has the following attributes:
       @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
@@ -397,10 +397,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Query
 
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
-		PR Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )* )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Atom | Rulebase | And | Or | Entails |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )* )		
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
+		PR Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )* )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Atom | Rulebase | And | Or | Entails |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )* )		
 
     attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -484,7 +484,7 @@
       content model:
  		 
 	  in CEP Reaction RuleML
-	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
 	  
       Answer has the following attributes:
     attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -529,7 +529,7 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 		
 		content model (below Answer formula): 
-		(Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)
+		(Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)
   		
 		Other (context-sensitive) versions of <formula> are in the
 		connective and quantifier modules.
@@ -556,16 +556,16 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 
 		content model (below Assert formula): 
-		DR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval  | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
-		PR Reaction RuleML (Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-		ECA Reaction RuleML (Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Action )
+		DR Reaction RuleML (Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval )
+		KR Reaction RuleML (Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval  | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
+		PR Reaction RuleML (Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
+		ECA Reaction RuleML (Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Action )
 		
 		content model (below Query): 
-		DR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
-    PR Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )
-		ECA Reaction RuleML (Operator | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action )    
+		DR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval )
+		KR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
+    PR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )
+		ECA Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action )    
 
 		Other (context-sensitive) versions of <formula> are in the
 		connective and quantifier modules.
@@ -675,10 +675,10 @@
 	Used for descriptive Metadata annotations in Reaction RuleML
 	
      content model: 
-     in DR Reaction RuleML: ( Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
-     in KR Reaction RuleML: ( Operator | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
-     in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-     in ECA Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
+     in DR Reaction RuleML: ( Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
+     in KR Reaction RuleML: ( Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
+     in PR Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
+     in ECA Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
 
      Multiple Metadata annotations are possible by repreating <meta>
      
@@ -758,10 +758,10 @@
      Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
      
      content model: 
-     DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
-     KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
-     PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
-     ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )
+     DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
+     KR Reaction RuleML  ( Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
+     PR Reaction RuleML  ( Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
+     ECA Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )
 
   attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
@@ -798,7 +798,7 @@
      content model: 
      in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
      in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     in PR Reaction RuleML: ( Operator | Atom | And | Or | Equal | Negation | Naf )
+     in PR Reaction RuleML: ( Operation | Atom | And | Or | Equal | Negation | Naf )
      in ECA Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)    
     
     attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -875,10 +875,10 @@
 	Multiple signatures are possible by repreating the <signature> element
 	
      content model: 
-     DR Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
-     KR Reaction RuleML  ( Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
-     PR Reaction RuleML  ( Operator | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
-     ECA Reaction RuleML  ( (Operator | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )         
+     DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
+     KR Reaction RuleML  ( Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
+     PR Reaction RuleML  ( Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
+     ECA Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )         
 
   attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -921,7 +921,7 @@
      content model: 
      in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
      in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
-     in PR Reaction RuleML: ( Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
+     in PR Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
      in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
   
   attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -1008,10 +1008,10 @@
 		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Forall
 
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
 		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
 
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
   -->
@@ -1056,10 +1056,10 @@
 		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Exists
 
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
     PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operator | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
  
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -1260,10 +1260,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-if
 
 		content model: 
-		DR Reaction RuleML (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
-		KR Reaction RuleML (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf ) 
-		ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
+		KR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf ) 
+		ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)
 		
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -1396,12 +1396,12 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equivalent
 
 		content model: 		
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens), 
-		                      (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens) ) ) )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Negation | Naf | Atom | Equal), (Operator | And | Or | Negation | Naf | Atom | Equal ) ) ) )                     
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
-		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens), 
+		                      (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens) ) ) )
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operation | And | Or | Negation | Naf | Atom | Equal), (Operation | And | Or | Negation | Naf | Atom | Equal ) ) ) )                     
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
+		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
 		
 		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -1466,10 +1466,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-torso
 
 		content model: 
-		DR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-		KR Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operator | And | Or | Negation | Naf | Atom | Equal )
-		ECA Reaction RuleML (Operator | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
+		KR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operation | And | Or | Negation | Naf | Atom | Equal )
+		ECA Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
 		
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -1504,10 +1504,10 @@
 		@vocab for default vocab definitions
 		
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal )* )
-    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal )* )
+    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
     
     attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
@@ -1548,10 +1548,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-And
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* ) 
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Equal | Negation | Naf )* )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* ) 
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Equal | Negation | Naf )* )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
 
 		Under Query, And may have attribute closure="existential"; 
 		
@@ -1603,10 +1603,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Or
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* )
-	  PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Equal | Negation | Naf )* )
-	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* )
+	  PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Equal | Negation | Naf )* )
+	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
 		
 		Under Query, Or may have attribute closure="existential"; 
 		
@@ -1658,16 +1658,16 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 
 		content model (below And/Or): 
-		DR Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-		KR Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Equal )
-		ECA Reaction RuleML (Operator | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
+		KR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Equal )
+		ECA Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
 		
 		content model (below Rulebase): 
-		DR Reaction RuleML (Operator | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval)
-		KR Reaction RuleML (Operator | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operator | Atom | Rule | Equivalent | Equal )
-		ECA Reaction RuleML (Operator | Atom | Rule | Equivalent |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval)
+		KR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operation | Atom | Rule | Equivalent | Equal )
+		ECA Reaction RuleML (Operation | Atom | Rule | Equivalent |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)
 		
 		Other (context-sensitive) versions of <formula> are in the
 		performative and quantifier modules.
@@ -1721,7 +1721,7 @@
             Reaction RuleML.     This is the XML Schema connective operator module for Reaction
             RuleML.    File: connective_operator_module.xsd    Version: 1.0    Last Modification:
             2011-03-22     This schema declares the following Reaction RuleML elements and
-            attributes:      * Operator (Connective)        The approach is modelled after that used
+            attributes:      * Operation (Connective)        The approach is modelled after that used
             in "Modularization of XHTML in XML Schema"    WD
             [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
             "Modularization of XHTML" (REC-xhtml-modularization-20010410)
@@ -1740,15 +1740,15 @@
         
     </a:documentation>
     <!--
-      *** generic connective Operator ***
+      *** generic connective Operation ***
       
-      	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operator
+      	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operation
       
       	content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
-        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal)* ) 
-        ECA Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)* )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval)* )
+		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)* ) 
+        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal)* ) 
+        ECA Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)* )
         
         attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -3778,8 +3778,8 @@
      DR Reaction RuleMl: (  )
      KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
      PR Reaction RuleML: ( )
-     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator)  
-     CEP Reaction RuleML: (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator) 
+     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation)  
+     CEP Reaction RuleML: (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation) 
      
      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
@@ -3812,10 +3812,10 @@
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-after
      
      content model:   
-     DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-     KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf  )    
-     ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
+     DR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+     KR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
+     PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf  )    
+     ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
 	
 	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -3860,9 +3860,9 @@
      content model:  
      DR Reaction RuleML: (  )
      KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
-     ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
-     CEP Reaction RuleML:  (Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operator)
+     PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
+     ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
+     CEP Reaction RuleML:  (Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
 
 	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -4057,10 +4057,10 @@
  		@key, @keyref, @node
 
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
+        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation ) )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action) )
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 		-->
@@ -4097,7 +4097,7 @@
     </define>
     <define name="formula-negation.content">
         <choice>
-            <element name="Operator">
+            <element name="Operation">
 <ref name="ConnectiveOperator.type"/>
 </element>
             <ref name="Equal"/>
@@ -4126,10 +4126,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Naf
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-   		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
- 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )  		
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
+   		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation ) )
+ 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )  		
 	
 		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
@@ -4164,10 +4164,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-weak
 		
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation ) )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
+		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation ) )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action ) )
 		
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -4198,10 +4198,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Neg
 		
 		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
 		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )
 
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
@@ -4236,10 +4236,10 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-strong
 		
 		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )	
+		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
+		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )	
 		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML 
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operator | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )	
+		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )	
 
 		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -4295,10 +4295,10 @@
     Format: "quantifier declare(Var)+ such that guard formula(...)?" 
 		
 	content model: 
-	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
-	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
-    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
-    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )?
+	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
+	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
+    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Naf)
+    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )?
 
 	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
@@ -4343,10 +4343,10 @@
 	
 	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Exists
 	
-	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
-	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
-    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
-    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
+	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
+	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
+    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Naf)
+    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
 
 	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
@@ -4378,10 +4378,10 @@
 	
 	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Forall
 	
-	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
-	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
-    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Naf)
-    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
+	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
+	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
+    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Naf)
+    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
 	
 	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -4414,10 +4414,10 @@
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 		
-	     DR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-     	 KR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     	 PR Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Naf  ) 
-     	 ECA Reaction RuleML: (Operator | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
+	     DR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
+     	 KR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
+     	 PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf  ) 
+     	 ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
 		
 		Other (context-sensitive) versions of <formula> are in the
 		connective and performative modules.
@@ -4461,10 +4461,10 @@
 	
 	The semantic profile can be defined internally by the any content model (xs:any Element) or externally  
 
-	DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | content(xs:any*)  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
-    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
- 	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operator | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
+	DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | content(xs:any*)  )*)
+    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens | content(xs:any*) )*)	
+    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal | content(xs:any*)  )*)
+ 	ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall | Quantifier | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | content(xs:any*)  )*)   
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @safety, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->
@@ -4574,13 +4574,13 @@
       		
 	content model: 
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 				content(xs:any*)* ) ) 
 	KR Reaction RuleML:  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
+				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 				content(xs:any*)* ) ) 
 	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
 				content(xs:any*)* ) ) 	
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -4662,9 +4662,9 @@
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
      
      content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval | (After | Before | Any | Every | Timer | Operator))
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operator))
-     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator))  
+     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval | (After | Before | Any | Every | Timer | Operation))
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operation))
+     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operation))  
      
      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
           
@@ -4746,10 +4746,10 @@
 		
 	content model: 
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operator))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
+		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 	PR Reaction RuleML: not used in PR Reaction RuleML
 	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
@@ -4835,10 +4835,10 @@
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
      
      content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operator))
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operator))
+     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))
+     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operation))
      in PR Reaction RuleML: not used in PR Reaction RuleML
-     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operator)) 
+     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operation)) 
      
       @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?  
 -->
@@ -4917,10 +4917,10 @@
        interval ontology of Reaction RuleML (defining different types of intervals).
 		
 	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?] )) 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?])) 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?] )) 
     PR Reaction RuleML: not used in PR Reaction RuleML 
-	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))?])) 
+	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?])) 
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -4985,7 +4985,7 @@
      
      content model:  
      in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)
-     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator) )
+     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation) )
      not used in PR Reaction RuleML     
      ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)
      
@@ -5040,7 +5040,7 @@
             module part of Reaction RuleML    This is the XML Schema of the algebra module for
             Reaction RuleML    File: spatial_temporal_interval_algebra_module.xsd    Version: 1.0
             Last Modification: 2011-03-22        This schema declares the following Reaction RuleML
-            elements and attributes:                                      Operator (generic
+            elements and attributes:                                      Operation (generic
             operator)                   at (general role "at Time | Spatial | Interval)
             Spatial, Temporal, Interval Function Constructs                                       *
             After                   * Before       * Every                   * Any
@@ -5065,7 +5065,7 @@
             <dc:relation xmlns:dc="http://purl.org/dc/elements/1.1/">http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
         
     </a:documentation>
-    <!--(After | Before | Any | Every | Timer | Operator)-->
+    <!--(After | Before | Any | Every | Timer | Operation)-->
     <define name="spatial_temporal_algebra_group.content">
         <choice>
             <ref name="After"/>
@@ -5073,12 +5073,12 @@
             <ref name="Every"/>
             <ref name="Any"/>
             <ref name="Timer"/>
-            <element name="Operator">
+            <element name="Operation">
 <ref name="Any.type"/>
 </element>
         </choice>
     </define>
-    <!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operator) -->
+    <!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation) -->
     <define name="interval_algebra_group.content">
         <choice>
             <ref name="During"/>
@@ -5091,7 +5091,7 @@
 <ref name="IntervalAlgebraOperator.type"/>
 </element>
             <ref name="Finishes"/>
-            <element name="Operator">
+            <element name="Operation">
 <ref name="IntervalAlgebraOperator.type"/>
 </element>
         </choice>
@@ -5105,8 +5105,8 @@
 	
       content model: 
       in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
-      in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
-      in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operator))
+      in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
+      in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
       
       attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -5780,12 +5780,12 @@
          
      An internal group for the query connectives in the Reaction RuleML language
     
-     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
     <define name="query-connective.content">
         <choice>
-            <element name="Operator">
+            <element name="Operation">
 <ref name="ConnectiveOperator.type"/>
 </element>
             <element name="And">
@@ -5805,12 +5805,12 @@
      An internal group for the inner connectives in the Reaction RuleML language
     
     
-     content model: (Operator | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
     <define name="inner-connective.content">
         <choice>
-            <element name="Operator">
+            <element name="Operation">
 <ref name="ConnectiveOperator.type"/>
 </element>
             <element name="And">
@@ -5830,12 +5830,12 @@
      An internal group for the outer connectives in the Reaction RuleML language
     
     
-     content model: (Operator | Negation | Neg | Equal )
+     content model: (Operation | Negation | Neg | Equal )
           
 	-->
     <define name="outer-connective.content">
         <choice>
-            <element name="Operator">
+            <element name="Operation">
 <ref name="ConnectiveOperator.type"/>
 </element>
             <ref name="Negation"/>
@@ -5928,7 +5928,7 @@
     </define>
     <!-- An internal group for the time primitives for interpretation as time
 		content model: 
-		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
+		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
 	-->
     <define name="time_primitives.content">
         <choice>
@@ -5938,7 +5938,7 @@
     </define>
     <!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
-		in DR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operator))
+		in DR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
 	-->
     <define name="spatial_primitives.content">
         <choice>
@@ -5948,7 +5948,7 @@
     </define>
     <!-- Interval primitives
 		content model: 
-		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operator))  -->
+		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))  -->
     <define name="interval_primitives.content">
         <choice>
             <ref name="arg.content"/>

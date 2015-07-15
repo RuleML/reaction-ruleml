@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?xml-model href="http://reaction.ruleml.org/1.0/xsd/cep.xsd"?>-->
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xcl2="http://purl.org/xcl/2.0/"
+	xsi:schemaLocation="http://ruleml.org/spec ../../xsd/cep.xsd">
+	
+	<!-- 
+		
+ 	Prova (http://www.prova.ws) examples in CEP Reaction RuleML
+ 	
+   -->
+
+
+
+	<Assert>
+	
+	<!-- event pattern 1 -->
+		
+		<!-- 
+			
+			Prova example
+						
+			server() :-
+			    rcvMult(XID, Protocol, Sender, event, {time->Time, url->URL, lastprice->Lastprice, volume->Volume, high->High, low->Low}),
+			    filter(URL,Lastprice), 
+			    println(['Found: ', URL, ' Price: ', Lastprice]),
+			    sendMsg(XID, Protocol, Sender, testrule, {url->URL, lastprice->Lastprice}).
+    
+			filter(Url, Lastprice) :-
+			    Lastprice > 100,
+			    parse_list([Url,"A.*"],L).
+		-->	    
+
+			  		<Rule style="active">
+			  			<on>
+			  				<Receive>
+			  					<Message>
+			  						<cid><Var>XID</Var></cid>
+			  						<protocol><Var>Protocol</Var></protocol>
+			  						<directive><Ind>event</Ind></directive>
+			  						<sender><Var>Sender</Var></sender>
+			  						<payload>
+			  							<RuleML>
+			  								<Query>
+			  									<Atom>			  										
+			  										<slot><Ind>time</Ind><Var>Time</Var></slot>
+			  										<slot><Ind>url</Ind><Var>URL</Var></slot>
+			  										<slot><Ind>lastprice</Ind><Var>Lastprice</Var></slot>
+			  										<slot><Ind>volume</Ind><Var>Volume</Var></slot>
+			  										<slot><Ind>high</Ind><Var>High</Var></slot>
+			  										<slot><Ind>low</Ind><Var>Low</Var></slot>
+			  									</Atom>			  									
+			  								</Query>
+			  							</RuleML>
+			  						</payload>
+			  					</Message>
+			  				</Receive>
+			  			</on>
+			  			<if>
+			  					<Atom>
+			  						<Rel>filter</Rel>
+			  						<Var>URL</Var>
+			  						<Var>Lastprice</Var>
+			  					</Atom>			  
+			  			</if>
+			  			<if>
+			  					<Atom>
+			  						<Rel iri="prova:println"/>
+			  						<Plex>
+			  							<Data xsi:type="xs:string">Found: </Data>
+										<Var>URL</Var>
+			  							<Data xsi:type="xs:string">Price: </Data>
+										<Var>Lastprice</Var>			  							
+			  						</Plex>
+			  					</Atom>
+			  			</if>
+			  			<do>
+			  				<Send>
+			  					<Message>
+			  						<cid><Var>XID</Var></cid>
+			  						<protocol><Var>Protocol</Var></protocol>
+			  						<directive><Ind>testrule</Ind></directive>
+			  						<receiver><Var>Sender</Var></receiver>
+			  						<payload>
+			  							<RuleML>
+			  								<Answer>
+			  									<Atom>
+			  										<slot><Ind>url</Ind><Var>URL</Var></slot>
+			  										<slot><Ind>lastprice</Ind><Var>Lastprice</Var></slot>
+			  									</Atom>			  									
+			  								</Answer>
+			  							</RuleML>
+			  						</payload>
+			  					</Message>
+			  				</Send>
+			  			</do>
+			  		</Rule>
+			  		
+			  		<Rule>
+			  			<if>
+			  				<And>
+			  					<Atom>
+			  						<Rel iri="prova:more"/>
+			  						<Var>Lastprice</Var>
+			  						<Data xsi:type="xs:integer">100</Data>
+			  					</Atom>
+			  					<Atom>
+			  						<Rel iri="prova:parse_list"/>
+			  						<Plex>
+			  							<Var>Url</Var>			  							
+			  							<Data>A.*</Data>
+			  						</Plex>
+			  						<Var>L</Var>
+			  					</Atom>
+			  				</And>
+			  			</if>
+			  			<then>
+			  				<Atom>
+			  					<Rel>filter</Rel>
+			  					<Var>Url</Var>
+			  					<Var>Lastprice</Var>
+			  				</Atom>
+			  			</then>
+			  		</Rule>
+
+	</Assert>
+
+
+		<!-- event pattern 2 -->
+
+		<!-- 
+		
+		@src(stream1) event("http://dbpedia.org/resource/Alcoa").
+		@src(stream2) event("http://dbpedia.org/resource/American_Express").
+		
+		trusted(stream1).
+		
+		
+		server() :-
+		rcvMult(XID, Protocol, Sender, event, {time->Time, url->URL, lastprice->Lastprice, volume->Volume, high->High, low->Low}),
+		ratedEvent(URL),
+		println(['Found: ', URL]),
+		sendMsg(XID, Protocol, Sender, testrule, {url->URL}).
+		
+		ratedEvent(CompanyUrl) :-
+		@src(Source) event(CompanyUrl) [trusted(Source)]. 
+		
+		-->
+	 	
+	 	<Assert>
+						
+							<Rulebase>
+								<Atom>
+									<qualification><Atom><Rel>src</Rel><Ind>stream1</Ind></Atom></qualification>
+									<Rel>event</Rel>
+									<Ind>http://dbpedia.org/resource/Alcoa</Ind>
+								</Atom>
+								<Atom>
+									<qualification><Atom><Rel>src</Rel><Ind>stream2</Ind></Atom></qualification>
+									<Rel>event</Rel>
+									<Ind>http://dbpedia.org/resource/American_Express</Ind>
+								</Atom>
+							</Rulebase>
+							
+							<Rulebase>
+								<Atom>
+									<Rel>trusted</Rel>
+									<Ind>stream1</Ind>
+								</Atom>
+							</Rulebase>
+							
+							<Rulebase>
+								
+							
+							<Rule style="active">
+								<on>
+									<Receive>
+										<Message>
+											<cid><Var>XID</Var></cid>
+											<protocol><Var>Protocol</Var></protocol>
+											<directive><Ind>event</Ind></directive>
+											<sender><Var>Sender</Var></sender>
+											<payload>
+												<RuleML>
+													<Query>
+														<Atom>			  										
+															<slot><Ind>time</Ind><Var>Time</Var></slot>
+															<slot><Ind>url</Ind><Var>URL</Var></slot>
+															<slot><Ind>lastprice</Ind><Var>Lastprice</Var></slot>
+															<slot><Ind>volume</Ind><Var>Volume</Var></slot>
+															<slot><Ind>high</Ind><Var>High</Var></slot>
+															<slot><Ind>low</Ind><Var>Low</Var></slot>
+														</Atom>			  									
+													</Query>
+												</RuleML>
+											</payload>
+										</Message>
+									</Receive>
+								</on>
+								<if>
+									<And>
+										<Atom>
+											<Rel>ratedEvent</Rel>
+											<Var>URL</Var>
+										</Atom>			  					
+										<Atom>
+											<Rel iri="prova:println"/>
+											<Plex>
+												<Data xsi:type="xs:string">Found: </Data>
+												<Var>URL</Var>
+												<Data xsi:type="xs:string">Price: </Data>
+												<Var>Lastprice</Var>			  							
+											</Plex>
+										</Atom>
+									</And>
+								</if>
+								<do>
+									<Send>
+										<Message>
+											<cid><Var>XID</Var></cid>
+											<protocol><Var>Protocol</Var></protocol>
+											<directive><Ind>testrule</Ind></directive>
+											<receiver><Var>Sender</Var></receiver>
+											<payload>
+												<RuleML>
+													<Assert>
+														<Atom>
+															<slot><Ind>url</Ind><Var>URL</Var></slot>
+														</Atom>			  									
+													</Assert>
+												</RuleML>
+											</payload>
+										</Message>
+									</Send>
+								</do>
+							</Rule>
+							
+							<Rule>
+									<if>
+											<Atom>
+												<scope>
+													<Atom>
+														<Rel>src</Rel>
+														<Var>Source</Var>
+													</Atom>
+												</scope>
+												<guard>
+													<Atom>
+														<Rel>trusted</Rel>
+														<Var>Source</Var>
+													</Atom>
+												</guard>
+												<Rel>event</Rel>
+												<Var>CompanyUrl</Var>
+											</Atom>
+									</if>
+									<then>
+										<Atom>
+											<Rel>ratedEvent</Rel>
+											<Var>CompanyUrl</Var>
+										</Atom>
+									</then>
+								</Rule>
+							
+							</Rulebase>
+							
+
+	 	</Assert>
+
+		<!-- event pattern 3 -->
+		
+		<!--
+			
+			
+
+server() :-
+    sparqlrule(CompanyUrl, CompanyEmployees),
+    println(['Looking for: ', CompanyUrl, ' ', CompanyEmployees]),
+    rcvMult(XID, Protocol, Sender, event, {time->Time, url->URL, lastprice->Lastprice, volume->Volume, high->High, low->Low}) [URL = CompanyUrl, CompanyEmployees > 50000],
+    println(['Found: ', URL]),
+    sendMsg(XID, Protocol, Sender, testrule, {url->URL, employees->CompanyEmployees }).
+
+sparqlrule(CompanyUrl, CompanyEmployees) :-
+    Query = '
+        PREFIX DBPPROP: <http://dbpedia.org/property/>
+        PREFIX DBPEDIA: <http://dbpedia.org/resource/>
+
+        SELECT ?company ?employees WHERE {
+            ?company DBPPROP:numEmployees ?employees .
+            ?company DBPPROP:industry DBPEDIA:Retail .
+        }
+    ',
+    sparql_select(Query, [company(CompanyUrl), employees(CompanyEmployees)], [], 'http://dbpedia.org/sparql').
+    
+    -->
+
+		<Assert>
+		 
+							<Rule style="active">
+								<if>
+									<And>
+										<Atom>
+											<Rel>sparqlrule</Rel>
+											<Var>CompanyUrl</Var>
+											<Var>CompanyEmployees</Var>
+										</Atom>
+										<Atom>
+											<Rel iri="prova:println"/>
+											<Plex>
+												<Data xsi:type="xs:string">Looking for: </Data>
+												<Var>CompanyUrl</Var>
+												<Var>CompanyEmployees</Var>			  							
+											</Plex>
+										</Atom>
+									</And>
+								</if>
+								<on>
+									<Receive>
+										<scope>
+											<And>
+												<Equal oriented="yes"><Var>URL</Var><Var>CompanyURL</Var></Equal>
+												<Atom>
+													<Rel iri="prova:more"/>
+													<Var>CompanyEmployees</Var>
+													<Data xsi:type="xs:integer">5000</Data>
+												</Atom>
+											</And>
+										</scope>
+										<Message>
+											<cid><Var>XID</Var></cid>
+											<protocol><Var>Protocol</Var></protocol>
+											<directive><Ind>event</Ind></directive>
+											<sender><Var>Sender</Var></sender>
+											<payload>
+												<RuleML>
+													<Assert>
+														<Atom>			  										
+															<slot><Ind>time</Ind><Var>Time</Var></slot>
+															<slot><Ind>url</Ind><Var>URL</Var></slot>
+															<slot><Ind>lastprice</Ind><Var>Lastprice</Var></slot>
+															<slot><Ind>volume</Ind><Var>Volume</Var></slot>
+															<slot><Ind>high</Ind><Var>High</Var></slot>
+															<slot><Ind>low</Ind><Var>Low</Var></slot>
+														</Atom>			  									
+													</Assert>
+												</RuleML>
+											</payload>
+										</Message>
+									</Receive>
+								</on>
+								<if> 					
+										<Atom>
+											<Rel iri="prova:println"/>
+											<Plex>
+												<Data xsi:type="xs:string">Found: </Data>
+												<Var>URL</Var>	  							
+											</Plex>
+										</Atom>
+								</if>
+								<do>
+									<Send>
+										<Message>
+											<cid><Var>XID</Var></cid>
+											<protocol><Var>Protocol</Var></protocol>
+											<directive><Ind>testrule</Ind></directive>
+											<receiver><Var>Sender</Var></receiver>
+											<payload>
+												<RuleML>
+													<Assert>
+														<Atom>
+															<slot><Ind>url</Ind><Var>URL</Var></slot>
+														</Atom>			  									
+													</Assert>
+												</RuleML>
+											</payload>
+										</Message>
+									</Send>
+								</do>
+							</Rule>
+							
+							<Rule>
+								<if>
+									<And>
+										<Equal oriented="yes">
+											<Var>Query</Var>
+											<Data xsi:type="xs:string">
+												PREFIX DBPPROP: &lt;http://dbpedia.org/property/&gt;
+												PREFIX DBPEDIA: &lt;http://dbpedia.org/resource/&gt;
+												
+												SELECT ?company ?employees WHERE {
+												?company DBPPROP:numEmployees ?employees .
+												?company DBPPROP:industry DBPEDIA:Retail .
+												}
+											</Data>
+										</Equal>
+										<Atom>
+											<Rel iri="prova:sparql_select"/>
+											<Var>Query</Var>
+											<Plex>
+												<Expr>
+													<Fun>company</Fun>
+													<Var>CompanyUrl</Var>
+												</Expr>
+												
+												<Expr>
+													<Fun>employees</Fun>
+													<Var>CompanyEmployees</Var>
+												</Expr>
+											</Plex>
+											<Plex/>
+											<Ind>http://dbpedia.org/sparql</Ind>
+										</Atom>
+									</And>
+								</if>
+								<then>
+									<Atom>
+										<Rel>sparqlrule</Rel>
+										<Var>CompanyUrl</Var>
+										<Var>CompanyEmployees</Var>
+									</Atom>
+								</then>
+							</Rule>
+
+
+ 	</Assert>
+	
+</RuleML>

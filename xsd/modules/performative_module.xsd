@@ -417,7 +417,7 @@
 
   <!--
 		*** formula ***
-		The formula role of a performative (<Assert>, <Retract> or <Query>).
+		The formula role of a performative (<Assert>, <Retract>, <Update>,... or <Query>).
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
 
@@ -432,6 +432,7 @@
 		KR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
     PR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )
 		ECA Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action )    
+		CEP Reaction RuleML (Operation | Atom | Rulebase | And | Or | Entails |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action  )
 
 		Other (context-sensitive) versions of <formula> are in the
 		connective and quantifier modules.

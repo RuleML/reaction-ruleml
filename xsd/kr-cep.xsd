@@ -200,17 +200,15 @@
     
      content model:
      
-     in ECA Reaction RuleML: (Reaction Rule | Derivation Rule)
+     in CEP Reaction RuleML: 
      
-     ( (on, (if?, then?, do, after?,else?, elseDo?)? ) | (do) | ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?)))
+     (on | if | then | do | after | else | elseDo)*
           
 	-->
 	
 	<xs:group name="rule-implementation.content">
 		<xs:choice>
-			<xs:group ref="ReactionRule.content"/>
 			<xs:group ref="MessagingRule.content"/>			
-			<xs:group ref="DerivationRule.content"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -224,7 +222,7 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperation.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -245,7 +243,7 @@
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperation.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -265,7 +263,7 @@
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperation.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 			
@@ -277,7 +275,7 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: not used - PR Reaction RuleML only supports inner quantifiers in <quantification>
+     content model: ( Exists )
           
 	-->
 	
@@ -310,12 +308,14 @@
 	 
 	 ECA Reaction RuleML does not allow outer quantifiers - Quantifiers are defined internally in the <quantification>    
     
-     content model: ( )
+     content model: ( Forall )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
-		<xs:choice>	</xs:choice>
+		<xs:choice>			
+			<xs:element ref="Forall"/>
+		</xs:choice>
 	</xs:group>
 	
 	<!--

@@ -31,7 +31,7 @@
 		*** Forall ***
 		Explicit universal quantifier.
 		
-		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Forall
+		See http://www.ruleml.org/1.02/glossary/#gloss-Forall
 
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
@@ -70,7 +70,7 @@
 		*** Exists ***
 		Explicit existential quantifier.
 
-		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-Exists
+		See http://www.ruleml.org/1.02/glossary/#gloss-Exists
 
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
@@ -109,7 +109,7 @@
 		*** declare ***
 		A role used for variables declared within a quantifier.
 		
-		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-declare
+		See http://www.ruleml.org/1.02/glossary/#gloss-declare
 
 		content model: ( Var )
 		
@@ -134,19 +134,19 @@
 		*** formula ***
 		The formula role of a quantifier (<Forall> or <Exists>).
 		
-		See http://www.deliberation.ruleml.org/1.02/glossary/#gloss-formula
+		See http://www.ruleml.org/1.02/glossary/#gloss-formula
 		
 		content model (below Forall): 
-		DR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
-		KR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action)
+		DR Reaction RuleML ( Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
+		KR Reaction RuleML ( Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
+		PR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal )
+		ECA Reaction RuleML ( Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action)
 
 		content model (below Exists): 
-		DR Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval )
-		KR Reaction RuleML ( Atom | Exists  | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
-		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)		
+		DR Reaction RuleML ( Operation | Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval )
+		KR Reaction RuleML ( Operation | Atom | Exists  | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
+		PR Reaction RuleML  ( Operation | Atom | Exists | And | Or | Negation | Naf | Neg | Equal )
+		ECA Reaction RuleML ( Operation | Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)		
 		
 		Other (context-sensitive) versions of <formula> are in the
 		connective and performative modules.

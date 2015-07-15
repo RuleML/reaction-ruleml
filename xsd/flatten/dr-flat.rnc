@@ -943,14 +943,14 @@ formula-rulebase.type = formula-rulebase.content, formula.attlist
 #   ECA Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)* )
 # 
 #   attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-ConnectiveOperator.attlist =
+ConnectiveOperation.attlist =
   operator-interface.attlist, node-element.attlist, xml.attlist
-ConnectiveOperator.content =
+ConnectiveOperation.content =
   meta-roles.content,
   (element formula { formula-rulebase.type }
    | formula-rulebase.content)*
-ConnectiveOperator.type =
-  ConnectiveOperator.content, ConnectiveOperator.attlist
+ConnectiveOperation.type =
+  ConnectiveOperation.content, ConnectiveOperation.attlist
 # note that elementFormDefault is qualified because of local declarations
 
 
@@ -2080,7 +2080,7 @@ start |= Negation
 Negation = element Negation { Negation.type }
 formula-negation.attlist = xml.attlist
 formula-negation.content =
-  element Operation { ConnectiveOperator.type }
+  element Operation { ConnectiveOperation.type }
   | Equal
   | Negation
   | Neg
@@ -2814,7 +2814,7 @@ rule-implementation.content = DerivationRule.content
 # content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
 #
 query-connective.content =
-  element Operation { ConnectiveOperator.type }
+  element Operation { ConnectiveOperation.type }
   | element And { And-query.type }
   | element Or { Or-query.type }
   | Negation
@@ -2828,7 +2828,7 @@ query-connective.content =
 # content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
 #
 inner-connective.content =
-  element Operation { ConnectiveOperator.type }
+  element Operation { ConnectiveOperation.type }
   | element And { And-inner.type }
   | element Or { Or-inner.type }
   | Negation
@@ -2842,7 +2842,7 @@ inner-connective.content =
 # content model: (Operation | Negation | Neg | Equal )
 #
 outer-connective.content =
-  element Operation { ConnectiveOperator.type }
+  element Operation { ConnectiveOperation.type }
   | Negation
   | Neg
   | Equal

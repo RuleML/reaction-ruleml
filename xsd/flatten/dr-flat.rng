@@ -1752,12 +1752,12 @@
         
         attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-    <define name="ConnectiveOperator.attlist">
+    <define name="ConnectiveOperation.attlist">
         <ref name="operator-interface.attlist"/>
         <ref name="node-element.attlist"/>
         <ref name="xml.attlist"/>
     </define>
-    <define name="ConnectiveOperator.content">
+    <define name="ConnectiveOperation.content">
         
             <ref name="meta-roles.content"/>
             <zeroOrMore>
@@ -1770,9 +1770,9 @@
 </zeroOrMore>
         
     </define>
-    <define name="ConnectiveOperator.type">
-        <ref name="ConnectiveOperator.content"/>
-        <ref name="ConnectiveOperator.attlist"/>
+    <define name="ConnectiveOperation.type">
+        <ref name="ConnectiveOperation.content"/>
+        <ref name="ConnectiveOperation.attlist"/>
     </define>
     <!-- note that elementFormDefault is qualified because of local declarations -->
     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
@@ -4098,7 +4098,7 @@
     <define name="formula-negation.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperator.type"/>
+<ref name="ConnectiveOperation.type"/>
 </element>
             <ref name="Equal"/>
             <ref name="Negation"/>
@@ -5786,7 +5786,7 @@
     <define name="query-connective.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperator.type"/>
+<ref name="ConnectiveOperation.type"/>
 </element>
             <element name="And">
 <ref name="And-query.type"/>
@@ -5811,7 +5811,7 @@
     <define name="inner-connective.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperator.type"/>
+<ref name="ConnectiveOperation.type"/>
 </element>
             <element name="And">
 <ref name="And-inner.type"/>
@@ -5836,7 +5836,7 @@
     <define name="outer-connective.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperator.type"/>
+<ref name="ConnectiveOperation.type"/>
 </element>
             <ref name="Negation"/>
             <ref name="Neg"/>

@@ -186,8 +186,7 @@
      
      in DR-PR Reaction RuleML: 
      
-     ((if, do, then?, elseDo?, else?) | (else?, elseDo?, then?, do, if)) |
-     ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?)) 
+     ((if, do, elseDo?) | (if, then, else) | (if, then?, else?, do, elseDo? ) | ( elseDo?, do, else?, then?, if))
      
           
 	-->
@@ -208,7 +207,7 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperation.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -229,7 +228,7 @@
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperation.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -250,7 +249,7 @@
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperator.type"/>
+			<xs:element name="Operation" type="ConnectiveOperation.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 
@@ -262,13 +261,13 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: ( )
+     content model: ( Exists )
           
 	-->
 	
 	<xs:group name="query-quantifier.content">
 		<xs:choice>
-			
+			<xs:element ref="Exists"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -294,13 +293,13 @@
      An internal group for the outer quantifiers in the Reaction RuleML language
     
     
-     content model: (  )
+     content model: ( Forall )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
 		<xs:choice>
-			
+			<xs:element ref="Forall"/>			
 		</xs:choice>
 	</xs:group>
 	

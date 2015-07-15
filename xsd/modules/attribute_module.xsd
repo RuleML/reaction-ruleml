@@ -419,7 +419,7 @@
 	-->
 	
 	<xs:attributeGroup name="direction.attrib">
-		<xs:attribute name="direction" use="optional" default="bidirectional">
+		<xs:attribute name="direction" use="optional">
 			<xs:simpleType>
 				<xs:union memberTypes="termOrCurieOrAbsIRI.datatype vocab-direction.datatype" />
 			</xs:simpleType> 
@@ -441,7 +441,7 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40closure		
 	-->
 	<xs:attributeGroup name="closure.attrib">
-		<xs:attribute name="closure" use="optional" default="universal">
+		<xs:attribute name="closure" use="optional">
 			<xs:simpleType>
 				<xs:union memberTypes="termOrCurieOrAbsIRI.datatype vocab-closure.datatype" />
 			</xs:simpleType> 
@@ -462,15 +462,19 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40material
 	-->
 	<xs:attributeGroup name="material.attrib">
-		<xs:attribute name="material" use="optional" default="no">
-			<xs:simpleType>
-				<xs:restriction base="xs:NMTOKEN">
-					<xs:enumeration value="no"/>
-					<xs:enumeration value="yes"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
+		<xs:attribute name="material" type="material.datatype" use="optional"/>
 	</xs:attributeGroup>
+	
+	<xs:simpleType name="material.datatype">
+		<xs:union memberTypes="termOrCurieOrAbsIRI.datatype vocab-material.datatype" />
+	</xs:simpleType> 
+	<xs:simpleType name="vocab-material.datatype">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="yes"/>
+			<xs:enumeration value="no"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
 
 	<!--
 		*** @iri ***
@@ -502,7 +506,7 @@
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40oriented
 	-->
 	<xs:attributeGroup name="oriented.attrib">
-		<xs:attribute name="oriented" use="optional" default="no">
+		<xs:attribute name="oriented" use="optional">
 			<xs:simpleType>
 				<xs:restriction base="xs:NMTOKEN">
 					<xs:enumeration value="yes"/>

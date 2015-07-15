@@ -202,13 +202,13 @@ Reaction RuleML 1.0 defines an ontology of predefined profiles, e.g. logical ent
        Its sort is defined by a reference to the RuleML NegationAsFailure type. 
        The semantic (evaluation/interpretation) style is referencing the predefined external RuleML WellFoundedSemantics profile  -->
   <Query>
-    <Operator type="ruleml:NegationAsFailure" iri="rulemlv:Naf" style="ruleml:WellFoundedSemantics">
+    <Operation type="ruleml:NegationAsFailure" iri="rulemlv:Naf" style="ruleml:WellFoundedSemantics">
       <Atom>
         <Rel>likes</Rel>
         <Ind>John</Ind>
         <Var>Katy</Var>
       </Atom>            
-    </Operator>
+    </Operation>
   </Query>
   
 </RuleML>

@@ -68,11 +68,11 @@
           <Holds>
             <Situation>
               <Reify>
-                <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+                <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
                   <Neg>
                     <Atom><Rel>p</Rel><Var>X</Var></Atom>
                   </Neg>
-                </Operator>
+                </Operation>
               </Reify>              
             </Situation>
             <Time><Var mode="+">T</Var></Time>
@@ -85,11 +85,11 @@
           <Action><Reify><Atom><Rel per="value">p</Rel><Var>X</Var></Atom></Reify></Action>
           <Situation>
             <Reify>
-              <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+              <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
                 <Neg>
                   <Atom><Rel>q</Rel><Var>X</Var></Atom>
                 </Neg>
-              </Operator>
+              </Operation>
             </Reify>              
           </Situation>          
           <Time><Var mode="+">T</Var></Time>
@@ -123,11 +123,11 @@
     <Holds>
       <Situation>
         <Reify>
-          <Operator type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+          <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
             <Neg>
               <Atom><Rel>q</Rel><Var>X</Var></Atom>
             </Neg>
-          </Operator>        
+          </Operation>        
         </Reify>
       </Situation>  
       <Time><Ind>t1</Ind></Time>

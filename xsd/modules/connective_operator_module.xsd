@@ -5,7 +5,7 @@
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
           
-			generic connective operator module of Reaction RuleML.
+			generic operation module of Reaction RuleML.
 
 			This is the XML Schema connective operator module for Reaction RuleML.
 			File: connective_operator_module.xsd
@@ -14,7 +14,7 @@
 
 			This schema declares the following Reaction RuleML elements and attributes:
 
-				* Operation (Connective)
+				* Operation 
 			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
 			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
@@ -39,7 +39,7 @@
 
 
 	<!--
-      *** generic connective Operation ***
+      *** generic Operation ***
       
       	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
       
@@ -51,12 +51,12 @@
         
         attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="ConnectiveOperation.attlist">
+	<xs:attributeGroup name="Operation-formula.attlist">
 		<xs:attributeGroup ref="operator-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="ConnectiveOperation.content">
+	<xs:group name="Operation-formula.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
@@ -66,9 +66,29 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="ConnectiveOperation.type">
-		<xs:group ref="ConnectiveOperation.content"/>
-		<xs:attributeGroup ref="ConnectiveOperation.attlist"/>
+	<xs:complexType name="Operation-formula.type">
+		<xs:group ref="Operation-formula.content"/>
+		<xs:attributeGroup ref="Operation-formula.attlist"/>
+	</xs:complexType>
+	
+	<xs:attributeGroup name="Operation-term.attlist">
+		<xs:attributeGroup ref="operator-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Operation-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="formula" type="formula-rulebase.type"/>
+				<xs:group ref="formula-rulebase.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Operation-term.type">
+		<xs:group ref="Operation-term.content"/>
+		<xs:attributeGroup ref="Operation-term.attlist"/>
 	</xs:complexType>
 	
 </xs:schema>

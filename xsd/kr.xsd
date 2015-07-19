@@ -8,8 +8,8 @@
 			KR (Knowledge Representation) dialect of Reaction RuleML for temporal / event / action / situation reasoning logics
 			
 			File: kr.xsd
-			Version: 1.0
-			Last Modification: 2011-03-22
+			Version: 1.02
+			Last Modification: 2015-07-19
 			
 			This schema declares the following Reaction RuleML KR elements and attributes for reasoning:
 			
@@ -25,14 +25,15 @@
 		</xs:documentation>
 		<xs:appinfo>
 			<dc:title>KR Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>Reaction RuleML 1.02</dc:subject> 
 			<dc:description>Knowledge Representation (KR) dialect of Reaction RuleML</dc:description> 
-			<dc:date>2011-03-22T23:11:17-0300</dc:date>
+			<dc:date>2015-03-22T23:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> 
+			<dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>
 	</xs:annotation>
 
@@ -279,10 +280,10 @@
 			<xs:element name="Time" type="Time-formula.type"/>
 			<xs:element name="Spatial" type="Spatial-formula.type"/>
 			<xs:element name="Interval" type="Interval-formula.type"/>
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>			
-			<xs:element ref="Situation"/>
-			<xs:element ref="Fluent" /> <!-- only in non-reified calculi used as predicate -->
+			<xs:element name="Event" type="Event-formula.type"/>			
+			<xs:element name="Action" type="Action-formula.type"/>			
+			<xs:element name="Situation" type="Situation-formula.type"/>
+			<xs:element name="Fluent" type="Fluent-formula.type"/> <!-- only used in non-reified calculi as predicate -->
 			<xs:element ref="Holds" />	
 			<xs:element ref="Initiates" />
 			<xs:element ref="Terminates" />
@@ -310,10 +311,10 @@
 			<xs:element name="Time" type="Time-term.type"/>
 			<xs:element name="Spatial" type="Spatial-term.type"/>
 			<xs:element name="Interval" type="Interval-term.type"/>	
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>			
-			<xs:element ref="Situation"/>
-			<xs:element ref="Fluent" /> <!-- in reified calculi used as function -->			
+			<xs:element name="Event" type="Event-term.type"/>			
+			<xs:element name="Action" type="Action-term.type"/>			
+			<xs:element name="Situation" type="Situation-term.type"/>
+			<xs:element name="Fluent" type="Fluent-term.type"/> <!-- in reified calculi used as function -->			
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>

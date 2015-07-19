@@ -9,8 +9,8 @@
 
 			This is the XML Schema KR-CEP module for Reaction RuleML.
 			File: situation_CEP_module.xsd
-			Version: 1.0
-			Last Modification: 2011-03-22
+			Version: 1.02
+			Last Modification: 2015-07-22
 
 			This schema declares the following Reaction RuleML elements and attributes:
 
@@ -28,17 +28,18 @@
 			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
 			[http://www.w3.org/TR/xhtml-modularization/].
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
-			<dc:date>2011-03-22T29:11:17-0300</dc:date>
+			<dc:date>2015-03-22T29:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> 
+			<dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>		
 	</xs:annotation>
 
@@ -46,7 +47,7 @@
 	<!--
       *** fluent ***
 
-	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-fluent
+	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-fluent
 
       A fluent is a fluent situation which holds true or false as a condition which changes over time - a changeable situation. 
       In Situation Calculus, fluents (changable situations) are expressions which hold true or false and take an occured situation (as a history of action events; note: there is no distinction in events and actions in such calculi) 
@@ -78,7 +79,7 @@
 		
 	  The function do maps (reified) actions into situations; do: A x S -> S
 	  
-	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Do
+	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Do
 			
       content model: 
       in KR Reaction RuleML: 
@@ -115,7 +116,7 @@
 		Different happens / happenings can be defined by pointing to an external vocabulary with @iri, e.g. a vocabulary for a calculi
 		which distinguishes between events which acutally happen and other event relations to time or situations  (e.g. poss, planned, etc.)
 		
-		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Happens
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Happens
 		
 		In reified Situation Calculus happens can be used to define action effects. 
 		
@@ -155,7 +156,7 @@
 	
  	<!--     *** Initiates ***
 
-	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Initiates 
+	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Initiates 
 	  
       content model: 
       in KR Reaction RuleML:
@@ -193,7 +194,7 @@
 	<!--
       *** Terminates ***
 
-		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Terminates
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Terminates
 		
       content model: 
 	   in KR Reaction RuleML:
@@ -231,7 +232,7 @@
 	<!--
       *** Holds ***
       
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Holds
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Holds
       
       In Event Calculus, Feature and Fluent Calculus reified fluents hold at a time. 
       In reified Situation Calculus a Fluent Situation (a statement whose truth value may change) holds at a particular Situation 
@@ -271,24 +272,25 @@
 	<!--
 	*** Fluent ***
 		
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Fluent	
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Fluent	
 	
 	content model: 
 	in KR Reaction RuleML: 
-			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (
+			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (
 		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation|Fluent)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
 			content(xs:any) )?)
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="Fluent.attlist">
+	<xs:attributeGroup name="Fluent-formula.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="Fluent.content">
+	<xs:group name="Fluent-formula.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
 			<xs:choice minOccurs="0">
 				<xs:sequence>
 					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
@@ -314,18 +316,58 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="Fluent.type">
-		<xs:group ref="Fluent.content"/>
-		<xs:attributeGroup ref="Fluent.attlist"/>
+	<xs:complexType name="Fluent-formula.type">
+		<xs:group ref="Fluent-formula.content"/>
+		<xs:attributeGroup ref="Fluent-formula.attlist"/>
 	</xs:complexType>
-	<xs:element name="Fluent" type="Fluent.type"/>
+
+	<!-- Fluent term -->
+
+	<xs:attributeGroup name="Fluent-term.attlist">
+		<xs:attributeGroup ref="term-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Fluent-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
+			<xs:choice minOccurs="0">
+				<xs:sequence>
+					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="resl" minOccurs="0"/>
+					<xs:choice minOccurs="0">
+						<xs:sequence>
+							<xs:choice>
+								<xs:sequence>
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="arg" type="arg_fluent.type"/>
+										<xs:group ref="arg_fluent.content"/>
+									</xs:choice>
+									<xs:element ref="repo" minOccurs="0"/>
+								</xs:sequence>
+								<xs:element ref="repo"/>
+							</xs:choice>
+							<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="resl" minOccurs="0"/>
+						</xs:sequence>
+					</xs:choice>
+				</xs:sequence>    				
+				<xs:element name="content" type="fluent_anycontent.type"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Fluent-term.type">
+		<xs:group ref="Fluent-term.content"/>
+		<xs:attributeGroup ref="Fluent-term.attlist"/>
+	</xs:complexType>
 	
 	<!--
      *** arg ***
      
      Definition of the the arg role for Fluent
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
      
      content model:  
      in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation|Fluent)
@@ -350,7 +392,7 @@
 	<!--
      *** content ***
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
      
      content model:  xs:any*
      

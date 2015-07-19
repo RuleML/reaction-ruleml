@@ -41,18 +41,18 @@
                   
              
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
 			<dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
 			<dc:date>2015-07-14T17:04:00+0200</dc:date> 
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>			
 	</xs:annotation>
 	
@@ -72,7 +72,7 @@
 			and the mode of conclusions, answers and active actions is "-" (output). Variables are "?" (open) by default.
 			optional attribute
 			
-			See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40mode
+			See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40mode
 -->
 	<xs:attributeGroup name="mode.attrib">
 		<xs:attribute name="mode" use="optional" default="?">
@@ -99,7 +99,7 @@
 		 default: non-interrupting 
 		 optional attribute
 		 
-		 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40safety
+		 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40safety
 	-->
 
 	<xs:attributeGroup name="safety.attrib">
@@ -126,7 +126,7 @@
 		In "reasoning" dialects the default for actions and events is per "value" and in active / messaging dialects it is per "effect".
 		In "non-reified" representations as formulas default interpretation per "value" and in "reified" representations as term default interpretation is per copy. 
 		
-		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40per
+		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40per
 	-->
 	<xs:attributeGroup name="per.attrib">
 		<xs:attribute name="per" use="optional">
@@ -150,7 +150,7 @@
 		An attribute indicating the size of a counter		
 		-1 = unbound / all
 		
-		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40size
+		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40size
 	-->
 	
 	<!-- 
@@ -178,7 +178,7 @@
 	 default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
 	 optional attribute
 	 
-	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40style
+	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40style
 	-->
 	
 	<xs:simpleType name="style.datatype">
@@ -199,7 +199,7 @@
     
 	 optinal attribute
 	 
-	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40key
+	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40key
 	-->
 	<xs:attributeGroup name="key.attrib">
 		<xs:attribute name="key" type="curieOrAbsIRI.datatype" use="optional"/>
@@ -212,7 +212,7 @@
     
 	 optinal attribute
 	 
-	 http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40keyref
+	 http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40keyref
 	-->
 	<xs:attributeGroup name="keyref.attrib">
 		<xs:attribute name="keyref" type="curieOrAbsIRI.datatype" use="optional"/>
@@ -226,7 +226,7 @@
     The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
     such a label.
     
-    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40node
+    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40node
     
     content model: (curieOrAbsIRI.datatype)
   -->
@@ -238,7 +238,7 @@
 		*** @type ***
 		An attribute for optionally specifying a (user-defined) type.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40type
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40type
 		
 		Note: In Reaction RuleML the type is changed to Term or Curie or absolute IRI to allow references
 		to internal vocabulary terms (e.g. local sort signature definitions) and external vocabulary types (sorts) 
@@ -262,7 +262,7 @@
 	 
 	 optional attribute
 	 
-	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40meta
+	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40meta
 	-->
 	
 	<xs:attributeGroup name="meta.attrib">
@@ -283,7 +283,7 @@
       
 	 optional attribute
 	 
-	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40qualify
+	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40qualify
 	-->
 	
 	<xs:attributeGroup name="qualify.attrib">
@@ -306,7 +306,7 @@
 	 default value: "global" for relations and functions and "local" for terms 
 	 optional attribute
 	 
-	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40scope
+	 See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40scope
 	-->
 
 	<xs:attributeGroup name="scope-formula.attrib">
@@ -338,7 +338,7 @@
 		The arity of constants / individual objects is zero.
 		The arity of predicates and functions is the number of arguments they have.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40arity
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40arity
 	-->
 	<xs:attributeGroup name="arity.attrib">
 		<xs:attribute name="arity" type="xs:nonNegativeInteger" use="optional"/>
@@ -349,7 +349,7 @@
 		
 		a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
 		
-		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40prefix
+		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40prefix
 		
 	-->
 	<xs:attributeGroup name="prefix.attrib">
@@ -368,7 +368,7 @@
 		
 		an IRI that defines the vocabulary mapping to use when a TERM is referenced in an attribute value.
 		
-		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40vocab
+		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40vocab
 				
 	-->
 	<xs:attributeGroup name="vocab.attrib">
@@ -382,9 +382,9 @@
 		
 		"-1" = unbound
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40card
-			http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40maxCard
-			http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40minCard
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40card
+			http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40maxCard
+			http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40minCard
 	-->
 	<xs:attributeGroup name="card.attrib">
 		<xs:attribute name="card" type="xs:int" use="optional"/>
@@ -397,7 +397,7 @@
 		An attribute optionally specifying a relative weight.
 		The default is "1", i.e. all knowledge has the same weight of "1". 
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40weight		
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40weight		
 	-->
 	<xs:attributeGroup name="weight.attrib">
 		<xs:attribute name="weight" use="optional">
@@ -415,7 +415,7 @@
 		An attribute indicating the intended direction of an implication rule's inferencing.
 		default is bidirectional.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40direction
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40direction
 	-->
 	
 	<xs:attributeGroup name="direction.attrib">
@@ -438,7 +438,7 @@
 		An attribute indicating how the contained free variables are quantified.
 		default is universal closure.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40closure		
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40closure		
 	-->
 	<xs:attributeGroup name="closure.attrib">
 		<xs:attribute name="closure" use="optional">
@@ -459,7 +459,7 @@
 		*** @material ***
 		An attribute indicating the kind of an implication rule.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40material
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40material
 	-->
 	<xs:attributeGroup name="material.attrib">
 		<xs:attribute name="material" type="material.datatype" use="optional"/>
@@ -480,7 +480,7 @@
 		*** @iri ***
 		An attribute for referring to a Curie or absolute IRI.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40iri
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40iri
 	-->
 	<xs:attributeGroup name="iri.attrib">
 		<xs:attribute name="iri" type="curieOrAbsIRI.datatype" use="optional"/>
@@ -492,7 +492,7 @@
 		
 		Note: in Reaction RuleML @index is optional
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40index
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40index
 	-->
 	<xs:attributeGroup name="index.attrib">
 		<xs:attribute name="index" type="xs:positiveInteger" use="optional"/>
@@ -503,7 +503,7 @@
 		An attribute indicating whether an equation is oriented (directed)
 		or unoriented (symmetric).
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40oriented
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40oriented
 	-->
 	<xs:attributeGroup name="oriented.attrib">
 		<xs:attribute name="oriented" use="optional">
@@ -659,42 +659,23 @@
  
   	a group of attributes for the meta knowledge interface of all action / performatives in Reaction RuleML
   	
-	@type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?
+	@safety?
   	-->
 	
 	<xs:attributeGroup name="action-interface.attlist">
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="card.attrib"/>
-		<xs:attributeGroup ref="weight.attrib"/>
-		<xs:attributeGroup ref="style.attrib"/>
-		<xs:attributeGroup ref="direction.attrib"/>
 		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="scope-formula.attrib"/>
-		<xs:attributeGroup ref="mode.attrib"/>
-		<xs:attributeGroup ref="closure.attrib"/>
-		<xs:attributeGroup ref="per.attrib"/>
 	</xs:attributeGroup>
 
 	<!-- 
  
   	a group of attributes for the meta knowledge interface of all events in Reaction RuleML
   	
-	@type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?
+	@safety?
   	-->
 	
 	<xs:attributeGroup name="event-interface.attlist">
-		<xs:attributeGroup ref="type.attrib"/>
-		<xs:attributeGroup ref="arity.attrib"/>
-		<xs:attributeGroup ref="card.attrib"/>
-		<xs:attributeGroup ref="weight.attrib"/>
-		<xs:attributeGroup ref="style.attrib"/>
-		<xs:attributeGroup ref="direction.attrib"/>
 		<xs:attributeGroup ref="safety.attrib"/>
-		<xs:attributeGroup ref="scope-formula.attrib"/>
-		<xs:attributeGroup ref="mode.attrib"/>
-		<xs:attributeGroup ref="closure.attrib"/>
-		<xs:attributeGroup ref="per.attrib"/>
+		
 	</xs:attributeGroup>
 
 </xs:schema>

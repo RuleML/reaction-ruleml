@@ -6,7 +6,7 @@
     
   <xs:annotation>
     <xs:documentation xml:lang="en"> This is the XML Schema module for description-related RuleML
-      elements. File: desc_module.xsd Version: 1.0 Last Modification: 2012-05-17 [Adrian Paschke]
+      elements. File: desc_module.xsd Version: 1.02 Last Modification: 2015-05-17 [Adrian Paschke]
       This module declares the following RuleML elements:   
       
     
@@ -22,18 +22,18 @@
       See
       http://www.ruleml.org/modularization for details about this modularization approach.
     </xs:documentation>
-    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    
     <xs:appinfo>
       <dc:title>RuleML Schema</dc:title>
-      <dc:version>1.0</dc:version>
+      <dc:version>1.02</dc:version>
       <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
       <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
       <dc:description>custom-built main module for Reaction RuleML</dc:description> 
-      <dc:date>2012-05-17T23:11:17-0300</dc:date>
+      <dc:date>2015-05-17T23:11:17-0300</dc:date>
       <dc:language>en</dc:language>
-      <dcterms:rights>LGPL-3.0</dcterms:rights> 
-      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+      <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+       <dc:relation>http://reaction.ruleml.org</dc:relation>
     </xs:appinfo> 
   </xs:annotation>
 
@@ -43,7 +43,7 @@
   of the SWSL branch, as needed for PSOA semantics.
   Note that oids are not required to be unique within a rulebase.
   
-  See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-oid
+  See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-oid
   
   content model: 
   in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -77,7 +77,7 @@
      
     An optional container for meta-knowledge about a Node.
     
-    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-meta
+    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-meta
     
 	Used for descriptive Metadata annotations in Reaction RuleML
 	
@@ -113,7 +113,7 @@
      
      metadata-based scope definition defined over the metadata annotations and the qualifications annotations.
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-scope
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-scope
      
      Note: scope reasoning in rules can use the metadata scopes to define a constructive view on the rules and facts in the KB.    
      The scoped rule/literal goal only applies in this scope (scoped reasoning/processing)
@@ -122,8 +122,8 @@
      on the knowledge base and to do scoped reasoning on this scope see the Prova rule engine (http://prova.ws).
      
      Example:
-     @src(kb1) @author("Adrian Paschke") @validity([2011-03-20, 2011-04-20]) @label(fact1) fact1(constant1).
-     @src(kb2) @author("Alex Kozlenkov") @validity([2011-01-20, 2011-03-20]) @label(fact2) fact2(constant2).
+     @src(kb1) @author("Adrian Paschke") @validity([2015-03-20, 2015-04-20]) @label(fact1) fact1(constant1).
+     @src(kb2) @author("Alex Kozlenkov") @validity([2015-01-20, 2015-03-20]) @label(fact2) fact2(constant2).
      
      @src(rb1) @label(rule1) rule1(Y) :- @validity(VTime) @authors("Adrian Paschke") fact1(Y) [between(SysTime,VTime)] 
      
@@ -188,7 +188,7 @@
      
 	guard constraints 
 	
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-guard
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-guard
 	
      content model: 
      in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
@@ -218,7 +218,7 @@
      
      The intended evaluation semantics, e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
      
-     	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-evaluation
+     	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-evaluation
      
      Note: multiple Profiles can be defined by repreating the <evaluation> role element
      The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
@@ -248,7 +248,7 @@
      The signature defines the signature of knowledge (formula and terms) with optional input / output mode declarations. The signature declaration can act as public interface and
 	can be published together with the intended evaluation semantics. 
 	
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-signature
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-signature
 	
 	Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
 	for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
@@ -285,7 +285,7 @@
      
     Definition of the qualification (qualifying metadata), e.g. validity time, priorities, etc.
     
-    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-qualification
+    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-qualification
      
     Note: the qualification can be also defined as a situation  <Situation> in KR Reaction RuleML 
 	A situation could be also modelled as a changeable situation called fluent (in the KR dialect of Reaction RuleML),
@@ -323,7 +323,7 @@
      
      Definition of the quantifier. 
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-quantification
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-quantification
      
      content model: (Forall | Exists | Quantifier)
      

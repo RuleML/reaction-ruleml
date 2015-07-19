@@ -6,23 +6,23 @@
 
   <xs:annotation>
     <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML terms. File:
-      term_module.xsd Version: 1.0 Last Modification: 2012-04-03 This module declares the following
+      term_module.xsd Version: 1.02 Last Modification: 2015-04-03 This module declares the following
       RuleML elements and attributes: * arg * Ind * Data * Var * Skolem * Reify as
       well as including a number of complex types for use in expicitly-typed data Nodes. See
       http://www.ruleml.org/modularization for details about this modularization approach.
     </xs:documentation>
-    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    
     <xs:appinfo>
       <dc:title>RuleML Schema</dc:title>
-      <dc:version>1.0</dc:version>
+      <dc:version>1.02</dc:version>
       <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
       <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
       <dc:description>custom-built main module for Reaction RuleML</dc:description> 
-      <dc:date>2012-04-03T23:11:17-0300</dc:date>
+      <dc:date>2015-04-03T23:11:17-0300</dc:date>
       <dc:language>en</dc:language>
-      <dcterms:rights>LGPL-3.0</dcterms:rights> 
-      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+      <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+       <dc:relation>http://reaction.ruleml.org</dc:relation>
     </xs:appinfo> 
   </xs:annotation>
 
@@ -30,7 +30,7 @@
 		*** arg ***
 		A role used for the positional arguments of a logical atom.
 		
-		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
 
 		content model: 
 		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -63,7 +63,7 @@
 		An individual constant, as in predicate logic, which can also be considered to
 		be a fixed argument like RDF resources.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Ind
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Ind
 		
 		content model: text
 
@@ -90,7 +90,7 @@
 		(see http://www.w3.org/TR/xmlschema-2/#built-in-datatypes)
 		using the built-in xsi:type attribute.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Data
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Data
 		
 		content model: xs:anytype [optionally datatyped]
 		
@@ -102,7 +102,7 @@
 		*** Var ***
 		A logical variable, as in logic programming.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Var
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Var
 
 		content model: text
 		
@@ -132,7 +132,7 @@
 		*** Skolem ***
 		A Skolem individual constant, like RDF's blank nodes.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Skolem
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Skolem
 
 		content model: text
 		
@@ -160,7 +160,7 @@
 		current sublanguage as content, treating it as a term for performing
 		reasoning on.
 				
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Reify		
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Reify		
 		
 		content model: (any valid RuleML formula)
 		

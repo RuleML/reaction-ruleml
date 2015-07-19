@@ -14,8 +14,8 @@
 			
 			
 			File: eca.xsd
-			Version: 1.0
-			Last Modification: 2011-03-22
+			Version: 1.02
+			Last Modification: 2015-07-19
 			
 			This schema declares the following Reaction RuleML elements and attributes:
 				  								  
@@ -47,17 +47,18 @@
 			 Rule is the core construct for all types of rules in Reaction RuleML.			 
 
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>ECA Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>Reaction RuleML 1.02</dc:subject> 
 			<dc:description>spatio-temporal Derivation Rule dialect of Reaction RuleML</dc:description> 
-			<dc:date>2011-03-22T23:11:17-0300</dc:date>
+			<dc:date>2015-03-22T23:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> 
+			<dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo> 
 	</xs:annotation>
 
@@ -309,8 +310,8 @@
 			<xs:element name="Time" type="Time-formula.type"/>
 			<xs:element name="Spatial" type="Spatial-formula.type"/>
 			<xs:element name="Interval" type="Interval-formula.type"/>
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>	
+			<xs:element name="Event" type="Event-formula.type"/>			
+			<xs:element name="Action" type="Action-formula.type"/>	
 		</xs:choice>
 	</xs:group>
 	
@@ -332,8 +333,8 @@
 			<xs:element name="Time" type="Time-term.type"/>
 			<xs:element name="Spatial" type="Spatial-term.type"/>
 			<xs:element name="Interval" type="Interval-term.type"/>
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>
+			<xs:element name="Event" type="Event-term.type"/>			
+			<xs:element name="Action" type="Action-term.type"/>
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
@@ -385,13 +386,11 @@
 
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
-		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )		
+		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )		
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>
 			<xs:group ref="arg.content"/>
-			<xs:group ref="event_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
 
@@ -402,8 +401,8 @@
 	
 	<xs:group name="event_group.content">
 		<xs:choice>
-			<xs:element ref="Event"/>
-			<xs:element ref="Action"/>
+			<xs:element name="Event" type="Event-formula.type"/>
+			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:group ref="event_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
@@ -411,12 +410,11 @@
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		
-		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action |  Succession | Choice | Flow | Loop | Operation )
+		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
 			<xs:group ref="arg.content"/>
-			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -430,7 +428,7 @@
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
 			<xs:element ref="Consult"/>
-			<xs:element ref="Action"/>
+			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:element ref="Query"/>
 			<xs:element ref="Answer"/>
 			<xs:element ref="Test"/>
@@ -459,7 +457,7 @@
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
 			<xs:element ref="Consult"/>
-			<xs:element ref="Action"/>
+			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:element ref="Query"/>
 			<xs:element ref="Answer"/>
 			<xs:element ref="Test"/>

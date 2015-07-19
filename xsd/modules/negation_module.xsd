@@ -7,8 +7,8 @@
         Negation module part of Reaction RuleML.
 		This defines the negation elements for Reaction RuleML.
 		File: negation_module.xsd
-		Version: 1.0
-		Last Modification: 2011-03-22
+		Version: 1.02
+		Last Modification: 2015-03-22
 		
 		* Negation		generic polymorphig negation
 		* Naf           negation as failure (inflationary negation in production rules), weak negation
@@ -18,18 +18,18 @@
 		* formula				
 
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
             <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
 			<dc:date>2015-07-14T17:04:00+0200</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>
 	</xs:annotation>
 
@@ -38,7 +38,7 @@
 		*** Negation ***
 		A generic polymorphic negation
 		
-		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Negation
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Negation
 		
 		It can be specialized by using
 		the @type attribute to specify the type of negation and/or 
@@ -96,7 +96,7 @@
 		A "by default" negation of a logical atom (i.e. "weak" negation or
 		negation-as-failure).
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Naf
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Naf
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
@@ -129,7 +129,7 @@
 		*** weak ***
 		A role used for negation as failure.
 	
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-weak
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-weak
 		
 		content model:
 		DR Reaction RuleML: ( Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial )
@@ -157,7 +157,7 @@
 		*** Neg ***
 		A classical negation of a logical atom (i.e. classical or "strong" negation).
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Neg
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Neg
 		
 		content model:
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
@@ -190,7 +190,7 @@
 		*** strong ***
 		A role used for classical negation.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-strong
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-strong
 		
 		content model: 
 		DR Reaction RuleML: ( Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial )

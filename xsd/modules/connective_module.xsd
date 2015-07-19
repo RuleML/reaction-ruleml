@@ -8,23 +8,23 @@
 
   <xs:annotation>
     <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML connectives. File:
-      connective_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module
+      connective_module.xsd Version: 1.02 Last Modification: 2015-02-21 [Tara Athan] This module
       declares the following RuleML elements and attributes: * Implies * if * then * Entails *
       Equivalent * torso * Rulebase * And * Or * formula 
       See http://www.ruleml.org/modularization for details
       about this modularization approach. </xs:documentation>
-    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    
     <xs:appinfo>
       <dc:title>RuleML Schema</dc:title>
-      <dc:version>1.0</dc:version>
+      <dc:version>1.02</dc:version>
       <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
       <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
       <dc:description>custom-built main module for Reaction RuleML</dc:description> 
       <dc:date>2015-07-14T17:04:00+0200</dc:date> 
       <dc:language>en</dc:language>
-      <dcterms:rights>LGPL-3.0</dcterms:rights> 
-      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+      <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+       <dc:relation>http://reaction.ruleml.org</dc:relation>
     </xs:appinfo>
   </xs:annotation>
 
@@ -41,7 +41,7 @@
 		*** Implies ***
 		An implication rule.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Implies
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Implies
 
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
@@ -86,7 +86,7 @@
 		The if of an implication rule containing the premise(s),
 		also known as the "antecedent" or "if" part of the rule.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-if
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-if
 
 		content model: 
 		DR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
@@ -125,7 +125,7 @@
 		The then of an implication rule containing the conclusion,
 		also known as the "consequent" or "then" part of the rule.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-then
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-then
 
 		content model: 
 		DR Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
@@ -164,7 +164,7 @@
 		Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
 		Kowalski/Bowen's object/meta-level-amalgamated logic).
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Entails
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Entails
 		
 		content model:
 		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
@@ -200,7 +200,7 @@
 		An equivalence expression, which is "syntactic sugar" for a pair
 		of conjoined converse implication rules.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equivalent
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equivalent
 
 		content model: 		
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
@@ -269,7 +269,7 @@
 		A symmetric role used in an equivalence expression combining
 		the asymmetric <then> and <if>.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-torso
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-torso
 
 		content model: 
 		DR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
@@ -298,7 +298,7 @@
 		*** Rulebase ***
 		A collection of rules that can be ordered or unordered, without or with duplicates.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Rulebase
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rulebase
 		
 		@prefix for default prefix definitions 
 		@vocab for default vocab definitions
@@ -336,7 +336,7 @@
 		*** And ***
 		A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-And
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-And
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -382,7 +382,7 @@
 		*** Or ***
 		A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Or
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Or
 		
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -428,7 +428,7 @@
 		*** formula ***
 		The formula role of a conjunctive/disjunctive expression or a rulebase.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
 
 		content model (below And/Or): 
 		DR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)

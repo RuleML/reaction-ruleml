@@ -10,26 +10,26 @@
 			
 			This is the XML Schema spatial module for Reaction RuleML.
 			File: spatial_module.xsd
-			Version: 1.0
-			Last Modification: 2011-03-29
+			Version: 1.02
+			Last Modification: 2015-07-19
 			
 			This schema declares the following Reaction RuleML elements and attributes:
 			
 			* Spatial
 			
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
             <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
 			<dc:date>2015-07-14T17:04:00+0200</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>  
 	</xs:annotation>
 	
@@ -38,7 +38,7 @@
 	*** Spatial ***
 	Explicit generic Spatial construct. 
 	
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Spatial
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Spatial
 	
 	The spatial can be represented internally 
       * with positional arguments <arg>
@@ -48,14 +48,14 @@
       The optional @type attribute defines the type of the spatial
 		
 	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 	PR Reaction RuleML: not used in PR Reaction RuleML
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 				
@@ -146,7 +146,7 @@
      
      Definition of the the arg role for Spatial
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
      
      content model:  
      in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))
@@ -174,7 +174,7 @@
 	<!--
      *** content ***
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
      
      @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
      	See CURIE to IRI and term to IRI translation

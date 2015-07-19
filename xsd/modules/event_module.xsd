@@ -10,25 +10,26 @@
 			
 			This is the XML Schema event module for Reaction RuleML.
 			File: event_module.xsd
-			Version: 1.0
-			Last Modification: 2011-03-29
+			Version: 1.02
+			Last Modification: 2015-07-19
 
 			This schema declares the following Reaction RuleML elements and attributes:
 
 			  * Event
 
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
-			<dc:date>2011-03-29T23:11:17-0300</dc:date>
+			<dc:date>2015-07-19T23:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> 
+			<dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>
 	</xs:annotation>
 
@@ -37,7 +38,7 @@
 	*** Event ***
 	  Explicit generic Event. 
 	  
-	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Event
+	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Event
 	  
 	  The event can be defined internally 
      	* with positional arguments <arg>, e.g., <arg><Ind>e1</Ind></arg>
@@ -56,25 +57,27 @@
       of the event as event template, e.g. <Event><signature>...</signature></Event>.
       
 	  content model: 
-	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
+	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  ( 
 	                ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )?
 	  PR Reaction RuleML: not used in PR Reaction RuleML
-	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( 
+	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  ( 
 	                ((slot)*,(resl)?,((((arg|Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
 		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 	                (content(xs:any)) )? )
 	                
 	    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="Event.attlist">
+	<xs:attributeGroup name="Event-formula.attlist">
 		<xs:attributeGroup ref="event-interface.attlist"/>
+		<xs:attributeGroup ref="formula-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="Event.content">
+	<xs:group name="Event-formula.content">
 		<xs:sequence>
-			<xs:group ref="meta-roles.content"/>	
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
 			<xs:choice minOccurs="0">
 			  <xs:sequence>
 					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
@@ -100,18 +103,58 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="Event.type">
-		<xs:group ref="Event.content"/>
-		<xs:attributeGroup ref="Event.attlist"/>
+	<xs:complexType name="Event-formula.type">
+		<xs:group ref="Event-formula.content"/>
+		<xs:attributeGroup ref="Event-formula.attlist"/>
 	</xs:complexType>
-	<xs:element name="Event" type="Event.type"/>
+
+	<!-- event term -->
+
+	<xs:attributeGroup name="Event-term.attlist">
+		<xs:attributeGroup ref="event-interface.attlist"/>
+		<xs:attributeGroup ref="term-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Event-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0">
+				<xs:sequence>
+					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="resl" minOccurs="0"/>
+					<xs:choice minOccurs="0">
+						<xs:sequence>
+							<xs:choice>
+								<xs:sequence>
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="arg" type="arg_event.type"/>
+										<xs:group ref="arg_event.content"/>
+									</xs:choice>
+									<xs:element ref="repo" minOccurs="0"/>
+								</xs:sequence>
+								<xs:element ref="repo"/>
+							</xs:choice>
+							<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="resl" minOccurs="0"/>
+						</xs:sequence>
+					</xs:choice>
+				</xs:sequence>            								
+				<xs:element name="content" type="event_anycontent.type"/>				
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Event-term.type">
+		<xs:group ref="Event-term.content"/>
+		<xs:attributeGroup ref="Event-term.attlist"/>
+	</xs:complexType>
 
 	<!--
      *** arg ***
      
      Definition of the the arg role for Event
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
      
      content model:  
      in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
@@ -140,7 +183,7 @@
 	<!--
      *** content ***
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
      
      content model:  xs:any*
      

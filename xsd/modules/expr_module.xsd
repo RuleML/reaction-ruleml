@@ -8,21 +8,21 @@
 
   <xs:annotation>
     <xs:documentation xml:lang="en"> This is the XML Schema module for RuleML expressions. File:
-      expr_module.xsd Version: 1.0 Last Modification: 2011-10-05 [Tara Athan] This module declares
+      expr_module.xsd Version: 1.02 Last Modification: 2015-10-05 [Tara Athan] This module declares
       the following RuleML elements and attributes: * Expr * op * Fun * Plex * @per See
       http://www.ruleml.org/modularization for details about this modularization approach. </xs:documentation>
-    <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+    
     <xs:appinfo>
       <dc:title>RuleML Schema</dc:title>
-      <dc:version>1.0</dc:version>
+      <dc:version>1.02</dc:version>
       <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
       <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-      <dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+      <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
       <dc:description>custom-built main module for Reaction RuleML</dc:description> 
-      <dc:date>2011-10-05T23:11:17-0300</dc:date>
+      <dc:date>2015-10-05T23:11:17-0300</dc:date>
       <dc:language>en</dc:language>
-      <dcterms:rights>LGPL-3.0</dcterms:rights> 
-      <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+      <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+       <dc:relation>http://reaction.ruleml.org</dc:relation>
     </xs:appinfo> 
 
     <!-- necessary for schematron -->
@@ -38,7 +38,7 @@
 		*** Expr ***
 		A logical function of the form "f(...)" where f is a function name.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Expr
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Expr
 
 		content model:
 		DR Reaction RuleML:
@@ -165,7 +165,7 @@
 		*** op ***
 		An operator expression including the function name of an expression.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-op
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-op
 				
 		content model (within Expr): (Fun)
 		
@@ -187,7 +187,7 @@
 		*** Fun ***
 		A user-defined function name.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Fun
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Fun
 
     content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
     attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -210,7 +210,7 @@
 		*** Plex ***
 		An unordered collection of arguments without a constructor.
 
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Plex
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Plex
 		
 		content model (within Atom, Plex, slot):
 		DR Reaction RuleML:

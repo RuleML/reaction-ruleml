@@ -6,7 +6,7 @@
     <xs:annotation>
         <xs:documentation xml:lang="en"> Complex Event Processing (CEP)
             schema of Reaction RuleML      </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>CEP Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -16,8 +16,8 @@
                 RuleML</dc:description>
             <dc:date>2011-03-22T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
 
@@ -468,7 +468,7 @@
             definition,       * qualification   qualification, e.g. priorities, validity, strategy
             * quantification  quantification       * oid              See
             http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -478,8 +478,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2012-05-17T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -785,7 +785,7 @@
             quantifier_module.xsd Version: 1.0 Last Modification: 2011-07-16 This module declares
             the       following RuleML elements: * Forall * Exists * declare * formula See
             http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -795,8 +795,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-07-16T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -952,7 +952,7 @@
             then * Entails *       Equivalent * torso * Rulebase * And * Or * formula        See
             http://www.ruleml.org/modularization for details       about this modularization
             approach. </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -962,8 +962,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2012-07-05T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!-- necessary for schematron -->
@@ -1413,7 +1413,7 @@
             [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
             "Modularization of XHTML" (REC-xhtml-modularization-20010410)
             [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -1422,8 +1422,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-22T29:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -1463,7 +1463,7 @@
             atom_module.xsd Version: 1.0 Last Modification: 2012-02-21 This module declares
             the following RuleML elements and attributes: * Atom * op * Rel * degree See
             http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -1473,8 +1473,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2012-07-05T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -1678,7 +1678,7 @@
             slot_module.xsd Version: 1.0 Last Modification: 2011-07-16 This module declares the
             following       RuleML element and attributes: * slot        See
             http://www.ruleml.org/modularization for details about this modularization approach.     </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -1688,8 +1688,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-07-16T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -1735,7 +1735,7 @@
             Reify as       well as including a number of complex types for use in expicitly-typed
             data Nodes. See       http://www.ruleml.org/modularization for details about this
             modularization approach.     </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -1745,8 +1745,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2012-04-03T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -1910,7 +1910,7 @@
             declares       the following RuleML elements and attributes: * Expr * op * Fun * Plex *
             @per See       http://www.ruleml.org/modularization for details about this
             modularization approach. </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -1920,8 +1920,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-10-05T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
         <!-- necessary for schematron -->
         <!-- 
@@ -2233,7 +2233,7 @@
             declares the following       RuleML elements: * repo * resl See
             http://www.ruleml.org/modularization for details about this       modularization
             approach. </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -2243,8 +2243,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-07-05T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -2299,7 +2299,7 @@
             equality_module.xsd Version: 1.0 Last Modification: 2012-02-21 [Tara Athan] This module
             declares the following RuleML elements and attributes: * Equal * left * right        See
             http://www.ruleml.org/modularization for details about this modularization approach. </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -2309,8 +2309,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2012-02-21T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -3054,7 +3054,7 @@
             Reaction RuleML elements and attributes:                      * Rule           * on
             * if           * then           * do           * after                     * else
             * elseDo           * elseAfter                          </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -3063,8 +3063,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -3314,7 +3314,7 @@
             negation   * Naf           negation as failure (inflationary negation in production
             rules), weak negation   * Neg           classical negation, strong negation   * weak
             * strong   * formula        </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -3323,8 +3323,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-22T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -3507,7 +3507,7 @@
             generic quantifier (used in quantification metatag)   * Forall  predefined inner
             quantifier (used in quantification metatag)   * Exist   predefined inner quantifier
             (used in qualification metatag)       </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -3516,8 +3516,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-22T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -3651,7 +3651,7 @@
             evaluation metatag)    either by referecing external existing profiles or by defining
             them internally.   File: profile_module.xsd   Version: 1.0   Last Modification:
             2011-03-22      * Profile         generic semantic profile       </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -3660,8 +3660,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-22T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -3728,7 +3728,7 @@
             Reaction RuleML.    File: time_module.xsd    Version: 1.0    Last Modification:
             2011-03-29     This schema declares the following Reaction RuleML elements and
             attributes:       * Time    </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -3737,8 +3737,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -3869,7 +3869,7 @@
             Reaction RuleML.    File: spatial_module.xsd    Version: 1.0    Last Modification:
             2011-03-29        This schema declares the following Reaction RuleML elements and
             attributes:        * Spatial       </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -3878,8 +3878,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -4009,7 +4009,7 @@
             for Reaction RuleML.    File: interval_module.xsd    Version: 1.0    Last Modification:
             2011-03-29     This schema declares the following Reaction RuleML elements and
             attributes:       * Interval    </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -4018,8 +4018,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -4144,7 +4144,7 @@
             WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
             "Modularization of XHTML" (REC-xhtml-modularization-20010410)
             [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -4153,8 +4153,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-22T29:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--(After | Before | Any | Every | Timer | Operator)-->
@@ -4405,7 +4405,7 @@
             RuleML.    File: event_module.xsd    Version: 1.0    Last Modification: 2011-03-29
             This schema declares the following Reaction RuleML elements and attributes:        *
             Action       </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -4414,8 +4414,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -4551,7 +4551,7 @@
             [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
             "Modularization of XHTML" (REC-xhtml-modularization-20010410)
             [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -4560,8 +4560,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-22T29:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--( Succession | Choice | Flow | Loop | Operator )-->
@@ -4615,7 +4615,7 @@
             Reaction RuleML.    File: event_module.xsd    Version: 1.0    Last Modification:
             2011-03-29     This schema declares the following Reaction RuleML elements and
             attributes:       * Event    </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -4624,8 +4624,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -4772,7 +4772,7 @@
             "Modularization of XHTML in XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/],
             which will soon be integrated with    "Modularization of XHTML"
             (REC-xhtml-modularization-20010410)    [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -4781,8 +4781,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-22T29:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--( Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operator )-->
@@ -4943,7 +4943,7 @@
             [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
             "Modularization of XHTML" (REC-xhtml-modularization-20010410)
             [http://www.w3.org/TR/xhtml-modularization/].       </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -4952,8 +4952,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--
@@ -5300,7 +5300,7 @@
             XHTML in XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be
             integrated with    "Modularization of XHTML" (REC-xhtml-modularization-20010410)
             [http://www.w3.org/TR/xhtml-modularization/].       </xs:documentation>
-        <xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+        
         <xs:appinfo>
             <dc:title>Reaction RuleML Schema</dc:title>
             <dc:version>1.0</dc:version>
@@ -5309,8 +5309,8 @@
             <dc:description>custom-built main module for Reaction RuleML</dc:description>
             <dc:date>2011-03-29T23:11:17-0300</dc:date>
             <dc:language>en</dc:language>
-            <dcterms:rights>LGPL-3.0</dcterms:rights>
-            <dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
     <!--

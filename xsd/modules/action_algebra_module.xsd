@@ -27,7 +27,7 @@
 			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
 			[http://www.w3.org/TR/xhtml-modularization/].
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>Reaction RuleML Schema</dc:title>
 			<dc:version>1.0</dc:version>
@@ -36,8 +36,8 @@
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
 			<dc:date>2011-03-22T29:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>  
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>		
 	</xs:annotation>		
 	

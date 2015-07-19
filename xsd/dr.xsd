@@ -16,30 +16,6 @@
 			Version: 1.02
 			Last Modification: 2015-07-19
 			
-			This schema declares the following Reaction RuleML elements and attributes:
-				  								  
-				  * rename Implies into Rule (if-then-else)
-				  * extends RuleML by adding meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends Assert, Retract by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification,  @safety and @size
-				  * extends Query by adding Negation, Naf, Neg Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
-				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends if and then by adding Time, Spatial, Interval
-				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
-				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification and Time, Spatial, Interval
-				  * extends slot by adding Time, Spatial, Interval
-				  * extends oid by adding Time, Spatial, Interval
-				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
-				  * extends Rel by adding @per	
-				  * extends And/Or by adding Negation, Neg, Naf, Rule
-				  * extends torso by  Negation, Neg, Naf 
-				  * extends @type to be of type termOrCurieOrIRI.datatype
-				  * add Negation, Neg, Naf 
-				  * add Time, Interval, Spatial
-				  * add Quantifier, Forall, Exists (quantification) 
-				  * add @key, @keyref (with key and keyref of type curieORAbsIRI)
-
-			 Rule is the core construct for all types of rules in Reaction RuleML.			 
-
 		</xs:documentation>
 		
 		<xs:appinfo>
@@ -285,9 +261,9 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
+     In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval + Allen operators
     
-     content model: (Atom | Time | Spatial | Interval)
+     content model: (Atom | Time | Spatial | Interval | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation))
           
 	-->
 	
@@ -297,6 +273,8 @@
 			<xs:element name="Time" type="Time-formula.type"/>
 			<xs:element name="Spatial" type="Spatial-formula.type"/>
 			<xs:element name="Interval" type="Interval-formula.type"/>
+			<xs:group ref="interval_algebra_group.content"/>	
+			
 		</xs:choice>
 	</xs:group>
 	

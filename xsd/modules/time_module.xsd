@@ -82,7 +82,7 @@
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
 									<xs:element name="arg" type="arg_time.type"/>
-									<xs:group ref="time_primitives.content"/>
+									<xs:group ref="arg_time.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
@@ -123,7 +123,7 @@
 								<xs:sequence>
 									<xs:choice maxOccurs="unbounded">
 										<xs:element name="arg" type="arg_time.type"/>
-										<xs:group ref="time_primitives.content"/>
+										<xs:group ref="arg_time.content"/>
 									</xs:choice>
 									<xs:element ref="repo" minOccurs="0"/>
 								</xs:sequence>

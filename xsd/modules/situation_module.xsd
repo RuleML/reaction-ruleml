@@ -81,7 +81,7 @@
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
 									<xs:element name="arg" type="arg_situation.type"/>
-									<xs:group ref="situation_primitives.content"/>
+									<xs:group ref="arg_situation.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
@@ -121,7 +121,7 @@
 								<xs:sequence>
 									<xs:choice maxOccurs="unbounded">
 										<xs:element name="arg" type="arg_situation.type"/>
-										<xs:group ref="situation_primitives.content"/>
+										<xs:group ref="arg_situation.content"/>
 									</xs:choice>
 									<xs:element ref="repo" minOccurs="0"/>
 								</xs:sequence>

@@ -59,7 +59,7 @@
 	</xs:annotation>		
 	
 	
-	<!--(After | Before | Any | Every | Timer | Operation)-->
+	<!--(After | Before | Any | Every | Timer )-->
 	
 	<xs:group name="spatial_temporal_algebra_group.content">
 		<xs:choice>
@@ -67,14 +67,11 @@
 			<xs:element ref="Before"/>
 			<xs:element ref="Every"/>
 			<xs:element ref="Any"/>			
-			<xs:element ref="Timer"/>
-			<xs:element name="Operation" type="Any.type"/> 
+			<xs:element ref="Timer"/> 
 		</xs:choice>
 	</xs:group>	
 
 	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets |  Finishes ) -->
-	
-	<!-- Note: Equal and Operation is already defined -->
 	
 	<xs:group name="interval_algebra_group.content">
 		<xs:choice>
@@ -274,7 +271,7 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Finishes
       
       content model: 
-      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ([arg, arg] | [Interval, Interval])
+      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation)) , (arg | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? )
       
       attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -285,16 +282,16 @@
 	</xs:attributeGroup>
 	<xs:group name="IntervalAlgebraOperator.content">
 		<xs:sequence>
-			<xs:element ref="degree" minOccurs="0"/>
 			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
 			<xs:sequence>
 				<xs:choice>
 					<xs:element name="arg" type="arg_interval.type"/>
-					<xs:element name="Interval" type="Interval-term.type"/>	
+					<xs:group ref="arg_interval.content"/>
 				</xs:choice>
 				<xs:choice>
 					<xs:element name="arg" type="arg_interval.type"/>
-					<xs:element name="Interval" type="Interval-term.type"/>	
+					<xs:group ref="arg_interval.content"/>
 				</xs:choice>	
 			</xs:sequence>
 		</xs:sequence>

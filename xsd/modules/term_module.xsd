@@ -33,10 +33,10 @@
 		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
 
 		content model: 
-		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
-		in PR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
-		in ECA RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
+		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Operator)
+		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation  | Operator)
+		in PR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex  | Operator)
+		in ECA RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action  | Operator)
 
     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 	-->

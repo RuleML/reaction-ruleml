@@ -48,10 +48,10 @@
        interval ontology of Reaction RuleML (defining different types of intervals).
 		
 	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex| (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?])) 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?] )) 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | content | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | | (After | Before | Any | Every | Timer | Operation)) , (arg | content | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? ) 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation)) , (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? ) 
     PR Reaction RuleML: not used in PR Reaction RuleML 
-	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation)), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))?])) 
+	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation)) , (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? ) 
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
@@ -64,11 +64,18 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice minOccurs="0">
-				<xs:sequence><xs:element name="arg" type="arg_interval.type"/><xs:element name="arg" type="arg_interval.type" minOccurs="0"/></xs:sequence>
-				<xs:sequence><xs:group ref="interval_primitives.content"/><xs:group ref="interval_primitives.content" minOccurs="0"/></xs:sequence>
-				<xs:sequence><xs:element name="content" type="interval_anycontent.type"/><xs:element name="content" type="interval_anycontent.type" minOccurs="0"/></xs:sequence>																			
-			</xs:choice>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="arg" type="arg_interval.type"/>
+					<xs:element name="content" type="interval_anycontent.type"/>
+					<xs:group ref="arg_interval.content"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">
+					<xs:element name="arg" type="arg_interval.type"/>
+					<xs:element name="content" type="interval_anycontent.type"/>
+					<xs:group ref="arg_interval.content"/>
+				</xs:choice>	
+			</xs:sequence>		
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="Interval-formula.type">
@@ -86,11 +93,16 @@
 	<xs:group name="Interval-term.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
-			<xs:choice minOccurs="0">
-				<xs:sequence><xs:element name="arg" type="arg_interval.type"/><xs:element name="arg" type="arg_interval.type" minOccurs="0"/></xs:sequence>
-				<xs:sequence><xs:group ref="interval_primitives.content"/><xs:group ref="interval_primitives.content" minOccurs="0"/></xs:sequence>
-				<xs:sequence><xs:element name="content" type="interval_anycontent.type"/><xs:element name="content" type="interval_anycontent.type" minOccurs="0"/></xs:sequence>																			
-			</xs:choice>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="arg" type="arg_interval.type"/>
+					<xs:group ref="arg_interval.content"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">
+					<xs:element name="arg" type="arg_interval.type"/>
+					<xs:group ref="arg_interval.content"/>
+				</xs:choice>	
+			</xs:sequence>		
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="Interval-term.type">
@@ -106,10 +118,10 @@
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
      
      content model:  
-     in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)
-     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation) )
+     in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))
+     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation) )
      not used in PR Reaction RuleML     
-     ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)
+     ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (After | Before | Any | Every | Timer | Operation))
      
      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->

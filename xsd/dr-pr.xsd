@@ -11,7 +11,7 @@
 			This layer defines the combined Derivation Rule and Production Rule dialect of Reaction RuleML.			
 			
 			File: dr-pr.xsd
-			Version: 1.0
+			Version: 1.02
 			Last Modification: 2011-03-22
 			
 			This schema declares the following Reaction RuleML elements and attributes:
@@ -329,9 +329,9 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-     In the DR-PR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval
+     In the DR-PR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval and additional functional algebra operator
     
-     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval)
+     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | (After | Before | Any | Every | Timer | Operation))
           
 	-->
 	
@@ -343,39 +343,37 @@
 			<xs:element ref="Plex"/>
 			<xs:element ref="Time"/>
 			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>	
+			<xs:element ref="Interval"/>
+			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
-		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
+		in DR-PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
-		in DR-PR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
+		in DR-PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
 	-->
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- Interval primitives
 		content model: 
-		in DR-PR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))  -->
+		in DR-PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)  -->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>
-			<xs:group ref="arg.content"/>	
-			<xs:group ref="interval_algebra_group.content"/>			
+			<xs:group ref="arg.content"/>		
 		</xs:choice>
 	</xs:group>
 
@@ -410,7 +408,7 @@
 
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
-		in DR-PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex |  Succession | Choice | Flow | Loop | Operation)
+		in DR-PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | ( Succession | Choice | Flow | Loop | Operation) )
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>

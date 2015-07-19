@@ -319,7 +319,7 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action)
+		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | (After | Before | Any | Every | Timer | Operation))
           
 	-->
 	
@@ -333,45 +333,43 @@
 			<xs:element ref="Spatial"/>
 			<xs:element ref="Interval"/>
 			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>	
+			<xs:element ref="Action"/>
+			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
 
-		in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
+		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
 
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>	
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
 
-		in ECA Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
+		in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
 
 	-->
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>	
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- Interval primitives
 		content model: 
 		
-		in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))  
+		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)   
 	-->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>	
 			<xs:group ref="arg.content"/>	
-			<xs:group ref="interval_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 

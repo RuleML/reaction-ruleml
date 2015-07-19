@@ -1453,7 +1453,7 @@
             </xs:choice>
         </xs:sequence>
     </xs:group>
-    <xs:complexType name="ConnectiveOperation.type">
+    <xs:complexType name="Operation-formula.type">
         <xs:group ref="ConnectiveOperation.content"/>
         <xs:attributeGroup ref="ConnectiveOperation.attlist"/>
     </xs:complexType>
@@ -3370,7 +3370,7 @@
     </xs:attributeGroup>
     <xs:group name="formula-negation.content">
         <xs:choice>
-            <xs:element form="qualified" name="Operation" type="ConnectiveOperation.type"/>
+            <xs:element form="qualified" name="Operation" type="Operation-formula.type"/>
             <xs:element ref="Equal"/>
             <xs:element ref="Negation"/>
             <xs:element ref="Neg"/>
@@ -4696,7 +4696,7 @@
 	-->
     <xs:group name="query-connective.content">
         <xs:choice>
-            <xs:element name="Operation" type="ConnectiveOperation.type"/>
+            <xs:element name="Operation" type="Operation-formula.type"/>
             <xs:element name="And" type="And-query.type"/>
             <xs:element name="Or" type="Or-query.type"/>
             <xs:element ref="Negation"/>
@@ -4715,7 +4715,7 @@
 	-->
     <xs:group name="inner-connective.content">
         <xs:choice>
-            <xs:element name="Operation" type="ConnectiveOperation.type"/>
+            <xs:element name="Operation" type="Operation-formula.type"/>
             <xs:element name="And" type="And-inner.type"/>
             <xs:element name="Or" type="Or-inner.type"/>
             <xs:element ref="Negation"/>
@@ -4734,7 +4734,7 @@
 	-->
     <xs:group name="outer-connective.content">
         <xs:choice>
-            <xs:element name="Operation" type="ConnectiveOperation.type"/>
+            <xs:element name="Operation" type="Operation-formula.type"/>
             <xs:element ref="Negation"/>
             <xs:element ref="Neg"/>
             <xs:element ref="Equal"/>

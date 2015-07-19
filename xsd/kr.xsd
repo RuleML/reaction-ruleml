@@ -32,7 +32,7 @@
 	<xs:include schemaLocation="modules/desc_module.xsd"/> <!-- extended descriptors in Reaction RuleML -->
 	<xs:include schemaLocation="modules/quantifier_module.xsd"/>
 	<xs:include schemaLocation="modules/connective_module.xsd"/>
-	<xs:include schemaLocation="modules/connective_operator_module.xsd"/>	
+	<xs:include schemaLocation="modules/operation_module.xsd"/>	
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
@@ -157,7 +157,7 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperation.type"/>
+			<xs:element name="Operation" type="Operation-formula.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -178,7 +178,7 @@
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperation.type"/>
+			<xs:element name="Operation" type="Operation-formula.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -199,7 +199,7 @@
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperation.type"/>
+			<xs:element name="Operation" type="Operation-formula.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 

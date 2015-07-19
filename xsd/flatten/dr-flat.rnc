@@ -949,7 +949,7 @@ ConnectiveOperation.content =
   meta-roles.content,
   (element formula { formula-rulebase.type }
    | formula-rulebase.content)*
-ConnectiveOperation.type =
+Operation-formula.type =
   ConnectiveOperation.content, ConnectiveOperation.attlist
 # note that elementFormDefault is qualified because of local declarations
 
@@ -2080,7 +2080,7 @@ start |= Negation
 Negation = element Negation { Negation.type }
 formula-negation.attlist = xml.attlist
 formula-negation.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | Equal
   | Negation
   | Neg
@@ -2814,7 +2814,7 @@ rule-implementation.content = DerivationRule.content
 # content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
 #
 query-connective.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | element And { And-query.type }
   | element Or { Or-query.type }
   | Negation
@@ -2828,7 +2828,7 @@ query-connective.content =
 # content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
 #
 inner-connective.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | element And { And-inner.type }
   | element Or { Or-inner.type }
   | Negation
@@ -2842,7 +2842,7 @@ inner-connective.content =
 # content model: (Operation | Negation | Neg | Equal )
 #
 outer-connective.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | Negation
   | Neg
   | Equal

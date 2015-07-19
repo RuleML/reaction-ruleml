@@ -38,7 +38,7 @@
 	<xs:include schemaLocation="modules/desc_module.xsd"/> <!-- extended descriptors in Reaction RuleML -->
 	<xs:include schemaLocation="modules/quantifier_module.xsd"/>
 	<xs:include schemaLocation="modules/connective_module.xsd"/>
-	<xs:include schemaLocation="modules/connective_operator_module.xsd"/>
+	<xs:include schemaLocation="modules/operation_module.xsd"/>
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>

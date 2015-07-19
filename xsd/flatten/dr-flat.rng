@@ -1770,7 +1770,7 @@
 </zeroOrMore>
         
     </define>
-    <define name="ConnectiveOperation.type">
+    <define name="Operation-formula.type">
         <ref name="ConnectiveOperation.content"/>
         <ref name="ConnectiveOperation.attlist"/>
     </define>
@@ -4098,7 +4098,7 @@
     <define name="formula-negation.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperation.type"/>
+<ref name="Operation-formula.type"/>
 </element>
             <ref name="Equal"/>
             <ref name="Negation"/>
@@ -5786,7 +5786,7 @@
     <define name="query-connective.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperation.type"/>
+<ref name="Operation-formula.type"/>
 </element>
             <element name="And">
 <ref name="And-query.type"/>
@@ -5811,7 +5811,7 @@
     <define name="inner-connective.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperation.type"/>
+<ref name="Operation-formula.type"/>
 </element>
             <element name="And">
 <ref name="And-inner.type"/>
@@ -5836,7 +5836,7 @@
     <define name="outer-connective.content">
         <choice>
             <element name="Operation">
-<ref name="ConnectiveOperation.type"/>
+<ref name="Operation-formula.type"/>
 </element>
             <ref name="Negation"/>
             <ref name="Neg"/>

@@ -72,7 +72,10 @@
 		</xs:choice>
 	</xs:group>	
 
-	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation) -->
+	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets |  Finishes | Operation) -->
+	
+	<!-- Note: Equal is already defined -->
+	
 	<xs:group name="interval_algebra_group.content">
 		<xs:choice>
 			<xs:element ref="During"/>
@@ -81,7 +84,6 @@
 			<xs:element ref="Precedes"/>
 			<xs:element ref="Succeeds"/>
 			<xs:element ref="Meets"/>
-			<xs:element name ="Equal"  type="IntervalAlgebraOperator.type"/>
 			<xs:element ref="Finishes"/>
 			<xs:element name="Operation" type="IntervalAlgebraOperator.type"/>
 		</xs:choice>

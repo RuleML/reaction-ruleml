@@ -55,12 +55,12 @@
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="Interval.attlist">
+	<xs:attributeGroup name="Interval-formula.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="Interval.content">
+	<xs:group name="Interval-formula.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
 			<xs:element ref="degree" minOccurs="0"/>
@@ -71,11 +71,32 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="Interval.type">
-		<xs:group ref="Interval.content"/>
-		<xs:attributeGroup ref="Interval.attlist"/>
+	<xs:complexType name="Interval-formula.type">
+		<xs:group ref="Interval-formula.content"/>
+		<xs:attributeGroup ref="Interval-formula.attlist"/>
 	</xs:complexType>
-	<xs:element name="Interval" type="Interval.type"/>
+	
+	<!-- Interval term -->
+	
+	<xs:attributeGroup name="Interval-term.attlist">
+		<xs:attributeGroup ref="term-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Interval-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:choice minOccurs="0">
+				<xs:sequence><xs:element name="arg" type="arg_interval.type"/><xs:element name="arg" type="arg_interval.type" minOccurs="0"/></xs:sequence>
+				<xs:sequence><xs:group ref="interval_primitives.content"/><xs:group ref="interval_primitives.content" minOccurs="0"/></xs:sequence>
+				<xs:sequence><xs:element name="content" type="interval_anycontent.type"/><xs:element name="content" type="interval_anycontent.type" minOccurs="0"/></xs:sequence>																			
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Interval-term.type">
+		<xs:group ref="Interval-term.content"/>
+		<xs:attributeGroup ref="Interval-term.attlist"/>
+	</xs:complexType>
 
 	<!--
      *** arg ***

@@ -309,9 +309,9 @@
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
 			<xs:element name="Atom" type="Atom.type"/>
-			<xs:element ref="Time"/>
-			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>
+			<xs:element name="Time" type="Time-formula.type"/>
+			<xs:element name="Spatial" type="Spatial-formula.type"/>
+			<xs:element name="Interval" type="Interval-formula.type"/>
 			<xs:element ref="Event"/>			
 			<xs:element ref="Action"/>	
 		</xs:choice>
@@ -332,9 +332,9 @@
 			<xs:element ref="Data"/>
 			<xs:element ref="Expr"/>
 			<xs:element ref="Plex"/>
-			<xs:element ref="Time"/>
-			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>
+			<xs:element name="Time" type="Time-term.type"/>
+			<xs:element name="Spatial" type="Spatial-term.type"/>
+			<xs:element name="Interval" type="Interval-term.type"/>
 			<xs:element ref="Event"/>			
 			<xs:element ref="Action"/>	
 			<xs:group ref="spatial_temporal_algebra_group.content"/>

@@ -317,9 +317,9 @@
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
 			<xs:element name="Atom" type="Atom.type"/>
-			<xs:element ref="Time"/>
-			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>
+			<xs:element name="Time" type="Time-formula.type"/>
+			<xs:element name="Spatial" type="Spatial-formula.type"/>
+			<xs:element name="Interval" type="Interval-formula.type"/>
 			<xs:group ref="performative_primitives.content"/>
 		</xs:choice>
 	</xs:group>
@@ -331,7 +331,7 @@
     
      In the DR-PR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval and additional functional algebra operator
     
-     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | (After | Before | Any | Every | Timer | Operation))
+     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | (After | Before | Any | Every | Timer | Operation)
           
 	-->
 	
@@ -341,9 +341,9 @@
 			<xs:element ref="Data"/>
 			<xs:element ref="Expr"/>
 			<xs:element ref="Plex"/>
-			<xs:element ref="Time"/>
-			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>
+			<xs:element name="Time" type="Time-term.type"/>
+			<xs:element name="Spatial" type="Spatial-term.type"/>
+			<xs:element name="Interval" type="Interval-term.type"/>	
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>

@@ -140,7 +140,7 @@
 	</xs:attributeGroup>
 	<xs:group name="After.content">
 		<xs:sequence>
-			<xs:group ref="Interval.content"/>	
+			<xs:group ref="Interval-term.content"/>	
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="After.type">
@@ -249,7 +249,7 @@
 	</xs:attributeGroup>
 	<xs:group name="Timer.content">
 		<xs:sequence>
-			<xs:group ref="Interval.content"/>	
+			<xs:group ref="Interval-term.content"/>	
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="Timer.type">
@@ -289,11 +289,11 @@
 			<xs:sequence>
 				<xs:choice>
 					<xs:element name="arg" type="arg_interval.type"/>
-					<xs:element ref="Interval"/>	
+					<xs:element name="Interval" type="Interval-term.type"/>	
 				</xs:choice>
 				<xs:choice>
 					<xs:element name="arg" type="arg_interval.type"/>
-					<xs:element ref="Interval"/>	
+					<xs:element name="Interval" type="Interval-term.type"/>	
 				</xs:choice>	
 			</xs:sequence>
 		</xs:sequence>

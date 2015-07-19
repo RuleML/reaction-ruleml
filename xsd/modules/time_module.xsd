@@ -62,12 +62,13 @@
 	
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="Time.attlist">
+	
+	<xs:attributeGroup name="Time-formula.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="Time.content">
+	<xs:group name="Time-formula.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
@@ -96,12 +97,52 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="Time.type">
-		<xs:group ref="Time.content"/>
-		<xs:attributeGroup ref="Time.attlist"/>
+	<xs:complexType name="Time-formula.type">
+		<xs:group ref="Time-formula.content"/>
+		<xs:attributeGroup ref="Time-formula.attlist"/>
 	</xs:complexType>
-	<xs:element name="Time" type="Time.type"/>
+	
+	
+	<!-- Time term -->
 
+	<xs:attributeGroup name="Time-term.attlist">
+		<xs:attributeGroup ref="term-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Time-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="resl" minOccurs="0"/>
+					<xs:choice minOccurs="0">
+						<xs:sequence>
+							<xs:choice>
+								<xs:sequence>
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="arg" type="arg_time.type"/>
+										<xs:group ref="time_primitives.content"/>
+									</xs:choice>
+									<xs:element ref="repo" minOccurs="0"/>
+								</xs:sequence>
+								<xs:element ref="repo"/>
+							</xs:choice>
+							<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="resl" minOccurs="0"/>
+						</xs:sequence>
+					</xs:choice>
+				</xs:sequence>
+				<xs:element name="content" type="time_anycontent.type" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Time-term.type">
+		<xs:group ref="Time-term.content"/>
+		<xs:attributeGroup ref="Time-term.attlist"/>
+	</xs:complexType>
+	
 
 	<!--
      *** arg ***

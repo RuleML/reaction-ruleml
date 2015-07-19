@@ -61,12 +61,12 @@
 				
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="Spatial.attlist">
+	<xs:attributeGroup name="Spatial-formula.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="Spatial.content">
+	<xs:group name="Spatial-formula.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
 			<xs:element ref="degree" minOccurs="0"/>
@@ -95,11 +95,51 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="Spatial.type">
-		<xs:group ref="Spatial.content"/>
-		<xs:attributeGroup ref="Spatial.attlist"/>
+	<xs:complexType name="Spatial-formula.type">
+		<xs:group ref="Spatial-formula.content"/>
+		<xs:attributeGroup ref="Spatial-formula.attlist"/>
 	</xs:complexType>
-	<xs:element name="Spatial" type="Spatial.type"/>
+
+
+	<!-- Spatial term -->
+
+	<xs:attributeGroup name="Spatial-term.attlist">
+		<xs:attributeGroup ref="term-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Spatial-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="resl" minOccurs="0"/>
+					<xs:choice minOccurs="0">
+						<xs:sequence>
+							<xs:choice>
+								<xs:sequence>
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="arg" type="arg_spatial.type"/>									
+										<xs:group ref="spatial_primitives.content"/>
+									</xs:choice>
+									<xs:element ref="repo" minOccurs="0"/>
+								</xs:sequence>
+								<xs:element ref="repo"/>
+							</xs:choice>
+							<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="resl" minOccurs="0"/>
+						</xs:sequence>
+					</xs:choice>
+				</xs:sequence>
+				<xs:element name="content" type="spatial_anycontent.type" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Spatial-term.type">
+		<xs:group ref="Spatial-term.content"/>
+		<xs:attributeGroup ref="Spatial-term.attlist"/>
+	</xs:complexType>
 
 	<!--
      *** arg ***

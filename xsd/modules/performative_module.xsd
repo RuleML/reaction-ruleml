@@ -31,12 +31,12 @@
 		*** RuleML ***
 		The n-ary top-level of a RuleML document.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-RuleML
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-RuleML
 			 
-	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Consult|Assert|Retract|Query|Answer|Test)* )
-	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert|Retract|Update|Consult|Query|Answer|Test|Action)* )
-	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert|Retract|Update|Query|Consult|Answer|Test|Action)* )
-	CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)* )
+	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Consult|Assert|Retract|Query|Answer|Test)* )
+	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Assert|Retract|Update|Consult|Query|Answer|Test|Action)* )
+	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Assert|Retract|Update|Query|Consult|Answer|Test|Action)* )
+	CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do|Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)* )
 			
  	 Note: key and keyref object identifier are defined to be unique under the RuleML document root
  	 
@@ -53,7 +53,7 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>     
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="act"/>
+        <xs:element name="do" type="act.type"/>
         <xs:group ref="act.content"/>
       </xs:choice>
     </xs:sequence>
@@ -76,10 +76,10 @@
   </xs:element>
   
   <!--
-    *** act ***
-    The act role of the root element (<RuleML>).
+    *** do ***
+    The do role of the root element (<RuleML>).
     
-    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-act
+    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-do
     
     content model  
     DR/KR Reaction RuleML (Consult|Assert|Retract|Query|Answer|Test)
@@ -102,7 +102,7 @@
     <xs:group ref="act.content"/>
     <xs:attributeGroup ref="act.attlist"/>
   </xs:complexType>
-  <xs:element name="act" type="act.type"/>
+<!--  <xs:element name="do" type="act.type"/> -->
 
   <!--
       *** Consult ***

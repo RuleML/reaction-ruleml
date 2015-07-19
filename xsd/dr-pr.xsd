@@ -7,57 +7,11 @@
 		<xs:documentation xml:lang="en">
           
             The combined Derivation Rule (DR) and Production Rule (PR) dialect of Reaction RuleML 
-			
-			This layer defines the combined Derivation Rule and Production Rule dialect of Reaction RuleML.			
-			
+						
 			File: dr-pr.xsd
 			Version: 1.02
 			Last Modification: 2015-07-19
 			
-			This schema declares the following Reaction RuleML elements and attributes:
-				  								  
-				  * rename Implies into Rule (if-then-else)
-				  * extends RuleML by adding meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends Assert, Retract by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification,  @safety and @size
-				  * extends Query by adding Negation, Naf, Neg Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
-				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends if and then by adding Time, Spatial, Interval
-				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
-				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification and Time, Spatial, Interval
-				  * extends slot by adding Time, Spatial, Interval
-				  * extends oid by adding Time, Spatial, Interval
-				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
-				  * extends Rel by adding @per	
-				  * extends And/Or by adding Negation, Neg, Naf, Rule
-				  * extends torso by  Negation, Neg, Naf 
-				  * extends @type to be of type termOrCurieOrIRI.datatype
-				  * add Negation, Neg, Naf 
-				  * add Time, Interval, Spatial
-				  * add Quantifier, Forall, Exists (quantification) 
-				  * add @key, @keyref (with key and keyref of type curieORAbsIRI)
-				  
-				  * extends Rule by adding on, do, elseDo (alternative action) 
-				  * adds Action and action operators for complex action definitions
-				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
-				  * extends actions by adding @safety (transactional update) and @size
-				  * add meta, scope, guard, evaluation, signature, qualification, quantification
-				  * add generic Operation
-				  * extends Assert, Retract, Update by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification
-				  * extends Query by adding Negation, Naf, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
-				  * extends Rulebase by adding Rule, Negation, Naf, meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
-				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification
-				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
-				  * extends Rel by adding @per	
-				  * extends And/Or by adding Negation, Naf, Rule
-				  * extends torso by  Negation, Naf 
-				  * extends @type to be of type termOrCurieOrIRI.datatype
-				  * add Negation, Naf 				  
-				  * add Quantifier, Forall, Exists (quantification) 
-				  * add @key, @keyref (with key and keyref of type Curie or IRI)
-
-			 Rule is the core construct for all types of rules in Reaction RuleML.			 
-
 		</xs:documentation>
 		
 		<xs:appinfo>
@@ -311,7 +265,7 @@
      In the DR-PR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval
      Update actions can be also used as predicates, i.e. having a value interpretation.
     
-     content model: (Atom | Time | Spatial | Interval | (Assert|Retract|Update|Consult|Query|Answer|Test|Action) )
+     content model: (Atom | Time | Spatial | Interval | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation) | (Assert|Retract|Update|Consult|Query|Answer|Test|Action) )
           
 	-->
 	
@@ -321,6 +275,7 @@
 			<xs:element name="Time" type="Time-formula.type"/>
 			<xs:element name="Spatial" type="Spatial-formula.type"/>
 			<xs:element name="Interval" type="Interval-formula.type"/>
+			<xs:group ref="interval_algebra_group.content"/>
 			<xs:group ref="performative_primitives.content"/>
 		</xs:choice>
 	</xs:group>

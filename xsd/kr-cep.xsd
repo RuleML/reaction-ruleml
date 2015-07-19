@@ -6,63 +6,16 @@
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
           
-           Knowledge Representation Complex Event Processing (CEP) dialect of Reaction RuleML 
-			
-			This layer combines the CEP Rule dialect with the KR Rule dialect of Reaction RuleML.
-			
+           Knowledge Representation Complex Event Processing (KR-CEP) dialect of Reaction RuleML 
+						
 			This allows using logical calculi such as Event Calculus for reasoning with complex events and actions and  
 			allows defining the semantics of the complex event algebra operators in terms of a logical calculus, as pioneered in 
 			ECA RuleML (http://arxiv.org/ftp/cs/papers/0610/0610167.pdf) and used in 
 			rule-based Semantic CEP (http://dx.doi.org/10.1007/978-3-642-04985-9_10)
-			
-			It adds necessary extensions to rules in particular for definitions and processing of complex event and actions,
-			and distributed messaging rules with send and receive actions and message based knowledge interchange.
-			
+						
 			File: kr-cep.xsd
 			Version: 1.02
 			Last Modification: 2015-07-19
-			
-			This schema declares the following Reaction RuleML elements and attributes:
-				  								  
-				  
-				  * extends Rule by adding do, after (post-condition), elseDo (alternative action) and relaxes the rule syntax to arbirary serial combinations of the different parts
-				  * adds messaging reaction rules
-				  * adds Send and Receive actions
-				  * adds Messages
-				  
-				  * adds Event and event operators for complex event definitions
-				  * adds Action and action operators for complex action definitions
-				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
-				  * extends actions by adding @safety (transactional update) and @size
-				  * add meta, scope, guard, evaluation, signature, qualification, quantification
-				  * add generic Operation
-				  * extends Assert, Retract, Update by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification
-				  * extends Query by adding Negation, Naf, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
-				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends if and then, on , do by adding Time, Spatial, Interval
-				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
-				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification and Time, Spatial, Interval
-				  * extends slot by adding Time, Spatial, Interval
-				  * extends oid by adding Time, Spatial, Interval
-				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
-				  * extends Rel by adding @per	
-				  * extends And/Or by adding Negation, Naf, Rule
-				  * extends torso by  Negation, Neg, Naf 
-				  * extends @type to be of type termOrCurieOrIRI.datatype
-				  * add Negation, Naf 				  
-				  * add Quantifier, Forall, Exists (quantification) 
-				  * add @key, @keyref (with key and keyref of type Curie or IRI)
-				  
-				  * extend Assert/Retract by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
-				  * extend Rulebase by Time, Interval, Spatial,  adding Event, Action, Situation, Holds, Initates, Terminstes, Happens
-				  * extend Query by adding Time, Interval, Spatial,  Event, Action, Situation, Holds, Initates, Terminates, Happens
-				  * extend if by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
-				  * extend then by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
-				  * And/Or by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Terminates, Happens
-				  * Negation and Neg by adding Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Termiantes, Happens
-				  * add Time, Interval, Spatial, Event, Action, Situation, Holds, Initates, Termiantes, Happens
-
-			 Rule is the core construct for all types of rules in Reaction RuleML.			 
 
 		</xs:documentation>
 		
@@ -323,7 +276,7 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-    content model: (Atom | Time | Spatial | Interval | Event | Action | Fluent | Holds | Initiates | Terminates | Happens)
+    content model: (Atom | Time | Spatial | Interval | Event | Action | Fluent | Holds | Initiates | Terminates | Happens | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation))
           
 	-->
 	
@@ -333,6 +286,7 @@
 			<xs:element name="Time" type="Time-formula.type"/>
 			<xs:element name="Spatial" type="Spatial-formula.type"/>
 			<xs:element name="Interval" type="Interval-formula.type"/>
+			<xs:group ref="interval_algebra_group.content"/>
 			<xs:element name="Event" type="Event-formula.type"/>			
 			<xs:element name="Action" type="Action-formula.type"/>	
 			<xs:element name="Fluent" type="Fluent-formula.type"/> <!-- only in non-reified calculi used as predicate -->

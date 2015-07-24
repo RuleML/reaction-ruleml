@@ -10,26 +10,26 @@
 			
 			This is the XML Schema spatial module for Reaction RuleML.
 			File: spatial_module.xsd
-			Version: 1.0
-			Last Modification: 2011-03-29
+			Version: 1.02
+			Last Modification: 2015-07-19
 			
 			This schema declares the following Reaction RuleML elements and attributes:
 			
 			* Spatial
 			
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
             <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
 			<dc:date>2015-07-14T17:04:00+0200</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>  
 	</xs:annotation>
 	
@@ -38,7 +38,7 @@
 	*** Spatial ***
 	Explicit generic Spatial construct. 
 	
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Spatial
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Spatial
 	
 	The spatial can be represented internally 
       * with positional arguments <arg>
@@ -48,25 +48,25 @@
       The optional @type attribute defines the type of the spatial
 		
 	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
+	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 	PR Reaction RuleML: not used in PR Reaction RuleML
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( 
+	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
 		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
 				content(xs:any*)* ) ) 
 				
 	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="Spatial.attlist">
+	<xs:attributeGroup name="Spatial-formula.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="Spatial.content">
+	<xs:group name="Spatial-formula.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
 			<xs:element ref="degree" minOccurs="0"/>
@@ -80,7 +80,7 @@
 							<xs:sequence>
 								<xs:choice maxOccurs="unbounded">
 									<xs:element name="arg" type="arg_spatial.type"/>									
-									<xs:group ref="spatial_primitives.content"/>
+									<xs:group ref="arg_spatial.content"/>
 								</xs:choice>
 								<xs:element ref="repo" minOccurs="0"/>
 							</xs:sequence>
@@ -95,18 +95,58 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="Spatial.type">
-		<xs:group ref="Spatial.content"/>
-		<xs:attributeGroup ref="Spatial.attlist"/>
+	<xs:complexType name="Spatial-formula.type">
+		<xs:group ref="Spatial-formula.content"/>
+		<xs:attributeGroup ref="Spatial-formula.attlist"/>
 	</xs:complexType>
-	<xs:element name="Spatial" type="Spatial.type"/>
+
+
+	<!-- Spatial term -->
+
+	<xs:attributeGroup name="Spatial-term.attlist">
+		<xs:attributeGroup ref="term-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Spatial-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>	
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="resl" minOccurs="0"/>
+					<xs:choice minOccurs="0">
+						<xs:sequence>
+							<xs:choice>
+								<xs:sequence>
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="arg" type="arg_spatial.type"/>									
+										<xs:group ref="arg_spatial.content"/>
+									</xs:choice>
+									<xs:element ref="repo" minOccurs="0"/>
+								</xs:sequence>
+								<xs:element ref="repo"/>
+							</xs:choice>
+							<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="resl" minOccurs="0"/>
+						</xs:sequence>
+					</xs:choice>
+				</xs:sequence>
+				<xs:element name="content" type="spatial_anycontent.type" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Spatial-term.type">
+		<xs:group ref="Spatial-term.content"/>
+		<xs:attributeGroup ref="Spatial-term.attlist"/>
+	</xs:complexType>
 
 	<!--
      *** arg ***
      
      Definition of the the arg role for Spatial
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
      
      content model:  
      in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))
@@ -134,7 +174,7 @@
 	<!--
      *** content ***
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
      
      @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
      	See CURIE to IRI and term to IRI translation

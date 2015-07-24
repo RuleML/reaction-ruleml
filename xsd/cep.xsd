@@ -7,61 +7,24 @@
 		<xs:documentation xml:lang="en">
           
            Complex Event Processing (CEP) dialect of Reaction RuleML 
-			
-			This layer defines the CEP Rule dialect of Reaction RuleML.
-			It adds necessary extensions to rules in particular for definitions and processing of complex event and actions,
-			and distributed messaging rules with send and receive actions and message based knowledge interchange.
-			
-			
+					
 			File: cep.xsd
-			Version: 1.0
-			Last Modification: 2011-03-22
+			Version: 1.02
+			Last Modification: 2015-07-19
 			
-			This schema declares the following Reaction RuleML elements and attributes:
-				  								  
-				  
-				  * extends Rule by adding do, after (post-condition), elseDo (alternative action) and relaxes the rule syntax to arbirary serial combinations of the different parts
-				  * adds messaging reaction rules
-				  * adds Send and Receive actions
-				  * adds Messages
-				  
-				  * adds Event and event operators for complex event definitions
-				  * adds Action and action operators for complex action definitions
-				  * add transactional update/action primitives (Assert, Retract, Update)		  				  				  				  
-				  * extends actions by adding @safety (transactional update) and @size
-				  * add meta, scope, guard, evaluation, signature, qualification, quantification
-				  * add generic Operation
-				  * extends Assert, Retract, Update by adding Rule, Negation, Neg, Time, Spatial, Interval,  meta, scope, guard, evaluation, signature, qualification, quantification
-				  * extends Query by adding Negation, Naf, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 				 				  
-				  * extends Rulebase by adding Rule, Negation, Neg, Time, Spatial, Interval, meta, scope, guard, evaluation, signature, qualification, quantification 
-				  * extends if and then, on , do by adding Time, Spatial, Interval
-				  * extends Atom by adding meta, scope, guard, evaluation, signature, qualification, quantification, Time, Spatial, Interval 
-				  * extends Expr, Plex by adding meta, scope, guard, evaluation, signature, qualification, quantification and Time, Spatial, Interval
-				  * extends slot by adding Time, Spatial, Interval
-				  * extends oid by adding Time, Spatial, Interval
-				  * extends Var by adding @mode (input / output mode declaration)				  				  				  
-				  * extends Rel by adding @per	
-				  * extends And/Or by adding Negation, Naf, Rule
-				  * extends torso by  Negation, Neg, Naf 
-				  * extends @type to be of type termOrCurieOrIRI.datatype
-				  * add Negation, Naf 				  
-				  * add Quantifier, Forall, Exists (quantification) 
-				  * add @key, @keyref (with key and keyref of type Curie or IRI)
-
-			 Rule is the core construct for all types of rules in Reaction RuleML.			 
-
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>CEP Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>Reaction RuleML 1.02</dc:subject> 
 			<dc:description>spatio-temporal Derivation Rule dialect of Reaction RuleML</dc:description> 
-			<dc:date>2011-03-22T23:11:17-0300</dc:date>
+			<dc:date>2015-03-22T23:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> 
+			<dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo> 
 	</xs:annotation>
 
@@ -71,7 +34,7 @@
 	<xs:include schemaLocation="modules/desc_module.xsd"/> <!-- extended descriptors in Reaction RuleML -->
 	<xs:include schemaLocation="modules/quantifier_module.xsd"/>
 	<xs:include schemaLocation="modules/connective_module.xsd"/>
-	<xs:include schemaLocation="modules/connective_operator_module.xsd"/>
+	<xs:include schemaLocation="modules/operation_module.xsd"/>
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
@@ -202,7 +165,7 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperation.type"/>
+			<xs:element name="Operation" type="Operation-formula.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
@@ -223,7 +186,7 @@
 	
 	<xs:group name="inner-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperation.type"/>
+			<xs:element name="Operation" type="Operation-formula.type"/>
 			<xs:element name="And" type="And-inner.type"/>
 			<xs:element name="Or" type="Or-inner.type"/>
 			<xs:element ref="Negation"/>
@@ -243,7 +206,7 @@
 	
 	<xs:group name="outer-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="ConnectiveOperation.type"/>
+			<xs:element name="Operation" type="Operation-formula.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 			
@@ -302,18 +265,19 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-    content model: (Atom | Time | Spatial | Interval | Event | Action)
+    content model: (Atom | Time | Spatial | Interval | Event | Action | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation))
           
 	-->
 	
 	<xs:group name="extended-signature-predicate-sorts.content">
 		<xs:choice>
 			<xs:element name="Atom" type="Atom.type"/>
-			<xs:element ref="Time"/>
-			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>	
+			<xs:element name="Time" type="Time-formula.type"/>
+			<xs:element name="Spatial" type="Spatial-formula.type"/>
+			<xs:element name="Interval" type="Interval-formula.type"/>
+			<xs:group ref="interval_algebra_group.content"/>
+			<xs:element name="Event" type="Event-formula.type"/>			
+			<xs:element name="Action" type="Action-formula.type"/>	
 		</xs:choice>
 	</xs:group>
 	
@@ -322,7 +286,7 @@
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action)
+		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | (After | Before | Any | Every | Timer | Operation))
           
 	-->
 	
@@ -332,49 +296,47 @@
 			<xs:element ref="Data"/>
 			<xs:element ref="Expr"/>
 			<xs:element ref="Plex"/>
-			<xs:element ref="Time"/>
-			<xs:element ref="Spatial"/>
-			<xs:element ref="Interval"/>
-			<xs:element ref="Event"/>			
-			<xs:element ref="Action"/>	
+			<xs:element name="Time" type="Time-term.type"/>
+			<xs:element name="Spatial" type="Spatial-term.type"/>
+			<xs:element name="Interval" type="Interval-term.type"/>
+			<xs:element name="Event" type="Event-term.type"/>			
+			<xs:element name="Action" type="Action-term.type"/>	
+			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
 
-		in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
+		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) 
 
 	-->
 	<xs:group name="time_primitives.content">
 		<xs:choice>	
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
 
-		in CEP Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
+		in CEP Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
 
 	-->
 	<xs:group name="spatial_primitives.content">
 		<xs:choice>	
 			<xs:group ref="arg.content"/>
-			<xs:group ref="spatial_temporal_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- Interval primitives
 		content model: 
 		
-		in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (During | Overlaps | Starts | Precedes | Succeedes | Meets | Equals | Finishes | Operation))  
+		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)   
 	-->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>	
 			<xs:group ref="arg.content"/>	
-			<xs:group ref="interval_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 
@@ -390,13 +352,11 @@
 
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
-		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )		
+		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )		
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>
 			<xs:group ref="arg.content"/>
-			<xs:group ref="event_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
 
@@ -407,8 +367,8 @@
 	
 	<xs:group name="event_group.content">
 		<xs:choice>
-			<xs:element ref="Event"/>
-			<xs:element ref="Action"/>
+			<xs:element name="Event" type="Event-formula.type"/>
+			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:element ref="Receive"/>
 			<xs:element ref="Answer"/>
 			<xs:group ref="event_algebra_group.content"/>
@@ -418,12 +378,11 @@
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action |  Succession | Choice | Flow | Loop | Operation )
+		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
 			<xs:group ref="arg.content"/>
-			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -436,7 +395,7 @@
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
-			<xs:element ref="Action"/>
+			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:element ref="Query"/> 
 			<xs:element ref="Send"/>
 			<xs:element ref="Consult"/>
@@ -473,7 +432,7 @@
 			<xs:element ref="Test"/>  <!-- for test-driven verification, validation and integrity testing -->
 			<xs:element ref="Send"/>
 			<xs:element ref="Receive"/>
-			<xs:element ref="Action"/>
+			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:element ref="Consult"/>
 		</xs:choice>
 	</xs:group>

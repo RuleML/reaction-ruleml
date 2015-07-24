@@ -69,7 +69,7 @@ start =
 #	*** RuleML ***
 #	The n-ary top-level of a RuleML document.
 # 
-#	See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-RuleML
+#	See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-RuleML
 # 
 # DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Consult|Assert|Retract|Query|Answer|Test)* )
 # PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act | Assert|Retract|Update|Consult|Query|Answer|Test|Action)* )
@@ -95,7 +95,7 @@ RuleML =
 # *** act ***
 # The act role of the root element (<RuleML>).
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-act
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-act
 # 
 # content model  
 # DR/KR Reaction RuleML (Consult|Assert|Retract|Query|Answer|Test)
@@ -112,7 +112,7 @@ act = element act { act.type }
 # *** Consult ***
 # Consult (import) performative / action 
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Consult
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Consult
 # 
 # dynamically "consults" (imports) knowledge resource, e.g. a message, documents or external resource (with the @iri attribute).
 # 
@@ -135,7 +135,7 @@ start |= Consult
 Consult = element Consult { Consult.type }
 #  *** payload ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-payload
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-payload
 # 
 #  content model: (RuleML | Reify | Var)
 # 
@@ -156,7 +156,7 @@ payload = element payload { payload.type }
 #	     A KQML-like performative acting as a wrapper specifying that its content is
 #	     asserted, making an 'implicit <Rulebase>' assumption.
 # 
-#	     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Assert 
+#	     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Assert 
 # 
 #	     content model:
 #	     DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
@@ -178,7 +178,7 @@ Assert = element Assert { Assert.type }
 #	    A performative similar to KQML's 'untell' that acts as a wrapper specifying that its
 #	    content is to be deleted, making an 'implicit <Rulebase>' assumption.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Retract
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Retract
 # 
 #	    content model:
 #	    DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
@@ -199,7 +199,7 @@ Retract = element Retract { Retract.type }
 # *** Update ***
 # Update action
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Update
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Update
 # 
 # content model:
 # 
@@ -229,7 +229,7 @@ Update = element Update { Update.type }
 #	    A KQML-like performative acting as a wrapper specifying that its content is
 #	    queried, making an 'implicit <Rulebase>' assumption.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Query
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Query
 # 
 #	    content model:
 #	    DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?,  (formula | Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
@@ -250,7 +250,7 @@ Query = element Query { Query.type }
 #       *** Answer ***
 #       Answer performative / action 
 # 
-#       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Answer
+#       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Answer
 # 
 #       It delivers the answer to a Query . The answer is given in terms of solved formulas, e.g.
 # 
@@ -313,7 +313,7 @@ Answer = element Answer { Answer.type }
 #	  *** formula ***
 #	  The formula role of a performative (<Answer>).
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
 # 
 #	  content model (below Answer formula): 
 #	  (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)
@@ -332,7 +332,7 @@ formula-answer.type = formula-answer.content, formula.attlist
 #	    *** formula ***
 #	    The formula role of a performative (<Assert>, <Retract> or <Query>).
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
 # 
 #	    content model (below Assert formula): 
 #	    DR Reaction RuleML (Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval )
@@ -375,7 +375,7 @@ formula-query.type = formula-query.content, formula.attlist
 # of the SWSL branch, as needed for PSOA semantics.
 # Note that oids are not required to be unique within a rulebase.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-oid
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-oid
 # 
 # content model: 
 # in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -394,7 +394,7 @@ oid = element oid { oid.type }
 # 
 # An optional container for meta-knowledge about a Node.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-meta
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-meta
 # 
 #     Used for descriptive Metadata annotations in Reaction RuleML
 # 
@@ -416,7 +416,7 @@ meta = element meta { meta.type }
 # 
 #    metadata-based scope definition defined over the metadata annotations and the qualifications annotations.
 # 
-#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-scope
+#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-scope
 # 
 #    Note: scope reasoning in rules can use the metadata scopes to define a constructive view on the rules and facts in the KB.    
 #    The scoped rule/literal goal only applies in this scope (scoped reasoning/processing)
@@ -425,8 +425,8 @@ meta = element meta { meta.type }
 #    on the knowledge base and to do scoped reasoning on this scope see the Prova rule engine (http://prova.ws).
 # 
 #    Example:
-#    @src(kb1) @author("Adrian Paschke") @validity([2011-03-20, 2011-04-20]) @label(fact1) fact1(constant1).
-#    @src(kb2) @author("Alex Kozlenkov") @validity([2011-01-20, 2011-03-20]) @label(fact2) fact2(constant2).
+#    @src(kb1) @author("Adrian Paschke") @validity([2015-03-20, 2015-04-20]) @label(fact1) fact1(constant1).
+#    @src(kb2) @author("Alex Kozlenkov") @validity([2015-01-20, 2015-03-20]) @label(fact2) fact2(constant2).
 # 
 #    @src(rb1) @label(rule1) rule1(Y) :- @validity(VTime) @authors("Adrian Paschke") fact1(Y) [between(SysTime,VTime)] 
 # 
@@ -479,7 +479,7 @@ scope = element scope { scope.type }
 # 
 #     guard constraints 
 # 
-#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-guard
+#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-guard
 # 
 #  content model: 
 #  in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
@@ -497,7 +497,7 @@ guard = element guard { guard.type }
 # 
 #  The intended evaluation semantics, e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
 # 
-#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-evaluation
+#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-evaluation
 # 
 #  Note: multiple Profiles can be defined by repreating the <evaluation> role element
 #  The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
@@ -515,7 +515,7 @@ evaluation = element evaluation { evaluation.type }
 #    The signature defines the signature of knowledge (formula and terms) with optional input / output mode declarations. The signature declaration can act as public interface and
 #       can be published together with the intended evaluation semantics. 
 # 
-#       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-signature
+#       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-signature
 # 
 #       Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
 #       for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
@@ -540,7 +540,7 @@ signature = element signature { signature.type }
 # 
 #   Definition of the qualification (qualifying metadata), e.g. validity time, priorities, etc.
 # 
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-qualification
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-qualification
 # 
 #   Note: the qualification can be also defined as a situation  <Situation> in KR Reaction RuleML 
 #       A situation could be also modelled as a changeable situation called fluent (in the KR dialect of Reaction RuleML),
@@ -566,7 +566,7 @@ qualification = element qualification { qualification.type }
 # 
 # Definition of the quantifier. 
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-quantification
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-quantification
 # 
 # content model: (Forall | Exists | Quantifier)
 # 
@@ -676,7 +676,7 @@ formula-exists.type = formula-exists.content, formula.attlist
 #	    *** Implies ***
 #	    An implication rule.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Implies
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Implies
 # 
 #	    content model:
 #	    ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
@@ -695,7 +695,7 @@ Implies = element Implies { Implies.type }
 # The if of an implication rule containing the premise(s),
 # also known as the "antecedent" or "if" part of the rule.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-if
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-if
 # 
 # content model: 
 # DR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
@@ -716,7 +716,7 @@ if = element if { if.type }
 # The then of an implication rule containing the conclusion,
 # also known as the "consequent" or "then" part of the rule.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-then
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-then
 # 
 # content model: 
 # DR Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
@@ -737,7 +737,7 @@ then = element then { then.type }
 # Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
 # Kowalski/Bowen's object/meta-level-amalgamated logic).
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Entails
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Entails
 # 
 # content model:
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
@@ -758,7 +758,7 @@ Entails = element Entails { Entails.type }
 # An equivalence expression, which is "syntactic sugar" for a pair
 # of conjoined converse implication rules.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equivalent
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equivalent
 # 
 # content model: 		
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
@@ -799,7 +799,7 @@ Equivalent = element Equivalent { Equivalent.type }
 # A symmetric role used in an equivalence expression combining
 # the asymmetric <then> and <if>.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-torso
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-torso
 # 
 # content model: 
 # DR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
@@ -817,7 +817,7 @@ torso = element torso { torso.type }
 #	    *** Rulebase ***
 #	    A collection of rules that can be ordered or unordered, without or with duplicates.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Rulebase
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rulebase
 # 
 #	    @prefix for default prefix definitions 
 #	    @vocab for default vocab definitions
@@ -841,7 +841,7 @@ Rulebase = element Rulebase { Rulebase.type }
 # *** And ***
 # A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-And
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-And
 # 
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -867,7 +867,7 @@ And = element And { And-inner.type }
 #       *** Or ***
 #       A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
 # 
-#       See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Or
+#       See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Or
 # 
 #       content model: 
 #       DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
@@ -893,7 +893,7 @@ Or = element Or { Or-inner.type }
 # *** formula ***
 # The formula role of a conjunctive/disjunctive expression or a rulebase.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
 # 
 # content model (below And/Or): 
 # DR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
@@ -934,7 +934,7 @@ formula-rulebase.type = formula-rulebase.content, formula.attlist
 
 # *** generic connective Operation ***
 # 
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operation
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
 # 
 #   content model: 
 #	  DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval)* )
@@ -949,7 +949,7 @@ ConnectiveOperation.content =
   meta-roles.content,
   (element formula { formula-rulebase.type }
    | formula-rulebase.content)*
-ConnectiveOperation.type =
+Operation-formula.type =
   ConnectiveOperation.content, ConnectiveOperation.attlist
 # note that elementFormDefault is qualified because of local declarations
 
@@ -959,7 +959,7 @@ ConnectiveOperation.type =
 #	applied to a collection of its (logical) arguments.
 #	Or a frame object with slots
 # 
-#	See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Atom
+#	See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Atom
 # 
 #	content model:
 #	in DR Reaction RuleML:
@@ -1039,7 +1039,7 @@ Atom = element Atom { Atom.type }
 # *** op ***
 # An operator expression including the relation of an atom.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-op
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-op
 # 
 # content model (within Atom): (Rel)
 # 
@@ -1054,7 +1054,7 @@ op = element op { op-atom.type }
 # *** Rel ***
 # A relation, i.e. a logical predicate, of an atom.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Rel
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rel
 # 
 # content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 # 
@@ -1070,7 +1070,7 @@ Rel = element Rel { Rel.type }
 # An optional uncertainty value (between 0.0 and 1.0)
 # that may be assigned to facts and rules.
 # 
-# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-degree
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-degree
 # 
 # content model: (Data)
 # 
@@ -1084,7 +1084,7 @@ degree = element degree { degree.type }
 # *** slot ***
 # A user-defined slot consisting of a name (first position) and a filler (second position).
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-slot
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-slot
 # 
 # content model:
 # DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
@@ -1104,7 +1104,7 @@ slot = element slot { slot.type }
 #	    *** arg ***
 #	    A role used for the positional arguments of a logical atom.
 # 
-#	    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+#	    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
 # 
 #	    content model: 
 #	    in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -1123,7 +1123,7 @@ arg = element arg { arg.type }
 #	    An individual constant, as in predicate logic, which can also be considered to
 #	    be a fixed argument like RDF resources.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Ind
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Ind
 # 
 #	    content model: text
 # 
@@ -1139,7 +1139,7 @@ Ind = element Ind { Ind.type }
 # (see http://www.w3.org/TR/xmlschema-2/#built-in-datatypes)
 # using the built-in xsi:type attribute.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Data
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Data
 # 
 # content model: xs:anytype [optionally datatyped]
 # 
@@ -1149,7 +1149,7 @@ Data = element Data { xsd:string }
 #	    *** Var ***
 #	    A logical variable, as in logic programming.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Var
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Var
 # 
 #	    content model: text
 # 
@@ -1168,7 +1168,7 @@ Var = element Var { Var.type }
 # *** Skolem ***
 # A Skolem individual constant, like RDF's blank nodes.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Skolem
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Skolem
 # 
 # content model: text
 # 
@@ -1185,7 +1185,7 @@ Skolem = element Skolem { Skolem.type }
 # current sublanguage as content, treating it as a term for performing
 # reasoning on.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Reify		
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Reify		
 # 
 # content model: (any valid RuleML formula)
 # 
@@ -1210,7 +1210,7 @@ Reify = element Reify { Reify.type }
 #	    *** Expr ***
 #	    A logical function of the form "f(...)" where f is a function name.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Expr
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Expr
 # 
 #	    content model:
 #	    DR Reaction RuleML:
@@ -1308,7 +1308,7 @@ Expr = element Expr { Expr.type }
 # *** op ***
 # An operator expression including the function name of an expression.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-op
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-op
 # 
 # content model (within Expr): (Fun)
 # 
@@ -1322,7 +1322,7 @@ op-Expr.type = op-Expr.content, op.attlist
 #	    *** Fun ***
 #	    A user-defined function name.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Fun
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Fun
 # 
 # content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
 # attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -1335,7 +1335,7 @@ Fun = element Fun { Fun.type }
 #	    *** Plex ***
 #	    An unordered collection of arguments without a constructor.
 # 
-#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Plex
+#	    See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Plex
 # 
 #	    content model (within Atom, Plex, slot):
 #	    DR Reaction RuleML:
@@ -1420,7 +1420,7 @@ Plex = element Plex { Plex.type }
 # *** repo ***
 # A positional rest variable.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-repo
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-repo
 # 
 # content model: (Var | Plex)
 # attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -1434,7 +1434,7 @@ repo = element repo { repo.type }
 # *** resl ***
 # A slotted rest variable.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-resl		
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-resl		
 # 
 # content model: (Var | Plex)
 # attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -1451,7 +1451,7 @@ resl = element resl { resl.type }
 # *** Equal ***
 # An equational formula consisting of two expressions.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equal
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
 # 
 # content model:
 # in DR Reaction RuleML:
@@ -1507,7 +1507,7 @@ Equal = element Equal { Equal.type }
 # *** left ***
 # The left-hand side of an equational formula.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-left
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-left
 # 
 # content model: 
 # in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -1525,7 +1525,7 @@ left = element left { left.type }
 # *** right***
 # The right-hand side of an equational formula.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-right
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-right
 # 
 # content model: 
 # in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
@@ -1567,7 +1567,7 @@ term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
 #	     and the mode of conclusions, answers and active actions is "-" (output). Variables are "?" (open) by default.
 #	     optional attribute
 # 
-#	     See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40mode
+#	     See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40mode
 mode.attrib =
   attribute mode {
     termOrCurieOrAbsIRI.datatype | vocab-modes.datatype
@@ -1581,7 +1581,7 @@ vocab-modes.datatype = "+" | "-" | "?"
 #        default: non-interrupting 
 #        optional attribute
 # 
-#        See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40safety
+#        See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40safety
 safety.attrib =
   attribute safety {
     termOrCurieOrAbsIRI.datatype | vocab-safety.datatype
@@ -1595,7 +1595,7 @@ vocab-safety.datatype =
 # In "reasoning" dialects the default for actions and events is per "value" and in active / messaging dialects it is per "effect".
 # In "non-reified" representations as formulas default interpretation per "value" and in "reified" representations as term default interpretation is per copy. 
 # 
-# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40per
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40per
 per.attrib =
   attribute per { termOrCurieOrAbsIRI.datatype | vocab-per.datatype }?
 vocab-per.datatype = "copy" | "value" | "effect" | "modal" | "open"
@@ -1603,7 +1603,7 @@ vocab-per.datatype = "copy" | "value" | "effect" | "modal" | "open"
 # An attribute indicating the size of a counter		
 # -1 = unbound / all
 # 
-# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40size
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40size
 
 #  
 # 
@@ -1628,7 +1628,7 @@ vocab-per.datatype = "copy" | "value" | "effect" | "modal" | "open"
 #       default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
 #       optional attribute
 # 
-#       See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40style
+#       See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40style
 style.datatype = termOrCurieOrAbsIRIs.datatype | vocab-style.datatype
 vocab-style.datatype = "active" | "messaging" | "reasoning"
 # *** @key ***
@@ -1637,7 +1637,7 @@ vocab-style.datatype = "active" | "messaging" | "reasoning"
 # 
 #      optinal attribute
 # 
-#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40key
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40key
 key.attrib = attribute key { curieOrAbsIRI.datatype }?
 # *** @keyref ***
 # 
@@ -1645,7 +1645,7 @@ key.attrib = attribute key { curieOrAbsIRI.datatype }?
 # 
 #      optinal attribute
 # 
-#      http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40keyref
+#      http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40keyref
 keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
 # *** @node ***
 # An optional identification label for a Node, creating accessibility within
@@ -1654,14 +1654,14 @@ keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
 # The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
 # such a label.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40node
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40node
 # 
 # content model: (curieOrAbsIRI.datatype)
 node.attrib = attribute node { curieOrAbsIRI.datatype }?
 # *** @type ***
 # An attribute for optionally specifying a (user-defined) type.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40type
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40type
 # 
 # Note: In Reaction RuleML the type is changed to Term or Curie or absolute IRI to allow references
 # to internal vocabulary terms (e.g. local sort signature definitions) and external vocabulary types (sorts) 
@@ -1679,7 +1679,7 @@ type.attrib = attribute type { termOrCurieOrAbsIRI.datatype }?
 # 
 #      optional attribute
 # 
-#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40meta
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40meta
 meta.attrib = attribute meta { termOrCurieOrAbsIRIs.datatype }?
 # *** @qualify ***
 # 
@@ -1690,7 +1690,7 @@ meta.attrib = attribute meta { termOrCurieOrAbsIRIs.datatype }?
 # 
 #      optional attribute
 # 
-#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40qualify
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40qualify
 qualify.attrib = attribute qualify { termOrCurieOrAbsIRIs.datatype }?
 # *** @scope ***
 # 
@@ -1703,7 +1703,7 @@ qualify.attrib = attribute qualify { termOrCurieOrAbsIRIs.datatype }?
 #      default value: "global" for relations and functions and "local" for terms 
 #      optional attribute
 # 
-#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40scope
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40scope
 scope-formula.attrib =
   attribute scope {
     termOrCurieOrAbsIRIs.datatype | vocab-scope.datatype
@@ -1718,13 +1718,13 @@ vocab-scope.datatype = "local" | "global" | "private"
 # The arity of constants / individual objects is zero.
 # The arity of predicates and functions is the number of arguments they have.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40arity
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40arity
 arity.attrib = attribute arity { xsd:nonNegativeInteger }?
 # *** @prefix ***
 # 
 # a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
 # 
-# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40prefix
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40prefix
 #
 prefix.attrib = attribute prefix { prefix.datatype }?
 prefix.datatype =
@@ -1733,7 +1733,7 @@ prefix.datatype =
 # 
 # an IRI that defines the vocabulary mapping to use when a TERM is referenced in an attribute value.
 # 
-# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40vocab
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40vocab
 #
 vocab.attrib = attribute vocab { xsd:anyURI }?
 # *** @card @minCard @maxCard ***
@@ -1741,9 +1741,9 @@ vocab.attrib = attribute vocab { xsd:anyURI }?
 # 
 # "-1" = unbound
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40card
-#	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40maxCard
-#	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40minCard
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40card
+#	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40maxCard
+#	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40minCard
 card.attrib =
   attribute card { xsd:int }?,
   attribute maxCard { xsd:int }?,
@@ -1752,7 +1752,7 @@ card.attrib =
 # An attribute optionally specifying a relative weight.
 # The default is "1", i.e. all knowledge has the same weight of "1". 
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40weight		
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40weight		
 weight.attrib =
   attribute weight {
     xsd:decimal { minInclusive = "0" maxInclusive = "1" }
@@ -1761,7 +1761,7 @@ weight.attrib =
 # An attribute indicating the intended direction of an implication rule's inferencing.
 # default is bidirectional.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40direction
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40direction
 direction.attrib =
   attribute direction {
     termOrCurieOrAbsIRI.datatype | vocab-direction.datatype
@@ -1771,7 +1771,7 @@ vocab-direction.datatype = "forward" | "backward" | "bidirectional"
 # An attribute indicating how the contained free variables are quantified.
 # default is universal closure.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40closure		
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40closure		
 closure.attrib =
   attribute closure {
     termOrCurieOrAbsIRI.datatype | vocab-closure.datatype
@@ -1780,26 +1780,26 @@ vocab-closure.datatype = "universal" | "existential"
 # *** @material ***
 # An attribute indicating the kind of an implication rule.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40material
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40material
 material.attrib =
   attribute material { "no" | "yes" }?
 # *** @iri ***
 # An attribute for referring to a Curie or absolute IRI.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40iri
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40iri
 iri.attrib = attribute iri { curieOrAbsIRI.datatype }?
 # *** @index ***
 # An optional attribute for specifying an ordering on roles.
 # 
 # Note: in Reaction RuleML @index is optional
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40index
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40index
 index.attrib = attribute index { xsd:positiveInteger }?
 # *** @oriented ***
 # An attribute indicating whether an equation is oriented (directed)
 # or unoriented (symmetric).
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-.40oriented
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40oriented
 oriented.attrib =
   attribute oriented { "yes" | "no" }?
 # 
@@ -1924,7 +1924,7 @@ event-interface.attlist =
 # The Rule element that provides the basic syntax for rules
 # in Reaction RuleML.
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Rule
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rule
 # 
 # content model: 
 # 
@@ -1958,7 +1958,7 @@ start |= Rule
 Rule = element Rule { Rule.type }
 # *** on ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-on
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-on
 # 
 # content model: 
 # DR Reaction RuleMl: (  )
@@ -1976,8 +1976,8 @@ on = element on { on.type }
 # *** if ***
 # *** after ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-if
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-after
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-if
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-after
 # 
 # content model:   
 # DR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
@@ -1991,8 +1991,8 @@ after = element after { if.type }
 #     *** then ***	
 # *** else ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-then
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-else
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-then
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-else
 # 
 # content model: 
 # DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
@@ -2006,8 +2006,8 @@ else = element else { then.type }
 # *** do ***
 # *** elseDo ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-do
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-elseDo
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-do
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-elseDo
 # 
 # content model:  
 # DR Reaction RuleML: (  )
@@ -2055,7 +2055,7 @@ MessagingRule.content = do
 #	*** Negation ***
 #	A generic polymorphic negation
 # 
-#	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Negation
+#	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Negation
 # 
 #	It can be specialized by using
 #	the @type attribute to specify the type of negation and/or 
@@ -2080,7 +2080,7 @@ start |= Negation
 Negation = element Negation { Negation.type }
 formula-negation.attlist = xml.attlist
 formula-negation.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | Equal
   | Negation
   | Neg
@@ -2093,7 +2093,7 @@ formula = element formula { formula-negation.type }
 # A "by default" negation of a logical atom (i.e. "weak" negation or
 # negation-as-failure).
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Naf
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Naf
 # 
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
@@ -2110,7 +2110,7 @@ Naf = element Naf { Naf.type }
 # *** weak ***
 # A role used for negation as failure.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-weak
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-weak
 # 
 # content model:
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
@@ -2127,7 +2127,7 @@ weak = element weak { weak.type }
 #	*** Neg ***
 #	A classical negation of a logical atom (i.e. classical or "strong" negation).
 # 
-#	See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Neg
+#	See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Neg
 # 
 #	content model:
 #	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
@@ -2144,7 +2144,7 @@ Neg = element Neg { Neg.type }
 # *** strong ***
 # A role used for classical negation.
 # 
-# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-strong
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-strong
 # 
 # content model: 
 # DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
@@ -2164,7 +2164,7 @@ strong = element strong { strong.type }
 # @type attribute and the @iri attribute can point to an external definition
 # of the quantifier.
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Quantifier
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Quantifier
 # 
 # Format: "quantifier declare(Var)+ such that guard formula(...)?" 
 # 
@@ -2188,7 +2188,7 @@ Quantifier = element Quantifier { Quantifier.type }
 # Exists
 #     make the quantifier constraint restrictions ("such that") optional
 # 
-#     http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Exists
+#     http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Exists
 # 
 #     DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
 #     KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
@@ -2205,7 +2205,7 @@ Exists-quantifier.type = Exists-quantifier.content, Quantifier.attlist
 # Forall
 #     make the quantifier constraint restrictions ("such that") optional
 # 
-#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Forall
+#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Forall
 # 
 #     DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
 #     KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
@@ -2222,7 +2222,7 @@ Forall-quantifier.type = Forall-quantifier.content, Quantifier.attlist
 #        *** formula ***
 #        The 'such that' guard formula role of a quantifier (<Forall> or <Exists>).
 # 
-#        See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-formula
+#        See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
 # 
 #     DR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
 # KR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
@@ -2240,7 +2240,7 @@ formula-inner-quantifier.type =
 #     *** Profile ***
 #     Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. 
 # 
-#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Profile
+#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Profile
 # 
 #     The semantic profile can be defined internally by the any content model (xs:any Element) or externally  
 # 
@@ -2265,7 +2265,7 @@ start |= Profile
 Profile = element Profile { Profile.type }
 # *** content ***
 # 
-#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
 # 
 # the optional @prefix and @vocab are used to define a prefix and a term mapping vocabulary for the XML content (see CURIE to IRI and term to IRI translation)
 # content model:  (xs:any*)
@@ -2279,15 +2279,15 @@ profile_anycontent.type =
 #	*** Time ***
 #	Explicit generic Time construct. 
 # 
-#	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Situation
+#	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Situation
 # 
 #	The time can be represented internally 
 #       * with positional arguments <arg>, e.g., <arg>
-# <Data xsi:type="xs:dateTime>2011-10-02T10:45:34-00:00</Data>
+# <Data xsi:type="xs:dateTime>2015-10-02T10:45:34-00:00</Data>
 # </arg>
 #       * with unpositional slots <slot>, e.g., <slot>
 # <Ind>year</Ind>
-# <Ind>2011</Ind>
+# <Ind>2015</Ind>
 # </slot>
 # <slot>
 # <Ind>month</Ind>
@@ -2331,7 +2331,7 @@ Time = element Time { Time.type }
 # 
 # Definition of the the arg role for Time
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
 # 
 # content model:  
 # in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval | (After | Before | Any | Every | Timer | Operation))
@@ -2345,7 +2345,7 @@ arg_time.content = time_primitives.content
 arg_time.type = arg_time.content, arg_time.attlist
 # *** content ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
 # 
 # @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
 #    See CURIE to IRI and term to IRI translation
@@ -2360,7 +2360,7 @@ time_anycontent.type = time_anycontent.content, time_anycontent.attlist
 #   *** Spatial ***
 #   Explicit generic Spatial construct. 
 # 
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Spatial
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Spatial
 # 
 #   The spatial can be represented internally 
 # * with positional arguments <arg>
@@ -2402,7 +2402,7 @@ Spatial = element Spatial { Spatial.type }
 # 
 # Definition of the the arg role for Spatial
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
 # 
 # content model:  
 # in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))
@@ -2416,7 +2416,7 @@ arg_spatial.content = spatial_primitives.content
 arg_spatial.type = arg_spatial.content, arg_spatial.attlist
 # *** content ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
 # 
 # @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
 #    See CURIE to IRI and term to IRI translation
@@ -2431,7 +2431,7 @@ spatial_anycontent.type =
 #     *** Interval ***
 #     Explicit generic Interval. 
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Interval
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Interval
 # 
 #     The interval can be
 #   defined internally by the any content model (xs:any Element) or externally, where 
@@ -2464,7 +2464,7 @@ Interval = element Interval { Interval.type }
 # 
 # Definition of the the arg role for Intervals
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-arg
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
 # 
 # content model:  
 # in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)
@@ -2478,7 +2478,7 @@ arg_interval.content = interval_primitives.content
 arg_interval.type = arg_interval.content, arg_interval.attlist
 # *** content ***
 # 
-#      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+#      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
 # 
 # content model:  xs:any*
 # 
@@ -2514,7 +2514,7 @@ interval_algebra_group.content =
   | element Operation { IntervalAlgebraOperator.type }
 # *** at ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-at
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-at
 # 
 #     Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
 # 
@@ -2531,8 +2531,8 @@ start |= at
 at = element at { at.type }
 # *** After / Before***
 # 
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-After
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Before
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-After
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Before
 # 
 # X after Y  / X before Y
 # 
@@ -2556,7 +2556,7 @@ Before = element Before { After.type }
 # 
 # Every X 
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Every
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Every
 # 
 # Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
 # 
@@ -2580,7 +2580,7 @@ Every = element Every { Every.type }
 # 
 # Any X1,..Xn
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Any
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Any
 # 
 # e.g. "at any Saturday and Sunday"     
 # 
@@ -2604,7 +2604,7 @@ Any = element Any { Any.type }
 # 
 # After X Every Y
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Recurring
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Recurring
 # 
 # Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
 # 
@@ -2625,14 +2625,14 @@ Timer = element Timer { Timer.type }
 # 
 # operator(Interval, Interval)
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-During
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Overlaps
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Starts
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Precedes
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Succeeds
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Meets
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Equal
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Finishes
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-During
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Overlaps
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Starts
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Precedes
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Succeeds
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Meets
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Finishes
 # 
 # content model: 
 # ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg] | [Interval, Interval])
@@ -2668,7 +2668,7 @@ Finishes = element Finishes { IntervalAlgebraOperator.type }
 # *** Test ***
 # A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Testing.
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Test
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Test
 # 
 # An optional scope (<scope>) can be defined so that the test applies only to the scope (constructed view) on the knowledge base.
 # 
@@ -2687,7 +2687,7 @@ Test = element Test { Test.type }
 # 
 #  vvi role - "verification, validation, integrity" tests
 # 
-#  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-vvi
+#  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-vvi
 # 
 #  content model: ( Entails | TestItem | TestSuite )
 # 
@@ -2702,7 +2702,7 @@ vvi = element vvi { vvi.type }
 # 
 # base role for the test assertion | consultation base
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-testbase
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-testbase
 # 
 # content model: ( Consult | Assert )
 # 
@@ -2716,7 +2716,7 @@ testbase = element testbase { testbase.type }
 # *** TestSuite ***
 # A TestSuite consisting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites 
 # 
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-TestSuite
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-TestSuite
 # 
 # content model: 
 #  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (testbase | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
@@ -2735,7 +2735,7 @@ TestSuite = element TestSuite { TestSuite.type }
 #  *** TestItem ***
 #  TestItem describing one particular test consisting of the test act (typically a Query) and the expected result (the expected Answer with the predefined expected truth valuation (<degree>) and results/variable bindings)
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-TestItem
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-TestItem
 # 
 #  content model:
 # 
@@ -2756,7 +2756,7 @@ TestItem = element TestItem { TestItem.type }
 # 
 # Definition of the the enclosed role for Send and Receive actions
 # 
-#  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-expectedResult
+#  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-expectedResult
 # 
 # content model:  
 #  in CEP Reaction RuleML: (Answer)
@@ -2814,7 +2814,7 @@ rule-implementation.content = DerivationRule.content
 # content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
 #
 query-connective.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | element And { And-query.type }
   | element Or { Or-query.type }
   | Negation
@@ -2828,7 +2828,7 @@ query-connective.content =
 # content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
 #
 inner-connective.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | element And { And-inner.type }
   | element Or { Or-inner.type }
   | Negation
@@ -2842,7 +2842,7 @@ inner-connective.content =
 # content model: (Operation | Negation | Neg | Equal )
 #
 outer-connective.content =
-  element Operation { ConnectiveOperation.type }
+  element Operation { Operation-formula.type }
   | Negation
   | Neg
   | Equal

@@ -9,23 +9,23 @@
 		Semantic Profiles are used to define the interpretation evaluation semantics (under the evaluation metatag) 
 		either by referecing external existing profiles or by defining them internally.
 		File: profile_module.xsd
-		Version: 1.0
-		Last Modification: 2011-03-22
+		Version: 1.02
+		Last Modification: 2015-03-22
 		
 		* Profile         generic semantic profile
 			
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
-			<dc:date>2011-03-22T23:11:17-0300</dc:date>
+			<dc:date>2015-03-22T23:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo> 
 	</xs:annotation>
 
@@ -34,7 +34,7 @@
 	*** Profile ***
 	Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. 
 	
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Profile
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Profile
 	
 	The semantic profile can be defined internally by the any content model (xs:any Element) or externally  
 
@@ -70,7 +70,7 @@
 	<!--
      *** content ***
      
-     	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-content
+     	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
      
      the optional @prefix and @vocab are used to define a prefix and a term mapping vocabulary for the XML content (see CURIE to IRI and term to IRI translation)
      content model:  (xs:any*)

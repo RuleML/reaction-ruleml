@@ -8,8 +8,8 @@
             event algebra module part of Reaction RuleML
 			This is the XML Schema of the event algebra module for Reaction RuleML
 			File: event_algebra_module.xsd
-			Version: 1.0
-			Last Modification: 2011-03-22
+			Version: 1.02
+			Last Modification: 2015-03-22
 			
 			This schema declares the following Reaction RuleML elements and attributes:
                                                     
@@ -35,17 +35,17 @@
 			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
 			[http://www.w3.org/TR/xhtml-modularization/].
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
-			<dc:date>2011-03-22T29:11:17-0300</dc:date>
+			<dc:date>2015-03-22T29:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>		
 	</xs:annotation>		
 	
@@ -72,7 +72,7 @@
 	<!--
       *** (Operation) ***
       
-      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operation
+      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
       
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
@@ -109,7 +109,7 @@
       
       "Not on Even2 at [Event1, Event3]" ("Event 2 does not occur between [Event 1 and Event 3]")
       
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Not
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Not
       
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
@@ -143,7 +143,7 @@
       "Aperiodic on Event2 at [Event1, Event3]" ("Event2 does occur aperiodically between [Event 1 and Event3]")
       possibly with multiple accumlated occurences of Event 2 (@size attribute) 
       
-            see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Aperiodic
+            see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Aperiodic
       
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
@@ -159,7 +159,7 @@
       
       "Periodic at TimeEvent2 at [Event1, Event3]" ("at TimeEvent2 does occur periodically between time interval [Event 1 and Event3]")
       
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Periodic
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Periodic
       
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (at, at)? ) 
@@ -193,8 +193,8 @@
       "AtLeast @size occurrences on Event"
       "AtMost @size occurrences on Event"
       
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-AtLeast
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-AtMost
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtLeast
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtMost
       
       content model: 
       ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 

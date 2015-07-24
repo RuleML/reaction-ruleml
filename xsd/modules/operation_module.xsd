@@ -5,43 +5,43 @@
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
           
-			generic connective operator module of Reaction RuleML.
+			generic operation module of Reaction RuleML.
 
 			This is the XML Schema connective operator module for Reaction RuleML.
 			File: connective_operator_module.xsd
-			Version: 1.0
-			Last Modification: 2011-03-22
+			Version: 1.02
+			Last Modification: 2015-03-22
 
 			This schema declares the following Reaction RuleML elements and attributes:
 
-				* Operation (Connective)
+				* Operation 
 			
 			The approach is modelled after that used in "Modularization of XHTML in XML Schema"
 			WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
 			"Modularization of XHTML" (REC-xhtml-modularization-20010410)
 			[http://www.w3.org/TR/xhtml-modularization/].
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
             <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
 			<dc:date>2015-07-14T17:04:00+0200</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>		
 	</xs:annotation>
 
 
 
 	<!--
-      *** generic connective Operation ***
+      *** generic Operation ***
       
-      	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Operation
+      	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
       
       	content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval)* )
@@ -51,12 +51,12 @@
         
         attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-	<xs:attributeGroup name="ConnectiveOperation.attlist">
+	<xs:attributeGroup name="Operation-formula.attlist">
 		<xs:attributeGroup ref="operator-interface.attlist"/>
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="ConnectiveOperation.content">
+	<xs:group name="Operation-formula.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
@@ -66,9 +66,29 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="ConnectiveOperation.type">
-		<xs:group ref="ConnectiveOperation.content"/>
-		<xs:attributeGroup ref="ConnectiveOperation.attlist"/>
+	<xs:complexType name="Operation-formula.type">
+		<xs:group ref="Operation-formula.content"/>
+		<xs:attributeGroup ref="Operation-formula.attlist"/>
+	</xs:complexType>
+	
+	<xs:attributeGroup name="Operation-term.attlist">
+		<xs:attributeGroup ref="operator-interface.attlist"/>
+		<xs:attributeGroup ref="node-element.attlist"/>
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="Operation-term.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="formula" type="formula-rulebase.type"/>
+				<xs:group ref="formula-rulebase.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Operation-term.type">
+		<xs:group ref="Operation-term.content"/>
+		<xs:attributeGroup ref="Operation-term.attlist"/>
 	</xs:complexType>
 	
 </xs:schema>

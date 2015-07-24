@@ -9,8 +9,8 @@
 			
 			This is the XML Schema Test module for Reaction RuleML.
 			File: test_module.xsd
-			Version: 1.0
-			Last Modification: 2011-07-20
+			Version: 1.02
+			Last Modification: 2015-07-20
 			
 			Further information - see RBSLA project (http://rbsla.ruleml.org)
 			ContractLog framework VVI Testing: http://rbsla.ruleml.org/docs/ContractLog_VVI.pdf
@@ -32,17 +32,17 @@
 			[http://www.w3.org/TR/xhtml-modularization/].
 			
 		</xs:documentation>
-		<xs:documentation source="http://ruleml.org/licensing/ruleml_eula.html"/>
+		
 		<xs:appinfo>
 			<dc:title>Reaction RuleML Schema</dc:title>
-			<dc:version>1.0</dc:version>
+			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-			<dc:subject>RuleML, custom-built for Reaction RuleML 1.0</dc:subject> 
+			<dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject> 
 			<dc:description>custom-built main module for Reaction RuleML</dc:description> 
-			<dc:date>2011-03-29T23:11:17-0300</dc:date>
+			<dc:date>2015-03-29T23:11:17-0300</dc:date>
 			<dc:language>en</dc:language>
-			<dcterms:rights>LGPL-3.0</dcterms:rights> 
-			<dc:relation>http://wiki.ruleml.org/index.php/Relax_NG</dc:relation>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>
 	</xs:annotation>
 	
@@ -51,7 +51,7 @@
       *** Test ***
       A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Testing.
       
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-Test
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Test
       
       An optional scope (<scope>) can be defined so that the test applies only to the scope (constructed view) on the knowledge base.
 
@@ -86,7 +86,7 @@
      
      vvi role - "verification, validation, integrity" tests
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-vvi
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-vvi
      
      content model: ( Entails | TestItem | TestSuite )
      
@@ -115,7 +115,7 @@
      
      base role for the test assertion | consultation base
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-testbase
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-testbase
      
      content model: ( Consult | Assert )
      
@@ -141,7 +141,7 @@
       *** TestSuite ***
       A TestSuite consisting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites 
 
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-TestSuite
+	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-TestSuite
 
       content model: 
        ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (testbase | Consult | Assert), (vvi | Entails | TestItem | TestSuite)*)
@@ -178,11 +178,11 @@
       *** TestItem ***
       TestItem describing one particular test consisting of the test act (typically a Query) and the expected result (the expected Answer with the predefined expected truth valuation (<degree>) and results/variable bindings)
       
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-TestItem
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.022#gloss-TestItem
       
       content model:
  		 
-	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (act|Query|Assert|Retract|Update|Send|Receive|Consult|Test|Action), (expectedResult|Answer) )
+	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do|Query|Assert|Retract|Update|Send|Receive|Consult|Test|Action), (expectedResult|Answer) )
 
      attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	  
@@ -197,7 +197,7 @@
 			<xs:group ref="meta-roles.content"/>
 			<xs:sequence>
 				<xs:choice>
-					<xs:element ref="act"/> 
+					<xs:element name="do" type="act.type"/> 
 					<xs:group ref="act.content"/>
 				</xs:choice>
 				<xs:choice>
@@ -219,7 +219,7 @@
      
      Definition of the the enclosed role for Send and Receive actions
      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.0#gloss-expectedResult
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-expectedResult
      
      content model:  
       in CEP Reaction RuleML: (Answer)

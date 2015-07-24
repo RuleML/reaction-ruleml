@@ -6,21 +6,16 @@
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
           
-           Knowledge Representation Complex Event Processing (KR-CEP) dialect of Reaction RuleML 
+           KR Event-Condition-Action Rule (KR-ECA) dialect of Reaction RuleML 
 						
-			This allows using logical calculi such as Event Calculus for reasoning with complex events and actions and  
-			allows defining the semantics of the complex event algebra operators in terms of a logical calculus, as pioneered in 
-			ECA RuleML (http://arxiv.org/ftp/cs/papers/0610/0610167.pdf) and used in 
-			rule-based Semantic CEP (http://dx.doi.org/10.1007/978-3-642-04985-9_10)
-						
-			File: kr-cep.xsd
+			File: kr-eca.xsd
 			Version: 1.02
 			Last Modification: 2015-07-19
-
+			
 		</xs:documentation>
 		
 		<xs:appinfo>
-			<dc:title>KR-CEP Reaction RuleML Schema</dc:title>
+			<dc:title>KR-ECA Reaction RuleML Schema</dc:title>
 			<dc:version>1.02</dc:version>
 			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
 			<dc:subject>Reaction RuleML 1.02</dc:subject> 
@@ -43,7 +38,6 @@
 	<xs:include schemaLocation="modules/atom_module.xsd"/>
 	<xs:include schemaLocation="modules/slot_module.xsd"/>
 	<xs:include schemaLocation="modules/term_module.xsd"/>
-	<xs:include schemaLocation="modules/curie_module.xsd"/>
 
 	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
 	<xs:include schemaLocation="modules/expr_module.xsd"/>
@@ -77,8 +71,7 @@
 	<xs:include schemaLocation="modules/event_module.xsd" />
 	<xs:include schemaLocation="modules/event_algebra_module.xsd" />
 	
-	<!-- include events from the CEP rule layer of reaction ruleml   -->
-	<xs:include schemaLocation="modules/message_module.xsd" />
+	<!-- include test suites   -->
 	<xs:include schemaLocation="modules/test_module.xsd" />
 
 	<!--
@@ -154,15 +147,16 @@
     
      content model:
      
-     in CEP Reaction RuleML: 
+     in ECA Reaction RuleML: (Reaction Rule | Derivation Rule | Production Rule)
      
-     (on | if | then | do | after | else | elseDo)*
+     ( (on, (if?, then?, do?, after?,else?, elseDo?)? ) | ((if, do, elseDo?) | (if, then, else) | (if, then?, do, else?, elseDo? ) | ( elseDo?, else?, do, then?, if)) )
           
 	-->
 	
 	<xs:group name="rule-implementation.content">
 		<xs:choice>
-			<xs:group ref="MessagingRule.content"/>			
+			<xs:group ref="ReactionRule.content"/>
+			<xs:group ref="DRProductionRule.content"/>
 		</xs:choice>
 	</xs:group>
 	
@@ -229,7 +223,7 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: ( Exists )
+     content model:  ( Exists )
           
 	-->
 	
@@ -260,15 +254,15 @@
          
      An internal group for the outer quantifiers in the Reaction RuleML language
 	 
-	 ECA Reaction RuleML does not allow outer quantifiers - Quantifiers are defined internally in the <quantification>    
+	 Quantifiers can be defined internally in the <quantification> too   
     
      content model: ( Forall )
           
 	-->
 	
 	<xs:group name="outer-quantifier.content">
-		<xs:choice>			
-			<xs:element ref="Forall"/>
+		<xs:choice>
+			<xs:element ref="Forall"/>	
 		</xs:choice>
 	</xs:group>
 	
@@ -276,7 +270,7 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-    content model: (Atom | Time | Spatial | Interval | Event | Action | Fluent | Holds | Initiates | Terminates | Happens | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation))
+    content model: (Atom | Time | Spatial | Interval | Event | Action | Fluent | Holds | Initiates | Terminates | Happens | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation)
           
 	-->
 	
@@ -315,9 +309,9 @@
 			<xs:element ref="Plex"/>
 			<xs:element name="Time" type="Time-term.type"/>
 			<xs:element name="Spatial" type="Spatial-term.type"/>
-			<xs:element name="Interval" type="Interval-term.type"/>	
+			<xs:element name="Interval" type="Interval-term.type"/>
 			<xs:element name="Event" type="Event-term.type"/>			
-			<xs:element name="Action" type="Action-term.type"/>	
+			<xs:element name="Action" type="Action-term.type"/>
 			<xs:element name="Situation" type="Situation-term.type"/>	
 			<xs:element name="Fluent" type="Fluent-term.type"/> <!-- in reified calculi used as function -->
 			<xs:group ref="spatial_temporal_algebra_group.content"/>
@@ -327,7 +321,7 @@
 	<!-- An internal group for the time primitives for interpretation as time
 		content model: 
 
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation)) 
+		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))
 
 	-->
 	<xs:group name="time_primitives.content">
@@ -339,7 +333,7 @@
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
 
-		in CEP Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation)) 
+		in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))
 
 	-->
 	<xs:group name="spatial_primitives.content">
@@ -351,7 +345,7 @@
 	<!-- Interval primitives
 		content model: 
 		
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))   
+		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))   
 	-->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>	
@@ -362,7 +356,7 @@
 	<!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
 		
-		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | Do | (After | Before | Any | Every | Timer | Operation))
+		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Do | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))
 	-->
 	<xs:group name="situation_primitives.content">
 		<xs:choice>
@@ -373,7 +367,7 @@
 
 	<!-- An internal group for the event primitives for interpretation as event
 		content model: 
-		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))
+		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))		
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>
@@ -383,15 +377,13 @@
 
 	<!-- An internal group for events
 		content model:
-		in CEP Reaction RuleML:  ( Receive | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
+		in ECA Reaction RuleML:  ( Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
 	-->
 	
 	<xs:group name="event_group.content">
 		<xs:choice>
 			<xs:element name="Event" type="Event-formula.type"/>
 			<xs:element name="Action" type="Action-formula.type"/>
-			<xs:element ref="Receive"/>
-			<xs:element ref="Answer"/>
 			<xs:group ref="event_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
@@ -399,7 +391,7 @@
 	<!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Situation | Fluent | (After | Before | Any | Every | Timer | Operation) )
+		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
@@ -409,51 +401,47 @@
 	
 	<!-- An internal group for actions
 		content model:
-		CEP Reaction RuleML (Send | Consult | Assert | Retract | Update | Query | Test | Action | Succession | Choice | Flow | Loop | Operation )-->
+		ECA Reaction RuleML (Assert | Retract | Update | Query | Answer | Test | Consult | Action | Succession | Choice | Flow | Loop | Operation )-->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
+			<xs:element ref="Consult"/>
 			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:element ref="Query"/>
+			<xs:element ref="Answer"/>
 			<xs:element ref="Test"/>
-			<xs:element ref="Send"/>
-			<xs:element ref="Consult"/>
 			<xs:group ref="action_algebra_group.content"/>
 		</xs:choice>
 	</xs:group>	
 	
 	<!-- An internal group for the imports of the consult primitive
 		content model: 
-		in DR Reaction RuleML: ((payload | RuleML | Reify | Var) | (enclosed | Message))
+		in ECA Reaction RuleML: (payload | RuleML | Reify | Var)
 	-->
 	<xs:group name="consult_imports.content">
 		<xs:choice>
 			<xs:element ref="payload"/>
 			<xs:group ref="payload.content"/>
-			<xs:element ref="enclosed"/>
-			<xs:element ref="Message"/>
 		</xs:choice>
 	</xs:group>
 
 	<!-- An internal group for the performative primitives
 		content model: 
-		in CEP Reaction RuleML: (Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)
+		in ECA Reaction RuleML: (Assert|Retract|Update|Query|Consult|Answer|Test|Action)
 	-->
 	<xs:group name="performative_primitives.content">
 		<xs:choice>
 			<xs:element ref="Assert"/>
 			<xs:element ref="Retract"/>
 			<xs:element ref="Update"/>
+			<xs:element ref="Consult"/>
+			<xs:element name="Action" type="Action-formula.type"/>
 			<xs:element ref="Query"/>
 			<xs:element ref="Answer"/>
-			<xs:element ref="Test"/>  <!-- for test-driven verification, validation and integrity testing -->
-			<xs:element ref="Send"/>
-			<xs:element ref="Receive"/>
-			<xs:element name="Action" type="Action-formula.type"/>
-			<xs:element ref="Consult"/>
+			<xs:element ref="Test"/>
 		</xs:choice>
 	</xs:group>
 
@@ -461,7 +449,7 @@
     *** @style ***
     
      restriction: active | messaging | reasoning
-	 default value: active (in CEP Reaction RuleML)
+	 default value: active (in ECA Reaction RuleML)
 	 optional attribute
 -->
 	<xs:attributeGroup name="style.attrib">

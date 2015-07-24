@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../relaxng/dr/dr-nafneghornlogeq_strict_relaxed.rnc" type="application/relax-ng-compact-syntax"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude"
+  xsi:schemaLocation="../../../xsd/dr.xsd">
+
+
+  <!-- Clocksin/Mellish sample rule 
+
+This example shows how the distributed rule bases can be included using XInclude.
+
+This Reaction RuleML XML document instance defines the implementation part of the distributed knowledge which includes the interface part of the distributed knowledge base defined in the DistributedDerivationRuleInterface XML document instance. 
+
+For the reference from the interface to the implementation of the rules it uses key-keyref attributes. See ModularDerivationRule
+
+-->
+
+  <!-- Include the distributed interface definition of the rule, so that both form one valid XML instance which ensures unique and valid key and keyref references. -->
+  <xi:include href="DistributedDerivationRuleInterfaceb.rrml">
+    <xi:fallback/>
+  </xi:include>
+
+
+  <!-- assert knowledge -->
+
+  <Assert>
+
+    <!-- implementation of rule 1 which is interpreted either by WFS or by ASS semantics according to it's interface definition. -->
+
+    <Rule keyref="r1" style="reasoning">
+      <if>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Var>X</Var>
+          <Ind>wine</Ind>
+        </Atom>
+      </if>
+      <then>
+        <Atom>
+          <op>
+            <Rel>likes</Rel>
+          </op>
+          <Ind>John</Ind>
+          <Var>X</Var>
+        </Atom>
+      </then>
+    </Rule>
+
+
+    <!-- fact -->
+
+    <Atom>
+      <op>
+        <Rel>likes</Rel>
+      </op>
+      <Ind>Mary</Ind>
+      <Ind>wine</Ind>
+    </Atom>
+
+  </Assert>
+
+</RuleML>

@@ -18,32 +18,32 @@ mkdir -p ${NORMAL_SUITE_HOME}
 rm ${NORMAL_SUITE_HOME}* >> /dev/null 2>&1
 
 
-  schemaname=consumer_normal.xsd
+  schemaname=dr_normal.xsd
   sfile=${XSD_HOME}${schemaname}       
-  ${BASH_HOME}aux_valxsd.sh "${sfile}"
-  exitvalue=$?
-  echo ${exitvalue}
-  if [ "${exitvalue}" -ne "0" ]; then
-       echo "Schema Validation Failed for ${schemaname}"
-       exit 1
-   fi   
+  #${BASH_HOME}aux_valxsd.sh "${sfile}"
+  #exitvalue=$?
+  #echo ${exitvalue}
+  #if [ "${exitvalue}" -ne "0" ]; then
+  #     echo "Schema Validation Failed for ${schemaname}"
+  #     exit 1
+  # fi   
 
 # Apply normalization XSLT transforamtions
 # transform files in TEST_SUITE_HOME ending in .ruleml
 # output to NORMAL_SUITE_HOME
 # FIXME write an aux script for the xslt call
-for f in ${RNC_TEST_SUITE_HOME}*/*.ruleml
+for f in ${DR_TEST_SUITE_HOME}*.*
 do
   filename=$(basename "$f")
   echo "Transforming " "${filename}"
-  java -jar "${SAX_HOME}saxon9ee.jar" -s:"${f}" -xsl:"${NORMAL_XSLT_HOME}1.02_normalizer.xslt"  -o:"${NORMAL_SUITE_HOME}${filename}"   >> /dev/null 2>&1
+  java -jar "${SAX_HOME}saxon9ee.jar" -s:"${f}" -xsl:"${NORMAL_XSLT_HOME}1.02_drst_hornlog_normalizer.xslt"  -o:"${NORMAL_SUITE_HOME}${filename}"
   if [ "$?" -ne "0" ]; then
      echo "XSLT Transformation Failed for " "${filename}"
      exit 1
    fi
 done
 
-for file in ${NORMAL_SUITE_HOME}*.ruleml ${NORMAL_SUITE_HOME}*/*.ruleml
+for file in ${NORMAL_SUITE_HOME}*.* ${NORMAL_SUITE_HOME}*/*.*
 do
   filename=$(basename "${file}")
   echo "File ${filename}"

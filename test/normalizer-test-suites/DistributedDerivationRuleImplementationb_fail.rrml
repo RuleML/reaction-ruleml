@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="../../../xsd/dr.xsd">
+  <!-- Clocksin/Mellish sample rule 
+
+This example shows how the distributed rule bases can be included using XInclude.
+
+This Reaction RuleML XML document instance defines the implementation part of the distributed knowledge which includes the interface part of the distributed knowledge base defined in the DistributedDerivationRuleInterface XML document instance. 
+
+For the reference from the interface to the implementation of the rules it uses key-keyref attributes. See ModularDerivationRule
+
+-->
+  <!-- Include the distributed interface definition of the rule, so that both form one valid XML instance which ensures unique and valid key and keyref references. -->
+  <xi:include href="DistributedDerivationRuleInterfaceb.rrml">
+    <xi:fallback/>
+  </xi:include>
+  <!-- assert knowledge -->
+  <act index="1">
+    <Assert mapMaterial="yes" mapDirection="bidirectional">
+      <!-- implementation of rule 1 which is interpreted either by WFS or by ASS semantics according to it's interface definition. -->
+      <formula>
+        <Rule keyref="r1" style="reasoning">
+          <if>
+            <Atom>
+              <op><Rel>likes</Rel></op>
+              <arg index="1"><Var>X</Var></arg>
+              <arg index="2"><Ind>wine</Ind></arg>
+            </Atom>
+          </if>
+          <then>
+            <Atom>
+              <op><Rel>likes</Rel></op>
+              <arg index="1"><Ind>John</Ind></arg>
+              <arg index="2"><Var>X</Var></arg>
+            </Atom>
+          </then>
+        </Rule>
+      </formula>
+      <!-- fact -->
+      <formula>
+        <Atom>
+          <op><Rel>likes</Rel></op>
+          <arg index="1"><Ind>Mary</Ind></arg>
+          <arg index="2"><Ind>wine</Ind></arg>
+        </Atom>
+      </formula>
+    </Assert>
+  </act>
+</RuleML>

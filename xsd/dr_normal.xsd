@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+		targetNamespace="http://ruleml.org/spec" elementFormDefault="qualified">
+		
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+          
+            Spatio-Temporal Derivation Rule (DR) dialect of Reaction RuleML 
+			
+			This layer defines the spatio-temporal Derivation Rule dialect of Reaction RuleML.
+			It adds necessary extensions to the RuleML Horn Logic layer with equality for
+			the spatio-temporal Derivation Rule dialect.
+			
+			File: dr.xsd
+			Version: 1.02
+			Last Modification: 2015-07-19
+			
+		</xs:documentation>
+		
+		<xs:appinfo>
+			<dc:title>DR Reaction RuleML Schema</dc:title>
+			<dc:version>1.02</dc:version>
+			<dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
+			<dc:subject>Reaction RuleML 1.02</dc:subject> 
+			<dc:description>spatio-temporal Derivation Rule dialect of Reaction RuleML</dc:description> 
+			<dc:date>2015-07-14T17:04:00+0200</dc:date>
+			<dc:language>en</dc:language>
+			<dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification License, Version 1.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing permissions and limitations under the License.</dc:rights> 
+			<dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights> 
+			 <dc:relation>http://reaction.ruleml.org</dc:relation>
+		</xs:appinfo> 
+	</xs:annotation>
+
+	<!-- includes the datalog layer of deliberation ruleml -->
+	
+	<xs:include schemaLocation="modules/performative_module.xsd"/>
+	<xs:include schemaLocation="modules/desc_module.xsd"/> <!-- extended descriptors in Reaction RuleML -->
+	<xs:include schemaLocation="modules/quantifier_module.xsd"/>
+	<xs:include schemaLocation="modules/connective_module.xsd"/>
+	<xs:include schemaLocation="modules/operation_module.xsd"/>
+	<xs:include schemaLocation="modules/atom_module.xsd"/>
+	<xs:include schemaLocation="modules/slot_module.xsd"/>
+	<xs:include schemaLocation="modules/term_module.xsd"/>
+
+	<!-- includes the hornlog layer with the 'expr' and 'rest' modules -->
+	<xs:include schemaLocation="modules/expr_module.xsd"/>
+	<xs:include schemaLocation="modules/rest_module.xsd"/>
+
+	<!-- includes the equalog layer with the 'equality' module -->
+	<xs:include schemaLocation="modules/equality_module.xsd"/>
+
+	<!-- include from the (spatial-temporal) derivation rule layer of reaction ruleml   -->
+	<xs:include schemaLocation="modules/attribute_module.xsd"/>
+	<xs:include schemaLocation="modules/rule_module.xsd"/>
+	<xs:include schemaLocation="modules/negation_module.xsd"/>
+	<xs:include schemaLocation="modules/extended_quantifier_module.xsd"/>
+	<xs:include schemaLocation="modules/profile_module.xsd"/>	
+	<xs:include schemaLocation="modules/time_module.xsd"/>
+	<xs:include schemaLocation="modules/spatial_module.xsd"/>	
+	<xs:include schemaLocation="modules/interval_module.xsd"/>
+
+	<!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
+	<xs:include schemaLocation="modules/spatial_temporal_interval_algebra_module.xsd"/>
+	
+	<!-- include test suites   -->
+	<xs:include schemaLocation="modules/test_module.xsd" />
+	
+	<!--
+     metadata group
+     
+	This internal group defines the descriptive metadata and the scope (for scoped reasoning on the metadata) + additional guard constraints on the scope
+	
+     content model: (meta*, scope*, guard )
+          
+	-->
+	<xs:group name="metadata.content">
+		<xs:sequence>
+			<xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/> 
+			<xs:element ref="scope" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="guard" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
+	</xs:group>
+	
+	<!--
+     interface group
+     
+     This internal group defines the interface signature and the evaluation semantics
+     
+     content model: (evaluation*, signature* )
+          
+	-->
+	<xs:group name="interface.content">
+		<xs:sequence>
+			<xs:element ref="evaluation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="signature" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!--
+     instance group
+     
+     This internal group defines the instance including the qualification (qualifying metadata), the quantification and the object id
+     
+     content model: (qualification*, quantification*, oid? )
+          
+	-->
+	<xs:group name="instance.content">
+		<xs:sequence>
+			<xs:element ref="qualification" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="quantification" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+
+	<!--
+         
+     An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
+    
+    
+     content model: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?)
+          
+	-->
+	
+	<xs:group name="meta-roles.content">
+		<xs:sequence>
+			<xs:group ref="metadata.content"/>
+			<xs:group ref="interface.content"/>
+			<xs:group ref="instance.content"/>
+		</xs:sequence>
+	</xs:group>
+	
+	
+	<!--
+         
+     An internal group for the implementation of a rule in the Reaction RuleML language
+    
+    
+     content model:
+     
+     in DR Reaction RuleML: 
+     
+     ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
+          
+	-->
+	
+	<xs:group name="rule-implementation.content">
+		<xs:choice>
+			<xs:group ref="DerivationRule.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the query connectives in the Reaction RuleML language
+    
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+          
+	-->
+	
+	<xs:group name="query-connective.content">
+		<xs:choice>
+			<xs:element name="Operation" type="Operation-formula.type"/>
+			<xs:element name="And" type="And-query.type"/>
+			<xs:element name="Or" type="Or-query.type"/>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Naf"/>
+			<xs:element ref="Neg"/>
+			<xs:element ref="Equal"/> 
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the inner connectives in the Reaction RuleML language
+    
+    
+     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+          
+	-->
+	
+	<xs:group name="inner-connective.content">
+		<xs:choice>
+			<xs:element name="Operation" type="Operation-formula.type"/>
+			<xs:element name="And" type="And-inner.type"/>
+			<xs:element name="Or" type="Or-inner.type"/>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Naf"/>
+			<xs:element ref="Neg"/>
+			<xs:element ref="Equal"/> 
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the outer connectives in the Reaction RuleML language
+    
+    
+     content model: (Operation | Negation | Neg | Equal )
+          
+	-->
+	
+	<xs:group name="outer-connective.content">
+		<xs:choice>
+			<xs:element name="Operation" type="Operation-formula.type"/>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Neg"/>
+			<xs:element ref="Equal"/> 
+		</xs:choice>
+	</xs:group>
+	
+	
+	<!--
+         
+     An internal group for the query quantifiers in the Reaction RuleML language
+    
+     content model: (Exists )
+          
+	-->
+	
+	<xs:group name="query-quantifier.content">
+		<xs:choice>
+			<xs:element ref="Exists"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the inner quantifiers in the Reaction RuleML language
+    
+    
+     content model: (Forall | Exists | Quantifier)
+          
+	-->
+	
+	<xs:group name="inner-quantifier.content">
+		<xs:choice>
+			<xs:element name="Forall" type="Forall-quantifier.type"/>
+			<xs:element name="Exists" type="Exists-quantifier.type"/>
+			<xs:element ref="Quantifier"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the outer quantifiers in the Reaction RuleML language
+    
+    
+     content model: ( Forall  )
+          
+	-->
+	
+	<xs:group name="outer-quantifier.content">
+		<xs:choice>
+			<xs:element ref="Forall"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
+    
+     In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval + Allen operators
+    
+     content model: (Atom | Time | Spatial | Interval | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes ))
+          
+	-->
+	
+	<xs:group name="extended-signature-predicate-sorts.content">
+		<xs:choice>
+			<xs:element name="Atom" type="Atom.type"/>
+			<xs:element name="Time" type="Time-formula.type"/>
+			<xs:element name="Spatial" type="Spatial-formula.type"/>
+			<xs:element name="Interval" type="Interval-formula.type"/>
+			<xs:group ref="interval_algebra_group.content"/>
+		</xs:choice>
+	</xs:group>
+	
+	
+	<!--
+         
+     An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
+    
+     In the DR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval and additional functional algebra operator
+    
+     content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | (After | Before | Any | Every | Timer ) | Operation )
+          
+	-->
+	
+	<xs:group name="extended-signature-function-sorts.content">
+		<xs:choice>
+			<xs:element ref="Ind"/>
+			<xs:element ref="Data"/>
+			<xs:element ref="Expr"/>
+			<xs:element ref="Plex"/>
+			<xs:element name="Time" type="Time-term.type"/>
+			<xs:element name="Spatial" type="Spatial-term.type"/>
+			<xs:element name="Interval" type="Interval-term.type"/>	
+			<xs:group ref="spatial_temporal_algebra_group.content"/>
+			<xs:element name="Operation" type="Operation-term.type"/>
+		</xs:choice>
+	</xs:group>
+
+	<!-- An internal group for the time primitives for interpretation as time
+		content model: 
+		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
+	-->
+	<xs:group name="time_primitives.content">
+		<xs:choice>			
+			<xs:group ref="arg.content"/>
+		</xs:choice>
+	</xs:group>
+
+	<!-- An internal group for the spatial primitives for interpretation as spatial
+		content model: 
+		in DR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
+	-->
+	<xs:group name="spatial_primitives.content">
+		<xs:choice>			
+			<xs:group ref="arg.content"/>
+		</xs:choice>
+	</xs:group>
+
+	<!-- Interval primitives
+		content model: 
+		in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))  -->
+	<xs:group name="interval_primitives.content">
+		<xs:choice>
+			<xs:group ref="arg.content"/>	
+		</xs:choice>
+	</xs:group>
+
+	<!-- An internal group for the situation primitives for interpretation as situation
+		content model: 
+		in DR Reaction RuleML: ()
+	-->
+	<xs:group name="situation_primitives.content">
+		<xs:choice>
+		</xs:choice>
+	</xs:group>
+
+	<!-- An internal group for the event primitives for interpretation as event
+		content model: 
+		in DR Reaction RuleML: ()
+	-->
+	<xs:group name="event_primitives.content">
+		<xs:choice>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- An internal group for events
+		content model:
+		
+		DR Reaction RuleML ( )-->
+	
+	<xs:group name="event_group.content">
+		<xs:choice>
+			
+		</xs:choice>
+	</xs:group>	
+
+	<!-- An internal group for the action primitives for interpretation as action
+		content model: 
+		in DR Reaction RuleML: ()
+	-->
+	<xs:group name="action_primitives.content">
+		<xs:choice>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- An internal group for actions
+		content model:
+		
+		DR Reaction RuleML ( )-->
+	
+	<xs:group name="action_group.content">
+		<xs:choice>
+
+		</xs:choice>
+	</xs:group>	
+
+	<!-- An internal group for the imports of the consult primitive
+		content model: 
+		in DR Reaction RuleML: (payload | RuleML | Reify | Var)
+	-->
+	<xs:group name="consult_imports.content">
+		<xs:choice>
+			<xs:element ref="payload"/>
+			<xs:group ref="payload.content"/>
+		</xs:choice>
+	</xs:group>
+	
+
+	<!-- An internal group for the performative primitives
+		content model: 
+		in DR Reaction RuleML: (Consult|Assert|Retract|Query|Answer|Test)
+	-->
+	<xs:group name="performative_primitives.content">
+		<xs:choice>
+			<xs:element ref="Consult"/>
+			<xs:element ref="Assert"/>
+			<xs:element ref="Retract"/>
+			<xs:element ref="Query"/>
+			<xs:element ref="Answer"/>
+			<xs:element ref="Test"/>
+		</xs:choice>
+	</xs:group>
+
+	<!--
+    *** @style ***
+    
+     restriction: active | messaging | reasoning
+	 default value: reasoning (in DR Reaction RuleML)
+	 optional attribute
+-->
+	<xs:attributeGroup name="style.attrib">
+		<xs:attribute name="style" type="style.datatype" use="optional"/>
+	</xs:attributeGroup>
+
+</xs:schema>

@@ -18,7 +18,7 @@ It explicitly shows all metadata information
        material implication (mapMaterial) applies to all derivation rules in the asserted KB  
   -->
 
-  <Assert key="#kb1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">
+  <Assert key="#kb1">
 
     <!-- general metadata of the asserted knowledge -->
 
@@ -85,7 +85,7 @@ It explicitly shows all metadata information
     <!-- rule base 1 with one rule -->
 
     <formula>
-      <Rulebase key="#rulebase1" mapClosure="universal" mapDirection="backward" mapMaterial="yes">
+      <Rulebase key="#rulebase1">
 
         <!-- general metadata of the asserted rule base -->
 

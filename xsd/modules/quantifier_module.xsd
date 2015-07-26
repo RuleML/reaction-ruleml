@@ -36,7 +36,7 @@
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
-		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
 
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
@@ -75,7 +75,7 @@
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
-    PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+    PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
  
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -159,8 +159,8 @@
       <xs:element ref="Implies"/>
       <xs:element ref="Rule"/>
       <xs:element ref="Equivalent"/>
-      <xs:group ref="outer-quantifier.content"/>
-      <xs:group ref="outer-connective.content"/>
+      <xs:group ref="head-quantifier.content"/>
+      <xs:group ref="head-connective.content"/>
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>

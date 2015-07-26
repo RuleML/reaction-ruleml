@@ -101,13 +101,15 @@
   </xs:attributeGroup>
   <xs:group name="if.content">
     <xs:choice>
-      <xs:group ref="inner-connective.content"/>
+      <xs:group ref="body-quantifier.content"/>
+      <xs:group ref="body-connective.content"/>
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>
   <xs:group name="if-entails.content">
     <xs:choice>
       <xs:element ref="Rulebase"/>
+      <xs:group ref="formula-rulebase.content"/>
     </xs:choice>
   </xs:group>
   <xs:complexType name="if.type">
@@ -140,13 +142,15 @@
   </xs:attributeGroup>
   <xs:group name="then.content">
     <xs:choice>
-      <xs:group ref="outer-connective.content"/>
+      <xs:group ref="head-quantifier.content"/>
+      <xs:group ref="head-connective.content"/>
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>
   <xs:group name="then-entails.content">
     <xs:choice>
       <xs:element ref="Rulebase"/>
+      <xs:group ref="formula-rulebase.content"/>
     </xs:choice>
   </xs:group>
   <xs:complexType name="then.type">
@@ -232,34 +236,11 @@
             <xs:group ref="torso.content"/>
           </xs:choice>
         </xs:sequence>
-        <xs:sequence>
- 
-        </xs:sequence>
       </xs:choice>
     </xs:sequence>
   </xs:group>
   <xs:complexType name="Equivalent.type">
-
-    <!--
-		<xs:annotation>
-			<xs:appinfo>
-				<pattern name="Equivalent">
-					<rule context="r:Equivalent[count( descendant::r:Equal/r:Expr | descendant::r:Equal/r:left/r:Expr )=2]">
-						<assert test=
-							"( descendant::r:Equal[1]/descendant::r:Fun[@per = 'copy']
-							   and descendant::r:Equal[2]/descendant::r:Fun[@per = 'copy'] )
-							 or
-							 ( descendant::r:Equal[1]/descendant::r:Fun[@per = 'open']
-							   and descendant::r:Equal[2]/descendant::r:Fun[@per = 'open'] )">
-						  Equalities within an equivalence expression must either both be interpreted or both uninterpreted.
-						</assert>
-					</rule>
-				</pattern>
-			</xs:appinfo>
-		</xs:annotation>
-                -->
-
-    <xs:group ref="Equivalent.content"/>
+  <xs:group ref="Equivalent.content"/>
     <xs:attributeGroup ref="Equivalent.attlist"/>
   </xs:complexType>
   <xs:element name="Equivalent" type="Equivalent.type"/>
@@ -284,7 +265,8 @@
   </xs:attributeGroup>
   <xs:group name="torso.content">
     <xs:choice>
-      <xs:group ref="inner-connective.content"/>
+      <xs:group ref="head-quantifier.content"/>
+      <xs:group ref="head-connective.content"/>
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>
@@ -348,7 +330,7 @@
 		
 		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-  <xs:attributeGroup name="And-inner.attlist">
+  <xs:attributeGroup name="And-body.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>
     <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
@@ -372,11 +354,11 @@
     <xs:group ref="And.content"/>
     <xs:attributeGroup ref="And-query.attlist"/>
   </xs:complexType>
-  <xs:complexType name="And-inner.type">
+  <xs:complexType name="And-body.type">
     <xs:group ref="And.content"/>
-    <xs:attributeGroup ref="And-inner.attlist"/>
+    <xs:attributeGroup ref="And-body.attlist"/>
   </xs:complexType>
-  <xs:element name="And" type="And-inner.type"/>
+  <xs:element name="And" type="And-body.type"/>
 
   <!--
 		*** Or ***
@@ -399,7 +381,7 @@
     <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
-  <xs:attributeGroup name="Or-inner.attlist">
+  <xs:attributeGroup name="Or-body.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>
     <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
@@ -418,11 +400,11 @@
     <xs:group ref="Or.content"/>
     <xs:attributeGroup ref="Or-query.attlist"/>
   </xs:complexType>
-  <xs:complexType name="Or-inner.type">
+  <xs:complexType name="Or-body.type">
     <xs:group ref="Or.content"/>
-    <xs:attributeGroup ref="Or-inner.attlist"/>
+    <xs:attributeGroup ref="Or-body.attlist"/>
   </xs:complexType>
-  <xs:element name="Or" type="Or-inner.type"/>
+  <xs:element name="Or" type="Or-body.type"/>
 
   <!--
 		*** formula ***
@@ -453,27 +435,19 @@
   </xs:attributeGroup>
   <xs:group name="formula-and-or.content">
     <xs:choice>
-      <xs:group ref="inner-connective.content"/>			
+      <xs:group ref="body-quantifier.content"/>
+      <xs:group ref="body-connective.content"/>			
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>
-  <!--
-		In 1.0, Naf is not allowed in the consequent (second child) of Entails
-		because Integrity uses of Entails call for classical Neg
-		and Rulebase should not contain Naf in any other context (except Query).
-		Alternatives would have been to use And in the consequent of Entails
-		or to only allow Naf children within Rulebases that are used for Integrity
-		and querying, but this would require making the role tags explicit (i.e.
-		not skippable). Schematron could be used here to disallow Naf from other
-		Rulebases.
-	-->
+
   <xs:group name="formula-rulebase.content">
     <xs:choice>
       <xs:element name="Implies" type="Implies.type"/>
       <xs:element ref="Rule"/> 
       <xs:element name="Equivalent" type="Equivalent.type"/>
-      <xs:group ref="outer-quantifier.content"/>
-      <xs:group ref="outer-connective.content"/> 
+      <xs:group ref="head-quantifier.content"/>
+      <xs:group ref="head-connective.content"/> 
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>

@@ -150,15 +150,15 @@
 	 on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
 	 by referencing it with the @keyref attribute.
 	 
-	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the inner knowledge. For instance, a scope
-	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. Inner scopes
-	 overwrite the outer scope. For instance a scope defined on <Assert> becomes overwritten by an inner scope defined on a <Rule> which is within the
-	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the outer scope.
+	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the body knowledge. For instance, a scope
+	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. body scopes
+	 overwrite the head scope. For instance a scope defined on <Assert> becomes overwritten by an body scope defined on a <Rule> which is within the
+	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the head scope.
 	 
 	 Note: the old approach which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0
      
      Note: multiple scopes can be defined by repeating the <scope> role element
-     Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
+     Note: an empty scope either assumes the head scope or an existing scope needs to be explicity referenced by keyref
      
      content model: 
      DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
@@ -336,7 +336,7 @@
   </xs:attributeGroup>
   <xs:group name="quantification.content">
     <xs:choice>
-      <xs:group ref="inner-quantifier.content"/>
+      <xs:group ref="meta-quantifier.content"/>
     </xs:choice>
   </xs:group>
   <xs:complexType name="quantification.type">

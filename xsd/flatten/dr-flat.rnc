@@ -358,8 +358,8 @@ formula-assert.content =
   | Rule
   | Equivalent
   | Entails
-  | outer-quantifier.content
-  | outer-connective.content
+  | head-quantifier.content
+  | head-connective.content
   | extended-signature-predicate-sorts.content
 formula-query.content =
   Rulebase
@@ -453,15 +453,15 @@ meta = element meta { meta.type }
 #        on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
 #        by referencing it with the @keyref attribute.
 # 
-#        There is a nesting of scopes. Scopes defined on the more general level automatically apply to the inner knowledge. For instance, a scope
-#        defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. Inner scopes
-#        overwrite the outer scope. For instance a scope defined on <Assert> becomes overwritten by an inner scope defined on a <Rule> which is within the
-#        this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the outer scope.
+#        There is a nesting of scopes. Scopes defined on the more general level automatically apply to the body knowledge. For instance, a scope
+#        defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. body scopes
+#        overwrite the head scope. For instance a scope defined on <Assert> becomes overwritten by an body scope defined on a <Rule> which is within the
+#        this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the head scope.
 # 
 #        Note: the old approach which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0
 # 
 #    Note: multiple scopes can be defined by repeating the <scope> role element
-#    Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
+#    Note: an empty scope either assumes the head scope or an existing scope needs to be explicity referenced by keyref
 # 
 #    content model: 
 #    DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
@@ -573,7 +573,7 @@ qualification = element qualification { qualification.type }
 # attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 #
 quantification.attlist = edge-element.attlist, xml.attlist
-quantification.content = inner-quantifier.content
+quantification.content = meta-quantifier.content
 quantification.type = quantification.content, quantification.attlist
 start |= quantification
 quantification = element quantification { quantification.type }
@@ -588,7 +588,7 @@ quantification = element quantification { quantification.type }
 #	    content model: 
 #	    DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
 #	    KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
-#	    PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+#	    PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 #	    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
 # 
 # attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
@@ -610,7 +610,7 @@ Forall = element Forall { Forall.type }
 #	    content model: 
 #	    DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
 #	    KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
-# PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+# PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 #	    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
 # 
 # attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -645,13 +645,13 @@ declare = element declare { declare.type }
 # content model (below Forall): 
 # DR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
 # KR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-# PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+# PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 # ECA Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action)
 # 
 # content model (below Exists): 
 # DR Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval )
 # KR Reaction RuleML ( Atom | Exists  | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
-# PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+# PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 # ECA Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)		
 # 
 # Other (context-sensitive) versions of <formula> are in the
@@ -662,8 +662,8 @@ formula-forall.content =
   Implies
   | Rule
   | Equivalent
-  | outer-quantifier.content
-  | outer-connective.content
+  | head-quantifier.content
+  | head-connective.content
   | extended-signature-predicate-sorts.content
 formula-forall.type = formula-forall.content, formula.attlist
 formula-exists.content =
@@ -706,7 +706,7 @@ Implies = element Implies { Implies.type }
 # attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 if.attlist = xml.attlist
 if.content =
-  inner-connective.content | extended-signature-predicate-sorts.content
+  body-connective.content | extended-signature-predicate-sorts.content
 if-entails.content = Rulebase
 if.type = if.content, if.attlist
 if-entails.type = if-entails.content, if.attlist
@@ -727,7 +727,7 @@ if = element if { if.type }
 # attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 then.attlist = xml.attlist
 then.content =
-  outer-connective.content | extended-signature-predicate-sorts.content
+  head-connective.content | extended-signature-predicate-sorts.content
 then-entails.content = Rulebase
 then.type = then.content, then.attlist
 then-entails.type = then-entails.content, then.attlist
@@ -810,7 +810,7 @@ Equivalent = element Equivalent { Equivalent.type }
 # attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 torso.attlist = xml.attlist
 torso.content =
-  inner-connective.content | extended-signature-predicate-sorts.content
+  body-connective.content | extended-signature-predicate-sorts.content
 torso.type = torso.content, torso.attlist
 start |= torso
 torso = element torso { torso.type }
@@ -852,7 +852,7 @@ Rulebase = element Rulebase { Rulebase.type }
 # Under Query, And may have attribute closure="existential"; 
 # 
 # attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-And-inner.attlist =
+And-body.attlist =
   operator-interface.attlist, node-element.attlist, xml.attlist
 And-query.attlist =
   operator-interface.attlist, node-element.attlist, xml.attlist
@@ -861,9 +861,9 @@ And.content =
   (element formula { formula-and-or.type }
    | formula-and-or.content)*
 And-query.type = And.content, And-query.attlist
-And-inner.type = And.content, And-inner.attlist
+And-body.type = And.content, And-body.attlist
 start |= And
-And = element And { And-inner.type }
+And = element And { And-body.type }
 #       *** Or ***
 #       A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
 # 
@@ -880,16 +880,16 @@ And = element And { And-inner.type }
 #       attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 Or-query.attlist =
   operator-interface.attlist, node-element.attlist, xml.attlist
-Or-inner.attlist =
+Or-body.attlist =
   operator-interface.attlist, node-element.attlist, xml.attlist
 Or.content =
   meta-roles.content,
   (element formula { formula-and-or.type }
    | formula-and-or.content)*
 Or-query.type = Or.content, Or-query.attlist
-Or-inner.type = Or.content, Or-inner.attlist
+Or-body.type = Or.content, Or-body.attlist
 start |= Or
-Or = element Or { Or-inner.type }
+Or = element Or { Or-body.type }
 # *** formula ***
 # The formula role of a conjunctive/disjunctive expression or a rulebase.
 # 
@@ -913,7 +913,7 @@ Or = element Or { Or-inner.type }
 # attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 formula.attlist = edge-element.attlist, xml.attlist
 formula-and-or.content =
-  inner-connective.content | extended-signature-predicate-sorts.content
+  body-connective.content | extended-signature-predicate-sorts.content
 # In 1.0, Naf is not allowed in the consequent (second child) of Entails
 # because Integrity uses of Entails call for classical Neg
 # and Rulebase should not contain Naf in any other context (except Query).
@@ -926,8 +926,8 @@ formula-rulebase.content =
   element Implies { Implies.type }
   | Rule
   | element Equivalent { Equivalent.type }
-  | outer-quantifier.content
-  | outer-connective.content
+  | head-quantifier.content
+  | head-connective.content
   | extended-signature-predicate-sorts.content
 formula-and-or.type = formula-and-or.content, formula.attlist
 formula-rulebase.type = formula-rulebase.content, formula.attlist
@@ -2180,8 +2180,8 @@ Quantifier.attlist =
 Quantifier.content =
   meta-roles.content,
   (declare | Var)+,
-  (element formula { formula-inner-quantifier.type }
-   | formula-inner-quantifier.content)?
+  (element formula { formula-body-quantifier.type }
+   | formula-meta-quantifier.content)?
 Quantifier.type = Quantifier.content, Quantifier.attlist
 start |= Quantifier
 Quantifier = element Quantifier { Quantifier.type }
@@ -2199,8 +2199,8 @@ Quantifier = element Quantifier { Quantifier.type }
 Exists-quantifier.content =
   meta-roles.content,
   (declare | declare.content)+,
-  (element formula { formula-inner-quantifier.type }
-   | formula-inner-quantifier.content)?
+  (element formula { formula-body-quantifier.type }
+   | formula-meta-quantifier.content)?
 Exists-quantifier.type = Exists-quantifier.content, Quantifier.attlist
 # Forall
 #     make the quantifier constraint restrictions ("such that") optional
@@ -2216,8 +2216,8 @@ Exists-quantifier.type = Exists-quantifier.content, Quantifier.attlist
 Forall-quantifier.content =
   meta-roles.content,
   (declare | declare.content)+,
-  (element formula { formula-inner-quantifier.type }
-   | formula-inner-quantifier.content)?
+  (element formula { formula-body-quantifier.type }
+   | formula-meta-quantifier.content)?
 Forall-quantifier.type = Forall-quantifier.content, Quantifier.attlist
 #        *** formula ***
 #        The 'such that' guard formula role of a quantifier (<Forall> or <Exists>).
@@ -2233,9 +2233,9 @@ Forall-quantifier.type = Forall-quantifier.content, Quantifier.attlist
 #        connective and performative modules.
 # 
 #        attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-formula-inner-quantifier.content = guard.content
-formula-inner-quantifier.type =
-  formula-inner-quantifier.content, formula.attlist
+formula-meta-quantifier.content = guard.content
+formula-body-quantifier.type =
+  formula-meta-quantifier.content, formula.attlist
 
 #     *** Profile ***
 #     Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. 
@@ -2822,26 +2822,26 @@ query-connective.content =
   | Neg
   | Equal
 # 
-# An internal group for the inner connectives in the Reaction RuleML language
+# An internal group for the body connectives in the Reaction RuleML language
 # 
 # 
 # content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
 #
-inner-connective.content =
+body-connective.content =
   element Operation { Operation-formula.type }
-  | element And { And-inner.type }
-  | element Or { Or-inner.type }
+  | element And { And-body.type }
+  | element Or { Or-body.type }
   | Negation
   | Naf
   | Neg
   | Equal
 # 
-# An internal group for the outer connectives in the Reaction RuleML language
+# An internal group for the head connectives in the Reaction RuleML language
 # 
 # 
 # content model: (Operation | Negation | Neg | Equal )
 #
-outer-connective.content =
+head-connective.content =
   element Operation { Operation-formula.type }
   | Negation
   | Neg
@@ -2853,22 +2853,22 @@ outer-connective.content =
 #
 query-quantifier.content = Exists
 # 
-# An internal group for the inner quantifiers in the Reaction RuleML language
+# An internal group for the body quantifiers in the Reaction RuleML language
 # 
 # 
 # content model: (Forall | Exists | Quantifier)
 #
-inner-quantifier.content =
+meta-quantifier.content =
   element Forall { Forall-quantifier.type }
   | element Exists { Exists-quantifier.type }
   | Quantifier
 # 
-# An internal group for the outer quantifiers in the Reaction RuleML language
+# An internal group for the head quantifiers in the Reaction RuleML language
 # 
 # 
 # content model: ( Forall  )
 #
-outer-quantifier.content = Forall
+head-quantifier.content = Forall
 # 
 # An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
 # 

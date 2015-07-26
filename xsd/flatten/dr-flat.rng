@@ -580,8 +580,8 @@
             <ref name="Rule"/>
             <ref name="Equivalent"/>
             <ref name="Entails"/>
-            <ref name="outer-quantifier.content"/>
-            <ref name="outer-connective.content"/>
+            <ref name="head-quantifier.content"/>
+            <ref name="head-connective.content"/>
             <ref name="extended-signature-predicate-sorts.content"/>
         </choice>
     </define>
@@ -747,15 +747,15 @@
 	 on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
 	 by referencing it with the @keyref attribute.
 	 
-	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the inner knowledge. For instance, a scope
-	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. Inner scopes
-	 overwrite the outer scope. For instance a scope defined on <Assert> becomes overwritten by an inner scope defined on a <Rule> which is within the
-	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the outer scope.
+	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the body knowledge. For instance, a scope
+	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. body scopes
+	 overwrite the head scope. For instance a scope defined on <Assert> becomes overwritten by an body scope defined on a <Rule> which is within the
+	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the head scope.
 	 
 	 Note: the old approach which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0
      
      Note: multiple scopes can be defined by repeating the <scope> role element
-     Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
+     Note: an empty scope either assumes the head scope or an existing scope needs to be explicity referenced by keyref
      
      content model: 
      DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
@@ -965,7 +965,7 @@
     </define>
     <define name="quantification.content">
         <choice>
-            <ref name="inner-quantifier.content"/>
+            <ref name="meta-quantifier.content"/>
         </choice>
     </define>
     <define name="quantification.type">
@@ -1010,7 +1010,7 @@
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
-		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
 
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
@@ -1058,7 +1058,7 @@
 		content model: 
 		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
 		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
-    PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+    PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
  
     attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
@@ -1136,13 +1136,13 @@
 		content model (below Forall): 
 		DR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
 		KR Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML ( Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action)
 
 		content model (below Exists): 
 		DR Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval )
 		KR Reaction RuleML ( Atom | Exists  | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
-		PR Reaction RuleML does not use outer quantifiers (innner quantifiers under <quantification> are used instead)
+		PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
 		ECA Reaction RuleML ( Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)		
 		
 		Other (context-sensitive) versions of <formula> are in the
@@ -1155,8 +1155,8 @@
             <ref name="Implies"/>
             <ref name="Rule"/>
             <ref name="Equivalent"/>
-            <ref name="outer-quantifier.content"/>
-            <ref name="outer-connective.content"/>
+            <ref name="head-quantifier.content"/>
+            <ref name="head-connective.content"/>
             <ref name="extended-signature-predicate-sorts.content"/>
         </choice>
     </define>
@@ -1272,7 +1272,7 @@
     </define>
     <define name="if.content">
         <choice>
-            <ref name="inner-connective.content"/>
+            <ref name="body-connective.content"/>
             <ref name="extended-signature-predicate-sorts.content"/>
         </choice>
     </define>
@@ -1317,7 +1317,7 @@
     </define>
     <define name="then.content">
         <choice>
-            <ref name="outer-connective.content"/>
+            <ref name="head-connective.content"/>
             <ref name="extended-signature-predicate-sorts.content"/>
         </choice>
     </define>
@@ -1478,7 +1478,7 @@
     </define>
     <define name="torso.content">
         <choice>
-            <ref name="inner-connective.content"/>
+            <ref name="body-connective.content"/>
             <ref name="extended-signature-predicate-sorts.content"/>
         </choice>
     </define>
@@ -1557,7 +1557,7 @@
 		
 		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-    <define name="And-inner.attlist">
+    <define name="And-body.attlist">
         <ref name="operator-interface.attlist"/>
         <ref name="node-element.attlist"/>
         <ref name="xml.attlist"/>
@@ -1584,16 +1584,16 @@
         <ref name="And.content"/>
         <ref name="And-query.attlist"/>
     </define>
-    <define name="And-inner.type">
+    <define name="And-body.type">
         <ref name="And.content"/>
-        <ref name="And-inner.attlist"/>
+        <ref name="And-body.attlist"/>
     </define>
     <start combine="choice">
 <ref name="And"/>
 </start>
 <define name="And">
 <element name="And">
-<ref name="And-inner.type"/>
+<ref name="And-body.type"/>
 </element>
 </define>
     <!--
@@ -1617,7 +1617,7 @@
         <ref name="node-element.attlist"/>
         <ref name="xml.attlist"/>
     </define>
-    <define name="Or-inner.attlist">
+    <define name="Or-body.attlist">
         <ref name="operator-interface.attlist"/>
         <ref name="node-element.attlist"/>
         <ref name="xml.attlist"/>
@@ -1639,16 +1639,16 @@
         <ref name="Or.content"/>
         <ref name="Or-query.attlist"/>
     </define>
-    <define name="Or-inner.type">
+    <define name="Or-body.type">
         <ref name="Or.content"/>
-        <ref name="Or-inner.attlist"/>
+        <ref name="Or-body.attlist"/>
     </define>
     <start combine="choice">
 <ref name="Or"/>
 </start>
 <define name="Or">
 <element name="Or">
-<ref name="Or-inner.type"/>
+<ref name="Or-body.type"/>
 </element>
 </define>
     <!--
@@ -1680,7 +1680,7 @@
     </define>
     <define name="formula-and-or.content">
         <choice>
-            <ref name="inner-connective.content"/>
+            <ref name="body-connective.content"/>
             <ref name="extended-signature-predicate-sorts.content"/>
         </choice>
     </define>
@@ -1703,8 +1703,8 @@
             <element name="Equivalent">
 <ref name="Equivalent.type"/>
 </element>
-            <ref name="outer-quantifier.content"/>
-            <ref name="outer-connective.content"/>
+            <ref name="head-quantifier.content"/>
+            <ref name="head-connective.content"/>
             <ref name="extended-signature-predicate-sorts.content"/>
         </choice>
     </define>
@@ -4268,8 +4268,8 @@
             Reaction RuleML redefining the Forall, Exists and introduce the Quantifier element.
             This is the XML Schema Quantifier element for Reaction RuleML.   File:
             quantifier_module.xsd   Version: 1.02   Last Modification: 2015-03-22       * Quantifier
-            generic quantifier (used in quantification metatag)   * Forall  predefined inner
-            quantifier (used in quantification metatag)   * Exist   predefined inner quantifier
+            generic quantifier (used in quantification metatag)   * Forall  predefined body
+            quantifier (used in quantification metatag)   * Exist   predefined body quantifier
             (used in qualification metatag)       
         
         
@@ -4319,9 +4319,9 @@
             <optional>
 <choice>
                 <element name="formula">
-<ref name="formula-inner-quantifier.type"/>
+<ref name="formula-body-quantifier.type"/>
 </element>
-                <ref name="formula-inner-quantifier.content"/>
+                <ref name="formula-meta-quantifier.content"/>
             </choice>
 </optional>
         
@@ -4362,9 +4362,9 @@
             <optional>
 <choice>
                 <element name="formula">
-<ref name="formula-inner-quantifier.type"/>
+<ref name="formula-body-quantifier.type"/>
 </element>
-                <ref name="formula-inner-quantifier.content"/>
+                <ref name="formula-meta-quantifier.content"/>
             </choice>
 </optional>
         
@@ -4397,9 +4397,9 @@
             <optional>
 <choice>
                 <element name="formula">
-<ref name="formula-inner-quantifier.type"/>
+<ref name="formula-body-quantifier.type"/>
 </element>
-                <ref name="formula-inner-quantifier.content"/>
+                <ref name="formula-meta-quantifier.content"/>
             </choice>
 </optional>
         
@@ -4424,13 +4424,13 @@
 		
 		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-    <define name="formula-inner-quantifier.content">
+    <define name="formula-meta-quantifier.content">
         <choice>
             <ref name="guard.content"/>
         </choice>
     </define>
-    <define name="formula-inner-quantifier.type">
-        <ref name="formula-inner-quantifier.content"/>
+    <define name="formula-body-quantifier.type">
+        <ref name="formula-meta-quantifier.content"/>
         <ref name="formula.attlist"/>
     </define>
     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
@@ -5802,22 +5802,22 @@
     </define>
     <!--
          
-     An internal group for the inner connectives in the Reaction RuleML language
+     An internal group for the body connectives in the Reaction RuleML language
     
     
      content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
-    <define name="inner-connective.content">
+    <define name="body-connective.content">
         <choice>
             <element name="Operation">
 <ref name="Operation-formula.type"/>
 </element>
             <element name="And">
-<ref name="And-inner.type"/>
+<ref name="And-body.type"/>
 </element>
             <element name="Or">
-<ref name="Or-inner.type"/>
+<ref name="Or-body.type"/>
 </element>
             <ref name="Negation"/>
             <ref name="Naf"/>
@@ -5827,13 +5827,13 @@
     </define>
     <!--
          
-     An internal group for the outer connectives in the Reaction RuleML language
+     An internal group for the head connectives in the Reaction RuleML language
     
     
      content model: (Operation | Negation | Neg | Equal )
           
 	-->
-    <define name="outer-connective.content">
+    <define name="head-connective.content">
         <choice>
             <element name="Operation">
 <ref name="Operation-formula.type"/>
@@ -5857,13 +5857,13 @@
     </define>
     <!--
          
-     An internal group for the inner quantifiers in the Reaction RuleML language
+     An internal group for the body quantifiers in the Reaction RuleML language
     
     
      content model: (Forall | Exists | Quantifier)
           
 	-->
-    <define name="inner-quantifier.content">
+    <define name="meta-quantifier.content">
         <choice>
             <element name="Forall">
 <ref name="Forall-quantifier.type"/>
@@ -5876,13 +5876,13 @@
     </define>
     <!--
          
-     An internal group for the outer quantifiers in the Reaction RuleML language
+     An internal group for the head quantifiers in the Reaction RuleML language
     
     
      content model: ( Forall  )
           
 	-->
-    <define name="outer-quantifier.content">
+    <define name="head-quantifier.content">
         <choice>
             <ref name="Forall"/>
         </choice>

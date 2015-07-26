@@ -437,8 +437,8 @@
             <xs:element ref="Rule"/>
             <xs:element ref="Equivalent"/>
             <xs:element ref="Entails"/>
-            <xs:group ref="outer-quantifier.content"/>
-            <xs:group ref="outer-connective.content"/>
+            <xs:group ref="head-quantifier.content"/>
+            <xs:group ref="head-connective.content"/>
             <xs:group ref="extended-signature-predicate-sorts.content"/>
         </xs:choice>
     </xs:group>
@@ -590,15 +590,15 @@
 	 on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
 	 by referencing it with the @keyref attribute.
 	 
-	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the inner knowledge. For instance, a scope
-	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. Inner scopes
-	 overwrite the outer scope. For instance a scope defined on <Assert> becomes overwritten by an inner scope defined on a <Rule> which is within the
-	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the outer scope.
+	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the body knowledge. For instance, a scope
+	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. body scopes
+	 overwrite the head scope. For instance a scope defined on <Assert> becomes overwritten by an body scope defined on a <Rule> which is within the
+	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the head scope.
 	 
 	 Note: the old approach which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0
      
      Note: multiple scopes can be defined by repeating the <scope> role element
-     Note: an empty scope either assumes the outer scope or an existing scope needs to be explicity referenced by keyref
+     Note: an empty scope either assumes the head scope or an existing scope needs to be explicity referenced by keyref
      
      content model: 
      DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
@@ -771,7 +771,7 @@
     </xs:attributeGroup>
     <xs:group name="quantification.content">
         <xs:choice>
-            <xs:group ref="inner-quantifier.content"/>
+            <xs:group ref="meta-quantifier.content"/>
         </xs:choice>
     </xs:group>
     <xs:complexType name="quantification.type">
@@ -925,8 +925,8 @@
             <xs:element ref="Implies"/>
             <xs:element ref="Rule"/>
             <xs:element ref="Equivalent"/>
-            <xs:group ref="outer-quantifier.content"/>
-            <xs:group ref="outer-connective.content"/>
+            <xs:group ref="head-quantifier.content"/>
+            <xs:group ref="head-connective.content"/>
             <xs:group ref="extended-signature-predicate-sorts.content"/>
         </xs:choice>
     </xs:group>
@@ -1035,7 +1035,7 @@
     </xs:attributeGroup>
     <xs:group name="if.content">
         <xs:choice>
-            <xs:group ref="inner-connective.content"/>
+            <xs:group ref="body-connective.content"/>
             <xs:group ref="extended-signature-predicate-sorts.content"/>
         </xs:choice>
     </xs:group>
@@ -1073,7 +1073,7 @@
     </xs:attributeGroup>
     <xs:group name="then.content">
         <xs:choice>
-            <xs:group ref="outer-connective.content"/>
+            <xs:group ref="head-connective.content"/>
             <xs:group ref="extended-signature-predicate-sorts.content"/>
         </xs:choice>
     </xs:group>
@@ -1209,7 +1209,7 @@
     </xs:attributeGroup>
     <xs:group name="torso.content">
         <xs:choice>
-            <xs:group ref="inner-connective.content"/>
+            <xs:group ref="body-connective.content"/>
             <xs:group ref="extended-signature-predicate-sorts.content"/>
         </xs:choice>
     </xs:group>
@@ -1270,7 +1270,7 @@
 		
 		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-    <xs:attributeGroup name="And-inner.attlist">
+    <xs:attributeGroup name="And-body.attlist">
         <xs:attributeGroup ref="Operation-interface.attlist"/>
         <xs:attributeGroup ref="node-element.attlist"/>
         <xs:attributeGroup ref="xml.attlist"/>
@@ -1293,11 +1293,11 @@
         <xs:group ref="And.content"/>
         <xs:attributeGroup ref="And-query.attlist"/>
     </xs:complexType>
-    <xs:complexType name="And-inner.type">
+    <xs:complexType name="And-body.type">
         <xs:group ref="And.content"/>
-        <xs:attributeGroup ref="And-inner.attlist"/>
+        <xs:attributeGroup ref="And-body.attlist"/>
     </xs:complexType>
-    <xs:element name="And" type="And-inner.type"/>
+    <xs:element name="And" type="And-body.type"/>
     <!--
 		*** Or ***
 		A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
@@ -1319,7 +1319,7 @@
         <xs:attributeGroup ref="node-element.attlist"/>
         <xs:attributeGroup ref="xml.attlist"/>
     </xs:attributeGroup>
-    <xs:attributeGroup name="Or-inner.attlist">
+    <xs:attributeGroup name="Or-body.attlist">
         <xs:attributeGroup ref="Operation-interface.attlist"/>
         <xs:attributeGroup ref="node-element.attlist"/>
         <xs:attributeGroup ref="xml.attlist"/>
@@ -1337,11 +1337,11 @@
         <xs:group ref="Or.content"/>
         <xs:attributeGroup ref="Or-query.attlist"/>
     </xs:complexType>
-    <xs:complexType name="Or-inner.type">
+    <xs:complexType name="Or-body.type">
         <xs:group ref="Or.content"/>
-        <xs:attributeGroup ref="Or-inner.attlist"/>
+        <xs:attributeGroup ref="Or-body.attlist"/>
     </xs:complexType>
-    <xs:element name="Or" type="Or-inner.type"/>
+    <xs:element name="Or" type="Or-body.type"/>
     <!--
 		*** formula ***
 		The formula role of a conjunctive/disjunctive expression or a rulebase.
@@ -1371,7 +1371,7 @@
     </xs:attributeGroup>
     <xs:group name="formula-and-or.content">
         <xs:choice>
-            <xs:group ref="inner-connective.content"/>
+            <xs:group ref="body-connective.content"/>
             <xs:group ref="extended-signature-predicate-sorts.content"/>
         </xs:choice>
     </xs:group>
@@ -1390,8 +1390,8 @@
             <xs:element form="qualified" name="Implies" type="Implies.type"/>
             <xs:element ref="Rule"/>
             <xs:element form="qualified" name="Equivalent" type="Equivalent.type"/>
-            <xs:group ref="outer-quantifier.content"/>
-            <xs:group ref="outer-connective.content"/>
+            <xs:group ref="head-quantifier.content"/>
+            <xs:group ref="head-connective.content"/>
             <xs:group ref="extended-signature-predicate-sorts.content"/>
         </xs:choice>
     </xs:group>
@@ -3504,8 +3504,8 @@
             Reaction RuleML redefining the Forall, Exists and introduce the Quantifier element.
             This is the XML Schema Quantifier element for Reaction RuleML.   File:
             quantifier_module.xsd   Version: 1.02   Last Modification: 2015-03-22       * Quantifier
-            generic quantifier (used in quantification metatag)   * Forall  predefined inner
-            quantifier (used in quantification metatag)   * Exist   predefined inner quantifier
+            generic quantifier (used in quantification metatag)   * Forall  predefined body
+            quantifier (used in quantification metatag)   * Exist   predefined body quantifier
             (used in qualification metatag)       </xs:documentation>
         
         <xs:appinfo>
@@ -3551,8 +3551,8 @@
                 <xs:element ref="Var"/>
             </xs:choice>
             <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="formula" type="formula-inner-quantifier.type"/>
-                <xs:group ref="formula-inner-quantifier.content"/>
+                <xs:element form="qualified" name="formula" type="formula-body-quantifier.type"/>
+                <xs:group ref="formula-meta-quantifier.content"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>
@@ -3581,8 +3581,8 @@
                 <xs:group ref="declare.content"/>
             </xs:choice>
             <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="formula" type="formula-inner-quantifier.type"/>
-                <xs:group ref="formula-inner-quantifier.content"/>
+                <xs:element form="qualified" name="formula" type="formula-body-quantifier.type"/>
+                <xs:group ref="formula-meta-quantifier.content"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>
@@ -3610,8 +3610,8 @@
                 <xs:group ref="declare.content"/>
             </xs:choice>
             <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="formula" type="formula-inner-quantifier.type"/>
-                <xs:group ref="formula-inner-quantifier.content"/>
+                <xs:element form="qualified" name="formula" type="formula-body-quantifier.type"/>
+                <xs:group ref="formula-meta-quantifier.content"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>
@@ -3635,13 +3635,13 @@
 		
 		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
-    <xs:group name="formula-inner-quantifier.content">
+    <xs:group name="formula-meta-quantifier.content">
         <xs:choice>
             <xs:group ref="guard.content"/>
         </xs:choice>
     </xs:group>
-    <xs:complexType name="formula-inner-quantifier.type">
-        <xs:group ref="formula-inner-quantifier.content"/>
+    <xs:complexType name="formula-body-quantifier.type">
+        <xs:group ref="formula-meta-quantifier.content"/>
         <xs:attributeGroup ref="formula.attlist"/>
     </xs:complexType>
     <xs:annotation>
@@ -4707,17 +4707,17 @@
     </xs:group>
     <!--
          
-     An internal group for the inner connectives in the Reaction RuleML language
+     An internal group for the body connectives in the Reaction RuleML language
     
     
      content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
-    <xs:group name="inner-connective.content">
+    <xs:group name="body-connective.content">
         <xs:choice>
             <xs:element name="Operation" type="Operation-formula.type"/>
-            <xs:element name="And" type="And-inner.type"/>
-            <xs:element name="Or" type="Or-inner.type"/>
+            <xs:element name="And" type="And-body.type"/>
+            <xs:element name="Or" type="Or-body.type"/>
             <xs:element ref="Negation"/>
             <xs:element ref="Naf"/>
             <xs:element ref="Neg"/>
@@ -4726,13 +4726,13 @@
     </xs:group>
     <!--
          
-     An internal group for the outer connectives in the Reaction RuleML language
+     An internal group for the head connectives in the Reaction RuleML language
     
     
      content model: (Operation | Negation | Neg | Equal )
           
 	-->
-    <xs:group name="outer-connective.content">
+    <xs:group name="head-connective.content">
         <xs:choice>
             <xs:element name="Operation" type="Operation-formula.type"/>
             <xs:element ref="Negation"/>
@@ -4754,13 +4754,13 @@
     </xs:group>
     <!--
          
-     An internal group for the inner quantifiers in the Reaction RuleML language
+     An internal group for the body quantifiers in the Reaction RuleML language
     
     
      content model: (Forall | Exists | Quantifier)
           
 	-->
-    <xs:group name="inner-quantifier.content">
+    <xs:group name="meta-quantifier.content">
         <xs:choice>
             <xs:element name="Forall" type="Forall-quantifier.type"/>
             <xs:element name="Exists" type="Exists-quantifier.type"/>
@@ -4769,13 +4769,13 @@
     </xs:group>
     <!--
          
-     An internal group for the outer quantifiers in the Reaction RuleML language
+     An internal group for the head quantifiers in the Reaction RuleML language
     
     
      content model: ( Forall  )
           
 	-->
-    <xs:group name="outer-quantifier.content">
+    <xs:group name="head-quantifier.content">
         <xs:choice>
             <xs:element ref="Forall"/>
         </xs:choice>

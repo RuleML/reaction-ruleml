@@ -13,8 +13,8 @@
 		Last Modification: 2015-03-22
 			
 		* Quantifier    generic quantifier (used in quantification metatag)
-		* Forall		predefined inner quantifier (used in quantification metatag)
-		* Exist			predefined inner quantifier (used in qualification metatag)
+		* Forall		predefined body quantifier (used in quantification metatag)
+		* Exist			predefined body quantifier (used in qualification metatag)
 			
 		</xs:documentation>
 		
@@ -65,8 +65,8 @@
 				<xs:element ref="Var"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-inner-quantifier.type"/>
-				<xs:group ref="formula-inner-quantifier.content"/>
+				<xs:element name="formula" type="formula-body-quantifier.type"/>
+				<xs:group ref="formula-meta-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -96,8 +96,8 @@
 				<xs:group ref="declare.content"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-inner-quantifier.type"/>
-				<xs:group ref="formula-inner-quantifier.content"/>
+				<xs:element name="formula" type="formula-body-quantifier.type"/>
+				<xs:group ref="formula-meta-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -126,8 +126,8 @@
 				<xs:group ref="declare.content"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-inner-quantifier.type"/>
-				<xs:group ref="formula-inner-quantifier.content"/>
+				<xs:element name="formula" type="formula-body-quantifier.type"/>
+				<xs:group ref="formula-meta-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -154,13 +154,13 @@
 		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	
-	<xs:group name="formula-inner-quantifier.content">
+	<xs:group name="formula-meta-quantifier.content">
 		<xs:choice>
 			<xs:group ref="guard.content"/>
 		</xs:choice>
 	</xs:group>
-	<xs:complexType name="formula-inner-quantifier.type">
-		<xs:group ref="formula-inner-quantifier.content"/>
+	<xs:complexType name="formula-body-quantifier.type">
+		<xs:group ref="formula-meta-quantifier.content"/>
 		<xs:attributeGroup ref="formula.attlist"/>
 	</xs:complexType>
 

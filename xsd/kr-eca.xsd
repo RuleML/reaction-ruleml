@@ -182,18 +182,18 @@
 	
 	<!--
          
-     An internal group for the inner connectives in the Reaction RuleML language
+     An internal group for the body connectives in the Reaction RuleML language
     
     
      content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
-	<xs:group name="inner-connective.content">
+	<xs:group name="body-connective.content">
 		<xs:choice>
 			<xs:element name="Operation" type="Operation-formula.type"/>
-			<xs:element name="And" type="And-inner.type"/>
-			<xs:element name="Or" type="Or-inner.type"/>
+			<xs:element name="And" type="And-body.type"/>
+			<xs:element name="Or" type="Or-body.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Naf"/>
 			<xs:element ref="Neg"/>
@@ -203,13 +203,13 @@
 	
 	<!--
          
-     An internal group for the outer connectives in the Reaction RuleML language
+     An internal group for the head connectives in the Reaction RuleML language
     
      content model: (Operation | Negation | Neg | Equal)
           
 	-->
 	
-	<xs:group name="outer-connective.content">
+	<xs:group name="head-connective.content">
 		<xs:choice>
 			<xs:element name="Operation" type="Operation-formula.type"/>
 			<xs:element ref="Negation"/>
@@ -235,14 +235,14 @@
 	
 	<!--
          
-     An internal group for the inner quantifiers in the Reaction RuleML language
+     An internal group for the body quantifiers in the Reaction RuleML language
     
     
      content model: (Forall | Exists | Quantifier)
           
 	-->
 	
-	<xs:group name="inner-quantifier.content">
+	<xs:group name="meta-quantifier.content">
 		<xs:choice>
 			<xs:element name="Forall" type="Forall-quantifier.type"/>
 			<xs:element name="Exists" type="Exists-quantifier.type"/>
@@ -252,7 +252,7 @@
 	
 	<!--
          
-     An internal group for the outer quantifiers in the Reaction RuleML language
+     An internal group for the head quantifiers in the Reaction RuleML language
 	 
 	 Quantifiers can be defined internally in the <quantification> too   
     
@@ -260,9 +260,23 @@
           
 	-->
 	
-	<xs:group name="outer-quantifier.content">
+	<xs:group name="head-quantifier.content">
 		<xs:choice>
 			<xs:element ref="Forall"/>	
+		</xs:choice>
+	</xs:group>
+
+	<!--
+         
+     An internal group for the body quantifier in the Reaction RuleML language
+    
+    
+     content model: ( Exist )
+          
+	-->
+	<xs:group name="body-quantifier.content">
+		<xs:choice>		
+			<xs:element ref="Exists"/>
 		</xs:choice>
 	</xs:group>
 	

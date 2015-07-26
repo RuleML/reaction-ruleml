@@ -446,8 +446,8 @@
       <xs:element name="Implies" type="Implies.type"/>
       <xs:element ref="Rule"/> 
       <xs:element name="Equivalent" type="Equivalent.type"/>
-      <xs:group ref="head-quantifier.content"/>
-      <xs:group ref="head-connective.content"/> 
+      <xs:group ref="rulebase-quantifier.content"/>
+      <xs:group ref="rulebase-connective.content"/> 
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>

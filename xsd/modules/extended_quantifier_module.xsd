@@ -65,7 +65,7 @@
 				<xs:element ref="Var"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-body-quantifier.type"/>
+				<xs:element name="formula" type="formula-meta-quantifier.type"/>
 				<xs:group ref="formula-meta-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
@@ -96,7 +96,7 @@
 				<xs:group ref="declare.content"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-body-quantifier.type"/>
+				<xs:element name="formula" type="formula-meta-quantifier.type"/>
 				<xs:group ref="formula-meta-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
@@ -126,7 +126,7 @@
 				<xs:group ref="declare.content"/>
 			</xs:choice>
 			<xs:choice minOccurs="0">
-				<xs:element name="formula" type="formula-body-quantifier.type"/>
+				<xs:element name="formula" type="formula-meta-quantifier.type"/>
 				<xs:group ref="formula-meta-quantifier.content"/>
 			</xs:choice>
 		</xs:sequence>
@@ -159,7 +159,7 @@
 			<xs:group ref="guard.content"/>
 		</xs:choice>
 	</xs:group>
-	<xs:complexType name="formula-body-quantifier.type">
+	<xs:complexType name="formula-meta-quantifier.type">
 		<xs:group ref="formula-meta-quantifier.content"/>
 		<xs:attributeGroup ref="formula.attlist"/>
 	</xs:complexType>

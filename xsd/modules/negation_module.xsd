@@ -78,7 +78,7 @@
 	</xs:attributeGroup>
 	<xs:group name="formula-negation.content">
 		<xs:choice>
-			<xs:element name="Operation" type="Operation-formula.type"/>
+			<xs:element name="Operation" type="Operation-formula-and-or.type"/>
 			<xs:element ref="Equal"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>

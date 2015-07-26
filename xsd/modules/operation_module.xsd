@@ -56,7 +56,8 @@
 		<xs:attributeGroup ref="node-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
 	</xs:attributeGroup>
-	<xs:group name="Operation-formula.content">
+	
+	<xs:group name="Operation-formula-rulebase.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
@@ -66,8 +67,38 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
-	<xs:complexType name="Operation-formula.type">
-		<xs:group ref="Operation-formula.content"/>
+	<xs:complexType name="Operation-formula-rulebase.type">
+		<xs:group ref="Operation-formula-rulebase.content"/>
+		<xs:attributeGroup ref="Operation-formula.attlist"/>
+	</xs:complexType>
+
+	<xs:group name="Operation-formula-and-or.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="formula" type="formula-and-or.type"/>
+				<xs:group ref="formula-and-or.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Operation-formula-and-or.type">
+		<xs:group ref="Operation-formula-and-or.content"/>
+		<xs:attributeGroup ref="Operation-formula.attlist"/>
+	</xs:complexType>
+	
+	<xs:group name="Operation-formula-query.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:element ref="degree" minOccurs="0"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="formula" type="formula-query.type"/>
+				<xs:group ref="formula-query.content"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="Operation-formula-query.type">
+		<xs:group ref="Operation-formula-query.content"/>
 		<xs:attributeGroup ref="Operation-formula.attlist"/>
 	</xs:complexType>
 	
@@ -81,14 +112,42 @@
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element name="formula" type="formula-rulebase.type"/>
-				<xs:group ref="formula-rulebase.content"/>
+				<xs:element ref="arg"/>
+				<xs:group ref="arg.content"/>
+				<xs:element name="content" type="operation_anycontent.type"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="Operation-term.type">
 		<xs:group ref="Operation-term.content"/>
 		<xs:attributeGroup ref="Operation-term.attlist"/>
+	</xs:complexType>
+	
+	
+	<!--
+     *** content ***
+     
+          see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+     
+     content model:  xs:any*
+     
+     @prefix is used to define a prefix and a term mapping vocabulary for the XML content
+     See CURIE to IRI and term to IRI translation
+     
+     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+-->
+	<xs:attributeGroup name="operation_anycontent.attlist">
+		<xs:attributeGroup ref="edge-element.attlist"/>	
+		<xs:attributeGroup ref="xml.attlist"/>
+	</xs:attributeGroup>
+	<xs:group name="operation_anycontent.content">
+		<xs:choice>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="operation_anycontent.type">
+		<xs:group ref="operation_anycontent.content"/>
+		<xs:attributeGroup ref="operation_anycontent.attlist"/>
 	</xs:complexType>
 	
 </xs:schema>

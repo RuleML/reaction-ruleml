@@ -155,11 +155,29 @@
 	
 	<xs:group name="query-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="Operation-formula.type"/>
+			<xs:element name="Operation" type="Operation-formula-query.type"/>
 			<xs:element name="And" type="And-query.type"/>
 			<xs:element name="Or" type="Or-query.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Naf"/>
+			<xs:element ref="Equal"/> 
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the rulebase connectives in the Reaction RuleML language
+    
+    
+     content model: (Operation | Negation | Neg | Equal )
+          
+	-->
+	
+	<xs:group name="rulebase-connective.content">
+		<xs:choice>
+			<xs:element name="Operation" type="Operation-formula-rulebase.type"/>
+			<xs:element ref="Negation"/>
+			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 
 		</xs:choice>
 	</xs:group>
@@ -175,7 +193,7 @@
 	
 	<xs:group name="body-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="Operation-formula.type"/>
+			<xs:element name="Operation" type="Operation-formula-and-or.type"/>
 			<xs:element name="And" type="And-body.type"/>
 			<xs:element name="Or" type="Or-body.type"/>
 			<xs:element ref="Negation"/>
@@ -194,7 +212,7 @@
 	
 	<xs:group name="head-connective.content">
 		<xs:choice>
-			<xs:element name="Operation" type="Operation-formula.type"/>
+			<xs:element name="Operation" type="Operation-formula-and-or.type"/>
 			<xs:element ref="Equal"/>			
 		</xs:choice>
 	</xs:group>
@@ -228,6 +246,21 @@
 			<xs:element name="Forall" type="Forall-quantifier.type"/>
 			<xs:element name="Exists" type="Exists-quantifier.type"/>
 			<xs:element ref="Quantifier"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!--
+         
+     An internal group for the rulebase quantifiers in the Reaction RuleML language
+    
+    
+     content model: ( Forall  )
+          
+	-->
+	
+	<xs:group name="rulebase-quantifier.content">
+		<xs:choice>
+			<xs:element ref="Forall"/>
 		</xs:choice>
 	</xs:group>
 	

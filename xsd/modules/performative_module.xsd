@@ -458,8 +458,8 @@
       <xs:element ref="Rule"/>	
       <xs:element ref="Equivalent"/>
       <xs:element ref="Entails"/>
-      <xs:group ref="head-quantifier.content"/>
-      <xs:group ref="head-connective.content"/>
+      <xs:group ref="rulebase-quantifier.content"/>
+      <xs:group ref="rulebase-connective.content"/>
       <xs:group ref="extended-signature-predicate-sorts.content"/>
     </xs:choice>
   </xs:group>

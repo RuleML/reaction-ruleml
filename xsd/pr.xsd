@@ -169,15 +169,13 @@
      An internal group for the rulebase connectives in the Reaction RuleML language
     
     
-     content model: (Operation | Negation | Neg | Equal )
+     content model: (Operation | Equal )
           
 	-->
 	
 	<xs:group name="rulebase-connective.content">
 		<xs:choice>
 			<xs:element name="Operation" type="Operation-formula-rulebase.type"/>
-			<xs:element ref="Negation"/>
-			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 
 		</xs:choice>
 	</xs:group>

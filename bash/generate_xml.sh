@@ -4,16 +4,17 @@
 # Instructions:
 # apply the XSLT transformation in xslt/rnc2xsd after flattening
 #
-BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
-rm ${INSTANCE_HOME}*.ruleml  >> /dev/null 2>&1
+BASH_HOME="$( cd "$(dirname "$0")" ; pwd -P )"/ ;. "${BASH_HOME}path_config.sh";
+echo $BASH_HOME
+#rm "${INSTANCE_HOME}"*.ruleml  >> /dev/null 2>&1
 
 #   use oxygen to generate XML instances according to the configuration file for the consumer-reaction driver
-sh "$GENERATE_SCRIPT" "$REACTION_CONFIG"
+# sh "$GENERATE_SCRIPT" "$REACTION_CONFIG"
 
 # Apply XSLT transforamtions
 # transform in place for files in INSTANCE_HOME
 # FIXME write an aux script for the xslt call
-for f in ${INSTANCE_HOME}*.ruleml
+for f in "${INSTANCE_HOME}"*
 do
   filename=$(basename "$f")
   echo "Transforming " "${filename}"
@@ -23,10 +24,11 @@ do
      exit 1
    fi
 done
+exit 0
 
   schemaname=consumer-reaction-normal.xsd
-  sfile=${XSD_HOME}${schemaname}       
-  ${BASH_HOME}aux_valxsd.sh "${sfile}"
+  sfile="${XSD_HOME}${schemaname}"       
+  "${BASH_HOME}"aux_valxsd.sh "${sfile}"
   exitvalue=$?
   echo ${exitvalue}
   if [ "${exitvalue}" -ne "0" ]; then

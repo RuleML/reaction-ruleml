@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
-    <schemaSystemId>file:/home/tara/Documents/Github/RuleML/consumer-ruleml/xsd/consumer-reaction-normal.xsd</schemaSystemId>
+    <schemaSystemId>file:/C:/Users/paschke/Documents/Eigene%20Arbeiten/Reaction%20RuleML/XSD%20Schema/consumer-ruleml/xsd/consumer-reaction-normal.xsd</schemaSystemId>
     <documentRoot>Rule</documentRoot>
-    <outputFolder>/home/tara/Documents/Github/RuleML/consumer-ruleml/test/reaction-test-suites</outputFolder>
+    <outputFolder>C:\Users\paschke\Documents\Eigene Arbeiten\Reaction RuleML\XSD Schema\reaction-ruleml1.02\test\reaction-test-suites</outputFolder>
     <filenamePrefix>instance</filenamePrefix>
     <filenameExtension>ruleml</filenameExtension>
     <noOfInstances>10</noOfInstances>
     <openFirstInstance>false</openFirstInstance>
     <defaultNamespace>&lt;NO_NAMESPACE></defaultNamespace>
     <valuesMaxLength>30</valuesMaxLength>
-    <isUseIncrementalNamesForValues>false</isUseIncrementalNamesForValues>
+    <isUseIncrementalNamesForValues>true</isUseIncrementalNamesForValues>
     <discardOptionalElementsAfterNestedLevel>6</discardOptionalElementsAfterNestedLevel>
     <namespaceMapping ns="http://ruleml.org/spec" proxy="ruleml"/>
     <namespaceMapping ns="http://www.w3.org/2001/XMLSchema-datatypes" proxy="xm"/>
@@ -19,7 +19,6 @@
         <valuesForContentType>RANDOM</valuesForContentType>
         <preferredNumberOfRepetitions>2</preferredNumberOfRepetitions>
         <maximumRecursivityLevel>1</maximumRecursivityLevel>
-        <alternativeStrategy>RANDOM</alternativeStrategy>
         <choicesAndSubstitutions strategy="RANDOM" generateOthersAsComments="false"/>
         <attribute namespace="&lt;ANY>" name="&lt;ANY>">
         </attribute>

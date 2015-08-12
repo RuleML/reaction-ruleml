@@ -3,7 +3,7 @@
 # Dependencies
 # build_rnc.sh
 # build_xsd.sh
-shopt -s nullglob
+#shopt -s nullglob
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
 
 # Download RNC and test

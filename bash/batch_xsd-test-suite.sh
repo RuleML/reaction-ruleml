@@ -11,11 +11,11 @@
 #
 # globstar is only available in bash 4
 #shopt -s globstar
-shopt -s nullglob
-BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
+#shopt -s nullglob
+BASH_HOME="$( cd "$(dirname "$0")" ; pwd -P )/" ;. "${BASH_HOME}path_config.sh";
 
   schemaname=dr.xsd
-  sfile=${XSD_HOME}${schemaname}       
+  sfile="${XSD_HOME}${schemaname}"       
   #${BASH_HOME}aux_valxsd.sh "${sfile}"
   #exitvalue=$?
   #echo ${exitvalue}
@@ -24,11 +24,11 @@ BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
   #     exit 1
   # fi   
 
-for file in ${DR_TEST_SUITE_HOME}*
+for file in "${DR_TEST_SUITE_HOME}"*
 do
-  filename=$(basename "${file}")
+  filename="$(basename "${file}")"
   echo "File ${filename}"
-  ${BASH_HOME}aux_valxsd.sh "${sfile}" "${file}"
+  "${BASH_HOME}aux_valxsd.sh" "${sfile}" "${file}"
   exitvalue=$?
   if [[ ! ${file} =~ fail ]] && [ "${exitvalue}" -ne "0" ]; then
           echo "Validation Failed for ${file}"

@@ -45,6 +45,7 @@
   -->
   <xs:attributeGroup name="Implies.attlist">
     <xs:attributeGroup ref="formula-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="material.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
@@ -183,6 +184,7 @@
   -->
   <xs:attributeGroup name="Equivalent.attlist">
     <xs:attributeGroup ref="formula-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="material.attrib"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>

@@ -356,7 +356,7 @@
 		<xs:choice>			
 			<xs:group ref="arg.content"/>
 		</xs:choice>
-	</xs:group>
+	</xs:group>	
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 

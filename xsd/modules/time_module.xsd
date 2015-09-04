@@ -48,19 +48,6 @@
       The optional @type attribute defines the type of the time, e.g. ruleml:TimeInstant (linear continuous time model) 
       or ruleml:TimeInterval (discrete time interval model). The default time semantics is a discrete time model.
       Note: Time can be defined absolute or relative.
-      		
-	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
-				content(xs:any*)* ) ) 
-	KR Reaction RuleML:  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
-				((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation| (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
-				content(xs:any*)* ) ) 
-	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
-		        ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operation))+, (repo)?)|(repo)),(slot)*, (resl)?)?) |		       
-				content(xs:any*)* ) ) 	
-	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	
 	<xs:attributeGroup name="Time-formula.attlist">
@@ -72,7 +59,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice>
+			<xs:choice minOccurs="0">
 				<xs:sequence>
 					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element ref="resl" minOccurs="0"/>
@@ -113,7 +100,7 @@
 	<xs:group name="Time-term.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
-			<xs:choice>
+			<xs:choice minOccurs="0">
 				<xs:sequence>
 					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element ref="resl" minOccurs="0"/>
@@ -150,15 +137,7 @@
      Definition of the the arg role for Time
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
-     
-     content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval | (After | Before | Any | Every | Timer | Operation))
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation | (After | Before | Any | Every | Timer | Operation))
-     in ECA Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action | (After | Before | Any | Every | Timer | Operation))  
-     
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-          
--->
+	-->
 	<xs:attributeGroup name="arg_time.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -181,11 +160,7 @@
      
      @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
      	See CURIE to IRI and term to IRI translation
-     
-     content model:  xs:any*
-
-     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
--->
+	-->
 	<xs:attributeGroup name="time_anycontent.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>	
 		<xs:attributeGroup ref="xml.attlist"/>

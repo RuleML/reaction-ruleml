@@ -52,14 +52,7 @@
       *** Message ***
       A Message element that provides the syntax for inbound and outbound messages / notifications 
       
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Message
-
-      content model: 
-       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, cid?, protocol?, directive?, sender?, receiver?, (content | payload)? )
-       
-      
-      Message has the following attributes:
-		@type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?      
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Message      
 -->
 	<xs:attributeGroup name="Message.attlist">
 		<xs:attributeGroup ref="message-mode.attrib"/>
@@ -109,13 +102,7 @@
       *** Agent ***
       Generic Agent element for defining Agents locally or for referencing existing external Agents
       
-            see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Agent
-      
-      content model: ( (content(xs:any))? )
-	  
-      Agent has the following attributes:
-      @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
-      
+            see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Agent      
 	-->
 	<xs:attributeGroup name="Agent.attlist">
 		<xs:attributeGroup ref="term-interface.attlist"/>
@@ -144,12 +131,7 @@
       Generic Protocol element for defining protocols locally or for referencing existing external protocols
  
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Protocol
-            
-      content model: ( (content(xs:any) )? )
-	  
-      Protocol has the following attributes:
-      @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
-      
+                  
 -->
 	<xs:attributeGroup name="Protocol.attlist">
 		<xs:attributeGroup ref="term-interface.attlist"/>
@@ -162,8 +144,7 @@
 			<xs:element ref="qualification" minOccurs="0" maxOccurs="unbounded"/> 
 			<xs:element ref="oid" minOccurs="0" maxOccurs="1"/>
 			<xs:choice minOccurs="0">
-				<xs:element name="content" type="message_anycontent.type"/>
-							
+				<xs:element name="content" type="message_anycontent.type"/>							
 			</xs:choice>	
 		</xs:sequence>			
 	</xs:group>
@@ -177,10 +158,6 @@
      *** protocol ***
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-protocol
-     
-     content model: (Protocol | Ind | Data | Var | Expr | Plex )
-     
-     attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="protocol.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -207,10 +184,7 @@
      *** directive ***
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-directive
-     
-     content model: (Ind | Data | Var | Expr | Plex )
-     
-     attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+
 -->
 	<xs:attributeGroup name="directive.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -238,10 +212,6 @@
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-sender
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-receiver
-     
-     content model: (Agent | Ind | Data | Var | Expr | Plex )
-     
-     attributes:  @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="sender.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -272,10 +242,6 @@
      	See CURIE to IRI and term to IRI translation
      	
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-     	
-     content model:  xs:any*
-     
-     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
 	<xs:attributeGroup name="message_anycontent.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>
@@ -316,18 +282,6 @@
       
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Send
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Receive
-      
-      content model:
- 		 
-	  in CEP Reaction RuleML
-	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (enclosed | Message )* )
-	  
-      
-      The @size attribute defines the number of messages to be received. Default value for size is "1". 
-      If -1 is used it will wait infinitely for incoming messages. 
-      The qualification can be used e.g. to define timeouts and validity intervals which are tested by scoped guard constraints.
-
-	  attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 
     -->
 	<xs:attributeGroup name="Send.attlist">
@@ -375,10 +329,7 @@
      *** enclosed ***
      
      Definition of the the enclosed role for Send and Receive actions
-     
-     content model:  
-      in CEP Reaction RuleML: (Message)
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+      
 	-->
 	<xs:attributeGroup name="enclosed.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>

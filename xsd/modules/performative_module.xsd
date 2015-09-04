@@ -33,18 +33,11 @@
 		The n-ary top-level of a RuleML document.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.022#gloss-RuleML
-			 
-	DR/KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Consult|Assert|Retract|Query|Answer|Test)* )
-	PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Assert|Retract|Update|Consult|Query|Answer|Test|Action)* )
-	ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do | Assert|Retract|Update|Query|Consult|Answer|Test|Action)* )
-	CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (do|Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)* )
-			
+
  	 Note: key and keyref object identifier are defined to be unique under the RuleML document root
  	 
  	 @vocab: an IRI that defines the mapping to use when a type term (e.g. a frame signature type) is referenced in an attribute value
  	 @prefix: a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
-				
-	attributes: @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="RuleML.attlist">
     <xs:attributeGroup ref="node-element.attlist"/>
@@ -81,14 +74,6 @@
     The do role of the root element (<RuleML>).
     
     See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.022#gloss-do
-    
-    content model  
-    DR/KR Reaction RuleML (Consult|Assert|Retract|Query|Answer|Test)
-    PR Reaction RuleML (Assert|Retract|Update|Consult|Query|Answer|Test|Action)
-    ECA Reaction RuleML (Assert|Retract|Update|Query|Consult|Answer|Test|Action)
-    CEP Reaction RuleML (Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)
-    
-    attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:group name="act.content">
     <xs:choice>
@@ -111,18 +96,6 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Consult
       
       dynamically "consults" (imports) knowledge resource, e.g. a message, documents or external resource (with the @iri attribute).
-      
-      content model:
- 		 
- 		 in DR Reaction RuleML (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (payload | RuleML | Reify | Var))
- 		 in KR Reaction RuleML (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (payload | RuleML | Reify | Var))
- 		 in PR Reaction RuleML  (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (payload | RuleML | Reify | Var))
- 		 in ECA Reaction RuleML (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (payload | RuleML | Reify | Var))
-	   in CEP Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ((payload | RuleML | Reify | Var) | (enclosed | Message))* )
-	  
-      Consult has the following attributes:
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
-
     -->
   <xs:attributeGroup name="Consult.attlist">
     <xs:attributeGroup ref="action-interface.attlist"/>
@@ -149,10 +122,6 @@
      *** payload ***
      
     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-payload
-     
-     content model: (RuleML | Reify | Var)
-     
-     attributes:  @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="payload.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -175,15 +144,7 @@
 		A KQML-like performative acting as a wrapper specifying that its content is
 		asserted, making an 'implicit <Rulebase>' assumption.
 
-		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Assert 
-
-		content model:
-		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
-    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
-    ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)
-
-   attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?  
+		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Assert   
   -->
   <xs:attributeGroup name="Assert.attlist">
     <xs:attributeGroup ref="action-interface.attlist"/>
@@ -213,14 +174,6 @@
 		content is to be deleted, making an 'implicit <Rulebase>' assumption.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Retract
-
-		content model:
-		DR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval  )*)
-    KR Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )*)
-    PR Reaction RuleML: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )*) 
- 		ECA Reaction RuleMl: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action  )*)   
-
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?   
   -->
   <xs:attributeGroup name="Retract.attlist">
     <xs:attributeGroup ref="action-interface.attlist"/>
@@ -249,21 +202,7 @@
       Update action
       
       See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Update
-      
-      content model:
-      
-      in PR Reaction RuleML
-       ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal),
-		 (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal)? )
-		 
-	  in ECA Reaction RuleML
-	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action),
-		 (formula | Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal |  Negation | Neg | Time | Spatial | Interval | Event | Action)? )
-	  
-      Update has the following attributes:
-      @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
-      
--->
+  -->
   <xs:attributeGroup name="Update.attlist">
     <xs:attributeGroup ref="action-interface.attlist"/>
     <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -274,7 +213,7 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element ref="degree" minOccurs="0"/>
-      <xs:sequence>
+      <xs:sequence minOccurs="0">
         <xs:choice>
           <xs:element name="formula" type="formula-assert.type"/>
           <xs:group ref="formula-assert.content"/>
@@ -298,14 +237,6 @@
 		queried, making an 'implicit <Rulebase>' assumption.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Query
-
-		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval )* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
-		PR Reaction RuleML:( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )* )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Rulebase | And | Or | Entails |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )* )		
-
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="Query.attlist">
     <xs:attributeGroup ref="action-interface.attlist"/>
@@ -365,15 +296,6 @@
 	  With the optional @type attribute an answer type can be specified. 
 	  The @safety optionally defines if the answer (event) is interrupting or non-interrupting 
 	  and the @card attribute optionally defines the number of results contained in an Answer.
-	   
-	  
-      content model:
- 		 
-	  in CEP Reaction RuleML
-	  ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (formula | Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)* )
-	  
-      Answer has the following attributes:
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
   <xs:attributeGroup name="Answer.attlist">		
     <xs:attributeGroup ref="action-interface.attlist"/>
@@ -402,14 +324,6 @@
 		The formula role of a performative (<Answer>).
 		
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
-		
-		content model (below Answer formula): 
-		(Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action)
-  		
-		Other (context-sensitive) versions of <formula> are in the
-		connective and quantifier modules.
-		
-		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   
   <xs:group name="formula-answer.content">
@@ -431,24 +345,6 @@
 		The formula role of a performative (<Assert>, <Retract>, <Update>,... or <Query>).
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
-
-		content model (below Assert formula): 
-		DR Reaction RuleML (Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval )
-		KR Reaction RuleML (Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Forall |  Time | Spatial | Interval  | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
-		PR Reaction RuleML (Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-		ECA Reaction RuleML (Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg |  Time | Spatial | Interval | Event | Action )
-		
-		content model (below Query): 
-		DR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval )
-		KR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Exists |  Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )
-    PR Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal | Action )
-		ECA Reaction RuleML (Operation | Rulebase | Atom | Entails | And | Or | Equal | Negation | Naf | Neg | Time | Spatial | Interval | Event | Action )    
-		CEP Reaction RuleML (Operation | Atom | Rulebase | And | Or | Entails |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action  )
-
-		Other (context-sensitive) versions of <formula> are in the
-		connective and quantifier modules.
-		
-		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <!-- the (empty) attribute list is declared in the connective module -->
   <xs:group name="formula-assert.content">

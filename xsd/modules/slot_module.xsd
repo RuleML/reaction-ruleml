@@ -31,15 +31,6 @@
 		A user-defined slot consisting of a name (first position) and a filler (second position).
 		
 		see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-slot
-
-		content model:
-		DR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval) )
-		KR Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation) )
-		PR Reaction RuleML: ( (Ind|Data|Expr|Plex), (Ind|Data|Skolem|Var|Reify|Expr|Plex) )
-		ECA Reaction RuleML: ( (Ind|Data|Expr|Plex|Time|Spatial|Interval|Event|Action), (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action) )
-		
-		attributes: @card?, @minCard?, @maxCard?, @weight?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?  
-		
 	-->
   <xs:attributeGroup name="slot.attlist">
     <xs:attributeGroup ref="card.attrib"/>

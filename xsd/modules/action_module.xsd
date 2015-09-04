@@ -42,13 +42,6 @@
 
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
      
-     content model:  
-     in DR Reaction RuleML: not used in DR Reaction RuleML
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action|Situation)
-     in PR Reaction RuleML (atomic action | complex action): ((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operation)) 
-     in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operation))
-    
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="arg_action.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>
@@ -74,8 +67,7 @@
      See CURIE to IRI and term to IRI translation
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-     
-     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+          
     -->
 	<xs:attributeGroup name="action_anycontent.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>
@@ -93,6 +85,7 @@
 	
 	<!--
 	*** Action ***
+	
 	  Explicit generic Action. The action can be defined internally 
      	* with positional arguments <arg>, e.g., <arg><Ind>a1</Ind></arg> (atomic actions | complex actions)
       	* with unpositional slots <slot>, e.g., <slot><Ind>name</Ind><Ind>a1</Ind></slot><slot><Ind>processingDate</Ind><Time>....</Time></slot>
@@ -104,20 +97,8 @@
       the optional @size attribute acts as a generic size counter for the number of actions to be done 
       optional @closure defines the default quantification
              
-	  content model: 
-	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
-	                ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Action|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-	                (content(xs:any)) )? 
-	  PR Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
-	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex ) | (Succession | Choice | Flow | Loop | Operation)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-	                (content(xs:any)) )? 
-	  ECA Reaction RuleML:   ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( 
-	                ((slot)*,(resl)?,((((((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action ) | (Succession | Choice | Flow | Loop | Operation)))+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-	                (content(xs:any)) )?             
-	                
-	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Action
-	                
-	  attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+
+	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Action	                
 	-->
 	<xs:attributeGroup name="Action-formula.attlist">
 		<xs:attributeGroup ref="action-interface.attlist"/>

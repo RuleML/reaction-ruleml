@@ -34,61 +34,7 @@
   <!--
         *** Atom ***
 		A logical atom , i.e. an expression formed from a predicate
-		applied to a collection of its (logical
-		content model:
-		in DR Reaction RuleML:
-		(
-			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
-			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval)*, repo?) | repo), slot*, resl?
-		)
 		
-		in KR Reaction RuleML:
-		(
-			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
-			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo?) | repo), slot*, resl?
-		)
-		
-		in PR Reaction RuleML:
-		(
-			meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
-			((arg | Ind | Data | Skolem | Var | Reify|Expr|Plex)*, repo?) | repo), slot*, resl?
-		)
-		
-		in ECA Reaction RuleML
-		(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (op | Rel)?, slot*,
-			((arg | Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)*, repo?) | repo), slot*, resl?)
-		
-		however, the above content model is non-deterministic,
-		so it is (equivalently) restructured as follows:
-		
-		in DR Reaction RuleML:
-		(
-				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel)?, slot*,
-				( 
-					( 
-						((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?)
-						|
-						repo
-					),
-					slot*)?, 
-				resl?
-			)	
-			
-		in KR Reaction RuleML
-		(
-				meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  (op | Rel)?, slot*,
-				( 
-					( 
-						((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo?)
-						|
-						repo
-					),
-					slot*)?, 
-				resl?
-			)
-	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
-	
 	-->
   <xs:attributeGroup name="Atom.attlist">
     <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -154,12 +100,6 @@
 		An operator expression including the relation of an atom.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-op
-
-		content model (within Atom): (Rel)
-		
-		Other (context-sensitive) versions of <op> are in the expr and holog modules.
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="op.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -180,11 +120,7 @@
 		*** Rel ***
 		A relation, i.e. a logical predicate, of an atom.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rel
-		
-		content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-		
-		attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rel		
 	-->
   <xs:attributeGroup name="Rel.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -208,9 +144,6 @@
 		
 		See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-degree
 
-		content model: (Data)
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="degree.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

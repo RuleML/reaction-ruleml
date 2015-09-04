@@ -46,14 +46,6 @@
       the optional @iri attribute points to an external definition of the interval, and
        An interval can be defined by Events, Actions,  Times, Spatials, and other Intervals can be typed by the 
        interval ontology of Reaction RuleML (defining different types of intervals).
-		
-	content model: 
-	DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | content | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | | (After | Before | Any | Every | Timer | Operation)) , (arg | content | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? ) 
-	KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation)) , (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? ) 
-    PR Reaction RuleML: not used in PR Reaction RuleML 
-	ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation)) , (arg | content | Interval | Time | Spatial |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? ) 
-	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Interval-formula.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
@@ -64,7 +56,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:sequence>
+			<xs:sequence minOccurs="0">
 				<xs:choice>
 					<xs:element name="arg" type="arg_interval.type"/>
 					<xs:element name="content" type="interval_anycontent.type"/>
@@ -93,7 +85,7 @@
 	<xs:group name="Interval-term.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
-			<xs:sequence>
+			<xs:sequence minOccurs="0">
 				<xs:choice>
 					<xs:element name="arg" type="arg_interval.type"/>
 					<xs:group ref="arg_interval.content"/>
@@ -116,14 +108,6 @@
      Definition of the the arg role for Intervals
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
-     
-     content model:  
-     in DR Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))
-     in KR Reaction RuleML: (Time | Spatial | Interval |  Event | Action | Situation | Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation) )
-     not used in PR Reaction RuleML     
-     ECA Reaction RuleML: (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action | (After | Before | Any | Every | Timer | Operation))
-     
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="arg_interval.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>
@@ -144,12 +128,9 @@
      
           see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
      
-     content model:  xs:any*
-     
      @prefix is used to define a prefix and a term mapping vocabulary for the XML content
      See CURIE to IRI and term to IRI translation
-     
-     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+
 -->
 	<xs:attributeGroup name="interval_anycontent.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>	

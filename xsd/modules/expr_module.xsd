@@ -39,62 +39,6 @@
 		A logical function of the form "f(...)" where f is a function name.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Expr
-
-		content model:
-		DR Reaction RuleML:
-		( 		   
-		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun)?, slot*, 
-      (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*,
-		  repo?, slot*, resl?
-		)
-
-    KR Reaction RuleML:
-		( 		   
-		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun)?, slot*, 
-      (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*,
-		  repo?, slot*, resl?
-		)
-
-		PR Reaction RuleML:
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?
-		  (op|Fun)?, slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl?		)
-		  
-		ECA Reaction RuleML:
-		( 		   
-		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op|Fun)?, slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action)*, repo?, slot*, resl?
-		)  
-
-		however, this is non-deterministic, so it is (equivalently) restructured as follows:
-		DR Reaction RuleML:
-		(
-		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun)?, slot*,
-			( 
-				( 
-					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo? )
-					|
-					repo
-				),
-				slot*)? , 
-			resl?
-		)
-		KR Reaction RuleML:
-				(
-		meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (op | Fun)?, slot*,
-			( 
-				( 
-					( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo? )
-					|
-					repo
-				),
-				slot*)? , 
-			resl?
-		)
-		Note the 'positionalized' normal form where the op role is only
-		at the beginning of the Expr.
-		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Expr.attlist">
     <xs:attributeGroup ref="term-interface.attlist"/>
@@ -111,17 +55,17 @@
       <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
       <xs:choice minOccurs="0">
         <xs:sequence>
-        <xs:choice>
-          <xs:sequence>
-            <xs:choice maxOccurs="unbounded">
-              <xs:element ref="arg"/>
-              <xs:group ref="arg.content"/>
-            </xs:choice>
-            <xs:element ref="repo" minOccurs="0"/>
-          </xs:sequence>
-          <xs:element ref="repo"/>
-        </xs:choice>
-        <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:choice>
+            <xs:sequence>
+              <xs:choice maxOccurs="unbounded">
+                <xs:element ref="arg"/>
+                <xs:group ref="arg.content"/>
+              </xs:choice>
+              <xs:element ref="repo" minOccurs="0"/>
+            </xs:sequence>
+            <xs:element ref="repo"/>
+          </xs:choice>
+          <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:choice>
       <xs:element ref="resl" minOccurs="0"/>
@@ -167,11 +111,6 @@
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-op
 				
-		content model (within Expr): (Fun)
-		
-		Other (context-sensitive) versions of <op> are in the atom and holog modules.
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <!-- the (empty) attribute list is declared in the atom module -->
   <xs:group name="op-Expr.content">
@@ -188,9 +127,6 @@
 		A user-defined function name.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Fun
-
-    content model: (#PCDATA, id?, #PCDATA, meta*, #PCDATA)
-    attributes: attribute: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Fun.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -211,62 +147,6 @@
 		An unordered collection of arguments without a constructor.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Plex
-		
-		content model (within Atom, Plex, slot):
-		DR Reaction RuleML:
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)*, repo?, slot*, resl? )
-    
-    KR Reaction RuleML
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Interval)*, repo?, slot*, resl? )
-		  
-		PR Reaction RuleML:
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex)*, repo?, slot*, resl? )
-		
-		ECA Reaction RuleML:
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-		  slot*, (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Atom|Event)*, repo?, slot*, resl? )
-		
-		however, this is non-deterministic, so it is (equivalently) restructured as follows:
-		
-		DR Reaction RuleML:
-		(		
-		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-		   slot*,
-		     (
-		        ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)+, repo?, slot*, resl? )?
-		        |
-                     ( repo, slot*, resl? )
-                     |
-                     resl
-		     )
-		)
-		
-		KR Reaction RuleML:
-		(		
-		   meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*,
-		   slot*,
-		     (
-		        ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, repo?, slot*, resl? )?
-		        |
-                     ( repo, slot*, resl? )
-                     |
-                     resl
-		     )
-		)
-		
-		content model (within repo): 
-		DR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval )*, repo? )
-		KR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)*, repo? )
-		PR Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex )*, repo? )
-		ECA Reaction RuleML: ( (arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Action )*, repo? )
-		
-		content model (within resl):
-		DR/KR/PR/ECA/CEP Reaction RuleML: (slot*, resl? )
-		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @scope?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Plex.attlist">
     <xs:attributeGroup ref="term-interface.attlist"/>
@@ -277,7 +157,7 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:choice>
+      <xs:choice minOccurs="0">
         <xs:sequence minOccurs="0">
           <xs:choice maxOccurs="unbounded">
             <xs:element ref="arg"/>

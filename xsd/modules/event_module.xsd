@@ -55,18 +55,7 @@
       The event instance is defined by its <arg>uments, <slot>s, as an event interpretation <on>, or arbitrary <content>.
       An event pattern (as used, e.g., in the <on> part of a reaction rule) is defined in the <signature> 
       of the event as event template, e.g. <Event><signature>...</signature></Event>.
-      
-	  content model: 
-	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  ( 
-	                ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-	                (content(xs:any)) )?
-	  PR Reaction RuleML: not used in PR Reaction RuleML
-	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?,  ( 
-	                ((slot)*,(resl)?,((((arg|Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )+, (repo)?)|(repo)),(slot)*, (resl)?)?) | 
-	                (content(xs:any)) )? )
-	                
-	    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @safety?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+
 	-->
 	<xs:attributeGroup name="Event-formula.attlist">
 		<xs:attributeGroup ref="event-interface.attlist"/>
@@ -156,14 +145,6 @@
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
      
-     content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation)
-     in PR Reaction RuleML: not used
-     in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | 
-		Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
-     
-      attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?     
 -->
 	<xs:attributeGroup name="arg_event.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>
@@ -184,13 +165,10 @@
      *** content ***
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-     
-     content model:  xs:any*
-     
+         
      @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
      See CURIE to IRI and term to IRI translation
-     
-     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+
     -->
 	<xs:attributeGroup name="event_anycontent.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>		

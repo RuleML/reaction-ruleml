@@ -48,10 +48,7 @@
 			 <dc:relation>http://reaction.ruleml.org</dc:relation>
 		</xs:appinfo>		
 	</xs:annotation>		
-	
-	
-	<!--( Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )-->
-	
+		
 	<xs:group name="event_algebra_group.content">
 		<xs:choice>
 			<xs:element ref="Sequence"/>
@@ -70,15 +67,9 @@
 	</xs:group>	
 	
 	<!--
-      *** (Operation) ***
+      *** (Operation) Sequence Disjunction XOR Conjunction Concurrent Not Any Aperiodic Periodic AtLeast AtMost ***
       
       See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
-      
-      content model: 
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
-      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
-            
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="EventAlgebraOperator.attlist">	
 		<xs:attributeGroup ref="event-interface.attlist"/>
@@ -107,28 +98,24 @@
 	<!--
       *** Not ***
       
-      "Not on Even2 at [Event1, Event3]" ("Event 2 does not occur between [Event 1 and Event 3]")
+      "Not on Even2 at [Event1, Event3]" ("Event 2 does not occur between/at [Event 1 and Event 3]")
       
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Not
-      
-      content model: 
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
-      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
-      
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Not 
 	-->
 	<xs:attributeGroup name="Not.attlist">
 		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
 	</xs:attributeGroup>
 	<xs:group name="Not.content">
 		<xs:sequence>
-			<xs:element ref="oid" minOccurs="0"/>
-			<xs:choice>
-				<xs:element ref="on"/>				
-			</xs:choice>
-			<xs:choice>
-				<xs:element ref="at"/>
-			</xs:choice>
+			<xs:group ref="meta-roles.content"/>
+			<xs:sequence minOccurs="0">
+				<xs:choice>
+					<xs:element ref="on"/>				
+				</xs:choice>
+				<xs:choice>
+					<xs:element ref="at"/>
+				</xs:choice>
+			</xs:sequence>	
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="Not.type">
@@ -140,52 +127,20 @@
 	<!--
       *** Aperiodic ***
       
-      "Aperiodic on Event2 at [Event1, Event3]" ("Event2 does occur aperiodically between [Event 1 and Event3]")
+      "Aperiodic on Event2 at [Event1, Event3]" ("Event2 does occur aperiodically at [Event 1 and Event3]")
       possibly with multiple accumlated occurences of Event 2 (@size attribute) 
       
             see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Aperiodic
+            
+             *** Periodic ***
       
-      content model: 
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
-      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on, at )? ) 
+      "Periodic on Event2 at [Event1, Event3]" ("Event2 does occur periodically at time interval [Event 1 and Event3]")
       
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Periodic     
 	-->
 
 	<xs:element name="Aperiodic" type="Not.type"/>
-	
-	<!--
-      *** Periodic ***
-      
-      "Periodic at TimeEvent2 at [Event1, Event3]" ("at TimeEvent2 does occur periodically between time interval [Event 1 and Event3]")
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Periodic
-      
-      content model: 
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (at, at)? ) 
-      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (at, at)? ) 
-      
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
--->
-	<xs:attributeGroup name="Periodic.attlist">
-		<xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
-	</xs:attributeGroup>
-	<xs:group name="Periodic.content">
-		<xs:sequence>
-			<xs:element ref="oid" minOccurs="0"/>
-			<xs:choice>
-				<xs:element ref="at"/>
-			</xs:choice>
-			<xs:choice>
-				<xs:element ref="at"/>
-			</xs:choice>
-		</xs:sequence>
-	</xs:group>
-	<xs:complexType name="Periodic.type">
-		<xs:group ref="Periodic.content"/>
-		<xs:attributeGroup ref="Periodic.attlist"/>
-	</xs:complexType>
-	<xs:element name="Periodic" type="Periodic.type"/>
+	<xs:element name="Periodic" type="Not.type"/>
 
 	<!--
       *** AtLeast / AtMost ***
@@ -195,12 +150,7 @@
       
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtLeast
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtMost
-      
-      content model: 
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
-      CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (on)* ) 
-      
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+ 
 	-->  
 	<xs:element name="AtLeast" type="EventAlgebraOperator.type"/>
 	<xs:element name="AtMost" type="EventAlgebraOperator.type"/>

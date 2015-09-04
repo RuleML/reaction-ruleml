@@ -47,32 +47,6 @@
       in Reaction RuleML.
       
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rule
-
-      content model: 
- 	 
- 	 In (temporal) DR Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
-	 
-	 In KR Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( (else?, then, if) | (if, then, else?)))
-	 
-	 In PR Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( (elseDo?, do, if) | (if, do, elseDo?)))
-	 
-	 in ECA Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (on, (if?, then?, do, after?,else?, elseDo?)? ) )
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
-
-	 
-	 in CEP Reaction RuleML:
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (on, (if?, then?, do, after?,else?, elseDo?)* ) )
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( do )
-	 ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? ( (else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?) ) )
-
-	 
-      Rule has the following attributes:
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-      
 -->
 	<xs:attributeGroup name="Rule.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
@@ -97,15 +71,6 @@
      *** on ***
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-on
-     
-     content model: 
-     DR Reaction RuleMl: (  )
-     KR Reaction RuleMl: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-     PR Reaction RuleML: ( )
-     ECA Reaction RuleML: (Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation)  
-     CEP Reaction RuleML: (Receive | Answer | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation) 
-     
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="on.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -128,14 +93,6 @@
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-if
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-after
-     
-     content model:   
-     DR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-     KR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf  )    
-     ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
-	
-	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:element name="after" type="if.type"/>
 
@@ -145,14 +102,6 @@
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-then
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-else
-     
-     content model: 
-     DR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
-     KR Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: not used in PR Reaction RuleML (only in combination with DR)
-     ECA Reaction RuleML: (  Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action )
-	
-	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:element name="else" type="then.type"/>
 	
@@ -162,15 +111,6 @@
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-do
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-elseDo
-     
-     content model:  
-     DR Reaction RuleML: (  )
-     KR Reaction RuleML: ( Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation )
-     PR Reaction RuleML: (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
-     ECA Reaction RuleML:  (Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
-     CEP Reaction RuleML:  (Send | Consult | Action | Assert | Retract | Update | Query | Succession | Choice | Flow | Loop | Operation)
-
-	attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="do.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -189,8 +129,7 @@
 	<xs:element name="elseDo" type="do.type"/>
 	
 	<!--
-  *** Derivation Rule content model ***
-  	((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
+  *** Derivation Rule content model ***  	
 	-->
 	<xs:group name="DerivationRule.content">
 		<xs:choice>
@@ -215,8 +154,7 @@
 
 	<!--
    *** Production Rule content model ***
-   ((if, do, elseDo?) | (elseDo?, do, if))
--->
+	-->
 	<xs:group name="ProductionRule.content">
 		<xs:choice>
 			<xs:sequence>
@@ -236,8 +174,6 @@
 	
 	<!--
    *** Combined DR Production Rule content model ***
-   Production Rule       Derivation Rule    Production Rule with conclusion   inverse Production Rule with conclusion 
-   ((if, do, elseDo?) | (if, then, else) | (if, then?, do, else?, elseDo? ) | ( elseDo?, else?, do, then?, if))
     -->
 	<xs:group name="DRProductionRule.content">
 		<xs:choice>
@@ -261,7 +197,6 @@
 
 	<!--
    *** ECA Reaction Rule content model ***
-   (on, (if?, then?, do?, after?,else?, elseDo?)? )
     -->
 	<xs:group name="ReactionRule.content">
 		<xs:sequence>
@@ -283,8 +218,6 @@
    *** CEP Messaging Rule content model ***
    
    CEP rules allow arbitrary combinations and repititions of the rule's content model
-   
-   (on | if | then | do | after | else | elseDo)*
    -->
 	<xs:group name="MessagingRule.content">
 		<xs:sequence>

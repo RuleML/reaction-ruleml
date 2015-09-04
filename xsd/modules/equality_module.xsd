@@ -33,24 +33,6 @@
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
 
-		content model:
-		in DR Reaction RuleML:
-		(
-		  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?
-			(left, right) |
-			(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)  )
-		)
-		in KR Reaction RuleML:
-		(
-		  meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?,
-			(left, right) |
-			(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)  )
-		)
-		in PR Reaction RuleML:  (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?,	(left, right) |	( (Ind | Data | Var | Skolem | Reify  | Expr | Plex ), (Ind | Data | Var | Skolem | Reify  | Expr | Plex ) ))
-		in ECA Reaction RuleML:	(meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (degree)?,	(left, right) |	(  (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)  )
-		)		
-		
-		attributes: @oriented?, @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Equal.attlist">
     <xs:attributeGroup ref="oriented.attrib"/>
@@ -62,7 +44,7 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element ref="degree" minOccurs="0"/>
-      <xs:choice>
+      <xs:choice minOccurs="0">
         <xs:sequence>
           <xs:element ref="left"/>
           <xs:element ref="right"/>
@@ -77,24 +59,6 @@
   </xs:group>
   <xs:complexType name="Equal.type">
 
-    <!-- 
-			<xs:annotation>
-			<xs:appinfo>
-				<sch:pattern name="Defining equality">
-					<sch:rule context=
-						"r:Implies/r:then/r:Equal/r:left/r:Expr/r:Fun |
-						 r:Implies/r:Equal[2]/r:left/r:Expr/r:Fun |
-						 r:Implies/r:then/r:Equal/r:Expr[1]/r:Fun |
-						 r:Implies/r:Equal[2]/r:Expr[1]/r:Fun">
-						<sch:assert test="@per='yes'">
-							A defining equality must have an interpreted left-hand side.
-						</sch:assert>
-					</sch:rule>
-				</sch:pattern>
-			</xs:appinfo>
-		</xs:annotation>
-		-->
-
     <xs:group ref="Equal.content"/>
     <xs:attributeGroup ref="Equal.attlist"/>
   </xs:complexType>
@@ -105,14 +69,6 @@
 		The left-hand side of an equational formula.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-left
-
-		content model: 
-		in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-		in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
-		in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
-		in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	
 	-->
   <xs:attributeGroup name="left.attlist">
@@ -134,14 +90,6 @@
 		The right-hand side of an equational formula.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-right
-
-		content model: 
-		in DR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-		in KR RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
-		in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex )
-		in ECA RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)		
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="right.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

@@ -53,14 +53,6 @@
       
       Note: It is possible to interpret intervals, time (in the reaction layers also events and actions) as situations,
             e.g., <Situation><Time>...</Time></Situation>. 
-		
-	content model: 
-	in KR Reaction RuleML: 
-			( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (
-		    ((slot)*,(resl)?,((((arg|Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Do)+, (repo)?)|(repo)),(slot)*, (resl)?)?) |            
-			content(xs:any) )? 
-			
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Situation-formula.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
@@ -146,13 +138,7 @@
      
      Definition of the the arg role for Situation
      
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
-     
-     content model:  
-     in DR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval)
-     in KR Reaction RuleML: (Ind|Data|Skolem|Var|Reify|Expr|Plex|Time|Spatial|Interval|Event|Situation|Do)
-     
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?     
+     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg     
 -->
 	<xs:attributeGroup name="arg_situation.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>
@@ -175,9 +161,6 @@
      
      @prefix ais used to define a prefix and a term mapping vocabulary for the XML content
      	See CURIE to IRI and term to IRI translation
-     
-     content model:  xs:any*
-     attributes:  @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
 	<xs:attributeGroup name="situation_anycontent.attlist">
 		<xs:attributeGroup ref="edge-element.attlist"/>	

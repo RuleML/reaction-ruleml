@@ -41,15 +41,7 @@
     
     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Quantifier
     
-    Format: "quantifier declare(Var)+ such that guard formula(...)?" 
-		
-	content model: 
-	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
-	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
-    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Naf)
-    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )?
-
-	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+    Format: "quantifier declare(Var)* such that guard formula(...)?" 
 -->
 	<xs:attributeGroup name="Quantifier.attlist">
 		<xs:attributeGroup ref="quantifier-interface.attlist"/>
@@ -59,8 +51,8 @@
 	<xs:group name="Quantifier.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>	
-			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element ref="degree" minOccurs="0"/>			
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element ref="declare"/>
 				<xs:element ref="Var"/>
 			</xs:choice>
@@ -79,19 +71,12 @@
 	make the quantifier constraint restrictions ("such that") optional
 	
 	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Exists
-	
-	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
-	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
-    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Naf)
-    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
-
-	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
     -->
 	<xs:group name="Exists-quantifier.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element ref="declare"/>
 				<xs:group ref="declare.content"/>
 			</xs:choice>
@@ -109,19 +94,12 @@
 	make the quantifier constraint restrictions ("such that") optional
 	
 	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Forall
-	
-	DR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )?
-	KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation)
-    PR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Naf)
-    ECA Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (declare|Var)+, (formula| Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)?
-	
-	attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:group name="Forall-quantifier.content">
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element ref="declare"/>
 				<xs:group ref="declare.content"/>
 			</xs:choice>
@@ -142,16 +120,6 @@
 		The 'such that' guard formula role of a quantifier (<Forall> or <Exists>).
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
-		
-	     DR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval  )
-     	 KR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     	 PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf  ) 
-     	 ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action )
-		
-		Other (context-sensitive) versions of <formula> are in the
-		connective and performative modules.
-		
-		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	
 	<xs:group name="formula-meta-quantifier.content">

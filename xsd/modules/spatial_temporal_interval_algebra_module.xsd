@@ -58,9 +58,7 @@
 		</xs:appinfo>		
 	</xs:annotation>		
 	
-	
-	<!--(After | Before | Any | Every | Timer )-->
-	
+
 	<xs:group name="spatial_temporal_algebra_group.content">
 		<xs:choice>
 			<xs:element ref="After"/>
@@ -71,8 +69,7 @@
 		</xs:choice>
 	</xs:group>	
 
-	<!-- (During | Overlaps | Starts | Precedes | Succeeds | Meets |  Finishes ) -->
-	
+
 	<xs:group name="interval_algebra_group.content">
 		<xs:choice>
 			<xs:element ref="During"/>
@@ -92,13 +89,6 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-at
       
 	  Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
-	
-      content model: 
-      in KR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)
-      in ECA Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
-      in CEP Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) | (After | Before | Any | Every | Timer | Operation))
-      
-      attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="at.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -123,13 +113,6 @@
       X after Y  / X before Y
       
       Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
-
-      content model: 
-      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
-	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] ))
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex | Event | Action)?])) 	  
-
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="After.attlist">
 		<xs:attributeGroup ref="operator-interface.attlist"/>
@@ -156,13 +139,6 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Every
       
       Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
-      
-      content model:
-      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
-	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation) ))
-      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg | content(xs:any) | (Time | Spatial | Interval |  Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex) )) 
-
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Every.attlist">
 		<xs:attributeGroup ref="operator-interface.attlist"/>
@@ -193,13 +169,6 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Any
             
       e.g. "at any Saturday and Sunday"     
-           
-      content model: 
-      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
-	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg*] | content(xs:any)* | (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)* ))
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (arg* | content(xs:any)* | (Time | Spatial | Interval | Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex)*)) 
-
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Any.attlist">
 		<xs:attributeGroup ref="operator-interface.attlist"/>
@@ -231,14 +200,6 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Recurring
       
       Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
-      
-      content model: 
-         
-      DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval |  Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
-	  KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation), (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation)?] )) 
-      ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, ([arg, arg?] | [content(xs:any),content(xs:any)?] | [(Time | Spatial | Interval | Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex), (Time | Spatial | Interval | Event | Action | Ind | Data | Skolem | Var | Reify | Expr | Plex)?])) 
-       
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="Timer.attlist">
 		<xs:attributeGroup ref="operator-interface.attlist"/>
@@ -269,11 +230,6 @@
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Meets
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Finishes
-      
-      content model: 
-      ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (arg | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation)) , (arg | Interval | Time | Spatial |  Ind | Data | Skolem | Var | Reify | Expr | Plex | (After | Before | Any | Every | Timer | Operation))? )
-      
-      attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="IntervalAlgebraOperator.attlist">
 		<xs:attributeGroup ref="operator-interface.attlist"/>
@@ -284,7 +240,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:sequence>
+			<xs:sequence minOccurs="0">
 				<xs:choice>
 					<xs:element name="arg" type="arg_interval.type"/>
 					<xs:group ref="arg_interval.content"/>

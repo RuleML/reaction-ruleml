@@ -44,14 +44,6 @@
 		the @type attribute to specify the type of negation and/or 
  		the @iri attribute to point to an external definition of the negation
  		@key, @keyref, @node
-
-		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-        PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation ) )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action) )
-	
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
 		-->
 	<xs:attributeGroup name="Negation.attlist">
 		<xs:attributeGroup ref="formula-interface.attlist"/>
@@ -62,7 +54,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice>
+			<xs:choice minOccurs="0">
 				<xs:element name="formula" type="formula-negation.type"/>
 				<xs:group ref="formula-negation.content"/>
 			</xs:choice>
@@ -96,15 +88,7 @@
 		A "by default" negation of a logical atom (i.e. "weak" negation or
 		negation-as-failure).
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Naf
-		
-		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-   		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation ) )
- 		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (weak | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )  		
-	
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Naf 
 	-->
 	<xs:attributeGroup name="Naf.attlist">
 		<xs:attributeGroup ref="Negation.attlist"/>
@@ -113,7 +97,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice>
+			<xs:choice minOccurs="0">
 				<xs:element ref="weak"/>
 				<xs:group ref="weak.content"/>
 			</xs:choice>
@@ -130,14 +114,6 @@
 		A role used for negation as failure.
 	
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-weak
-		
-		content model:
-		DR Reaction RuleML: ( Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial )
-		KR Reaction RuleML ( Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates )
-		PR Reaction RuleML: ( Operation | Atom | Equal | Negation )
-		ECA Reaction RuleML: ( Operation | Atom | Equal | Negation |  Neg | Time | Interval | Spatial | Event | Action )
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="weak.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>
@@ -157,15 +133,7 @@
 		*** Neg ***
 		A classical negation of a logical atom (i.e. classical or "strong" negation).
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Neg
-		
-		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial ) )
-		KR Reaction RuleML ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates ) )
-		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (strong | Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action ) )
-
-	attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Neg 
 	-->
 	<xs:attributeGroup name="Neg.attlist">
 		<xs:attributeGroup ref="Negation.attlist"/>
@@ -174,7 +142,7 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:element ref="degree" minOccurs="0"/>
-			<xs:choice>
+			<xs:choice minOccurs="0">
 				<xs:element ref="strong"/>
 				<xs:group ref="strong.content"/>
 			</xs:choice>
@@ -191,14 +159,6 @@
 		A role used for classical negation.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-strong
-		
-		content model: 
-		DR Reaction RuleML: ( Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial )
-		KR Reaction RuleML (  Operation | Atom | Equal | Negation | | Neg | Time | Interval | Spatial | Event | Action | Situation | Holds | Happens | Initates | Terminates )	
-		PR Reaction RuleML: strong negation not supported by PR Reaction RuleML 
-		ECA Reaction RuleML: ( Operation | Atom | Equal | Negation | Neg | Time | Interval | Spatial | Event | Action )	
-
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 	<xs:attributeGroup name="strong.attlist">
 		<xs:attributeGroup ref="xml.attlist"/>

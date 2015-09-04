@@ -42,12 +42,6 @@
 		An implication rule.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Implies
-
-		content model:
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (then, if) | (if, then) | ( (Atom | And | Or | Equal), (Atom | Equal) ) )
-
-    attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-
   -->
   <xs:attributeGroup name="Implies.attlist">
     <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -59,7 +53,7 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element ref="degree" minOccurs="0"/>
-      <xs:choice>
+      <xs:choice minOccurs="0">
         <xs:sequence>
           <xs:element ref="then"/>
           <xs:element ref="if"/>
@@ -87,14 +81,6 @@
 		also known as the "antecedent" or "if" part of the rule.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-if
-
-		content model: 
-		DR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
-		KR Reaction RuleML (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Naf ) 
-		ECA Reaction RuleML: (Operation | Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="if.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -128,14 +114,6 @@
 		also known as the "consequent" or "then" part of the rule.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-then
-
-		content model: 
-		DR Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval )
-		KR Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML does not support "then"  (except in combination with DR/KR Reaction RuleML)
-		ECA Reaction RuleML ( Opeartor | Atom  | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action )
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="then.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -169,11 +147,6 @@
 		Kowalski/Bowen's object/meta-level-amalgamated logic).
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Entails
-		
-		content model:
-		( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (if | Rulebase), (then | Rulebase) )
-		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Entails.attlist">
     <xs:attributeGroup ref="group-formula-interface.attlist"/>
@@ -183,14 +156,16 @@
   <xs:group name="Entails.content">
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
-      <xs:choice>
-        <xs:element name="if" type="if-entails.type"/>
-        <xs:group ref="if-entails.content"/>
-      </xs:choice>
-      <xs:choice>
-        <xs:element name="then" type="then-entails.type"/>
-        <xs:group ref="then-entails.content"/>
-      </xs:choice>
+      <xs:sequence minOccurs="0">
+        <xs:choice>
+          <xs:element name="if" type="if-entails.type"/>
+          <xs:group ref="if-entails.content"/>
+        </xs:choice>
+        <xs:choice>
+          <xs:element name="then" type="then-entails.type"/>
+          <xs:group ref="then-entails.content"/>
+        </xs:choice>
+      </xs:sequence> 
     </xs:sequence>
   </xs:group>
   <xs:complexType name="Entails.type">
@@ -204,17 +179,7 @@
 		An equivalence expression, which is "syntactic sugar" for a pair
 		of conjoined converse implication rules.
 		
-		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equivalent
-
-		content model: 		
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval) ) ) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens), 
-		                      (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens) ) ) )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Negation | Naf | Atom | Equal), (Operation | And | Or | Negation | Naf | Atom | Equal ) ) ) )                     
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
-		CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, ( (torso, torso) | ( (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action), (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) ) ) )
-		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equivalent		
   -->
   <xs:attributeGroup name="Equivalent.attlist">
     <xs:attributeGroup ref="formula-interface.attlist"/>
@@ -225,8 +190,7 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element ref="degree" minOccurs="0"/>
-      <xs:choice>
-        <xs:sequence>
+      <xs:sequence minOccurs="0">
           <xs:choice>
             <xs:element ref="torso"/>
             <xs:group ref="torso.content"/>
@@ -235,8 +199,7 @@
             <xs:element ref="torso"/>
             <xs:group ref="torso.content"/>
           </xs:choice>
-        </xs:sequence>
-      </xs:choice>
+        </xs:sequence>      
     </xs:sequence>
   </xs:group>
   <xs:complexType name="Equivalent.type">
@@ -251,14 +214,6 @@
 		the asymmetric <then> and <if>.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-torso
-
-		content model: 
-		DR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-		KR Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Fluent | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operation | And | Or | Negation | Naf | Atom | Equal )
-		ECA Reaction RuleML (Operation | And | Or | Atom |  Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="torso.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -284,15 +239,6 @@
 		
 		@prefix for default prefix definitions 
 		@vocab for default vocab definitions
-		
-		content model:
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval )* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens )* )
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal )* )
-    ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Atom | Rule | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
-    CEP Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, (formula | Operation | Forall | Atom | Rule | Implies | Equivalent | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )* )
-
-    attributes:  @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="Rulebase.attlist">
     <xs:attributeGroup ref="group-formula-interface.attlist"/>
@@ -319,16 +265,6 @@
 		A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-And
-		
-		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* ) 
-		PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Equal | Negation | Naf )* )
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
-
-		Under Query, And may have attribute closure="existential"; 
-		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="And-body.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -365,16 +301,6 @@
 		A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Or
-		
-		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)* )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)* )
-	  PR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Equal | Negation | Naf )* )
-	  ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree?, (formula | Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)* )
-		
-		Under Query, Or may have attribute closure="existential"; 
-		
-		attributes: @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="Or-query.attlist">
     <xs:attributeGroup ref="operator-interface.attlist"/>
@@ -411,23 +337,6 @@
 		The formula role of a conjunctive/disjunctive expression or a rulebase.
 
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
-
-		content model (below And/Or): 
-		DR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval)
-		KR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Equal )
-		ECA Reaction RuleML (Operation | Atom | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)
-		
-		content model (below Rulebase): 
-		DR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval)
-		KR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operation | Atom | Rule | Equivalent | Equal )
-		ECA Reaction RuleML (Operation | Atom | Rule | Equivalent |  Equal | Negation | Neg | Time | Spatial | Interval | Event | Action)
-		
-		Other (context-sensitive) versions of <formula> are in the
-		performative and quantifier modules.
-		
-		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="formula.attlist">
     <xs:attributeGroup ref="edge-element.attlist"/>

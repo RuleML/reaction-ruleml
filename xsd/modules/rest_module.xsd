@@ -31,9 +31,6 @@
 		A positional rest variable.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-repo
-
-		content model: (Var | Plex)
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="repo.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -55,9 +52,6 @@
 		A slotted rest variable.
 		
 		See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-resl		
-
-		content model: (Var | Plex)
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="resl.attlist">
     <xs:attributeGroup ref="xml.attlist"/>

@@ -44,14 +44,6 @@
   Note that oids are not required to be unique within a rulebase.
   
   See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-oid
-  
-  content model: 
-  in DR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval)
-  in KR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Situation)
-  in PR Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex)
-  in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
-  
-  attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="oid.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -78,18 +70,6 @@
     An optional container for meta-knowledge about a Node.
     
     See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-meta
-    
-	Used for descriptive Metadata annotations in Reaction RuleML
-	
-     content model: 
-     in DR Reaction RuleML: ( Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
-     in KR Reaction RuleML: ( Operation | Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
-     in PR Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-     in ECA Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
-
-     Multiple Metadata annotations are possible by repreating <meta>
-     
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
   
   <xs:attributeGroup name="meta.attlist">
@@ -115,58 +95,8 @@
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-scope
      
-     Note: scope reasoning in rules can use the metadata scopes to define a constructive view on the rules and facts in the KB.    
-     The scoped rule/literal goal only applies in this scope (scoped reasoning/processing)
+     Note: scope reasoning can use the metadata scopes to define a constructive view on the knowledge in the KB.    
      
-     For an implementation of scoped reasoning as a mechanism to dynamicaly create a scope (a constructive view)
-     on the knowledge base and to do scoped reasoning on this scope see the Prova rule engine (http://prova.ws).
-     
-     Example:
-     @src(kb1) @author("Adrian Paschke") @validity([2015-03-20, 2015-04-20]) @label(fact1) fact1(constant1).
-     @src(kb2) @author("Alex Kozlenkov") @validity([2015-01-20, 2015-03-20]) @label(fact2) fact2(constant2).
-     
-     @src(rb1) @label(rule1) rule1(Y) :- @validity(VTime) @authors("Adrian Paschke") fact1(Y) [between(SysTime,VTime)] 
-     
-     In this example all knowledge is annotated with predefined (@src, ...) and user-defined metadata annotations (@author, @validity, ...). 
-     User-defined metadata annotations can be arbitrary name/value pairs described as predicates. The literal "fact1" in the body
-     of "rule1" is a scoped literal defining a scope over knowledge in the knowledge base with the scope constraints
-     @validity and @author. If such knowledge is found in the KB the meta data value (an Interval) for @validity
-     is bound to the variable "VTime" and used in the guard constraint [...] on the literal. The guard is stating that 
-     the actual system time should be  within the validity interval. The second scope constraint is directly compared 
-     to the constant value "Adrian Paschke".
-     The sub-goal literal "fact1" in the rule condition is then applied only on the selected scope 
-     (a constructive view on the overall knowledge base which is selected by the metadata scope of the literal) and not on the 
-     overal knowledge. It is possible to define scopes for modules (e.g. sets of knowledge such as a rule-base/rule-set or 
-     an knowledge updates (assert, retracts) by using the meta data identifier such as @src or @label. Such identifiers can
-     be also used for transactional logics.
-     
-     In Reaction RuleML general metadata annotations (descriptive metadata) are defined under the <meta> tag role and
-     qualifying metadata which qualify the rule (such as validity in the above example) are defined under the <qualification> tag.
-     The @key attribute which defines a unique identifier for knowledge in the knowledge base is used for a 
-     modular nested structuring of the knowledge base. The @key of e.g. <Assert key=""> or <Rulebase key=""> acts as module identifier 
-     (which in Prova is denoted by the predefined @src metadata).
-     
-	 Scopes in Reaction RuleML can be defined within the <scope> role tag on descriptive metadata <meta> and qualifying metadata <qualification> as well as
-	 on the unique identifier @key of the knowledge in the knowledge base (<Assert key="">, <Rulebase key="">, <Rule key="">, <Atom key="">)
-	 by referencing it with the @keyref attribute.
-	 
-	 There is a nesting of scopes. Scopes defined on the more general level automatically apply to the body knowledge. For instance, a scope
-	 defined on the level of a <Rulebase> automatically applies to all goal literals of the <Rule>s in the rulebase. body scopes
-	 overwrite the head scope. For instance a scope defined on <Assert> becomes overwritten by an body scope defined on a <Rule> which is within the
-	 this asserted knowledge module. That is the goal literals within this rules are automatically applying the innter scope and not the head scope.
-	 
-	 Note: the old approach which used <oid> to define a scope has been replaces by the key-keyref approach in Reaction RuleML 1.0
-     
-     Note: multiple scopes can be defined by repeating the <scope> role element
-     Note: an empty scope either assumes the head scope or an existing scope needs to be explicity referenced by keyref
-     
-     content model: 
-     DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
-     KR Reaction RuleML  ( Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
-     PR Reaction RuleML  ( Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)?     
-     ECA Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )
-
-  attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
   <xs:attributeGroup name="scope.attlist">
     <xs:attributeGroup ref="edge-element.attlist"/>
@@ -189,15 +119,7 @@
 	guard constraints 
 	
 	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-guard
-	
-     content model: 
-     in DR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval )
-     in KR Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action | Situation )
-     in PR Reaction RuleML: ( Operation | Atom | And | Or | Equal | Negation | Naf )
-     in ECA Reaction RuleML: ( Atom | And | Or | Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)    
-    
-    attribute: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
--->
+ -->
   <xs:attributeGroup name="guard.attlist">
     <xs:attributeGroup ref="edge-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
@@ -219,13 +141,7 @@
      The intended evaluation semantics, e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
      
      	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-evaluation
-     
-     Note: multiple Profiles can be defined by repreating the <evaluation> role element
-     The Profiles can be defined externally by using the Profile attributes to point to it or internally by defining it in XML (xs:any)
-     
-     content model: (Profile )     
-  
-    attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+
   -->
   <xs:attributeGroup name="evaluation.attlist">
     <xs:attributeGroup ref="edge-element.attlist"/>
@@ -249,21 +165,6 @@
 	can be published together with the intended evaluation semantics. 
 	
 	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-signature
-	
-	Note: In PR, RR and CEP reaction rules the signature is extended with events and actions
-	for defining the event templates (i.e. the event form / event descriptor which corresponds to the event type/class. The event template is used for
-	pattern machting, i.e. in the on part of a reaction rule it triggers the reaction rule if the template matches with required event instances, which are
-	instantiations of the event type / class to which make up the required properties of the event template.
-		
-	Multiple signatures are possible by repreating the <signature> element
-	
-     content model: 
-     DR Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval)? )
-     KR Reaction RuleML  ( Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens)? )
-     PR Reaction RuleML  ( Operation | Rulebase | Atom | Entails | And | Or | Negation | Naf | Equal)? 
-     ECA Reaction RuleML  ( (Operation | Atom | Rulebase | And | Or | Entails | Exists |  Equal | Negation | Neg | Naf | Time | Spatial | Interval | Event | Action)? )         
-
-  attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="signature.attlist">
     <xs:attributeGroup ref="edge-element.attlist"/>
@@ -286,22 +187,6 @@
     Definition of the qualification (qualifying metadata), e.g. validity time, priorities, etc.
     
     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-qualification
-     
-    Note: the qualification can be also defined as a situation  <Situation> in KR Reaction RuleML 
-	A situation could be also modelled as a changeable situation called fluent (in the KR dialect of Reaction RuleML),
-	which changes its truth value depending on the context (context can be time, events/actions which 
-	initiate/terminate the changeable situation, or a history of occured events/actions which leads to an occured situation
-	as context for the truth changes of the fluent.
-	
-	That would mean the qualification of the rule changes depending on the situation (the truth value of the fluent in KR RuleML)
-	
-     content model: 
-     in DR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval  )
-     in KR Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Situation )
-     in PR Reaction RuleML: ( Operation | Rulebase | Atom | Rule | Equivalent | Entails | Equal )
-     in ECA Reaction RuleML: ( Rulebase | Atom | Implies | Rule | Equivalent | Entails | Equal | Negation | Neg | Time | Spatial | Interval | Event | Action )
-  
-  attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 -->
   <xs:attributeGroup name="qualification.attlist">
     <xs:attributeGroup ref="edge-element.attlist"/>
@@ -324,11 +209,7 @@
      Definition of the quantifier. 
      
      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-quantification
-     
-     content model: (Forall | Exists | Quantifier)
-     
-     attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
-          
+        
 -->
   <xs:attributeGroup name="quantification.attlist">
     <xs:attributeGroup ref="edge-element.attlist"/>

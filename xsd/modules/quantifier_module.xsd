@@ -31,15 +31,7 @@
 		*** Forall ***
 		Explicit universal quantifier.
 		
-		See http://www.ruleml.org/1.02/glossary/#gloss-Forall
-
-		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval ) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens ) )
-		PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action ) )		
-
-    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base? 
+		See http://www.ruleml.org/1.02/glossary/#gloss-Forall 
   -->
   <xs:attributeGroup name="Forall.attlist">
     <xs:attributeGroup ref="quantifier-interface.attlist"/>
@@ -50,11 +42,11 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element ref="degree" minOccurs="0"/>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="declare"/>
         <xs:group ref="declare.content"/>
       </xs:choice>
-      <xs:choice>
+      <xs:choice minOccurs="0">
         <xs:element name="formula" type="formula-forall.type"/>
         <xs:group ref="formula-forall.content"/>
       </xs:choice>
@@ -71,14 +63,6 @@
 		Explicit existential quantifier.
 
 		See http://www.ruleml.org/1.02/glossary/#gloss-Exists
-
-		content model: 
-		DR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval) )
-		KR Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens) )		
-    PR Reaction RuleML does not use head quantifiers (innner quantifiers under <quantification> are used instead)
-		ECA Reaction RuleML: ( meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?, degree? (declare | Var)+, (formula | Operation | Atom | Exists | Quantifier | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action) )    
- 
-    attributes: @type?, @card?, @minCard?, @maxCard?, @style?, @scope?, @meta?, @qualify?, @node?, @iri?, @vocab?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
   -->
   <xs:attributeGroup name="Exists.attlist">
     <xs:attributeGroup ref="quantifier-interface.attlist"/>
@@ -89,11 +73,11 @@
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
       <xs:element ref="degree" minOccurs="0"/>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="declare"/>
         <xs:group ref="declare.content"/>
       </xs:choice>
-      <xs:choice>
+      <xs:choice minOccurs="0">
         <xs:element name="formula" type="formula-exists.type"/>
         <xs:group ref="formula-exists.content"/>
       </xs:choice>
@@ -110,10 +94,6 @@
 		A role used for variables declared within a quantifier.
 		
 		See http://www.ruleml.org/1.02/glossary/#gloss-declare
-
-		content model: ( Var )
-		
-		attributes: @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
   <xs:attributeGroup name="declare.attlist">
     <xs:attributeGroup ref="xml.attlist"/>
@@ -135,23 +115,6 @@
 		The formula role of a quantifier (<Forall> or <Exists>).
 		
 		See http://www.ruleml.org/1.02/glossary/#gloss-formula
-		
-		content model (below Forall): 
-		DR Reaction RuleML ( Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval )
-		KR Reaction RuleML ( Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action | Situation | Holds | Initiates | Terminates | Happens)
-		PR Reaction RuleML (Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal )
-		ECA Reaction RuleML ( Operation | Atom | Implies | Rule | Equivalent | Forall | Quantifier | Negation | Neg | Equal | Time | Spatial | Interval | Event | Action)
-
-		content model (below Exists): 
-		DR Reaction RuleML ( Operation | Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval )
-		KR Reaction RuleML ( Operation | Atom | Exists  | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Situation | Holds | Initiates | Terminates | Happens )
-		PR Reaction RuleML  ( Operation | Atom | Exists | And | Or | Negation | Naf | Neg | Equal )
-		ECA Reaction RuleML ( Operation | Atom | Exists | And | Or | Negation | Naf | Neg | Equal | Time | Spatial | Interval | Event | Action)		
-		
-		Other (context-sensitive) versions of <formula> are in the
-		connective and performative modules.
-		
-		attributes: @index?, @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
 	-->
 
   <xs:group name="formula-forall.content">

@@ -15,7 +15,7 @@ if [ "${extension1}" != "rnc" ];then
 fi
 
 # Validate
-if [ -z "${2+xxx}" ]; then
+if [[ $# -eq 1 ]]; then
   java -jar "${JING}" -c  "$1"
 else  
   java -jar "${JING}" -c  "$1" "$2"

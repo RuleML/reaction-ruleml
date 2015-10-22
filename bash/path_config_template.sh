@@ -16,10 +16,12 @@
 #  - curl
 #  - libxml2-utils (for xmllint)
 #  - zip  
-# Note: copied from path_config_template.sh
-PLATFORM="Mac"
-OXY_VERSION="14"
-OXY_HOME="/Applications/oxygen 14/"
+# Note: copy to path_config.sh and then
+# change the parameters accordingly
+# JAXB (jaxb-ri) should be installed in the Oxygen /lib directory
+PLATFORM="Linux"
+OXY_VERSION="17"
+OXY_HOME="/home/taraathan/oxygen 17/"
 # FIXME: handle the script name variations for other versions and platforms
 FLATTEN_SCRIPT="${OXY_HOME}flattenSchema.sh"
 if [[ ${OXY_VERSION} == "14" && ${PLATFORM} == "Mac" ]]; then 
@@ -37,7 +39,7 @@ OXY_LIB="${OXY_HOME}lib/"
 SAX_HOME="${OXY_LIB}"
 JING="${OXY_LIB}jing.jar"
 TRANG="${OXY_LIB}trang.jar"
-JAXB_HOME="${OXY_LIB}"jaxb-ri-2.2.6/
+JAXB_HOME="${OXY_LIB}"jaxb-ri/
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/
 REPO_HOME="${BASH_HOME}../"
 RNC_HOME="${REPO_HOME}relaxng/"
@@ -49,6 +51,7 @@ DESIGN_HOME="${REPO_HOME}designPattern/"
 TEST_HOME="${REPO_HOME}relaxng/test/"
 RNC4SIMP_HOME="${REPO_HOME}relaxng/drivers4simp/"
 RNC4XSD_HOME="${REPO_HOME}relaxng/drivers4xsd/" 
+RNC4XSD_MIN_HOME="${REPO_HOME}relaxng/drivers4xsd_min/" 
 RNC_TEST_SUITE_HOME="${REPO_HOME}test/rnc-test-suites/"
 TMP_MODULES="${RNC_HOME}tmp/modules/"
 SIMP_HOME="${REPO_HOME}simplified/"
@@ -56,7 +59,7 @@ XSD_HOME="${REPO_HOME}xsd/"
 XSD_MIN_HOME="${REPO_HOME}xsd_min/"
 XSLT2_HOME="${REPO_HOME}xslt/rnc2xsd/"
 XSD_HOME="${REPO_HOME}xsd/"
-XSD_TEST_SUITE_HOME="${REPO_HOME}test/rnc-test-suites/"
+XSD_TEST_SUITE_HOME="${REPO_HOME}test/xsd-test-suites/"
 COMPACT_SUITE_HOME="${REPO_HOME}test/compactifier-test-suites/"
 XSLT_HOME="${REPO_HOME}xslt/"
 COMPACT_XSLT_HOME="${XSLT_HOME}compactifier/"
@@ -71,4 +74,3 @@ GIT_HOME="${REPO_HOME}../"
 REACTION_CONFIG="${BASH_HOME}/settings/reaction-config.xml"
 INSTANCE_HOME="${REPO_HOME}test/reaction-test-suites/"
 REACTION_XSD_HOME="${REPO_HOME}../reaction-ruleml/xsd/"
-

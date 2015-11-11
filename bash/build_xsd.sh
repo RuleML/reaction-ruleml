@@ -5,11 +5,11 @@ shopt -s nullglob
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
 
 # Generate XSD, and validate
-"${BASH_HOME}batch_rnc2xsd.sh"   >> /dev/null 2>&1
-if [[ "$?" -ne "0" ]]; then
-     echo "Generation of XSD Failed"
-     exit 1
-fi
+#"${BASH_HOME}batch_rnc2xsd.sh"   >> /dev/null 2>&1
+#if [[ "$?" -ne "0" ]]; then
+#     echo "Generation of XSD Failed"
+#     exit 1
+#fi
    
 # Validate Examples in Test Suites
 "${BASH_HOME}batch_xsd-test-suite.sh"  >> /dev/null 2>&1

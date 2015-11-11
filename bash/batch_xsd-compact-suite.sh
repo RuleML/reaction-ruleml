@@ -33,7 +33,7 @@ for f in "${RNC_TEST_SUITE_HOME}"*/*.ruleml
 do
   filename=$(basename "$f")
   echo "Transforming " "${filename}"
-  java -jar "${SAX_HOME}saxon9ee.jar" -s:"${f}" -xsl:"${COMPACT_XSLT_HOME}1.02_compactifier.xslt"  -o:"${COMPACT_SUITE_HOME}${filename}"   >> /dev/null 2>&1
+  "${BASH_HOME}aux_xslt.sh" "${f}" "${COMPACT_XSLT_HOME}1.02_compactifier.xslt" "${COMPACT_SUITE_HOME}${filename}Ó   >> /dev/null 2>&1
   if [[ "$?" -ne "0" ]]; then
      echo "XSLT Transformation Failed for " "${filename}"
      exit 1

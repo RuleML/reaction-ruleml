@@ -9,21 +9,34 @@
 shopt -s nullglob
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
 
-  schemaname="dr.xsd"
-  sfile="${XSD_HOME}${schemaname}"       
-  "${BASH_HOME}aux_valxsd.sh" "${sfile}"
-  exitvalue=$?
-  echo ${exitvalue}
-  if [[ "${exitvalue}" -ne "0" ]]; then
-       echo "Schema Validation Failed for ${schemaname}"
-       exit 1
-   fi   
+schemaname="dr.xsd"
+sxfile="${XSD_HOME}${schemaname}"       
 
-for file in "${XSD_TEST_SUITE_HOME}"*/*.ruleml "${XSD_TEST_SUITE_HOME}"*/*/*.ruleml
+for file in "${DR_TEST_SUITE_HOME}"*.rrml
 do
   filename=$(basename "${file}")
   echo "File ${filename}"
-  "${BASH_HOME}aux_valxsd.sh" "${sfile}" "${file}"
+  "${BASH_HOME}aux_valxsd.sh" "${sxfile}" "${file}"
+  exitvalue=$?
+  if [[ ! "${file}" =~ fail ]] && [[ "${exitvalue}" -ne "0" ]]; then
+          echo "Validation Failed for ${file}"
+          exit 1
+   else
+         if [[ "${file}" =~ fail ]] && [[ "${exitvalue}" == "0" ]]; then
+           echo "Validation Succeeded for Failure Test ${file}"
+           exit 1
+         fi
+  fi       
+done
+
+schemaname="kr-cep.xsd"
+sxfile="${XSD_HOME}${schemaname}"       
+
+for file in "${CEP_TEST_SUITE_HOME}"*.rrml
+do
+  filename=$(basename "${file}")
+  echo "File ${filename}"
+  "${BASH_HOME}aux_valxsd.sh" "${sxfile}" "${file}"
   exitvalue=$?
   if [[ ! "${file}" =~ fail ]] && [[ "${exitvalue}" -ne "0" ]]; then
           echo "Validation Failed for ${file}"

@@ -38,7 +38,7 @@ for f in "${XSD_HOME}"*.xsd
 do
   filename=$(basename "$f")
   echo "Transforming " "${filename}"
-  java -jar "${SAX_HOME}saxon9ee.jar" -s:"${f}" -xsl:"${XSLT2_HOME}rnc2xsd.xslt"  -o:"${f}"   >> /dev/null 2>&1
+  "${BASH_HOME}aux_xslt.sh" "${f}" "${XSLT2_HOME}rnc2xsd.xslt" "${f}Ó   >> /dev/null 2>&1
   if [[ "$?" -ne "0" ]]; then
      echo "XSLT Transformation Failed for " "${filename}"
      exit 1

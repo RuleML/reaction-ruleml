@@ -5,5 +5,5 @@
 shopt -s nullglob
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
 
-"${DOC_SCRIPT}"  "${XSD_HOME}eca.xsd"  -cfg:"${BASH_HOME}settings/doc.xml"
+"${DOC_SCRIPT}"  "${XSD_HOME}kr-cep.xsd"  -cfg:"${BASH_HOME}settings/doc.xml"
  

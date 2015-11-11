@@ -13,7 +13,7 @@ extension1="${filename1##*.}"
 #filenameNE="${filename1%.*}"
 
 # Verifies that input schema name ends in ".rnc"
-if [ "${extension1}" != "rnc" ];then
+if [[ "${extension1}" != "rnc" ]];then
    echo "Input extension is not .rnc"
    exit 1
 fi
@@ -24,24 +24,24 @@ extension2="${filename2##*.}"
 #filenameNE="${filename2%.*}"
 
 # Verifies that output name ends in ".rnc"
-if [ "${extension2}" != "rnc" ];then
+if [[ "${extension2}" != "rnc" ]];then
    echo "Output extension is not .rnc"
    exit 1
 fi
 
 
-java -jar "${JING}" -cs "$1" > ${TMP}
-if [ "$?" != "0" ];then
+java -jar "${JING}" -cs "$1" > "${TMP}"
+if [[ "$?" != "0" ]];then
    echo "Simplification Failed."
    exit 1
 fi
-java -jar "${TRANG}" ${TMP} "$2"
-if [ "$?" != "0" ];then
+java -jar "${TRANG}" "${TMP}" "$2"
+if [[ "$?" != "0" ]];then
    echo "Conversion back to RNC Failed."
    exit 1
 fi
 function finish {
-  rm ${TMP}
+  rm "${TMP}"
 }
 trap finish EXIT
   

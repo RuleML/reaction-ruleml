@@ -6,7 +6,6 @@ BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
 # Finds the filename without extension
 filename1=$(basename "$1")
 extension1="${filename1##*.}"
-filename1NE="${filename1%.*}"
 
 # Verifies that input file name ends in ".rnc"
 if [ "${extension1}" != "rnc" ];then

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-model href="http://reaction.ruleml.org/1.02/xsd/cep.xsd"?>
+<?xml-model href="http://reaction.ruleml.org/1.02/relaxng/cep.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:xcl2="http://purl.org/xcl/2.0/"
 	xmlns:acl="urn:fipa:language:acl"
-	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.0/xsd/cep.xsd">
+	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/cep.xsd">
 	<!-- 
 		
     This example shows how RuleML can be used for message interchange

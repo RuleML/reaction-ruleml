@@ -10,11 +10,8 @@ namespace rng = "http://relaxng.org/ns/structure/1.0"
 
 a:documentation [
   "\x{a}" ~
-  "                                Spatio-Temporal Derivation Rule (DR)\x{a}" ~
-  "            dialect of Reaction RuleML         This layer defines the spatio-temporal Derivation\x{a}" ~
-  "            Rule dialect of Reaction RuleML.    It adds necessary extensions to the RuleML Horn\x{a}" ~
-  "            Logic layer with equality for    the spatio-temporal Derivation Rule dialect.\x{a}" ~
-  "            File: dr.xsd    Version: 1.02    Last Modification: 2015-07-19       \x{a}" ~
+  "                                Production Rule (PR) dialect of\x{a}" ~
+  "            Reaction RuleML         File: pr.xsd    Version: 1.02    Last Modification: 2015-07-19       \x{a}" ~
   "        \x{a}" ~
   "            "
   dc:title [ "DR Reaction RuleML Schema" ]
@@ -35,7 +32,7 @@ a:documentation [
   ]
   "\x{a}" ~
   "            "
-  dc:date [ "2015-07-14T17:04:00+0200" ]
+  dc:date [ "2015-03-22T23:11:17-0300" ]
   "\x{a}" ~
   "            "
   dc:language [ "en" ]
@@ -2317,357 +2314,151 @@ profile_anycontent.attlist = xml.attlist
 profile_anycontent.content = element * { text }*
 profile_anycontent.type =
   profile_anycontent.content, profile_anycontent.attlist
-a:documentation [
-  "\x{a}" ~
-  "                       Time module part of Reaction RuleML. It\x{a}" ~
-  "            defines the core     time constructs        This is the XML Schema time module for\x{a}" ~
-  "            Reaction RuleML.    File: time_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
-  "            2015-07-19     This schema declares the following Reaction RuleML elements and\x{a}" ~
-  "            attributes:       * Time    \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.02" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built time module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2015-07-19T17:04:00+0200" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dc:rights [
-    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
-    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
-    "                with the License. You may obtain a copy of the License at\x{a}" ~
-    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
-    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
-    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
-    "                permissions and limitations under the License."
-  ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://reaction.ruleml.org" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
-#	*** Time ***
-#	Explicit generic Time construct. 
-# 
-#	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Situation
-# 
-#	The time can be represented internally 
-#       * with positional arguments <arg>, e.g., <arg>
-# <Data xsi:type="xs:dateTime>2015-10-02T10:45:34-00:00</Data>
-# </arg>
-#       * with unpositional slots <slot>, e.g., <slot>
-# <Ind>year</Ind>
-# <Ind>2015</Ind>
-# </slot>
-# <slot>
-# <Ind>month</Ind>
-# <Ind>10</Ind>
-# </slot>
-#       * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for time
-#       or externally, where the optional @iri attribute points to an external data definition of the time
-#       The optional @type attribute defines the type of the time, e.g. ruleml:TimeInstant (linear continuous time model) 
-#       or ruleml:TimeInterval (discrete time interval model). The default time semantics is a discrete time model.
-#       Note: Time can be defined absolute or relative.
-Time-formula.attlist =
-  formula-interface.attlist, node-element.attlist, xml.attlist
-Time-formula.content =
-  meta-roles.content,
-  degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_time.type }
-        | arg_time.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
-   | element content { time_anycontent.type }*)?
-Time-formula.type = Time-formula.content, Time-formula.attlist
-# Time term
-Time-term.attlist =
-  term-interface.attlist, node-element.attlist, xml.attlist
-Time-term.content =
-  meta-roles.content,
-  (element slot { slot.type }*
-   | (((element arg { arg_time.type }
-        | arg_time.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
-   | element content { time_anycontent.type }*)?
-Time-term.type = Time-term.content, Time-term.attlist
-# *** arg ***
-# 
-# Definition of the the arg role for Time
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
-arg_time.attlist = edge-element.attlist, xml.attlist
-arg_time.content = time_primitives.content
-arg_time.type = arg_time.content, arg_time.attlist
-# *** content ***
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-# 
-# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
-#    See CURIE to IRI and term to IRI translation
-time_anycontent.attlist = edge-element.attlist, xml.attlist
-time_anycontent.content = element * { text }*
-time_anycontent.type = time_anycontent.content, time_anycontent.attlist
-a:documentation [
-  "\x{a}" ~
-  "                Spatial module part of Reaction RuleML. It defines\x{a}" ~
-  "            the core     spatial constructs        This is the XML Schema spatial module for\x{a}" ~
-  "            Reaction RuleML.    File: spatial_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
-  "            2015-07-19        This schema declares the following Reaction RuleML elements and\x{a}" ~
-  "            attributes:        * Spatial       \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.02" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2015-07-14T17:04:00+0200" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dc:rights [
-    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
-    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
-    "                with the License. You may obtain a copy of the License at\x{a}" ~
-    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
-    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
-    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
-    "                permissions and limitations under the License."
-  ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://reaction.ruleml.org" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
-#   *** Spatial ***
-#   Explicit generic Spatial construct. 
-# 
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Spatial
-# 
-#   The spatial can be represented internally 
-# * with positional arguments <arg>
-# * with unpositional slots <slot>
-# * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed arbitrary XML syntaxes
-# or externally, where the optional @iri attribute points to an external data definition of the spatial
-# The optional @type attribute defines the type of the spatial
-Spatial-formula.attlist =
-  formula-interface.attlist, node-element.attlist, xml.attlist
-Spatial-formula.content =
-  meta-roles.content,
-  degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_spatial.type }
-        | arg_spatial.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
-   | element content { spatial_anycontent.type }*)?
-Spatial-formula.type = Spatial-formula.content, Spatial-formula.attlist
-# Spatial term
-Spatial-term.attlist =
-  term-interface.attlist, node-element.attlist, xml.attlist
-Spatial-term.content =
-  meta-roles.content,
-  (element slot { slot.type }*
-   | (((element arg { arg_spatial.type }
-        | arg_spatial.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
-   | element content { spatial_anycontent.type }*)?
-Spatial-term.type = Spatial-term.content, Spatial-term.attlist
-# *** arg ***
-# 
-# Definition of the the arg role for Spatial
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg  
-arg_spatial.attlist = edge-element.attlist, xml.attlist
-arg_spatial.content = spatial_primitives.content
-arg_spatial.type = arg_spatial.content, arg_spatial.attlist
-# *** content ***
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-# 
-# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
-#    See CURIE to IRI and term to IRI translation
-spatial_anycontent.attlist = edge-element.attlist, xml.attlist
-spatial_anycontent.content = element * { text }*
-spatial_anycontent.type =
-  spatial_anycontent.content, spatial_anycontent.attlist
-a:documentation [
-  "\x{a}" ~
-  "                       Interval module part of Reaction RuleML. It\x{a}" ~
-  "            defines the core     Interval construct        This is the XML Schema interval module\x{a}" ~
-  "            for Reaction RuleML.    File: interval_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
-  "            2015-07-19     This schema declares the following Reaction RuleML elements and\x{a}" ~
-  "            attributes:       * Interval    \x{a}" ~
-  "        \x{a}" ~
-  "            "
-  dc:title [ "RuleML Schema" ]
-  "\x{a}" ~
-  "            "
-  dc:version [ "1.02" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
-  "\x{a}" ~
-  "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
-  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
-  "\x{a}" ~
-  "            "
-  dc:description [ "custom-built main module for Reaction RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:date [ "2015-07-14T17:04:00+0200" ]
-  "\x{a}" ~
-  "            "
-  dc:language [ "en" ]
-  "\x{a}" ~
-  "            "
-  dc:rights [
-    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
-    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
-    "                with the License. You may obtain a copy of the License at\x{a}" ~
-    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
-    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
-    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
-    "                permissions and limitations under the License."
-  ]
-  "\x{a}" ~
-  "            "
-  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
-  "\x{a}" ~
-  "            "
-  dc:relation [ "http://reaction.ruleml.org" ]
-  "\x{a}" ~
-  "        \x{a}" ~
-  "    "
-]
-#     *** Interval ***
-#     Explicit generic Interval. 
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Interval
-# 
-#     The interval can be
-#   defined internally by the any content model (xs:any Element) or externally, where 
-#   the optional @type attribute defines the name/type of the interval,
-#   the optional @iri attribute points to an external definition of the interval, and
-#    An interval can be defined by Events, Actions,  Times, Spatials, and other Intervals can be typed by the 
-#    interval ontology of Reaction RuleML (defining different types of intervals).
-Interval-formula.attlist =
-  formula-interface.attlist, node-element.attlist, xml.attlist
-Interval-formula.content =
-  meta-roles.content,
-  degree?,
-  (element arg { arg_interval.type }
-   | element content { interval_anycontent.type }
-   | arg_interval.content),
-  (element arg { arg_interval.type }
-   | element content { interval_anycontent.type }
-   | arg_interval.content)?
-Interval-formula.type =
-  Interval-formula.content, Interval-formula.attlist
-# Interval term
-Interval-term.attlist =
-  term-interface.attlist, node-element.attlist, xml.attlist
-Interval-term.content =
-  meta-roles.content,
-  (element arg { arg_interval.type }
-   | arg_interval.content),
-  (element arg { arg_interval.type }
-   | arg_interval.content)?
-Interval-term.type = Interval-term.content, Interval-term.attlist
-# *** arg ***
-# 
-# Definition of the the arg role for Intervals
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
-arg_interval.attlist = edge-element.attlist, xml.attlist
-arg_interval.content = interval_primitives.content
-arg_interval.type = arg_interval.content, arg_interval.attlist
-# *** content ***
-# 
-#      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-# 
-# @prefix is used to define a prefix and a term mapping vocabulary for the XML content
-# See CURIE to IRI and term to IRI translation
-#
-interval_anycontent.attlist = edge-element.attlist, xml.attlist
-interval_anycontent.content = element * { text }*
-interval_anycontent.type =
-  interval_anycontent.content, interval_anycontent.attlist
-# include spatial-temporal and interval operators from the algebra modules of reaction ruleml
+# include actions from the PR rule layer of reaction ruleml
 
 a:documentation [
   "\x{a}" ~
-  "                                spatial-temporal-interval algebra\x{a}" ~
-  "            module part of Reaction RuleML    This is the XML Schema of the algebra module for\x{a}" ~
-  "            Reaction RuleML    File: spatial_temporal_interval_algebra_module.xsd    Version: 1.02\x{a}" ~
-  "            Last Modification: 2015-07-19        This schema declares the following Reaction RuleML\x{a}" ~
-  "            elements and attributes:                                      Operation (generic\x{a}" ~
-  '            operator)                   at (general role "at Time | Spatial | Interval)\x{a}' ~
-  "            Spatial, Temporal, Interval Function Constructs                                       *\x{a}" ~
-  "            After                   * Before       * Every                   * Any\x{a}" ~
-  "            * Timer                                                         (Allen's) Interval\x{a}" ~
-  "            Relations                                      * During                   * Overlaps\x{a}" ~
-  "            * Starts                   * Precedes                   * Succeeds                   *\x{a}" ~
-  "            Meets                   * Equal                   * Finishes\x{a}" ~
-  '            The approach is modelled after that used in "Modularization of XHTML in XML Schema"\x{a}' ~
-  "            WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with\x{a}" ~
+  "                Action module part of Reaction RuleML. It defines\x{a}" ~
+  "            the core     action constructs        This is the XML Schema event module for Reaction\x{a}" ~
+  "            RuleML.    File: action_module.xsd    Version: 1.02    Last Modification: 2015-07-19\x{a}" ~
+  "            This schema declares the following Reaction RuleML elements and attributes:        *\x{a}" ~
+  "            Action       \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-29T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** arg ***
+# 
+# Definition of the the arg role for Action
+# 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
+#
+arg_action.attlist = edge-element.attlist, xml.attlist
+arg_action.content = action_primitives.content
+arg_action.type = arg_action.content, arg_action.attlist
+# *** content ***
+# 
+# content model:  xs:any*
+# 
+# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+# See CURIE to IRI and term to IRI translation
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+#
+action_anycontent.attlist = edge-element.attlist, xml.attlist
+action_anycontent.content = element * { text }*
+action_anycontent.type =
+  action_anycontent.content, action_anycontent.attlist
+#	*** Action ***
+# 
+#	  Explicit generic Action. The action can be defined internally 
+#	* with positional arguments <arg>, e.g., <arg>
+# <Ind>a1</Ind>
+# </arg> (atomic actions | complex actions)
+#	* with unpositional slots <slot>, e.g., <slot>
+# <Ind>name</Ind>
+# <Ind>a1</Ind>
+# </slot>
+# <slot>
+# <Ind>processingDate</Ind>
+# <Time>....</Time>
+# </slot>
+#	* as interpretation as event with <do>, e.g., <do>
+# <Atom>...</Atom>
+# </do>
+#	* by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for actions
+#       or externally, where the optional @iri attribute points to an external definition of the action.
+#       The optional @type attribute defines the type of the action,
+#       the optional @safety attribute indicates if this is an interrupting, non-interrupting, transactional action
+#       the optional @size attribute acts as a generic size counter for the number of actions to be done 
+#       optional @closure defines the default quantification
+# 
+# 
+#	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Action	                
+Action-formula.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Action-formula.content =
+  meta-roles.content,
+  degree?,
+  (slot*
+   | (((element arg { arg_action.type }
+        | arg_action.content)+
+       | repo?
+       | repo)
+      | slot*)?
+   | resl?
+   | element content { action_anycontent.type })?
+Action-formula.type = Action-formula.content, Action-formula.attlist
+# action term
+Action-term.attlist =
+  action-interface.attlist,
+  term-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Action-term.content =
+  meta-roles.content,
+  (slot*
+   | (((element arg { arg_action.type }
+        | arg_action.content)+
+       | repo?
+       | repo)
+      | slot*)?
+   | resl?
+   | element content { action_anycontent.type })?
+Action-term.type = Action-term.content, Action-term.attlist
+a:documentation [
+  "\x{a}" ~
+  "                                action algebra module part of\x{a}" ~
+  "            Reaction RuleML    This is the XML Schema of the algebra module for Reaction RuleML\x{a}" ~
+  "            File: action_algebra_module.xsd    Version: 1.02    Last Modification: 2015-03-22\x{a}" ~
+  "            This schema declares the following Reaction RuleML elements and attributes:\x{a}" ~
+  "            Action Algebra Operators                                      * Operation (generic\x{a}" ~
+  "            action operator)                   * Succession                    * Choice\x{a}" ~
+  "            * Flow                    * Loop                           The approach is modelled\x{a}" ~
+  '            after that used in "Modularization of XHTML in XML Schema"    WD\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with\x{a}" ~
   '            "Modularization of XHTML" (REC-xhtml-modularization-20010410)\x{a}' ~
   "            [http://www.w3.org/TR/xhtml-modularization/].   \x{a}" ~
   "        \x{a}" ~
@@ -2681,16 +2472,13 @@ a:documentation [
   dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
   "\x{a}" ~
   "            "
-  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
-  "\x{a}" ~
-  "            "
   dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
   "\x{a}" ~
   "            "
   dc:description [ "custom-built main module for Reaction RuleML" ]
   "\x{a}" ~
   "            "
-  dc:date [ "2015-07-14T17:04:00+0200" ]
+  dc:date [ "2015-03-22T29:11:17-0300" ]
   "\x{a}" ~
   "            "
   dc:language [ "en" ]
@@ -2715,120 +2503,35 @@ a:documentation [
   "        \x{a}" ~
   "    "
 ]
-spatial_temporal_algebra_group.content =
-  After | Before | Every | Any | Timer
-interval_algebra_group.content =
-  During | Overlaps | Starts | Precedes | Succeeds | Meets | Finishes
-# *** at ***
+action_algebra_group.content =
+  Succession
+  | Choice
+  | Flow
+  | Loop
+  | element Operation { ActionAlgebraOperator.type }
+#  *** (Succession) (Choice) (Flow) (Loop) (Operation) ***
 # 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-at
+#  Definition of action algebra operators
 # 
-#     Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
-at.attlist = xml.attlist
-at.content = time_primitives.content
-at.type = at.content, at.attlist
-start |= at
-at = element at { at.type }
-# *** After / Before***
 # 
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-After
-#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Before
-# 
-# X after Y  / X before Y
-# 
-# Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
-After.attlist =
-  operator-interface.attlist, node-element.attlist, xml.attlist
-After.content = Interval-term.content
-After.type = After.content, After.attlist
-start |= After
-After = element After { After.type }
-start |= Before
-Before = element Before { After.type }
-# *** Every ***
-# 
-# Every X 
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Every
-# 
-# Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
-Every.attlist =
-  operator-interface.attlist, node-element.attlist, xml.attlist
-Every.content =
-  meta-roles.content,
-  (element arg { arg_interval.type }
-   | interval_primitives.content
-   | element content { interval_anycontent.type })?
-Every.type = Every.content, Every.attlist
-start |= Every
-Every = element Every { Every.type }
-# *** Any ***
-# 
-# Any X1,..Xn
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Any
-# 
-# e.g. "at any Saturday and Sunday"     
-Any.attlist =
-  operator-interface.attlist, node-element.attlist, xml.attlist
-Any.content =
-  meta-roles.content,
-  (element arg { arg_interval.type }+
-   | interval_primitives.content+
-   | element content { interval_anycontent.type }+)?
-Any.type = Any.content, Any.attlist
-start |= Any
-Any = element Any { Any.type }
-# *** (Recurring) Timer ***
-# 
-# After X Every Y
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Recurring
-# 
-# Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
-Timer.attlist =
-  operator-interface.attlist, node-element.attlist, xml.attlist
-Timer.content = Interval-term.content
-Timer.type = Timer.content, Timer.attlist
-start |= Timer
-Timer = element Timer { Timer.type }
-# *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes) ***
-# 
-# operator(Interval, Interval)
-# 
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-During
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Overlaps
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Starts
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Precedes
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Succeeds
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Meets
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
-# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Finishes
-IntervalAlgebraOperator.attlist =
-  operator-interface.attlist, node-element.attlist, xml.attlist
-IntervalAlgebraOperator.content =
-  meta-roles.content,
-  degree?,
-  (element arg { arg_interval.type }
-   | arg_interval.content),
-  (element arg { arg_interval.type }
-   | arg_interval.content)
-IntervalAlgebraOperator.type =
-  IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
-start |= During
-During = element During { IntervalAlgebraOperator.type }
-start |= Overlaps
-Overlaps = element Overlaps { IntervalAlgebraOperator.type }
-start |= Starts
-Starts = element Starts { IntervalAlgebraOperator.type }
-start |= Precedes
-Precedes = element Precedes { IntervalAlgebraOperator.type }
-start |= Succeeds
-Succeeds = element Succeeds { IntervalAlgebraOperator.type }
-start |= Meets
-Meets = element Meets { IntervalAlgebraOperator.type }
-start |= Finishes
-Finishes = element Finishes { IntervalAlgebraOperator.type }
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Sucession
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Choice
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Flow
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Loop
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
+ActionAlgebraOperator.attlist =
+  action-interface.attlist, node-element.attlist, xml.attlist
+ActionAlgebraOperator.content = meta-roles.content, (do | do.content)*
+ActionAlgebraOperator.type =
+  ActionAlgebraOperator.content, ActionAlgebraOperator.attlist
+start |= Succession
+Succession = element Succession { ActionAlgebraOperator.type }
+start |= Choice
+Choice = element Choice { ActionAlgebraOperator.type }
+start |= Flow
+Flow = element Flow { ActionAlgebraOperator.type }
+start |= Loop
+Loop = element Loop { ActionAlgebraOperator.type }
 # include test suites
 
 a:documentation [
@@ -2991,15 +2694,15 @@ meta-roles.content =
 # 
 # content model:
 # 
-# in DR Reaction RuleML: 
+# in PR Reaction RuleML: 
 # 
-# ((else?, then, if) | (if, then, else?)	| (if.content, then.content, then.content?))
+# ((elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?))
 #
-rule-implementation.content = DerivationRule.content
+rule-implementation.content = ProductionRule.content
 # 
 # An internal group for the query connectives in the Reaction RuleML language
 # 
-# content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+# content model: (Operation | And | Or | Negation | Naf | Equal)
 #
 query-connective.content =
   element Operation { Operation-formula-query.type }
@@ -3007,13 +2710,21 @@ query-connective.content =
   | element Or { Or-query.type }
   | Negation
   | Naf
-  | Neg
+  | Equal
+# 
+# An internal group for the rulebase connectives in the Reaction RuleML language
+# 
+# 
+# content model: (Operation | Equal )
+#
+rulebase-connective.content =
+  element Operation { Operation-formula-rulebase.type }
   | Equal
 # 
 # An internal group for the body connectives in the Reaction RuleML language
 # 
 # 
-# content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+# content model: (Operation | And | Or | Negation | Naf | Equal)
 #
 body-connective.content =
   element Operation { Operation-formula-and-or.type }
@@ -3021,29 +2732,14 @@ body-connective.content =
   | element Or { Or-body.type }
   | Negation
   | Naf
-  | Neg
   | Equal
 # 
 # An internal group for the head connectives in the Reaction RuleML language
 # 
-# 
-# content model: (Operation | Negation | Neg | Equal )
+# content model: (Operation | Equal )
 #
 head-connective.content =
   element Operation { Operation-formula-and-or.type }
-  | Negation
-  | Neg
-  | Equal
-# 
-# An internal group for the rulebase connectives in the Reaction RuleML language
-# 
-# 
-# content model: (Operation | Negation | Neg | Equal )
-#
-rulebase-connective.content =
-  element Operation { Operation-formula-rulebase.type }
-  | Negation
-  | Neg
   | Equal
 # 
 # An internal group for the query quantifiers in the Reaction RuleML language
@@ -3052,7 +2748,7 @@ rulebase-connective.content =
 #
 query-quantifier.content = Exists
 # 
-# An internal group for the meta quantifiers in the Reaction RuleML language
+# An internal group for the body quantifiers in the Reaction RuleML language
 # 
 # 
 # content model: (Forall | Exists | Quantifier)
@@ -3071,8 +2767,9 @@ rulebase-quantifier.content = Forall
 # 
 # An internal group for the head quantifiers in the Reaction RuleML language
 # 
+#     PR Reaction RuleML does not allow head quantifiers - Quantifiers are defined internally in the <quantification>    
 # 
-# content model: ( Forall  )
+# content model: (  )
 #
 head-quantifier.content = Forall
 # 
@@ -3083,81 +2780,84 @@ head-quantifier.content = Forall
 #
 body-quantifier.content = Exists
 # 
-# An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
+#  An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
 # 
-# In the DR dialect of Reaction RuleML the signature contains the predicate sorts Time, Spatial and Interval + Allen operators
-# 
-# content model: (Atom | Time | Spatial | Interval | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes ))
+# content model: (Atom)
 #
-extended-signature-predicate-sorts.content =
-  element Atom { Atom.type }
-  | element Time { Time-formula.type }
-  | element Spatial { Spatial-formula.type }
-  | element Interval { Interval-formula.type }
-  | interval_algebra_group.content
+extended-signature-predicate-sorts.content = element Atom { Atom.type }
 # 
 # An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
 # 
-# In the DR dialect of Reaction RuleML the signature contains the function sorts Time, Spatial and Interval and additional functional algebra operator
-# 
-# content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | (After | Before | Any | Every | Timer ) | Operation )
+#	   content model: (Ind | Data | Expr | Plex)
 #
-extended-signature-function-sorts.content =
-  Ind
-  | Data
-  | Expr
-  | Plex
-  | element Time { Time-term.type }
-  | element Spatial { Spatial-term.type }
-  | element Interval { Interval-term.type }
-  | spatial_temporal_algebra_group.content
-  | element Operation { Operation-term.type }
+extended-signature-function-sorts.content = Ind | Data | Expr | Plex
 # An internal group for the time primitives for interpretation as time
 # content model: 
-# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
-time_primitives.content = arg.content
+# 
+# not used in PR RuleML (only in combination with spatio-temporal DR RuleML)
+#
+time_primitives.content = empty
 # An internal group for the spatial primitives for interpretation as spatial
 # content model: 
-# in DR Reaction RuleML ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
-spatial_primitives.content = arg.content
+# 
+# not used in PR RuleML (only in combination with spatio-temporal DR RuleML)
+#
+spatial_primitives.content = empty
 # Interval primitives
 # content model: 
-# in DR Reaction RuleML: ((Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval) | (After | Before | Any | Every | Timer | Operation))
-interval_primitives.content = arg.content
+# 
+# not used in PR RuleML (only in combination with spatio-temporal DR RuleML)
+interval_primitives.content = empty
 # An internal group for the situation primitives for interpretation as situation
 # content model: 
-# in DR Reaction RuleML: ()
+# 
+# not used in PR RuleML (only in combination with KR RuleML)
 situation_primitives.content = empty
 # An internal group for the event primitives for interpretation as event
 # content model: 
-# in DR Reaction RuleML: ()
+# not used in PR RuleML (only in combination with KR RuleML or ECA/CEP RuleML)
 event_primitives.content = empty
 #  An internal group for events
 # content model:
-# 
-# DR Reaction RuleML ( )
+# not used in PR RuleML (only in combination with KR RuleML or ECA/CEP RuleML)
 event_group.content = empty
 # An internal group for the action primitives for interpretation as action
 # content model: 
-# in DR Reaction RuleML: ()
-action_primitives.content = empty
+# 
+# in PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr )
+action_primitives.content = arg.content
 #  An internal group for actions
 # content model:
-# 
-# DR Reaction RuleML ( )
-action_group.content = empty
+# PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Answer | Test | Action | Succession | Choice | Flow | Loop | Operation )
+action_group.content =
+  Assert
+  | Retract
+  | Update
+  | Consult
+  | element Action { Action-formula.type }
+  | Query
+  | Answer
+  | Test
+  | action_algebra_group.content
 # An internal group for the imports of the consult primitive
 # content model: 
-# in DR Reaction RuleML: (payload | RuleML | Reify | Var)
+# in PR Reaction RuleML: (payload | RuleML | Reify | Var)
 consult_imports.content = payload | payload.content
 # An internal group for the performative primitives
 # content model: 
-# in DR Reaction RuleML: (Consult|Assert|Retract|Query|Answer|Test)
+# in PR Reaction RuleML: (Assert|Retract|Update|Consult|Query|Answer|Test|Action)
 performative_primitives.content =
-  Consult | Assert | Retract | Query | Answer | Test
+  Assert
+  | Retract
+  | Update
+  | Consult
+  | element Action { Action-formula.type }
+  | Query
+  | Answer
+  | Test
 # *** @style ***
 # 
 #  restriction: active | messaging | reasoning
-#      default value: reasoning (in DR Reaction RuleML)
+#      default value: active (in PR Reaction RuleML)
 #      optional attribute
 style.attrib = attribute style { style.datatype }?

@@ -4,11 +4,10 @@
     xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xh11d="http://www.w3.org/1999/xhtml/datatypes/"
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:annotation>
-        <xs:documentation xml:lang="en">                       Complex Event Processing (CEP)
-            dialect of Reaction RuleML           File: cep.xsd    Version: 1.02    Last
-            Modification: 2015-07-19       </xs:documentation>
+        <xs:documentation xml:lang="en">                        Production Rule (PR) dialect of
+            Reaction RuleML         File: pr.xsd    Version: 1.02    Last Modification: 2015-07-19       </xs:documentation>
         <xs:appinfo>
-            <dc:title>CEP Reaction RuleML Schema</dc:title>
+            <dc:title>DR Reaction RuleML Schema</dc:title>
             <dc:version>1.02</dc:version>
             <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
             <dc:subject>Reaction RuleML 1.02</dc:subject>
@@ -2410,6 +2409,7 @@
         <xs:attributeGroup ref="prefix.attrib"/>
         <xs:attributeGroup ref="key.attrib"/>
         <xs:attributeGroup ref="keyref.attrib"/>
+
     </xs:attributeGroup>
     <!-- 
  
@@ -3096,697 +3096,6 @@
         <xs:group ref="profile_anycontent.content"/>
         <xs:attributeGroup ref="profile_anycontent.attlist"/>
     </xs:complexType>
-    <xs:annotation>
-        <xs:documentation xml:lang="en">               Time module part of Reaction RuleML. It
-            defines the core     time constructs        This is the XML Schema time module for
-            Reaction RuleML.    File: time_module.xsd    Version: 1.02    Last Modification:
-            2015-07-19     This schema declares the following Reaction RuleML elements and
-            attributes:       * Time    </xs:documentation>
-        <xs:appinfo>
-            <dc:title>RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built time module for Reaction RuleML</dc:description>
-            <dc:date>2015-07-19T17:04:00+0200</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
-    <!--
-	*** Time ***
-	Explicit generic Time construct. 
-	
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Situation
-	
-	The time can be represented internally 
-      * with positional arguments <arg>, e.g., <arg><Data xsi:type="xs:dateTime>2015-10-02T10:45:34-00:00</Data></arg>
-      * with unpositional slots <slot>, e.g., <slot><Ind>year</Ind><Ind>2015</Ind></slot><slot><Ind>month</Ind><Ind>10</Ind></slot>
-      * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for time
-      or externally, where the optional @iri attribute points to an external data definition of the time
-      The optional @type attribute defines the type of the time, e.g. ruleml:TimeInstant (linear continuous time model) 
-      or ruleml:TimeInterval (discrete time interval model). The default time semantics is a discrete time model.
-      Note: Time can be defined absolute or relative.
-	-->
-    <xs:attributeGroup name="Time-formula.attlist">
-        <xs:attributeGroup ref="formula-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Time-formula.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:element minOccurs="0" ref="degree"/>
-            <xs:choice minOccurs="0">
-                <xs:sequence>
-                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                        type="slot.type"/>
-                    <xs:choice minOccurs="0">
-                        <xs:sequence>
-                            <xs:choice>
-                                <xs:sequence>
-                                    <xs:choice maxOccurs="unbounded">
-                                        <xs:element form="qualified" name="arg" type="arg_time.type"/>
-                                        <xs:group ref="arg_time.content"/>
-                                    </xs:choice>
-                                    <xs:element minOccurs="0" ref="repo"/>
-                                </xs:sequence>
-                                <xs:element ref="repo"/>
-                            </xs:choice>
-                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
-                                name="slot" type="slot.type"/>
-                        </xs:sequence>
-                    </xs:choice>
-                    <xs:element minOccurs="0" ref="resl"/>
-                </xs:sequence>
-                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
-                    type="time_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Time-formula.type">
-        <xs:group ref="Time-formula.content"/>
-        <xs:attributeGroup ref="Time-formula.attlist"/>
-    </xs:complexType>
-    <!-- Time term -->
-    <xs:attributeGroup name="Time-term.attlist">
-        <xs:attributeGroup ref="term-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Time-term.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice minOccurs="0">
-                <xs:sequence>
-                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                        type="slot.type"/>
-                    <xs:choice minOccurs="0">
-                        <xs:sequence>
-                            <xs:choice>
-                                <xs:sequence>
-                                    <xs:choice maxOccurs="unbounded">
-                                        <xs:element form="qualified" name="arg" type="arg_time.type"/>
-                                        <xs:group ref="arg_time.content"/>
-                                    </xs:choice>
-                                    <xs:element minOccurs="0" ref="repo"/>
-                                </xs:sequence>
-                                <xs:element ref="repo"/>
-                            </xs:choice>
-                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
-                                name="slot" type="slot.type"/>
-                        </xs:sequence>
-                    </xs:choice>
-                    <xs:element minOccurs="0" ref="resl"/>
-                </xs:sequence>
-                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
-                    type="time_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Time-term.type">
-        <xs:group ref="Time-term.content"/>
-        <xs:attributeGroup ref="Time-term.attlist"/>
-    </xs:complexType>
-    <!--
-     *** arg ***
-     
-     Definition of the the arg role for Time
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
-	-->
-    <xs:attributeGroup name="arg_time.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="arg_time.content">
-        <xs:choice>
-            <xs:group ref="time_primitives.content"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="arg_time.type">
-        <xs:group ref="arg_time.content"/>
-        <xs:attributeGroup ref="arg_time.attlist"/>
-    </xs:complexType>
-    <!--
-     *** content ***
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-     
-     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
-     	See CURIE to IRI and term to IRI translation
-	-->
-    <xs:attributeGroup name="time_anycontent.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="time_anycontent.content">
-        <xs:choice>
-            <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="time_anycontent.type">
-        <xs:group ref="time_anycontent.content"/>
-        <xs:attributeGroup ref="time_anycontent.attlist"/>
-    </xs:complexType>
-    <xs:annotation>
-        <xs:documentation xml:lang="en">        Spatial module part of Reaction RuleML. It defines
-            the core     spatial constructs        This is the XML Schema spatial module for
-            Reaction RuleML.    File: spatial_module.xsd    Version: 1.02    Last Modification:
-            2015-07-19        This schema declares the following Reaction RuleML elements and
-            attributes:        * Spatial       </xs:documentation>
-        <xs:appinfo>
-            <dc:title>RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built main module for Reaction RuleML</dc:description>
-            <dc:date>2015-07-14T17:04:00+0200</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
-    <!--
-	*** Spatial ***
-	Explicit generic Spatial construct. 
-	
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Spatial
-	
-	The spatial can be represented internally 
-      * with positional arguments <arg>
-      * with unpositional slots <slot>
-      * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed arbitrary XML syntaxes
-      or externally, where the optional @iri attribute points to an external data definition of the spatial
-      The optional @type attribute defines the type of the spatial
-	-->
-    <xs:attributeGroup name="Spatial-formula.attlist">
-        <xs:attributeGroup ref="formula-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Spatial-formula.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:element minOccurs="0" ref="degree"/>
-            <xs:choice minOccurs="0">
-                <xs:sequence>
-                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                        type="slot.type"/>
-                    <xs:choice minOccurs="0">
-                        <xs:sequence>
-                            <xs:choice>
-                                <xs:sequence>
-                                    <xs:choice maxOccurs="unbounded">
-                                        <xs:element form="qualified" name="arg"
-                                            type="arg_spatial.type"/>
-                                        <xs:group ref="arg_spatial.content"/>
-                                    </xs:choice>
-                                    <xs:element minOccurs="0" ref="repo"/>
-                                </xs:sequence>
-                                <xs:element ref="repo"/>
-                            </xs:choice>
-                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
-                                name="slot" type="slot.type"/>
-                        </xs:sequence>
-                    </xs:choice>
-                    <xs:element minOccurs="0" ref="resl"/>
-                </xs:sequence>
-                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
-                    type="spatial_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Spatial-formula.type">
-        <xs:group ref="Spatial-formula.content"/>
-        <xs:attributeGroup ref="Spatial-formula.attlist"/>
-    </xs:complexType>
-    <!-- Spatial term -->
-    <xs:attributeGroup name="Spatial-term.attlist">
-        <xs:attributeGroup ref="term-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Spatial-term.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice minOccurs="0">
-                <xs:sequence>
-                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                        type="slot.type"/>
-                    <xs:choice minOccurs="0">
-                        <xs:sequence>
-                            <xs:choice>
-                                <xs:sequence>
-                                    <xs:choice maxOccurs="unbounded">
-                                        <xs:element form="qualified" name="arg"
-                                            type="arg_spatial.type"/>
-                                        <xs:group ref="arg_spatial.content"/>
-                                    </xs:choice>
-                                    <xs:element minOccurs="0" ref="repo"/>
-                                </xs:sequence>
-                                <xs:element ref="repo"/>
-                            </xs:choice>
-                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
-                                name="slot" type="slot.type"/>
-                        </xs:sequence>
-                    </xs:choice>
-                    <xs:element minOccurs="0" ref="resl"/>
-                </xs:sequence>
-                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
-                    type="spatial_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Spatial-term.type">
-        <xs:group ref="Spatial-term.content"/>
-        <xs:attributeGroup ref="Spatial-term.attlist"/>
-    </xs:complexType>
-    <!--
-     *** arg ***
-     
-     Definition of the the arg role for Spatial
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg  
-	-->
-    <xs:attributeGroup name="arg_spatial.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="arg_spatial.content">
-        <xs:choice>
-            <xs:group ref="spatial_primitives.content"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="arg_spatial.type">
-        <xs:group ref="arg_spatial.content"/>
-        <xs:attributeGroup ref="arg_spatial.attlist"/>
-    </xs:complexType>
-    <!--
-     *** content ***
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-     
-     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
-     	See CURIE to IRI and term to IRI translation
-	-->
-    <xs:attributeGroup name="spatial_anycontent.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="spatial_anycontent.content">
-        <xs:choice>
-            <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="spatial_anycontent.type">
-        <xs:group ref="spatial_anycontent.content"/>
-        <xs:attributeGroup ref="spatial_anycontent.attlist"/>
-    </xs:complexType>
-    <xs:annotation>
-        <xs:documentation xml:lang="en">               Interval module part of Reaction RuleML. It
-            defines the core     Interval construct        This is the XML Schema interval module
-            for Reaction RuleML.    File: interval_module.xsd    Version: 1.02    Last Modification:
-            2015-07-19     This schema declares the following Reaction RuleML elements and
-            attributes:       * Interval    </xs:documentation>
-        <xs:appinfo>
-            <dc:title>RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built main module for Reaction RuleML</dc:description>
-            <dc:date>2015-07-14T17:04:00+0200</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
-    <!--
-	*** Interval ***
-	Explicit generic Interval. 
-	
-    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Interval
-	
-	The interval can be
-      defined internally by the any content model (xs:any Element) or externally, where 
-      the optional @type attribute defines the name/type of the interval,
-      the optional @iri attribute points to an external definition of the interval, and
-       An interval can be defined by Events, Actions,  Times, Spatials, and other Intervals can be typed by the 
-       interval ontology of Reaction RuleML (defining different types of intervals).
-	-->
-    <xs:attributeGroup name="Interval-formula.attlist">
-        <xs:attributeGroup ref="formula-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Interval-formula.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:element minOccurs="0" ref="degree"/>
-            <xs:sequence minOccurs="0">
-                <xs:choice>
-                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
-                    <xs:element form="qualified" name="content" type="interval_anycontent.type"/>
-                    <xs:group ref="arg_interval.content"/>
-                </xs:choice>
-                <xs:choice minOccurs="0">
-                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
-                    <xs:element form="qualified" name="content" type="interval_anycontent.type"/>
-                    <xs:group ref="arg_interval.content"/>
-                </xs:choice>
-            </xs:sequence>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Interval-formula.type">
-        <xs:group ref="Interval-formula.content"/>
-        <xs:attributeGroup ref="Interval-formula.attlist"/>
-    </xs:complexType>
-    <!-- Interval term -->
-    <xs:attributeGroup name="Interval-term.attlist">
-        <xs:attributeGroup ref="term-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Interval-term.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:sequence minOccurs="0">
-                <xs:choice>
-                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
-                    <xs:group ref="arg_interval.content"/>
-                </xs:choice>
-                <xs:choice minOccurs="0">
-                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
-                    <xs:group ref="arg_interval.content"/>
-                </xs:choice>
-            </xs:sequence>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Interval-term.type">
-        <xs:group ref="Interval-term.content"/>
-        <xs:attributeGroup ref="Interval-term.attlist"/>
-    </xs:complexType>
-    <!--
-     *** arg ***
-     
-     Definition of the the arg role for Intervals
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
--->
-    <xs:attributeGroup name="arg_interval.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="arg_interval.content">
-        <xs:choice>
-            <xs:group ref="interval_primitives.content"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="arg_interval.type">
-        <xs:group ref="arg_interval.content"/>
-        <xs:attributeGroup ref="arg_interval.attlist"/>
-    </xs:complexType>
-    <!--
-     *** content ***
-     
-          see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-     
-     @prefix is used to define a prefix and a term mapping vocabulary for the XML content
-     See CURIE to IRI and term to IRI translation
-
--->
-    <xs:attributeGroup name="interval_anycontent.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="interval_anycontent.content">
-        <xs:choice>
-            <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="interval_anycontent.type">
-        <xs:group ref="interval_anycontent.content"/>
-        <xs:attributeGroup ref="interval_anycontent.attlist"/>
-    </xs:complexType>
-    <!-- include spatial-temporal and interval operators from the algebra modules of reaction ruleml   -->
-    <xs:annotation>
-        <xs:documentation xml:lang="en">                        spatial-temporal-interval algebra
-            module part of Reaction RuleML    This is the XML Schema of the algebra module for
-            Reaction RuleML    File: spatial_temporal_interval_algebra_module.xsd    Version: 1.02
-            Last Modification: 2015-07-19        This schema declares the following Reaction RuleML
-            elements and attributes:                                      Operation (generic
-            operator)                   at (general role "at Time | Spatial | Interval)
-            Spatial, Temporal, Interval Function Constructs                                       *
-            After                   * Before       * Every                   * Any
-            * Timer                                                         (Allen's) Interval
-            Relations                                      * During                   * Overlaps
-            * Starts                   * Precedes                   * Succeeds                   *
-            Meets                   * Equal                   * Finishes
-            The approach is modelled after that used in "Modularization of XHTML in XML Schema"
-            WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
-            "Modularization of XHTML" (REC-xhtml-modularization-20010410)
-            [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
-        <xs:appinfo>
-            <dc:title>Reaction RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:creator>Tara Athan (taraathan AT gmail.com)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built main module for Reaction RuleML</dc:description>
-            <dc:date>2015-07-14T17:04:00+0200</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
-    <xs:group name="spatial_temporal_algebra_group.content">
-        <xs:choice>
-            <xs:element ref="After"/>
-            <xs:element ref="Before"/>
-            <xs:element ref="Every"/>
-            <xs:element ref="Any"/>
-            <xs:element ref="Timer"/>
-        </xs:choice>
-    </xs:group>
-    <xs:group name="interval_algebra_group.content">
-        <xs:choice>
-            <xs:element ref="During"/>
-            <xs:element ref="Overlaps"/>
-            <xs:element ref="Starts"/>
-            <xs:element ref="Precedes"/>
-            <xs:element ref="Succeeds"/>
-            <xs:element ref="Meets"/>
-            <xs:element ref="Finishes"/>
-        </xs:choice>
-    </xs:group>
-    <!--
-      *** at ***
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-at
-      
-	  Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
-	-->
-    <xs:attributeGroup name="at.attlist">
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="at.content">
-        <xs:choice>
-            <xs:group ref="time_primitives.content"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="at.type">
-        <xs:group ref="at.content"/>
-        <xs:attributeGroup ref="at.attlist"/>
-    </xs:complexType>
-    <xs:element name="at" type="at.type"/>
-    <!--
-      *** After / Before***
-
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-After
-	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Before
-
-      X after Y  / X before Y
-      
-      Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
-	-->
-    <xs:attributeGroup name="After.attlist">
-        <xs:attributeGroup ref="operator-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="After.content">
-        <xs:sequence>
-            <xs:group ref="Interval-term.content"/>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="After.type">
-        <xs:group ref="After.content"/>
-        <xs:attributeGroup ref="After.attlist"/>
-    </xs:complexType>
-    <xs:element name="After" type="After.type"/>
-    <xs:element name="Before" type="After.type"/>
-    <!--
-      *** Every ***
-      
-      Every X 
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Every
-      
-      Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
-	-->
-    <xs:attributeGroup name="Every.attlist">
-        <xs:attributeGroup ref="operator-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Every.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="arg" type="arg_interval.type"/>
-                <xs:group ref="interval_primitives.content"/>
-                <xs:element form="qualified" name="content" type="interval_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Every.type">
-        <xs:group ref="Every.content"/>
-        <xs:attributeGroup ref="Every.attlist"/>
-    </xs:complexType>
-    <xs:element name="Every" type="Every.type"/>
-    <!--
-      *** Any ***
-      
-      Any X1,..Xn
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Any
-            
-      e.g. "at any Saturday and Sunday"     
-	-->
-    <xs:attributeGroup name="Any.attlist">
-        <xs:attributeGroup ref="operator-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Any.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice minOccurs="0">
-                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="1" name="arg"
-                    type="arg_interval.type"/>
-                <xs:group maxOccurs="unbounded" minOccurs="1" ref="interval_primitives.content"/>
-                <xs:element form="qualified" maxOccurs="unbounded" minOccurs="1" name="content"
-                    type="interval_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Any.type">
-        <xs:group ref="Any.content"/>
-        <xs:attributeGroup ref="Any.attlist"/>
-    </xs:complexType>
-    <xs:element name="Any" type="Any.type"/>
-    <!--
-      *** (Recurring) Timer ***
-      
-      After X Every Y
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Recurring
-      
-      Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
-	-->
-    <xs:attributeGroup name="Timer.attlist">
-        <xs:attributeGroup ref="operator-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Timer.content">
-        <xs:sequence>
-            <xs:group ref="Interval-term.content"/>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Timer.type">
-        <xs:group ref="Timer.content"/>
-        <xs:attributeGroup ref="Timer.attlist"/>
-    </xs:complexType>
-    <xs:element name="Timer" type="Timer.type"/>
-    <!--
-      *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes) ***
-      
-      operator(Interval, Interval)
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-During
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Overlaps
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Starts
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Precedes
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Succeeds
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Meets
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Finishes
-	-->
-    <xs:attributeGroup name="IntervalAlgebraOperator.attlist">
-        <xs:attributeGroup ref="operator-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="IntervalAlgebraOperator.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:element minOccurs="0" ref="degree"/>
-            <xs:sequence minOccurs="0">
-                <xs:choice>
-                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
-                    <xs:group ref="arg_interval.content"/>
-                </xs:choice>
-                <xs:choice>
-                    <xs:element form="qualified" name="arg" type="arg_interval.type"/>
-                    <xs:group ref="arg_interval.content"/>
-                </xs:choice>
-            </xs:sequence>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="IntervalAlgebraOperator.type">
-        <xs:group ref="IntervalAlgebraOperator.content"/>
-        <xs:attributeGroup ref="IntervalAlgebraOperator.attlist"/>
-    </xs:complexType>
-    <xs:element name="During" type="IntervalAlgebraOperator.type"/>
-    <xs:element name="Overlaps" type="IntervalAlgebraOperator.type"/>
-    <xs:element name="Starts" type="IntervalAlgebraOperator.type"/>
-    <xs:element name="Precedes" type="IntervalAlgebraOperator.type"/>
-    <xs:element name="Succeeds" type="IntervalAlgebraOperator.type"/>
-    <xs:element name="Meets" type="IntervalAlgebraOperator.type"/>
-    <xs:element name="Finishes" type="IntervalAlgebraOperator.type"/>
     <!-- include actions from the PR rule layer of reaction ruleml   -->
     <xs:annotation>
         <xs:documentation xml:lang="en">        Action module part of Reaction RuleML. It defines
@@ -4028,628 +3337,7 @@
     <xs:element name="Choice" type="ActionAlgebraOperator.type"/>
     <xs:element name="Flow" type="ActionAlgebraOperator.type"/>
     <xs:element name="Loop" type="ActionAlgebraOperator.type"/>
-    <!-- include events from the ECA rule layer of reaction ruleml   -->
-    <xs:annotation>
-        <xs:documentation xml:lang="en">               Event module part of Reaction RuleML. It
-            defines the core     event constructs        This is the XML Schema event module for
-            Reaction RuleML.    File: event_module.xsd    Version: 1.02    Last Modification:
-            2015-07-19     This schema declares the following Reaction RuleML elements and
-            attributes:       * Event    </xs:documentation>
-        <xs:appinfo>
-            <dc:title>Reaction RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built main module for Reaction RuleML</dc:description>
-            <dc:date>2015-07-19T23:11:17-0300</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
-    <!--
-	*** Event ***
-	  Explicit generic Event. 
-	  
-	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Event
-	  
-	  The event can be defined internally 
-     	* with positional arguments <arg>, e.g., <arg><Ind>e1</Ind></arg>
-      	* with unpositional slots <slot>, e.g., <slot><Ind>name</Ind><Ind>e1</Ind></slot><slot><Ind>processingDate</Ind><Time>....</Time></slot>
-      	* as interpretation as event with <on>, e.g., <on><Atom>...</Atom></on>
-      	* by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for events
-      or externally, where the optional @iri attribute points to an external definition of the event.
-      The optional @type attribute defines the type of the event,
-      the optional @safety attribute indicates if this is an interrupting, non-interrupting, transactional event
-      the optional @size attribute acts as a generic size counter for the number of events to be received 
-      Definitions of time and spatial events are simplified by makeing the assumption that a time/spatial object can be interpreted as event, 
-      e.g. <Event><arg><Time>...</Time></arg></Event>.
-      
-      The event instance is defined by its <arg>uments, <slot>s, as an event interpretation <on>, or arbitrary <content>.
-      An event pattern (as used, e.g., in the <on> part of a reaction rule) is defined in the <signature> 
-      of the event as event template, e.g. <Event><signature>...</signature></Event>.
-
-	-->
-    <xs:attributeGroup name="Event-formula.attlist">
-        <xs:attributeGroup ref="event-interface.attlist"/>
-        <xs:attributeGroup ref="formula-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Event-formula.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:element minOccurs="0" ref="degree"/>
-            <xs:choice minOccurs="0">
-                <xs:sequence>
-                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                        type="slot.type"/>
-                    <xs:choice minOccurs="0">
-                        <xs:sequence>
-                            <xs:choice>
-                                <xs:sequence>
-                                    <xs:choice maxOccurs="unbounded">
-                                        <xs:element form="qualified" name="arg"
-                                            type="arg_event.type"/>
-                                        <xs:group ref="arg_event.content"/>
-                                    </xs:choice>
-                                    <xs:element minOccurs="0" ref="repo"/>
-                                </xs:sequence>
-                                <xs:element ref="repo"/>
-                            </xs:choice>
-                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
-                                name="slot" type="slot.type"/>
-                        </xs:sequence>
-                    </xs:choice>
-                    <xs:element minOccurs="0" ref="resl"/>
-                </xs:sequence>
-                <xs:element form="qualified" name="content" type="event_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Event-formula.type">
-        <xs:group ref="Event-formula.content"/>
-        <xs:attributeGroup ref="Event-formula.attlist"/>
-    </xs:complexType>
-    <!-- event term -->
-    <xs:attributeGroup name="Event-term.attlist">
-        <xs:attributeGroup ref="event-interface.attlist"/>
-        <xs:attributeGroup ref="term-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Event-term.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice minOccurs="0">
-                <xs:sequence>
-                    <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
-                        type="slot.type"/>
-                    <xs:choice minOccurs="0">
-                        <xs:sequence>
-                            <xs:choice>
-                                <xs:sequence>
-                                    <xs:choice maxOccurs="unbounded">
-                                        <xs:element form="qualified" name="arg"
-                                            type="arg_event.type"/>
-                                        <xs:group ref="arg_event.content"/>
-                                    </xs:choice>
-                                    <xs:element minOccurs="0" ref="repo"/>
-                                </xs:sequence>
-                                <xs:element ref="repo"/>
-                            </xs:choice>
-                            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
-                                name="slot" type="slot.type"/>
-                        </xs:sequence>
-                    </xs:choice>
-                    <xs:element minOccurs="0" ref="resl"/>
-                </xs:sequence>
-                <xs:element form="qualified" name="content" type="event_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Event-term.type">
-        <xs:group ref="Event-term.content"/>
-        <xs:attributeGroup ref="Event-term.attlist"/>
-    </xs:complexType>
-    <!--
-     *** arg ***
-     
-     Definition of the the arg role for Event
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
-     
--->
-    <xs:attributeGroup name="arg_event.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="arg_event.content">
-        <xs:choice>
-            <xs:group ref="event_primitives.content"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="arg_event.type">
-        <xs:group ref="arg_event.content"/>
-        <xs:attributeGroup ref="arg_event.attlist"/>
-    </xs:complexType>
-    <!--
-     *** content ***
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-         
-     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
-     See CURIE to IRI and term to IRI translation
-
-    -->
-    <xs:attributeGroup name="event_anycontent.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="event_anycontent.content">
-        <xs:choice>
-            <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="event_anycontent.type">
-        <xs:group ref="event_anycontent.content"/>
-        <xs:attributeGroup ref="event_anycontent.attlist"/>
-    </xs:complexType>
-    <xs:annotation>
-        <xs:documentation xml:lang="en">                        event algebra module part of
-            Reaction RuleML    This is the XML Schema of the event algebra module for Reaction
-            RuleML    File: event_algebra_module.xsd    Version: 1.02    Last Modification:
-            2015-03-22        This schema declares the following Reaction RuleML elements and
-            attributes:                                                                        Event
-            Algebra Operators                                      * Operation (generic event
-            operator)                   * Sequence                    * Disjunction
-            * Xor                    * Conjunction                    * Concurrent
-            * Not                    * Any                    * Aperiodic                    *
-            Periodic                    * AtLeast                    * ATMost                    *
-            Operation                       The approach is modelled after that used in
-            "Modularization of XHTML in XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/],
-            which will soon be integrated with    "Modularization of XHTML"
-            (REC-xhtml-modularization-20010410)    [http://www.w3.org/TR/xhtml-modularization/].   </xs:documentation>
-        <xs:appinfo>
-            <dc:title>Reaction RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built main module for Reaction RuleML</dc:description>
-            <dc:date>2015-03-22T29:11:17-0300</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
-    <xs:group name="event_algebra_group.content">
-        <xs:choice>
-            <xs:element ref="Sequence"/>
-            <xs:element ref="Disjunction"/>
-            <xs:element ref="Xor"/>
-            <xs:element ref="Conjunction"/>
-            <xs:element ref="Concurrent"/>
-            <xs:element ref="Not"/>
-            <xs:element form="qualified" name="Any" type="EventAlgebraOperator.type"/>
-            <xs:element ref="Aperiodic"/>
-            <xs:element ref="Periodic"/>
-            <xs:element ref="AtLeast"/>
-            <xs:element ref="AtMost"/>
-            <xs:element form="qualified" name="Operation" type="EventAlgebraOperator.type"/>
-        </xs:choice>
-    </xs:group>
-    <!--
-      *** (Operation) Sequence Disjunction XOR Conjunction Concurrent Not Any Aperiodic Periodic AtLeast AtMost ***
-      
-      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
-	-->
-    <xs:attributeGroup name="EventAlgebraOperator.attlist">
-        <xs:attributeGroup ref="event-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="EventAlgebraOperator.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice maxOccurs="unbounded" minOccurs="0">
-                <xs:element ref="on"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="EventAlgebraOperator.type">
-        <xs:group ref="EventAlgebraOperator.content"/>
-        <xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
-    </xs:complexType>
-    <xs:element name="Sequence" type="EventAlgebraOperator.type"/>
-    <xs:element name="Disjunction" type="EventAlgebraOperator.type"/>
-    <xs:element name="Xor" type="EventAlgebraOperator.type"/>
-    <xs:element name="Conjunction" type="EventAlgebraOperator.type"/>
-    <xs:element name="Concurrent" type="EventAlgebraOperator.type"/>
-    <!--
-      *** Not ***
-      
-      "Not on Even2 at [Event1, Event3]" ("Event 2 does not occur between/at [Event 1 and Event 3]")
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Not 
-	-->
-    <xs:attributeGroup name="Not.attlist">
-        <xs:attributeGroup ref="EventAlgebraOperator.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Not.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:sequence minOccurs="0">
-                <xs:choice>
-                    <xs:element ref="on"/>
-                </xs:choice>
-                <xs:choice>
-                    <xs:element ref="at"/>
-                </xs:choice>
-            </xs:sequence>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Not.type">
-        <xs:group ref="Not.content"/>
-        <xs:attributeGroup ref="Not.attlist"/>
-    </xs:complexType>
-    <xs:element name="Not" type="Not.type"/>
-    <!--
-      *** Aperiodic ***
-      
-      "Aperiodic on Event2 at [Event1, Event3]" ("Event2 does occur aperiodically at [Event 1 and Event3]")
-      possibly with multiple accumlated occurences of Event 2 (@size attribute) 
-      
-            see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Aperiodic
-            
-             *** Periodic ***
-      
-      "Periodic on Event2 at [Event1, Event3]" ("Event2 does occur periodically at time interval [Event 1 and Event3]")
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Periodic     
-	-->
-    <xs:element name="Aperiodic" type="Not.type"/>
-    <xs:element name="Periodic" type="Not.type"/>
-    <!--
-      *** AtLeast / AtMost ***
-      
-      "AtLeast @size occurrences on Event"
-      "AtMost @size occurrences on Event"
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtLeast
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtMost
- 
-	-->
-    <xs:element name="AtLeast" type="EventAlgebraOperator.type"/>
-    <xs:element name="AtMost" type="EventAlgebraOperator.type"/>
-    <!-- include events from the CEP rule layer of reaction ruleml   -->
-    <xs:annotation>
-        <xs:documentation xml:lang="en">        Message module part of Reaction RuleML.        This
-            is the XML Schema Message module for Reaction RuleML.    File: message_module.xsd
-            Version: 1.02    Last Modification: 2015-07-20        This schema declares the following
-            Reaction RuleML elements and attributes:            * Message    * Agent    * Protocol
-            * protocol    * sender    * receiver        * content | payload    * @mode    *
-            directive    * Send    * Receive    * enclosed        The approach is modelled after
-            that used in "Modularization of XHTML in XML Schema"    WD
-            [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with
-            "Modularization of XHTML" (REC-xhtml-modularization-20010410)
-            [http://www.w3.org/TR/xhtml-modularization/].       </xs:documentation>
-        <xs:appinfo>
-            <dc:title>Reaction RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built main module for Reaction RuleML</dc:description>
-            <dc:date>2015-03-29T23:11:17-0300</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
-    <!--
-      *** Message ***
-      A Message element that provides the syntax for inbound and outbound messages / notifications 
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Message      
--->
-    <xs:attributeGroup name="Message.attlist">
-        <xs:attributeGroup ref="message-mode.attrib"/>
-        <xs:attributeGroup ref="type.attrib"/>
-        <xs:attributeGroup ref="arity.attrib"/>
-        <xs:attributeGroup ref="card.attrib"/>
-        <xs:attributeGroup ref="weight.attrib"/>
-        <xs:attributeGroup ref="style.attrib"/>
-        <xs:attributeGroup ref="direction.attrib"/>
-        <xs:attributeGroup ref="scope-formula.attrib"/>
-        <xs:attributeGroup ref="closure.attrib"/>
-        <xs:attributeGroup ref="per.attrib"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Message.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="cid" type="oid.type"/>
-            </xs:choice>
-            <xs:choice minOccurs="0">
-                <xs:element ref="protocol"/>
-            </xs:choice>
-            <xs:choice minOccurs="0">
-                <xs:element ref="directive"/>
-            </xs:choice>
-            <xs:choice minOccurs="0">
-                <xs:element ref="sender"/>
-            </xs:choice>
-            <xs:choice minOccurs="0">
-                <xs:element ref="receiver"/>
-            </xs:choice>
-            <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="content" type="message_anycontent.type"/>
-                <xs:element ref="payload"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Message.type">
-        <xs:group ref="Message.content"/>
-        <xs:attributeGroup ref="Message.attlist"/>
-    </xs:complexType>
-    <xs:element name="Message" type="Message.type"/>
-    <!--
-      *** Agent ***
-      Generic Agent element for defining Agents locally or for referencing existing external Agents
-      
-            see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Agent      
-	-->
-    <xs:attributeGroup name="Agent.attlist">
-        <xs:attributeGroup ref="term-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Agent.content">
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="meta"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="qualification"/>
-            <xs:element maxOccurs="1" minOccurs="0" ref="oid"/>
-            <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="content" type="message_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Agent.type">
-        <xs:group ref="Agent.content"/>
-        <xs:attributeGroup ref="Agent.attlist"/>
-    </xs:complexType>
-    <xs:element name="Agent" type="Agent.type"/>
-    <!--
-      *** Protocol ***
-      Generic Protocol element for defining protocols locally or for referencing existing external protocols
- 
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Protocol
-                  
--->
-    <xs:attributeGroup name="Protocol.attlist">
-        <xs:attributeGroup ref="term-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Protocol.content">
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="meta"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="qualification"/>
-            <xs:element maxOccurs="1" minOccurs="0" ref="oid"/>
-            <xs:choice minOccurs="0">
-                <xs:element form="qualified" name="content" type="message_anycontent.type"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Protocol.type">
-        <xs:group ref="Protocol.content"/>
-        <xs:attributeGroup ref="Protocol.attlist"/>
-    </xs:complexType>
-    <xs:element name="Protocol" type="Protocol.type"/>
-    <!--
-     *** protocol ***
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-protocol
--->
-    <xs:attributeGroup name="protocol.attlist">
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="protocol.content">
-        <xs:sequence>
-            <xs:choice>
-                <xs:element ref="Protocol"/>
-                <xs:element ref="Ind"/>
-                <xs:element ref="Data"/>
-                <xs:element ref="Var"/>
-                <xs:element ref="Expr"/>
-                <xs:element ref="Plex"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="protocol.type">
-        <xs:group ref="protocol.content"/>
-        <xs:attributeGroup ref="protocol.attlist"/>
-    </xs:complexType>
-    <xs:element name="protocol" type="protocol.type"/>
-    <!--
-     *** directive ***
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-directive
-
--->
-    <xs:attributeGroup name="directive.attlist">
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="directive.content">
-        <xs:sequence>
-            <xs:choice>
-                <xs:element ref="Ind"/>
-                <xs:element ref="Data"/>
-                <xs:element ref="Var"/>
-                <xs:element ref="Expr"/>
-                <xs:element ref="Plex"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="directive.type">
-        <xs:group ref="directive.content"/>
-        <xs:attributeGroup ref="directive.attlist"/>
-    </xs:complexType>
-    <xs:element name="directive" type="directive.type"/>
-    <!--
-     *** sender ***
-     *** receiver ***
-     
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-sender
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-receiver
--->
-    <xs:attributeGroup name="sender.attlist">
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="sender.content">
-        <xs:sequence>
-            <xs:choice>
-                <xs:element ref="Agent"/>
-                <xs:element ref="Ind"/>
-                <xs:element ref="Data"/>
-                <xs:element ref="Var"/>
-                <xs:element ref="Expr"/>
-                <xs:element ref="Plex"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="sender.type">
-        <xs:group ref="sender.content"/>
-        <xs:attributeGroup ref="sender.attlist"/>
-    </xs:complexType>
-    <xs:element name="sender" type="sender.type"/>
-    <xs:element name="receiver" type="sender.type"/>
-    <!--
-     *** content ***
-     
-     @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
-     	See CURIE to IRI and term to IRI translation
-     	
-     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
-    -->
-    <xs:attributeGroup name="message_anycontent.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="message_anycontent.content">
-        <xs:choice>
-            <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="message_anycontent.type">
-        <xs:group ref="message_anycontent.content"/>
-        <xs:attributeGroup ref="message_anycontent.attlist"/>
-    </xs:complexType>
-    <!--
-    *** @mode ***
-
-     restriction: inbound | outbound  ; 
-	 optional attribute
--->
-    <xs:attributeGroup name="message-mode.attrib">
-        <xs:attribute name="mode" use="optional">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="inbound"/>
-                    <xs:enumeration value="outbound"/>
-                    <xs:enumeration value="bidirectional"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-    </xs:attributeGroup>
-    <!--
-      *** Send and Receive ***
-      Send  and Receive performative / action
-      
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Send
-      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Receive
-
-    -->
-    <xs:attributeGroup name="Send.attlist">
-        <xs:attributeGroup ref="action-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Send.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice maxOccurs="unbounded" minOccurs="0">
-                <xs:element ref="enclosed"/>
-                <xs:element ref="Message"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Send.type">
-        <xs:group ref="Send.content"/>
-        <xs:attributeGroup ref="Send.attlist"/>
-    </xs:complexType>
-    <xs:element name="Send" type="Send.type"/>
-    <xs:attributeGroup name="Receive.attlist">
-        <xs:attributeGroup ref="action-interface.attlist"/>
-        <xs:attributeGroup ref="node-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="Receive.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice maxOccurs="unbounded" minOccurs="0">
-                <xs:element ref="enclosed"/>
-                <xs:element ref="Message"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:group>
-    <xs:complexType name="Receive.type">
-        <xs:group ref="Receive.content"/>
-        <xs:attributeGroup ref="Receive.attlist"/>
-    </xs:complexType>
-    <xs:element name="Receive" type="Receive.type"/>
-    <!--
-     *** enclosed ***
-     
-     Definition of the the enclosed role for Send and Receive actions
-      
-	-->
-    <xs:attributeGroup name="enclosed.attlist">
-        <xs:attributeGroup ref="edge-element.attlist"/>
-        <xs:attributeGroup ref="xml.attlist"/>
-    </xs:attributeGroup>
-    <xs:group name="enclosed.content">
-        <xs:choice>
-            <xs:element ref="Message"/>
-        </xs:choice>
-    </xs:group>
-    <xs:complexType name="enclosed.type">
-        <xs:group ref="enclosed.content"/>
-        <xs:attributeGroup ref="enclosed.attlist"/>
-    </xs:complexType>
-    <xs:element name="enclosed" type="enclosed.type"/>
+    <!-- include test suites   -->
     <xs:annotation>
         <xs:documentation xml:lang="en">        Test and Proof module part of Reaction RuleML.
             This is the XML Schema Test module for Reaction RuleML.    File: test_module.xsd
@@ -4900,20 +3588,21 @@
     
      content model:
      
-     in CEP Reaction RuleML:      
-     (on | if | then | do | after | else | elseDo)*
+     in PR Reaction RuleML: 
+     
+     ((elseDo?, do, if) | (if, do, elseDo?)	| (if.content, do.content, do.content?))
           
 	-->
     <xs:group name="rule-implementation.content">
         <xs:choice>
-            <xs:group ref="MessagingRule.content"/>
+            <xs:group ref="ProductionRule.content"/>
         </xs:choice>
     </xs:group>
     <!--
          
      An internal group for the query connectives in the Reaction RuleML language
     
-     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Equal)
           
 	-->
     <xs:group name="query-connective.content">
@@ -4923,7 +3612,6 @@
             <xs:element name="Or" type="Or-query.type"/>
             <xs:element ref="Negation"/>
             <xs:element ref="Naf"/>
-            <xs:element ref="Neg"/>
             <xs:element ref="Equal"/>
         </xs:choice>
     </xs:group>
@@ -4932,14 +3620,12 @@
      An internal group for the rulebase connectives in the Reaction RuleML language
     
     
-     content model: (Operation | Negation | Neg | Equal )
+     content model: (Operation | Equal )
           
 	-->
     <xs:group name="rulebase-connective.content">
         <xs:choice>
             <xs:element name="Operation" type="Operation-formula-rulebase.type"/>
-            <xs:element ref="Negation"/>
-            <xs:element ref="Neg"/>
             <xs:element ref="Equal"/>
         </xs:choice>
     </xs:group>
@@ -4948,7 +3634,7 @@
      An internal group for the body connectives in the Reaction RuleML language
     
     
-     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+     content model: (Operation | And | Or | Negation | Naf | Equal)
           
 	-->
     <xs:group name="body-connective.content">
@@ -4958,7 +3644,6 @@
             <xs:element name="Or" type="Or-body.type"/>
             <xs:element ref="Negation"/>
             <xs:element ref="Naf"/>
-            <xs:element ref="Neg"/>
             <xs:element ref="Equal"/>
         </xs:choice>
     </xs:group>
@@ -4966,14 +3651,12 @@
          
      An internal group for the head connectives in the Reaction RuleML language
     
-     content model: (Operation | Negation | Neg | Equal)
+     content model: (Operation | Equal )
           
 	-->
     <xs:group name="head-connective.content">
         <xs:choice>
             <xs:element name="Operation" type="Operation-formula-and-or.type"/>
-            <xs:element ref="Negation"/>
-            <xs:element ref="Neg"/>
             <xs:element ref="Equal"/>
         </xs:choice>
     </xs:group>
@@ -4981,7 +3664,7 @@
          
      An internal group for the query quantifiers in the Reaction RuleML language
     
-     content model: ( Exists )
+     content model: (Exists )
           
 	-->
     <xs:group name="query-quantifier.content">
@@ -5021,9 +3704,9 @@
          
      An internal group for the head quantifiers in the Reaction RuleML language
 	 
-	  Quantifiers can be defined internally in the <quantification> too 
+	 PR Reaction RuleML does not allow head quantifiers - Quantifiers are defined internally in the <quantification>    
     
-     content model: ( Forall )
+     content model: (  )
           
 	-->
     <xs:group name="head-quantifier.content">
@@ -5048,25 +3731,19 @@
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
     
-    content model: (Atom | Time | Spatial | Interval | Event | Action | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation))
+    content model: (Atom)
           
 	-->
     <xs:group name="extended-signature-predicate-sorts.content">
         <xs:choice>
             <xs:element name="Atom" type="Atom.type"/>
-            <xs:element name="Time" type="Time-formula.type"/>
-            <xs:element name="Spatial" type="Spatial-formula.type"/>
-            <xs:element name="Interval" type="Interval-formula.type"/>
-            <xs:group ref="interval_algebra_group.content"/>
-            <xs:element name="Event" type="Event-formula.type"/>
-            <xs:element name="Action" type="Action-formula.type"/>
         </xs:choice>
     </xs:group>
     <!--
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
     
-		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | (After | Before | Any | Every | Timer | Operation))
+		content model: (Ind | Data | Expr | Plex)
           
 	-->
     <xs:group name="extended-signature-function-sorts.content">
@@ -5075,80 +3752,59 @@
             <xs:element ref="Data"/>
             <xs:element ref="Expr"/>
             <xs:element ref="Plex"/>
-            <xs:element name="Time" type="Time-term.type"/>
-            <xs:element name="Spatial" type="Spatial-term.type"/>
-            <xs:element name="Interval" type="Interval-term.type"/>
-            <xs:element name="Event" type="Event-term.type"/>
-            <xs:element name="Action" type="Action-term.type"/>
-            <xs:group ref="spatial_temporal_algebra_group.content"/>
         </xs:choice>
     </xs:group>
     <!-- An internal group for the time primitives for interpretation as time
 		content model: 
 
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action) 
+		not used in PR RuleML (only in combination with spatio-temporal DR RuleML)
 
 	-->
     <xs:group name="time_primitives.content">
-        <xs:choice>
-            <xs:group ref="arg.content"/>
-        </xs:choice>
+        <xs:choice> </xs:choice>
     </xs:group>
     <!-- An internal group for the spatial primitives for interpretation as spatial
 		content model: 
 
-		in CEP Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
+		not used in PR RuleML (only in combination with spatio-temporal DR RuleML)
 
 	-->
     <xs:group name="spatial_primitives.content">
-        <xs:choice>
-            <xs:group ref="arg.content"/>
-        </xs:choice>
+        <xs:choice> </xs:choice>
     </xs:group>
     <!-- Interval primitives
 		content model: 
 		
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)   
+		not used in PR RuleML (only in combination with spatio-temporal DR RuleML)
 	-->
     <xs:group name="interval_primitives.content">
-        <xs:choice>
-            <xs:group ref="arg.content"/>
-        </xs:choice>
+        <xs:choice> </xs:choice>
     </xs:group>
     <!-- An internal group for the situation primitives for interpretation as situation
 		content model: 
 		
-
+		not used in PR RuleML (only in combination with KR RuleML)
 	-->
     <xs:group name="situation_primitives.content">
         <xs:choice> </xs:choice>
     </xs:group>
     <!-- An internal group for the event primitives for interpretation as event
 		content model: 
-		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )		
+		not used in PR RuleML (only in combination with KR RuleML or ECA/CEP RuleML)
 	-->
     <xs:group name="event_primitives.content">
-        <xs:choice>
-            <xs:group ref="arg.content"/>
-        </xs:choice>
+        <xs:choice> </xs:choice>
     </xs:group>
     <!-- An internal group for events
 		content model:
-		in CEP Reaction RuleML:  ( Receive | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
-	-->
+		not used in PR RuleML (only in combination with KR RuleML or ECA/CEP RuleML)-->
     <xs:group name="event_group.content">
-        <xs:choice>
-            <xs:element name="Event" type="Event-formula.type"/>
-            <xs:element name="Action" type="Action-formula.type"/>
-            <xs:element ref="Receive"/>
-            <xs:element ref="Answer"/>
-            <xs:group ref="event_algebra_group.content"/>
-        </xs:choice>
+        <xs:choice> </xs:choice>
     </xs:group>
     <!-- An internal group for the action primitives for interpretation as action
 		content model: 
 		
-		in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )
+		in PR Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr )
 	-->
     <xs:group name="action_primitives.content">
         <xs:choice>
@@ -5157,56 +3813,51 @@
     </xs:group>
     <!-- An internal group for actions
 		content model:
-		CEP Reaction RuleML (Send | Consult | Assert | Retract | Update | Query | Test | Action | Succession | Choice | Flow | Loop | Operation )-->
+		PR Reaction RuleML (Assert | Retract | Update | Consult | Query | Answer | Test | Action | Succession | Choice | Flow | Loop | Operation )-->
     <xs:group name="action_group.content">
         <xs:choice>
             <xs:element ref="Assert"/>
             <xs:element ref="Retract"/>
             <xs:element ref="Update"/>
+            <xs:element ref="Consult"/>
             <xs:element name="Action" type="Action-formula.type"/>
             <xs:element ref="Query"/>
-            <xs:element ref="Send"/>
-            <xs:element ref="Consult"/>
+            <xs:element ref="Answer"/>
             <xs:element ref="Test"/>
             <xs:group ref="action_algebra_group.content"/>
         </xs:choice>
     </xs:group>
     <!-- An internal group for the imports of the consult primitive
 		content model: 
-		in DR Reaction RuleML: ((payload | RuleML | Reify | Var) | (enclosed | Message))
+		in PR Reaction RuleML: (payload | RuleML | Reify | Var)
 	-->
     <xs:group name="consult_imports.content">
         <xs:choice>
             <xs:element ref="payload"/>
             <xs:group ref="payload.content"/>
-            <xs:element ref="enclosed"/>
-            <xs:element ref="Message"/>
         </xs:choice>
     </xs:group>
     <!-- An internal group for the performative primitives
 		content model: 
-		in CEP Reaction RuleML: (Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)
+		in PR Reaction RuleML: (Assert|Retract|Update|Consult|Query|Answer|Test|Action)
 	-->
     <xs:group name="performative_primitives.content">
         <xs:choice>
             <xs:element ref="Assert"/>
             <xs:element ref="Retract"/>
             <xs:element ref="Update"/>
+            <xs:element ref="Consult"/>
+            <xs:element name="Action" type="Action-formula.type"/>
             <xs:element ref="Query"/>
             <xs:element ref="Answer"/>
             <xs:element ref="Test"/>
-            <!-- for test-driven verification, validation and integrity testing -->
-            <xs:element ref="Send"/>
-            <xs:element ref="Receive"/>
-            <xs:element name="Action" type="Action-formula.type"/>
-            <xs:element ref="Consult"/>
         </xs:choice>
     </xs:group>
     <!--
     *** @style ***
     
      restriction: active | messaging | reasoning
-	 default value: active (in CEP Reaction RuleML)
+	 default value: active (in PR Reaction RuleML)
 	 optional attribute
 -->
     <xs:attributeGroup name="style.attrib">

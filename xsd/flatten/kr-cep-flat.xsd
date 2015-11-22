@@ -60,11 +60,6 @@
             <dc:relation>http://reaction.ruleml.org</dc:relation>
         </xs:appinfo>
     </xs:annotation>
-	
-	
-	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
-		schemaLocation="../modules/xml_module.xsd"/>
-	
     <!--
 		*** RuleML ***
 		The n-ary top-level of a RuleML document.
@@ -1576,30 +1571,7 @@
         <xs:attributeGroup ref="Reify.attlist"/>
     </xs:complexType>
     <xs:element name="Reify" type="Reify.type"/>
-    <xs:annotation>
-        <xs:documentation xml:lang="en">              This is the XML Schema currie module for
-            Reaction RuleML.       File: currie_module.xsd       Version: 1.02       Last
-            Modification: 2015-03-30              This module declares the datatypes supporting
-            CURRIEs             </xs:documentation>
-        <xs:appinfo>
-            <dc:title>RuleML Schema</dc:title>
-            <dc:version>1.02</dc:version>
-            <dc:creator>Adrian Paschke (paschke AT gmx.de)</dc:creator>
-            <dc:subject>RuleML, custom-built for Reaction RuleML 1.02</dc:subject>
-            <dc:description>custom-built main module for Reaction RuleML</dc:description>
-            <dc:date>2015-03-30T23:11:17-0300</dc:date>
-            <dc:language>en</dc:language>
-            <dc:rights>'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification
-                License, Version 1.0 (the "License"); you may not use this file except in compliance
-                with the License. You may obtain a copy of the License at
-                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS
-                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF
-                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing
-                permissions and limitations under the License.</dc:rights>
-            <dcterms:rights>http://ruleml.org/licensing/RSL1.0-RuleML</dcterms:rights>
-            <dc:relation>http://reaction.ruleml.org</dc:relation>
-        </xs:appinfo>
-    </xs:annotation>
+
     <xs:simpleType name="curieOrIRI.datatype">
         <xs:union memberTypes="curie.datatype xs:anyURI"/>
     </xs:simpleType>
@@ -2444,8 +2416,6 @@
         <xs:attributeGroup ref="prefix.attrib"/>
         <xs:attributeGroup ref="key.attrib"/>
         <xs:attributeGroup ref="keyref.attrib"/>
-        <xs:attribute ref="xml:base" use="optional"/>
-        <xs:attribute ref="xml:id" use="optional"/>
     </xs:attributeGroup>
     <!-- 
  
@@ -3186,7 +3156,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -3201,9 +3170,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
                     type="time_anycontent.type"/>
@@ -3227,7 +3196,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -3242,9 +3210,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
                     type="time_anycontent.type"/>
@@ -3348,7 +3316,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -3364,9 +3331,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
                     type="spatial_anycontent.type"/>
@@ -3390,7 +3357,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -3406,9 +3372,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="content"
                     type="spatial_anycontent.type"/>
@@ -3886,7 +3852,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -3902,9 +3867,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="situation_anycontent.type"/>
             </xs:choice>
@@ -3927,7 +3892,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -3943,9 +3907,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="situation_anycontent.type"/>
             </xs:choice>
@@ -4227,7 +4191,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -4243,9 +4206,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="fluent_anycontent.type"/>
             </xs:choice>
@@ -4269,7 +4232,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -4285,9 +4247,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="fluent_anycontent.type"/>
             </xs:choice>
@@ -4437,7 +4399,6 @@
             <xs:choice minOccurs="0">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="slot"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -4452,9 +4413,9 @@
                                 <xs:element ref="repo"/>
                             </xs:choice>
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="slot"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="action_anycontent.type"/>
             </xs:choice>
@@ -4477,7 +4438,6 @@
             <xs:choice minOccurs="0">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="slot"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -4492,9 +4452,9 @@
                                 <xs:element ref="repo"/>
                             </xs:choice>
                             <xs:element maxOccurs="unbounded" minOccurs="0" ref="slot"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="action_anycontent.type"/>
             </xs:choice>
@@ -4641,7 +4601,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -4657,9 +4616,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="event_anycontent.type"/>
             </xs:choice>
@@ -4683,7 +4642,6 @@
                 <xs:sequence>
                     <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="slot"
                         type="slot.type"/>
-                    <xs:element minOccurs="0" ref="resl"/>
                     <xs:choice minOccurs="0">
                         <xs:sequence>
                             <xs:choice>
@@ -4699,9 +4657,9 @@
                             </xs:choice>
                             <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0"
                                 name="slot" type="slot.type"/>
-                            <xs:element minOccurs="0" ref="resl"/>
                         </xs:sequence>
                     </xs:choice>
+                    <xs:element minOccurs="0" ref="resl"/>
                 </xs:sequence>
                 <xs:element form="qualified" name="content" type="event_anycontent.type"/>
             </xs:choice>

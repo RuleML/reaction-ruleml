@@ -59,7 +59,6 @@
 			<xs:choice minOccurs="0">
 				<xs:sequence>
 					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element ref="resl" minOccurs="0"/>
 					<xs:choice minOccurs="0">
 						<xs:sequence>
 						<xs:choice>
@@ -73,9 +72,9 @@
 							<xs:element ref="repo"/>
 						</xs:choice>
 						<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:element ref="resl" minOccurs="0"/>
 						</xs:sequence>
 					</xs:choice>
+					<xs:element ref="resl" minOccurs="0"/>
 				</xs:sequence>
 				<xs:element name="content" type="spatial_anycontent.type" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:choice>
@@ -100,7 +99,6 @@
 			<xs:choice minOccurs="0">
 				<xs:sequence>
 					<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
-					<xs:element ref="resl" minOccurs="0"/>
 					<xs:choice minOccurs="0">
 						<xs:sequence>
 							<xs:choice>
@@ -114,9 +112,9 @@
 								<xs:element ref="repo"/>
 							</xs:choice>
 							<xs:element name="slot" type="slot.type" minOccurs="0" maxOccurs="unbounded"/>
-							<xs:element ref="resl" minOccurs="0"/>
 						</xs:sequence>
 					</xs:choice>
+					<xs:element ref="resl" minOccurs="0"/>
 				</xs:sequence>
 				<xs:element name="content" type="spatial_anycontent.type" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:choice>

@@ -49,7 +49,7 @@
   <xs:group name="Atom-repo.extend">
     <xs:choice>
       <xs:group ref="Atom-arg.extend"/>
-        <xs:element ref="repo"/>
+       <xs:element ref="repo"/>
     </xs:choice>
   </xs:group>
   <xs:group name="Atom-arg.extend">

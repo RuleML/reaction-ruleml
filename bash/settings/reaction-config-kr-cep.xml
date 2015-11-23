@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <schemaSystemId>file:/Users/taraathan/Repositories/RuleML/Github/reaction-ruleml/xsd/kr-eca.xsd</schemaSystemId>
+  <documentRoot>Assert</documentRoot>
+  <outputFolder>/Users/taraathan/Repositories/RuleML/Github/reaction-ruleml/xsd</outputFolder>
+  <filenamePrefix>instance</filenamePrefix>
+  <filenameExtension>ruleml</filenameExtension>
+  <noOfInstances>1</noOfInstances>
+  <openFirstInstance>false</openFirstInstance>
+  <defaultNamespace>&lt;NO_NAMESPACE></defaultNamespace>
+  <valuesMaxLength>30</valuesMaxLength>
+  <isUseIncrementalNamesForValues>true</isUseIncrementalNamesForValues>
+  <discardOptionalElementsAfterNestedLevel>6</discardOptionalElementsAfterNestedLevel>
+  <namespaceMapping ns="http://ruleml.org/spec" proxy="ruleml"/>
+  <namespaceMapping ns="http://www.w3.org/1999/xhtml/datatypes/" proxy="xh11d"/>
+  <namespaceMapping ns="http://purl.org/dc/terms/" proxy="dcterms"/>
+  <namespaceMapping ns="http://purl.org/dc/elements/1.1/" proxy="dc"/>
+  <element namespace="&lt;ANY>" name="&lt;ANY>">
+    <generateOptionalElements>true</generateOptionalElements>
+    <generateOptionalAttributes>false</generateOptionalAttributes>
+    <valuesForContentType>RANDOM</valuesForContentType>
+    <preferredNumberOfRepetitions>2</preferredNumberOfRepetitions>
+    <maximumRecursivityLevel>1</maximumRecursivityLevel>
+    <alternativeStrategy>FIRST</alternativeStrategy>
+    <choicesAndSubstitutions strategy="RANDOM" generateOthersAsComments="false"/>
+    <attribute namespace="&lt;ANY>" name="&lt;ANY>">
+    </attribute>
+    <attribute namespace="&lt;NO_NAMESPACE>" name="key">
+    </attribute>
+  </element>
+</settings>

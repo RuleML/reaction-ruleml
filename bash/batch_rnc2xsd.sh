@@ -25,7 +25,7 @@ do
   filename=$(basename "$f")
   #extension="${filename##*.}"
   filenameNE="${filename%.*}"
-  "${BASH_HOME}rnc2xsd.sh" "$f" "${XSD_HOME}""$filenameNE".xsd "{$simplify}" "{$finish}"
+  "${BASH_HOME}rnc2xsd.sh" "$f" "${XSD_HOME}""$filenameNE".xsd "${simplify}" "${finish}"
 done
 # temporary exit
 #exit 2

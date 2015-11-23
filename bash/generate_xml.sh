@@ -5,34 +5,41 @@
 #
 shopt -s nullglob
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
-if [[ ${INSTANCE_HOME} ]]; then rm "{INSTANCE_HOME}"*.ruleml  >> /dev/null 2>&1; fi
+echo "${INSTANCE_HOME}"
+if [[ ${INSTANCE_HOME} ]]; then rm "${INSTANCE_HOME}"*.ruleml  >> /dev/null 2>&1; fi
 
 #   use oxygen to generate XML instances according to the configuration file for the generated xsd schema
 "$GENERATE_SCRIPT" "$REACTION_CONFIG"
 
 # Apply XSLT transforamtions
 # transform in place for files in INSTANCE_HOME
-# FIXME write an aux script for the xslt call
 for f in "${INSTANCE_HOME}"*.ruleml
 do
   filename=$(basename "${f}")
+  fnew="${INSTANCE_HOME}proc-${filename}"
   echo "Transforming ${filename}"
-  "${BASH_HOME}aux_xslt.sh" "${f}" "${XSLT_HOME}instance-postprocessor/1.02_instance-postprocessor.xslt" "${f}"
+  "${BASH_HOME}aux_xslt.sh" "${f}" "${XSLT_HOME}instance-postprocessor/1.02_instance-postprocessor.xslt" "${fnew}"
   if [[ "$?" -ne "0" ]]; then
      echo "XSLT Transformation Failed for " "${filename}"
      exit 1
    fi
 done
 
-schemaname="kr-cep.xsd"
-sxfile="${XSD_HOME}${schemaname}" 
-for file in "${INSTANCE_HOME}"*.ruleml 
+schemaname="kr-cep"
+sxfile="${XSD_HOME}${schemaname}.xsd" 
+srfile="${RNC_HOME}${schemaname}.rnc" 
+for file in "${INSTANCE_HOME}"proc-*.ruleml 
 do
   filename=$(basename "${file}")
   echo "File ${filename}"
   "${BASH_HOME}aux_valxsd.sh" "${sxfile}" "${file}"
   if [[ "$?" -ne "0" ]]; then
-          echo "Validation Failed for ${file}"
+          echo "XSD Validation Failed for ${file}"
           exit 1
   fi       
+  #"${BASH_HOME}aux_valrnc.sh" "${srfile}" "${file}"
+  #if [[ "$?" -ne "0" ]]; then
+  #        echo "RNC Validation Failed for ${file}"
+  #        exit 1
+  #fi       
 done

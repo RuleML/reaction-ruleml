@@ -230,10 +230,10 @@ Update.attlist =
 Update.content =
   meta-roles.content,
   degree?,
-  (element formula { formula-assert.type }
+  ((element formula { formula-assert.type }
    | formula-assert.content),
   (element formula { formula-assert.type }
-   | formula-assert.content)?
+   | formula-assert.content)?)?
 Update.type = Update.content, Update.attlist
 start |= Update
 Update = element Update { Update.type }
@@ -717,11 +717,11 @@ then = element then { then.type }
 Entails.attlist =
   group-formula-interface.attlist, node-element.attlist, xml.attlist
 Entails.content =
-  meta-roles.content,
+  meta-roles.content,(
   (element if { if-entails.type }
    | if-entails.content),
   (element then { then-entails.type }
-   | then-entails.content)
+   | then-entails.content))?
 Entails.type = Entails.content, Entails.attlist
 start |= Entails
 Entails = element Entails { Entails.type }
@@ -738,8 +738,8 @@ Equivalent.attlist =
 Equivalent.content =
   meta-roles.content,
   degree?,
-  (torso | torso.content),
-  (torso | torso.content)
+  ((torso | torso.content),
+  (torso | torso.content))?
 Equivalent.type = Equivalent.content, Equivalent.attlist
 start |= Equivalent
 Equivalent = element Equivalent { Equivalent.type }
@@ -2618,12 +2618,12 @@ Interval-formula.attlist =
 Interval-formula.content =
   meta-roles.content,
   degree?,
-  (arg_interval
+  ((arg_interval
    | element content { interval_anycontent.type }
    | arg_interval.content),
   (arg_interval
    | element content { interval_anycontent.type }
-   | arg_interval.content)?
+   | arg_interval.content)?)?
 Interval-formula.type =
   Interval-formula.content, Interval-formula.attlist
 # Interval term
@@ -2631,10 +2631,10 @@ Interval-term.attlist =
   term-interface.attlist, node-element.attlist, xml.attlist
 Interval-term.content =
   meta-roles.content,
-  (arg_interval
+  ((arg_interval
    | arg_interval.content),
   (arg_interval
-   | arg_interval.content)?
+   | arg_interval.content)?)?
 Interval-term.type = Interval-term.content, Interval-term.attlist
 # *** arg ***
 # 
@@ -2815,10 +2815,10 @@ IntervalAlgebraOperator.attlist =
 IntervalAlgebraOperator.content =
   meta-roles.content,
   degree?,
-  (arg_interval
+  ((arg_interval
    | arg_interval.content),
   (arg_interval
-   | arg_interval.content)
+   | arg_interval.content))?
 IntervalAlgebraOperator.type =
   IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
 start |= During
@@ -3035,7 +3035,7 @@ fluent = element fluent { fluent.type }
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Do
 Do.attlist = term-interface.attlist, node-element.attlist, xml.attlist
-Do.content = meta-roles.content, (do), (at)?
+Do.content = meta-roles.content, ((do), (at)?)?
 Do.type = Do.content, Do.attlist
 start |= Do
 Do = element Do { Do.type }
@@ -3052,7 +3052,7 @@ Do = element Do { Do.type }
 # The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
 Happens.attlist =
   formula-interface.attlist, node-element.attlist, xml.attlist
-Happens.content = meta-roles.content, (on), (at)?
+Happens.content = meta-roles.content, ((on), (at)?)?
 Happens.type = Happens.content, Happens.attlist
 start |= Happens
 Happens = element Happens { Happens.type }
@@ -3061,7 +3061,7 @@ Happens = element Happens { Happens.type }
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Initiates 
 Initiates.attlist =
   formula-interface.attlist, node-element.attlist, xml.attlist
-Initiates.content = meta-roles.content, (on), (fluent), (at)?
+Initiates.content = meta-roles.content, ((on), (fluent), (at)?)?
 Initiates.type = Initiates.content, Initiates.attlist
 start |= Initiates
 Initiates = element Initiates { Initiates.type }
@@ -3070,7 +3070,7 @@ Initiates = element Initiates { Initiates.type }
 #	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Terminates
 Terminates.attlist =
   formula-interface.attlist, node-element.attlist, xml.attlist
-Terminates.content = meta-roles.content, (on), (fluent), (at)?
+Terminates.content = meta-roles.content, ((on), (fluent), (at)?)?
 Terminates.type = Terminates.content, Terminates.attlist
 start |= Terminates
 Terminates = element Terminates { Terminates.type }
@@ -3085,7 +3085,7 @@ Terminates = element Terminates { Terminates.type }
 #	  The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
 Holds.attlist =
   formula-interface.attlist, node-element.attlist, xml.attlist
-Holds.content = meta-roles.content, (fluent), (at)?
+Holds.content = meta-roles.content, ((fluent), (at)?)?
 Holds.type = Holds.content, Holds.attlist
 start |= Holds
 Holds = element Holds { Holds.type }
@@ -3583,7 +3583,7 @@ Concurrent = element Concurrent { EventAlgebraOperator.type }
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Not 
 Not.attlist = EventAlgebraOperator.attlist
-Not.content = meta-roles.content, (on), (at)
+Not.content = meta-roles.content, ((on), (at))?
 Not.type = Not.content, Not.attlist
 start |= Not
 Not = element Not { Not.type }
@@ -3909,9 +3909,9 @@ TestItem.attlist =
   group-formula-interface.attlist, node-element.attlist, xml.attlist
 TestItem.content =
   meta-roles.content,
-  (element do { act.type }
+  ((element do { act.type }
    | act.content),
-  (expectedResult | expectedResult.content)
+  (expectedResult | expectedResult.content))?
 TestItem.type = TestItem.content, TestItem.attlist
 start |= TestItem
 TestItem = element TestItem { TestItem.type }

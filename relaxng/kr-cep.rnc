@@ -1,4 +1,4 @@
-default namespace = "http://ruleml.org/spec"
+default namespace ruleml = "http://ruleml.org/spec"
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace a0 = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace a1 = "http://relaxng.org/ns/compatibility/annotations/1.0"
@@ -7,6 +7,7 @@ namespace a3 = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace dc = "http://purl.org/dc/elements/1.1/"
 namespace dcterms = "http://purl.org/dc/terms/"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
+namespace xsi = "http://www.w3.org/2001/XMLSchema-instance"
 
 a:documentation [
   "\x{a}" ~
@@ -674,7 +675,7 @@ Implies.attlist =
 Implies.content =
   meta-roles.content,
   degree?,
-  (then | if | if | then | if.content | then.content)?
+  ((then , if) | (if , then) | (if.content , then.content))?
 Implies.type = Implies.content, Implies.attlist
 start |= Implies
 Implies = element Implies { Implies.type }
@@ -920,7 +921,7 @@ Operation-term.type = Operation-term.content, Operation-term.attlist
 # @prefix is used to define a prefix and a term mapping vocabulary for the XML content
 # See CURIE to IRI and term to IRI translation
 operation_anycontent.attlist = edge-element.attlist, xml.attlist
-operation_anycontent.content = element * { text }*
+operation_anycontent.content = any_content
 operation_anycontent.type =
   operation_anycontent.content, operation_anycontent.attlist
 # note that elementFormDefault is qualified because of local declarations
@@ -986,19 +987,17 @@ Atom.attlist =
 # These .extend groups, pointed to by Atom.content, are necessary
 # for redefinition to be binary in bindatalog and to add rest
 # variables in hornlog.
-Atom-repo.extend = Atom-arg.extend | repo
-Atom-arg.extend = (arg | arg.content)+, repo?
-Atom-slots.extend1 = element slot { slot.type }*
-Atom-slots.extend2 = resl?
 Atom.content =
   meta-roles.content,
   degree?,
   (# operator optional for frame representation
    element op { op-atom.type }
    | op-atom.content)?,
-  Atom-slots.extend1,
-  (Atom-repo.extend | Atom-slots.extend1)?,
-  Atom-slots.extend2
+  slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?
 Atom.type = Atom.content, Atom.attlist
 start |= Atom
 Atom = element Atom { Atom.type }
@@ -1208,7 +1207,12 @@ Reify.content =
   # <Reify> only allows valid RuleML
   
   # <xs:any minOccurs="0" maxOccurs="unbounded" processContents="strict" namespace="##targetNamespace"/>
-  element * { text }?
+  AnyThis.def?
+AnyThis.def =
+  element ruleml:* {
+    attribute * { text }*,
+    (text & AnyThis.def*)
+  }
 Reify.type = Reify.content, Reify.attlist
 start |= Reify
 Reify = element Reify { Reify.type }
@@ -1302,10 +1306,11 @@ Expr.content =
   meta-roles.content,
   (element op { op-Expr.type }
    | op-Expr.content)?,
-  element slot { slot.type }*,
-  (((arg | arg.content)+ | repo? | repo)
-   | element slot { slot.type }*)?,
-  resl?
+  slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?
 Expr.type =
   # <xs:annotation>
   #	<xs:appinfo>
@@ -1361,19 +1366,15 @@ Fun = element Fun { Fun.type }
 Plex.attlist = term-interface.attlist, node-element.attlist, xml.attlist
 Plex.content =
   meta-roles.content,
-  element slot { slot.type }*,
-  ((arg | arg.content)+
-   | repo?
-   | element slot { slot.type }*
-   | resl?
-   | repo
-   | element slot { slot.type }*
-   | resl?
-   | resl)?
+  slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?
 Plex-repo.content = meta-roles.content, (arg | arg.content)*, repo?
 Plex-resl.content =
   meta-roles.content,
-  element slot { slot.type }*,
+  slot*,
   resl?
 Plex.type = Plex.content, Plex.attlist
 Plex-repo.type = Plex-repo.content, Plex.attlist
@@ -1525,11 +1526,11 @@ Equal.attlist =
 Equal.content =
   meta-roles.content,
   degree?,
-  (left
-   | right
+  ((left
+   , right)
    | # note that (right, left) is disallowed
-     left.content
-   | right.content)?
+     (left.content
+   , right.content))?
 Equal.type = Equal.content, Equal.attlist
 start |= Equal
 Equal = element Equal { Equal.type }
@@ -1812,20 +1813,27 @@ oriented.attrib = attribute oriented { "yes" | "no" }?
 # 
 # @key and @keyref attributes for local syntactic modularization of the knowledge base
 #
-xml.attlist = prefix.attrib, key.attrib, keyref.attrib
+xml.attlist =
+  prefix.attrib?,
+  key.attrib?,
+  keyref.attrib?,
+  attribute xml:base { text }?,
+  attribute xml:id { text }?
+#
+xsi.attrib =  attribute xsi:schemaLocation { text }?
 # 
 # a group of attributes for all XML node elements (type elements) in Reaction RuleML
 # 
 # @meta?, @qualify?, @node?, @iri?, @vocab?
 #
 node-element.attlist =
-  node.attrib, iri.attrib, vocab.attrib, meta.attrib, qualify.attrib
+  node.attrib, iri.attrib, vocab.attrib, meta.attrib, qualify.attrib, xsi.attrib
 # 
 # a group of attributes for all XML edge elements (role elements) in Reaction RuleML
 # 
 # @index?
 #
-edge-element.attlist = index.attrib
+edge-element.attlist = index.attrib, xsi.attrib
 # 
 # a group of attributes for the meta knowledge interface of all grouping formulas in Reaction RuleML
 # 
@@ -2317,7 +2325,7 @@ Profile = element Profile { Profile.type }
 # 
 # the optional @prefix and @vocab are used to define a prefix and a term mapping vocabulary for the XML content (see CURIE to IRI and term to IRI translation)
 profile_anycontent.attlist = xml.attlist
-profile_anycontent.content = element * { text }*
+profile_anycontent.content = any_content
 profile_anycontent.type =
   profile_anycontent.content, profile_anycontent.attlist
 a:documentation [
@@ -2399,13 +2407,11 @@ Time-formula.attlist =
 Time-formula.content =
   meta-roles.content,
   degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_time.type }
-        | arg_time.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_time.content | arg_time)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { time_anycontent.type }*)?
 Time-formula.type = Time-formula.content, Time-formula.attlist
 # Time term
@@ -2413,13 +2419,11 @@ Time-term.attlist =
   term-interface.attlist, node-element.attlist, xml.attlist
 Time-term.content =
   meta-roles.content,
-  (element slot { slot.type }*
-   | (((element arg { arg_time.type }
-        | arg_time.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_time.content | arg_time)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { time_anycontent.type }*)?
 Time-term.type = Time-term.content, Time-term.attlist
 # *** arg ***
@@ -2430,6 +2434,7 @@ Time-term.type = Time-term.content, Time-term.attlist
 arg_time.attlist = edge-element.attlist, xml.attlist
 arg_time.content = time_primitives.content
 arg_time.type = arg_time.content, arg_time.attlist
+arg_time = element arg { arg_time.type }
 # *** content ***
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
@@ -2437,7 +2442,7 @@ arg_time.type = arg_time.content, arg_time.attlist
 # @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
 #    See CURIE to IRI and term to IRI translation
 time_anycontent.attlist = edge-element.attlist, xml.attlist
-time_anycontent.content = element * { text }*
+time_anycontent.content = any_content
 time_anycontent.type = time_anycontent.content, time_anycontent.attlist
 a:documentation [
   "\x{a}" ~
@@ -2507,13 +2512,11 @@ Spatial-formula.attlist =
 Spatial-formula.content =
   meta-roles.content,
   degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_spatial.type }
-        | arg_spatial.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_spatial.content | arg_spatial)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { spatial_anycontent.type }*)?
 Spatial-formula.type = Spatial-formula.content, Spatial-formula.attlist
 # Spatial term
@@ -2521,13 +2524,11 @@ Spatial-term.attlist =
   term-interface.attlist, node-element.attlist, xml.attlist
 Spatial-term.content =
   meta-roles.content,
-  (element slot { slot.type }*
-   | (((element arg { arg_spatial.type }
-        | arg_spatial.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_spatial.content | arg_spatial)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { spatial_anycontent.type }*)?
 Spatial-term.type = Spatial-term.content, Spatial-term.attlist
 # *** arg ***
@@ -2538,6 +2539,7 @@ Spatial-term.type = Spatial-term.content, Spatial-term.attlist
 arg_spatial.attlist = edge-element.attlist, xml.attlist
 arg_spatial.content = spatial_primitives.content
 arg_spatial.type = arg_spatial.content, arg_spatial.attlist
+arg_spatial = element arg {arg_spatial.type}
 # *** content ***
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
@@ -2545,7 +2547,7 @@ arg_spatial.type = arg_spatial.content, arg_spatial.attlist
 # @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
 #    See CURIE to IRI and term to IRI translation
 spatial_anycontent.attlist = edge-element.attlist, xml.attlist
-spatial_anycontent.content = element * { text }*
+spatial_anycontent.content = any_content
 spatial_anycontent.type =
   spatial_anycontent.content, spatial_anycontent.attlist
 a:documentation [
@@ -2616,10 +2618,10 @@ Interval-formula.attlist =
 Interval-formula.content =
   meta-roles.content,
   degree?,
-  (element arg { arg_interval.type }
+  (arg_interval
    | element content { interval_anycontent.type }
    | arg_interval.content),
-  (element arg { arg_interval.type }
+  (arg_interval
    | element content { interval_anycontent.type }
    | arg_interval.content)?
 Interval-formula.type =
@@ -2629,9 +2631,9 @@ Interval-term.attlist =
   term-interface.attlist, node-element.attlist, xml.attlist
 Interval-term.content =
   meta-roles.content,
-  (element arg { arg_interval.type }
+  (arg_interval
    | arg_interval.content),
-  (element arg { arg_interval.type }
+  (arg_interval
    | arg_interval.content)?
 Interval-term.type = Interval-term.content, Interval-term.attlist
 # *** arg ***
@@ -2642,6 +2644,7 @@ Interval-term.type = Interval-term.content, Interval-term.attlist
 arg_interval.attlist = edge-element.attlist, xml.attlist
 arg_interval.content = interval_primitives.content
 arg_interval.type = arg_interval.content, arg_interval.attlist
+arg_interval = element arg {arg_interval.type}
 # *** content ***
 # 
 #      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
@@ -2650,7 +2653,7 @@ arg_interval.type = arg_interval.content, arg_interval.attlist
 # See CURIE to IRI and term to IRI translation
 #
 interval_anycontent.attlist = edge-element.attlist, xml.attlist
-interval_anycontent.content = element * { text }*
+interval_anycontent.content = any_content
 interval_anycontent.type =
   interval_anycontent.content, interval_anycontent.attlist
 # include spatial-temporal and interval operators from the algebra modules of reaction ruleml
@@ -2759,7 +2762,7 @@ Every.attlist =
   operator-interface.attlist, node-element.attlist, xml.attlist
 Every.content =
   meta-roles.content,
-  (element arg { arg_interval.type }
+  (arg_interval
    | interval_primitives.content
    | element content { interval_anycontent.type })?
 Every.type = Every.content, Every.attlist
@@ -2776,7 +2779,7 @@ Any.attlist =
   operator-interface.attlist, node-element.attlist, xml.attlist
 Any.content =
   meta-roles.content,
-  (element arg { arg_interval.type }+
+  (arg_interval+
    | interval_primitives.content+
    | element content { interval_anycontent.type }+)?
 Any.type = Any.content, Any.attlist
@@ -2812,9 +2815,9 @@ IntervalAlgebraOperator.attlist =
 IntervalAlgebraOperator.content =
   meta-roles.content,
   degree?,
-  (element arg { arg_interval.type }
+  (arg_interval
    | arg_interval.content),
-  (element arg { arg_interval.type }
+  (arg_interval
    | arg_interval.content)
 IntervalAlgebraOperator.type =
   IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
@@ -2919,13 +2922,11 @@ Situation-formula.attlist =
 Situation-formula.content =
   meta-roles.content,
   degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_situation.type }
-        | arg_situation.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_situation.content | arg_situation)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { situation_anycontent.type })?
 Situation-formula.type =
   Situation-formula.content, Situation-formula.attlist
@@ -2934,13 +2935,11 @@ Situation-term.attlist =
   term-interface.attlist, node-element.attlist, xml.attlist
 Situation-term.content =
   meta-roles.content,
-  (element slot { slot.type }*
-   | (((element arg { arg_situation.type }
-        | arg_situation.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_situation.content | arg_situation)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { situation_anycontent.type })?
 Situation-term.type = Situation-term.content, Situation-term.attlist
 # *** arg ***
@@ -2951,6 +2950,7 @@ Situation-term.type = Situation-term.content, Situation-term.attlist
 arg_situation.attlist = edge-element.attlist, xml.attlist
 arg_situation.content = situation_primitives.content
 arg_situation.type = arg_situation.content, arg_situation.attlist
+arg_situation = element arg { arg_situation.type }
 # *** content ***
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
@@ -2958,7 +2958,7 @@ arg_situation.type = arg_situation.content, arg_situation.attlist
 # @prefix ais used to define a prefix and a term mapping vocabulary for the XML content
 #    See CURIE to IRI and term to IRI translation
 situation_anycontent.attlist = edge-element.attlist, xml.attlist
-situation_anycontent.content = element * { text }*
+situation_anycontent.content = any_content
 situation_anycontent.type =
   situation_anycontent.content, situation_anycontent.attlist
 a:documentation [
@@ -3097,13 +3097,11 @@ Fluent-formula.attlist =
 Fluent-formula.content =
   meta-roles.content,
   degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_fluent.type }
-        | arg_fluent.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_fluent.content | arg_fluent)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { fluent_anycontent.type })?
 Fluent-formula.type = Fluent-formula.content, Fluent-formula.attlist
 # Fluent term
@@ -3112,13 +3110,11 @@ Fluent-term.attlist =
 Fluent-term.content =
   meta-roles.content,
   degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_fluent.type }
-        | arg_fluent.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+   ((slot*,
+    ((((arg_fluent.content | arg_fluent)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { fluent_anycontent.type })?
 Fluent-term.type = Fluent-term.content, Fluent-term.attlist
 # *** arg ***
@@ -3129,11 +3125,12 @@ Fluent-term.type = Fluent-term.content, Fluent-term.attlist
 arg_fluent.attlist = edge-element.attlist, xml.attlist
 arg_fluent.content = arg.content
 arg_fluent.type = arg_fluent.content, arg_fluent.attlist
+arg_fluent = element arg { arg_fluent.type }
 # *** content ***
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
 fluent_anycontent.attlist = edge-element.attlist, xml.attlist
-fluent_anycontent.content = element * { text }*
+fluent_anycontent.content = any_content
 fluent_anycontent.type =
   fluent_anycontent.content, fluent_anycontent.attlist
 # include actions from the PR rule layer of reaction ruleml
@@ -3197,6 +3194,7 @@ a:documentation [
 arg_action.attlist = edge-element.attlist, xml.attlist
 arg_action.content = action_primitives.content
 arg_action.type = arg_action.content, arg_action.attlist
+arg_action = element arg { arg_action.type }
 # *** content ***
 # 
 # content model:  xs:any*
@@ -3207,7 +3205,7 @@ arg_action.type = arg_action.content, arg_action.attlist
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
 #
 action_anycontent.attlist = edge-element.attlist, xml.attlist
-action_anycontent.content = element * { text }*
+action_anycontent.content = any_content
 action_anycontent.type =
   action_anycontent.content, action_anycontent.attlist
 #	*** Action ***
@@ -3244,13 +3242,11 @@ Action-formula.attlist =
 Action-formula.content =
   meta-roles.content,
   degree?,
-  (slot*
-   | (((element arg { arg_action.type }
-        | arg_action.content)+
-       | repo?
-       | repo)
-      | slot*)?
-   | resl?
+  (  (slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { action_anycontent.type })?
 Action-formula.type = Action-formula.content, Action-formula.attlist
 # action term
@@ -3261,13 +3257,11 @@ Action-term.attlist =
   xml.attlist
 Action-term.content =
   meta-roles.content,
-  (slot*
-   | (((element arg { arg_action.type }
-        | arg_action.content)+
-       | repo?
-       | repo)
-      | slot*)?
-   | resl?
+  ((slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { action_anycontent.type })?
 Action-term.type = Action-term.content, Action-term.attlist
 a:documentation [
@@ -3451,13 +3445,11 @@ Event-formula.attlist =
 Event-formula.content =
   meta-roles.content,
   degree?,
-  (element slot { slot.type }*
-   | (((element arg { arg_event.type }
-        | arg_event.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_event.content | arg_event)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { event_anycontent.type })?
 Event-formula.type = Event-formula.content, Event-formula.attlist
 # event term
@@ -3468,13 +3460,11 @@ Event-term.attlist =
   xml.attlist
 Event-term.content =
   meta-roles.content,
-  (element slot { slot.type }*
-   | (((element arg { arg_event.type }
-        | arg_event.content)+
-       | repo?
-       | repo)
-      | element slot { slot.type }*)?
-   | resl?
+  ((slot*,
+    ((((arg_event.content | arg_event)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
    | element content { event_anycontent.type })?
 Event-term.type = Event-term.content, Event-term.attlist
 # *** arg ***
@@ -3486,6 +3476,7 @@ Event-term.type = Event-term.content, Event-term.attlist
 arg_event.attlist = edge-element.attlist, xml.attlist
 arg_event.content = event_primitives.content
 arg_event.type = arg_event.content, arg_event.attlist
+arg_event = element arg { arg_event.type }
 # *** content ***
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
@@ -3494,7 +3485,7 @@ arg_event.type = arg_event.content, arg_event.attlist
 # See CURIE to IRI and term to IRI translation
 #
 event_anycontent.attlist = edge-element.attlist, xml.attlist
-event_anycontent.content = element * { text }*
+event_anycontent.content = any_content
 event_anycontent.type =
   event_anycontent.content, event_anycontent.attlist
 a:documentation [
@@ -3774,7 +3765,7 @@ receiver = element receiver { sender.type }
 # 
 # see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
 message_anycontent.attlist = edge-element.attlist, xml.attlist
-message_anycontent.content = element * { text }*
+message_anycontent.content = any_content
 message_anycontent.type =
   message_anycontent.content, message_anycontent.attlist
 # *** @mode ***
@@ -4178,3 +4169,6 @@ performative_primitives.content =
 #      default value: active (in CEP Reaction RuleML)
 #      optional attribute
 style.attrib = attribute style { style.datatype }?
+any_content = any_element* & text
+any_element = element * { any_attribute*, any_content }
+any_attribute = attribute * { text }

@@ -42,41 +42,54 @@
   
   <xsl:template match="ruleml:*[matches(local-name(.), '^Holds$')][ruleml:at[count(preceding-sibling::ruleml:fluent)=0]]">
     <xsl:copy>      
-    <ruleml:fluent>
+      <xsl:apply-templates select="@*"/>
+      <ruleml:fluent>
       <ruleml:Data/>
     </ruleml:fluent>
-    <xsl:copy-of select="ruleml:at"/>
+    <xsl:apply-templates select="ruleml:at"/>
     </xsl:copy>
   </xsl:template>
   
   <xsl:template match="ruleml:*[matches(local-name(.), '^Initiates$|^Terminates$')][ruleml:at[count(preceding-sibling::ruleml:fluent)=0 or count(preceding-sibling::ruleml:on)=0 ]]">
     <xsl:copy>      
-    <ruleml:on>
+      <xsl:apply-templates select="@*"/>
+      <ruleml:on>
       <ruleml:Event/>
     </ruleml:on>
     <ruleml:fluent>
       <ruleml:Data/>
     </ruleml:fluent>
-    <xsl:copy-of select="ruleml:at"/>
+      <xsl:apply-templates select="ruleml:at"/>
     </xsl:copy>
   </xsl:template>
   
   <xsl:template match="ruleml:*[matches(local-name(.), '^Not$|^Aperiodic$|^Happens$|^Periodic$')][ruleml:at[count(preceding-sibling::ruleml:on)=0]]">
     <xsl:copy>
-      
-    <ruleml:on>
+      <xsl:apply-templates select="@*"/>
+      <ruleml:on>
       <ruleml:Event/>
     </ruleml:on>
-    <xsl:copy-of select="ruleml:at"/>
+      <xsl:apply-templates select="ruleml:at"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="ruleml:*[matches(local-name(.), '^Not$|^Aperiodic$|^Happens$|^Periodic$')][not(*)]">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <ruleml:on>
+        <ruleml:Event/>
+      </ruleml:on>
     </xsl:copy>
   </xsl:template>
   
+  
   <xsl:template match="ruleml:*[matches(local-name(.), '^Do$')][ruleml:at[count(preceding-sibling::ruleml:do)=0]]">
     <xsl:copy>
+      <xsl:apply-templates select="@*"/>
       <ruleml:do>
       <ruleml:Action/>
     </ruleml:do>
-    <xsl:copy-of select="ruleml:at"/>
+      <xsl:apply-templates select="ruleml:at"/>
     </xsl:copy>
   </xsl:template>
   
@@ -92,7 +105,7 @@
       <ruleml:Answer/>
     </xsl:copy>
   </xsl:template>
-  
+  <!--
   <xsl:template match="ruleml:*[matches(local-name(.), '^Forall$|^Exists$')][count(ruleml:declare)=0 or count(ruleml:formula)=0]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
@@ -108,5 +121,25 @@
       </xsl:element>
     </xsl:copy>
   </xsl:template>
-  
+
+  <xsl:template match="ruleml:*[matches(local-name(.), '^Equivalent$')][count(ruleml:torso) &lt; 2]">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:element name="ruleml:torso">
+        <xsl:element name="ruleml:Atom">
+          <xsl:element name="ruleml:op">
+            <xsl:element name="ruleml:Rel"/>
+          </xsl:element>
+        </xsl:element>
+      </xsl:element>
+      <xsl:element name="ruleml:torso">
+        <xsl:element name="ruleml:Atom">
+          <xsl:element name="ruleml:op">
+            <xsl:element name="ruleml:Rel"/>
+          </xsl:element>
+        </xsl:element>
+      </xsl:element>
+    </xsl:copy>
+  </xsl:template>
+  -->
 </xsl:stylesheet>

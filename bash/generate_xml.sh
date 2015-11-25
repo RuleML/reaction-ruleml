@@ -28,18 +28,41 @@ done
 schemaname="kr-cep"
 sxfile="${XSD_HOME}${schemaname}.xsd" 
 srfile="${RNC_HOME}${schemaname}.rnc" 
+
+#
+# Check number of files to start with
+files=( "${INSTANCE_HOME}"*.ruleml )
+numfilesstart=${#files[@]}
+echo "Number of Files to Start: ${numfilesstart}"
+
 for file in "${INSTANCE_HOME}"proc-*.ruleml 
 do
   filename=$(basename "${file}")
-  echo "File ${filename}"
+  echo "Validating  ${filename}"
   "${BASH_HOME}aux_valxsd.sh" "${sxfile}" "${file}"
   if [[ "$?" -ne "0" ]]; then
           echo "XSD Validation Failed for ${file}"
+     rm "${file}"
+  fi       
+done
+
+# Check if too many files were removed
+files=( "${INSTANCE_HOME}"*.ruleml )
+numfilesend=${#files[@]}
+numfilesenddouble=2*$numfilesend
+echo "Number of Files to End: ${numfilesend}"
+  if [[ $numfilesenddouble -le $numfilesstart ]]; then
+     echo "Completion Failed - Too Many Invalid Results"
+     exit 1
+   fi
+
+for file in "${INSTANCE_HOME}"proc-*.ruleml 
+do
+  filename=$(basename "${file}")
+  echo "RNC Validating  ${filename}"
+  "${BASH_HOME}aux_valrnc.sh" "${srfile}" "${file}"
+  if [[ "$?" -ne "0" ]]; then
+          echo "RNC Validation Failed for ${file}"
           exit 1
   fi       
-  #"${BASH_HOME}aux_valrnc.sh" "${srfile}" "${file}"
-  #if [[ "$?" -ne "0" ]]; then
-  #        echo "RNC Validation Failed for ${file}"
-  #        exit 1
-  #fi       
 done

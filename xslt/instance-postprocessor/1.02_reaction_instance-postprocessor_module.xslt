@@ -5,9 +5,12 @@
   <!-- dc:description [ 'Transformation to correct incomplete termination in instance generation by post-processing. 
        Target schema is normalized or relaxed serialization. ' ] -->
   <xsl:template match="ruleml:do[not(*)]"/>  
-  <!-- Changes each key value to a unique value -->
+  <!-- Changes each key and xml:id value to a unique value -->
   <xsl:template match="@key">
-      <xsl:attribute name="key" select="generate-id()"/>
+      <xsl:attribute name="key" select="concat(':', generate-id())"/>
+  </xsl:template>
+  <xsl:template match="@xml:id">
+    <xsl:attribute name="xml:id" select="generate-id()"/>
   </xsl:template>
   
   <xsl:template match="ruleml:guard[not(*)]"/>
@@ -54,12 +57,32 @@
     <xsl:copy>      
       <xsl:apply-templates select="@*"/>
       <ruleml:on>
-      <ruleml:Event/>
-    </ruleml:on>
-    <ruleml:fluent>
-      <ruleml:Data/>
-    </ruleml:fluent>
+        <ruleml:Event/>
+      </ruleml:on>
+      <ruleml:fluent>
+        <ruleml:Data/>
+      </ruleml:fluent>
       <xsl:apply-templates select="ruleml:at"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="ruleml:*[matches(local-name(.), '^Initiates$|^Terminates$')][not(ruleml:at)][ruleml:fluent[count(preceding-sibling::ruleml:on)=0 ]]">
+    <xsl:copy>      
+      <xsl:apply-templates select="@*"/>
+      <ruleml:on>
+        <ruleml:Event/>
+      </ruleml:on>
+      <xsl:apply-templates select="ruleml:fluent"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="ruleml:*[matches(local-name(.), '^Initiates$|^Terminates$')][not(ruleml:at)][not(ruleml:fluent)][ruleml:on]">
+    <xsl:copy>      
+      <xsl:apply-templates select="@*"/>
+      <xsl:apply-templates select="ruleml:on"/>
+      <ruleml:fluent>
+        <ruleml:Data/>
+      </ruleml:fluent>
     </xsl:copy>
   </xsl:template>
   
@@ -73,16 +96,6 @@
     </xsl:copy>
   </xsl:template>
 
-  <xsl:template match="ruleml:*[matches(local-name(.), '^Not$|^Aperiodic$|^Happens$|^Periodic$')][not(*)]">
-    <xsl:copy>
-      <xsl:apply-templates select="@*"/>
-      <ruleml:on>
-        <ruleml:Event/>
-      </ruleml:on>
-    </xsl:copy>
-  </xsl:template>
-  
-  
   <xsl:template match="ruleml:*[matches(local-name(.), '^Do$')][ruleml:at[count(preceding-sibling::ruleml:do)=0]]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
@@ -92,20 +105,22 @@
       <xsl:apply-templates select="ruleml:at"/>
     </xsl:copy>
   </xsl:template>
-  
+
+  <!--    
   <xsl:template match="ruleml:*[matches(local-name(.), '^Test$')][count(ruleml:expectedResult or ruleml:Answer or ruleml:Result)=0]">
     <xsl:copy>
       <ruleml:Answer/>
     </xsl:copy>
   </xsl:template>
-  
-  <xsl:template match="ruleml:*[matches(local-name(.), '^TestItem$')][count(ruleml:expectedResult | ruleml:Answer | ruleml:Result) &lt; 2]">
+  -->
+  <xsl:template match="ruleml:*[matches(local-name(.), '^TestItem$')][count(*) &lt; 2]">
     <xsl:copy>
+      <xsl:apply-templates select="@*"/>
       <ruleml:Answer/>
       <ruleml:Answer/>
     </xsl:copy>
   </xsl:template>
-  <!--
+  <!--    
   <xsl:template match="ruleml:*[matches(local-name(.), '^Forall$|^Exists$')][count(ruleml:declare)=0 or count(ruleml:formula)=0]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>

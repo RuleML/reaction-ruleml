@@ -106,13 +106,6 @@
     </xsl:copy>
   </xsl:template>
 
-  <!--    
-  <xsl:template match="ruleml:*[matches(local-name(.), '^Test$')][count(ruleml:expectedResult or ruleml:Answer or ruleml:Result)=0]">
-    <xsl:copy>
-      <ruleml:Answer/>
-    </xsl:copy>
-  </xsl:template>
-  -->
   <xsl:template match="ruleml:*[matches(local-name(.), '^TestItem$')][count(*) &lt; 2]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
@@ -120,41 +113,16 @@
       <ruleml:Answer/>
     </xsl:copy>
   </xsl:template>
-  <!--    
-  <xsl:template match="ruleml:*[matches(local-name(.), '^Forall$|^Exists$')][count(ruleml:declare)=0 or count(ruleml:formula)=0]">
-    <xsl:copy>
-      <xsl:apply-templates select="@*"/>
-      <xsl:element name="ruleml:declare">
-        <xsl:element name="ruleml:Var"/>
-      </xsl:element>
-      <xsl:element name="ruleml:formula">
-        <xsl:element name="ruleml:Atom">
-          <xsl:element name="ruleml:op">
-            <xsl:element name="ruleml:Rel"/>
-          </xsl:element>
-        </xsl:element>
-      </xsl:element>
-    </xsl:copy>
+  
+  <xsl:template match="ruleml:conent/ruleml:Operation">    
+  <xsl:copy>
+    <xsl:apply-templates select="@*"/>
+    <ruleml:formula>
+      <ruleml:Atom>
+        <ruleml:op><ruleml:Rel/></ruleml:op>
+      </ruleml:Atom>
+    </ruleml:formula>
+  </xsl:copy>
   </xsl:template>
-
-  <xsl:template match="ruleml:*[matches(local-name(.), '^Equivalent$')][count(ruleml:torso) &lt; 2]">
-    <xsl:copy>
-      <xsl:apply-templates select="@*"/>
-      <xsl:element name="ruleml:torso">
-        <xsl:element name="ruleml:Atom">
-          <xsl:element name="ruleml:op">
-            <xsl:element name="ruleml:Rel"/>
-          </xsl:element>
-        </xsl:element>
-      </xsl:element>
-      <xsl:element name="ruleml:torso">
-        <xsl:element name="ruleml:Atom">
-          <xsl:element name="ruleml:op">
-            <xsl:element name="ruleml:Rel"/>
-          </xsl:element>
-        </xsl:element>
-      </xsl:element>
-    </xsl:copy>
-  </xsl:template>
-  -->
+  
 </xsl:stylesheet>

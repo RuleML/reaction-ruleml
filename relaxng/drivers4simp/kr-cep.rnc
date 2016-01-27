@@ -1,0 +1,4174 @@
+default namespace ruleml = "http://ruleml.org/spec"
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace a0 = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace a1 = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace a2 = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace a3 = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace dc = "http://purl.org/dc/elements/1.1/"
+namespace dcterms = "http://purl.org/dc/terms/"
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+namespace xsi = "http://www.w3.org/2001/XMLSchema-instance"
+
+a:documentation [
+  "\x{a}" ~
+  "                               Knowledge Representation Complex\x{a}" ~
+  "            Event Processing (KR-CEP) dialect of Reaction RuleML            This allows using\x{a}" ~
+  "            logical calculi such as Event Calculus for reasoning with complex events and actions and\x{a}" ~
+  "            allows defining the semantics of the complex event algebra operators in terms of a\x{a}" ~
+  "            logical calculus, as pioneered in     ECA RuleML\x{a}" ~
+  "            (http://arxiv.org/ftp/cs/papers/0610/0610167.pdf) and used in     rule-based Semantic\x{a}" ~
+  "            CEP (http://dx.doi.org/10.1007/978-3-642-04985-9_10)           File: kr-cep.xsd\x{a}" ~
+  "            Version: 1.02    Last Modification: 2015-07-19    \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "KR-CEP Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [
+    "spatio-temporal Derivation Rule dialect of Reaction\x{a}" ~
+    "                RuleML"
+  ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-22T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# includes the datalog layer of deliberation ruleml
+
+# note that elementFormDefault is qualified because of local declarations
+
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML performatives.\x{a}" ~
+  "            File:       performative_module.xsd Version: 1.02        Last Modification: 2015-07-19\x{a}" ~
+  "            This module declares the       following RuleML elements: * RuleML * Assert * Retract *\x{a}" ~
+  "            Query * act * formula See       http://www.ruleml.org/modularization for details about\x{a}" ~
+  "            this modularization approach.     \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [
+    "custom-built performative module for Reaction RuleML"
+  ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-19T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+#        *** RuleML ***
+#        The n-ary top-level of a RuleML document.
+# 
+#        See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.022#gloss-RuleML
+# 
+# Note: key and keyref object identifier are defined to be unique under the RuleML document root
+# 
+# @vocab: an IRI that defines the mapping to use when a type term (e.g. a frame signature type) is referenced in an attribute value
+# @prefix: a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
+RuleML.attlist = node-element.attlist, xml.attlist
+RuleML.content =
+  meta-roles.content,
+  (element do { act.type }
+   | act.content)*
+RuleML.type = RuleML.content, RuleML.attlist
+start |= RuleML
+RuleML =
+  element RuleML {
+    RuleML.type
+    # key object identifiers and key object references defined on the top level
+    
+  }
+# *** do ***
+# The do role of the root element (<RuleML>).
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.022#gloss-do
+act.content = performative_primitives.content
+act.attlist = edge-element.attlist, xml.attlist
+act.type = act.content, act.attlist
+# *** Consult ***
+# Consult (import) performative / action 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Consult
+# 
+# dynamically "consults" (imports) knowledge resource, e.g. a message, documents or external resource (with the @iri attribute).
+Consult.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Consult.content =
+  meta-roles.content, degree?, (consult_imports.content)*
+Consult.type = Consult.content, Consult.attlist
+start |= Consult
+Consult = element Consult { Consult.type }
+#  *** payload ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-payload
+payload.attlist = xml.attlist
+payload.content =
+  RuleML
+  | # a RuleML knowledge base
+    Reify
+  | # reified knowledge as payload
+    Var
+    # for  binding knowledge to variables in meta programming
+    
+payload.type = payload.content, payload.attlist
+start |= payload
+payload = element payload { payload.type }
+# *** Assert ***
+# A KQML-like performative acting as a wrapper specifying that its content is
+# asserted, making an 'implicit <Rulebase>' assumption.
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Assert   
+Assert.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Assert.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-assert.type }
+   | formula-assert.content)*
+Assert.type = Assert.content, Assert.attlist
+start |= Assert
+Assert = element Assert { Assert.type }
+# *** Retract ***
+# A performative similar to KQML's 'untell' that acts as a wrapper specifying that its
+# content is to be deleted, making an 'implicit <Rulebase>' assumption.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Retract
+Retract.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Retract.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-assert.type }
+   | formula-assert.content)*
+Retract.type = Retract.content, Retract.attlist
+start |= Retract
+Retract = element Retract { Retract.type }
+# *** Update ***
+# Update action
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Update
+Update.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Update.content =
+  meta-roles.content,
+  degree?,
+  ((element formula { formula-assert.type }
+   | formula-assert.content),
+  (element formula { formula-assert.type }
+   | formula-assert.content)?)?
+Update.type = Update.content, Update.attlist
+start |= Update
+Update = element Update { Update.type }
+# *** Query ***
+# A KQML-like performative acting as a wrapper specifying that its content is
+# queried, making an 'implicit <Rulebase>' assumption.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Query
+Query.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Query.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-query.type }
+   | formula-query.content)*
+Query.type = Query.content, Query.attlist
+start |= Query
+Query = element Query { Query.type }
+#       *** Answer ***
+#       Answer performative / action 
+# 
+#       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Answer
+# 
+#       It delivers the answer to a Query . The answer is given in terms of solved formulas, e.g.
+# 
+#       as a <Rulebase> that contains just 'solved' equations with the variable bindings
+# 
+#	  <Rulebase>
+#		<Equal>
+# <Var>x</Var>
+# <Ind>a</Ind>
+# </Equal>
+#		<Equal>
+# <Var>y</Var>
+# <Ind>b</Ind>
+# </Equal>
+#		<Equal>
+# <Var>z</Var>
+# <Ind>c</Ind>
+# </Equal>
+#	  </Rulebase>
+# 
+#	  as ground fact <Atom> matching the query / goal 
+# 
+#	  <Atom>
+#		<Rel>p</Rel>
+#		<Ind>a</Ind>
+#		<Ind>b</Ind>
+#		<Ind>c</Ind>
+#	  </Atom>
+# 
+#	  as solved ground entailments <Entails> of the answer from the queried (ground or instantiated / forward chained) rule base  
+# 
+#	  With the optional <degree> role a truth/uncertainty value (between 0.0 and 1.0; 
+#	  with the truth values "1" for true and "0" for false in two-valued logics and "0.5" for unknown in three-valued logics) can be assigned to the answer. 
+# 
+#	  An answer maybe be also just referenced by the local @key-@keyref mechanism  
+#	  or by the optional @iri attribute, in case of externally published answers. 
+# 
+#	  With the optional @type attribute an answer type can be specified. 
+#	  The @safety optionally defines if the answer (event) is interrupting or non-interrupting 
+#	  and the @card attribute optionally defines the number of results contained in an Answer.
+Answer.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Answer.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-answer.type }
+   | formula-answer.content)*
+Answer.type = Answer.content, Answer.attlist
+start |= Answer
+Answer = element Answer { Answer.type }
+#	  *** formula ***
+#	  The formula role of a performative (<Answer>).
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
+formula-answer.content =
+  Rulebase
+  | Entails
+  | query-connective.content
+  | query-quantifier.content
+  | extended-signature-predicate-sorts.content
+formula-answer.type = formula-answer.content, formula.attlist
+# *** formula ***
+# The formula role of a performative (<Assert>, <Retract>, <Update>,... or <Query>).
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
+
+# the (empty) attribute list is declared in the connective module
+formula-assert.content =
+  Rulebase
+  | Implies
+  | Rule
+  | Equivalent
+  | Entails
+  | rulebase-quantifier.content
+  | rulebase-connective.content
+  | extended-signature-predicate-sorts.content
+formula-query.content =
+  Rulebase
+  | Entails
+  | query-connective.content
+  | query-quantifier.content
+  | extended-signature-predicate-sorts.content
+formula-assert.type = formula-assert.content, formula.attlist
+formula-query.type = formula-query.content, formula.attlist
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for description-related\x{a}" ~
+  "            RuleML       elements. File: desc_module.xsd Version: 1.02 Last Modification: 2015-05-17\x{a}" ~
+  "            [Adrian Paschke]       This module declares the following RuleML elements:\x{a}" ~
+  "            * meta            descriptive metadata        * scope           scope  (e.g. for scoped\x{a}" ~
+  "            reasoning)        * guard         guard (e.g. for guard constraints in scoped reasoning)\x{a}" ~
+  "            * evaluation      semantic profile        * signature       interface signature, pattern\x{a}" ~
+  "            definition,       * qualification   qualification, e.g. priorities, validity, strategy\x{a}" ~
+  "            * quantification  quantification       * oid              See\x{a}" ~
+  "            http://www.ruleml.org/modularization for details about this modularization approach.     \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-05-17T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** oid ***
+# An optional object identifier for an atomic formula, expression or the unifed terms
+# of the SWSL branch, as needed for PSOA semantics.
+# Note that oids are not required to be unique within a rulebase.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-oid
+oid.attlist = xml.attlist
+oid.content =
+  Var | Skolem | Reify | extended-signature-function-sorts.content
+oid.type = oid.content, oid.attlist
+start |= oid
+oid = element oid { oid.type }
+#  *** meta ***     
+# 
+# An optional container for meta-knowledge about a Node.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-meta
+meta.attlist = edge-element.attlist, xml.attlist
+meta.content = formula-assert.content
+meta.type = meta.content, meta.attlist
+start |= meta
+meta = element meta { meta.type }
+# *** scope ***
+# 
+# metadata-based scope definition defined over the metadata annotations and the qualifications annotations.
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-scope
+# 
+# Note: scope reasoning can use the metadata scopes to define a constructive view on the knowledge in the KB.    
+#
+scope.attlist = edge-element.attlist, xml.attlist
+scope.content = formula-query.content?
+scope.type = scope.content, scope.attlist
+start |= scope
+scope = element scope { scope.type }
+# *** guard ***     
+# 
+#    guard constraints 
+# 
+#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-guard
+guard.attlist = edge-element.attlist, xml.attlist
+guard.content = if.content
+guard.type = guard.content, guard.attlist
+start |= guard
+guard = element guard { guard.type }
+# *** evaluation ***
+# 
+# The intended evaluation semantics, e.g. model theoretic semantic, proof-semantics, execution semantic such as selection and consumption policies etc.
+# 
+#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-evaluation
+#
+evaluation.attlist = edge-element.attlist, xml.attlist
+evaluation.content = Profile
+evaluation.type = evaluation.content, evaluation.attlist
+start |= evaluation
+evaluation = element evaluation { evaluation.type }
+# *** signature ***
+# 
+# The signature defines the signature of knowledge (formula and terms) with optional input / output mode declarations. The signature declaration can act as public interface and
+#    can be published together with the intended evaluation semantics. 
+# 
+#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-signature
+signature.attlist = edge-element.attlist, xml.attlist
+signature.content = formula-query.content
+signature.type = signature.content, signature.attlist
+start |= signature
+signature = element signature { signature.type }
+#  *** qualification ***
+# 
+# Definition of the qualification (qualifying metadata), e.g. validity time, priorities, etc.
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-qualification
+qualification.attlist = edge-element.attlist, xml.attlist
+qualification.content = formula-assert.content
+qualification.type = qualification.content, qualification.attlist
+start |= qualification
+qualification = element qualification { qualification.type }
+# *** quantification ***
+# 
+# Definition of the quantifier. 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-quantification
+#
+quantification.attlist = edge-element.attlist, xml.attlist
+quantification.content = meta-quantifier.content
+quantification.type = quantification.content, quantification.attlist
+start |= quantification
+quantification = element quantification { quantification.type }
+# extended descriptors in Reaction RuleML
+
+# note that elementFormDefault is qualified because of local declarations
+
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML quantifiers. File:\x{a}" ~
+  "            quantifier_module.xsd Version: 1.02 Last Modification: 2015-07-16 This module declares\x{a}" ~
+  "            the       following RuleML elements: * Forall * Exists * declare * formula See\x{a}" ~
+  "            http://www.ruleml.org/modularization for details about this modularization approach.     \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Forall ***
+# Explicit universal quantifier.
+# 
+# See http://www.ruleml.org/1.02/glossary/#gloss-Forall 
+Forall.attlist =
+  quantifier-interface.attlist, node-element.attlist, xml.attlist
+Forall.content =
+  meta-roles.content,
+  degree?,
+  (declare | declare.content)*,
+  (element formula { formula-forall.type }
+   | formula-forall.content)?
+Forall.type = Forall.content, Forall.attlist
+start |= Forall
+Forall = element Forall { Forall.type }
+# *** Exists ***
+# Explicit existential quantifier.
+# 
+# See http://www.ruleml.org/1.02/glossary/#gloss-Exists
+Exists.attlist =
+  quantifier-interface.attlist, node-element.attlist, xml.attlist
+Exists.content =
+  meta-roles.content,
+  degree?,
+  (declare | declare.content)*,
+  (element formula { formula-exists.type }
+   | formula-exists.content)?
+Exists.type = Exists.content, Exists.attlist
+start |= Exists
+Exists = element Exists { Exists.type }
+# *** declare ***
+# A role used for variables declared within a quantifier.
+# 
+# See http://www.ruleml.org/1.02/glossary/#gloss-declare
+declare.attlist = xml.attlist
+declare.content = Var
+declare.type = declare.content, declare.attlist
+start |= declare
+declare = element declare { declare.type }
+# *** formula ***
+# The formula role of a quantifier (<Forall> or <Exists>).
+# 
+# See http://www.ruleml.org/1.02/glossary/#gloss-formula
+formula-forall.content =
+  Implies
+  | Rule
+  | Equivalent
+  | head-quantifier.content
+  | head-connective.content
+  | extended-signature-predicate-sorts.content
+formula-forall.type = formula-forall.content, formula.attlist
+formula-exists.content =
+  query-quantifier.content
+  | query-connective.content
+  | extended-signature-predicate-sorts.content
+formula-exists.type = formula-exists.content, formula.attlist
+# note that elementFormDefault is qualified because of local declarations
+
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML connectives. File:\x{a}" ~
+  "            connective_module.xsd Version: 1.02 Last Modification: 2015-02-21 [Tara Athan] This\x{a}" ~
+  "            module       declares the following RuleML elements and attributes: * Implies * if *\x{a}" ~
+  "            then * Entails *       Equivalent * torso * Rulebase * And * Or * formula        See\x{a}" ~
+  "            http://www.ruleml.org/modularization for details       about this modularization\x{a}" ~
+  "            approach. \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# necessary for schematron
+
+# <xs:appinfo>
+# 
+#	<ns prefix="r" uri="http://ruleml.org/spec"/>
+# </xs:appinfo> 
+
+# *** Implies ***
+# An implication rule.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Implies
+Implies.attlist =
+  formula-interface.attlist,
+  node-element.attlist,
+  material.attrib,
+  xml.attlist
+Implies.content =
+  meta-roles.content,
+  degree?,
+  ((then , if) | (if , then) | (if.content , then.content))?
+Implies.type = Implies.content, Implies.attlist
+start |= Implies
+Implies = element Implies { Implies.type }
+# *** if ***
+# The if of an implication rule containing the premise(s),
+# also known as the "antecedent" or "if" part of the rule.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-if
+if.attlist = xml.attlist
+if.content =
+  body-quantifier.content
+  | body-connective.content
+  | extended-signature-predicate-sorts.content
+if-entails.content = Rulebase | formula-rulebase.content
+if.type = if.content, if.attlist
+if-entails.type = if-entails.content, if.attlist
+start |= if
+if = element if { if.type }
+# *** then ***
+# The then of an implication rule containing the conclusion,
+# also known as the "consequent" or "then" part of the rule.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-then
+then.attlist = xml.attlist
+then.content =
+  head-quantifier.content
+  | head-connective.content
+  | extended-signature-predicate-sorts.content
+then-entails.content = Rulebase | formula-rulebase.content
+then.type = then.content, then.attlist
+then-entails.type = then-entails.content, then.attlist
+start |= then
+then = element then { then.type }
+# *** Entails ***
+# Well-known in (meta-)logic (earlier called 'Turnstile', and 'Demo' in
+# Kowalski/Bowen's object/meta-level-amalgamated logic).
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Entails
+Entails.attlist =
+  group-formula-interface.attlist, node-element.attlist, xml.attlist
+Entails.content =
+  meta-roles.content,(
+  (element if { if-entails.type }
+   | if-entails.content),
+  (element then { then-entails.type }
+   | then-entails.content))?
+Entails.type = Entails.content, Entails.attlist
+start |= Entails
+Entails = element Entails { Entails.type }
+# *** Equivalent ***
+# An equivalence expression, which is "syntactic sugar" for a pair
+# of conjoined converse implication rules.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equivalent		
+Equivalent.attlist =
+  formula-interface.attlist,
+  node-element.attlist,
+  material.attrib,
+  xml.attlist
+Equivalent.content =
+  meta-roles.content,
+  degree?,
+  ((torso | torso.content),
+  (torso | torso.content))?
+Equivalent.type = Equivalent.content, Equivalent.attlist
+start |= Equivalent
+Equivalent = element Equivalent { Equivalent.type }
+# *** torso ***
+# A symmetric role used in an equivalence expression combining
+# the asymmetric <then> and <if>.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-torso
+torso.attlist = xml.attlist
+torso.content =
+  head-quantifier.content
+  | head-connective.content
+  | extended-signature-predicate-sorts.content
+torso.type = torso.content, torso.attlist
+start |= torso
+torso = element torso { torso.type }
+# *** Rulebase ***
+# A collection of rules that can be ordered or unordered, without or with duplicates.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rulebase
+# 
+# @prefix for default prefix definitions 
+# @vocab for default vocab definitions
+Rulebase.attlist =
+  group-formula-interface.attlist, node-element.attlist, xml.attlist
+Rulebase.content =
+  meta-roles.content,
+  (element formula { formula-rulebase.type }
+   | formula-rulebase.content)*
+Rulebase.type = Rulebase.content, Rulebase.attlist
+start |= Rulebase
+Rulebase = element Rulebase { Rulebase.type }
+# *** And ***
+# A conjunctive expression, where <And>Atom</And> is equivalent to Atom.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-And
+And-body.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+And-query.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+And.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-and-or.type }
+   | formula-and-or.content)*
+And-query.type = And.content, And-query.attlist
+And-body.type = And.content, And-body.attlist
+start |= And
+And = element And { And-body.type }
+# *** Or ***
+# A disjunctive expression, where <Or>Atom</Or> is equivalent to Atom.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Or
+Or-query.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Or-body.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Or.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-and-or.type }
+   | formula-and-or.content)*
+Or-query.type = Or.content, Or-query.attlist
+Or-body.type = Or.content, Or-body.attlist
+start |= Or
+Or = element Or { Or-body.type }
+# *** formula ***
+# The formula role of a conjunctive/disjunctive expression or a rulebase.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
+formula.attlist = edge-element.attlist, xml.attlist
+formula-and-or.content =
+  body-quantifier.content
+  | body-connective.content
+  | extended-signature-predicate-sorts.content
+formula-rulebase.content =
+  element Implies { Implies.type }
+  | Rule
+  | element Equivalent { Equivalent.type }
+  | rulebase-quantifier.content
+  | rulebase-connective.content
+  | extended-signature-predicate-sorts.content
+formula-and-or.type = formula-and-or.content, formula.attlist
+formula-rulebase.type = formula-rulebase.content, formula.attlist
+a:documentation [
+  "\x{a}" ~
+  "                       generic operation module of Reaction RuleML.\x{a}" ~
+  "            This is the XML Schema connective operator module for Reaction RuleML.    File:\x{a}" ~
+  "            connective_operator_module.xsd    Version: 1.02    Last Modification: 2015-03-22\x{a}" ~
+  "            This schema declares the following Reaction RuleML elements and attributes:      *\x{a}" ~
+  '            Operation         The approach is modelled after that used in "Modularization of XHTML\x{a}' ~
+  '            in XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be\x{a}' ~
+  '            integrated with    "Modularization of XHTML" (REC-xhtml-modularization-20010410)\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-modularization/].   \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** generic Operation ***
+# 
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
+Operation-formula.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Operation-formula-rulebase.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-rulebase.type }
+   | formula-rulebase.content)*
+Operation-formula-rulebase.type =
+  Operation-formula-rulebase.content, Operation-formula.attlist
+Operation-formula-and-or.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-and-or.type }
+   | formula-and-or.content)*
+Operation-formula-and-or.type =
+  Operation-formula-and-or.content, Operation-formula.attlist
+Operation-formula-query.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-query.type }
+   | formula-query.content)*
+Operation-formula-query.type =
+  Operation-formula-query.content, Operation-formula.attlist
+Operation-term.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Operation-term.content =
+  meta-roles.content,
+  degree?,
+  (arg
+   | arg.content
+   | element content { operation_anycontent.type })*
+Operation-term.type = Operation-term.content, Operation-term.attlist
+# *** content ***
+# 
+#      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+# 
+# @prefix is used to define a prefix and a term mapping vocabulary for the XML content
+# See CURIE to IRI and term to IRI translation
+operation_anycontent.attlist = edge-element.attlist, xml.attlist
+operation_anycontent.content = any_content
+operation_anycontent.type =
+  operation_anycontent.content, operation_anycontent.attlist
+# note that elementFormDefault is qualified because of local declarations
+
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML atoms. File:\x{a}" ~
+  "            atom_module.xsd Version: 1.02 Last Modification: 2015-02-21 This module declares\x{a}" ~
+  "            the following RuleML elements and attributes: * Atom * op * Rel * degree See\x{a}" ~
+  "            http://www.ruleml.org/modularization for details about this modularization approach.     \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "        )\x{a}" ~
+  "            arguments.   Or a frame object with slots    See\x{a}" ~
+  "            http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Atom\x{a}" ~
+  "                "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Atom ***
+#	A logical atom , i.e. an expression formed from a predicate
+#
+Atom.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+# These .extend groups, pointed to by Atom.content, are necessary
+# for redefinition to be binary in bindatalog and to add rest
+# variables in hornlog.
+Atom.content =
+  meta-roles.content,
+  degree?,
+  (# operator optional for frame representation
+   element op { op-atom.type }
+   | op-atom.content)?,
+  slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?
+Atom.type = Atom.content, Atom.attlist
+start |= Atom
+Atom = element Atom { Atom.type }
+# *** op ***
+# An operator expression including the relation of an atom.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-op
+op.attlist = xml.attlist
+op-atom.content = Rel
+op-atom.type = op-atom.content, op.attlist
+start |= op
+op = element op { op-atom.type }
+# *** Rel ***
+# A relation, i.e. a logical predicate, of an atom.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rel		
+Rel.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Rel.content = text
+Rel.type = Rel.content, Rel.attlist
+start |= Rel
+Rel = element Rel { Rel.type }
+# *** degree ***
+# 
+# An optional uncertainty value (between 0.0 and 1.0)
+# that may be assigned to facts and rules.
+# 
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-degree
+#
+degree.attlist = xml.attlist
+degree.content = Data
+degree.type = degree.content, degree.attlist
+start |= degree
+degree = element degree { degree.type }
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML slots. File:\x{a}" ~
+  "            slot_module.xsd Version: 1.02 Last Modification: 2015-07-16 This module declares the\x{a}" ~
+  "            following       RuleML element and attributes: * slot        See\x{a}" ~
+  "            http://www.ruleml.org/modularization for details about this modularization approach.     \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-16T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** slot ***
+# A user-defined slot consisting of a name (first position) and a filler (second position).
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-slot
+slot.attlist = card.attrib, weight.attrib, xml.attlist
+slot-name.extend = extended-signature-function-sorts.content
+slot.content = slot-name.extend, arg.content
+slot.type = slot.content, slot.attlist
+start |= slot
+slot = element slot { slot.type }
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML terms. File:\x{a}" ~
+  "            term_module.xsd Version: 1.02 Last Modification: 2015-04-03 This module declares the\x{a}" ~
+  "            following       RuleML elements and attributes: * arg * Ind * Data * Var * Skolem *\x{a}" ~
+  "            Reify as       well as including a number of complex types for use in expicitly-typed\x{a}" ~
+  "            data Nodes. See       http://www.ruleml.org/modularization for details about this\x{a}" ~
+  "            modularization approach.     \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-04-03T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** arg ***
+# A role used for the positional arguments of a logical atom.
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg 
+arg.attlist = edge-element.attlist, xml.attlist
+arg.content =
+  Var | Skolem | Reify | extended-signature-function-sorts.content
+arg.type = arg.content, arg.attlist
+start |= arg
+arg = element arg { arg.type }
+# *** Ind ***
+# An individual constant, as in predicate logic, which can also be considered to
+# be a fixed argument like RDF resources.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Ind
+Ind.attlist = term-interface.attlist, node-element.attlist, xml.attlist
+Ind.content = text
+Ind.type = Ind.content, Ind.attlist
+start |= Ind
+Ind = element Ind { Ind.type }
+# *** Data ***
+# A fixed argument like RDF literals, allowing XML data.  It may be
+# optionally associated with an XML Schema built-in datatype
+# (see http://www.w3.org/TR/xmlschema-2/#built-in-datatypes)
+# using the built-in xsi:type attribute.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Data
+start |= Data
+Data = element Data { xsd:string }
+# *** Var ***
+# A logical variable, as in logic programming.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Var
+Var.attlist = term-interface.attlist, node-element.attlist, xml.attlist
+Var.content = text
+Var.type = Var.content, Var.attlist
+start |= Var
+Var = element Var { Var.type }
+# *** Skolem ***
+# A Skolem individual constant, like RDF's blank nodes.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Skolem
+Skolem.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Skolem.content = text
+Skolem.type = Skolem.content, Skolem.attlist
+start |= Skolem
+Skolem = element Skolem { Skolem.type }
+# *** Reify ***
+# Supports reification (a kind of instantiation or quasi-quotation). It allows any RuleML tag available within the
+# current sublanguage as content, treating it as a term for performing reasoning on.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Reify		
+Reify.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Reify.content =
+  # <xs:element ref="meta" minOccurs="0" maxOccurs="unbounded"/>
+  
+  # <Reify> only allows valid RuleML
+  
+  # <xs:any minOccurs="0" maxOccurs="unbounded" processContents="strict" namespace="##targetNamespace"/>
+  AnyThis.def?
+AnyThis.def =
+  element ruleml:* {
+    attribute * { text }*,
+    (text & AnyThis.def*)
+  }
+Reify.type = Reify.content, Reify.attlist
+start |= Reify
+Reify = element Reify { Reify.type }
+curieOrIRI.datatype = curie.datatype | xsd:anyURI
+curieOrAbsIRI.datatype = curie.datatype | absIRI.datatype
+termOrCurieOrIRI.datatype = term.datatype | curie.datatype | xsd:anyURI
+termOrCurieOrIRIs.datatype = list { termOrCurieOrIRI.datatype }
+termOrCurieOrAbsIRI.datatype =
+  term.datatype | curie.datatype | absIRI.datatype
+termOrCurieOrAbsIRIs.datatype = list { termOrCurieOrAbsIRI.datatype }
+absIRI.datatype = xsd:anyURI { pattern = "[\i-[:]][\c-[:]]+:.+" }
+curie.datatype =
+  xsd:string {
+    minLength = "1"
+    pattern =
+      "(([\i-[:]][\c-[:]]*)?:)?(/[^\s/][^\s]*|[^\s/][^\s]*|[^\s]?)"
+  }
+term.datatype = xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
+# includes the hornlog layer with the 'expr' and 'rest' modules
+
+# note that elementFormDefault is qualified because of local declarations
+
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML expressions. File:\x{a}" ~
+  "            expr_module.xsd Version: 1.02 Last Modification: 2015-10-05 [Tara Athan] This module\x{a}" ~
+  "            declares       the following RuleML elements and attributes: * Expr * op * Fun * Plex *\x{a}" ~
+  "            @per See       http://www.ruleml.org/modularization for details about this\x{a}" ~
+  "            modularization approach. \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-10-05T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "        "
+  # necessary for schematron
+  
+  "\x{a}" ~
+  "        "
+  # <xs:appinfo>
+  # 
+  # <sch:ns prefix="r" iri="http://www.deliberation.ruleml.org/1.02/xsd"/>
+  
+  "\x{a}" ~
+  "    "
+]
+# *** Expr ***
+# A logical function of the form "f(...)" where f is a function name.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Expr
+Expr.attlist = term-interface.attlist, node-element.attlist, xml.attlist
+Expr.content =
+  meta-roles.content,
+  (element op { op-Expr.type }
+   | op-Expr.content)?,
+  slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?
+Expr.type =
+  # <xs:annotation>
+  #	<xs:appinfo>
+  #		<sch:pattern name="Uninterpreted functions">
+  #			<sch:rule context="r:Expr/r:Fun[@per='no']">
+  #				<sch:assert test=
+  #						"not(../r:Expr/r:Fun[@per='yes'] or
+  #							 ../r:arg/r:Expr/r:Fun[@per='yes'] or
+  #							 ../r:Expr/r:op/r:Fun[@per='yes'] or 
+  #							 ../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
+  #						Functions nested within an uninterpreted function must also be uninterpreted.
+  #				</sch:assert>
+  #			</sch:rule>
+  #			<sch:rule context="r:Expr/r:op/r:Fun[@per='no']">
+  #				<sch:assert test=
+  #						"not(../../r:Expr/r:Fun[@per='yes'] or
+  #							 ../../r:arg/r:Expr/r:Fun[@per='yes'] or
+  #							 ../../r:Expr/r:op/r:Fun[@per='yes'] or 
+  #							 ../../r:arg/r:Expr/r:op/r:Fun[@per='yes'])">
+  #						Functions nested within an uninterpreted function must also be uninterpreted.
+  #				</sch:assert>
+  #			</sch:rule>
+  #		</sch:pattern>
+  #	</xs:appinfo>
+  # </xs:annotation>
+  Expr.content,
+  Expr.attlist
+start |= Expr
+Expr = element Expr { Expr.type }
+# *** op ***
+# An operator expression including the function name of an expression.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-op
+#
+
+# the (empty) attribute list is declared in the atom module
+op-Expr.content = Fun
+op-Expr.type = op-Expr.content, op.attlist
+# *** Fun ***
+# A user-defined function name.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Fun
+Fun.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Fun.content = text
+Fun.type = Fun.content, Fun.attlist
+start |= Fun
+Fun = element Fun { Fun.type }
+# *** Plex ***
+# An unordered collection of arguments without a constructor.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Plex
+Plex.attlist = term-interface.attlist, node-element.attlist, xml.attlist
+Plex.content =
+  meta-roles.content,
+  slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?
+Plex-repo.content = meta-roles.content, (arg | arg.content)*, repo?
+Plex-resl.content =
+  meta-roles.content,
+  slot*,
+  resl?
+Plex.type = Plex.content, Plex.attlist
+Plex-repo.type = Plex-repo.content, Plex.attlist
+Plex-resl.type = Plex-resl.content, Plex.attlist
+start |= Plex
+Plex = element Plex { Plex.type }
+# note that elementFormDefault is qualified because of local declarations
+
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for RuleML rest variables.\x{a}" ~
+  "            File:       rest_module.xsd Version: 1.02 Last Modification: 2015-07-05 This module\x{a}" ~
+  "            declares the following       RuleML elements: * repo * resl See\x{a}" ~
+  "            http://www.ruleml.org/modularization for details about this       modularization\x{a}" ~
+  "            approach. \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-05T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** repo ***
+# A positional rest variable.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-repo
+repo.attlist = xml.attlist
+repo.content =
+  Var
+  | element Plex { Plex-repo.type }
+repo.type = repo.content, repo.attlist
+start |= repo
+repo = element repo { repo.type }
+# *** resl ***
+# A slotted rest variable.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-resl		
+resl.attlist = xml.attlist
+resl.content =
+  Var
+  | element Plex { Plex-resl.type }
+resl.type = resl.content, resl.attlist
+start |= resl
+resl = element resl { resl.type }
+# includes the equalog layer with the 'equality' module
+
+a:documentation [
+  "\x{a}" ~
+  "         This is the XML Schema module for equality in RuleML. File:\x{a}" ~
+  "            equality_module.xsd Version: 1.02 Last Modification: 2015-02-21 [Tara Athan] This module\x{a}" ~
+  "            declares the following RuleML elements and attributes: * Equal * left * right        See\x{a}" ~
+  "            http://www.ruleml.org/modularization for details about this modularization approach. \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Equal ***
+# An equational formula consisting of two expressions.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
+#
+Equal.attlist =
+  oriented.attrib,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Equal.content =
+  meta-roles.content,
+  degree?,
+  ((left
+   , right)
+   | # note that (right, left) is disallowed
+     (left.content
+   , right.content))?
+Equal.type = Equal.content, Equal.attlist
+start |= Equal
+Equal = element Equal { Equal.type }
+# *** left ***
+# The left-hand side of an equational formula.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-left
+#
+left.attlist = xml.attlist
+left.content = arg.content
+left.type = left.content, left.attlist
+start |= left
+left = element left { left.type }
+# *** right***
+# The right-hand side of an equational formula.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-right
+right.attlist = xml.attlist
+right.content = arg.content
+right.type = right.content, right.attlist
+start |= right
+right = element right { right.type }
+# *** @mode ***
+# An attribute for optionally specifying the intended input-output constellations of formulas and terms with the
+# following semantics:
+# 
+# "+" The formula/term is intended to be input
+# "-" The formula/term is intended to be output
+# "?" The formula/term is undefined (input or output)
+# "[iri]" the formula/term's mode is defined in an internal or external vocabulary referenced by the IRI (vocabulary term or curie or absolute IRI)  
+# 
+#	     By default the mode of formulas when used as conditions, constraints, queries and event patterns is "+" (input)
+#	     and the mode of conclusions, answers and active actions is "-" (output). Variables are "?" (open) by default.
+#	     optional attribute
+# 
+#	     See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40mode
+mode.attrib =
+  [ a0:defaultValue = "?" ]
+  attribute mode {
+    termOrCurieOrAbsIRI.datatype | vocab-modes.datatype
+  }?
+vocab-modes.datatype = "+" | "-" | "?"
+# *** @safety ***
+# 
+#    restriction: interrupting, non-interrupting or transactional or
+#    "[iri]" the formula/term's safety mode is defined in an internal or external vocabulary referenced by the IRI (vocabulary term or curie or absolute IRI)
+# 
+#        default: non-interrupting 
+#        optional attribute
+# 
+#        See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40safety
+safety.attrib =
+  [ a1:defaultValue = "non-interrupting" ]
+  attribute safety {
+    termOrCurieOrAbsIRI.datatype | vocab-safety.datatype
+  }?
+vocab-safety.datatype =
+  "non-interrupting" | "interrupting" | "transactional"
+# *** @per ***
+# An optinal attribute indicating how a formulas, terms and operators are interpreted.
+# 
+# Default for formulas is per "value" (truth valuation), for terms per "copy", for modal operators per "modal" and for actions/performatives by "effect".		
+# In "reasoning" dialects the default for actions and events is per "value" and in active / messaging dialects it is per "effect".
+# In "non-reified" representations as formulas default interpretation per "value" and in "reified" representations as term default interpretation is per copy. 
+# 
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40per
+per.attrib =
+  attribute per { termOrCurieOrAbsIRI.datatype | vocab-per.datatype }?
+vocab-per.datatype = "copy" | "value" | "effect" | "modal" | "open"
+# *** @size  ***
+# An attribute indicating the size of a counter		
+# -1 = unbound / all
+# 
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40size
+
+#  
+# 
+#	replaced by card 
+# 
+#	<xs:attributeGroup name="size.attrib">
+#	<xs:attribute name="size" type="xs:int" use="optional" default="-1"/>
+# </xs:attributeGroup>
+# <xs:attributeGroup name="mapSize.attrib">
+#	<xs:attribute name="mapSize" type="xs:int" use="optional" default="-1"/>
+# </xs:attributeGroup>
+
+#  *** @style ***
+# 
+#  The style attribute defines the styles of the intended semantics. 
+#  Predefined semantics are "active", "reasoning", "messaging". 
+#  Further intented semantics can be defined by semantic profiles internally in the <evaluation> role
+#  or externally. They can be referenced by ther profile name (term) or resource locator (curie or absolute IRI).
+# 
+# restriction: active | messaging | reasoning | "[IRIs]" (vocabulary terms or curies or absolute IRIs)
+# 
+#       default value: reasoning (in DR Reaction RuleML), active (in PR and ECA RuleML), and messaging (in CEP RuleML)
+#       optional attribute
+# 
+#       See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40style
+style.datatype = termOrCurieOrAbsIRIs.datatype | vocab-style.datatype
+vocab-style.datatype = "active" | "messaging" | "reasoning"
+# *** @key ***
+# 
+# optinal unique local key on all knowledge formulas
+# 
+#      optinal attribute
+# 
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40key
+key.attrib = attribute key { curieOrAbsIRI.datatype }?
+# *** @keyref ***
+# 
+# corresponding reference to a unique local key
+# 
+#      optinal attribute
+# 
+#      http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40keyref
+keyref.attrib = attribute keyref { curieOrAbsIRI.datatype }?
+# *** @node ***
+# An optional identification label for a Node, creating accessibility within
+# the knowledge representation.
+# This can help for representing prioritization between rules, for example. 
+# The content of all Node elements (i.e. those that begin with an uppercase letter) of RuleML can begin with 
+# such a label.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40node
+# 
+# content model: (curieOrAbsIRI.datatype)
+node.attrib = attribute node { curieOrAbsIRI.datatype }?
+# *** @type ***
+# An attribute for optionally specifying a (user-defined) type.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40type
+# 
+# Note: In Reaction RuleML the type is changed to Term or Curie or absolute IRI to allow references
+# to internal vocabulary terms (e.g. local sort signature definitions) and external vocabulary types (sorts) 
+type.attrib = attribute type { termOrCurieOrAbsIRI.datatype }?
+# *** @meta ***
+# 
+#  "[iri]" (term or curie or absolute IRI)
+# 
+#  Defines descriptive meta knowledge annotations. The IRI points to internal metadata definitions (defined in the <meta> role)
+#  or external metadata vocabularies.
+# 
+#      By default knowledge is contextually annotated by metadata about the source (@src([Locator])) and the name (@label([OID])),
+#      with "Locator" being the source location (location of Reaction RuleML knowledge base in which the knowledge is defined) 
+#      and OID being the implicitly or explicitly defined object identifer of the knowledge.
+# 
+#      optional attribute
+# 
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40meta
+meta.attrib = attribute meta { termOrCurieOrAbsIRIs.datatype }?
+# *** @qualify ***
+# 
+#  "[iri]" (term or curie or absolute IRI)
+# 
+#  Defines qualifying meta knowledge annotations. The IRI points to internal metadata definitions (defined in the <qualification> role)
+#  or external metadata vocabularies.
+# 
+#      optional attribute
+# 
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40qualify
+qualify.attrib = attribute qualify { termOrCurieOrAbsIRIs.datatype }?
+# *** @scope ***
+# 
+#  restriction: global | local | private | "[iris]" (terms or curies or absolute IRIs)
+# 
+#  Defines a scope. Predefined scopes are global, local, private. 
+#  Internal dynamic scopes defined by metadata views (defined in the <scope> role) can be references by the oid name term (<oid>)
+#  and externally defined scopes by their IRI.
+# 
+#      default value: "global" for relations and functions and "local" for terms 
+#      optional attribute
+# 
+#      See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40scope
+scope-formula.attrib =
+  [ a2:defaultValue = "global" ]
+  attribute scope {
+    termOrCurieOrAbsIRIs.datatype | vocab-scope.datatype
+  }?
+scope-term.attrib =
+  [ a3:defaultValue = "local" ]
+  attribute scope {
+    termOrCurieOrAbsIRIs.datatype | vocab-scope.datatype
+  }?
+vocab-scope.datatype = "local" | "global" | "private"
+# *** @arity ***
+# An optional attribute for specifying the arity of a signature.
+# The arity of constants / individual objects is zero.
+# The arity of predicates and functions is the number of arguments they have.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40arity
+arity.attrib = attribute arity { xsd:nonNegativeInteger }?
+# *** @prefix ***
+# 
+# a white space separated list of prefix-name IRI pairs of the form NCName ':' ' '+ xsd:anyURI
+# 
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40prefix
+#
+prefix.attrib = attribute prefix { prefix.datatype }?
+prefix.datatype =
+  xsd:string { minLength = "1" pattern = "([\i-[:]][\c-[:]]*)?" }
+# *** @vocab ***
+# 
+# an IRI that defines the vocabulary mapping to use when a TERM is referenced in an attribute value.
+# 
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40vocab
+#
+vocab.attrib = attribute vocab { xsd:anyURI }?
+# *** @card @minCard @maxCard ***
+# An attribute optionally specifying the cardinality.
+# 
+# "-1" = unbound
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40card
+#	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40maxCard
+#	http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40minCard
+card.attrib =
+  attribute card { xsd:int }?,
+  attribute maxCard { xsd:int }?,
+  attribute minCard { xsd:nonNegativeInteger }?
+# *** @weight ***
+# An attribute optionally specifying a relative weight.
+# The default is "1", i.e. all knowledge has the same weight of "1". 
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40weight		
+weight.attrib =
+  attribute weight {
+    xsd:decimal { minInclusive = "0" maxInclusive = "1" }
+  }?
+# *** @direction ***
+# An attribute indicating the intended direction of an implication rule's inferencing.
+# default is bidirectional.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40direction
+direction.attrib =
+  attribute direction {
+    termOrCurieOrAbsIRI.datatype | vocab-direction.datatype
+  }?
+vocab-direction.datatype = "forward" | "backward" | "bidirectional"
+# *** @closure ***
+# An attribute indicating how the contained free variables are quantified.
+# default is universal closure.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40closure		
+closure.attrib =
+  attribute closure {
+    termOrCurieOrAbsIRI.datatype | vocab-closure.datatype
+  }?
+vocab-closure.datatype = "universal" | "existential"
+# *** @material ***
+# An attribute indicating the kind of an implication rule.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40material
+material.attrib = attribute material { material.datatype }?
+material.datatype =
+  termOrCurieOrAbsIRI.datatype | vocab-material.datatype
+vocab-material.datatype = "yes" | "no"
+# *** @iri ***
+# An attribute for referring to a Curie or absolute IRI.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40iri
+iri.attrib = attribute iri { curieOrAbsIRI.datatype }?
+# *** @index ***
+# An optional attribute for specifying an ordering on roles.
+# 
+# Note: in Reaction RuleML @index is optional
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40index
+index.attrib = attribute index { xsd:positiveInteger }?
+# *** @oriented ***
+# An attribute indicating whether an equation is oriented (directed)
+# or unoriented (symmetric).
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-.40oriented
+oriented.attrib = attribute oriented { "yes" | "no" }?
+# 
+# a group of attributes for all XML elements in Reaction RuleML
+# 
+# @prefix?, @key?, @keyref?, @xml:id?, @xml:base?
+# 
+# @key and @keyref attributes for local syntactic modularization of the knowledge base
+#
+xml.attlist =
+  prefix.attrib?,
+  key.attrib?,
+  keyref.attrib?,
+  attribute xml:base { text }?,
+  attribute xml:id { text }?
+#
+xsi.attrib =  attribute xsi:schemaLocation { text }?
+# 
+# a group of attributes for all XML node elements (type elements) in Reaction RuleML
+# 
+# @meta?, @qualify?, @node?, @iri?, @vocab?
+#
+node-element.attlist =
+  node.attrib, iri.attrib, vocab.attrib, meta.attrib, qualify.attrib, xsi.attrib
+# 
+# a group of attributes for all XML edge elements (role elements) in Reaction RuleML
+# 
+# @index?
+#
+edge-element.attlist = index.attrib, xsi.attrib
+# 
+# a group of attributes for the meta knowledge interface of all grouping formulas in Reaction RuleML
+# 
+# @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @material?, @per?  
+# 
+# attributes of grouping formulas are automatically inherited as default attributes to all formulas in the group.
+group-formula-interface.attlist =
+  formula-interface.attlist, material.attrib
+# 
+# a group of attributes for the meta knowledge interface of all knowledge formulas in Reaction RuleML
+# 
+# @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?
+# 
+#
+formula-interface.attlist =
+  type.attrib,
+  arity.attrib,
+  card.attrib,
+  weight.attrib,
+  style.attrib,
+  direction.attrib,
+  scope-formula.attrib,
+  closure.attrib,
+  mode.attrib,
+  per.attrib
+# 
+# a group of attributes for the meta knowledge interface of all terms in Reaction RuleML
+# 
+# @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @scope?, @per?
+#
+term-interface.attlist =
+  type.attrib,
+  arity.attrib,
+  card.attrib,
+  weight.attrib,
+  style.attrib,
+  scope-term.attrib,
+  mode.attrib,
+  per.attrib
+# 
+# a group of attributes for the meta knowledge interface of all quantifiers in Reaction RuleML
+# 
+# @type?, @card?, @minCard?, @maxCard?, @style?, @scope?
+quantifier-interface.attlist =
+  type.attrib, card.attrib, style.attrib, scope-formula.attrib
+# 
+# a group of attributes for the meta knowledge interface of all connectives/operators in Reaction RuleML
+# 
+# @type?, @mode?, @arity?, @card?, @minCard?, @maxCard?, @weight?, @style?, @direction?, @scope?, @closure?, @per?
+operator-interface.attlist =
+  type.attrib,
+  arity.attrib,
+  card.attrib,
+  weight.attrib,
+  style.attrib,
+  direction.attrib,
+  scope-formula.attrib,
+  mode.attrib,
+  closure.attrib,
+  per.attrib
+# 
+# a group of attributes for the meta knowledge interface of all action / performatives in Reaction RuleML
+# 
+# @safety?
+action-interface.attlist = safety.attrib
+# 
+# a group of attributes for the meta knowledge interface of all events in Reaction RuleML
+# 
+# @safety?
+event-interface.attlist = safety.attrib
+a:documentation [
+  "\x{a}" ~
+  "                              Rules module part of Reaction RuleML.\x{a}" ~
+  "            It defines the core            Rule construct used as basis for all types of rules in\x{a}" ~
+  "            Reaction RuleML                      This is the XML Schema rule module for Reaction\x{a}" ~
+  "            RuleML.           File: rule_module.xsd           Version: 1.02           Last\x{a}" ~
+  "            Modification: 2015-03-29                      This schema declares the following\x{a}" ~
+  "            Reaction RuleML elements and attributes:                      * Rule           * on\x{a}" ~
+  "            * if           * then           * do           * after                     * else\x{a}" ~
+  "            * elseDo           * elseAfter                          \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Rule ***
+# The Rule element that provides the basic syntax for rules
+# in Reaction RuleML.
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Rule
+Rule.attlist =
+  formula-interface.attlist,
+  node-element.attlist,
+  material.attrib,
+  xml.attlist
+Rule.content = meta-roles.content, degree?, rule-implementation.content?
+Rule.type = Rule.content, Rule.attlist
+start |= Rule
+Rule = element Rule { Rule.type }
+# *** on ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-on
+on.attlist = xml.attlist, edge-element.attlist
+on.content = event_group.content
+on.type = on.content, on.attlist
+start |= on
+on = element on { on.type }
+# *** if ***
+# *** after ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-if
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-after
+start |= after
+after = element after { if.type }
+#     *** then ***	
+# *** else ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-then
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-else
+start |= else
+else = element else { then.type }
+# *** do ***
+# *** elseDo ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-do
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-elseDo
+do.attlist = xml.attlist, edge-element.attlist
+do.content = action_group.content
+do.type = do.content, do.attlist
+start |= do
+do = element do { do.type }
+start |= elseDo
+elseDo = element elseDo { do.type }
+# *** Derivation Rule content model ***  	
+DerivationRule.content =
+  else?
+  | then
+  | if
+  | if
+  | then
+  | else?
+  | if.content
+  | then.content
+  | then.content?
+# *** Production Rule content model ***
+ProductionRule.content = elseDo? | do | if | if | do | elseDo?
+# *** Combined DR Production Rule content model ***
+DRProductionRule.content =
+  elseDo? | else? | do | then? | if | if | then? | do? | else? | elseDo?
+# *** ECA Reaction Rule content model ***
+ReactionRule.content =
+  on, (if? | then? | do? | after? | else? | elseDo?)?
+# *** CEP Messaging Rule content model ***
+# 
+# CEP rules allow arbitrary combinations and repititions of the rule's content model
+MessagingRule.content = (on | if | then | do | after | else | elseDo)+
+a:documentation [
+  "\x{a}" ~
+  "                 Negation module part of Reaction RuleML.   This\x{a}" ~
+  "            defines the negation elements for Reaction RuleML.   File: negation_module.xsd\x{a}" ~
+  "            Version: 1.02   Last Modification: 2015-03-22      * Negation  generic polymorphig\x{a}" ~
+  "            negation   * Naf           negation as failure (inflationary negation in production\x{a}" ~
+  "            rules), weak negation   * Neg           classical negation, strong negation   * weak\x{a}" ~
+  "            * strong   * formula        \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Negation ***
+# A generic polymorphic negation
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Negation
+# 
+# It can be specialized by using
+# the @type attribute to specify the type of negation and/or 
+# the @iri attribute to point to an external definition of the negation
+# @key, @keyref, @node
+Negation.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Negation.content =
+  meta-roles.content,
+  degree?,
+  (element formula { formula-negation.type }
+   | formula-negation.content)?
+Negation.type = Negation.content, Negation.attlist
+start |= Negation
+Negation = element Negation { Negation.type }
+formula-negation.attlist = xml.attlist
+formula-negation.content =
+  element Operation { Operation-formula-and-or.type }
+  | Equal
+  | Negation
+  | Neg
+  | extended-signature-predicate-sorts.content
+formula-negation.type =
+  formula-negation.content, formula-negation.attlist
+start |= formula
+formula = element formula { formula-negation.type }
+# *** Naf ***
+# A "by default" negation of a logical atom (i.e. "weak" negation or
+# negation-as-failure).
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Naf 
+Naf.attlist = Negation.attlist
+Naf.content = meta-roles.content, degree?, (weak | weak.content)?
+Naf.type = Naf.content, Naf.attlist
+start |= Naf
+Naf = element Naf { Naf.type }
+# *** weak ***
+# A role used for negation as failure.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-weak
+weak.attlist = xml.attlist
+weak.content = formula-negation.content
+weak.type = weak.content, weak.attlist
+start |= weak
+weak = element weak { weak.type }
+# *** Neg ***
+# A classical negation of a logical atom (i.e. classical or "strong" negation).
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Neg 
+Neg.attlist = Negation.attlist
+Neg.content = meta-roles.content, degree?, (strong | strong.content)?
+Neg.type = Neg.content, Neg.attlist
+start |= Neg
+Neg = element Neg { Neg.type }
+# *** strong ***
+# A role used for classical negation.
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-strong
+strong.attlist = xml.attlist
+strong.content = formula-negation.content
+strong.type = strong.content, strong.attlist
+start |= strong
+strong = element strong { strong.type }
+a:documentation [
+  "\x{a}" ~
+  "                                         Quantifier module part of\x{a}" ~
+  "            Reaction RuleML redefining the Forall, Exists and introduce the Quantifier element.\x{a}" ~
+  "            This is the XML Schema Quantifier element for Reaction RuleML.   File:\x{a}" ~
+  "            quantifier_module.xsd   Version: 1.02   Last Modification: 2015-03-22       * Quantifier\x{a}" ~
+  "            generic quantifier (used in quantification metatag)   * Forall  predefined body\x{a}" ~
+  "            quantifier (used in quantification metatag)   * Exist   predefined body quantifier (used\x{a}" ~
+  "            in qualification metatag)       \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+#     *** Quantifier ***
+#     Explicit generic quantifier, where the quantifier name can be defined by the 
+# @type attribute and the @iri attribute can point to an external definition
+# of the quantifier.
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Quantifier
+# 
+# Format: "quantifier declare(Var)* such that guard formula(...)?" 
+Quantifier.attlist =
+  quantifier-interface.attlist, node-element.attlist, xml.attlist
+Quantifier.content =
+  meta-roles.content,
+  degree?,
+  (declare | Var)*,
+  (element formula { formula-meta-quantifier.type }
+   | formula-meta-quantifier.content)?
+Quantifier.type = Quantifier.content, Quantifier.attlist
+start |= Quantifier
+Quantifier = element Quantifier { Quantifier.type }
+# Exists
+# make the quantifier constraint restrictions ("such that") optional
+# 
+# http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Exists
+Exists-quantifier.content =
+  meta-roles.content,
+  degree?,
+  (declare | declare.content)*,
+  (element formula { formula-meta-quantifier.type }
+   | formula-meta-quantifier.content)?
+Exists-quantifier.type = Exists-quantifier.content, Quantifier.attlist
+# Forall
+# make the quantifier constraint restrictions ("such that") optional
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Forall
+Forall-quantifier.content =
+  meta-roles.content,
+  degree?,
+  (declare | declare.content)*,
+  (element formula { formula-meta-quantifier.type }
+   | formula-meta-quantifier.content)?
+Forall-quantifier.type = Forall-quantifier.content, Quantifier.attlist
+# *** formula ***
+# The 'such that' guard formula role of a quantifier (<Forall> or <Exists>).
+# 
+# See http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-formula
+formula-meta-quantifier.content = guard.content
+formula-meta-quantifier.type =
+  formula-meta-quantifier.content, formula.attlist
+a:documentation [
+  "\x{a}" ~
+  "                 Profile module part of Reaction RuleML.   This is\x{a}" ~
+  "            the XML Schema Profile element for Reaction RuleML for describing semantic profiles.\x{a}" ~
+  "            Semantic Profiles are used to define the interpretation evaluation semantics (under the\x{a}" ~
+  "            evaluation metatag)    either by referecing external existing profiles or by defining\x{a}" ~
+  "            them internally.   File: profile_module.xsd   Version: 1.02   Last Modification:\x{a}" ~
+  "            2015-03-22      * Profile         generic semantic profile       \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-22T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Profile ***
+# Explicit generic semantic profile defining the intended semantics for knowledge interpretation, inference and execution. 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Profile 
+Profile.attlist =
+  group-formula-interface.attlist,
+  safety.attrib,
+  node-element.attlist,
+  xml.attlist
+Profile.content =
+  meta-roles.content,
+  (element formula { formula-assert.type }
+   | formula-assert.content
+   | element content { profile_anycontent.type })*
+Profile.type = Profile.content, Profile.attlist
+start |= Profile
+Profile = element Profile { Profile.type }
+# *** content ***
+# 
+#    see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+# 
+# the optional @prefix and @vocab are used to define a prefix and a term mapping vocabulary for the XML content (see CURIE to IRI and term to IRI translation)
+profile_anycontent.attlist = xml.attlist
+profile_anycontent.content = any_content
+profile_anycontent.type =
+  profile_anycontent.content, profile_anycontent.attlist
+a:documentation [
+  "\x{a}" ~
+  "                       Time module part of Reaction RuleML. It\x{a}" ~
+  "            defines the core     time constructs        This is the XML Schema time module for\x{a}" ~
+  "            Reaction RuleML.    File: time_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
+  "            2015-07-19     This schema declares the following Reaction RuleML elements and\x{a}" ~
+  "            attributes:       * Time    \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built time module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-19T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+#	*** Time ***
+#	Explicit generic Time construct. 
+# 
+#	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Situation
+# 
+#	The time can be represented internally 
+#       * with positional arguments <arg>, e.g., <arg>
+# <Data xsi:type="xs:dateTime>2015-10-02T10:45:34-00:00</Data>
+# </arg>
+#       * with unpositional slots <slot>, e.g., <slot>
+# <Ind>year</Ind>
+# <Ind>2015</Ind>
+# </slot>
+# <slot>
+# <Ind>month</Ind>
+# <Ind>10</Ind>
+# </slot>
+#       * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for time
+#       or externally, where the optional @iri attribute points to an external data definition of the time
+#       The optional @type attribute defines the type of the time, e.g. ruleml:TimeInstant (linear continuous time model) 
+#       or ruleml:TimeInterval (discrete time interval model). The default time semantics is a discrete time model.
+#       Note: Time can be defined absolute or relative.
+Time-formula.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Time-formula.content =
+  meta-roles.content,
+  degree?,
+  ((slot*,
+    ((((arg_time.content | arg_time)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { time_anycontent.type }*)?
+Time-formula.type = Time-formula.content, Time-formula.attlist
+# Time term
+Time-term.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Time-term.content =
+  meta-roles.content,
+  ((slot*,
+    ((((arg_time.content | arg_time)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { time_anycontent.type }*)?
+Time-term.type = Time-term.content, Time-term.attlist
+# *** arg ***
+# 
+# Definition of the the arg role for Time
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
+arg_time.attlist = edge-element.attlist, xml.attlist
+arg_time.content = time_primitives.content
+arg_time.type = arg_time.content, arg_time.attlist
+arg_time = element arg { arg_time.type }
+# *** content ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+# 
+# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+#    See CURIE to IRI and term to IRI translation
+time_anycontent.attlist = edge-element.attlist, xml.attlist
+time_anycontent.content = any_content
+time_anycontent.type = time_anycontent.content, time_anycontent.attlist
+a:documentation [
+  "\x{a}" ~
+  "                Spatial module part of Reaction RuleML. It defines\x{a}" ~
+  "            the core     spatial constructs        This is the XML Schema spatial module for\x{a}" ~
+  "            Reaction RuleML.    File: spatial_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
+  "            2015-07-19        This schema declares the following Reaction RuleML elements and\x{a}" ~
+  "            attributes:        * Spatial       \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+#   *** Spatial ***
+#   Explicit generic Spatial construct. 
+# 
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Spatial
+# 
+#   The spatial can be represented internally 
+# * with positional arguments <arg>
+# * with unpositional slots <slot>
+# * by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed arbitrary XML syntaxes
+# or externally, where the optional @iri attribute points to an external data definition of the spatial
+# The optional @type attribute defines the type of the spatial
+Spatial-formula.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Spatial-formula.content =
+  meta-roles.content,
+  degree?,
+  ((slot*,
+    ((((arg_spatial.content | arg_spatial)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { spatial_anycontent.type }*)?
+Spatial-formula.type = Spatial-formula.content, Spatial-formula.attlist
+# Spatial term
+Spatial-term.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Spatial-term.content =
+  meta-roles.content,
+  ((slot*,
+    ((((arg_spatial.content | arg_spatial)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { spatial_anycontent.type }*)?
+Spatial-term.type = Spatial-term.content, Spatial-term.attlist
+# *** arg ***
+# 
+# Definition of the the arg role for Spatial
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg  
+arg_spatial.attlist = edge-element.attlist, xml.attlist
+arg_spatial.content = spatial_primitives.content
+arg_spatial.type = arg_spatial.content, arg_spatial.attlist
+arg_spatial = element arg {arg_spatial.type}
+# *** content ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+# 
+# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+#    See CURIE to IRI and term to IRI translation
+spatial_anycontent.attlist = edge-element.attlist, xml.attlist
+spatial_anycontent.content = any_content
+spatial_anycontent.type =
+  spatial_anycontent.content, spatial_anycontent.attlist
+a:documentation [
+  "\x{a}" ~
+  "                       Interval module part of Reaction RuleML. It\x{a}" ~
+  "            defines the core     Interval construct        This is the XML Schema interval module\x{a}" ~
+  "            for Reaction RuleML.    File: interval_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
+  "            2015-07-19     This schema declares the following Reaction RuleML elements and\x{a}" ~
+  "            attributes:       * Interval    \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+#     *** Interval ***
+#     Explicit generic Interval. 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Interval
+# 
+#     The interval can be
+#   defined internally by the any content model (xs:any Element) or externally, where 
+#   the optional @type attribute defines the name/type of the interval,
+#   the optional @iri attribute points to an external definition of the interval, and
+#    An interval can be defined by Events, Actions,  Times, Spatials, and other Intervals can be typed by the 
+#    interval ontology of Reaction RuleML (defining different types of intervals).
+Interval-formula.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Interval-formula.content =
+  meta-roles.content,
+  degree?,
+  ((arg_interval
+   | element content { interval_anycontent.type }
+   | arg_interval.content),
+  (arg_interval
+   | element content { interval_anycontent.type }
+   | arg_interval.content)?)?
+Interval-formula.type =
+  Interval-formula.content, Interval-formula.attlist
+# Interval term
+Interval-term.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Interval-term.content =
+  meta-roles.content,
+  ((arg_interval
+   | arg_interval.content),
+  (arg_interval
+   | arg_interval.content)?)?
+Interval-term.type = Interval-term.content, Interval-term.attlist
+# *** arg ***
+# 
+# Definition of the the arg role for Intervals
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
+arg_interval.attlist = edge-element.attlist, xml.attlist
+arg_interval.content = interval_primitives.content
+arg_interval.type = arg_interval.content, arg_interval.attlist
+arg_interval = element arg {arg_interval.type}
+# *** content ***
+# 
+#      see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+# 
+# @prefix is used to define a prefix and a term mapping vocabulary for the XML content
+# See CURIE to IRI and term to IRI translation
+#
+interval_anycontent.attlist = edge-element.attlist, xml.attlist
+interval_anycontent.content = any_content
+interval_anycontent.type =
+  interval_anycontent.content, interval_anycontent.attlist
+# include spatial-temporal and interval operators from the algebra modules of reaction ruleml
+
+a:documentation [
+  "\x{a}" ~
+  "                                spatial-temporal-interval algebra\x{a}" ~
+  "            module part of Reaction RuleML    This is the XML Schema of the algebra module for\x{a}" ~
+  "            Reaction RuleML    File: spatial_temporal_interval_algebra_module.xsd    Version: 1.02\x{a}" ~
+  "            Last Modification: 2015-07-19        This schema declares the following Reaction RuleML\x{a}" ~
+  "            elements and attributes:                                      Operation (generic\x{a}" ~
+  '            operator)                   at (general role "at Time | Spatial | Interval)\x{a}' ~
+  "            Spatial, Temporal, Interval Function Constructs                                       *\x{a}" ~
+  "            After                   * Before       * Every                   * Any\x{a}" ~
+  "            * Timer                                                         (Allen's) Interval\x{a}" ~
+  "            Relations                                      * During                   * Overlaps\x{a}" ~
+  "            * Starts                   * Precedes                   * Succeeds                   *\x{a}" ~
+  "            Meets                   * Equal                   * Finishes\x{a}" ~
+  '            The approach is modelled after that used in "Modularization of XHTML in XML Schema"\x{a}' ~
+  "            WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with\x{a}" ~
+  '            "Modularization of XHTML" (REC-xhtml-modularization-20010410)\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-modularization/].   \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Tara Athan (taraathan AT gmail.com)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-14T17:04:00+0200" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+spatial_temporal_algebra_group.content =
+  After | Before | Every | Any | Timer
+interval_algebra_group.content =
+  During | Overlaps | Starts | Precedes | Succeeds | Meets | Finishes
+# *** at ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-at
+# 
+#     Note: In Situation Calculus the time is a situation (the history of occured situations as a finite sequence of the events/actions) 	
+at.attlist = xml.attlist
+at.content = time_primitives.content
+at.type = at.content, at.attlist
+start |= at
+at = element at { at.type }
+# *** After / Before***
+# 
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-After
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Before
+# 
+# X after Y  / X before Y
+# 
+# Note: Y might be absolute or relative, e.g. "after 2 days", "2 days after X"  
+After.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+After.content = Interval-term.content
+After.type = After.content, After.attlist
+start |= After
+After = element After { After.type }
+start |= Before
+Before = element Before { After.type }
+# *** Every ***
+# 
+# Every X 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Every
+# 
+# Note:  X is often a relative, e.g. "every Monday", "every 2 meters" 
+Every.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Every.content =
+  meta-roles.content,
+  (arg_interval
+   | interval_primitives.content
+   | element content { interval_anycontent.type })?
+Every.type = Every.content, Every.attlist
+start |= Every
+Every = element Every { Every.type }
+# *** Any ***
+# 
+# Any X1,..Xn
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Any
+# 
+# e.g. "at any Saturday and Sunday"     
+Any.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Any.content =
+  meta-roles.content,
+  (arg_interval+
+   | interval_primitives.content+
+   | element content { interval_anycontent.type }+)?
+Any.type = Any.content, Any.attlist
+start |= Any
+Any = element Any { Any.type }
+# *** (Recurring) Timer ***
+# 
+# After X Every Y
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Recurring
+# 
+# Note: X and Y might be relative, e.g. after 1 hour every hour (recurring timer)
+Timer.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+Timer.content = Interval-term.content
+Timer.type = Timer.content, Timer.attlist
+start |= Timer
+Timer = element Timer { Timer.type }
+# *** (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes) ***
+# 
+# operator(Interval, Interval)
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-During
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Overlaps
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Starts
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Precedes
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Succeeds
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Meets
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Equal
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Finishes
+IntervalAlgebraOperator.attlist =
+  operator-interface.attlist, node-element.attlist, xml.attlist
+IntervalAlgebraOperator.content =
+  meta-roles.content,
+  degree?,
+  ((arg_interval
+   | arg_interval.content),
+  (arg_interval
+   | arg_interval.content))?
+IntervalAlgebraOperator.type =
+  IntervalAlgebraOperator.content, IntervalAlgebraOperator.attlist
+start |= During
+During = element During { IntervalAlgebraOperator.type }
+start |= Overlaps
+Overlaps = element Overlaps { IntervalAlgebraOperator.type }
+start |= Starts
+Starts = element Starts { IntervalAlgebraOperator.type }
+start |= Precedes
+Precedes = element Precedes { IntervalAlgebraOperator.type }
+start |= Succeeds
+Succeeds = element Succeeds { IntervalAlgebraOperator.type }
+start |= Meets
+Meets = element Meets { IntervalAlgebraOperator.type }
+start |= Finishes
+Finishes = element Finishes { IntervalAlgebraOperator.type }
+# include from the knowledge representation (KR) rule layer of reaction ruleml
+
+a:documentation [
+  "\x{a}" ~
+  "                       Situation module part of Reaction RuleML. It\x{a}" ~
+  "            defines the core     situation constructs        This is the XML Schema situation module\x{a}" ~
+  "            for Reaction RuleML.    File: situation_module.xsd    Version: 1.02    Last\x{a}" ~
+  "            Modification: 2015-03-29     This schema declares the following Reaction RuleML elements\x{a}" ~
+  "            and attributes:       * Situation    \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-22T29:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+#	*** Situation ***
+#	Explicit generic Situation. 
+# 
+#	see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Situation
+# 
+#	The situation can be defined internally 
+#		* with positional arguments <arg>, e.g., <arg>
+# <Ind>s1</Ind>
+# </arg>
+#	* with unpositional slots <slot>, e.g., <slot>
+# <Ind>name</Ind>
+# <Ind>s1</Ind>
+# </slot>
+# <slot>
+# <Ind>occursAt</Ind>
+# <Time>....</Time>
+# </slot>
+#	* by the any content model (<content>xs:any Element</content>), which acts as an extension point
+#       or externally, where the optional @iri attribute points to an external definition of the situation.
+#       The optional @type attribute defines the type of the situation.
+# 
+#       The situation instance (aka situation occurence is defined by its <arg>uments, <slot>s, as a situation interpretation <formula>, 
+#       or arbitrary <content>. A situation pattern, as used, e.g., in a query or condition of a rule, is defined in the <signature> 
+#       as situation template, e.g. <Situation>
+# <signature>...</signature>
+# </Situation>.
+# 
+#       Note: It is possible to interpret intervals, time (in the reaction layers also events and actions) as situations,
+#	    e.g., <Situation>
+# <Time>...</Time>
+# </Situation>. 
+Situation-formula.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Situation-formula.content =
+  meta-roles.content,
+  degree?,
+  ((slot*,
+    ((((arg_situation.content | arg_situation)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { situation_anycontent.type })?
+Situation-formula.type =
+  Situation-formula.content, Situation-formula.attlist
+# Situation term
+Situation-term.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Situation-term.content =
+  meta-roles.content,
+  ((slot*,
+    ((((arg_situation.content | arg_situation)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { situation_anycontent.type })?
+Situation-term.type = Situation-term.content, Situation-term.attlist
+# *** arg ***
+# 
+# Definition of the the arg role for Situation
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg     
+arg_situation.attlist = edge-element.attlist, xml.attlist
+arg_situation.content = situation_primitives.content
+arg_situation.type = arg_situation.content, arg_situation.attlist
+arg_situation = element arg { arg_situation.type }
+# *** content ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+# 
+# @prefix ais used to define a prefix and a term mapping vocabulary for the XML content
+#    See CURIE to IRI and term to IRI translation
+situation_anycontent.attlist = edge-element.attlist, xml.attlist
+situation_anycontent.content = any_content
+situation_anycontent.type =
+  situation_anycontent.content, situation_anycontent.attlist
+a:documentation [
+  "\x{a}" ~
+  "                       KR situation reasoning module part of\x{a}" ~
+  "            Reaction RuleML.     This is the XML Schema KR-CEP module for Reaction RuleML.    File:\x{a}" ~
+  "            situation_CEP_module.xsd    Version: 1.02    Last Modification: 2015-07-22     This\x{a}" ~
+  "            schema declares the following Reaction RuleML elements and attributes:      * Happens\x{a}" ~
+  "            * Initiates     * Terminates     * fluent     * Fluent     * Holds     * Situation     *\x{a}" ~
+  '            Do        The approach is modelled after that used in "Modularization of XHTML in XML\x{a}' ~
+  '            Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated\x{a}' ~
+  '            with    "Modularization of XHTML" (REC-xhtml-modularization-20010410)\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-modularization/].   \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-22T29:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** fluent ***
+# 
+#     see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-fluent
+# 
+# A fluent is a fluent situation which holds true or false as a condition which changes over time - a changeable situation. 
+# In Situation Calculus, fluents (changable situations) are expressions which hold true or false and take an occured situation (as a history of action events; note: there is no distinction in events and actions in such calculi) 
+# as their final argument (see Holds below).
+# 
+#     Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
+#	  The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic  
+fluent.attlist = xml.attlist
+fluent.content = situation_primitives.content
+fluent.type = fluent.content, fluent.attlist
+start |= fluent
+fluent = element fluent { fluent.type }
+# *** Do ***
+# 
+# The function do maps (reified) actions into situations; do: A x S -> S
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Do
+Do.attlist = term-interface.attlist, node-element.attlist, xml.attlist
+Do.content = meta-roles.content, ((do), (at)?)?
+Do.type = Do.content, Do.attlist
+start |= Do
+Do = element Do { Do.type }
+# *** Happens ***
+# 
+# Different happens / happenings can be defined by pointing to an external vocabulary with @iri, e.g. a vocabulary for a calculi
+# which distinguishes between events which acutally happen and other event relations to time or situations  (e.g. poss, planned, etc.)
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Happens
+# 
+# In reified Situation Calculus happens can be used to define action effects. 
+# 
+# Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
+# The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
+Happens.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Happens.content = meta-roles.content, ((on), (at)?)?
+Happens.type = Happens.content, Happens.attlist
+start |= Happens
+Happens = element Happens { Happens.type }
+# *** Initiates ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Initiates 
+Initiates.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Initiates.content = meta-roles.content, ((on), (fluent), (at)?)?
+Initiates.type = Initiates.content, Initiates.attlist
+start |= Initiates
+Initiates = element Initiates { Initiates.type }
+# *** Terminates ***
+# 
+#	  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Terminates
+Terminates.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Terminates.content = meta-roles.content, ((on), (fluent), (at)?)?
+Terminates.type = Terminates.content, Terminates.attlist
+start |= Terminates
+Terminates = element Terminates { Terminates.type }
+# *** Holds ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Holds
+# 
+# In Event Calculus, Feature and Fluent Calculus reified fluents hold at a time. 
+# In reified Situation Calculus a Fluent Situation (a statement whose truth value may change) holds at a particular Situation 
+# 
+#	  Note: we allow reification of fluents and situations in Reaction RuleML also for Situation Calculus serialization. 
+#	  The transformation of such XML reifications in Reaction RuleML would be translated into a predicate in the concrete language of a Situation Calculus rule language or first-order logic
+Holds.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Holds.content = meta-roles.content, ((fluent), (at)?)?
+Holds.type = Holds.content, Holds.attlist
+start |= Holds
+Holds = element Holds { Holds.type }
+# *** Fluent ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Fluent	
+Fluent-formula.attlist =
+  formula-interface.attlist, node-element.attlist, xml.attlist
+Fluent-formula.content =
+  meta-roles.content,
+  degree?,
+  ((slot*,
+    ((((arg_fluent.content | arg_fluent)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { fluent_anycontent.type })?
+Fluent-formula.type = Fluent-formula.content, Fluent-formula.attlist
+# Fluent term
+Fluent-term.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Fluent-term.content =
+  meta-roles.content,
+  degree?,
+   ((slot*,
+    ((((arg_fluent.content | arg_fluent)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { fluent_anycontent.type })?
+Fluent-term.type = Fluent-term.content, Fluent-term.attlist
+# *** arg ***
+# 
+# Definition of the the arg role for Fluent
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
+arg_fluent.attlist = edge-element.attlist, xml.attlist
+arg_fluent.content = arg.content
+arg_fluent.type = arg_fluent.content, arg_fluent.attlist
+arg_fluent = element arg { arg_fluent.type }
+# *** content ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+fluent_anycontent.attlist = edge-element.attlist, xml.attlist
+fluent_anycontent.content = any_content
+fluent_anycontent.type =
+  fluent_anycontent.content, fluent_anycontent.attlist
+# include actions from the PR rule layer of reaction ruleml
+
+a:documentation [
+  "\x{a}" ~
+  "                Action module part of Reaction RuleML. It defines\x{a}" ~
+  "            the core     action constructs        This is the XML Schema event module for Reaction\x{a}" ~
+  "            RuleML.    File: action_module.xsd    Version: 1.02    Last Modification: 2015-07-19\x{a}" ~
+  "            This schema declares the following Reaction RuleML elements and attributes:        *\x{a}" ~
+  "            Action       \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-29T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** arg ***
+# 
+# Definition of the the arg role for Action
+# 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
+#
+arg_action.attlist = edge-element.attlist, xml.attlist
+arg_action.content = action_primitives.content
+arg_action.type = arg_action.content, arg_action.attlist
+arg_action = element arg { arg_action.type }
+# *** content ***
+# 
+# content model:  xs:any*
+# 
+# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+# See CURIE to IRI and term to IRI translation
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+#
+action_anycontent.attlist = edge-element.attlist, xml.attlist
+action_anycontent.content = any_content
+action_anycontent.type =
+  action_anycontent.content, action_anycontent.attlist
+#	*** Action ***
+# 
+#	  Explicit generic Action. The action can be defined internally 
+#	* with positional arguments <arg>, e.g., <arg>
+# <Ind>a1</Ind>
+# </arg> (atomic actions | complex actions)
+#	* with unpositional slots <slot>, e.g., <slot>
+# <Ind>name</Ind>
+# <Ind>a1</Ind>
+# </slot>
+# <slot>
+# <Ind>processingDate</Ind>
+# <Time>....</Time>
+# </slot>
+#	* as interpretation as event with <do>, e.g., <do>
+# <Atom>...</Atom>
+# </do>
+#	* by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for actions
+#       or externally, where the optional @iri attribute points to an external definition of the action.
+#       The optional @type attribute defines the type of the action,
+#       the optional @safety attribute indicates if this is an interrupting, non-interrupting, transactional action
+#       the optional @size attribute acts as a generic size counter for the number of actions to be done 
+#       optional @closure defines the default quantification
+# 
+# 
+#	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Action	                
+Action-formula.attlist =
+  action-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Action-formula.content =
+  meta-roles.content,
+  degree?,
+  (  (slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { action_anycontent.type })?
+Action-formula.type = Action-formula.content, Action-formula.attlist
+# action term
+Action-term.attlist =
+  action-interface.attlist,
+  term-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Action-term.content =
+  meta-roles.content,
+  ((slot*,
+    ((((arg.content | arg)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { action_anycontent.type })?
+Action-term.type = Action-term.content, Action-term.attlist
+a:documentation [
+  "\x{a}" ~
+  "                                action algebra module part of\x{a}" ~
+  "            Reaction RuleML    This is the XML Schema of the algebra module for Reaction RuleML\x{a}" ~
+  "            File: action_algebra_module.xsd    Version: 1.02    Last Modification: 2015-03-22\x{a}" ~
+  "            This schema declares the following Reaction RuleML elements and attributes:\x{a}" ~
+  "            Action Algebra Operators                                      * Operation (generic\x{a}" ~
+  "            action operator)                   * Succession                    * Choice\x{a}" ~
+  "            * Flow                    * Loop                           The approach is modelled\x{a}" ~
+  '            after that used in "Modularization of XHTML in XML Schema"    WD\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with\x{a}" ~
+  '            "Modularization of XHTML" (REC-xhtml-modularization-20010410)\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-modularization/].   \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-22T29:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+action_algebra_group.content =
+  Succession
+  | Choice
+  | Flow
+  | Loop
+  | element Operation { ActionAlgebraOperator.type }
+#  *** (Succession) (Choice) (Flow) (Loop) (Operation) ***
+# 
+#  Definition of action algebra operators
+# 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Sucession
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Choice
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Flow
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Loop
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
+ActionAlgebraOperator.attlist =
+  action-interface.attlist, node-element.attlist, xml.attlist
+ActionAlgebraOperator.content = meta-roles.content, (do | do.content)*
+ActionAlgebraOperator.type =
+  ActionAlgebraOperator.content, ActionAlgebraOperator.attlist
+start |= Succession
+Succession = element Succession { ActionAlgebraOperator.type }
+start |= Choice
+Choice = element Choice { ActionAlgebraOperator.type }
+start |= Flow
+Flow = element Flow { ActionAlgebraOperator.type }
+start |= Loop
+Loop = element Loop { ActionAlgebraOperator.type }
+# include events from the ECA rule layer of reaction ruleml
+
+a:documentation [
+  "\x{a}" ~
+  "                       Event module part of Reaction RuleML. It\x{a}" ~
+  "            defines the core     event constructs        This is the XML Schema event module for\x{a}" ~
+  "            Reaction RuleML.    File: event_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
+  "            2015-07-19     This schema declares the following Reaction RuleML elements and\x{a}" ~
+  "            attributes:       * Event    \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-07-19T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+#	*** Event ***
+#	  Explicit generic Event. 
+# 
+#	  See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Event
+# 
+#	  The event can be defined internally 
+#	* with positional arguments <arg>, e.g., <arg>
+# <Ind>e1</Ind>
+# </arg>
+#	* with unpositional slots <slot>, e.g., <slot>
+# <Ind>name</Ind>
+# <Ind>e1</Ind>
+# </slot>
+# <slot>
+# <Ind>processingDate</Ind>
+# <Time>....</Time>
+# </slot>
+#	* as interpretation as event with <on>, e.g., <on>
+# <Atom>...</Atom>
+# </on>
+#	* by the any content model (<content>xs:any Element</content>), which acts as an extension point to embed one of the many existing XML syntaxes for events
+#       or externally, where the optional @iri attribute points to an external definition of the event.
+#       The optional @type attribute defines the type of the event,
+#       the optional @safety attribute indicates if this is an interrupting, non-interrupting, transactional event
+#       the optional @size attribute acts as a generic size counter for the number of events to be received 
+#       Definitions of time and spatial events are simplified by makeing the assumption that a time/spatial object can be interpreted as event, 
+#       e.g. <Event>
+# <arg>
+# <Time>...</Time>
+# </arg>
+# </Event>.
+# 
+#       The event instance is defined by its <arg>uments, <slot>s, as an event interpretation <on>, or arbitrary <content>.
+#       An event pattern (as used, e.g., in the <on> part of a reaction rule) is defined in the <signature> 
+#       of the event as event template, e.g. <Event>
+# <signature>...</signature>
+# </Event>.
+#
+Event-formula.attlist =
+  event-interface.attlist,
+  formula-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Event-formula.content =
+  meta-roles.content,
+  degree?,
+  ((slot*,
+    ((((arg_event.content | arg_event)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { event_anycontent.type })?
+Event-formula.type = Event-formula.content, Event-formula.attlist
+# event term
+Event-term.attlist =
+  event-interface.attlist,
+  term-interface.attlist,
+  node-element.attlist,
+  xml.attlist
+Event-term.content =
+  meta-roles.content,
+  ((slot*,
+    ((((arg_event.content | arg_event)+, repo?)
+      | repo),
+     slot*)?,
+    resl?)
+   | element content { event_anycontent.type })?
+Event-term.type = Event-term.content, Event-term.attlist
+# *** arg ***
+# 
+# Definition of the the arg role for Event
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-arg
+#
+arg_event.attlist = edge-element.attlist, xml.attlist
+arg_event.content = event_primitives.content
+arg_event.type = arg_event.content, arg_event.attlist
+arg_event = element arg { arg_event.type }
+# *** content ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+# 
+# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+# See CURIE to IRI and term to IRI translation
+#
+event_anycontent.attlist = edge-element.attlist, xml.attlist
+event_anycontent.content = any_content
+event_anycontent.type =
+  event_anycontent.content, event_anycontent.attlist
+a:documentation [
+  "\x{a}" ~
+  "                                event algebra module part of\x{a}" ~
+  "            Reaction RuleML    This is the XML Schema of the event algebra module for Reaction\x{a}" ~
+  "            RuleML    File: event_algebra_module.xsd    Version: 1.02    Last Modification:\x{a}" ~
+  "            2015-03-22        This schema declares the following Reaction RuleML elements and\x{a}" ~
+  "            attributes:                                                                        Event\x{a}" ~
+  "            Algebra Operators                                      * Operation (generic event\x{a}" ~
+  "            operator)                   * Sequence                    * Disjunction\x{a}" ~
+  "            * Xor                    * Conjunction                    * Concurrent\x{a}" ~
+  "            * Not                    * Any                    * Aperiodic                    *\x{a}" ~
+  "            Periodic                    * AtLeast                    * ATMost                    *\x{a}" ~
+  "            Operation                       The approach is modelled after that used in\x{a}" ~
+  '            "Modularization of XHTML in XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/],\x{a}' ~
+  '            which will soon be integrated with    "Modularization of XHTML"\x{a}' ~
+  "            (REC-xhtml-modularization-20010410)    [http://www.w3.org/TR/xhtml-modularization/].   \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-22T29:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+event_algebra_group.content =
+  Sequence
+  | Disjunction
+  | Xor
+  | Conjunction
+  | Concurrent
+  | Not
+  | element Any { EventAlgebraOperator.type }
+  | Aperiodic
+  | Periodic
+  | AtLeast
+  | AtMost
+  | element Operation { EventAlgebraOperator.type }
+# *** (Operation) Sequence Disjunction XOR Conjunction Concurrent Not Any Aperiodic Periodic AtLeast AtMost ***
+# 
+# See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
+EventAlgebraOperator.attlist =
+  event-interface.attlist, node-element.attlist, xml.attlist
+EventAlgebraOperator.content = meta-roles.content, (on)*
+EventAlgebraOperator.type =
+  EventAlgebraOperator.content, EventAlgebraOperator.attlist
+start |= Sequence
+Sequence = element Sequence { EventAlgebraOperator.type }
+start |= Disjunction
+Disjunction = element Disjunction { EventAlgebraOperator.type }
+start |= Xor
+Xor = element Xor { EventAlgebraOperator.type }
+start |= Conjunction
+Conjunction = element Conjunction { EventAlgebraOperator.type }
+start |= Concurrent
+Concurrent = element Concurrent { EventAlgebraOperator.type }
+# *** Not ***
+# 
+# "Not on Even2 at [Event1, Event3]" ("Event 2 does not occur between/at [Event 1 and Event 3]")
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Not 
+Not.attlist = EventAlgebraOperator.attlist
+Not.content = meta-roles.content, ((on), (at))?
+Not.type = Not.content, Not.attlist
+start |= Not
+Not = element Not { Not.type }
+# *** Aperiodic ***
+# 
+# "Aperiodic on Event2 at [Event1, Event3]" ("Event2 does occur aperiodically at [Event 1 and Event3]")
+# possibly with multiple accumlated occurences of Event 2 (@size attribute) 
+# 
+#       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Aperiodic
+# 
+#        *** Periodic ***
+# 
+# "Periodic on Event2 at [Event1, Event3]" ("Event2 does occur periodically at time interval [Event 1 and Event3]")
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Periodic     
+start |= Aperiodic
+Aperiodic = element Aperiodic { Not.type }
+start |= Periodic
+Periodic = element Periodic { Not.type }
+# *** AtLeast / AtMost ***
+# 
+# "AtLeast @size occurrences on Event"
+# "AtMost @size occurrences on Event"
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtLeast
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-AtMost
+#
+start |= AtLeast
+AtLeast = element AtLeast { EventAlgebraOperator.type }
+start |= AtMost
+AtMost = element AtMost { EventAlgebraOperator.type }
+# include events from the CEP rule layer of reaction ruleml
+
+a:documentation [
+  "\x{a}" ~
+  "                Message module part of Reaction RuleML.        This\x{a}" ~
+  "            is the XML Schema Message module for Reaction RuleML.    File: message_module.xsd\x{a}" ~
+  "            Version: 1.02    Last Modification: 2015-07-20        This schema declares the following\x{a}" ~
+  "            Reaction RuleML elements and attributes:            * Message    * Agent    * Protocol\x{a}" ~
+  "            * protocol    * sender    * receiver        * content | payload    * @mode    *\x{a}" ~
+  "            directive    * Send    * Receive    * enclosed        The approach is modelled after\x{a}" ~
+  '            that used in "Modularization of XHTML in XML Schema"    WD\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be integrated with\x{a}" ~
+  '            "Modularization of XHTML" (REC-xhtml-modularization-20010410)\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-modularization/].       \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-29T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Message ***
+# A Message element that provides the syntax for inbound and outbound messages / notifications 
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Message      
+Message.attlist =
+  message-mode.attrib,
+  type.attrib,
+  arity.attrib,
+  card.attrib,
+  weight.attrib,
+  style.attrib,
+  direction.attrib,
+  scope-formula.attrib,
+  closure.attrib,
+  per.attrib,
+  node-element.attlist,
+  xml.attlist
+Message.content =
+  meta-roles.content,
+  (element cid { oid.type })?,
+  (protocol)?,
+  (directive)?,
+  (sender)?,
+  (receiver)?,
+  (element content { message_anycontent.type }
+   | payload)?
+Message.type = Message.content, Message.attlist
+start |= Message
+Message = element Message { Message.type }
+# *** Agent ***
+# Generic Agent element for defining Agents locally or for referencing existing external Agents
+# 
+#       see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Agent      
+Agent.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Agent.content =
+  meta*,
+  qualification*,
+  oid?,
+  (element content { message_anycontent.type })?
+Agent.type = Agent.content, Agent.attlist
+start |= Agent
+Agent = element Agent { Agent.type }
+# *** Protocol ***
+# Generic Protocol element for defining protocols locally or for referencing existing external protocols
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Protocol
+#
+Protocol.attlist =
+  term-interface.attlist, node-element.attlist, xml.attlist
+Protocol.content =
+  meta*,
+  qualification*,
+  oid?,
+  (element content { message_anycontent.type })?
+Protocol.type = Protocol.content, Protocol.attlist
+start |= Protocol
+Protocol = element Protocol { Protocol.type }
+# *** protocol ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-protocol
+protocol.attlist = xml.attlist
+protocol.content = Protocol | Ind | Data | Var | Expr | Plex
+protocol.type = protocol.content, protocol.attlist
+start |= protocol
+protocol = element protocol { protocol.type }
+# *** directive ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-directive
+#
+directive.attlist = xml.attlist
+directive.content = Ind | Data | Var | Expr | Plex
+directive.type = directive.content, directive.attlist
+start |= directive
+directive = element directive { directive.type }
+# *** sender ***
+# *** receiver ***
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-sender
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-receiver
+sender.attlist = xml.attlist
+sender.content = Agent | Ind | Data | Var | Expr | Plex
+sender.type = sender.content, sender.attlist
+start |= sender
+sender = element sender { sender.type }
+start |= receiver
+receiver = element receiver { sender.type }
+# *** content ***
+# 
+# @prefix and @vocab is used to define a prefix and a term mapping vocabulary for the XML content
+#    See CURIE to IRI and term to IRI translation
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-content
+message_anycontent.attlist = edge-element.attlist, xml.attlist
+message_anycontent.content = any_content
+message_anycontent.type =
+  message_anycontent.content, message_anycontent.attlist
+# *** @mode ***
+# 
+#  restriction: inbound | outbound  ; 
+#      optional attribute
+message-mode.attrib =
+  attribute mode { "inbound" | "outbound" | "bidirectional" }?
+# *** Send and Receive ***
+# Send  and Receive performative / action
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Send
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Receive
+#
+Send.attlist =
+  action-interface.attlist, node-element.attlist, xml.attlist
+Send.content = meta-roles.content, (enclosed | Message)*
+Send.type = Send.content, Send.attlist
+start |= Send
+Send = element Send { Send.type }
+Receive.attlist =
+  action-interface.attlist, node-element.attlist, xml.attlist
+Receive.content = meta-roles.content, (enclosed | Message)*
+Receive.type = Receive.content, Receive.attlist
+start |= Receive
+Receive = element Receive { Receive.type }
+# *** enclosed ***
+# 
+# Definition of the the enclosed role for Send and Receive actions
+#
+enclosed.attlist = edge-element.attlist, xml.attlist
+enclosed.content = Message
+enclosed.type = enclosed.content, enclosed.attlist
+start |= enclosed
+enclosed = element enclosed { enclosed.type }
+a:documentation [
+  "\x{a}" ~
+  "                Test and Proof module part of Reaction RuleML.\x{a}" ~
+  "            This is the XML Schema Test module for Reaction RuleML.    File: test_module.xsd\x{a}" ~
+  "            Version: 1.02    Last Modification: 2015-07-20        Further information - see RBSLA\x{a}" ~
+  "            project (http://rbsla.ruleml.org)    ContractLog framework VVI Testing:\x{a}" ~
+  "            http://rbsla.ruleml.org/docs/ContractLog_VVI.pdf        This schema declares the\x{a}" ~
+  "            following Reaction RuleML elements and attributes:            * Test    * vvi    *\x{a}" ~
+  "            TestSuite    * testbase    * TestItem    * Answer     * formula (Answer)    *\x{a}" ~
+  '            expectedResult        The approach is modelled after that used in "Modularization of\x{a}' ~
+  '            XHTML in XML Schema"    WD [http://www.w3.org/TR/xhtml-m12n-schema/], which will soon be\x{a}' ~
+  '            integrated with    "Modularization of XHTML" (REC-xhtml-modularization-20010410)\x{a}' ~
+  "            [http://www.w3.org/TR/xhtml-modularization/].       \x{a}" ~
+  "        \x{a}" ~
+  "            "
+  dc:title [ "Reaction RuleML Schema" ]
+  "\x{a}" ~
+  "            "
+  dc:version [ "1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:creator [ "Adrian Paschke (paschke AT gmx.de)" ]
+  "\x{a}" ~
+  "            "
+  dc:subject [ "RuleML, custom-built for Reaction RuleML 1.02" ]
+  "\x{a}" ~
+  "            "
+  dc:description [ "custom-built main module for Reaction RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:date [ "2015-03-29T23:11:17-0300" ]
+  "\x{a}" ~
+  "            "
+  dc:language [ "en" ]
+  "\x{a}" ~
+  "            "
+  dc:rights [
+    "'Copyright 2015 RuleML Inc. -- Licensed under the RuleML Specification\x{a}" ~
+    '                License, Version 1.0 (the "License"); you may not use this file except in compliance\x{a}' ~
+    "                with the License. You may obtain a copy of the License at\x{a}" ~
+    "                http://ruleml.org/licensing/RSL1.0-RuleML. Disclaimer: THIS SPECIFICATION IS\x{a}" ~
+    '                PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, ..., EVEN IF ADVISED OF\x{a}' ~
+    "                THE POSSIBILITY OF SUCH DAMAGE. See the License for the specifics governing\x{a}" ~
+    "                permissions and limitations under the License."
+  ]
+  "\x{a}" ~
+  "            "
+  dcterms:rights [ "http://ruleml.org/licensing/RSL1.0-RuleML" ]
+  "\x{a}" ~
+  "            "
+  dc:relation [ "http://reaction.ruleml.org" ]
+  "\x{a}" ~
+  "        \x{a}" ~
+  "    "
+]
+# *** Test ***
+# A Test action/primitive that provides the syntax for Verification, Validation and Integrity (VVI) Testing.
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Test
+# 
+# An optional scope (<scope>) can be defined so that the test applies only to the scope (constructed view) on the knowledge base.   
+Test.attlist =
+  action-interface.attlist, node-element.attlist, xml.attlist
+Test.content = meta-roles.content, (vvi | vvi.content)*
+Test.type = Test.content, Test.attlist
+start |= Test
+Test = element Test { Test.type }
+# *** vvi ***
+# 
+# vvi role - "verification, validation, integrity" tests
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-vvi 
+vvi.attlist = edge-element.attlist, xml.attlist
+vvi.content = Entails | TestSuite | TestItem
+vvi.type = vvi.content, vvi.attlist
+start |= vvi
+vvi = element vvi { vvi.type }
+# *** testsbase ***
+# 
+# base role for the test assertion | consultation base
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-testbase
+testbase.attlist = xml.attlist
+testbase.content = Consult | Assert
+testbase.type = testbase.content, testbase.attlist
+start |= testbase
+testbase = element testbase { testbase.type }
+# *** TestSuite ***
+# A TestSuite consisting of the assertion | consultation base (test assertions) and the VVI tests (integrity entailments, test items or nested test suites 
+# 
+#   see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-TestSuite
+TestSuite.attlist =
+  group-formula-interface.attlist, node-element.attlist, xml.attlist
+TestSuite.content =
+  meta-roles.content,
+  (testbase | Assert | Consult)*,
+  (vvi | vvi.content)*
+TestSuite.type = TestSuite.content, TestSuite.attlist
+start |= TestSuite
+TestSuite = element TestSuite { TestSuite.type }
+#  *** TestItem ***
+#  TestItem describing one particular test consisting of the test act (typically a Query) and the expected result (the expected Answer with the predefined expected truth valuation (<degree>) and results/variable bindings)
+# 
+# see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.022#gloss-TestItem
+TestItem.attlist =
+  group-formula-interface.attlist, node-element.attlist, xml.attlist
+TestItem.content =
+  meta-roles.content,
+  ((element do { act.type }
+   | act.content),
+  (expectedResult | expectedResult.content))?
+TestItem.type = TestItem.content, TestItem.attlist
+start |= TestItem
+TestItem = element TestItem { TestItem.type }
+# *** expectedResult***
+# 
+# Definition of the the enclosed role for Send and Receive actions
+# 
+#  see: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-expectedResult
+#
+expectedResult.attlist = xml.attlist
+expectedResult.content = Answer
+expectedResult.type = expectedResult.content, expectedResult.attlist
+start |= expectedResult
+expectedResult = element expectedResult { expectedResult.type }
+# metadata group
+# 
+#    This internal group defines the descriptive metadata and the scope (for scoped reasoning on the metadata) + additional guard constraints on the scope
+# 
+# content model: (meta*, scope*, guard )
+#
+metadata.content = meta*, scope*, guard*
+# interface group
+# 
+# This internal group defines the interface signature and the evaluation semantics
+# 
+# content model: (evaluation*, signature* )
+#
+interface.content = evaluation*, signature*
+# instance group
+# 
+# This internal group defines the instance including the qualification (qualifying metadata), the quantification and the object id
+# 
+# content model: (qualification*, quantification*, oid? )
+#
+instance.content = qualification*, quantification*, oid?
+# 
+# An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
+# 
+# 
+# content model: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?)
+#
+meta-roles.content =
+  metadata.content, interface.content, instance.content
+# 
+# An internal group for the implementation of a rule in the Reaction RuleML language
+# 
+# 
+# content model:
+# 
+# in CEP Reaction RuleML: 
+# 
+# (on | if | then | do | after | else | elseDo)*
+#
+rule-implementation.content = MessagingRule.content
+# 
+# An internal group for the query connectives in the Reaction RuleML language
+# 
+# content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+#
+query-connective.content =
+  element Operation { Operation-formula-query.type }
+  | element And { And-query.type }
+  | element Or { Or-query.type }
+  | Negation
+  | Naf
+  | Neg
+  | Equal
+# 
+# An internal group for the rulebase connectives in the Reaction RuleML language
+# 
+# 
+# content model: (Operation | Negation | Neg | Equal )
+#
+rulebase-connective.content =
+  element Operation { Operation-formula-rulebase.type }
+  | Negation
+  | Neg
+  | Equal
+# 
+# An internal group for the body connectives in the Reaction RuleML language
+# 
+# 
+# content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
+#
+body-connective.content =
+  element Operation { Operation-formula-and-or.type }
+  | element And { And-body.type }
+  | element Or { Or-body.type }
+  | Negation
+  | Naf
+  | Neg
+  | Equal
+# 
+# An internal group for the head connectives in the Reaction RuleML language
+# 
+# content model: (Operation | Negation | Neg | Equal)
+#
+head-connective.content =
+  element Operation { Operation-formula-and-or.type }
+  | Negation
+  | Neg
+  | Equal
+# 
+# An internal group for the query quantifiers in the Reaction RuleML language
+# 
+# content model: ( Exists )
+#
+query-quantifier.content = Exists
+# 
+# An internal group for the body quantifiers in the Reaction RuleML language
+# 
+# 
+# content model: (Forall | Exists | Quantifier)
+#
+meta-quantifier.content =
+  element Forall { Forall-quantifier.type }
+  | element Exists { Exists-quantifier.type }
+  | Quantifier
+# 
+# An internal group for the rulebase quantifiers in the Reaction RuleML language
+# 
+# 
+# content model: ( Forall  )
+#
+rulebase-quantifier.content = Forall
+# 
+# An internal group for the head quantifiers in the Reaction RuleML language
+# 
+#     ECA Reaction RuleML does not allow head quantifiers - Quantifiers are defined internally in the <quantification>    
+# 
+# content model: ( Forall )
+#
+head-quantifier.content = Forall
+# 
+# An internal group for the body quantifier in the Reaction RuleML language
+# 
+# 
+# content model: ( Exist )
+#
+body-quantifier.content = Exists
+# 
+#  An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
+# 
+# content model: (Atom | Time | Spatial | Interval | Event | Action | Fluent | Holds | Initiates | Terminates | Happens | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation))
+#
+extended-signature-predicate-sorts.content =
+  element Atom { Atom.type }
+  | element Time { Time-formula.type }
+  | element Spatial { Spatial-formula.type }
+  | element Interval { Interval-formula.type }
+  | interval_algebra_group.content
+  | element Event { Event-formula.type }
+  | element Action { Action-formula.type }
+  | element Fluent { Fluent-formula.type }
+  | # only in non-reified calculi used as predicate
+    element Situation { Situation-formula.type }
+  | Holds
+  | Initiates
+  | Terminates
+  | Happens
+# 
+# An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
+# 
+#	   content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))
+#
+extended-signature-function-sorts.content =
+  Ind
+  | Data
+  | Expr
+  | Plex
+  | element Time { Time-term.type }
+  | element Spatial { Spatial-term.type }
+  | element Interval { Interval-term.type }
+  | element Event { Event-term.type }
+  | element Action { Action-term.type }
+  | element Situation { Situation-term.type }
+  | element Fluent { Fluent-term.type }
+  | # in reified calculi used as function
+    spatial_temporal_algebra_group.content
+# An internal group for the time primitives for interpretation as time
+# content model: 
+# 
+# in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation)) 
+#
+time_primitives.content = arg.content
+# An internal group for the spatial primitives for interpretation as spatial
+# content model: 
+# 
+# in CEP Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation)) 
+#
+spatial_primitives.content = arg.content
+# Interval primitives
+# content model: 
+# 
+# in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))   
+interval_primitives.content = arg.content
+# An internal group for the situation primitives for interpretation as situation
+# content model: 
+# 
+# (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | Do | (After | Before | Any | Every | Timer | Operation))
+situation_primitives.content = arg.content | Do
+# An internal group for the event primitives for interpretation as event
+# content model: 
+# (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action | Situation | Fluent | (After | Before | Any | Every | Timer | Operation))
+event_primitives.content = arg.content
+# An internal group for events
+# content model:
+# in CEP Reaction RuleML:  ( Receive | Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
+event_group.content =
+  element Event { Event-formula.type }
+  | element Action { Action-formula.type }
+  | Receive
+  | Answer
+  | event_algebra_group.content
+# An internal group for the action primitives for interpretation as action
+# content model: 
+# 
+# in CEP Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Situation | Fluent | (After | Before | Any | Every | Timer | Operation) )
+action_primitives.content = arg.content
+#  An internal group for actions
+# content model:
+# CEP Reaction RuleML (Send | Consult | Assert | Retract | Update | Query | Test | Action | Succession | Choice | Flow | Loop | Operation )
+action_group.content =
+  Assert
+  | Retract
+  | Update
+  | element Action { Action-formula.type }
+  | Query
+  | Test
+  | Send
+  | Consult
+  | action_algebra_group.content
+# An internal group for the imports of the consult primitive
+# content model: 
+# in DR Reaction RuleML: ((payload | RuleML | Reify | Var) | (enclosed | Message))
+consult_imports.content = payload | payload.content | enclosed | Message
+# An internal group for the performative primitives
+# content model: 
+# in CEP Reaction RuleML: (Assert|Retract|Update|Query|Answer|Send|Receive|Consult|Test|Action)
+performative_primitives.content =
+  Assert
+  | Retract
+  | Update
+  | Query
+  | Answer
+  | Test
+  | # for test-driven verification, validation and integrity testing
+    Send
+  | Receive
+  | element Action { Action-formula.type }
+  | Consult
+# *** @style ***
+# 
+#  restriction: active | messaging | reasoning
+#      default value: active (in CEP Reaction RuleML)
+#      optional attribute
+style.attrib = attribute style { style.datatype }?
+any_content = any_element* & text
+any_element = element * { any_attribute*, any_content }
+any_attribute = attribute * { text }

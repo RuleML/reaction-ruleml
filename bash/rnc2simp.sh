@@ -4,13 +4,18 @@
 #   - makes modular RNC monolothic
 #   - removes intermediate named patterns
 #   - simplified definitions
-# FIXME use named pipe instead of temporary file
+# Prerequisites:
+#   Installation of Java and Jing/Trang. See https://code.google.com/p/jing-trang/
+# Dependencies:
+# Jing
+# Trang
+# Note: change the APP_HOME path according to your path to the Jing/Trang library
+# Caution: Jing simplification cannot handle specified qualified names in content
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
 
 # Finds the filename without extension
 filename1=$(basename "$1")
 extension1="${filename1##*.}"
-#filenameNE="${filename1%.*}"
 
 # Verifies that input schema name ends in ".rnc"
 if [[ "${extension1}" != "rnc" ]];then
@@ -21,14 +26,12 @@ fi
 # Finds the filename without extension
 filename2=$(basename "$2")
 extension2="${filename2##*.}"
-#filenameNE="${filename2%.*}"
 
 # Verifies that output name ends in ".rnc"
 if [[ "${extension2}" != "rnc" ]];then
    echo "Output extension is not .rnc"
    exit 1
 fi
-
 
 java -jar "${JING}" -cs "$1" > "${TMP}"
 if [[ "$?" != "0" ]];then

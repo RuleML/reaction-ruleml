@@ -3,28 +3,15 @@
 shopt -s nullglob
 BASH_HOME=$( cd "$(dirname "$0")" ; pwd -P )/ ;. "${BASH_HOME}path_config.sh";
 
+schemaname="kr-cep.rnc"
+sfile="${RNC_HOME}${schemaname}"      
+simpfile="${SIMP_HOME}${schemaname}"      
 for file in "${RNC_TEST_SUITE_HOME}"*/*.ruleml "${RNC_TEST_SUITE_HOME}"*/*/*.ruleml
 do
   filename=$(basename "${file}")
   echo "File "${filename}
-  while read -r; do
-     #echo "Line ${REPLY}"
-     if [[ ${REPLY} =~ ^..xml-model ]]
-     then     
-       tail=${REPLY#*\"}
-       #echo "Tail ${tail}"
-       url=${tail%%\"*}
-       #echo "URL ${url}"
-       schemaname=${url##*/}
-       echo "Schema ${schemaname}"       
-       sfile="${DRIVER_HOME}${schemaname}"      
-       "${BASH_HOME}aux_valrnc.sh" "${sfile}"
-       if [[ "$?" -ne "0" ]]; then
-          echo "Schema Validation Failed for ${schemaname} called in ${file}"
-          exit 1
-       fi   
-       "${BASH_HOME}aux_valrnc.sh" "${sfile}" "${file}"
-       exitvalue=$?
+  "${BASH_HOME}aux_valrnc.sh" "${sfile}" "${file}"
+  exitvalue=$?
        if [[ ! "${file}" =~ fail ]] && [[ "${exitvalue}" -ne "0" ]]; then
           echo "Validation Failed for ${file}"
           exit 1
@@ -34,7 +21,15 @@ do
            exit 1
          fi
        fi
-       break
-     fi
-  done < "${file}"
+  "${BASH_HOME}aux_valrnc.sh" "${simpfile}" "${file}"
+  exitvalue=$?
+       if [[ ! "${file}" =~ fail ]] && [[ "${exitvalue}" -ne "0" ]]; then
+          echo "Simplified Validation Failed for ${file}"
+          exit 1
+       else
+         if [[ "${file}" =~ fail ]] && [[ "${exitvalue}" == "0" ]]; then
+           echo "Simplified Validation Succeeded for Failure Test ${file}"
+           exit 1
+         fi
+       fi
 done

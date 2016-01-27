@@ -14,59 +14,58 @@
   <!-- assert rule -->
 
   <Assert>
-
-    <formula>
-      <!-- rule "on receiving the order of a person for a drink if the drink is wine do tell person (=send to person message) that John likes the person" --> 
-      <Rule style="active">
-        <on>
-          <Receive> <!-- receive action waiting for incoming messages -->
-            <enclosed>
-              <Message>   <!-- message pattern definition matching against incoming messages --> 
-                <signature> <!-- define the message's signature as event pattern for the detection -->
-                  <Atom>
-                        <op><Rel>order</Rel></op>
-                        <arg><Var>Person</Var></arg>
-                        <arg><Var>Drink</Var></arg>
-                  </Atom>     
-                </signature>
-              </Message>
-            </enclosed>
-          </Receive>
-        </on>
+    <!-- rule "on receiving the order of a person for a drink if the drink is wine do tell person (=send to person message) that John likes the person" --> 
+    <Rule style="active">
+      <on>
+        <Receive> <!-- receive action waiting for incoming messages -->
+          <enclosed>
+            <Message>   <!-- message pattern definition matching against incoming messages --> 
+              <signature> <!-- define the message's signature as event pattern for the detection -->
+                <Atom>
+                  <Rel>orders</Rel>
+                  <Var>Person</Var>
+                  <Var>Drink</Var>
+                </Atom>     
+              </signature>
+            </Message>
+          </enclosed>
+        </Receive>
+      </on>
         
-        <if>
-          <Equal>
-            <left><Var>Drink</Var></left>
-            <right><Ind>wine</Ind></right>
-          </Equal>
-        </if>
+      <if>
+        <Atom>
+          <Rel>wine</Rel>
+          <Var>drink</Var>
+        </Atom>
+      </if>
         
-        <do>
-          <Send>
-            <enclosed>
-              <Message>
-                <receiver><Var>Person</Var></receiver> <!-- receiver is THE "Person" -->
-                <payload> <!-- payload of message is a RuleML knowledge base -->
-                  <RuleML>
-                    <do>
-                      <Assert>
-                        <formula>
-                          <Atom>
-                            <op><Rel>likes</Rel></op> 
-                            <arg><Ind>John</Ind></arg>
-                            <arg><Var>Person</Var></arg>
-                          </Atom>
-                        </formula>
-                      </Assert>
-                    </do>
-                  </RuleML>
-                </payload>
-              </Message>
-            </enclosed>
-          </Send>
-        </do>
-      </Rule>
-    </formula>
+      <do>
+        <Send>
+          <enclosed>
+            <Message>
+              <receiver><Var>Person</Var></receiver> <!-- receiver is THE "Person" -->
+              <payload> <!-- payload of message is a RuleML knowledge base -->
+                <RuleML>
+                  <Assert>
+                    <Atom>
+                    <Rel>likes</Rel> 
+                    <Ind>John</Ind>
+                    <Var>Person</Var>
+                    </Atom>
+                  </Assert>
+                </RuleML>
+              </payload>
+            </Message>
+          </enclosed>
+        </Send>
+      </do>
+    </Rule>
+    
+    <Atom>
+      <Rel>wine</Rel>
+      <Ind>merlot</Ind>
+    </Atom>
+    
   </Assert> 
   
   <!-- send message that "Mary orders wine" which triggers the messaging reaction rule which is waiting for orders -->
@@ -81,9 +80,9 @@
           <RuleML>
             <Assert>
               <Atom>
-                <op><Rel>orders</Rel></op>
-                <arg><Ind>Mary</Ind></arg>
-                <arg><Ind>wine</Ind></arg>
+                <Rel>orders</Rel>
+                <Ind>Mary</Ind>
+                <Ind>merlot</Ind>
               </Atom>
             </Assert>
           </RuleML>

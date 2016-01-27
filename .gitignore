@@ -8,3 +8,6 @@ drrr_andor_loop_expansion_module.rnc
 drrr4legalruleml-normal.rnc
 simp-drrr4legalruleml-normal.rnc.xsd
 xml.xsd
+test/reaction-test-suites
+path_config.sh
+reaction-config.xml

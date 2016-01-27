@@ -71,7 +71,7 @@
 
   <!-- assert rules -->
 
-  <act>
+  <do>
     <!-- (* ex1:CheckoutRuleset *) -->
     <Assert>
 
@@ -421,7 +421,7 @@
       </formula>
       
     </Assert>  
-  </act>
+  </do>
     
     
     

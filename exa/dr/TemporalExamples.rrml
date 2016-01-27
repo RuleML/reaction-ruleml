@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.02/relaxng/dr.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="http://reaction.ruleml.org/1.02/relaxng/kr-cep.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,7 +7,7 @@
 	xmlns:owltime="http://www.w3.org/2006/time"
 	xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/dr.xsd">
 
-<act index="1">
+<do index="1">
 	<Assert direction="bidirectional">
 		
 
@@ -253,68 +253,52 @@
    					<!-- different interval algebra definitions -->
    					
    					<!-- [t2,t3] during [t1,4] -->
-   					<formula><Interval>
-	   					<arg index="1"><During>
+   					<formula><During>
 	   						<arg index="1"><Interval><arg index="1"><Time><arg><Ind>t2</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t3</Ind></arg></Time></arg></Interval></arg>
    							<arg index="2"><Interval><arg index="1"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
-	   					</During></arg>
-   					</Interval>	</formula>
+	   					</During></formula>
    					
    					<!-- [t1,t3] overlaps with [t2,t4] -->
-   					<formula><Interval>
-	   					<arg index="1"><Overlaps>
+   					<formula><Overlaps>
 	   						<arg index="1"><Interval><arg index="1"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t3</Ind></arg></Time></arg></Interval></arg>
 	   						<arg index="2"><Interval><arg index="1"><Time><arg><Ind>t2</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
-	   					</Overlaps></arg>
-   					</Interval>	</formula>
+	   					</Overlaps>	</formula>
    					
    					<!-- [t1,t2] starts [t1,t4] -->
-   					<formula><Interval>
-	   					<arg index="1"><Starts>
+   					<formula><Starts>
 	   						<arg index="1"><Interval><arg index="1"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
 	   						<arg index="2"><Interval><arg index="2"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
-	   					</Starts></arg>
-   					</Interval></formula>
+	   					</Starts></formula>
    					
    					<!-- [t1,t2] precedes [t3,t4] -->
-   					<formula><Interval>
-	   					<arg index="1"><Precedes>
+   					<formula><Precedes>
 	   						<arg index="1"><Interval><arg index="1"><Time><arg><Ind>t1</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
 	   						<arg index="2"><Interval><arg index="2"><Time><arg><Ind>t3</Ind></arg></Time></arg><arg index="2"><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
-	   					</Precedes></arg>
-   					</Interval>	</formula>
+	   					</Precedes></formula>
    					
    					<!-- [t3,t4] succeeds [t1,t2] -->
-   					<formula><Interval>
-	   					<arg><Succeeds>
+   					<formula><Succeeds>
 	   						<arg><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
 	   						<arg><Interval><arg><Time><arg><Ind>t3</Ind></arg></Time></arg><arg><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
-	   					</Succeeds></arg>
-   					</Interval>	</formula>
+	   					</Succeeds></formula>
    					
    					<!-- [t1,t2] meets [t2,t4] -->
-   					<formula><Interval>
-	   					<arg><Meets>
+   					<formula><Meets>
 	   						<arg><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
 	   						<arg><Interval><arg><Time><arg><Ind>t2</Ind></arg></Time></arg><arg><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
-	   					</Meets></arg>
-   					</Interval>	</formula>
+	   					</Meets></formula>
    					
    					<!-- [t1,t2] equals [t1,t2] -->
-   					<formula><Interval>
-	   					<arg><Equal>
-	   						<arg><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
-	   						<arg><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></arg>
-	   					</Equal></arg>
-   					</Interval></formula>	
+   					<formula><Equal>
+	   						<left><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></left>
+	   						<right><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t2</Ind></arg></Time></arg></Interval></right>
+	   					</Equal></formula>	
    					
    					<!-- [t1,t4] finishes [t3,t4] -->
-   					<formula><Interval>
-	   					<arg><Finishes>
+   					<formula><Finishes>
 	   						<arg><Interval><arg><Time><arg><Ind>t1</Ind></arg></Time></arg><arg><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
 	   						<arg><Interval><arg><Time><arg><Ind>t3</Ind></arg></Time></arg><arg><Time><arg><Ind>t4</Ind></arg></Time></arg></Interval></arg>
-	   					</Finishes></arg>
-   					</Interval>	</formula>
+	   					</Finishes></formula>
    					
    					
    				</And>
@@ -327,11 +311,11 @@
 	</Rulebase>
 	</formula>
  </Assert>
-</act>
+</do>
 	
  <!-- query knowledge base -->
  
-<act index="2"> 
+<do index="2"> 
  <Query>
  	<formula>
 	<And>
@@ -355,6 +339,6 @@
 	</And>
  	</formula>	
  </Query>
-</act> 
+</do> 
  
 </RuleML>

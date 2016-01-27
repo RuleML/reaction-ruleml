@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-model href="http://reaction.ruleml.org/1.02/relaxng/cep.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="http://reaction.ruleml.org/1.02/relaxng/kr-cep.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:xcl2="http://purl.org/xcl/2.0/"
@@ -34,7 +34,7 @@
 					<!-- one particular test item of a test suite -->
 					<TestItem>
 						<!-- test query -->
-						<act><Query></Query></act>
+						<do><Query></Query></do>
 						<!-- exepected result -->
 						<expectedResult>
 							<Answer>

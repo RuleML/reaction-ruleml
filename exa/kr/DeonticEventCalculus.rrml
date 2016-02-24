@@ -18,38 +18,42 @@
         <And>
           
           <Happens>
-            <Action><Expr><Fun>p</Fun><Var>X</Var></Expr></Action>
-            <Time><Var>T</Var></Time>
+            <on><Action><Expr><Fun>p</Fun><Var>X</Var></Expr></Action></on>
+            <at><Time><Var>T</Var></Time></at>
           </Happens>
           
           <Holds>
-            <Situation>
-              <Expr per="modal">
-                <Fun per="modal" iri="ruleml:Obliged"/>
+            <fluent>
+              <Situation>
                 <Expr per="modal">
-                    <Fun iri="ruleml:Neg"/>
-                    <Expr><Fun>p</Fun><Var>X</Var></Expr>
-                </Expr>  
-              </Expr>            
-            </Situation>
-            <Time><Var mode="+">T</Var></Time>
+                  <Fun per="modal" iri="ruleml:Obliged"/>
+                  <Expr per="modal">
+                      <Fun iri="ruleml:Neg"/>
+                      <Expr><Fun>p</Fun><Var>X</Var></Expr>
+                  </Expr>  
+                </Expr>            
+              </Situation>
+            </fluent>
+            <at><Time><Var mode="+">T</Var></Time></at>
           </Holds>  
           
         </And>  
       </if>
       <then>
         <Initiates>
-          <Action><Expr><Fun per="value">p</Fun><Var>X</Var></Expr></Action>
-          <Situation>
-            <Expr per="modal">
-              <Fun per="modal" iri="ruleml:Obliged"/>
+          <on><Action><Expr><Fun per="value">p</Fun><Var>X</Var></Expr></Action></on>
+          <fluent>
+            <Situation>
               <Expr per="modal">
-                <Fun iri="ruleml:Neg"/>
-                <Expr><Fun>p</Fun><Var>X</Var></Expr>
-              </Expr>  
-            </Expr>            
-          </Situation>
-          <Time><Var mode="+">T</Var></Time>
+                <Fun per="modal" iri="ruleml:Obliged"/>
+                <Expr per="modal">
+                  <Fun iri="ruleml:Neg"/>
+                  <Expr><Fun>p</Fun><Var>X</Var></Expr>
+                </Expr>  
+              </Expr>            
+            </Situation>
+          </fluent>
+          <at><Time><Var mode="+">T</Var></Time></at>
         </Initiates> 
       </then>
     </Rule>
@@ -61,38 +65,42 @@
         <And>
           
           <Happens>
-            <Action><Reify><Atom><Rel>p</Rel><Var>X</Var></Atom></Reify></Action>
-            <Time><Var>T</Var></Time>
+            <on><Action><Reify><Atom><Rel>p</Rel><Var>X</Var></Atom></Reify></Action></on>
+            <at><Time><Var>T</Var></Time></at>
           </Happens>
           
           <Holds>
-            <Situation>
-              <Reify>
-                <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
-                  <Neg>
-                    <Atom><Rel>p</Rel><Var>X</Var></Atom>
-                  </Neg>
-                </Operation>
-              </Reify>              
-            </Situation>
-            <Time><Var mode="+">T</Var></Time>
+            <fluent>
+              <Situation>
+                <Reify>
+                  <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+                    <Neg>
+                      <Atom><Rel>p</Rel><Var>X</Var></Atom>
+                    </Neg>
+                  </Operation>
+                </Reify>              
+              </Situation>
+            </fluent>
+            <at><Time><Var mode="+">T</Var></Time></at>
           </Holds>  
           
         </And>  
       </if>
       <then>
         <Initiates>
-          <Action><Reify><Atom><Rel per="value">p</Rel><Var>X</Var></Atom></Reify></Action>
-          <Situation>
-            <Reify>
-              <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
-                <Neg>
-                  <Atom><Rel>q</Rel><Var>X</Var></Atom>
-                </Neg>
-              </Operation>
-            </Reify>              
-          </Situation>          
-          <Time><Var mode="+">T</Var></Time>
+          <on><Action><Reify><Atom><Rel per="value">p</Rel><Var>X</Var></Atom></Reify></Action></on>
+          <fluent>
+            <Situation>
+              <Reify>
+                <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+                  <Neg>
+                    <Atom><Rel>q</Rel><Var>X</Var></Atom>
+                  </Neg>
+                </Operation>
+              </Reify>              
+            </Situation>          
+          </fluent>
+          <at><Time><Var mode="+">T</Var></Time></at>
         </Initiates> 
       </then>
     </Rule>
@@ -105,7 +113,8 @@
   <!-- Query with using reified modal expressions -->
   <Query>
     <Holds>
-      <Situation>
+      <fluent>
+        <Situation>
           <Expr per="modal">
             <Fun per="modal" iri="ruleml:Obliged"/>
             <Expr per="modal">
@@ -113,24 +122,27 @@
               <Expr><Fun>p</Fun><Var>X</Var></Expr>
             </Expr>  
           </Expr>            
-      </Situation>
-      <Time><Ind>t1</Ind></Time>
+        </Situation>
+      </fluent>
+      <at><Time><Ind>t1</Ind></Time></at>
     </Holds>
   </Query>
 
   <!-- Query using Reify -->
   <Query>
     <Holds>
-      <Situation>
-        <Reify>
-          <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
-            <Neg>
-              <Atom><Rel>q</Rel><Var>X</Var></Atom>
-            </Neg>
-          </Operation>        
-        </Reify>
-      </Situation>  
-      <Time><Ind>t1</Ind></Time>
+      <fluent>
+        <Situation>
+          <Reify>
+            <Operation type="ruleml:DeonticOperator" iri="ruleml:Obliged">
+              <Neg>
+                <Atom><Rel>q</Rel><Var>X</Var></Atom>
+              </Neg>
+            </Operation>        
+          </Reify>
+        </Situation>  
+      </fluent>
+      <at><Time><Ind>t1</Ind></Time></at>
     </Holds>
   </Query>
 </RuleML>

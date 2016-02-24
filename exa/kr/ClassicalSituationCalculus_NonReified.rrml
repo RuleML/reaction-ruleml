@@ -304,8 +304,8 @@
           <Var>X</Var>
           <Situation>
             <Do>
-              <Action><Var>A</Var></Action>
-              <Situation><Var>S</Var></Situation>
+              <do><Action><Var>A</Var></Action></do>
+              <at><Situation><Var>S</Var></Situation></at>
             </Do>
           </Situation>
         </Expr>
@@ -429,8 +429,8 @@
            <Var>Y</Var>
            <Situation>
              <Do>
-               <Action><Var>A</Var></Action>
-               <Situation><Var>S</Var></Situation>               
+               <do><Action><Var>A</Var></Action></do>
+               <at><Situation><Var>S</Var></Situation></at>               
              </Do>
            </Situation>           
          </Expr>
@@ -525,7 +525,11 @@
           <Expr per="value">
             <Fun>onTable</Fun> 
             <Var>X</Var>
-            <Situation><Do><Action><Var>A</Var><Var>S</Var></Action></Do></Situation>
+            <Situation>
+              <Do>
+                <do><Action><Var>A</Var><Var>S</Var></Action></do>
+              </Do>
+            </Situation>
           </Expr>
         </Fluent>      
       </torso>

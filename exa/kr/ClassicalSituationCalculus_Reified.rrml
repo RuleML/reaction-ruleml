@@ -38,26 +38,34 @@
       <torso>
         <And>
           <Holds>
+            <fluent>
               <Fluent>
                 <Expr per="copy">
                   <Fun>clear</Fun>
                   <Var>X</Var>    
                 </Expr> 
               </Fluent>
+            </fluent>
+            <at>
               <Situation>
                  <Var>S</Var>
               </Situation>   
+            </at>
           </Holds>
           <Holds>
-            <Fluent>
-              <Expr per="copy">
-                <Fun>clear</Fun>
-                <Var>Y</Var>
-              </Expr>  
-            </Fluent>
-            <Situation>
-              <Var>S</Var>
-            </Situation>
+            <fluent>
+              <Fluent>
+                <Expr per="copy">
+                  <Fun>clear</Fun>
+                  <Var>Y</Var>
+                </Expr>  
+              </Fluent>
+            </fluent>
+            <at>
+              <Situation>
+                <Var>S</Var>
+              </Situation>
+            </at>
           </Holds>
           <Negation>
             <Equal>
@@ -89,27 +97,35 @@
       <torso>
         <And>
           <Holds>
-            <Fluent>
-              <Expr per="copy">
-                <Fun>clear</Fun>
-                <Var>X</Var>
-              </Expr>  
-            </Fluent>  
-            <Situation>
-               <Var>S</Var>
-            </Situation>
-          </Holds>
-          <Negation>
-            <Holds>
+            <fluent>
               <Fluent>
                 <Expr per="copy">
-                  <Fun>ontable</Fun>
+                  <Fun>clear</Fun>
                   <Var>X</Var>
                 </Expr>  
-              </Fluent>
+              </Fluent>  
+            </fluent>
+            <at>
               <Situation>
                  <Var>S</Var>
               </Situation>
+            </at>
+          </Holds>
+          <Negation>
+            <Holds>
+              <fluent>
+                <Fluent>
+                  <Expr per="copy">
+                    <Fun>ontable</Fun>
+                    <Var>X</Var>
+                  </Expr>  
+                </Fluent>
+              </fluent>
+              <at>
+                <Situation>
+                   <Var>S</Var>
+                </Situation>
+              </at>
             </Holds>  
           </Negation>
         </And>
@@ -166,27 +182,33 @@
             </Equal>
           </Or>
           <Holds>
-            <Fluent>
-              <Expr per="copy">
-                <Fun>on</Fun>
-                <Var>Y</Var>
-                <Var>X</Var>
-              </Expr>
-            </Fluent>
-            <Situation><Var>S</Var></Situation>
+            <fluent>
+              <Fluent>
+                <Expr per="copy">
+                  <Fun>on</Fun>
+                  <Var>Y</Var>
+                  <Var>X</Var>
+                </Expr>
+              </Fluent>
+            </fluent>
+            <at><Situation><Var>S</Var></Situation></at>
           </Holds>  
         </And>
         <And>
           <Holds>
-            <Fluent>
-              <Expr per="copy">
-                <Fun>clear</Fun>
-                <Var>X</Var>
-              </Expr>  
-            </Fluent>    
-            <Situation>
-              <Var>S</Var>
-            </Situation>
+            <fluent>
+              <Fluent>
+                <Expr per="copy">
+                  <Fun>clear</Fun>
+                  <Var>X</Var>
+                </Expr>  
+              </Fluent>    
+            </fluent>
+            <at>
+              <Situation>
+                <Var>S</Var>
+              </Situation>
+            </at>
           </Holds>  
           <Negation>
             <Equal>
@@ -205,18 +227,22 @@
     </torso>
     <torso>
       <Holds>
-        <Fluent>
-          <Expr per="copy">
-                <Fun>clear</Fun> 
-                <Var>X</Var>
-           </Expr>
-        </Fluent>
-        <Situation>
-            <Do>
-              <Action><Var>A</Var></Action>
-              <Situation><Var>S</Var></Situation>
-            </Do>
-        </Situation>
+        <fluent>
+          <Fluent>
+            <Expr per="copy">
+                  <Fun>clear</Fun> 
+                  <Var>X</Var>
+             </Expr>
+          </Fluent>
+        </fluent>
+        <at>
+          <Situation>
+              <Do>
+                <do><Action><Var>A</Var></Action></do>
+                <at><Situation><Var>S</Var></Situation></at>
+              </Do>
+          </Situation>
+        </at>
       </Holds>
     </torso>
   </Equivalent>  
@@ -240,14 +266,16 @@
          </Equal>
          <And>
            <Holds>
-             <Fluent>
-               <Expr per="copy">
-                 <Fun>on</Fun>
-                 <Var>Y</Var>
-                 <Var>X</Var>
-               </Expr>
-             </Fluent>
-             <Situation><Var>S</Var></Situation>
+             <fluent>
+              <Fluent>
+                <Expr per="copy">
+                  <Fun>on</Fun>
+                  <Var>Y</Var>
+                  <Var>X</Var>
+                </Expr>
+              </Fluent>
+             </fluent>
+             <at><Situation><Var>S</Var></Situation></at>
            </Holds>  
            <Negation>
              <Equal>
@@ -277,19 +305,23 @@
      </if>
      <then>
        <Holds>
-         <Fluent>
-           <Expr per="copy">
-             <Fun>on</Fun> 
-             <Var>X</Var>
-             <Var>Y</Var>
-           </Expr>
-         </Fluent>
-         <Situation>
-           <Do>
-             <Action><Var>A</Var></Action>
-             <Situation><Var>S</Var></Situation>
-           </Do>
-         </Situation>
+         <fluent>
+          <Fluent>
+            <Expr per="copy">
+              <Fun>on</Fun> 
+              <Var>X</Var>
+              <Var>Y</Var>
+            </Expr>
+          </Fluent>
+         </fluent>
+         <at>
+          <Situation>
+            <Do>
+              <do><Action><Var>A</Var></Action></do>
+              <at><Situation><Var>S</Var></Situation></at>
+            </Do>
+          </Situation>
+         </at>
        </Holds>  
      </then>
    </Rule> 
@@ -310,13 +342,15 @@
           </Equal>
           <And>
             <Holds>
-              <Fluent>
-                <Expr per="copy">
-                  <Fun>ontanle</Fun>
-                  <Var>X</Var>
-                </Expr>
-              </Fluent>
-              <Situation><Var>S</Var></Situation>
+              <fluent>
+                <Fluent>
+                  <Expr per="copy">
+                    <Fun>ontanle</Fun>
+                    <Var>X</Var>
+                  </Expr>
+                </Fluent>
+              </fluent>
+              <at><Situation><Var>S</Var></Situation></at>
             </Holds>  
             <Negation>
               <Equal>
@@ -335,18 +369,22 @@
       </if>
       <then>
         <Holds>
-          <Fluent>
-            <Expr per="copy">
-              <Fun>ontable</Fun> 
-              <Var>X</Var>
-            </Expr>
-          </Fluent>
-          <Situation>
-            <Do>
-              <Action><Var>A</Var></Action>
-              <Situation><Var>S</Var></Situation>
-            </Do>
-          </Situation>
+          <fluent>
+            <Fluent>
+              <Expr per="copy">
+                <Fun>ontable</Fun> 
+                <Var>X</Var>
+              </Expr>
+            </Fluent>
+          </fluent>
+          <at>
+            <Situation>
+              <Do>
+                <do><Action><Var>A</Var></Action></do>
+                <at><Situation><Var>S</Var></Situation></at>
+              </Do>
+            </Situation>
+          </at>
         </Holds>  
       </then>
     </Rule>
@@ -394,82 +432,94 @@
       <!-- holds(on(c,b), s0) -->
       
       <Holds>
-        <Fluent>
-          <Expr per="copy">
-            <Fun>on</Fun>
-            <Ind>c</Ind>
-            <Ind>b</Ind>
-          </Expr>
-        </Fluent>
-        <Situation><Ind>s0</Ind></Situation>
+        <fluent>
+          <Fluent>
+            <Expr per="copy">
+              <Fun>on</Fun>
+              <Ind>c</Ind>
+              <Ind>b</Ind>
+            </Expr>
+          </Fluent>
+        </fluent>
+        <at><Situation><Ind>s0</Ind></Situation></at>
       </Holds>
        
       <!-- holds(on(b,a), s0) -->
       
       <Holds>
-        <Fluent>
-          <Expr per="copy">
-            <Fun>on</Fun>
-            <Ind>b</Ind>
-            <Ind>a</Ind>
-          </Expr>
-        </Fluent>
-        <Situation><Ind>s0</Ind></Situation>
+        <fluent>
+          <Fluent>
+            <Expr per="copy">
+              <Fun>on</Fun>
+              <Ind>b</Ind>
+              <Ind>a</Ind>
+            </Expr>
+          </Fluent>
+        </fluent>
+        <at><Situation><Ind>s0</Ind></Situation></at>
       </Holds>
       
       
       <!-- holds(on(a,table), s0) -->
       
       <Holds>
-        <Fluent>
-          <Expr per="copy">
-            <Fun>on</Fun>
-            <Ind>a</Ind>
-            <Ind>table</Ind>
-          </Expr>
-        </Fluent>
-        <Situation><Ind>s0</Ind></Situation>
+        <fluent>
+          <Fluent>
+            <Expr per="copy">
+              <Fun>on</Fun>
+              <Ind>a</Ind>
+              <Ind>table</Ind>
+            </Expr>
+          </Fluent>
+        </fluent>
+        <at><Situation><Ind>s0</Ind></Situation></at>
       </Holds>
       
       
       <!-- holds(on(e,d), s0) -->
       
       <Holds>
-        <Fluent>
-          <Expr per="copy">
-            <Fun>on</Fun>
-            <Ind>c</Ind>
-            <Ind>b</Ind>
-          </Expr>
-        </Fluent>
-        <Situation><Ind>s0</Ind></Situation>
+        <fluent>
+          <Fluent>
+            <Expr per="copy">
+              <Fun>on</Fun>
+              <Ind>c</Ind>
+              <Ind>b</Ind>
+            </Expr>
+          </Fluent>
+        </fluent>
+        <at><Situation><Ind>s0</Ind></Situation></at>
       </Holds>
       
       
       <!-- holds(on(d,table), s0) -->
       
       <Holds>
-        <Fluent>
-          <Expr per="copy">
-            <Fun>on</Fun>
-            <Ind>c</Ind>
-            <Ind>b</Ind>
-          </Expr>
-        </Fluent>
-        <Situation><Ind>s0</Ind></Situation>
+        <fluent>
+          <Fluent>
+            <Expr per="copy">
+              <Fun>on</Fun>
+              <Ind>c</Ind>
+              <Ind>b</Ind>
+            </Expr>
+          </Fluent>
+        </fluent>
+        <at><Situation><Ind>s0</Ind></Situation></at>
       </Holds>
       
       <!-- holds(on(f,table), s0) -->
       
       <Holds>
-        <Fluent>
-          <Expr per="copy">
-            <Fun>on</Fun>
-            <Ind>c</Ind>
-            <Ind>b</Ind>
-          </Expr>
-        </Fluent>
-        <Situation><Ind>s0</Ind></Situation>
+        <fluent>
+          <Fluent>
+            <Expr per="copy">
+              <Fun>on</Fun>
+              <Ind>c</Ind>
+              <Ind>b</Ind>
+            </Expr>
+          </Fluent>
+        </fluent>
+        <at><Situation><Ind>s0</Ind></Situation></at>
       </Holds>
       
       

@@ -66,14 +66,16 @@
   <!-- loading(Server) terminates status(Server,unloaded) at time T -->
   <Terminates> <!-- terminates axiom -->
     <!-- on event -->
+     <on>
       <Event>
           <Expr>
             <Fun>loading</Fun>
             <Var>Server</Var>
           </Expr>
       </Event>
-    
+     </on>
     <!-- terminate fluent situation -->
+    <fluent>
       <Situation type="ruleml:Fluent">
         <Expr>
           <Fun>status</Fun>
@@ -81,18 +83,20 @@
           <Ind>unloaded</Ind>
         </Expr>  
       </Situation>
-    
+    </fluent>
     <!-- at time -->
+    <at>
       <Time>
         <Var>T</Var>
       </Time>
-      
+    </at>  
   </Terminates>
 
   <!-- if status(Server,unloaded) holds at Time then scheduling(Task, Server) initates schedule(Server,Task,executing) at Time  -->
   <Rule>
     <if>
       <Holds>
+        <fluent>
           <Situation type="ruleml:Fluent">
             <Expr>
               <Fun>status</Fun>
@@ -100,13 +104,17 @@
               <Ind>unloaded</Ind>
             </Expr>  
           </Situation>
+        </fluent>
+        <at>
           <Time>
             <Var>Time</Var>
           </Time>
+        </at>
       </Holds>
     </if>
     <then>
-      <Initiates> 
+      <Initiates>
+        <on>
           <Event>
             <Expr> 
               <Fun>scheduling</Fun>
@@ -114,6 +122,8 @@
               <Var>Server</Var>
             </Expr>
           </Event>
+        </on>
+        <fluent>
           <Situation type="ruleml:Fluent">
             <Expr>
               <Fun>schedule</Fun>
@@ -122,9 +132,12 @@
               <Ind>executing</Ind>
             </Expr>  
           </Situation>
+        </fluent>
+        <at>
           <Time>
             <Var>Time</Var>
           </Time>
+        </at>  
       </Initiates>
     </then>
   </Rule>
@@ -132,31 +145,34 @@
     <!-- ending(Taks,Server) terminates schedule(Server,Task, executing) at time T -->
     <Terminates> <!-- terminates axiom -->
       <!-- on event -->
-      <Event>
-        <arg>                  
-          <Expr>
-            <op><Fun>ending</Fun></op> 
-            <arg><Var>Task</Var></arg> 
-            <arg><Var>Server</Var></arg>
-          </Expr>
-        </arg>  
-      </Event>
-      
+      <on>
+        <Event>
+          <arg>                  
+            <Expr>
+              <op><Fun>ending</Fun></op> 
+              <arg><Var>Task</Var></arg> 
+              <arg><Var>Server</Var></arg>
+            </Expr>
+          </arg>  
+        </Event>
+      </on>
       <!-- terminate fluent situation -->
-      <Situation type="ruleml:Fluent">
-        <Expr>
-          <Fun>schedule</Fun>
-          <Var>Server</Var>
-          <Var>Task</Var>
-          <Ind>executing</Ind>
-        </Expr>  
-      </Situation>
-      
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>schedule</Fun>
+            <Var>Server</Var>
+            <Var>Task</Var>
+            <Ind>executing</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
       <!-- at time -->
-      <Time>
-        <Var>T</Var>
-      </Time>
-      
+      <at>
+        <Time>
+          <Var>T</Var>
+        </Time>
+      </at>
     </Terminates>
 
   </Rulebase>  
@@ -166,6 +182,7 @@
 
     <!-- scheduling task1 on server1 at time 2 -->
     <Happens>
+      <on>
         <Event> <!-- event instance (event individual) -->
           <Expr>
             <Fun>scheduling</Fun> <!-- scheduling -->
@@ -173,9 +190,12 @@
             <Ind>server1</Ind> <!-- server1 -->
           </Expr>
         </Event>
+      </on>
+      <at>
         <Time>
           <Ind>2</Ind> <!-- time 2 -->
         </Time>
+      </at>
     </Happens>
 
   <!-- if scheduling(Task,Server) happens at Time then loading(Server) happens at Time,
@@ -183,6 +203,7 @@
   <Rule>
     <if>
       <Happens>
+        <on>
           <Event> 
             <Expr>
               <Fun>scheduling</Fun> 
@@ -190,9 +211,12 @@
               <Var>Service</Var> 
             </Expr>
           </Event>
+        </on>
+        <at>
           <Time>
             <Var>Time</Var> 
           </Time>
+        </at>
       </Happens>        
     </if>
     <then>
@@ -216,6 +240,7 @@
 
   <!-- ending task1 on server1 at time 5 -->
   <Happens>
+    <on>
       <Event> <!-- event instance (event individual) -->
         <Expr>
           <Fun>ending</Fun> <!-- ending -->
@@ -223,9 +248,12 @@
           <Ind>server1</Ind> <!-- server server1 -->
         </Expr>
       </Event>
+    </on>
+    <at>
       <Time>
         <Ind>5</Ind> <!-- time 5 -->
       </Time>
+    </at>
   </Happens>
 
     <!-- if ending(Task,Server) happens at Time then unloading(Server) happens at Time -->
@@ -334,6 +362,7 @@
     </Holds>    
 
     <Holds>
+      <fluent>
         <Situation type="ruleml:Fluent">
           <Expr>
             <Fun>schedule</Fun>
@@ -342,9 +371,12 @@
             <Ind>executing</Ind>
           </Expr>  
         </Situation>
+      </fluent>
+      <at>
         <Time>
           <Ind>2</Ind>
         </Time>      
+      </at>
     </Holds>    
     
     <Holds>
@@ -365,17 +397,21 @@
     </Holds>    
 
     <Holds>
-      <Situation type="ruleml:Fluent">
-        <Expr>
-          <Fun>schedule</Fun>
-          <Var>server1</Var>
-          <Var>task1</Var>
-          <Ind>executing</Ind>
-        </Expr>  
-      </Situation>
-      <Time>
-        <Ind>3</Ind>
-      </Time>      
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>schedule</Fun>
+            <Var>server1</Var>
+            <Var>task1</Var>
+            <Ind>executing</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>3</Ind>
+        </Time>      
+      </at>
     </Holds>    
 
     <Holds>
@@ -396,17 +432,21 @@
     </Holds>    
 
     <Holds>
-      <Situation type="ruleml:Fluent">
-        <Expr>
-          <Fun>schedule</Fun>
-          <Var>server1</Var>
-          <Var>task1</Var>
-          <Ind>executing</Ind>
-        </Expr>  
-      </Situation>
-      <Time>
-        <Ind>4</Ind>
-      </Time>      
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>schedule</Fun>
+            <Var>server1</Var>
+            <Var>task1</Var>
+            <Ind>executing</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>4</Ind>
+        </Time>
+      </at>
     </Holds>    
     
     <Holds>
@@ -427,20 +467,25 @@
     </Holds>    
 
     <Holds>
-      <Situation type="ruleml:Fluent">
-        <Expr>
-          <Fun>schedule</Fun>
-          <Var>server1</Var>
-          <Var>task1</Var>
-          <Ind>executing</Ind>
-        </Expr>  
-      </Situation>
-      <Time>
-        <Ind>5</Ind>
-      </Time>      
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>schedule</Fun>
+            <Var>server1</Var>
+            <Var>task1</Var>
+            <Ind>executing</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>5</Ind>
+        </Time>      
+      </at>
     </Holds>    
 
     <Holds>
+      <fluent>
         <Situation type="ruleml:Fluent">
           <Expr>
             <Fun>status</Fun>
@@ -448,23 +493,30 @@
             <Ind>unloaded</Ind>
           </Expr>  
         </Situation>
+      </fluent>
+      <at>
         <Time>
           <Ind>6</Ind>
         </Time>
+      </at>
     </Holds>    
     
     <Holds>
-      <Situation type="ruleml:Fluent">
-        <Expr>
-          <Fun>schedule</Fun>
-          <Var>server1</Var>
-          <Var>task1</Var>
-          <Ind>executing</Ind>
-        </Expr>  
-      </Situation>
-      <Time>
-        <Ind>6</Ind>
-      </Time>      
+      <fluent>
+        <Situation type="ruleml:Fluent">
+          <Expr>
+            <Fun>schedule</Fun>
+            <Var>server1</Var>
+            <Var>task1</Var>
+            <Ind>executing</Ind>
+          </Expr>  
+        </Situation>
+      </fluent>
+      <at>
+        <Time>
+          <Ind>6</Ind>
+        </Time>      
+      </at>
     </Holds>    
 
   </Query>

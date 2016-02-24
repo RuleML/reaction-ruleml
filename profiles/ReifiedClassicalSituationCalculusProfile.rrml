@@ -10,8 +10,6 @@
     The formalization of the axioms originates from Pinto's reified situation calculus which extends the basic axioms of Reiter's classcial situation calculus.
  
     -->
-  <Assert>
-    
   <evaluation>
     
     <Profile key="ruleml:ReifiedClassicalSituationCalculus">
@@ -272,6 +270,4 @@
     </Profile>
   </evaluation>
   
-  </Assert>
-
 </RuleML>

@@ -8,14 +8,11 @@
   <!-- Semantic Profile for the reified Situation Calculus with reified fluents, actions and situations (SCr).
     
     The formalization of the axioms originates from Pinto's reified situation calculus which extends the basic axioms of Reiter's classcial situation calculus.
-  
-  <!-- assert knowledge -->
-
+ 
+    -->
   <Assert>
     
   <evaluation>
-    
-    -->
     
     <Profile key="ruleml:ReifiedClassicalSituationCalculus">
       
@@ -48,14 +45,14 @@
                   <Equal>
                     <Situation>
                       <Do>
-                        <Action><Var>A1</Var></Action>
-                        <Situation><Var>S1</Var></Situation>
+                        <do><Action><Var>A1</Var></Action></do>
+                        <at><Situation><Var>S1</Var></Situation></at>
                       </Do>
                     </Situation>
                     <Situation>
                       <Do>
-                        <Action><Var>A2</Var></Action>
-                        <Situation><Var>S2</Var></Situation>
+                        <do><Action><Var>A2</Var></Action></do>
+                        <at><Situation><Var>S2</Var></Situation></at>
                       </Do>
                     </Situation>                    
                   </Equal>
@@ -97,8 +94,8 @@
                   <Situation><Var>S1</Var></Situation>
                   <Situation>
                     <Do>
-                      <Action><Var>A</Var></Action>
-                      <Situation><Var>S2</Var></Situation>
+                      <do><Action><Var>A</Var></Action></do>
+                      <at><Situation><Var>S2</Var></Situation></at>
                     </Do>
                   </Situation>
                 </Atom>
@@ -248,8 +245,8 @@
                   <Holds>
                     <fluent><Situation type="ruleml:Fluent"><Var>F</Var></Situation></fluent>
                     <at><Situation><Do>
-                      <Action><Var>A</Var></Action>
-                      <Situation><Var>S</Var></Situation>
+                      <do><Action><Var>A</Var></Action></do>
+                      <at><Situation><Var>S</Var></Situation></at>
                     </Do></Situation></at>
                   </Holds>
                 </then>

@@ -9,66 +9,66 @@
 
 <!-- a simplified broker definition -->
 
-<Assert mapClosure="universal">
-
-<Implies>
- <then>
-  <Atom>
-    <op><Rel>buy</Rel></op>
-    <Var>broker</Var>
-    <Var>prod</Var>
-  </Atom>
- </then>
- <if>
-  <And>
+  <Assert>
+  
+    <Implies  closure="universal">
+     <then>
+      <Atom>
+        <op><Rel>buy</Rel></op>
+        <Var>broker</Var>
+        <Var>prod</Var>
+      </Atom>
+     </then>
+     <if>
+      <And>
+        <Atom>
+          <op><Rel>want</Rel></op>
+          <Ind>customer-of-broker</Ind>
+          <Var>prod</Var>
+        </Atom>
+        <Atom>
+          <op><Rel>deal</Rel></op>
+          <Var>prod</Var>
+          <Expr>
+            <op><Fun>cost</Fun></op>
+            <Ind>prod</Ind>
+          </Expr>
+          <Ind>benefit-of-prod</Ind>
+        </Atom>
+      </And>
+     </if>
+    </Implies>
+  
+    <Implies  closure="universal">
+     <then>
+      <Atom>
+        <op><Rel>deal</Rel></op>
+        <Var>prod</Var>
+        <Var>cost</Var>
+        <Var>benefit</Var>
+      </Atom>
+     </then>
+     <if>
+      <Atom>
+        <op><Rel>greater-or-equal</Rel></op>
+        <Var>benefit</Var>
+        <Var>cost</Var>
+      </Atom>
+     </if>
+    </Implies>
+  
     <Atom>
       <op><Rel>want</Rel></op>
-      <Ind>customer-of-broker</Ind>
-      <Var>prod</Var>
+      <Ind>miller</Ind>
+      <Ind iri="www.stock.com/stock1"/>
     </Atom>
+  
     <Atom>
-      <op><Rel>deal</Rel></op>
-      <Var>prod</Var>
-      <Expr>
-        <op><Fun>cost</Fun></op>
-        <Ind>prod</Ind>
-      </Expr>
-      <Ind>benefit-of-prod</Ind>
+      <op><Rel>want</Rel></op>
+      <Ind>miller</Ind>
+      <Ind iri="www.stock.com/stock2"/>
     </Atom>
-  </And>
- </if>
-</Implies>
-
-<Implies>
- <then>
-  <Atom>
-    <op><Rel>deal</Rel></op>
-    <Var>prod</Var>
-    <Var>cost</Var>
-    <Var>benefit</Var>
-  </Atom>
- </then>
- <if>
-  <Atom>
-    <op><Rel>greater-or-equal</Rel></op>
-    <Var>benefit</Var>
-    <Var>cost</Var>
-  </Atom>
- </if>
-</Implies>
-
-  <Atom>
-    <op><Rel>want</Rel></op>
-    <Ind>miller</Ind>
-    <Ind iri="www.stock.com/stock1"/>
-  </Atom>
-
-  <Atom>
-    <op><Rel>want</Rel></op>
-    <Ind>miller</Ind>
-    <Ind iri="www.stock.com/stock2"/>
-  </Atom>
-
-</Assert>
+  
+  </Assert>
 
 </RuleML>

@@ -9,9 +9,9 @@
 
   <!-- a flattened factorial definition -->
 
-<Assert mapClosure="universal">
+  <Assert>
 
-    <Equal>
+    <Equal closure="universal">
       <Expr>
         <op>
           <Fun per="value">fac</Fun>
@@ -22,61 +22,61 @@
     </Equal>
 
 
-<Implies>
-  <then>
-    <Equal>
-      <Expr>
-        <op>
-          <Fun per="value">fac</Fun>
-        </op>
-        <Var>n</Var>
-      </Expr>
-      <Var>r</Var>
-    </Equal>
-  </then>
-  <if>
-    <And>
-      <Atom>
-        <op>
-          <Rel>greater</Rel>
-        </op>
-        <Var>n</Var>
-        <Data xsi:type="xs:nonNegativeInteger">0</Data>
-      </Atom>
-      <Equal>
-        <Var>m</Var>
-        <Expr>
-          <op>
-            <Fun per="value">-</Fun>
-          </op>
-          <Var>n</Var>
-          <Data xsi:type="xs:positiveInteger">1</Data>
-        </Expr>
-      </Equal>
-      <Equal>
-        <Var>f</Var>
-        <Expr>
-          <op>
-            <Fun per="value">fac</Fun>
-          </op>
-          <Var>m</Var>
-        </Expr>
-      </Equal>
-      <Equal>
-        <Var>r</Var>
-        <Expr>
-          <op>
-            <Fun per="value">*</Fun>
-          </op>
-          <Var>n</Var>
-          <Var>f</Var>
-        </Expr>
-      </Equal>
-    </And>
-  </if>
-</Implies>
+    <Implies closure="universal">
+      <then>
+        <Equal>
+          <Expr>
+            <op>
+              <Fun per="value">fac</Fun>
+            </op>
+            <Var>n</Var>
+          </Expr>
+          <Var>r</Var>
+        </Equal>
+      </then>
+      <if>
+        <And>
+          <Atom>
+            <op>
+              <Rel>greater</Rel>
+            </op>
+            <Var>n</Var>
+            <Data xsi:type="xs:nonNegativeInteger">0</Data>
+          </Atom>
+          <Equal>
+            <Var>m</Var>
+            <Expr>
+              <op>
+                <Fun per="value">-</Fun>
+              </op>
+              <Var>n</Var>
+              <Data xsi:type="xs:positiveInteger">1</Data>
+            </Expr>
+          </Equal>
+          <Equal>
+            <Var>f</Var>
+            <Expr>
+              <op>
+                <Fun per="value">fac</Fun>
+              </op>
+              <Var>m</Var>
+            </Expr>
+          </Equal>
+          <Equal>
+            <Var>r</Var>
+            <Expr>
+              <op>
+                <Fun per="value">*</Fun>
+              </op>
+              <Var>n</Var>
+              <Var>f</Var>
+            </Expr>
+          </Equal>
+        </And>
+      </if>
+    </Implies>
 
 
-</Assert>
+  </Assert>
 
 </RuleML>

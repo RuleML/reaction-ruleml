@@ -6,13 +6,13 @@
   <!-- 
 
     This example show the combination of ECA rules and Derivation rules. 
-    It defines an Event-Condition-Action rule where the condition in the if part is proofen by a seperated backward-reasoning derivation rule and facts.
+    It defines an Event-Condition-Action rule where the condition in the if part is proven by a seperate backward-reasoning derivation rule and facts.
     
    -->
 
   <!-- assert rule -->
 
-  <Assert mapDirection="bidirectional">
+  <Assert>
     
     <!--  on the order of a person for a drink if the drink is not expenssive do assert that John likes the person   -->
     <formula>

@@ -6,9 +6,9 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/dr.xsd">
 
-  <Assert mapClosure="universal">
+  <Assert>
 
-    <Rule>
+    <Rule closure="universal">
       <then>
         <Atom>
           <Rel>own</Rel>

@@ -7,170 +7,170 @@
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/dr.xsd">
   
 
-  <Assert mapClosure="universal">
-
-<!--
-   Unoriented with interpreted functions on left and right
-   (no constructor discipline):
-
-   ((x+y)+z) = (x+(y+z))
-
-   Can rewrite ((1+2)+3) to (1+(2+3)) 
-   Can rewrite (1+(2+3)) to ((1+2)+3)
---> 
- 
-<Equal oriented="no">
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Expr>
-      <Fun per="value">plus</Fun>
-      <Var>x</Var>
-      <Var>y</Var>
-    </Expr>
-    <Var>z</Var>
-  </Expr>
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Var>x</Var>
-    <Expr>
-      <Fun per="value">plus</Fun>
-      <Var>y</Var>
-      <Var>z</Var>
-    </Expr>
-  </Expr>
-</Equal>
-
-
-<!--
-  Oriented with interpreted functions on left and right
-  (no constructor discipline):
-
-  ((x+y)+z) -> (x+(y+z))
-
-  Can rewrite ((1+2)+3) to (1+(2+3)) 
- -->
- 
-<Equal oriented="yes">
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Expr>
-      <Fun per="value">plus</Fun>
-      <Var>x</Var>
-      <Var>y</Var>
-    </Expr>
-    <Var>z</Var>
-  </Expr>
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Var>x</Var>
-    <Expr>
-      <Fun per="value">plus</Fun>
-      <Var>y</Var>
-      <Var>z</Var>
-    </Expr>
-  </Expr>
-</Equal>
-
-
-<!--
-  Unoriented with interpreted functions only on top-level of left and right
-  (constructor discipline):
-
-  ([x+y]+z) = (x+[y+z])
-
-  Can rewrite ([1+2]+3) to (1+[2+3]) 
-  Can rewrite (1+[2+3]) to ([1+2]+3)
--->
-
-<Equal oriented="yes">
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Expr>
-      <Fun per="copy">plus</Fun>
-      <Var>x</Var>
-      <Var>y</Var>
-    </Expr>
-    <Var>z</Var>
-  </Expr>
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Var>x</Var>
-    <Expr>
-      <Fun per="copy">plus</Fun>
-      <Var>y</Var>
-      <Var>z</Var>
-    </Expr>
-  </Expr>
-</Equal>
-
-
-
-<!--
-  Oriented with interpreted functions only on top-level of left and right
-  (constructor discipline):
-
-  ([x+y]+z) -> (x+[y+z])
-  Can rewrite ([1+2]+3) to (1+[2+3])
-
- -->
- 
-<Equal oriented="yes">
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Expr>
-      <Fun per="copy">plus</Fun>
-      <Var>x</Var>
-      <Var>y</Var>
-    </Expr>
-    <Var>z</Var>
-  </Expr>
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Var>x</Var>
-    <Expr>
-      <Fun per="copy">plus</Fun>
-      <Var>y</Var>
-      <Var>z</Var>
-    </Expr>
-  </Expr>
-</Equal>
-
-
-
-<!--
-  Unoriented with interpreted function only on top-level of left and uninterpreted functions on right:
-
-  NOT ALLOWED: Top-level uninterpreted function on right prevents any right-to-left rewriting.
+  <Assert>
   
-  Oriented with interpreted function only on top-level of left and uninterpreted functions on right
-  (constructor discipline):
-
-  ([x+y]+z) -> [x+[y+z]]
-
-  Can rewrite ([1+2]+3) to [1+[2+3]]
--->
-
-<Equal oriented="no">
-  <Expr>
-    <Fun per="value">plus</Fun>
-    <Expr>
-      <Fun per="copy">plus</Fun>
-      <Var>x</Var>
-      <Var>y</Var>
-    </Expr>
-    <Var>z</Var>
-  </Expr>
-  <Expr>
-    <Fun per="copy">plus</Fun>
-    <Var>x</Var>
-    <Expr>
-      <Fun per="copy">plus</Fun>
-      <Var>y</Var>
-      <Var>z</Var>
-    </Expr>
-  </Expr>
-</Equal>
-
-</Assert>
+    <!--
+       Unoriented with interpreted functions on left and right
+       (no constructor discipline):
+    
+       ((x+y)+z) = (x+(y+z))
+    
+       Can rewrite ((1+2)+3) to (1+(2+3)) 
+       Can rewrite (1+(2+3)) to ((1+2)+3)
+    --> 
+   
+    <Equal oriented="no" closure="universal">
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Expr>
+          <Fun per="value">plus</Fun>
+          <Var>x</Var>
+          <Var>y</Var>
+        </Expr>
+        <Var>z</Var>
+      </Expr>
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Var>x</Var>
+        <Expr>
+          <Fun per="value">plus</Fun>
+          <Var>y</Var>
+          <Var>z</Var>
+        </Expr>
+      </Expr>
+    </Equal>
+  
+  
+    <!--
+      Oriented with interpreted functions on left and right
+      (no constructor discipline):
+    
+      ((x+y)+z) -> (x+(y+z))
+    
+      Can rewrite ((1+2)+3) to (1+(2+3)) 
+     -->
+   
+    <Equal oriented="yes" closure="universal">
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Expr>
+          <Fun per="value">plus</Fun>
+          <Var>x</Var>
+          <Var>y</Var>
+        </Expr>
+        <Var>z</Var>
+      </Expr>
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Var>x</Var>
+        <Expr>
+          <Fun per="value">plus</Fun>
+          <Var>y</Var>
+          <Var>z</Var>
+        </Expr>
+      </Expr>
+    </Equal>
+  
+  
+    <!--
+      Unoriented with interpreted functions only on top-level of left and right
+      (constructor discipline):
+    
+      ([x+y]+z) = (x+[y+z])
+    
+      Can rewrite ([1+2]+3) to (1+[2+3]) 
+      Can rewrite (1+[2+3]) to ([1+2]+3)
+    -->
+  
+    <Equal oriented="yes" closure="universal">
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Expr>
+          <Fun per="copy">plus</Fun>
+          <Var>x</Var>
+          <Var>y</Var>
+        </Expr>
+        <Var>z</Var>
+      </Expr>
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Var>x</Var>
+        <Expr>
+          <Fun per="copy">plus</Fun>
+          <Var>y</Var>
+          <Var>z</Var>
+        </Expr>
+      </Expr>
+    </Equal>
+  
+  
+  
+    <!--
+      Oriented with interpreted functions only on top-level of left and right
+      (constructor discipline):
+    
+      ([x+y]+z) -> (x+[y+z])
+      Can rewrite ([1+2]+3) to (1+[2+3])
+    
+     -->
+   
+    <Equal oriented="yes" closure="universal">
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Expr>
+          <Fun per="copy">plus</Fun>
+          <Var>x</Var>
+          <Var>y</Var>
+        </Expr>
+        <Var>z</Var>
+      </Expr>
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Var>x</Var>
+        <Expr>
+          <Fun per="copy">plus</Fun>
+          <Var>y</Var>
+          <Var>z</Var>
+        </Expr>
+      </Expr>
+    </Equal>
+  
+  
+  
+    <!--
+      Unoriented with interpreted function only on top-level of left and uninterpreted functions on right:
+    
+      NOT ALLOWED: Top-level uninterpreted function on right prevents any right-to-left rewriting.
+      
+      Oriented with interpreted function only on top-level of left and uninterpreted functions on right
+      (constructor discipline):
+    
+      ([x+y]+z) -> [x+[y+z]]
+    
+      Can rewrite ([1+2]+3) to [1+[2+3]]
+    -->
+  
+    <Equal oriented="no" closure="universal">
+      <Expr>
+        <Fun per="value">plus</Fun>
+        <Expr>
+          <Fun per="copy">plus</Fun>
+          <Var>x</Var>
+          <Var>y</Var>
+        </Expr>
+        <Var>z</Var>
+      </Expr>
+      <Expr>
+        <Fun per="copy">plus</Fun>
+        <Var>x</Var>
+        <Expr>
+          <Fun per="copy">plus</Fun>
+          <Var>y</Var>
+          <Var>z</Var>
+        </Expr>
+      </Expr>
+    </Equal>
+  
+  </Assert>
 
 </RuleML>

@@ -8,9 +8,9 @@
 
   <!-- a syntactic example rulebase for testing the Hornlog RuleML sublanguage -->
 
-  <Assert mapClosure="universal">
+  <Assert>
 
-    <Implies>
+    <Implies closure="universal">
       <then>
         <Atom>
           <op>
@@ -59,7 +59,7 @@
     </Implies>
 
 
-    <Atom>
+    <Atom closure="universal">
       <op>
         <Rel>some relation</Rel>
       </op>
@@ -75,7 +75,7 @@
       </slot>
     </Atom>
 
-    <Atom>
+    <Atom closure="universal">
       <op>
         <Rel>another relation</Rel>
       </op>
@@ -100,7 +100,7 @@
     </Atom>
 
 
-    <Atom>
+    <Atom closure="universal">
       <op>
         <Rel>some relation</Rel>
       </op>
@@ -124,7 +124,7 @@
         <Ind>role 2</Ind>
       </slot>
     </Atom>
-    <Atom>
+    <Atom closure="universal">
       <op>
         <Rel>another relation</Rel>
       </op>
@@ -148,7 +148,7 @@
     </Atom>
 
 
-    <Atom>
+    <Atom closure="universal">
       <op>
         <Rel>yet another relation</Rel>
       </op>

@@ -9,8 +9,8 @@
   
 <!-- 'own' example as universal 'Assert' (changed from not-currently-supported 'Consider') -->
 
-	<Assert mapClosure="universal">
-		<Implies>
+	<Assert>
+		<Implies closure="universal">
 			<And>
 				<Atom>
 					<Rel>buy</Rel>
@@ -30,7 +30,7 @@
 				<Var>object</Var>
 			</Atom>
 		</Implies>
-		<Atom>
+	  <Atom  closure="universal">
 			<Rel>buy</Rel>
 			<Ind>Mary</Ind>
 			<Ind>John</Ind>
@@ -41,7 +41,7 @@
 				<Data xsi:type="xs:positiveInteger">2001</Data>
 			</Expr>
 		</Atom>
-		<Atom>
+	  <Atom  closure="universal">
 			<Rel>keep</Rel>
 			<Ind>Mary</Ind>
 			<Var>object</Var>

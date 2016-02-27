@@ -4262,11 +4262,12 @@
         <xs:attributeGroup ref="node-element.attlist"/>
         <xs:attributeGroup ref="xml.attlist"/>
     </xs:attributeGroup>
-    <xs:group name="EventAlgebraOperator.content">
-        <xs:sequence>
-            <xs:group ref="meta-roles.content"/>
-            <xs:choice maxOccurs="unbounded" minOccurs="0">
-                <xs:element ref="on"/>
+	<xs:group name="EventAlgebraOperator.content">
+		<xs:sequence>
+			<xs:group ref="meta-roles.content"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="on"/>
+				<xs:group ref="on.content"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>

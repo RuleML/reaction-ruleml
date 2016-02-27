@@ -19,8 +19,6 @@
       <Rule style="active" direction="bidirectional">
         <on>
           <Event>
-            <arg> 
-              <Event>
                 <arg>
                   <Expr>
                     <op><Fun>orders</Fun></op>
@@ -28,8 +26,6 @@
                     <arg><Var>Drink</Var></arg>
                   </Expr>     
                 </arg>
-              </Event>
-            </arg>
           </Event>
         </on>
         <if>

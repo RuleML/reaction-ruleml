@@ -2740,6 +2740,8 @@ body-connective.content =
 #
 head-connective.content =
   element Operation { Operation-formula-and-or.type }
+  | element And { And-body.type }
+  | element Or { Or-body.type }  
   | Equal
 # 
 # An internal group for the query quantifiers in the Reaction RuleML language

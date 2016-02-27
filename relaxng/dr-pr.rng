@@ -5604,6 +5604,12 @@
             <rng:element name="Operation">
 <rng:ref name="Operation-formula-and-or.type"/>
 </rng:element>
+            <rng:element name="And">
+                <rng:ref name="And-body.type"/>
+            </rng:element>
+            <rng:element name="Or">
+                <rng:ref name="Or-body.type"/>
+            </rng:element>
             <rng:ref name="Negation"/>
             <rng:ref name="Neg"/>
             <rng:ref name="Equal"/>

@@ -3657,6 +3657,8 @@
     <xs:group name="head-connective.content">
         <xs:choice>
             <xs:element name="Operation" type="Operation-formula-and-or.type"/>
+            <xs:element name="And" type="And-body.type"/>
+            <xs:element name="Or" type="Or-body.type"/>
             <xs:element ref="Equal"/>
         </xs:choice>
     </xs:group>

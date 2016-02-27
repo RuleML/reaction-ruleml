@@ -74,8 +74,6 @@
      metadata group
      
 	This internal group defines the descriptive metadata and the scope (for scoped reasoning on the metadata) + additional guard constraints on the scope
-	
-     content model: (meta*, scope*, guard )
           
 	-->
 	<xs:group name="metadata.content">
@@ -90,8 +88,6 @@
      interface group
      
      This internal group defines the interface signature and the evaluation semantics
-     
-     content model: (evaluation*, signature* )
           
 	-->
 	<xs:group name="interface.content">
@@ -105,8 +101,6 @@
      instance group
      
      This internal group defines the instance including the qualification (qualifying metadata), the quantification and the object id
-     
-     content model: (qualification*, quantification*, oid? )
           
 	-->
 	<xs:group name="instance.content">
@@ -121,10 +115,7 @@
 	<!--
          
      An internal group for the metadata, interface description, and instance qualification and quantification roles in the Reaction RuleML language
-    
-    
-     content model: (meta*, scope*, guard*, evaluation*, signature*, qualification*, quantification*, oid?)
-          
+         
 	-->
 	
 	<xs:group name="meta-roles.content">
@@ -139,14 +130,6 @@
 	<!--
          
      An internal group for the implementation of a rule in the Reaction RuleML language
-    
-    
-     content model:
-     
-     in ECA Reaction RuleML: (Reaction Rule | Derivation Rule | Production Rule)
-     
-     ( (on, (if?, then?, do?, after?,else?, elseDo?)? ) | ((if, do, elseDo?) | (if, then, else) | (if, then?, do, else?, elseDo? ) | ( elseDo?, else?, do, then?, if)) )
-          
 	-->
 	
 	<xs:group name="rule-implementation.content">
@@ -159,8 +142,6 @@
 	<!--
          
      An internal group for the query connectives in the Reaction RuleML language
-    
-     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
           
 	-->
 	
@@ -179,9 +160,6 @@
 	<!--
          
      An internal group for the rulebase connectives in the Reaction RuleML language
-    
-    
-     content model: (Operation | Negation | Neg | Equal )
           
 	-->
 	
@@ -196,12 +174,7 @@
 	
 	<!--
          
-     An internal group for the body connectives in the Reaction RuleML language
-    
-    
-     content model: (Operation | And | Or | Negation | Naf | Neg | Equal)
-          
-	-->
+     An internal group for the body connectives in the Reaction RuleML language 	-->
 	
 	<xs:group name="body-connective.content">
 		<xs:choice>
@@ -218,14 +191,14 @@
 	<!--
          
      An internal group for the head connectives in the Reaction RuleML language
-    
-     content model: (Operation | Negation | Neg | Equal)
-          
+              
 	-->
 	
 	<xs:group name="head-connective.content">
 		<xs:choice>
 			<xs:element name="Operation" type="Operation-formula-and-or.type"/>
+			<xs:element name="And" type="And-body.type"/>
+			<xs:element name="Or" type="Or-body.type"/>
 			<xs:element ref="Negation"/>
 			<xs:element ref="Neg"/>
 			<xs:element ref="Equal"/> 			
@@ -236,8 +209,6 @@
 	<!--
          
      An internal group for the query quantifiers in the Reaction RuleML language
-    
-     content model:  ( Exists )
           
 	-->
 	
@@ -267,9 +238,6 @@
 	<!--
          
      An internal group for the rulebase quantifiers in the Reaction RuleML language
-    
-    
-     content model: ( Forall  )
           
 	-->
 	
@@ -284,8 +252,6 @@
      An internal group for the head quantifiers in the Reaction RuleML language
 	 
 	 Quantifiers can be defined internally in the <quantification> too   
-    
-     content model: ( Forall )
           
 	-->
 	
@@ -298,10 +264,7 @@
 	<!--
          
      An internal group for the body quantifier in the Reaction RuleML language
-    
-    
-     content model: ( Exist )
-          
+             
 	-->
 	<xs:group name="body-quantifier.content">
 		<xs:choice>		
@@ -313,9 +276,7 @@
 	<!--
          
      An internal group for the different additional predicate sorts supported in the respective language signature of the Reaction RuleML language
-    
-    content model: (Atom | Time | Spatial | Interval | Event | Action | (During | Overlaps | Starts | Precedes | Succeeds | Meets | Equal | Finishes | Operation))
-          
+              
 	-->
 	
 	<xs:group name="extended-signature-predicate-sorts.content">
@@ -334,9 +295,7 @@
 	<!--
          
      An internal group for the different additional function sorts supported in the respective language signature of the Reaction RuleML language
-    
-		content model: (Ind | Data | Expr | Plex | Time | Spatial | Interval | Event | Action | (After | Before | Any | Every | Timer | Operation))
-          
+              
 	-->
 	
 	<xs:group name="extended-signature-function-sorts.content">
@@ -355,9 +314,6 @@
 	</xs:group>
 
 	<!-- An internal group for the time primitives for interpretation as time
-		content model: 
-
-		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
 
 	-->
 	<xs:group name="time_primitives.content">
@@ -367,9 +323,6 @@
 	</xs:group>
 
 	<!-- An internal group for the spatial primitives for interpretation as spatial
-		content model: 
-
-		in ECA Reaction RuleML (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)
 
 	-->
 	<xs:group name="spatial_primitives.content">
@@ -379,9 +332,6 @@
 	</xs:group>
 
 	<!-- Interval primitives
-		content model: 
-		
-		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action)   
 	-->
 	<xs:group name="interval_primitives.content">
 		<xs:choice>	
@@ -390,9 +340,6 @@
 	</xs:group>
 
 	<!-- An internal group for the situation primitives for interpretation as situation
-		content model: 
-		
-		not used in ECA RuleML (only in combination with KR RuleML)
 	-->
 	<xs:group name="situation_primitives.content">
 		<xs:choice>
@@ -400,8 +347,6 @@
 	</xs:group>
 
 	<!-- An internal group for the event primitives for interpretation as event
-		content model: 
-		(Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )		
 	-->
 	<xs:group name="event_primitives.content">
 		<xs:choice>
@@ -410,8 +355,6 @@
 	</xs:group>	
 
 	<!-- An internal group for events
-		content model:
-		in ECA Reaction RuleML:  ( Event | Action | Sequence | Disjunction | Xor | Conjunction | Concurrent | Not | Any | Aperiodic | Periodic | AtLeast | ATMost | Operation )
 	-->
 	
 	<xs:group name="event_group.content">
@@ -423,9 +366,6 @@
 	</xs:group>	
 
 	<!-- An internal group for the action primitives for interpretation as action
-		content model: 
-		
-		in ECA Reaction RuleML: (Ind | Data | Var | Skolem | Reify  | Expr | Plex | Time | Spatial | Interval | Event | Action )
 	-->
 	<xs:group name="action_primitives.content">
 		<xs:choice>
@@ -433,9 +373,7 @@
 		</xs:choice>
 	</xs:group>
 	
-	<!-- An internal group for actions
-		content model:
-		ECA Reaction RuleML (Assert | Retract | Update | Query | Answer | Test | Consult | Action | Succession | Choice | Flow | Loop | Operation )-->
+	<!-- An internal group for actions -->
 	
 	<xs:group name="action_group.content">
 		<xs:choice>

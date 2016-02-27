@@ -278,6 +278,11 @@
     <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
+  <xs:attributeGroup name="And-head.attlist">
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
   <xs:group name="And.content">
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
@@ -297,6 +302,11 @@
     <xs:attributeGroup ref="And-body.attlist"/>
   </xs:complexType>
   <xs:element name="And" type="And-body.type"/>
+  <xs:complexType name="And-head.type">
+    <xs:group ref="And.content"/>
+    <xs:attributeGroup ref="And-head.attlist"/>
+  </xs:complexType>
+  
 
   <!--
 		*** Or ***
@@ -314,6 +324,12 @@
     <xs:attributeGroup ref="node-element.attlist"/>
     <xs:attributeGroup ref="xml.attlist"/>
   </xs:attributeGroup>
+  <xs:attributeGroup name="Or-head.attlist">
+    <xs:attributeGroup ref="operator-interface.attlist"/>
+    <xs:attributeGroup ref="node-element.attlist"/>
+    <xs:attributeGroup ref="xml.attlist"/>
+  </xs:attributeGroup>
+  
   <xs:group name="Or.content">
     <xs:sequence>
       <xs:group ref="meta-roles.content"/>
@@ -333,6 +349,10 @@
     <xs:attributeGroup ref="Or-body.attlist"/>
   </xs:complexType>
   <xs:element name="Or" type="Or-body.type"/>
+  <xs:complexType name="Or-head.type">
+    <xs:group ref="Or.content"/>
+    <xs:attributeGroup ref="Or-head.attlist"/>
+  </xs:complexType>
 
   <!--
 		*** formula ***

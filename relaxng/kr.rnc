@@ -3620,6 +3620,8 @@ body-connective.content =
 #
 head-connective.content =
   element Operation { Operation-formula-and-or.type }
+  | element And { And-body.type }
+  | element Or { Or-body.type }
   | Negation
   | Neg
   | Equal

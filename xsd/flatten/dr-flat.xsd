@@ -1150,6 +1150,7 @@
         <xs:group ref="Operation-formula-rulebase.content"/>
         <xs:attributeGroup ref="Operation-formula.attlist"/>
     </xs:complexType>
+    <xs:element name="Operation" type="Operation-formula-rulebase.type"/>
     <xs:group name="Operation-formula-and-or.content">
         <xs:sequence>
             <xs:group ref="meta-roles.content"/>

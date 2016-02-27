@@ -80,7 +80,8 @@
 		<xs:sequence>
 			<xs:group ref="meta-roles.content"/>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element ref="on"/>				
+				<xs:element ref="on"/>
+				<xs:group ref="on.content"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -110,7 +111,8 @@
 			<xs:group ref="meta-roles.content"/>
 			<xs:sequence minOccurs="0">
 				<xs:choice>
-					<xs:element ref="on"/>				
+					<xs:element ref="on"/>	
+					<xs:group ref="on.content"/>
 				</xs:choice>
 				<xs:choice>
 					<xs:element ref="at"/>

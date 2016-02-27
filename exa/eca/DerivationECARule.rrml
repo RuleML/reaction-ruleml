@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://reaction.ruleml.org/1.02/relaxng/eca.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="http://reaction.ruleml.org/1.02/relaxng/kr-cep.rnc" type="application/relax-ng-compact-syntax"?>
 <RuleML xmlns="http://ruleml.org/spec" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/eca.xsd">
@@ -19,7 +19,7 @@
       <Rule style="active" direction="bidirectional">
         <on>
           <Event>
-            <signature> <!-- define the event pattern for the detection -->
+            <arg> 
               <Event>
                 <arg>
                   <Expr>
@@ -29,7 +29,7 @@
                   </Expr>     
                 </arg>
               </Event>
-            </signature>
+            </arg>
           </Event>
         </on>
         <if>

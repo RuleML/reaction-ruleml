@@ -34,48 +34,30 @@
     <!-- EA trigger rule  -->
     <formula>
       <Rule style="active">
-        <on>
-          <Event type="ruleml:ComplexEvent">
-            <signature> <!-- define the event pattern for the complex event (a;(b;c)) -->
-              <Event type="ruleml:ComplexEvent">
-                  <Sequence>
-                    <Event type="ruleml:SimpleEvent"> <!-- event "a"-->
-                      <oid><Var type="DateTimeEvent">ID</Var></oid> <!-- event of event frame type "DateTimeEvent" -->
-                      <slot><Ind>event</Ind><Ind>a</Ind></slot> <!-- event attribute value is "a" -->
-                      <slot><Ind>time</Ind><Time>
-                          <oid><Var type="Datetime"/></oid> <!-- time of time frame type "Datetime" -->
-                          <slot><Ind>date</Ind><Var type="xs:date">Date</Var></slot>
-                          <slot><Ind>time</Ind><Var type="xs:time">Time</Var></slot>
-                      </Time></slot>
-                    </Event>
-                    <Sequence>
+        <on> <!-- (a;(b,c)) -->
+           <Sequence>
+                <Event type="ruleml:SimpleEvent"> <!-- event "a"-->
+                    <oid><Var type="DateTimeEvent">IDa</Var></oid> <!-- event of event frame type "DateTimeEvent" -->
+                    <slot><Ind>event</Ind><Ind>a</Ind></slot> <!-- event value is "a" -->
+                    <slot><Ind>time</Ind><Var type="Datetime">T1</Var></slot> <!-- time value is a variable of type "Datetime" -->
+                 </Event>
+                 <Sequence>
                       <Event type="ruleml:SimpleEvent"> <!-- event "b" -->
-                        <oid><Var type="DateTimeEvent">ID</Var></oid> 
+                        <oid><Var type="DateTimeEvent">IDb</Var></oid> 
                         <slot><Ind>event</Ind><Ind>b</Ind></slot> 
-                        <slot><Ind>time</Ind><Time>
-                          <oid><Var type="Datetime"/></oid> 
-                          <slot><Ind>date</Ind><Var type="xs:date">Date</Var></slot>
-                          <slot><Ind>time</Ind><Var type="xs:time">Time</Var></slot>
-                        </Time></slot>
+                        <slot><Ind>time</Ind><Var type="Datetime">T2</Var> </slot>
                       </Event>
                       <Event type="ruleml:SimpleEvent"> <!-- event "c" -->
-                        <oid><Var type="DateTimeEvent">ID</Var></oid> 
+                        <oid><Var type="DateTimeEvent">IDc</Var></oid> 
                         <slot><Ind>event</Ind><Ind>c</Ind></slot> 
-                        <slot><Ind>time</Ind><Time>
-                          <oid><Var type="Datetime"/></oid> 
-                          <slot><Ind>date</Ind><Var type="xs:date">Date</Var></slot>
-                          <slot><Ind>time</Ind><Var type="xs:time">Time</Var></slot>
-                        </Time></slot>
+                        <slot><Ind>time</Ind><Var>T3</Var></slot>
                       </Event>
-                    </Sequence>
-                  </Sequence>
-              </Event>
-            </signature>
-          </Event>
+                 </Sequence>
+            </Sequence>
         </on>
         <do>
           <!-- built-in action -->
-          <Action type="ruleml:BuiltInAction"><Expr><op><Fun per="effect" iri="rulemlb:println"/></op><arg><Ind>event detected</Ind></arg></Expr></Action>
+          <Action type="ruleml:BuiltInAction"><Expr><op><Fun per="effect" iri="prova:println"/></op><arg><Ind>event detected</Ind></arg></Expr></Action>
         </do>
       </Rule>
     </formula>

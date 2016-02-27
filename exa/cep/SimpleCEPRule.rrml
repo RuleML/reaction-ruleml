@@ -46,7 +46,7 @@
               <receiver><Var>Person</Var></receiver> <!-- receiver is THE "Person" -->
               <payload> <!-- payload of message is a RuleML knowledge base -->
                 <RuleML>
-                  <Assert>
+                  <Assert> <!-- assert a fact -->
                     <Atom>
                     <Rel>likes</Rel> 
                     <Ind>John</Ind>
@@ -78,7 +78,7 @@
         <receiver><Ind>John</Ind></receiver> <!-- receiver -->
         <payload> <!-- payload -->
           <RuleML>
-            <Assert>
+            <Assert> <!-- assert a fact -->
               <Atom>
                 <Rel>orders</Rel>
                 <Ind>Mary</Ind>

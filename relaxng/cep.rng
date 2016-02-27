@@ -1428,8 +1428,7 @@
         <rng:ref name="node-element.attlist"/>
         <rng:ref name="xml.attlist"/>
     </rng:define>
-    <rng:define name="Operation-formula-rulebase.content">
-        
+    <rng:define name="Operation-formula-rulebase.content">        
             <rng:ref name="meta-roles.content"/>
             <rng:optional>
 <rng:ref name="degree"/>
@@ -1448,6 +1447,13 @@
         <rng:ref name="Operation-formula-rulebase.content"/>
         <rng:ref name="Operation-formula.attlist"/>
     </rng:define>
+    
+    <rng:define name="Operation">
+        <rng:element name="Operation">
+            <rng:ref name="Operation-formula-rulebase.type"/>
+        </rng:element>
+    </rng:define>
+    
     <rng:define name="Operation-formula-and-or.content">
         
             <rng:ref name="meta-roles.content"/>

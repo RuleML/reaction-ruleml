@@ -884,6 +884,8 @@ Operation-formula-rulebase.content =
    | formula-rulebase.content)*
 Operation-formula-rulebase.type =
   Operation-formula-rulebase.content, Operation-formula.attlist
+start |= Operation
+Operation = element Operation { Operation-formula-rulebase.type }
 Operation-formula-and-or.content =
   meta-roles.content,
   degree?,

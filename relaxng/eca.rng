@@ -5502,6 +5502,8 @@
             <rng:zeroOrMore>
 <rng:choice>
                 <rng:ref name="on"/>
+                <rng:ref name="on.content"/>
+    
             </rng:choice>
 </rng:zeroOrMore>
         

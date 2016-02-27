@@ -3568,7 +3568,7 @@ event_algebra_group.content =
 # See: http://wiki.ruleml.org/index.php/Glossary_of_Reaction_RuleML_1.02#gloss-Operation
 EventAlgebraOperator.attlist =
   event-interface.attlist, node-element.attlist, xml.attlist
-EventAlgebraOperator.content = meta-roles.content, (on)*
+EventAlgebraOperator.content = meta-roles.content, (on | on.content)*
 EventAlgebraOperator.type =
   EventAlgebraOperator.content, EventAlgebraOperator.attlist
 start |= Sequence

@@ -81,7 +81,7 @@
     
     <!-- price of beer is 5 -->
     <formula>
-      <Atom>
+      <Atom direction="bidirectional">
         <op><Rel>price</Rel></op>
         <arg><Ind>beer</Ind></arg>
         <arg><Data>5</Data></arg>
@@ -90,7 +90,7 @@
     
     <!-- price of wine is 8 -->
     <formula>
-      <Atom>
+      <Atom direction="bidirectional">
         <op><Rel>price</Rel></op>
         <arg><Ind>wine</Ind></arg>
         <arg><Data>8</Data></arg>
@@ -99,7 +99,7 @@
     
     <!-- price of champagne is 19 -->
     <formula>
-      <Atom>
+      <Atom direction="bidirectional">
         <op><Rel>price</Rel></op>
         <arg><Ind>champagne</Ind></arg>
         <arg><Data>19</Data></arg>
@@ -111,7 +111,7 @@
   <Assert>
     <!-- event -->
     <formula>
-      <Event>
+      <Event direction="bidirectional">
         <arg>
           <Expr>
             <op><Fun>orders</Fun></op>

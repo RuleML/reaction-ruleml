@@ -18,7 +18,6 @@
 #  - zip  
 # Note: copy to path_config.sh and then
 # change the parameters accordingly
-# JAXB (jaxb-ri) should be installed in the Oxygen /lib directory
 PLATFORM="Linux"
 OXY_VERSION="17"
 OXY_HOME="/home/taraathan/oxygen 17/"
@@ -58,7 +57,6 @@ XSD_HOME="${REPO_HOME}xsd/"
 XSD_MIN_HOME="${REPO_HOME}xsd_min/"
 XSLT2_HOME="${REPO_HOME}xslt/rnc2xsd/"
 XSD_HOME="${REPO_HOME}xsd/"
-XSD_TEST_SUITE_HOME="${REPO_HOME}test/xsd-test-suites/"
 COMPACT_SUITE_HOME="${REPO_HOME}test/compactifier-test-suites/"
 XSLT_HOME="${REPO_HOME}xslt/"
 COMPACT_XSLT_HOME="${XSLT_HOME}compactifier/"
@@ -67,7 +65,7 @@ NORMAL_XSLT_HOME="${XSLT_HOME}normalizer/"
 TMP_HOME="${RNC_HOME}tmp/"
 TMP_RNG="${TMP_HOME}tmp-std2xsd.rng"
 MODULE_HOME="${REPO_HOME}relaxng/modules/"
-TMPDIR="${XSD_HOME}/tmp/"
+TMPDIR="${XSD_HOME}tmp/"
 ZIP_HOME="${REPO_HOME}zip/"
 GIT_HOME="${REPO_HOME}../"
 REACTION_CONFIG="${BASH_HOME}/settings/reaction-config.xml"
@@ -80,4 +78,4 @@ HORNLOG_TEST_SUITE_HOME="${REPO_HOME}exa/hornlog/"
 KR_TEST_SUITE_HOME="${REPO_HOME}exa/kr/"
 NAFHORNLOG_TEST_SUITE_HOME="${REPO_HOME}exa/nafhornlog/"
 PR_TEST_SUITE_HOME="${REPO_HOME}exa/pr/"
-
+KRCEP_TEST_SUITE_HOME="${REPO_HOME}exa/"

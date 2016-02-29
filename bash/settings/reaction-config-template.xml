@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
-    <schemaSystemId>file:/C:/Users/paschke/Documents/Eigene%20Arbeiten/Reaction%20RuleML/XSD%20Schema/consumer-ruleml/xsd/consumer-reaction-normal.xsd</schemaSystemId>
-    <documentRoot>Rule</documentRoot>
+    <schemaSystemId>file:/C:/Users/paschke/Documents/Eigene%20Arbeiten/Reaction%20RuleML/XSD%20Schema/reaction-ruleml1.02/xsd/kr-cep.xsd</schemaSystemId>
+    <documentRoot>Assert</documentRoot>
     <outputFolder>C:\Users\paschke\Documents\Eigene Arbeiten\Reaction RuleML\XSD Schema\reaction-ruleml1.02\test\reaction-test-suites</outputFolder>
     <filenamePrefix>instance</filenamePrefix>
     <filenameExtension>ruleml</filenameExtension>
@@ -10,10 +10,12 @@
     <defaultNamespace>&lt;NO_NAMESPACE></defaultNamespace>
     <valuesMaxLength>30</valuesMaxLength>
     <isUseIncrementalNamesForValues>true</isUseIncrementalNamesForValues>
-    <discardOptionalElementsAfterNestedLevel>6</discardOptionalElementsAfterNestedLevel>
+    <discardOptionalElementsAfterNestedLevel>3</discardOptionalElementsAfterNestedLevel>
     <namespaceMapping ns="http://ruleml.org/spec" proxy="ruleml"/>
-    <namespaceMapping ns="http://www.w3.org/2001/XMLSchema-datatypes" proxy="xm"/>
-    <element namespace="&lt;ANY>" name="&lt;ANY>">
+    <namespaceMapping ns="http://www.w3.org/1999/xhtml/datatypes/" proxy="xh11d"/>
+    <namespaceMapping ns="http://purl.org/dc/terms/" proxy="dcterms"/>
+  <namespaceMapping ns="http://purl.org/dc/elements/1.1/" proxy="dc"/>
+  <element namespace="&lt;ANY>" name="&lt;ANY>">
         <generateOptionalElements>true</generateOptionalElements>
         <generateOptionalAttributes>true</generateOptionalAttributes>
         <valuesForContentType>RANDOM</valuesForContentType>
@@ -22,5 +24,7 @@
         <choicesAndSubstitutions strategy="RANDOM" generateOthersAsComments="false"/>
         <attribute namespace="&lt;ANY>" name="&lt;ANY>">
         </attribute>
-    </element>
+    <attribute namespace="&lt;NO_NAMESPACE>" name="key">
+    </attribute>
+  </element>
 </settings>

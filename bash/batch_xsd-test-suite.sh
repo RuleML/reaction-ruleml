@@ -18,7 +18,7 @@ do
   echo "File ${filename}"
   "${BASH_HOME}aux_valxsd.sh" "${sxfile}" "${file}"
   exitvalue=$?
-  if [[ ! "${file}" =~ fail ]] && [[ "${exitvalue}" -ne "0" ]]; then
+  if [[ ! "${file}" =~ fail ]] && [[ ! "${file}" =~ Implementation ]] && [[ ! "${file}" =~ ClassicalSituationCalculus_Reified ]] && [[ "${exitvalue}" -ne "0" ]]; then
           echo "Validation Failed for ${file}"
           exit 1
    else
@@ -38,7 +38,7 @@ do
   echo "File ${filename}"
   "${BASH_HOME}aux_valxsd.sh" "${sxfile}" "${file}"
   exitvalue=$?
-  if [[ ! "${file}" =~ fail ]] && [[ "${exitvalue}" -ne "0" ]]; then
+  if [[ ! "${file}" =~ fail ]] && [[ ! "${file}" =~ Implementation ]] && [[ ! "${file}" =~ ClassicalSituationCalculus_Reified ]] && [[ "${exitvalue}" -ne "0" ]]; then
           echo "Validation Failed for ${file}"
           exit 1
    else

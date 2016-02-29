@@ -1857,6 +1857,8 @@ Forall =
      | Equivalent
      | Forall
      | Operation_3
+     | And
+     | Or
      | Negation
      | Neg
      | Equal
@@ -2190,6 +2192,8 @@ Implies =
          | Happens),
         (Forall
          | Operation_3
+         | And
+         | Or
          | Negation
          | Neg
          | Equal
@@ -2433,6 +2437,8 @@ then =
   element then {
     (Forall
      | Operation_3
+     | And
+     | Or
      | Negation
      | Neg
      | Equal
@@ -2725,6 +2731,8 @@ Equivalent =
     ((torso
       | Forall
       | Operation_3
+      | And
+      | Or
       | Negation
       | Neg
       | Equal
@@ -2750,6 +2758,8 @@ Equivalent =
      (torso
       | Forall
       | Operation_3
+      | And
+      | Or
       | Negation
       | Neg
       | Equal
@@ -2942,6 +2952,8 @@ torso =
   element torso {
     (Forall
      | Operation_3
+     | And
+     | Or
      | Negation
      | Neg
      | Equal
@@ -5739,6 +5751,8 @@ else =
   element else {
     (Forall
      | Operation_3
+     | And
+     | Or
      | Negation
      | Neg
      | Equal
@@ -10658,7 +10672,23 @@ Sequence =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -10743,7 +10773,23 @@ Disjunction =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -10828,7 +10874,23 @@ Xor =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -10913,7 +10975,23 @@ Conjunction =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -10998,7 +11076,23 @@ Concurrent =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -11338,7 +11432,23 @@ AtLeast =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -11423,7 +11533,23 @@ AtMost =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -16824,6 +16950,8 @@ formula_5 =
      | Equivalent
      | Forall
      | Operation_3
+     | And
+     | Or
      | Negation
      | Neg
      | Equal
@@ -17480,7 +17608,23 @@ Any_2 =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {
@@ -17565,7 +17709,23 @@ Operation_4 =
     qualification*,
     quantification*,
     oid?,
-    on*,
+    (on
+     | Event
+     | Action
+     | Receive
+     | Answer
+     | Sequence
+     | Disjunction
+     | Xor
+     | Conjunction
+     | Concurrent
+     | Not
+     | Any_2
+     | Aperiodic
+     | Periodic
+     | AtLeast
+     | AtMost
+     | Operation_4)*,
     attribute safety {
       xsd:Name { pattern = "[\i-[:]][/\c-[:]]*" }
       | xsd:string {

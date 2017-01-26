@@ -5,7 +5,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/eca.xsd">
   <!-- 
-    This examples show the definition of a complex event pattern which is used for the event detection in the on part of an ECA Rule.
+    This examples shows the definition of a complex event pattern which is used for the event detection in the on part of an ECA Rule.
     The asserted event instance sequence triggers the ECA rule according to the matching event pattern signature.
    -->
 
@@ -34,7 +34,7 @@
     <!-- EA trigger rule  -->
     <formula>
       <Rule style="active">
-        <on> <!-- (a;(b,c)) -->
+        <on> <!-- (a;(b;c)) -->
            <Sequence>
                 <Event type="ruleml:SimpleEvent"> <!-- event "a"-->
                     <oid><Var type="DateTimeEvent">IDa</Var></oid> <!-- event of event frame type "DateTimeEvent" -->

@@ -6,7 +6,7 @@
   <!-- 
 
     This example defines a messaging reaction rule which is triggered by receiving a matching event message.
-    A matching event instance is asserted which triggers the messaging rule. If the condition holds the action 
+    A matching event instance is sent and received by the rule which triggers it. If the condition holds the action 
     sends a message.
 
    -->

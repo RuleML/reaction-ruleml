@@ -50,7 +50,7 @@
       </Rule>
     </formula>
     
-    <!-- if price of drink is more than 19 then it is expensive -->
+    <!-- if price of drink is more than 15 then it is expensive -->
     <formula>
       <Rule style="reasoning" direction="backward">
         <if>

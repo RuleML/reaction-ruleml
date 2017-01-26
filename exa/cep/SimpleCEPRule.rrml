@@ -5,9 +5,9 @@
   xsi:schemaLocation="http://ruleml.org/spec http://reaction.ruleml.org/1.02/xsd/cep.xsd">
   <!-- 
 
-    This example defines a simple Event-Condition-Action rule which is triggered by an event pattern in the on part.
-    A matching event instance is asserted which triggers the pattern in the ECA rule. The ECA rule proofs the condition and
-    executes the action which asserts a new fact to the knowledge base. This fact is then queried.
+    This example defines a messaging reaction rule which is triggered by receiving a matching event message.
+    A matching event instance is asserted which triggers the messaging rule. If the condition holds the action 
+    sends a message.
 
    -->
 
